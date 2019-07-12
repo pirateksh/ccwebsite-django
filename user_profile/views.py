@@ -38,18 +38,18 @@ def user_profile(request, username):
     return render(request, 'user_profile/user_profile.html', context)
 
 
-def change_password(request, iden):
+def change_password(request, username):
     if request.method == 'POST':
         password_change_form = PasswordChangeForm(request.user, request.POST)
         if password_change_form.is_valid():
             user = password_change_form.save()
             update_session_auth_hash(request, user)  # Important! To keep User Logged in.
             messages.success(request, 'Your password was successfully updated!')
-            redirect_to = '/profile/' + str(user.username)
+            redirect_to = '/profile/' + str(username)
             return redirect(redirect_to)
         else:
             messages.error(request, f'Something went wrong, try again!')
-            redirect_to = '/profile/' + str(request.user.username)
+            redirect_to = '/profile/' + str(username)
             return redirect(redirect_to)
     else:
         password_change_form = PasswordChangeForm(request.user)
