@@ -1,0 +1,48 @@
+{% load materializecss %}
+
+<div id="modal-avatar" class="modal modal-fixed-footer">
+    <form class="col s12" method="post" enctype="multipart/form-data" action="{% url 'Avatar Upload' user.username %}">
+        <div class="modal-content">
+            <h4>Upload Avatar</h4>
+            <div class="row">
+                {% csrf_token %}
+                {{ avatar_form|materializecss }}
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn waves-light" type="submit" name="action">Upload
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </form>
+</div>
+
+
+{#<!-- MODAL TO CROP THE IMAGE -->#}
+{#<div class="modal fade" id="modalCrop">#}
+{#  <div class="modal-dialog">#}
+{#    <div class="modal-content">#}
+{#      <div class="modal-header">#}
+{#        <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#          <span aria-hidden="true">&times;</span>#}
+{#        </button>#}
+{#        <h4 class="modal-title">Crop the photo</h4>#}
+{#      </div>#}
+{#      <div class="modal-body">#}
+{#        <img src="" id="image" style="max-width: 100%;">#}
+{#      </div>#}
+{#      <div class="modal-footer">#}
+{#        <div class="btn-group pull-left" role="group">#}
+{#          <button type="button" class="btn btn-default js-zoom-in">#}
+{#            <span class="glyphicon glyphicon-zoom-in"></span>#}
+{#          </button>#}
+{#          <button type="button" class="btn btn-default js-zoom-out">#}
+{#            <span class="glyphicon glyphicon-zoom-out"></span>#}
+{#          </button>#}
+{#        </div>#}
+{#        <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>#}
+{#        <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}

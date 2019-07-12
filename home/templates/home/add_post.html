@@ -1,0 +1,68 @@
+{% load materializecss %}
+{# Adding post #}
+{% if user.is_authenticated %}
+    <form method="post" action="{% url 'Add Post' %}">
+        <ul class="collapsible white" >
+            <li>
+                <div class="collapsible-header tooltipped" data-position="top" data-tooltip="Click to Add Post!">
+                    <strong>Add Post</strong>
+                </div>
+                <div class="collapsible-body">
+                    {% csrf_token %}
+                    {{ addpostform.media }}
+                    {{ addpostform.title|materializecss:'col s6 m6, icon=account_circle' }}
+                    {{ addpostform.tags|materializecss:'col s6 m6, icon=account_circle' }}
+                    {{ addpostform.content }}
+                    <button class="btn waves-light" type="submit" name="action">Post
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </form>
+{% else %}
+    <ul class="collapsible">
+        <li>
+            <div class="collapsible-header tooltipped" onclick="addPostToast()" data-position="top" data-tooltip="Click to Add Post!">
+                <a class="btn-flat modal-trigger white black-text col s12 m12 l12" href="#modal1" id="add-post-without-login" >
+                    <strong>Add Post</strong>
+                </a>
+            </div>
+        </li>
+    </ul>
+{% endif %}
+
+
+{# CONTAINER #}
+{#{% if user.is_authenticated %}#}
+{#    <ul class="collection with-header" >#}
+{#        <form method="post" action="{% url 'Add Post' %}">#}
+{#        <li class="collection-header">#}
+{#            <strong>Add Post</strong>#}
+{#        </li>#}
+{#        <li class="collection-item">#}
+{#            {% csrf_token %}#}
+{#            {{ addpostform.media }}#}
+{#            {{ addpostform.title|materializecss:'col s6 m6, icon=account_circle' }}#}
+{#            {{ addpostform.tags|materializecss:'col s6 m6, icon=account_circle' }}#}
+{#            {{ addpostform.content }}#}
+{#            <div>#}
+{#                <button class="btn waves-light" type="submit" name="action">Post#}
+{#                <i class="material-icons right">send</i>#}
+{#            </button>#}
+{#            </div>#}
+{##}
+{#        </li>#}
+{#        </form>#}
+{#    </ul>#}
+{#{% else %}#}
+{#    <ul class="collapsible">#}
+{#        <li>#}
+{#            <div class="collapsible-header" onclick="addPostToast()">#}
+{#                <a class="btn-flat modal-trigger white black-text col s12 m12 l12" href="#modal1" id="add-post-without-login" >#}
+{#                    <strong>Add Post</strong>#}
+{#                </a>#}
+{#            </div>#}
+{#        </li>#}
+{#    </ul>#}
+{#{% endif %}#}

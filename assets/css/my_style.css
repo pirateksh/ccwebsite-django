@@ -1,0 +1,26 @@
+/*#publish{*/
+    /*font-size:100%;*/
+/*}*/
+
+
+  /*body {*/
+    /*display: flex;*/
+    /*min-height: 100vh;*/
+    /*flex-direction: column;*/
+  /*}*/
+
+  /*main {*/
+    /*flex: 1 0 auto;*/
+  /*}*/
+
+#post-head-m-down{
+    font-size: 3vw;
+}
+
+#post-head-s-down-l{
+    font-size: 4vw;
+}
+
+#post-head-m-up{
+    font-size: 6vw;
+}

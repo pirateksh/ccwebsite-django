@@ -1,0 +1,110 @@
+{% comment %}
+    Context vars:
+    profile: profile of native user
+    native_user: User whose profile is currently open.
+    user: Logged in User
+    avatar_form: Form to upload avatar
+    form: User Signup Form
+{% endcomment %}
+{% load static %}
+<nav class="amber lighten-1" role="navigation">
+    <div class="nav-wrapper container">
+        {% if user.is_authenticated %}
+            <a id="logo-container" class="brand-logo hide-on-med-and-down" style="font-size:3vw;">{{ native_user.first_name }} {{ native_user.last_name }}</a>
+            <a id="logo-container" class="brand-logo hide-on-small-and-down hide-on-large-only" style="font-size:4vw;">{{ native_user.first_name }} {{ native_user.last_name }}</a>
+            <a id="logo-container" class="brand-logo hide-on-med-and-up" style="font-size:5vw;">{{ native_user.first_name }} {{ native_user.last_name }}</a>
+        {% else %}
+            <a id="logo-container" class="brand-logo">Hi, User!</a>
+        {% endif %}
+        <ul class="right hide-on-med-and-down">
+            {% if user.is_authenticated %}
+                <li>
+                    <a class="waves-light btn" href="{% url 'Index' %}">Home</a>
+                </li>
+                <li>
+                    <a class=" waves-light btn" href="{% url 'Logout' %}">Logout</a>
+                </li>
+            {% else %}
+                <li>
+                    <a class=" waves-light btn modal-trigger" href="#modal1">Login</a>
+                </li>
+                <li>
+                    <a class=" waves-light btn modal-trigger" href="#modal2">Signup</a>
+                </li>
+            {% endif %}
+        </ul>
+
+        {# SideNav for Mobile view #}
+        <ul id="nav-mobile" class="sidenav">
+
+            {# Loop through categories #}
+
+{#            <li><a class="waves-light btn" id="cate" href="#cate">CATEGORIES</a></li>#}
+{#            <ul class="collapsible popout black-text">#}
+{#                {% for tag in tags %}#}
+{#                    <li>#}
+{#                        <div class="collapsible-header">{{ tag.name }}</div>#}
+{#                        <div class="collapsible-body">{{ tag.description }}</div>#}
+{#                    </li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+            <li>
+                <div class="user-view">
+                    {% if profile.avatar %}
+                        <a><img class="circle materialboxed" src="{{ profile.avatar.url }}"></a>
+                    {% else %}
+                        <a><img class="circle" src="{% static 'default-profile-picture.jpg' %}"></a>
+                    {% endif %}
+                    <a><span class="name">{{ native_user.first_name }} {{ native_user.last_name }}</span></a>
+                    <a><span class="email">{{ native_user.email }}</span></a>
+                </div>
+                <div class="divider"></div>
+            </li>
+            {% if user == native_user %}
+                <div class="row">
+                    <a class='dropdown-trigger btn-large waves-light col s10 m10 offset-s1 offset-m1' href='#' data-target='dropdown1'>Edit Profile</a>
+                    <ul id='dropdown1' class='dropdown-content'>
+                        <li class="collection-item amber lighten-1">
+                            <a class="modal-trigger btn-flat" href="#modal1">Add Categories</a>
+                        </li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li class="collection-item amber lighten-1">
+                            <a class="modal-trigger btn-flat" href="#modal-avatar">Add/Change Avatar</a>
+                        </li>
+                        <li class="divider" tabindex="-1"></li>
+                        <li class="collection-item amber lighten-2">
+                            <a class="modal-trigger btn-flat" href="#modal-change-user-password">Change Password</a>
+                        </li>
+                        <li class="divider" tabindex="-1"></li>
+                    </ul>
+                </div>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <li>
+                    <a class="waves-light btn" href="{% url 'Index' %}">Home</a>
+                </li>
+                <li>
+                    <a class=" waves-light btn" href="{% url 'Logout' %}">Logout</a>
+                </li>
+
+            {% else %}
+
+                <li>
+                    <a class=" waves-light btn modal-trigger" href="#modal1">Login</a>
+                </li>
+
+                <li>
+                    <a class=" waves-light btn modal-trigger" href="#modal2">Signup</a>
+                </li>
+
+            {% endif %}
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+    </div>
+{#{% include 'user_profile/side_nav_user_prof.html' %}#}
+</nav>
+
+{% include 'home/login_modal.html' %}
+
+{% include 'home/signup_modal.html' %}

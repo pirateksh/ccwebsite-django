@@ -1,0 +1,75 @@
+{% load static %}
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{% static "Materialize/js/materialize.js" %}"></script>
+<script src="{% static "Materialize/js/init.js" %}"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+{#Cropper JS files#}
+{#<script src="{% static 'js_for_cropper/jquery.min.js' %}"></script>#}
+{#<script src="{% static 'js_for_cropper/cropper.min.js' %}"></script>#}
+{#<script src="{% static 'js_for_cropper/jquery-cropper.min.js' %}"></script>#}
+
+{#Bootstrap JS files#}
+{#<script src="{% static 'Bootstrap/js/bootstrap.min.js' %}"></script>#}
+{#<script src="{% static 'Bootstrap/js/bootstrap.js' %}"></script>#}
+
+<script>M.AutoInit();</script>
+
+{# Function for read more functionality #}
+{#                               <a class="btn" onclick="expandPost()">Read more</a>#}
+{#                               <script>#}
+{#                                    function expandPost() {#}
+{#                                        document.getElementById("p").innerHTML = "{{ post.content|safe }}";#}
+                                        {#window.alert('hi');#}
+{#                                        }#}
+{#                                </script>#}
+{# Function ended #}
+
+
+{# Show password #}
+<script>
+    function showPassword() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
+{# Show password ended #}
+
+{# For Toasts #}
+    {% if messages %}
+        {% for message in messages %}
+            <script>M.toast({html: "{{ message }}", classes: 'rounded', displayLength: 3000})</script>
+        {% endfor %}
+    {% endif %}
+
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <script>M.toast({html: "{{ error }}", classes: 'rounded', displayLength: 3000})</script>
+                # error|escape
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    {% if password_change_form.errors %}
+        {% for field in password_change_form %}
+            {% for error in field.errors %}
+                <script>M.toast({html: "{{ error }}", classes: 'rounded', displayLength: 3000})</script>
+{#                error|escape#}
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <script>
+        function addPostToast(){
+            M.toast({html: "Login to add post!", classes: 'rounded', displayLength: 3000});
+        }
+    </script>
+

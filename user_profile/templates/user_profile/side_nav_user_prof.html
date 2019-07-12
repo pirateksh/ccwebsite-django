@@ -1,0 +1,23 @@
+{% load static %}
+  <ul id="slide-out" class="sidenav">
+      <li>
+          <div class="user-view">
+              <div class="background">
+                  <img src="{% static 'background3.jpg' %}">
+              </div>
+              {% if profile.avatar %}
+                  <a><img class="circle" src="{{ profile.avatar.url }}"></a>
+              {% else %}
+                  <a><img class="circle" src="{% static 'default-profile-picture.png' %}"></a>
+              {% endif %}
+              <a><span class="white-text name">{{ native_user.first_name }}</span></a>
+              <a><span class="white-text email">{{ native_user.email }}</span></a>
+          </div>
+      </li>
+      <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+      <li><a href="#!">Second Link</a></li>
+      <li><div class="divider"></div></li>
+      <li><a class="subheader">Subheader</a></li>
+      <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+  </ul>
+  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>

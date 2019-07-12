@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>
+        {% block title %}
+            Parallax Template - Materialize
+        {% endblock %}
+    </title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'logo.png' %}" />
+    {% include 'css.html' %}
+
+</head>
+<body style="background: url('{% static 'back2.jpg' %}') fixed no-repeat center; background-size: cover;">
+
+    {% block content %}
+        {# Content Here #}
+    {% endblock %}
+        {% include 'scripts.html' %}
+    {% block javascript %}
+    
+    {% endblock %}
+
+
+
+
+</body>
+</html>

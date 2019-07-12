@@ -1,0 +1,86 @@
+{% comment %}
+    Context Variables:
+    form - Login Form
+    user - Logged in User
+    addpostform - Post Add Form
+    posts - Posts
+    tags - Tags
+    user_profiles - Profiles of users
+{% endcomment %}
+{% load static %}
+<nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+        {% if user.is_authenticated %}
+            <a id="logo-container" href="{% url 'User Profile' user.username%}" class="brand-logo">Hi, {{ user.first_name }}!</a>
+        {% else %}
+            <a id="logo-container" class="brand-logo">Hi, User!</a>
+        {% endif %}
+        <ul class="right hide-on-med-and-down">
+            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+                <li>
+                    <a class=" waves-light btn" href="/admin">Dashboard</a>
+                </li>
+            {% endif %}
+           <li>
+                <a class=" waves-light btn" href="{% url 'Logout' %}">Logout</a>
+           </li>
+        {% else %}
+        <li>
+            <a class=" waves-light btn modal-trigger" href="#modal1">Login</a>
+        </li>
+           <li>
+            <a class=" waves-light btn modal-trigger" href="#modal2">Signup</a>
+        </li>
+          {% endif %}
+        </ul>
+
+        {# SideNav for Mobile view #}
+        <ul id="nav-mobile" class="sidenav">
+
+            {# Loop through categories #}
+        
+            <li><a class="waves-light btn" id="cate" href="#cate">CATEGORIES</a></li>
+            <ul class="collapsible popout black-text">
+                {% for tag in tags %}
+                    <li>
+                        <div class="collapsible-header">{{ tag.name }}</div>
+                        <div class="collapsible-body">{{ tag.description }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+
+
+
+            {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                    <li>
+                        <a class=" waves-light btn" href="/admin">Dashboard</a>
+                    </li>
+                {% endif %}
+
+                <li>
+                    <a class=" waves-light btn" href="{% url 'Logout' %}">Logout</a>
+                </li>
+
+            {% else %}
+
+                <li>
+                    <a class=" waves-light btn modal-trigger" href="#modal1">Login</a>
+                </li>
+
+                <li>
+                    <a class=" waves-light btn modal-trigger" href="#modal2">Signup</a>
+                </li>
+
+            {% endif %}
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+    </div>
+</nav>
+
+
+{% include 'home/login_modal.html' %}
+
+{% include 'home/signup_modal.html' %}
