@@ -1,0 +1,37 @@
+{% load static %}
+<ul class="collection">
+    <li class="collection-item amber">
+        <div class="user-view">
+            {% if profile.avatar %}
+                <a><img class="circle materialboxed" src="{{ profile.avatar.url }}"></a>
+            {% else %}
+                <a><img class="circle" src="{% static 'default-profile-picture.jpg' %}"></a>
+            {% endif %}
+            <p><span class="name"><strong>{{ native_user.first_name }} {{ native_user.last_name }}</strong></span></p>
+            <span class="email">{{ native_user.email }}</span>
+        </div>
+    </li>
+    <div class="divider"></div>
+    {% if native_user == user %}
+        <li class="collection-item amber lighten-1">
+            <a class="modal-trigger btn-flat" href="#modal">
+                Add Categories
+            </a>
+        </li>
+        <li class="collection-item amber lighten-1">
+            <a class="modal-trigger btn-flat" href="#modal-avatar">
+                Add/Change Avatar
+            </a>
+        </li>
+        <li class="collection-item amber lighten-2">
+            <a class="modal-trigger btn-flat" href="#modal-change-user-password">
+                Change Password
+            </a>
+        </li>
+        <li class="collection-item amber lighten-2">
+            <a class="btn-flat" href="{% url 'Drafts' user.username %}">
+                Drafts
+            </a>
+        </li>
+    {% endif %}
+</ul>

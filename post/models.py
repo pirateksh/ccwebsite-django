@@ -4,7 +4,28 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from datetime import datetime
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from django.utils import timezone
 # Create your models here.
+
+# Model manager
+# https://www.youtube.com/watch?v=BrbaKmyTOMc&list=PLEsfXFp6DpzQFqfCur9CJ4QnKQTVXUsRy&index=36
+
+
+class PostManager(models.Manager):
+    # Overriding all() model manager
+    def all(self, native_user=None, draft=False, *args, **kwargs):
+        if native_user is None:
+            if not draft:
+                return super(PostManager, self).filter(draft=False).filter(post_on_date__lte=timezone.now()).order_by(
+                    '-published')
+            return super(PostManager, self).filter(draft=True).filter(post_on_date__lte=timezone.now()).order_by(
+                    '-published')
+        else:
+            if not draft:
+                return super(PostManager, self).filter(draft=False).filter(post_on_date__lte=timezone.now()).filter(
+                    author=native_user).order_by('-published')
+            return super(PostManager, self).filter(draft=True).filter(post_on_date__lte=timezone.now()).filter(
+                    author=native_user).order_by('-published')
 
 
 class Tags(models.Model):
@@ -27,9 +48,16 @@ class Post(models.Model):
         null=True
     )
 
+    # To create Draft and publish post on specific day.
+    draft = models.BooleanField(default=False)
+    post_on_date = models.DateField(auto_now=False, auto_now_add=False, default=timezone.now())
+
     published = models.DateTimeField(default=datetime.now, blank=True)
     tags = models.ManyToManyField(Tags, verbose_name='Post Tags', blank=True)
     slug = models.SlugField(default='', blank=True)
+
+    # Initialising post manager
+    objects = PostManager()
 
     def save(self):
         self.slug = slugify(self.title)

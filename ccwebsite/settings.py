@@ -23,32 +23,37 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ')xlv8*ocitg4+_-00hm6o98)#z^xqeww^7%9w@*%*=5f@2y359'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['herokuccwebsite.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
 INSTALLED_APPS = [
-    # 'django.contrib.sites',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
+    # Local Apps
     'home.apps.RegistrationConfig',
     'post.apps.PostConfig',
     'user_profile.apps.UserProfileConfig',
+
+    # Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django.contrib.sites',
+
+    # Third party Apps
     'rest_framework',
     'materializecssform',
     'ckeditor',
     'ckeditor_uploader',
     'multiselectfield',
     'imagekit',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
     # 'materialize',
     # 'crispy_forms',
     # 'crispy_forms_materialize',
@@ -180,7 +185,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 

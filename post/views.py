@@ -3,10 +3,19 @@ from django.contrib.auth.decorators import login_required
 from .forms import PostForm
 from home.forms import UserSignupForm
 from .models import Post, Tags
-from django.contrib.auth.models import User
+from django.core.paginator import Paginator  # EmptyPage, PageNotAnInteger
 from django.contrib import messages
-from home.views import page_maker
 # Create your views here.
+
+NUMBER_OF_POSTS_PER_PAGE = 2
+HOME = '/'
+
+
+def page_maker(request, native_user=None, draft=False):
+    post_list = Post.objects.all(native_user=native_user, draft=draft)
+    paginator = Paginator(post_list, NUMBER_OF_POSTS_PER_PAGE)
+    page = request.GET.get('page')
+    return paginator.get_page(page)
 
 
 @login_required
@@ -27,9 +36,7 @@ def add_post(request):
 
             post.save()
             messages.success(request, f"Post Added Successfully!")
-            return redirect('/home/')
-        else:
-            messages.info(request, f"Form Invalid!")
+            return redirect(HOME)
     else:
         addpostform = PostForm()
     form = UserSignupForm()

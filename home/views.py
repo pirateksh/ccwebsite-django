@@ -5,25 +5,14 @@ from django.contrib import messages
 from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
 from home.forms import UserSignupForm
-from post.models import Post, Tags
+from post.models import Tags  # Post,
 from post.forms import PostForm
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from user_profile.models import UserProfile
-
-
-NUMBER_OF_POSTS_PER_PAGE = 2
+from post.views import page_maker
 User = get_user_model()
 # A function to paginate posts and return them
 
-
-def page_maker(request, native_user=None):
-    if native_user is None:
-        post_list = Post.objects.all().order_by('-published')
-    else:
-        post_list = Post.objects.filter(author=native_user).order_by('-published')
-    paginator = Paginator(post_list, NUMBER_OF_POSTS_PER_PAGE)
-    page = request.GET.get('page')
-    return paginator.get_page(page)
+HOME = '/'
 
 
 def index(request):
@@ -50,19 +39,18 @@ def login_view(request):
         if user is not None:
             login(request, user)
             messages.success(request, f"Login Success")
-            to = '/home/'
-            return redirect(to)
+            return redirect(HOME)
         else:
             messages.error(request, f"Login Failed")
-            return redirect('/home/')
+            return redirect(HOME)
     else:
-        return redirect('/home/')
+        return redirect(HOME)
 
 
 def logout_view(request):
     logout(request)
     messages.success(request, f"Logout Success")
-    return redirect('/home/')
+    return redirect(HOME)
 
 
 def signup_view(request):
@@ -89,7 +77,7 @@ def signup_view(request):
             profile.save()
 
             messages.success(request, f"Signup Success")
-            return redirect('/home/')
+            return redirect(HOME)
     else:
         form = UserSignupForm()
     posts = page_maker(request)

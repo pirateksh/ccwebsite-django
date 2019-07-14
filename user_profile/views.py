@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, update_session_auth_hash
-from home.views import page_maker
+from post.views import page_maker
 
 # Imported Models
 from django.contrib.auth.models import User
@@ -90,27 +90,23 @@ def avatar_upload(request, username):
     }
     return render(request, 'user_profile/user_profile.html', context)
 
-#
-# def avatar_upload(request, iden):
-#     profile = UserProfile.objects.filter(pk=iden)
-#     if request.method == 'POST':
-#         avatar_form = PhotoForm(request.POST, request.FILES)
-#         if avatar_form.is_valid():
-#             avatar_form.save()
-#             redirect_to = '/profile/' + str(request.user.username)
-#             return redirect(redirect_to)
-#     else:
-#         avatar_form = PhotoForm()
-#     form = UserSignupForm()
-#     password_change_form = PasswordChangeForm(request.user)
-#     addpostform = PostForm()
-#
-#     context = {
-#         'profile': profile,
-#         'avatar_form': avatar_form,
-#         'password_change_form': password_change_form,
-#         'addpostform': addpostform,
-#         'form': form,
-#     }
-#
-#     return render(request, 'user_profile/user_profile.html', context)
+
+def show_drafts(request, username):
+    # native_user = get_object_or_404(User, username=username)
+    # profile = get_object_or_404(UserProfile, user=native_user)
+    # draft_list = page_maker(request, native_user=native_user, draft=True)
+    # avatar_form = AvatarUploadForm()
+    # form = UserSignupForm()
+    # addpostform = PostForm()
+    # password_change_form = PasswordChangeForm(user=native_user)
+    # context = {
+    #     'profile': profile,
+    #     'avatar_form': avatar_form,
+    #     'form': form,
+    #     'native_user': native_user,
+    #     'draft_list': draft_list,
+    #     'addpostform': addpostform,
+    #     'password_change_form': password_change_form,
+    # }
+    # return render(request, 'user_profile/user_profile.html', context)
+    return HttpResponse('You will see drafts here soon')

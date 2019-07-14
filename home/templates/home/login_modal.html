@@ -1,7 +1,7 @@
 {% load materializecss %}
 {#  Login Modal #}
 <div id="modal1" class="modal modal-fixed-footer">
-    <form class="col s12" method="post" action="{% url 'Login' %}">
+    <form class="col s12" method="post" action="{% url 'Login' %}" data-url="{% url 'Login'%}">
         {% csrf_token %}
         <div class="modal-content">
         <h4>Login Here</h4>

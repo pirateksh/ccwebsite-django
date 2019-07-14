@@ -53,7 +53,7 @@
                 </ul>
             </div>
 
-            <div class="col s12 m8 l8">
+            <div class="col s12 m8 l7">
                 {% include 'home/add_post.html' %}
 
                 {% for post in posts %}
@@ -63,7 +63,7 @@
                                 <h4 id="post-head-s-down-l" class="hide-on-small-and-down hide-on-large-only">{{ post.title|safe }}</h4>
                                 <h4 id="post-head-m-up" class="hide-on-med-and-up">{{ post.title|safe }}</h4>
                                 <p class="row">
-                                    <span class="col s8 m8 l8">
+                                    <span class="col s8 m8 l7">
                                         <a class="chip" href="{% url 'User Profile' post.author.username %} ">
                                             {% for user_profile in user_profiles %}
                                                 {% if user_profile.user == post.author %}
@@ -77,7 +77,7 @@
                                             {{ post.author }}
                                         </a>
                                     </span>
-                                <span class="col s4 m4 l4">Published: {{ post.published }}</span>
+                                <span class="col s4 m4 l4">{{ post.published|timesince }} ago</span>
                                 </p>
                             </li>
                             <li class="collection-item">
@@ -89,54 +89,34 @@
                             <li class="collection-item" id="p">
                                 {{ post.content|safe }}
                             </li>
+{#                            <li class="collection-item">#}
+{#                                Share to:#}
+{#                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>#}
+{#                            </li>#}
                     </ul>
                 {% endfor %}
 
                 {# Pagination #}
-                {% if posts.has_other_pages %}
-                    <ul class="pagination center-align">
-                        {% if posts.has_previous %}
-                            <li><a href="?page={{ posts.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
-                        {% else %}
-                            <li class="disabled"><i class="material-icons">chevron_left</i></li>
-                        {% endif %}
-                        {% for i in posts.paginator.page_range %}
-                            {% if posts.number == i %}
-                                <li class="active teal"><a href="?page={{ i }}">{{ i }}</a></li>
-                            {% else %}
-                                <li><a href="?page={{ i }}">{{ i }}</a></li>
-                            {% endif %}
-                        {% endfor %}
-                        {% if posts.has_next %}
-                            <li><a href="?page={{ posts.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
-                        {% else %}
-                            <li class="disabled"><i class="material-icons">chevron_right</i></li>
-                        {% endif %}
-                    </ul>
-                {% endif %}
+                {% include 'home/pagination_home.html' %}
                 {# Pagination Ended #}
 
             </div>
 
             {# Right side Catergory Menu #}
-            <div class="col s12 m2 l2 hide-on-med-and-down">
-
-            {% if user.is_authenticated %}
-                <ul class="collapsible white">
-                    <li>
-                        <div class="collapsible-header">
-                            <a href="{% url "User Profile" user.username %}" >Profile</a>
-                        </div>
+            <div class="col s12 m2 l3 hide-on-med-and-down">
+                <ul class="collection white">
+                    {% if user.is_authenticated %}
+                        <li class="collection-item amber">
+                            <a class="btn" href="{% url "User Profile" user.username %}" ><span class="center-align">Profile</span></a>
+                        </li>
+                    {% else %}
+                        <li class="collection-item amber">
+                            <a class="btn disabled">Profile</a>
+                        </li>
+                    {% endif %}
+                    <li class="collection-item amber">
+                        <a class="btn-flat" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>
                     </li>
-                </ul>
-            {% endif %}
-                <ul class="collapsible popout teal">
-                        {% for tag in tags %}
-                            <li>
-                                <div class="collapsible-header">{{ tag.name }}</div>
-                                <div class="collapsible-body">{{ tag.description }}</div>
-                            </li>
-                        {% endfor %}
                 </ul>
             </div>
 

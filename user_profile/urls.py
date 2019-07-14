@@ -1,9 +1,11 @@
-from django.contrib import admin
-from django.urls import path, include
+# from django.contrib import admin
+from django.urls import path
+# from django.conf.urls import url
 from . import views
 
 urlpatterns = [
     path('<str:username>/', views.user_profile, name="User Profile"),
-    path('avatar_upload/<str:username>/', views.avatar_upload, name="Avatar Upload"),
-    path('change_password/<str:username>', views.change_password, name="Change Password"),
+    path('<str:username>/avatar_upload/', views.avatar_upload, name="Avatar Upload"),
+    path('<str:username>/change_password/', views.change_password, name="Change Password"),
+    path('<str:username>/drafts/', views.show_drafts, name="Drafts"),
 ]

@@ -4,6 +4,7 @@
 <script src="{% static "Materialize/js/materialize.js" %}"></script>
 <script src="{% static "Materialize/js/init.js" %}"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
@@ -42,6 +43,96 @@
 </script>
 {# Show password ended #}
 
+
+
+
+{# Django Docs copied for AJAX #}
+{#// using jQuery#}
+{#<script>#}
+{#function getCookie(name) {#}
+{#    var cookieValue = null;#}
+{#    if (document.cookie && document.cookie !== '') {#}
+{#        var cookies = document.cookie.split(';');#}
+{#        for (var i = 0; i < cookies.length; i++) {#}
+{#            var cookie = jQuery.trim(cookies[i]);#}
+{#            // Does this cookie string begin with the name we want?#}
+{#            if (cookie.substring(0, name.length + 1) === (name + '=')) {#}
+{#                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));#}
+{#                break;#}
+{#            }#}
+{#        }#}
+{#    }#}
+{#    return cookieValue;#}
+{# }#}
+{##}
+{#var csrftoken = getCookie('csrftoken');#}
+{##}
+{#function csrfSafeMethod(method) {#}
+{#    // these HTTP methods do not require CSRF protection#}
+{#    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));#}
+{# }#}
+{#$.ajaxSetup({#}
+{#    beforeSend: function(xhr, settings) {#}
+{#        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {#}
+{#            xhr.setRequestHeader("X-CSRFToken", csrftoken);#}
+{#        }#}
+{#    }#}
+{# });#}
+{#</script>#}
+
+{# AJAX Script #}
+{#<script>#}
+{#    $(document).on('submit', '#ajax-form', function (e) {#}
+{#        e.preventDefault();#}
+{##}
+{#        $.ajax({#}
+{#            type: 'POST',#}
+{#            url: '{% url 'Login' %}',#}
+{#            data: {#}
+{#                username: $('#username_login').val(),#}
+{#                password: $('#password_login').val(),#}
+                {#csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()#}
+{#            },#}
+{#            success: function () {#}
+{#                alert('User logged in');#}
+{#            }#}
+{#        });#}
+{#    });#}
+{#</script>#}
+{# AJAX Script Ended #}
+{#<script>#}
+{#$(document).ready(function(){#}
+{#    var $myForm = $('#ajax-form');#}
+{#    $myForm.submit(function(event){#}
+{#        event.preventDefault();#}
+{#        var $formData = $(this).serialize();#}
+{#        var $thisURL = $myForm.attr('data-url') || window.location.href; // or set your own url#}
+{#        $.ajax({#}
+{#            method: "POST",#}
+{#            url: $thisURL,#}
+{#            data: $formData,#}
+{#            success: handleFormSuccess,#}
+{#            error: handleFormError,#}
+{#        })#}
+{#    });#}
+{##}
+{#    function handleFormSuccess(data, textStatus, jqXHR){#}
+{#        console.log(data);#}
+{#        console.log(textStatus);#}
+{#        console.log(jqXHR);#}
+{#        $myForm.reset(); // reset form data#}
+{#    }#}
+{##}
+{#    function handleFormError(jqXHR, textStatus, errorThrown){#}
+{#        console.log(jqXHR);#}
+{#        console.log(textStatus);#}
+{#        console.log(errorThrown);#}
+{#    }#}
+{# });#}
+{#</script>#}
+
+
+
 {# For Toasts #}
     {% if messages %}
         {% for message in messages %}
@@ -53,7 +144,6 @@
         {% for field in form %}
             {% for error in field.errors %}
                 <script>M.toast({html: "{{ error }}", classes: 'rounded', displayLength: 3000})</script>
-                # error|escape
             {% endfor %}
         {% endfor %}
     {% endif %}
@@ -62,14 +152,13 @@
         {% for field in password_change_form %}
             {% for error in field.errors %}
                 <script>M.toast({html: "{{ error }}", classes: 'rounded', displayLength: 3000})</script>
-{#                error|escape#}
             {% endfor %}
         {% endfor %}
     {% endif %}
-
+{# Function to display toast from HTML (when message can't be passed from view) #}
     <script>
-        function addPostToast(){
-            M.toast({html: "Login to add post!", classes: 'rounded', displayLength: 3000});
+        function addToast(message){
+            M.toast({html: message, classes: 'rounded', displayLength: 3000});
         }
     </script>
 

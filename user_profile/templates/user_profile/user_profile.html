@@ -17,66 +17,6 @@
     {{ native_user.first_name }} {{ native_user.last_name }}
 {% endblock %}
 
-{#{% block javascript %}#}
-{# <script>#}
-{#     $(function () {#}
-{#         /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */#}
-{#         $("#id_avatar").change(function () {#}
-{#             if (this.files && this.files[0]) {#}
-{#                 var reader = new FileReader();#}
-{#                 reader.onload = function (e) {#}
-{#                     $("#image").attr("src", e.target.result);#}
-{#                     $("#modalCrop").modal("show");#}
-{#                 }#}
-{#                 reader.readAsDataURL(this.files[0]);#}
-{#             }#}
-{#         });#}
-{##}
-{#      /* SCRIPTS TO HANDLE THE CROPPER BOX */#}
-{#        var $image = $("#image");#}
-{#        var cropBoxData;#}
-{#        var canvasData;#}
-{#        $("#modalCrop").on("shown.bs.modal", function () {#}
-{#          $image.cropper({#}
-{#            viewMode: 1,#}
-{#            aspectRatio: 1/1,#}
-{#            minCropBoxWidth: 200,#}
-{#            minCropBoxHeight: 200,#}
-{#            ready: function () {#}
-{#              $image.cropper("setCanvasData", canvasData);#}
-{#              $image.cropper("setCropBoxData", cropBoxData);#}
-{#            }#}
-{#          });#}
-{#        }).on("hidden.bs.modal", function () {#}
-{#          cropBoxData = $image.cropper("getCropBoxData");#}
-{#          canvasData = $image.cropper("getCanvasData");#}
-{#          $image.cropper("destroy");#}
-{#        });#}
-{##}
-{#        // Enable zoom in button#}
-{#        $(".js-zoom-in").click(function () {#}
-{#          $image.cropper("zoom", 0.1);#}
-{#        });#}
-{##}
-{#        // Enable zoom out button#}
-{#        $(".js-zoom-out").click(function () {#}
-{#          $image.cropper("zoom", -0.1);#}
-{#        });#}
-{##}
-{#      /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */#}
-{#      $(".js-crop-and-upload").click(function () {#}
-{#        var cropData = $image.cropper("getData");#}
-{#        $("#id_x").val(cropData["x"]);#}
-{#        $("#id_y").val(cropData["y"]);#}
-{#        $("#id_height").val(cropData["height"]);#}
-{#        $("#id_width").val(cropData["width"]);#}
-{#        $("#formUpload").submit();#}
-{#      });#}
-{##}
-{#    });#}
-{#  </script>#}
-{#{% endblock %}#}
-
 {% block content %}
 
     {% include 'user_profile/navbar_user_prof.html' %}
@@ -84,105 +24,19 @@
 
             {# Left side Catergory Menu #}
             <div class="col m4 l3 hide-on-small-and-down">
-                <ul class="collection">
-                    <li class="collection-item amber">
-                        <div class="user-view">
-                            {% if profile.avatar %}
-                                <a><img class="circle materialboxed" src="{{ profile.avatar.url }}"></a>
-                            {% else %}
-                                <a><img class="circle" src="{% static 'default-profile-picture.jpg' %}"></a>
-                            {% endif %}
-                            <p><span class="name"><strong>{{ native_user.first_name }} {{ native_user.last_name }}</strong></span></p>
-                            <span class="email">{{ native_user.email }}</span>
-                        </div>
-                    </li>
-                    <div class="divider"></div>
-                    {% if native_user == user %}
-                        <li class="collection-item amber lighten-1">
-                            <a class="modal-trigger btn-flat" href="#modal">
-                                Add Categories
-                            </a>
-                        </li>
-                        <li class="collection-item amber lighten-1">
-                            <a class="modal-trigger btn-flat" href="#modal-avatar">
-                                Add/Change Avatar
-                            </a>
-                        </li>
-                        <li class="collection-item amber lighten-2">
-                            <a class="modal-trigger btn-flat" href="#modal-change-user-password">
-                                 Change Password
-                            </a>
-                        </li>
-                    {% endif %}
-                </ul>
+                {% include 'user_profile/left_side_bar_user_profile.html' %}
             </div>
 
-            <div class="col s12 m8 l9">
-                {% if user == native_user %}
-                    {% include 'home/add_post.html' %}
-                {% endif %}
-                {% if native_posts %}
-                    {% for native_post in native_posts %}
-                        <ul class="collection with-header" >
-                            <li class="collection-header">
-                                <h4 id="post-head-m-down" class="hide-on-med-and-down">{{ native_post.title|safe }}</h4>
-                                <h4 id="post-head-s-down-l" class="hide-on-small-and-down hide-on-large-only">{{ native_post.title|safe }}</h4>
-                                <h4 id="post-head-m-up" class="hide-on-med-and-up">{{ native_post.title|safe }}</h4>
-                                <p class="row">
-                                    <span class="col s8 m8 l8">
-                                        <a href="{% url 'User Profile' native_user.username %}" class="chip">
-                                            {% if profile.avatar %}
-                                                <img src="{{ profile.avatar.url }}">
-                                            {% else %}
-                                                <img src="{% static 'default-profile-picture.jpg' %}">
-                                            {% endif %}
-                                            {{ native_post.author }}
-                                        </a>
-                                    </span>
-                                    <span class="col s4 m4 l4">Published: {{ native_post.published }}</span>
-                                </p>
-                            </li>
-                            <li class="collection-item">
-                                Tags :
-                                {% for native_post_tag in native_post.tags.all %}
-                                    <a class="chip">{{ native_post_tag|safe }}</a>
-                                {% endfor %}
-                            </li>
-                            <li class="collection-item" id="p">
-                                {{ native_post.content|safe }}
-                            </li>
-                        </ul>
-                    {% endfor %}
-                {% else %}
-                    <ul class="collection with-header" >
-                    <li class="collection-header">
-                        You have'nt added any posts yet, try to add one.
+            <div class="col s12 m8 l7">
+                {% include 'user_profile/post_display_user_profile.html' %}
+            </div>
+
+            <div class="col m4 l2 hide-on-small-and-down">
+                <ul class="collection">
+                    <li class="collection-item amber">
+                        <a class="btn-flat" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>
                     </li>
-                    </ul>
-                {% endif %}
-                {# Pagination #}
-                {% if native_posts.has_other_pages %}
-                    <ul class="pagination center-align">
-                        {% if native_posts.has_previous %}
-                            <li><a href="?page={{ native_posts.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
-                        {% else %}
-                            <li class="disabled"><i class="material-icons">chevron_left</i></li>
-                        {% endif %}
-                        {% for i in native_posts.paginator.page_range %}
-                            {% if native_posts.number == i %}
-                                <li class="active teal"><a href="?page={{ i }}">{{ i }}</a></li>
-                            {% else %}
-                                <li><a href="?page={{ i }}">{{ i }}</a></li>
-                            {% endif %}
-                        {% endfor %}
-                        {% if native_posts.has_next %}
-                            <li><a href="?page={{ native_posts.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
-                        {% else %}
-                            <li class="disabled"><i class="material-icons">chevron_right</i></li>
-                        {% endif %}
-                    </ul>
-                {% endif %}
-                {# Pagination Ended #}
+                </ul>
             </div>
     </div>
 

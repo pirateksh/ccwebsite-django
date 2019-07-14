@@ -1,0 +1,23 @@
+{# Pagination #}
+{% if native_posts.has_other_pages %}
+    <ul class="pagination center-align">
+        {% if native_posts.has_previous %}
+            <li><a href="?page={{ native_posts.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+        {% else %}
+            <li class="disabled"><i class="material-icons">chevron_left</i></li>
+        {% endif %}
+        {% for i in native_posts.paginator.page_range %}
+            {% if native_posts.number == i %}
+                <li class="active teal"><a href="?page={{ i }}">{{ i }}</a></li>
+            {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if native_posts.has_next %}
+            <li><a href="?page={{ native_posts.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+        {% else %}
+            <li class="disabled"><i class="material-icons">chevron_right</i></li>
+        {% endif %}
+    </ul>
+{% endif %}
+{# Pagination Ended #}

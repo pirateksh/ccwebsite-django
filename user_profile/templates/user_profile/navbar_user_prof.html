@@ -78,13 +78,16 @@
                         <li class="divider" tabindex="-1"></li>
                     </ul>
                 </div>
+                <li>
+                    <a class="btn" href="{% url 'Drafts' user.username %}">Drafts</a>
+                </li>
             {% endif %}
             {% if user.is_authenticated %}
                 <li>
-                    <a class="waves-light btn" href="{% url 'Index' %}">Home</a>
+                    <a class="btn" href="{% url 'Index' %}">Home</a>
                 </li>
                 <li>
-                    <a class=" waves-light btn" href="{% url 'Logout' %}">Logout</a>
+                    <a class="btn" href="{% url 'Logout' %}">Logout</a>
                 </li>
 
             {% else %}
@@ -102,7 +105,6 @@
         <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
     </div>
-{#{% include 'user_profile/side_nav_user_prof.html' %}#}
 </nav>
 
 {% include 'home/login_modal.html' %}
