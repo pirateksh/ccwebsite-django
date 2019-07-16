@@ -1,14 +1,20 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse
 from django.contrib import messages
-from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
-from home.forms import UserSignupForm
-from post.models import Tags  # Post,
-from post.forms import PostForm
-from user_profile.models import UserProfile
 from post.views import page_maker
+# from django.contrib.contenttypes.models import ContentType
+
+# Importng models
+from comments.models import Comment
+from django.contrib.auth.models import Group
+from post.models import Tags, Post
+from user_profile.models import UserProfile
+
+# Importing Forms
+from home.forms import UserSignupForm
+from post.forms import PostForm
+from comments.forms import CommentForm
 User = get_user_model()
 # A function to paginate posts and return them
 
@@ -21,12 +27,20 @@ def index(request):
     posts = page_maker(request)
     user_profiles = UserProfile.objects.all()
     tags = Tags.objects.all()
+
+    # Using Model Manager all().
+    comments = Comment.objects.all()
+    comment_form = CommentForm()
+    # if comment_form.is_valid():
+    #     print(comment_form.cleaned_data)
     context = {
         'form': form,
         'addpostform': addpostform,
         'posts': posts,
         'tags': tags,
         'user_profiles': user_profiles,
+        'comments': comments,
+        'comment_form': comment_form,
     }
     return render(request, 'home/index.html', context)
 

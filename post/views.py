@@ -5,6 +5,8 @@ from home.forms import UserSignupForm
 from .models import Post, Tags
 from django.core.paginator import Paginator  # EmptyPage, PageNotAnInteger
 from django.contrib import messages
+from django.contrib.contenttypes.models import ContentType
+from comments.models import Comment
 # Create your views here.
 
 NUMBER_OF_POSTS_PER_PAGE = 2

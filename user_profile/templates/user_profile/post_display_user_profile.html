@@ -20,7 +20,7 @@
                             {{ native_post.author }}
                         </a>
                     </span>
-                    <span class="col s4 m4 l4">Published: {{ native_post.published|timesince }}</span>
+                    <span class="col s4 m4 l4">{{ native_post.published|timesince }} ago.</span>
                 </p>
             </li>
             <li class="collection-item">
@@ -41,7 +41,11 @@
 {% else %}
     <ul class="collection with-header" >
         <li class="collection-header">
-                        You have'nt added any posts yet, try to add one.
+            {% if native_user == user %}
+                You have'nt added any posts yet, try to add one.
+            {% else %}
+                {{ native_user.first_name }}'s feed is empty. No posts to show.
+            {% endif %}
         </li>
     </ul>
 {% endif %}

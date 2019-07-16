@@ -5,6 +5,7 @@ from datetime import datetime
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.contrib.contenttypes.models import ContentType
 # Create your models here.
 
 # Model manager
@@ -66,5 +67,9 @@ class Post(models.Model):
     def __str__(self):
         return '%s' % self.title
 
+    @property
+    def get_content_type(self):
+        content_type = ContentType.objects.get_for_model(self.__class__)
+        return content_type
 
 

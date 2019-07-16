@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['herokuccwebsite.herokuapp.com', '127.0.0.1']
 
 INSTALLED_APPS = [
     # Local Apps
+    'comments.apps.CommentsConfig',
     'home.apps.RegistrationConfig',
     'post.apps.PostConfig',
     'user_profile.apps.UserProfileConfig',
@@ -199,8 +200,8 @@ USE_TZ = True
 
 PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
 STATIC_URL = '/static/'
-# STATIC_ROOT = 'static'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_ROOT = 'static'
+# STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),

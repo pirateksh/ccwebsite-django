@@ -12,7 +12,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('post/', include('post.urls')),
     path('profile/', include('user_profile.urls')),
-
+    path('comments/', include('comments.urls')),
     # Account URLS
 
     url(r'^password_reset/$', views.PasswordResetView.as_view(), name='password_reset'),

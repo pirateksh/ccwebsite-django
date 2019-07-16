@@ -8,6 +8,8 @@
     posts - Posts
     tags - Tags
     user_profiles - Profiles of users
+    comments - Comments
+    comment_form - Comment Form
 {% endcomment %}
 {% load static %}
 
@@ -55,51 +57,7 @@
 
             <div class="col s12 m8 l7">
                 {% include 'home/add_post.html' %}
-
-                {% for post in posts %}
-                    <ul class="collection with-header" >
-                            <li class="collection-header">
-                                <h4 id="post-head-m-down" class="hide-on-med-and-down">{{ post.title|safe }}</h4>
-                                <h4 id="post-head-s-down-l" class="hide-on-small-and-down hide-on-large-only">{{ post.title|safe }}</h4>
-                                <h4 id="post-head-m-up" class="hide-on-med-and-up">{{ post.title|safe }}</h4>
-                                <p class="row">
-                                    <span class="col s8 m8 l7">
-                                        <a class="chip" href="{% url 'User Profile' post.author.username %} ">
-                                            {% for user_profile in user_profiles %}
-                                                {% if user_profile.user == post.author %}
-                                                    {% if user_profile.avatar %}
-                                                        <img src="{{ user_profile.avatar.url }}">
-                                                    {% else %}
-                                                        <img src="{% static 'default-profile-picture.jpg' %}">
-                                                    {% endif %}
-                                                {% endif %}
-                                            {% endfor %}
-                                            {{ post.author }}
-                                        </a>
-                                    </span>
-                                <span class="col s4 m4 l4">{{ post.published|timesince }} ago</span>
-                                </p>
-                            </li>
-                            <li class="collection-item">
-                                Tags :
-                                {% for post_tag in post.tags.all %}
-                                    <a class="chip">{{ post_tag|safe }}</a>
-                                {% endfor %}
-                            </li>
-                            <li class="collection-item" id="p">
-                                {{ post.content|safe }}
-                            </li>
-{#                            <li class="collection-item">#}
-{#                                Share to:#}
-{#                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>#}
-{#                            </li>#}
-                    </ul>
-                {% endfor %}
-
-                {# Pagination #}
-                {% include 'home/pagination_home.html' %}
-                {# Pagination Ended #}
-
+                {% include 'home/post_display_home.html' %}
             </div>
 
             {# Right side Catergory Menu #}

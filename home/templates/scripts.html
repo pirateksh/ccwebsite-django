@@ -7,7 +7,10 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+<script
+  src="http://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 {#Cropper JS files#}
 {#<script src="{% static 'js_for_cropper/jquery.min.js' %}"></script>#}
 {#<script src="{% static 'js_for_cropper/cropper.min.js' %}"></script>#}
@@ -79,10 +82,10 @@
 {#    }#}
 {# });#}
 {#</script>#}
-
-{# AJAX Script #}
+{##}
+{# AJAX Script#}
 {#<script>#}
-{#    $(document).on('submit', '#ajax-form', function (e) {#}
+{#    $(document).on('submit', '.ajax-form', function (e) {#}
 {#        e.preventDefault();#}
 {##}
 {#        $.ajax({#}
@@ -91,7 +94,7 @@
 {#            data: {#}
 {#                username: $('#username_login').val(),#}
 {#                password: $('#password_login').val(),#}
-                {#csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()#}
+{#                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()#}
 {#            },#}
 {#            success: function () {#}
 {#                alert('User logged in');#}
@@ -99,7 +102,7 @@
 {#        });#}
 {#    });#}
 {#</script>#}
-{# AJAX Script Ended #}
+{# AJAX Script Ended#}
 {#<script>#}
 {#$(document).ready(function(){#}
 {#    var $myForm = $('#ajax-form');#}
@@ -131,7 +134,18 @@
 {# });#}
 {#</script>#}
 
-
+<script>
+    $(".comment-reply-btn").click(function (event) {
+        event.preventDefault();
+        $(this).parent().next(".comment-reply").fadeToggle();
+        {#alert('This was clicked!');#}
+    })
+</script>
+{#<script>#}
+{#    function f() {#}
+{#        $('.comment-reply-btn').next('.comment-reply').fadeToggle();#}
+{#    }#}
+{#</script>#}
 
 {# For Toasts #}
     {% if messages %}
