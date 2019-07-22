@@ -6,6 +6,7 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import reverse
 # Create your models here.
 
 # Model manager
@@ -38,8 +39,8 @@ class Tags(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=255, blank=True, null=True, verbose_name='Post Title')
-    content = RichTextUploadingField(blank=True, null=True, verbose_name='Post Content')
+    title = models.CharField(max_length=255, blank=False, null=True, verbose_name='Post Title')
+    content = RichTextUploadingField(blank=False, null=True, verbose_name='Post Content')
 
     author = models.ForeignKey(
         User,
@@ -53,6 +54,9 @@ class Post(models.Model):
     draft = models.BooleanField(default=False)
     post_on_date = models.DateField(auto_now=False, auto_now_add=False, default=timezone.now())
 
+    # For AJAX likes
+    likes = models.ManyToManyField(User, blank=True, related_name='post_likes')
+
     published = models.DateTimeField(default=datetime.now, blank=True)
     tags = models.ManyToManyField(Tags, verbose_name='Post Tags', blank=True)
     slug = models.SlugField(default='', blank=True)
@@ -64,6 +68,9 @@ class Post(models.Model):
         self.slug = slugify(self.title)
         super(Post, self).save()
 
+    def get_like_url(self):
+        return reverse("like_toggle", (), {'slug', self.slug})
+
     def __str__(self):
         return '%s' % self.title
 
@@ -71,5 +78,4 @@ class Post(models.Model):
     def get_content_type(self):
         content_type = ContentType.objects.get_for_model(self.__class__)
         return content_type
-
 

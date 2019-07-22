@@ -74,9 +74,9 @@ CKEDITOR_ALLOW_NONIMAGE_FILES = False
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'custom',
-        'height': False,
+        # 'height': False,
         'width': False,
-        'height': '8vh',
+        'height': '15vh',
         'resize_dir': 'vertical',
         'toolbar_custom': [
             ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'CodeSnippet', ],

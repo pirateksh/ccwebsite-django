@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, forms
 # from django.contrib.auth.models import User
 # from django.contrib import admin
 # from ckeditor.widgets import CKEditorWidget

@@ -12,15 +12,15 @@
   /*main {*/
     /*flex: 1 0 auto;*/
   /*}*/
-#post-head-m-down{
+.post-head-m-down{
     font-size: 3vw;
 }
 
-#post-head-s-down-l{
+.post-head-s-down-l{
     font-size: 4vw;
 }
 
-#post-head-m-up{
+.post-head-m-up{
     font-size: 6vw;
 }
 

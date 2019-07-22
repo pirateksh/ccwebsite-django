@@ -15,9 +15,9 @@
 {% for post in posts %}
         <ul class="collection with-header" >
             <li class="collection-header">
-                <h4 id="post-head-m-down" class="hide-on-med-and-down">{{ post.title|safe }}</h4>
-                <h4 id="post-head-s-down-l" class="hide-on-small-and-down hide-on-large-only">{{ post.title|safe }}</h4>
-                <h4 id="post-head-m-up" class="hide-on-med-and-up">{{ post.title|safe }}</h4>
+                <h4 id="title-{{ post.pk }}" class="hide-on-med-and-down post-head-m-down">{{ post.title|safe }}</h4>
+                <h4 id="title-{{ post.pk }}" class="hide-on-small-and-down hide-on-large-only post-head-s-down-l">{{ post.title|safe }}</h4>
+                <h4 id="title-{{ post.pk }}" class="hide-on-med-and-up post-head-m-up">{{ post.title|safe }}</h4>
                 <p class="row">
                     <span class="col s8 m8 l7">
                         <a class="chip" href="{% url 'User Profile' post.author.username %} ">
@@ -43,88 +43,103 @@
                 {% endfor %}
             </li>
             <li class="collection-item" id="p">
-                {{ post.content|safe }}
+{#                <div class="less-content">#}
+{#                    {{ post.content|safe|truncatewords:50 }}#}
+{#                    <a class="read-more-btn" href="#">Show more</a>#}
+{#                </div>#}
+
+                <div class="expanded-content">
+                    {{ post.content|safe }}
+{#                    <a class="read-less-btn" href="#">Show less</a>#}
+                </div>
             </li>
-            <li class="collection-item">
-                <p>Comments:</p>
-                {% if user.is_authenticated %}
-                    <form method="post" action="{% url 'Add Comment' post.id %}">
-                        {% csrf_token %}
-                        {{ comment_form|materializecss }}
-                        <button class="btn waves-light" type="submit" name="action">Post Comment
-                            <i class="material-icons right">send</i>
-                        </button>
-                    </form>
-                {% endif %}
-                    {% for comment in comments %}
-                        {% if comment.post.id == post.id %}
-                            <blockquote>
-                            {{ comment.content }}
-                                <footer>
-                                via -
-                                    <a class="chip" href="{% url 'User Profile' comment.user.username %} ">
-                                        {% for user_profile in user_profiles %}
-                                            {% if user_profile.user == comment.user %}
-                                                {% if user_profile.avatar %}
-                                                    <img src="{{ user_profile.avatar.url }}">
-                                                {% else %}
-                                                    <img src="{% static 'default-profile-picture.jpg' %}">
+            <li class="collection-item row" id="like-{{ post.pk }}">
+                <div class="col s5 m5 l5">
+{#                    <a class="btn-flat col s5 m5 l5" href="{{ post.get_like_url }}">Like</a>LIKES:{{ post.likes.count }}#}
+                    <a class="btn-flat like-btn" data-href="{% url 'like_api_toggle' post.slug %}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">{{ post.likes.count }} Like</a>
+{#                    <a class="btn-flat disabled">LIKES:{{ post.likes.count }}</a>#}
+                </div>
+                <a class="btn-flat comment-display-btn" href="#">Comments</a>
+            </li>
+            <li class="collection-item comment-display" > {# style="display: none;"> #}
+                    {% if user.is_authenticated %}
+                        <form method="post" action="{% url 'Add Comment' post.id %}">
+                            {% csrf_token %}
+                            {{ comment_form|materializecss }}
+                            <button class="btn waves-light" type="submit" name="action">Post Comment
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </form>
+                    {% endif %}
+                        {% for comment in comments %}
+                            {% if comment.post.id == post.id %}
+                                <blockquote id="comment-{{ post.pk }}-{{ comment.pk }}">
+                                {{ comment.content }}
+                                    <footer>
+                                    via -
+                                        <a class="chip" href="{% url 'User Profile' comment.user.username %} ">
+                                            {% for user_profile in user_profiles %}
+                                                {% if user_profile.user == comment.user %}
+                                                    {% if user_profile.avatar %}
+                                                        <img src="{{ user_profile.avatar.url }}">
+                                                    {% else %}
+                                                        <img src="{% static 'default-profile-picture.jpg' %}">
+                                                    {% endif %}
                                                 {% endif %}
+                                            {% endfor %}
+                                            {{ comment.user }}
+                                        </a>
+    {#                                    <span id="comment-timestamp" style="color: #0f74a8;">#}
+                                            | {{ comment.timestamp|timesince }} ago |
+                                            {% if comment.children.count > 1 %}
+                                                {{ comment.children.count }} Replies |
+                                            {% elif comment.children.count == 1 %}
+                                                {{ comment.children.count }} Reply |
                                             {% endif %}
-                                        {% endfor %}
-                                        {{ comment.user }}
-                                    </a>
-{#                                    <span id="comment-timestamp" style="color: #0f74a8;">#}
-                                        | {{ comment.timestamp|timesince }} ago |
-                                        {% if comment.children.count > 1 %}
-                                            {{ comment.children.count }} Replies |
-                                        {% elif comment.children.count == 1 %}
-                                            {{ comment.children.count }} Reply |
-                                        {% endif %}
-                                        <a class="comment-reply-btn" href="#" onclick="f()">Reply</a>
-{#                                    </span>#}
-                                </footer>
+                                            <a class="comment-reply-btn" href="#">Reply</a>
+    {#                                    </span>#}
+                                    </footer>
 
-                                <div class="comment-reply" style="display: none;">
-                                    {% for child_comment in comment.children %}
-                                        <blockquote>
-                                        {{ child_comment.content }}
-                                            <footer>
-                                            via -
-                                                <a class="chip" href="{% url 'User Profile' child_comment.user.username %} ">
-                                                    {% for user_profile in user_profiles %}
-                                                        {% if user_profile.user == child_comment.user %}
-                                                            {% if user_profile.avatar %}
-                                                                <img src="{{ user_profile.avatar.url }}">
-                                                            {% else %}
-                                                                <img src="{% static 'default-profile-picture.jpg' %}">
+                                    <div class="comment-reply" style="display: none;">
+                                        {% for child_comment in comment.children %}
+                                            <blockquote>
+                                            {{ child_comment.content }}
+                                                <footer>
+                                                via -
+                                                    <a class="chip" href="{% url 'User Profile' child_comment.user.username %} ">
+                                                        {% for user_profile in user_profiles %}
+                                                            {% if user_profile.user == child_comment.user %}
+                                                                {% if user_profile.avatar %}
+                                                                    <img src="{{ user_profile.avatar.url }}">
+                                                                {% else %}
+                                                                    <img src="{% static 'default-profile-picture.jpg' %}">
+                                                                {% endif %}
                                                             {% endif %}
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                    {{ child_comment.user }}
-                                                </a>
-                                                <span id="comment-timestamp" style="color: #0f74a8;">
-                                                    | {{ child_comment.timestamp|timesince }} ago
-                                                </span>
-                                            </footer>
+                                                        {% endfor %}
+                                                        {{ child_comment.user }}
+                                                    </a>
+                                                    <span id="comment-timestamp" style="color: #0f74a8;">
+                                                        | {{ child_comment.timestamp|timesince }} ago
+                                                    </span>
+                                                </footer>
 
-                                        </blockquote>
-                                    {% endfor %}
-                                    {% if user.is_authenticated %}
-                                        <form method="post" action="{% url 'Add Comment' post.id %}">
-                                            {% csrf_token %}
-                                            {{ comment_form.content|materializecss }}
-                                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                                            <button class="btn waves-light" type="submit" name="action">Reply
-                                                <i class="material-icons right">send</i>
-                                            </button>
-                                        </form>
-                                    {% endif %}
-                                </div>
-                            </blockquote>
-                            <div class="divider"></div>
-                        {% endif %}
-                    {% endfor %}
+                                            </blockquote>
+                                        {% endfor %}
+                                        {% if user.is_authenticated %}
+                                            <form method="post" action="{% url 'Add Comment' post.id %}">
+                                                {% csrf_token %}
+                                                {{ comment_form.content|materializecss }}
+                                                <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                                                <button class="btn waves-light" type="submit" name="action">Reply
+                                                    <i class="material-icons right">send</i>
+                                                </button>
+                                            </form>
+                                        {% endif %}
+                                    </div>
+                                </blockquote>
+                                <div class="divider"></div>
+                            {% endif %}
+                        {% endfor %}
             </li>
     {#      <li class="collection-item">#}
     {#      Share to:#}

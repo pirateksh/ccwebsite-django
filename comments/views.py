@@ -57,13 +57,17 @@ def add_comment(request, post_id):
             )
             if created:
                 messages.success(request, f'Comment posted!')
-                return redirect(HOME)
+                if parent_obj is None:
+                    return redirect(HOME + '#comment-' + str(post.pk) + '-' + str(new_comment.pk))
+                else:
+                    return redirect(HOME + '#comment-' + str(post.pk) + '-' + str(parent_obj.pk))
                 # return HttpResponseRedirect(new_comment.content.get_absolute_url())
             else:
                 messages.error(request, f"Not created!")
                 return redirect(HOME)
-        # else:
-        #     messages.error(request, f"Form not valid!")
+        else:
+            messages.error(request, f"Please write some comment!")
+            return redirect(HOME)
     else:
         comment_form = CommentForm()
     form = UserSignupForm()
