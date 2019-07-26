@@ -7,6 +7,7 @@ from django.core.paginator import Paginator  # EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from comments.models import Comment
+from comments.forms import CommentForm
 from django.views.generic import RedirectView
 # Create your views here.
 
@@ -44,11 +45,13 @@ def add_post(request):
         addpostform = PostForm()
     form = UserSignupForm()
     posts = page_maker(request)
+    comment_form = CommentForm()
     context = {
         'form': form,
         'addpostform': addpostform,
         'posts': posts,
         'tags': tags,
+        'comment_form': comment_form,
     }
     return render(request, 'home/index.html', context)
 

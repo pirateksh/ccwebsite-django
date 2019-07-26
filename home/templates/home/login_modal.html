@@ -1,7 +1,7 @@
 {% load materializecss %}
 {#  Login Modal #}
 <div id="modal1" class="modal modal-fixed-footer">
-    <form class="col s12" method="post" action="{% url 'Login' %}" data-url="{% url 'Login'%}">
+    <form class="col s12" id="login_form" method="post" action="{% url 'ajax_login' %}" data-success="{% url 'Index' %}">
         {% csrf_token %}
         <div class="modal-content">
         <h4>Login Here</h4>
@@ -9,13 +9,13 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">account_circle</i>
-                        <input id="username" name="username" type="text" class="validate" required>
-                        <label for="username">Username/Email</label>
+                        <input id="login_username" name="username" type="text" class="validate" required>
+                        <label for="login_username">Username/Email</label>
                     </div>
                     <div class="input-field col s12">
                         <i class="material-icons prefix">phone</i>
-                        <input id="password" name="password" type="password" class="validate" required>
-                        <label for="password">Password</label>
+                        <input id="login_password" name="password" type="password" class="validate" required>
+                        <label for="login_password">Password</label>
                     </div>
                     <div class="col s12">
                         <label>

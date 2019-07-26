@@ -40,7 +40,7 @@ class Tags(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=255, blank=False, null=True, verbose_name='Post Title')
-    content = RichTextUploadingField(blank=False, null=True, verbose_name='Post Content')
+    post_content = RichTextUploadingField(blank=False, null=True, verbose_name='Post Content')
 
     author = models.ForeignKey(
         User,

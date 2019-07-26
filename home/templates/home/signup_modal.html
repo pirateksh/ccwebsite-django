@@ -1,7 +1,7 @@
 {% load materializecss %}
     {# Signup Modal #}
     <div id="modal2" class="modal modal-fixed-footer">
-        <form class="col s12" method="post" action="{% url 'Signup' %}">
+        <form id="signup_form" class="col s12" method="post" action="{% url 'ajax_signup' %}" data-success="{% url 'Index' %}">
             <div class="modal-content">
                 <h4>Signup Here</h4>
 
@@ -17,13 +17,13 @@
                             <label>Signup as:</label>
                             <p>
                                 <label for="id_choice_0">
-                                    <input class="with-gap" type="radio" name="choice" value="teacher" required id="id_choice_0" checked/>
+                                    <input class="with-gap st_choice" type="radio" name="choice" value="teacher" required id="id_choice_0" checked/>
                                     <span>Teacher</span>
                                 </label>
                             </p>
                             <p>
                                 <label for="id_choice_1">
-                                    <input class="with-gap" type="radio" name="choice" value="student" required id="id_choice_1" />
+                                    <input class="with-gap st_choice" type="radio" name="choice" value="student" required id="id_choice_1" />
                                     <span>Student</span>
                                 </label>
                             </p>

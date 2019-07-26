@@ -1,7 +1,7 @@
 {% load materializecss %}
 {# Adding post #}
 {% if user.is_authenticated %}
-    <form method="post" action="{% url 'Add Post' %}">
+    <form id="post_form" method="post" action="{% url 'Add Post' %}">
         <ul class="collapsible white" >
             <li>
                 <div class="collapsible-header tooltipped" data-position="top" data-tooltip="Click to Add Post!">
@@ -12,7 +12,7 @@
                     {{ addpostform.media }}
                     {{ addpostform.title|materializecss:'col s6 m6, icon=account_circle' }}
                     {{ addpostform.tags|materializecss:'col s6 m6, icon=account_circle' }}
-                    {{ addpostform.content }}
+                    {{ addpostform.post_content }}
 {#                    <span class="tooltipped" data-position="top" data-tooltip="Tick to save post as draft.">#}
 {#                        {{ addpostform.draft|materializecss:'col s4 m4' }}#}
 {#                    </span>#}
@@ -49,7 +49,7 @@
 {#            {{ addpostform.media }}#}
 {#            {{ addpostform.title|materializecss:'col s6 m6, icon=account_circle' }}#}
 {#            {{ addpostform.tags|materializecss:'col s6 m6, icon=account_circle' }}#}
-{#            {{ addpostform.content }}#}
+{#            {{ addpostform.post_content }}#}
 {#            <div>#}
 {#                <button class="btn waves-light" type="submit" name="action">Post#}
 {#                <i class="material-icons right">send</i>#}

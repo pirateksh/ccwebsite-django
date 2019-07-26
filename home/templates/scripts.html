@@ -20,7 +20,7 @@
 {#<script src="{% static 'Bootstrap/js/bootstrap.min.js' %}"></script>#}
 {#<script src="{% static 'Bootstrap/js/bootstrap.js' %}"></script>#}
 
-
+<script src="{% static 'js/main.js' %}"></script>
 
 <script>M.AutoInit();</script>
 
@@ -50,41 +50,6 @@
 
 
 
-
-{# Django Docs copied for AJAX #}
-{#// using jQuery#}
-{#<script>#}
-{#function getCookie(name) {#}
-{#    var cookieValue = null;#}
-{#    if (document.cookie && document.cookie !== '') {#}
-{#        var cookies = document.cookie.split(';');#}
-{#        for (var i = 0; i < cookies.length; i++) {#}
-{#            var cookie = jQuery.trim(cookies[i]);#}
-{#            // Does this cookie string begin with the name we want?#}
-{#            if (cookie.substring(0, name.length + 1) === (name + '=')) {#}
-{#                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));#}
-{#                break;#}
-{#            }#}
-{#        }#}
-{#    }#}
-{#    return cookieValue;#}
-{# }#}
-{##}
-{#var csrftoken = getCookie('csrftoken');#}
-{##}
-{#function csrfSafeMethod(method) {#}
-{#    // these HTTP methods do not require CSRF protection#}
-{#    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));#}
-{# }#}
-{#$.ajaxSetup({#}
-{#    beforeSend: function(xhr, settings) {#}
-{#        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {#}
-{#            xhr.setRequestHeader("X-CSRFToken", csrftoken);#}
-{#        }#}
-{#    }#}
-{# });#}
-{#</script>#}
-{##}
 {# AJAX Script#}
 {#<script>#}
 {#    $(document).on('submit', '.ajax-form', function (e) {#}
@@ -105,6 +70,7 @@
 {#    });#}
 {#</script>#}
 {# AJAX Script Ended#}
+
 {#<script>#}
 {#$(document).ready(function(){#}
 {#    var $myForm = $('#ajax-form');#}
@@ -136,7 +102,7 @@
 {# });#}
 {#</script>#}
 
-# For like button
+{# For like button#}
 <script>
     {#$(document).ready(function () {#}
 
@@ -181,10 +147,10 @@
      {# });#}
 </script>
 
-# For read more/less fadeIn()/fadeOut()
+{#For read more/less fadeIn()/fadeOut()#}
 <script>
     $(".read-more-btn").click(function (event) {
-        event.preventDefault()
+        event.preventDefault();
         $(this).parent().fadeOut();
         $(this).parent().next('.expanded-content').fadeIn();
     });
@@ -196,7 +162,7 @@
     });
 </script>
 
-# For reply fadeToggle()
+{#For reply fadeToggle()#}
 <script>
     $(".comment-reply-btn").click(function (event) {
         event.preventDefault();
@@ -204,13 +170,14 @@
     });
 </script>
 
-# For comment fadeToggle()
+{#For comment fadeToggle()#}
 <script>
     $(".comment-display-btn").click(function (event) {
         event.preventDefault();
         $(this).parent().next('.comment-display').fadeToggle();
     });
 </script>
+
 
 {# For Toasts #}
     {% if messages %}

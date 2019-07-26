@@ -44,12 +44,12 @@
             </li>
             <li class="collection-item" id="p">
 {#                <div class="less-content">#}
-{#                    {{ post.content|safe|truncatewords:50 }}#}
+{#                    {{ postpost_content|safe|truncatewords:50 }}#}
 {#                    <a class="read-more-btn" href="#">Show more</a>#}
 {#                </div>#}
 
                 <div class="expanded-content">
-                    {{ post.content|safe }}
+                    {{ post.post_content|safe }}
 {#                    <a class="read-less-btn" href="#">Show less</a>#}
                 </div>
             </li>
@@ -74,7 +74,7 @@
                         {% for comment in comments %}
                             {% if comment.post.id == post.id %}
                                 <blockquote id="comment-{{ post.pk }}-{{ comment.pk }}">
-                                {{ comment.content }}
+                                {{ comment.comment_text }}
                                     <footer>
                                     via -
                                         <a class="chip" href="{% url 'User Profile' comment.user.username %} ">
@@ -103,7 +103,7 @@
                                     <div class="comment-reply" style="display: none;">
                                         {% for child_comment in comment.children %}
                                             <blockquote>
-                                            {{ child_comment.content }}
+                                            {{ child_comment.comment_text }}
                                                 <footer>
                                                 via -
                                                     <a class="chip" href="{% url 'User Profile' child_comment.user.username %} ">
@@ -128,7 +128,7 @@
                                         {% if user.is_authenticated %}
                                             <form method="post" action="{% url 'Add Comment' post.id %}">
                                                 {% csrf_token %}
-                                                {{ comment_form.content|materializecss }}
+                                                {{ comment_form.comment_text|materializecss }}
                                                 <input type="hidden" name="parent_id" value="{{ comment.id }}">
                                                 <button class="btn waves-light" type="submit" name="action">Reply
                                                     <i class="material-icons right">send</i>

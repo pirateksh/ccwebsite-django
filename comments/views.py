@@ -35,7 +35,7 @@ def add_comment(request, post_id):
             #     object_id=obj_id,
             #     content=content_data,
             # )
-            content_data = comment_form.cleaned_data.get('content')
+            content_data = comment_form.cleaned_data.get('comment_text')
             parent_obj = None
 
             try:
@@ -52,7 +52,7 @@ def add_comment(request, post_id):
             new_comment, created = Comment.objects.get_or_create(
                 user=request.user,
                 post=post,
-                content=content_data,
+                comment_text=content_data,
                 parent=parent_obj,
             )
             if created:
@@ -61,7 +61,7 @@ def add_comment(request, post_id):
                     return redirect(HOME + '#comment-' + str(post.pk) + '-' + str(new_comment.pk))
                 else:
                     return redirect(HOME + '#comment-' + str(post.pk) + '-' + str(parent_obj.pk))
-                # return HttpResponseRedirect(new_comment.content.get_absolute_url())
+                # return HttpResponseRedirect(new_comment.comment_text.get_absolute_url())
             else:
                 messages.error(request, f"Not created!")
                 return redirect(HOME)
