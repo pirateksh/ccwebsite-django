@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse, reverse
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .forms import PostForm
 from home.forms import UserSignupForm
@@ -9,9 +10,12 @@ from django.contrib.contenttypes.models import ContentType
 from comments.models import Comment
 from comments.forms import CommentForm
 from django.views.generic import RedirectView
+from user_profile.models import UserProfile
+from django.utils.timesince import timesince
+from comments.views import add_comment
 # Create your views here.
 
-NUMBER_OF_POSTS_PER_PAGE = 2
+NUMBER_OF_POSTS_PER_PAGE = 5
 HOME = '/'
 
 
@@ -30,8 +34,7 @@ def add_post(request):
         if addpostform.is_valid():
             post = addpostform.save(commit=False)  # Why commit=False?
             post.save()
-            current_user = request.user
-            post.author = current_user
+            post.author = request.user
             raw_tags = addpostform.cleaned_data.get('tags')
 
             for raw_tag in raw_tags:
@@ -54,6 +57,60 @@ def add_post(request):
         'comment_form': comment_form,
     }
     return render(request, 'home/index.html', context)
+
+
+@login_required
+def ajax_add_post(request):
+    if request.method == "POST":
+        title = request.POST['title']
+        tags_str = request.POST['tags']
+        tags_str = str(tags_str)
+        post_content = request.POST['post_content']
+        user = request.user
+        user_profile = get_object_or_404(UserProfile, user=user)
+        tags_qs = Tags.objects.all()
+
+        post = Post.objects.create(title=title, post_content=post_content, author=user)
+
+        selected_tags = []
+
+        for tag in tags_qs:
+            if str(tag) in tags_str:
+                post.tags.add(tag)
+                selected_tags.append(str(tag))
+
+        post.save()
+
+        likes = post.likes.count()
+        if likes > 1:
+            likes_count = str(likes) + ' Like'
+        else:
+            likes_count = str(likes) + 'Likes'
+
+        if user_profile.avatar:
+            avatar_url = user_profile.avatar.url
+        else:
+            avatar_url = '/static/default-profile-picture.jpg'
+
+        add_comment_url = reverse(add_comment, kwargs={'post_id': post.pk})
+
+        response_data = {
+            'result': 'Post added successfully!',
+            'postPk': post.pk,
+            'postTitle': post.title,
+            'postContent': post.post_content,
+            'created': timesince(post.published),
+            'author': post.author.username,
+            'selectedTags':  selected_tags,
+            'avatarURL': avatar_url,
+            'likes': likes,
+            'likesCountStr': likes_count,
+            'addCommentURL': add_comment_url,
+            'isPinned': post.is_pinned,
+        }
+
+        return JsonResponse(response_data)
+        # return HttpResponse('Post added successfully JSON!')
 
 
 class PostLikeToggle(RedirectView):

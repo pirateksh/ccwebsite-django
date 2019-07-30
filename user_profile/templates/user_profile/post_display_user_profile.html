@@ -1,7 +1,6 @@
 {% load static %}
-{% if user == native_user %}
-    {% include 'home/add_post.html' %}
-{% endif %}
+{% load materializecss %}
+
 {% if native_posts %}
     {% for native_post in native_posts %}
         <ul class="collection with-header" >
@@ -32,6 +31,102 @@
             <li class="collection-item" id="p">
                 {{ native_post.post_content|safe }}
             </li>
+
+            <li class="collection-item row" id="like-{{ native_post.pk }}">
+                <div class="col s5 m5 l5">
+                    <a class="btn-flat like-btn" data-href="{% url 'like_api_toggle' native_post.slug %}" data-likes="{{ native_post.likes.count }}" href="{% url 'like_toggle' native_post.slug %}">
+                        {{ native_post.likes.count }} Like
+                    </a>
+                </div>
+                <a class="btn-flat comment-display-btn" href="#">Comments</a>
+            </li>
+
+
+
+            <li class="collection-item comment-display" > {# style="display: none;"> #}
+                    {% if user.is_authenticated %}
+                        <form method="post" action="{% url 'Add Comment' native_post.id %}">
+                            {% csrf_token %}
+                            {{ comment_form|materializecss }}
+                            <button class="btn waves-light" type="submit" name="action">Post Comment
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </form>
+                    {% endif %}
+                        {% for comment in comments %}
+                            {% if comment.post.id == native_post.id %}
+                                <blockquote id="comment-{{ native_post.pk }}-{{ comment.pk }}">
+                                {{ comment.comment_text }}
+                                    <footer>
+                                    via -
+                                        <a class="chip" href="{% url 'User Profile' comment.user.username %} ">
+                                            {% for user_profile in user_profiles %}
+                                                {% if user_profile.user == comment.user %}
+                                                    {% if user_profile.avatar %}
+                                                        <img src="{{ user_profile.avatar.url }}">
+                                                    {% else %}
+                                                        <img src="{% static 'default-profile-picture.jpg' %}">
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            {{ comment.user }}
+                                        </a>
+                                            | {{ comment.timestamp|timesince }} ago |
+                                            {% if comment.children.count > 1 %}
+                                                {{ comment.children.count }} Replies |
+                                            {% elif comment.children.count == 1 %}
+                                                {{ comment.children.count }} Reply |
+                                            {% endif %}
+                                            <a class="comment-reply-btn" href="#">Reply</a>
+                                    </footer>
+
+                                    <div class="comment-reply" style="display: none;">
+                                        {% for child_comment in comment.children %}
+                                            <blockquote>
+                                            {{ child_comment.comment_text }}
+                                                <footer>
+                                                via -
+                                                    <a class="chip" href="{% url 'User Profile' child_comment.user.username %} ">
+                                                        {% for user_profile in user_profiles %}
+                                                            {% if user_profile.user == child_comment.user %}
+                                                                {% if user_profile.avatar %}
+                                                                    <img src="{{ user_profile.avatar.url }}">
+                                                                {% else %}
+                                                                    <img src="{% static 'default-profile-picture.jpg' %}">
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        {{ child_comment.user }}
+                                                    </a>
+                                                    <span id="comment-timestamp" style="color: #0f74a8;">
+                                                        | {{ child_comment.timestamp|timesince }} ago
+                                                    </span>
+                                                </footer>
+
+                                            </blockquote>
+                                        {% endfor %}
+                                        {% if user.is_authenticated %}
+                                            <form method="post" action="{% url 'Add Comment' native_post.id %}">
+                                                {% csrf_token %}
+                                                {{ comment_form.comment_text|materializecss }}
+                                                <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                                                <button class="btn waves-light" type="submit" name="action">Reply
+                                                    <i class="material-icons right">send</i>
+                                                </button>
+                                            </form>
+                                        {% endif %}
+                                    </div>
+                                </blockquote>
+                                <div class="divider"></div>
+                            {% endif %}
+                        {% endfor %}
+            </li>
+
+
+
+
+
+
 {#          <li class="collection-item">#}
 {#          Share to:#}
 {#          <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>#}

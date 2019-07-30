@@ -50,6 +50,9 @@ class Post(models.Model):
         null=True
     )
 
+    # Pinned to top
+    is_pinned = models.BooleanField(default=False)
+
     # To create Draft and publish post on specific day.
     draft = models.BooleanField(default=False)
     post_on_date = models.DateField(auto_now=False, auto_now_add=False, default=timezone.now())
@@ -64,7 +67,13 @@ class Post(models.Model):
     # Initialising post manager
     objects = PostManager()
 
-    def save(self):
+    def save(self, *args, **kwargs):
+
+        """
+            Without *args and **kwargs, following error was encountered:
+            TypeError: save() got an unexpected keyword argument 'force_insert'
+        """
+
         self.slug = slugify(self.title)
         super(Post, self).save()
 

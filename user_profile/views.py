@@ -7,6 +7,7 @@ from post.views import page_maker
 # Imported Models
 from django.contrib.auth.models import User
 from .models import UserProfile
+from comments.models import Comment
 # from post.models import Post, Tags
 
 # Imported Forms
@@ -14,6 +15,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from .forms import AvatarUploadForm
 from home.forms import UserSignupForm
 from post.forms import PostForm
+from comments.forms import CommentForm
 
 # Create your views here.
 
@@ -25,6 +27,9 @@ def user_profile(request, username):
     avatar_form = AvatarUploadForm()
     form = UserSignupForm()
     addpostform = PostForm()
+    user_profiles = UserProfile.objects.all()
+    comments = Comment.objects.all()
+    comment_form = CommentForm()
     password_change_form = PasswordChangeForm(user=native_user)
     context = {
         'profile': profile,
@@ -34,6 +39,9 @@ def user_profile(request, username):
         'native_posts': native_posts,
         'addpostform': addpostform,
         'password_change_form': password_change_form,
+        'comments': comments,
+        'comment_form': comment_form,
+        'user_profiles': user_profiles,
     }
     return render(request, 'user_profile/user_profile.html', context)
 
@@ -56,11 +64,17 @@ def change_password(request, username):
     avatar_form = AvatarUploadForm()
     form = UserSignupForm()
     addpostform = PostForm()
+    comments = Comment.objects.all()
+    comment_form = CommentForm()
+    user_profiles = UserProfile.objects.all()
     context = {
         'password_change_form': password_change_form,
         'addpostform': addpostform,
         'avatar_form': avatar_form,
         'form': form,
+        'comments': comments,
+        'comment_form': comment_form,
+        'user_profiles': user_profiles,
     }
     return render(request, 'user_profile/user_profile.html', context)
 
@@ -82,11 +96,17 @@ def avatar_upload(request, username):
     form = UserSignupForm()
     password_change_form = PasswordChangeForm(request.user)
     addpostform = PostForm()
+    comments = Comment.objects.all()
+    comment_form = CommentForm()
+    user_profiles = UserProfile.objects.all()
     context = {
         'password_change_form': password_change_form,
         'addpostform': addpostform,
         'avatar_form': avatar_form,
         'form': form,
+        'comments': comments,
+        'comment_form': comment_form,
+        'user_profiles': user_profiles,
     }
     return render(request, 'user_profile/user_profile.html', context)
 
