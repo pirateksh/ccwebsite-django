@@ -96,7 +96,7 @@ function create_post(this_) {
         // handle a successful response
         success : function(json) {
 
-            alert(json.isPinned);
+            // alert(json.isPinned);
             $('#id_title').val('');
             // alert( $('select[name="tags"]').html());
             //

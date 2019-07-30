@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="30960ef7-872c-46bd-bef3-b2acd3b0d9a2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/add_post.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/add_post.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/post_display_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/post_display_home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/post/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/post/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/post/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/post/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/post/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/post/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_profile/templates/user_profile/post_display_user_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/templates/user_profile/post_display_user_profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_profile/templates/user_profile/user_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/templates/user_profile/user_profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_profile/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="30960ef7-872c-46bd-bef3-b2acd3b0d9a2" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,7 +204,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="702" />
     <option name="y" value="4" />
     <option name="width" value="648" />
@@ -388,15 +375,15 @@
       <workItem from="1564200909938" duration="2701000" />
       <workItem from="1564248359967" duration="7462000" />
       <workItem from="1564322230103" duration="8108000" />
-      <workItem from="1564376192805" duration="10303000" />
+      <workItem from="1564376192805" duration="10523000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="363349000" />
+    <option name="totallyTimeSpent" value="363569000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21709532" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
