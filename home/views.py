@@ -26,7 +26,7 @@ HOME = '/'
 def index(request):
     form = UserSignupForm()
     addpostform = PostForm()
-    posts = page_maker(request)
+    posts = page_maker(request, Post)
     user_profiles = UserProfile.objects.all()
     tags = Tags.objects.all()
 

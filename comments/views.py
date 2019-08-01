@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
+from post import views as post_view
+
 # Imported Models
-from post.models import Post
+from post.models import Post, Tags
+from user_profile.models import UserProfile
 from .models import Comment
 
 # Imported Forms
@@ -65,16 +68,24 @@ def add_comment(request, post_id):
             else:
                 messages.error(request, f"Not created!")
                 return redirect(HOME)
-        else:
-            messages.error(request, f"Please write some comment!")
-            return redirect(HOME)
+        # else:
+            # messages.error(request, f"Please write some comment!")
+            # return redirect(HOME)
     else:
         comment_form = CommentForm()
     form = UserSignupForm()
-    addpostform = PostForm()
+    add_post_form = PostForm()
+    posts = post_view.page_maker(request, Post)
+    user_profiles = UserProfile.objects.all()
+    tags = Tags.objects.all()
+    comments = Comment.objects.all()
     context = {
         'comment_form': comment_form,
         'form': form,
-        'addpostform': addpostform,
+        'addpostform': add_post_form,
+        'posts': posts,
+        'tags': tags,
+        'user_profiles': user_profiles,
+        'comments': comments,
     }
     return render(request, 'home/index.html', context)

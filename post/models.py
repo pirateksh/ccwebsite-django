@@ -74,7 +74,7 @@ class Post(models.Model):
             TypeError: save() got an unexpected keyword argument 'force_insert'
         """
 
-        self.slug = slugify(self.title)
+        self.slug = slugify(self.title + str(self.pk))
         super(Post, self).save()
 
     def get_like_url(self):

@@ -35,7 +35,8 @@ class Comment(models.Model):
     # object_id = models.PositiveIntegerField()
     # content_object = GenericForeignKey('content_type', 'object_id')
 
-    comment_text = models.TextField()
+    # comment_text = models.TextField()
+    comment_text = RichTextUploadingField(blank=False, null=False, verbose_name='Comment Text')
     timestamp = models.DateTimeField(auto_now_add=True)
 
     objects = CommentManager()

@@ -224,6 +224,8 @@ function create_post(this_) {
                 );
             }
 
+            $('.no-post-yet').fadeOut();
+
             var ajaxTag = $('.ajax-tag');
 
             for (var i = 0; i < json.selectedTags.length; i++)
@@ -381,3 +383,51 @@ function login_user(this_) {
         }
     });
 }
+
+//Deleting post - NO
+$('.post-del-btn-no').click(function (event) {
+    event.preventDefault();
+    var elem = $('#delete-post-modal');
+    var instance = M.Modal.getInstance(elem);
+    instance.close();
+});
+
+//Deleting post - YES
+$('.post-del-form').submit(function (event) {
+    event.preventDefault();
+    // alert('delete success!');
+    var this_ = $(this);
+    var url = this_.attr('action');
+    var comingFrom = this_.attr('data-from');
+    // alert(comingFrom);
+    var postPK = this_.attr('data-pk');
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        data: {
+            coming_from: comingFrom,
+            post_pk: postPK
+        },
+
+        success: function (json) {
+
+            if (json.result === "SS") {
+                if (json.comingFrom === "user_prof") {
+                    var postDiv = $('#user-prof-post-' + json.postPK);
+                }
+            // write else statement
+
+                postDiv.fadeOut(2000);
+                addToast("Post deleted successfully!");
+            } else if (json.result === "ERR") {
+                addToast('Oops! We have encountered an error. Try Again!');
+            }
+
+        },
+
+        error: function () {
+            addToast('Oops! We have encountered an error. Try Again!');
+        }
+    });
+});

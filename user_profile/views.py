@@ -8,6 +8,7 @@ from post.views import page_maker
 from django.contrib.auth.models import User
 from .models import UserProfile
 from comments.models import Comment
+from post.models import Post
 # from post.models import Post, Tags
 
 # Imported Forms
@@ -23,7 +24,7 @@ from comments.forms import CommentForm
 def user_profile(request, username):
     native_user = get_object_or_404(User, username=username)
     profile = get_object_or_404(UserProfile, user=native_user)
-    native_posts = page_maker(request, native_user)
+    native_posts = page_maker(request, Post, native_user)
     avatar_form = AvatarUploadForm()
     form = UserSignupForm()
     addpostform = PostForm()

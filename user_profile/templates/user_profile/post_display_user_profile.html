@@ -3,7 +3,7 @@
 
 {% if native_posts %}
     {% for native_post in native_posts %}
-        <ul class="collection with-header" >
+        <ul class="collection with-header" id="user-prof-post-{{ native_post.pk }}" >
             <li class="collection-header">
                 <h4 id="post-head-m-down" class="hide-on-med-and-down">{{ native_post.title|safe }}</h4>
                 <h4 id="post-head-s-down-l" class="hide-on-small-and-down hide-on-large-only">{{ native_post.title|safe }}</h4>
@@ -34,11 +34,41 @@
 
             <li class="collection-item row" id="like-{{ native_post.pk }}">
                 <div class="col s5 m5 l5">
-                    <a class="btn-flat like-btn" data-href="{% url 'like_api_toggle' native_post.slug %}" data-likes="{{ native_post.likes.count }}" href="{% url 'like_toggle' native_post.slug %}">
-                        {{ native_post.likes.count }} Like
+                    <a class="btn-flat like-btn light-blue white-text" data-href="{% url 'like_api_toggle' native_post.slug %}" data-likes="{{ native_post.likes.count }}" href="{% url 'like_toggle' native_post.slug %}">
+                        {{ native_post.likes.count }}
+                        <i class="material-icons">thumb_up</i>
                     </a>
                 </div>
-                <a class="btn-flat comment-display-btn" href="#">Comments</a>
+                <div class="col s5 l5 m5">
+                    <a class="btn-flat comment-display-btn light-blue white-text" href="#"><i class="material-icons">comment</i></a>
+                </div>
+
+                {% if user == native_user %}
+
+                    <form action="{% url 'ajax_delete_post' %}" class="post-del-form" method="get" data-from="user_prof" data-pk="{{ native_post.pk }}">
+{#                        <button class="btn-flat post-del-btn red white-text" type="submit">#}
+                            <a class="btn-flat red white-text modal-trigger" href="#delete-post-modal">Delete</a>
+{#                        </button>#}
+{#                    </form>#}
+
+                    {# Delete post modal #}
+
+                        <div id="delete-post-modal" class="modal modal-fixed-footer">
+                            <div class="modal-content">
+                              <h4>Delete Post</h4>
+                              <p>Do you really want to delete this? There is no going back...</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn-flat post-del-btn-no green white-text" type="submit">
+                                    No
+                                </button>
+                                <button class="btn-flat red white-text" type="submit">
+                                    Yes
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                {% endif %}
             </li>
 
 
@@ -47,7 +77,7 @@
                     {% if user.is_authenticated %}
                         <form method="post" action="{% url 'Add Comment' native_post.id %}">
                             {% csrf_token %}
-                            {{ comment_form|materializecss }}
+                            {{ comment_form.comment_text|materializecss }}
                             <button class="btn waves-light" type="submit" name="action">Post Comment
                                 <i class="material-icons right">send</i>
                             </button>
@@ -121,12 +151,6 @@
                             {% endif %}
                         {% endfor %}
             </li>
-
-
-
-
-
-
 {#          <li class="collection-item">#}
 {#          Share to:#}
 {#          <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>#}

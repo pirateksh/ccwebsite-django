@@ -59,10 +59,15 @@
                 <li class="collection-item row" id="like-{{ post.pk }}">
                     <div class="col s5 m5 l5">
     {#                    <a class="btn-flat col s5 m5 l5" href="{{ post.get_like_url }}">Like</a>LIKES:{{ post.likes.count }}#}
-                        <a class="btn-flat like-btn" data-href="{% url 'like_api_toggle' post.slug %}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">{{ post.likes.count }} Like</a>
+                        <a class="btn-flat like-btn light-blue white-text" data-href="{% url 'like_api_toggle' post.slug %}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
+                            <i class="material-icons">thumb_up</i>
+                            {{ post.likes.count }} Like
+                        </a>
     {#                    <a class="btn-flat disabled">LIKES:{{ post.likes.count }}</a>#}
                     </div>
-                    <a class="btn-flat comment-display-btn" href="#">Comments</a>
+                    <div class="col s5 m5 l5">
+                        <a class="btn-flat comment-display-btn light-blue white-text" href="#"><i class="material-icons">comment</i></a>
+                    </div>
                 </li>
                 <li class="collection-item comment-display" > {# style="display: none;"> #}
                         {% if user.is_authenticated %}
@@ -131,7 +136,7 @@
                                             {% if user.is_authenticated %}
                                                 <form method="post" action="{% url 'Add Comment' post.id %}">
                                                     {% csrf_token %}
-                                                    {{ comment_form.comment_text|materializecss }}
+                                                    {{ comment_form|materializecss }}
                                                     <input type="hidden" name="parent_id" value="{{ comment.id }}">
                                                     <button class="btn waves-light" type="submit" name="action">Reply
                                                         <i class="material-icons right">send</i>
@@ -199,10 +204,19 @@
                 <li class="collection-item row" id="like-{{ post.pk }}">
                     <div class="col s5 m5 l5">
     {#                    <a class="btn-flat col s5 m5 l5" href="{{ post.get_like_url }}">Like</a>LIKES:{{ post.likes.count }}#}
-                        <a class="btn-flat like-btn" data-href="{% url 'like_api_toggle' post.slug %}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">{{ post.likes.count }} Like</a>
+                        <a class="btn-flat like-btn light-blue white-text" data-href="{% url 'like_api_toggle' post.slug %}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
+
+                            {{ post.likes.count }}
+                            <i class="material-icons large">thumb_up</i>
+{#                            Like#}
+                        </a>
     {#                    <a class="btn-flat disabled">LIKES:{{ post.likes.count }}</a>#}
                     </div>
-                    <a class="btn-flat comment-display-btn" href="#">Comments</a>
+                    <div class="col s5 m5 l5">
+                        <a class="btn-flat comment-display-btn light-blue white-text" href="#">
+                            <i class="material-icons large">comment</i>
+                        </a>
+                    </div>
                 </li>
                 <li class="collection-item comment-display" > {# style="display: none;"> #}
                         {% if user.is_authenticated %}
@@ -271,7 +285,7 @@
                                             {% if user.is_authenticated %}
                                                 <form method="post" action="{% url 'Add Comment' post.id %}">
                                                     {% csrf_token %}
-                                                    {{ comment_form.comment_text|materializecss }}
+                                                    {{ comment_form|materializecss }}
                                                     <input type="hidden" name="parent_id" value="{{ comment.id }}">
                                                     <button class="btn waves-light" type="submit" name="action">Reply
                                                         <i class="material-icons right">send</i>
@@ -293,11 +307,13 @@
     {% endfor %}
 </div>
 {% else %}
-    <ul class="collection">
+    <div class="normal-post">
+    <ul class="collection no-post-yet">
         <li class="collection-item">
             There isn't any post to show yet.
         </li>
     </ul>
+    </div>
 
 {% endif %}
 {# Pagination #}

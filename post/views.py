@@ -19,8 +19,8 @@ NUMBER_OF_POSTS_PER_PAGE = 5
 HOME = '/'
 
 
-def page_maker(request, native_user=None, draft=False):
-    post_list = Post.objects.all(native_user=native_user, draft=draft)
+def page_maker(request, model, native_user=None, draft=False):
+    post_list = model.objects.all(native_user=native_user, draft=draft)
     paginator = Paginator(post_list, NUMBER_OF_POSTS_PER_PAGE)
     page = request.GET.get('page')
     return paginator.get_page(page)
@@ -111,6 +111,30 @@ def ajax_add_post(request):
 
         return JsonResponse(response_data)
         # return HttpResponse('Post added successfully JSON!')
+
+
+@login_required
+def ajax_del_post(request):
+    if request.method == "GET":
+        coming_from = request.GET['coming_from']
+        post_pk = request.GET['post_pk']
+        post_qs = Post.objects.filter(pk=post_pk)
+
+        if post_qs is None:
+            result = "ERR"
+        else:
+            post = post_qs.first()
+            post.delete()
+            result = "SS"
+
+        response_data = {
+            'postPK': post_pk,
+            'comingFrom': coming_from,
+            'result': result,
+        }
+        return JsonResponse(response_data)
+    else:
+        return redirect(HOME)
 
 
 class PostLikeToggle(RedirectView):
