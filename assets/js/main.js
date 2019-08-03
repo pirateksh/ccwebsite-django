@@ -412,11 +412,20 @@ $('.post-del-form').submit(function (event) {
 
         success: function (json) {
 
+            var postDiv;
+
             if (json.result === "SS") {
+
                 if (json.comingFrom === "user_prof") {
-                    var postDiv = $('#user-prof-post-' + json.postPK);
+
+                    postDiv = $('#user-prof-post-' + json.postPK);
+
+                } else if (json.comingFrom === "home") {
+
+                    postDiv = $('#home-post-' + json.postPK);
+
                 }
-            // write else statement
+
 
                 postDiv.fadeOut(2000);
                 addToast("Post deleted successfully!");

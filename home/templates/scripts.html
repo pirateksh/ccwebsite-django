@@ -107,7 +107,12 @@
     {#$(document).ready(function () {#}
 
         function updateText(btn, newCount, verb){
-            btn.text(newCount + " " + verb)
+            if(verb === 'Like') {
+                btn.html(newCount + " <i class='material-icons'>thumb_up</i>");
+            } else if (verb === 'Unlike') {
+                btn.html(newCount + " <i class='material-icons'>thumb_down</i>");
+            }
+            {#btn.text(newCount + " " + verb)#}
         }
 
         $('.like-btn').click(function (event) {

@@ -33,13 +33,13 @@
             </li>
 
             <li class="collection-item row" id="like-{{ native_post.pk }}">
-                <div class="col s5 m5 l5">
+                <div class="col s4 m4 l4 center">
                     <a class="btn-flat like-btn light-blue white-text" data-href="{% url 'like_api_toggle' native_post.slug %}" data-likes="{{ native_post.likes.count }}" href="{% url 'like_toggle' native_post.slug %}">
                         {{ native_post.likes.count }}
                         <i class="material-icons">thumb_up</i>
                     </a>
                 </div>
-                <div class="col s5 l5 m5">
+                <div class="col s4 m4 l4 center">
                     <a class="btn-flat comment-display-btn light-blue white-text" href="#"><i class="material-icons">comment</i></a>
                 </div>
 
@@ -47,8 +47,10 @@
 
                     <form action="{% url 'ajax_delete_post' %}" class="post-del-form" method="get" data-from="user_prof" data-pk="{{ native_post.pk }}">
 {#                        <button class="btn-flat post-del-btn red white-text" type="submit">#}
-                            <a class="btn-flat red white-text modal-trigger" href="#delete-post-modal">Delete</a>
-{#                        </button>#}
+                        <div class="col s4 m4 l4 center">
+                            <a class="btn-flat red white-text modal-trigger" href="#delete-post-modal"><i class="material-icons">delete</i></a>
+                                               </div>
+                           {# </button>#}
 {#                    </form>#}
 
                     {# Delete post modal #}
