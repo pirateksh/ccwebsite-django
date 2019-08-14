@@ -14,6 +14,7 @@
     comments - Comments
     comment_form - Comment Form
     user_profiles - Profiles of users
+    tags - All tags
 {% endcomment %}
 
 {% block title %}
@@ -36,7 +37,7 @@
                         {% include 'home/add_post.html' %}
                     {% endif %}
                 </div>
-                <div class=" post-display-home">
+                <div class=" post-display-user-profile">
                     {% include 'user_profile/post_display_user_profile.html' %}
                 </div>
             </div>

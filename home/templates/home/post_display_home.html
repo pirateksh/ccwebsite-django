@@ -53,22 +53,63 @@
 
                     <div class="expanded-content">
                         {{ post.post_content|safe }}
-    {#                    <a class="read-less-btn" href="#">Show less</a>#}
                     </div>
                 </li>
+
                 <li class="collection-item row" id="like-{{ post.pk }}">
-                    <div class="col s6 m6 l6 center">
-    {#                    <a class="btn-flat col s5 m5 l5" href="{{ post.get_like_url }}">Like</a>LIKES:{{ post.likes.count }}#}
-                        <a class="btn-flat like-btn light-blue white-text" data-href="{% url 'like_api_toggle' post.slug %}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
-                            <i class="material-icons">thumb_up</i>
-                            {{ post.likes.count }} Like
-                        </a>
-    {#                    <a class="btn-flat disabled">LIKES:{{ post.likes.count }}</a>#}
-                    </div>
-                    <div class="col s6 m6 l6 center">
-                        <a class="btn-flat comment-display-btn light-blue white-text" href="#"><i class="material-icons">comment</i></a>
-                    </div>
+                    {% if user == post.author %}
+                        <div class="col s4 m4 l4 center">
+                            <a class="btn-flat like-btn light-blue white-text" data-href="{% url 'like_api_toggle' post.slug %}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
+                                {{ post.likes.count }}
+                                <i class="material-icons large">thumb_up</i>
+                            </a>
+                        </div>
+                        <div class="col s4 m4 l4 center">
+                            <a class="btn-flat comment-display-btn light-blue white-text" href="#">
+                                <i class="material-icons large">comment</i>
+                            </a>
+                        </div>
+
+
+                        <form action="{% url 'ajax_delete_post' %}" class="post-del-form" method="get" data-from="home" data-pk="{{ post.pk }}">
+                            <div class="col s4 m4 l4 center">
+                                <a class="btn-flat red white-text modal-trigger" href="#delete-post-modal-{{ post.pk }}"><i class="material-icons">delete</i></a>
+                            </div>
+
+                            {# Delete post modal #}
+
+                            <div id="delete-post-modal-{{ post.pk }}" class="modal modal-fixed-footer">
+                                <div class="modal-content">
+                                  <h4>Delete Post</h4>
+                                  <p>Do you really want to delete this? There is no going back...</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn-flat post-del-btn-no green white-text" type="submit" data-pk="{{ post.pk }}">
+                                        No
+                                    </button>
+                                    <button class="btn-flat red white-text" type="submit">
+                                        Yes
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    {% else %}
+                        <div class="col s6 m6 l6 center">
+                            <a class="btn-flat like-btn light-blue white-text" data-href="{% url 'like_api_toggle' post.slug %}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
+                                {{ post.likes.count }}
+                                <i class="material-icons large">thumb_up</i>
+                            </a>
+                        </div>
+                        <div class="col s6 m6 l6 center">
+                            <a class="btn-flat comment-display-btn light-blue white-text" href="#">
+                                <i class="material-icons large">comment</i>
+                            </a>
+                        </div>
+                    {% endif %}
                 </li>
+
                 <li class="collection-item comment-display" > {# style="display: none;"> #}
                         {% if user.is_authenticated %}
                             <form method="post" action="{% url 'Add Comment' post.id %}">
@@ -97,7 +138,6 @@
                                                 {% endfor %}
                                                 {{ comment.user }}
                                             </a>
-        {#                                    <span id="comment-timestamp" style="color: #0f74a8;">#}
                                                 | {{ comment.timestamp|timesince }} ago |
                                                 {% if comment.children.count > 1 %}
                                                     {{ comment.children.count }} Replies |
@@ -105,7 +145,6 @@
                                                     {{ comment.children.count }} Reply |
                                                 {% endif %}
                                                 <a class="comment-reply-btn" href="#">Reply</a>
-        {#                                    </span>#}
                                         </footer>
 
                                         <div class="comment-reply" style="display: none;">
@@ -218,18 +257,18 @@
 
                         <form action="{% url 'ajax_delete_post' %}" class="post-del-form" method="get" data-from="home" data-pk="{{ post.pk }}">
                             <div class="col s4 m4 l4 center">
-                                <a class="btn-flat red white-text modal-trigger" href="#delete-post-modal"><i class="material-icons">delete</i></a>
+                                <a class="btn-flat red white-text modal-trigger" href="#delete-post-modal-{{ post.pk }}"><i class="material-icons">delete</i></a>
                             </div>
 
                             {# Delete post modal #}
 
-                            <div id="delete-post-modal" class="modal modal-fixed-footer">
+                            <div id="delete-post-modal-{{ post.pk }}" class="modal modal-fixed-footer">
                                 <div class="modal-content">
                                   <h4>Delete Post</h4>
                                   <p>Do you really want to delete this? There is no going back...</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn-flat post-del-btn-no green white-text" type="submit">
+                                    <button class="btn-flat post-del-btn-no green white-text" type="submit" data-pk="{{ post.pk }}">
                                         No
                                     </button>
                                     <button class="btn-flat red white-text" type="submit">

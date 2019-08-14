@@ -13,6 +13,7 @@ from django.views.generic import RedirectView
 from user_profile.models import UserProfile
 from django.utils.timesince import timesince
 from comments.views import add_comment
+from datetime import datetime
 # Create your views here.
 
 NUMBER_OF_POSTS_PER_PAGE = 5
@@ -135,6 +136,52 @@ def ajax_del_post(request):
         return JsonResponse(response_data)
     else:
         return redirect(HOME)
+
+
+@login_required
+def ajax_edit_post(request):
+    if request.method == "POST":
+        pk = request.POST['pk']
+        updated_title = request.POST['title']
+        tags_str = request.POST['tags']
+        updated_content = request.POST['post_content']
+        original_post_qs = Post.objects.filter(pk=pk)
+        tags_qs = Tags.objects.all()
+
+        selected_tags = []
+        updated =datetime.now()
+
+        if original_post_qs is None:
+            result = 'ERR'
+        else:
+            original_post = original_post_qs.first()
+            original_tags_qs = original_post.tags.all()
+
+            for original_tag in original_tags_qs:
+                original_post.tags.remove(original_tag)
+
+            for tag in tags_qs:
+                if str(tag) in tags_str:
+                    original_post.tags.add(tag)
+                    selected_tags.append(str(tag))
+
+            original_post.title = updated_title
+            original_post.post_content = updated_content
+            original_post.updated = datetime.now()
+            updated = original_post.updated
+            original_post.save()
+            result = 'SS'
+
+        response_data = {
+            'result': result,
+            'title': updated_title,
+            'content': updated_content,
+            'selectedTags': selected_tags,
+            'postPK': pk,
+            'updated': timesince(updated),
+        }
+
+        return JsonResponse(response_data)
 
 
 class PostLikeToggle(RedirectView):

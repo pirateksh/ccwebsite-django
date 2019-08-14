@@ -61,6 +61,8 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, blank=True, related_name='post_likes')
 
     published = models.DateTimeField(default=datetime.now, blank=True)
+    updated = models.DateTimeField(default=datetime.now, blank=True)
+
     tags = models.ManyToManyField(Tags, verbose_name='Post Tags', blank=True)
     slug = models.SlugField(default='', blank=True)
 

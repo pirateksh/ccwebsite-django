@@ -62,17 +62,6 @@ $('#post_form').on('submit', function(event){
     create_post($(this));
 });
 
-
-
-// function create_post() {
-//     console.log("create post is working!"); // sanity check
-//     // console.log($('#id_post_content').val());
-//     var value = CKEDITOR.instances['id_post_content'];
-//     console.log(value.getData());
-//
-// }
-
-
 // AJAX for posting
 function create_post(this_) {
     console.log("create post is working!"); // sanity check
@@ -83,7 +72,7 @@ function create_post(this_) {
     // var selected = select.children("option").filter(":selected").text();
     var selected = $('select[name="tags"] :selected');
     // var author = this_.attr('author');
-    // alert(selected);
+    // alert(selected.text());
     $.ajax({
         url : url_, // the endpoint
         type : "POST", // http method
@@ -96,7 +85,6 @@ function create_post(this_) {
         // handle a successful response
         success : function(json) {
 
-            // alert(json.isPinned);
             $('#id_title').val('');
             // alert( $('select[name="tags"]').html());
             //
@@ -107,23 +95,6 @@ function create_post(this_) {
             var elem = $('.post-form-collapse');
             var instance = M.Collapsible.getInstance(elem);
             instance.close(0);
-            // var collection = $('//.ajax_post_display');
-            // var titleBlock = collection.children('.ajax-title');
-            // var tagBlock = collection.children('.ajax-tag');
-            // var contentBlock = collection.children('.ajax-content');
-            // var likeCommentBlock = collection.children('.ajax-like-comment');
-
-            // likeCommentBlock.attr("id","like-" + json.postPk);
-            // Changing DOM
-            // titleBlock.children('h4').html(json.postTitle); //.val(json.postTitle);
-            // titleBlock.children('p').children('.s8').children('.chip').html('<img src=' + json.avatarURL + '>' + json.author);
-            // for (var i = 0; i < json.selectedTags.length; i++)
-            // {
-            //     tagBlock.append('<a class="chip">' + json.selectedTags[i] + '</a>');
-            // }
-            //
-            // contentBlock.children('.expanded-content').html(json.postContent);
-            // collection.fadeIn();
 
             var postDivPinned = $('.pinned-posts');
             var postDivNormal = $('.normal-posts');
@@ -154,10 +125,27 @@ function create_post(this_) {
                     "</li>" +
 
                     "<li class='collection-item row' id='like-'" + json.postPk + ">" +
-                        "<div class=\"col s5 m5 l5\">" +
-                            "<a class='btn-flat like-btn' data-likes=" + json.likes + ">" + json.likesCountStr + "</a>" +
+                        "<div class='col s4 m4 l4 center'>" +
+                            "<a class='btn-flat like-btn light-blue white-text' data-likes=" + json.likes + "> " + json.likes + " <i class='material-icons'>thumb_up</i></a>" +
                         "</div>" +
-                        "<a class='btn-flat comment-display-btn' href='#'>Comments</a>" +
+                        "<div class=\"col s4 m4 l4 center\">" +
+                            "<a class='btn-flat comment-display-btn light-blue white-text' href='#'><i class='material-icons'>comment</i></a>" +
+                        "</div>" +
+                        "<form action=\"{% url 'ajax_delete_post' %}\" class=\"post-del-form\" method=\"get\" data-from=\"user_prof\" data-pk=" + json.postPk + ">" +
+                        "<div class=\"col s4 m4 l4 center\">" +
+                            "<a class=\"btn-flat red white-text modal-trigger\" href=\"#delete-post-modal\"><i class=\"material-icons\">delete</i></a>" +
+                        "</div>" +
+                        "<div id=\"delete-post-modal\" class=\"modal modal-fixed-footer\">" +
+                            "<div class=\"modal-content\">" +
+                                "<h4>Delete Post</h4>" +
+                                "<p>Do you really want to delete this? There is no going back...</p>" +
+                            "</div>" +
+                            "<div class=\"modal-footer\">" +
+                                "<button class=\"btn-flat post-del-btn-no green white-text\" type=\"submit\">No</button>" +
+                                "<button class=\"btn-flat red white-text\" type=\"submit\">Yes</button>" +
+                            "</div>" +
+                        "</div>" +
+                        "</form>" +
                     "</li>" +
 
                     "<li class='collection-item comment-display'>" +
@@ -201,10 +189,27 @@ function create_post(this_) {
                     "</li>" +
 
                     "<li class='collection-item row' id='like-'" + json.postPk + ">" +
-                        "<div class=\"col s5 m5 l5\">" +
-                            "<a class='btn-flat like-btn' data-likes=" + json.likes + ">" + json.likesCountStr + "</a>" +
+                        "<div class=\"col s4 m4 l4 center\">" +
+                            "<a class='btn-flat like-btn light-blue white-text' data-likes=" + json.likes + "> " + json.likes + " <i class='material-icons'>thumb_up</i></a>" +
                         "</div>" +
-                        "<a class='btn-flat comment-display-btn' href='#'>Comments</a>" +
+                        "<div class=\"col s4 m4 l4 center\">" +
+                            "<a class='btn-flat comment-display-btn light-blue white-text' href='#'><i class='material-icons'>comment</i></a>" +
+                        "</div>" +
+                        "<form action=\"{% url 'ajax_delete_post' %}\" class=\"post-del-form\" method=\"get\" data-from=\"user_prof\" data-pk=" + json.postPk + ">" +
+                        "<div class=\"col s4 m4 l4 center\">" +
+                            "<a class=\"btn-flat red white-text modal-trigger\" href=\"#delete-post-modal\"><i class=\"material-icons\">delete</i></a>" +
+                        "</div>" +
+                        "<div id=\"delete-post-modal\" class=\"modal modal-fixed-footer\">" +
+                            "<div class=\"modal-content\">" +
+                                "<h4>Delete Post</h4>" +
+                                "<p>Do you really want to delete this? There is no going back...</p>" +
+                            "</div>" +
+                            "<div class=\"modal-footer\">" +
+                                "<button class=\"btn-flat post-del-btn-no green white-text\" type=\"submit\">No</button>" +
+                                "<button class=\"btn-flat red white-text\" type=\"submit\">Yes</button>" +
+                            "</div>" +
+                        "</div>" +
+                        "</form>" +
                     "</li>" +
 
                     "<li class='collection-item comment-display'>" +
@@ -387,7 +392,8 @@ function login_user(this_) {
 //Deleting post - NO
 $('.post-del-btn-no').click(function (event) {
     event.preventDefault();
-    var elem = $('#delete-post-modal');
+    var PK = $(this).attr('data-pk');
+    var elem = $('#delete-post-modal-' + PK);
     var instance = M.Modal.getInstance(elem);
     instance.close();
 });
@@ -426,8 +432,8 @@ $('.post-del-form').submit(function (event) {
 
                 }
 
-
-                postDiv.fadeOut(2000);
+                postDiv.css('display', 'none');
+                // postDiv.fadeOut(2000);
                 addToast("Post deleted successfully!");
             } else if (json.result === "ERR") {
                 addToast('Oops! We have encountered an error. Try Again!');
@@ -440,3 +446,77 @@ $('.post-del-form').submit(function (event) {
         }
     });
 });
+
+// Edit post
+$('.edit-btn').click(function (event) {
+
+    var this_ = $(this);
+    var postPK = this_.attr('data-pk');
+    var postData = this_.attr('data-val');
+    CKEDITOR.instances['id_post_content_' + postPK].setData(postData);
+
+    $('#post-edit-form-' + postPK).submit(function (e) {
+        e.preventDefault();
+        var form = $(this);
+        var updatedTitle = $('#id-title-' + postPK);
+        var url = form.attr('action');
+        var updatedTags = $('#tags-edit-' + postPK).children().filter(':selected').text();
+        //alert(updatedTags);
+        var updatedContent = CKEDITOR.instances['id_post_content_' + postPK].getData();
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                pk: postPK,
+                title: updatedTitle.val(),
+                tags: updatedTags,
+                post_content: updatedContent,
+            },
+            success: function (json) {
+
+                if (json.result === 'SS') {
+                    console.log(json.content + json.title + json.selectedTags);
+                    var ulCollection = $('#user-prof-post-' + postPK);
+                    ulCollection.children('.title').children('#post-head-m-down').html(json.title);
+                    ulCollection.children('.title').children('#ost-head-s-down-l').html(json.title);
+                    ulCollection.children('.title').children('#post-head-m-up').html(json.title);
+                    // $('#id-title-' + json.postPK).val(json.title);
+                    var tags = ulCollection.children('.tag');
+                    tags.html("Tags:");
+
+                    for (var i = 0; i < json.selectedTags.length; i++) {
+                        tags.append('<a class="chip">' + json.selectedTags[i] + '</a>');
+                    }
+
+                    ulCollection.children('#p').html(json.content);
+                    CKEDITOR.instances['id_post_content_' + postPK].setData(json.content);
+
+                    var elem = $('#edit-post-modal-' + postPK);
+                    var instance = M.Modal.getInstance(elem);
+                    instance.close();
+                    addToast('Post edited successfully!');
+
+                } else if (json.result === 'ERR') {
+                    addToast('Oops! We have encountered an error. Try Again!');
+                }
+            },
+
+            error: function () {
+
+            }
+        });
+    });
+});
+
+// For reply fadeToggle()
+$(".comment-reply-btn").click(function (event) {
+    event.preventDefault();
+    $(this).parent().next(".comment-reply").fadeToggle();
+});
+
+// For comment fadeToggle()
+$(".comment-display-btn").click(function (event) {
+    event.preventDefault();
+    $(this).parent().parent().next('.comment-display').fadeToggle();
+});
+

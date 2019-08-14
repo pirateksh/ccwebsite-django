@@ -9,13 +9,13 @@
 {% load static %}
 <nav class="amber lighten-1" role="navigation">
     <div class="nav-wrapper container">
-        {% if user.is_authenticated %}
+{#        {% if user.is_authenticated %}#}
             <a id="logo-container" class="brand-logo hide-on-med-and-down" style="font-size:3vw;">{{ native_user.first_name }} {{ native_user.last_name }}</a>
             <a id="logo-container" class="brand-logo hide-on-small-and-down hide-on-large-only" style="font-size:4vw;">{{ native_user.first_name }} {{ native_user.last_name }}</a>
             <a id="logo-container" class="brand-logo hide-on-med-and-up" style="font-size:5vw;">{{ native_user.first_name }} {{ native_user.last_name }}</a>
-        {% else %}
-            <a id="logo-container" class="brand-logo">Hi, User!</a>
-        {% endif %}
+{#        {% else %}#}
+{#            <a id="logo-container" class="brand-logo">Hi, User!</a>#}
+{#        {% endif %}#}
         <ul class="right hide-on-med-and-down">
             {% if user.is_authenticated %}
                 <li>

@@ -8,7 +8,7 @@ from post.views import page_maker
 from django.contrib.auth.models import User
 from .models import UserProfile
 from comments.models import Comment
-from post.models import Post
+from post.models import Post, Tags
 # from post.models import Post, Tags
 
 # Imported Forms
@@ -31,6 +31,7 @@ def user_profile(request, username):
     user_profiles = UserProfile.objects.all()
     comments = Comment.objects.all()
     comment_form = CommentForm()
+    tags = Tags.objects.all()
     password_change_form = PasswordChangeForm(user=native_user)
     context = {
         'profile': profile,
@@ -43,6 +44,7 @@ def user_profile(request, username):
         'comments': comments,
         'comment_form': comment_form,
         'user_profiles': user_profiles,
+        'tags': tags,
     }
     return render(request, 'user_profile/user_profile.html', context)
 
