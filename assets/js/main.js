@@ -56,7 +56,7 @@ $(function() {
 
 
 // Submit post on submit
-$('#post_form').on('submit', function(event){
+$('.post_form').on('submit', function(event){
     event.preventDefault();
     console.log("form submitted!"); // sanity check
     create_post($(this));
@@ -68,11 +68,8 @@ function create_post(this_) {
     var url_ = this_.attr('action');
     var title = $('#id_title');
     var postContent = CKEDITOR.instances['id_post_content'].getData();
-    // var select = $('select[name="tags"]');
-    // var selected = select.children("option").filter(":selected").text();
     var selected = $('select[name="tags"] :selected');
-    // var author = this_.attr('author');
-    // alert(selected.text());
+    var successRedirectURL = this_.attr('data-success');
     $.ajax({
         url : url_, // the endpoint
         type : "POST", // http method
@@ -86,11 +83,6 @@ function create_post(this_) {
         success : function(json) {
 
             $('#id_title').val('');
-            // alert( $('select[name="tags"]').html());
-            //
-            // $('select[name="tags"]').html('');
-
-            // $('select[name="tags"] :selected').prop("selected", false);
             CKEDITOR.instances['id_post_content'].setData('');
             var elem = $('.post-form-collapse');
             var instance = M.Collapsible.getInstance(elem);
@@ -98,7 +90,7 @@ function create_post(this_) {
 
             var postDivPinned = $('.pinned-posts');
             var postDivNormal = $('.normal-posts');
-
+            /*
             if(json.isPinned === false){
                 postDivNormal.prepend(
                 "<ul class='collection with-header ajax-display'>" +
@@ -126,7 +118,10 @@ function create_post(this_) {
 
                     "<li class='collection-item row' id='like-'" + json.postPk + ">" +
                         "<div class='col s4 m4 l4 center'>" +
-                            "<a class='btn-flat like-btn light-blue white-text' data-likes=" + json.likes + "> " + json.likes + " <i class='material-icons'>thumb_up</i></a>" +
+                            "<a class='btn-flat like-btn light-blue white-text' data-likes=" + json.likes + " id='like-btn-" + json.postPk + "' href='"+ json.likeURL +"'> " +
+                                json.likes +
+                                " <i class='material-icons'>thumb_up</i>" +
+                            "</a>" +
                         "</div>" +
                         "<div class=\"col s4 m4 l4 center\">" +
                             "<a class='btn-flat comment-display-btn light-blue white-text' href='#'><i class='material-icons'>comment</i></a>" +
@@ -149,7 +144,7 @@ function create_post(this_) {
                     "</li>" +
 
                     "<li class='collection-item comment-display'>" +
-                        "<form method='post' action=" + json.addCommentURL + ">" +
+                        "<form method='post' action='" + json.addCommentURL + "'>" +
 
                             "<div class='input-field col s12'>" +
                                 "<textarea id='id_comment_text' class='materialize-textarea' name='comment_text' cols='40' rows='10' class='validate' ></textarea>" +
@@ -190,7 +185,10 @@ function create_post(this_) {
 
                     "<li class='collection-item row' id='like-'" + json.postPk + ">" +
                         "<div class=\"col s4 m4 l4 center\">" +
-                            "<a class='btn-flat like-btn light-blue white-text' data-likes=" + json.likes + "> " + json.likes + " <i class='material-icons'>thumb_up</i></a>" +
+                            "<a class='btn-flat like-btn light-blue white-text' data-likes=" + json.likes + " id='like-btn-" + json.postPk + "' href='"+ json.likeURL +"'> " +
+                                json.likes +
+                                " <i class='material-icons'>thumb_up</i>" +
+                            "</a>" +
                         "</div>" +
                         "<div class=\"col s4 m4 l4 center\">" +
                             "<a class='btn-flat comment-display-btn light-blue white-text' href='#'><i class='material-icons'>comment</i></a>" +
@@ -213,7 +211,7 @@ function create_post(this_) {
                     "</li>" +
 
                     "<li class='collection-item comment-display'>" +
-                        "<form method='post' action=" + json.addCommentURL + ">" +
+                        "<form method='post' action='" + json.addCommentURL + "'>" +
 
                             "<div class='input-field col s12'>" +
                                 "<textarea id='id_comment_text' class='materialize-textarea' name='comment_text' cols='40' rows='10' class='validate' ></textarea>" +
@@ -237,6 +235,13 @@ function create_post(this_) {
             {
                 ajaxTag.append('<a class="chip">' + json.selectedTags[i] + '</a>');
             }
+            */
+            // if(json.comingFrom === "home") {
+            //     location.href =
+            // } else if (json.comingFrom === 'user-prof') {
+            //     location.href =
+            // }
+            location.href = successRedirectURL;
 
             addToast(json.result);
         },
@@ -482,6 +487,8 @@ $('.edit-btn').click(function (event) {
                     ulCollection.children('.title').children('#post-head-m-up').html(json.title);
                     // $('#id-title-' + json.postPK).val(json.title);
                     var tags = ulCollection.children('.tag');
+                    var likeBtn = $('#like-btn-' + json.postPK);
+                    likeBtn.attr('href', json.likeUrl);
                     tags.html("Tags:");
 
                     for (var i = 0; i < json.selectedTags.length; i++) {

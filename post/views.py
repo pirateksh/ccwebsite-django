@@ -27,37 +27,37 @@ def page_maker(request, model, native_user=None, draft=False):
     return paginator.get_page(page)
 
 
-@login_required
-def add_post(request):
-    tags = Tags.objects.all()
-    if request.method == 'POST':
-        addpostform = PostForm(request.POST)
-        if addpostform.is_valid():
-            post = addpostform.save(commit=False)  # Why commit=False?
-            post.save()
-            post.author = request.user
-            raw_tags = addpostform.cleaned_data.get('tags')
-
-            for raw_tag in raw_tags:
-                if raw_tag in tags:
-                    post.tags.add(raw_tag)
-
-            post.save()
-            messages.success(request, f"Post Added Successfully!")
-            return redirect(HOME)
-    else:
-        addpostform = PostForm()
-    form = UserSignupForm()
-    posts = page_maker(request)
-    comment_form = CommentForm()
-    context = {
-        'form': form,
-        'addpostform': addpostform,
-        'posts': posts,
-        'tags': tags,
-        'comment_form': comment_form,
-    }
-    return render(request, 'home/index.html', context)
+# @login_required
+# def add_post(request):
+#     tags = Tags.objects.all()
+#     if request.method == 'POST':
+#         addpostform = PostForm(request.POST)
+#         if addpostform.is_valid():
+#             post = addpostform.save(commit=False)  # Why commit=False?
+#             post.save()
+#             post.author = request.user
+#             raw_tags = addpostform.cleaned_data.get('tags')
+#
+#             for raw_tag in raw_tags:
+#                 if raw_tag in tags:
+#                     post.tags.add(raw_tag)
+#
+#             post.save()
+#             messages.success(request, f"Post Added Successfully!")
+#             return redirect(HOME)
+#     else:
+#         addpostform = PostForm()
+#     form = UserSignupForm()
+#     posts = page_maker(request)
+#     comment_form = CommentForm()
+#     context = {
+#         'form': form,
+#         'addpostform': addpostform,
+#         'posts': posts,
+#         'tags': tags,
+#         'comment_form': comment_form,
+#     }
+#     return render(request, 'home/index.html', context)
 
 
 @login_required
@@ -94,6 +94,7 @@ def ajax_add_post(request):
             avatar_url = '/static/default-profile-picture.jpg'
 
         add_comment_url = reverse(add_comment, kwargs={'post_id': post.pk})
+        like_url = reverse('like_toggle', kwargs={'slug': post.slug})
 
         response_data = {
             'result': 'Post added successfully!',
@@ -108,6 +109,7 @@ def ajax_add_post(request):
             'likesCountStr': likes_count,
             'addCommentURL': add_comment_url,
             'isPinned': post.is_pinned,
+            'likeURL': like_url,
         }
 
         return JsonResponse(response_data)
@@ -153,6 +155,7 @@ def ajax_edit_post(request):
 
         if original_post_qs is None:
             result = 'ERR'
+            like_url = None
         else:
             original_post = original_post_qs.first()
             original_tags_qs = original_post.tags.all()
@@ -171,6 +174,7 @@ def ajax_edit_post(request):
             updated = original_post.updated
             original_post.save()
             result = 'SS'
+            like_url = reverse('like_toggle', kwargs={'slug': original_post.slug})
 
         response_data = {
             'result': result,
@@ -179,6 +183,7 @@ def ajax_edit_post(request):
             'selectedTags': selected_tags,
             'postPK': pk,
             'updated': timesince(updated),
+            'likeUrl': like_url,
         }
 
         return JsonResponse(response_data)

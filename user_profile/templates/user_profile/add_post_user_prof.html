@@ -1,7 +1,7 @@
 {% load materializecss %}
 {# Adding post #}
 {% if user.is_authenticated %}
-    <form class="post_form" method="post" action="{% url 'ajax_add_post' %}" author="{{ user.username }}" data-success="{% url 'Index' %}">
+    <form class="post_form" method="post" action="{% url 'ajax_add_post' %}" author="{{ user.username }}" data-success="{% url 'User Profile' user.username %}">
         <ul class="collapsible white post-form-collapse" >
             <li>
                 <div class="collapsible-header tooltipped" data-position="top" data-tooltip="Click to Add Post!">
