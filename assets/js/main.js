@@ -574,3 +574,58 @@ $('.like-btn').click(function (event) {
        }
    });
 });
+
+// Comment AJAX
+
+$('.comment-add-form').submit(function (event) {
+   event.preventDefault();
+   console.log("Post comment button clicked");
+   var this_ = $(this);
+   var commentType = this_.attr('data-type');
+   var postPK = this_.attr('post-pk');
+   var commentPK = this_.attr('comment-pk') || 0;
+   var url = this_.attr('action');
+   var commentContent;
+   if(commentType === 'comment') {
+       commentContent = CKEDITOR.instances['id_comment_' + postPK].getData();
+   } else if(commentType === 'reply') {
+       commentContent = CKEDITOR.instances['id_comment_reply_' + postPK + '_' + commentPK].getData();
+   }
+   console.log(commentContent);
+
+   $.ajax({
+       url: url,
+       method: "POST",
+       data: {
+           post_pk: postPK,
+           comment_pk: commentPK,
+           comment_content: commentContent
+       },
+       success: function (json) {
+           if(json.result === "SS") {
+                console.log("Everything good!");
+                if(commentType === 'comment') {
+                    var commentDiv = $('#comment-' + postPK);
+                    console.log(commentDiv.html());
+                    if(json.commentCount === 1) {
+                        commentDiv.html("THis is good comment done!");
+                    } else {
+                        commentDiv.prepend("THis is good comment done!");
+                    }
+                } else if (commentType === 'reply') {
+                    var replyDiv = $('#reply-' + postPK + '-' + commentPK);
+                    if (json.replyCount === 1) {
+                        replyDiv.html('This is good reply done!');
+                    } else {
+                        replyDiv.prepend('This is good reply done!');
+                    }
+                }
+           } else if (json.result === "ERR") {
+               addToast('Oops! We have encountered an error. Try Again!');
+           }
+       },
+       error: function (json) {
+           addToast('Oops! We have encountered an error. Try Again!');
+       }
+   })
+});

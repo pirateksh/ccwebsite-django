@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
 from post import views as post_view
@@ -89,3 +90,46 @@ def add_comment(request, post_id):
         'comments': comments,
     }
     return render(request, 'home/index.html', context)
+
+
+def ajax_add_comment(request, post_id):
+    if request.method == "POST":
+        post_pk = request.POST['post_pk']
+        parent_pk = request.POST['comment_pk']
+        comment_content = request.POST['comment_content']
+        parent = None
+        post = None
+        parent_qs = Comment.objects.filter(pk=parent_pk)
+        post_qs = Post.objects.filter(pk=post_pk)
+
+        if parent_qs is not None:
+            parent = parent_qs.first()
+
+        if post_qs is not None:
+            post = post_qs.first()
+
+        new_comment, created = Comment.objects.get_or_create(
+            user=request.user,
+            post=post,
+            comment_text=comment_content,
+            parent=parent,
+        )
+
+        comments = Comment.objects.filter(post=post)
+        comment_count = comments.count()
+
+        replies = Comment.objects.filter(post=post).filter(parent=parent)
+        reply_count = replies.count()
+
+        if created:
+            result = "SS"
+        else:
+            result = "ERR"
+
+        response_data = {
+            'result': result,
+            'commentCount': comment_count,
+            'replyCount': reply_count,
+        }
+
+        return JsonResponse(response_data)

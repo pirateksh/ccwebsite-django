@@ -120,9 +120,14 @@
 
                 <li class="collection-item comment-display" > {# style="display: none;"> #}
                         {% if user.is_authenticated %}
-                            <form method="post" action="{% url 'Add Comment' post.id %}">
+                            <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" data-type="comment">
                                 {% csrf_token %}
-                                {{ comment_form|materializecss }}
+                                <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
+                                <script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+                                <div class="django-ckeditor-widget" data-field-id="id_comment_{{ post.pk }}" style="display: inline-block;">
+                                    <textarea cols="40" id="id_comment_{{ post.pk }}" name="post_content" rows="10" required data-processed="0" data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;custom&quot;, &quot;height&quot;: &quot;15vh&quot;, &quot;width&quot;: false, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;resize_dir&quot;: &quot;vertical&quot;, &quot;toolbar_custom&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;CodeSnippet&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;extraPlugins&quot;: &quot;resize&quot;, &quot;filebrowserUploadUrl&quot;: &quot;/ckeditor/upload/&quot;, &quot;filebrowserBrowseUrl&quot;: &quot;/ckeditor/browse/&quot;, &quot;language&quot;: &quot;en-us&quot;}" data-external-plugin-resources="[]" data-id="id_comment_{{ native_post.pk }}" data-type="ckeditortype"></textarea>
+                                </div>
+{#                                {{ comment_form|materializecss }}#}
                                 <button class="btn waves-light" type="submit" name="action">Post Comment
                                     <i class="material-icons right">send</i>
                                 </button>
@@ -130,69 +135,78 @@
                         {% endif %}
                             {% for comment in comments %}
                                 {% if comment.post.id == post.id %}
-                                    <blockquote id="comment-{{ post.pk }}-{{ comment.pk }}">
-                                    {{ comment.comment_text }}
-                                        <footer>
-                                        via -
-                                            <a class="chip" href="{% url 'User Profile' comment.user.username %} ">
-                                                {% for user_profile in user_profiles %}
-                                                    {% if user_profile.user == comment.user %}
-                                                        {% if user_profile.avatar %}
-                                                            <img src="{{ user_profile.avatar.url }}">
-                                                        {% else %}
-                                                            <img src="{% static 'default-profile-picture.jpg' %}">
+                                    <div id="comment-{{ post.pk }}">
+                                        <blockquote>
+                                        {{ comment.comment_text|safe }}
+                                            <footer>
+                                            via -
+                                                <a class="chip" href="{% url 'User Profile' comment.user.username %} ">
+                                                    {% for user_profile in user_profiles %}
+                                                        {% if user_profile.user == comment.user %}
+                                                            {% if user_profile.avatar %}
+                                                                <img src="{{ user_profile.avatar.url }}">
+                                                            {% else %}
+                                                                <img src="{% static 'default-profile-picture.jpg' %}">
+                                                            {% endif %}
                                                         {% endif %}
+                                                    {% endfor %}
+                                                    {{ comment.user }}
+                                                </a>
+                                                    | {{ comment.timestamp|timesince }} ago |
+                                                    {% if comment.children.count > 1 %}
+                                                        {{ comment.children.count }} Replies |
+                                                    {% elif comment.children.count == 1 %}
+                                                        {{ comment.children.count }} Reply |
                                                     {% endif %}
+                                                    <a class="comment-reply-btn" href="#">Reply</a>
+                                            </footer>
+
+                                            <div class="comment-reply" style="display: none;">
+                                                {% for child_comment in comment.children %}
+                                                    <div id="reply-{{ post.pk }}-{{ comment.pk }}">
+                                                        <blockquote>
+                                                        {{ child_comment.comment_text|safe }}
+                                                            <footer>
+                                                            via -
+                                                                <a class="chip" href="{% url 'User Profile' child_comment.user.username %} ">
+                                                                    {% for user_profile in user_profiles %}
+                                                                        {% if user_profile.user == child_comment.user %}
+                                                                            {% if user_profile.avatar %}
+                                                                                <img src="{{ user_profile.avatar.url }}">
+                                                                            {% else %}
+                                                                                <img src="{% static 'default-profile-picture.jpg' %}">
+                                                                            {% endif %}
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                    {{ child_comment.user }}
+                                                                </a>
+                                                                <span id="comment-timestamp" style="color: #0f74a8;">
+                                                                    | {{ child_comment.timestamp|timesince }} ago
+                                                                </span>
+                                                            </footer>
+
+                                                        </blockquote>
+                                                    </div>
                                                 {% endfor %}
-                                                {{ comment.user }}
-                                            </a>
-                                                | {{ comment.timestamp|timesince }} ago |
-                                                {% if comment.children.count > 1 %}
-                                                    {{ comment.children.count }} Replies |
-                                                {% elif comment.children.count == 1 %}
-                                                    {{ comment.children.count }} Reply |
+                                                {% if user.is_authenticated %}
+                                                    <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" comment-pk="{{ comment.pk }}" data-type="reply">
+                                                        {% csrf_token %}
+                                                        <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
+                                                        <script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+                                                        <div class="django-ckeditor-widget" data-field-id="id_comment_reply_{{ post.pk }}_{{ comment.pk }}" style="display: inline-block;">
+                                                            <textarea cols="40" id="id_comment_reply_{{ post.pk }}_{{ comment.pk }}" name="post_content" rows="10" required data-processed="0" data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;custom&quot;, &quot;height&quot;: &quot;15vh&quot;, &quot;width&quot;: false, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;resize_dir&quot;: &quot;vertical&quot;, &quot;toolbar_custom&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;CodeSnippet&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;extraPlugins&quot;: &quot;resize&quot;, &quot;filebrowserUploadUrl&quot;: &quot;/ckeditor/upload/&quot;, &quot;filebrowserBrowseUrl&quot;: &quot;/ckeditor/browse/&quot;, &quot;language&quot;: &quot;en-us&quot;}" data-external-plugin-resources="[]" data-id="id_comment_reply_{{ post.pk }}_{{ comment.pk }}" data-type="ckeditortype"></textarea>
+                                                        </div>
+    {#                                                    {{ comment_form|materializecss }}#}
+                                                        <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                                                        <button class="btn waves-light" type="submit" name="action">Reply
+                                                            <i class="material-icons right">send</i>
+                                                        </button>
+                                                    </form>
                                                 {% endif %}
-                                                <a class="comment-reply-btn" href="#">Reply</a>
-                                        </footer>
-
-                                        <div class="comment-reply" style="display: none;">
-                                            {% for child_comment in comment.children %}
-                                                <blockquote>
-                                                {{ child_comment.comment_text }}
-                                                    <footer>
-                                                    via -
-                                                        <a class="chip" href="{% url 'User Profile' child_comment.user.username %} ">
-                                                            {% for user_profile in user_profiles %}
-                                                                {% if user_profile.user == child_comment.user %}
-                                                                    {% if user_profile.avatar %}
-                                                                        <img src="{{ user_profile.avatar.url }}">
-                                                                    {% else %}
-                                                                        <img src="{% static 'default-profile-picture.jpg' %}">
-                                                                    {% endif %}
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                            {{ child_comment.user }}
-                                                        </a>
-                                                        <span id="comment-timestamp" style="color: #0f74a8;">
-                                                            | {{ child_comment.timestamp|timesince }} ago
-                                                        </span>
-                                                    </footer>
-
-                                                </blockquote>
-                                            {% endfor %}
-                                            {% if user.is_authenticated %}
-                                                <form method="post" action="{% url 'Add Comment' post.id %}">
-                                                    {% csrf_token %}
-                                                    {{ comment_form|materializecss }}
-                                                    <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                                                    <button class="btn waves-light" type="submit" name="action">Reply
-                                                        <i class="material-icons right">send</i>
-                                                    </button>
-                                                </form>
-                                            {% endif %}
-                                        </div>
-                                    </blockquote>
-                                    <div class="divider"></div>
+                                            </div>
+                                        </blockquote>
+                                        <div class="divider"></div>
+                                    </div>
                                 {% endif %}
                             {% endfor %}
                 </li>
@@ -313,9 +327,14 @@
                 </li>
                 <li class="collection-item comment-display" > {# style="display: none;"> #}
                         {% if user.is_authenticated %}
-                            <form method="post" action="{% url 'Add Comment' post.id %}">
+                            <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" data-type="comment">
                                 {% csrf_token %}
-                                {{ comment_form|materializecss }}
+                                <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
+                                <script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+                                <div class="django-ckeditor-widget" data-field-id="id_comment_{{ post.pk }}" style="display: inline-block;">
+                                    <textarea cols="40" id="id_comment_{{ post.pk }}" name="post_content" rows="10" required data-processed="0" data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;custom&quot;, &quot;height&quot;: &quot;15vh&quot;, &quot;width&quot;: false, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;resize_dir&quot;: &quot;vertical&quot;, &quot;toolbar_custom&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;CodeSnippet&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;extraPlugins&quot;: &quot;resize&quot;, &quot;filebrowserUploadUrl&quot;: &quot;/ckeditor/upload/&quot;, &quot;filebrowserBrowseUrl&quot;: &quot;/ckeditor/browse/&quot;, &quot;language&quot;: &quot;en-us&quot;}" data-external-plugin-resources="[]" data-id="id_comment_{{ post.pk }}" data-type="ckeditortype"></textarea>
+                                </div>
+{#                                {{ comment_form|materializecss }}#}
                                 <button class="btn waves-light" type="submit" name="action">Post Comment
                                     <i class="material-icons right">send</i>
                                 </button>
@@ -323,68 +342,76 @@
                         {% endif %}
                             {% for comment in comments %}
                                 {% if comment.post.id == post.id %}
-                                    <blockquote id="comment-{{ post.pk }}-{{ comment.pk }}">
-                                    {{ comment.comment_text }}
-                                        <footer>
-                                        via -
-                                            <a class="chip" href="{% url 'User Profile' comment.user.username %} ">
-                                                {% for user_profile in user_profiles %}
-                                                    {% if user_profile.user == comment.user %}
-                                                        {% if user_profile.avatar %}
-                                                            <img src="{{ user_profile.avatar.url }}">
-                                                        {% else %}
-                                                            <img src="{% static 'default-profile-picture.jpg' %}">
+                                    <div id="comment-{{ post.pk }}">
+                                        <blockquote>
+                                        {{ comment.comment_text|safe }}
+                                            <footer>
+                                            via -
+                                                <a class="chip" href="{% url 'User Profile' comment.user.username %} ">
+                                                    {% for user_profile in user_profiles %}
+                                                        {% if user_profile.user == comment.user %}
+                                                            {% if user_profile.avatar %}
+                                                                <img src="{{ user_profile.avatar.url }}">
+                                                            {% else %}
+                                                                <img src="{% static 'default-profile-picture.jpg' %}">
+                                                            {% endif %}
                                                         {% endif %}
+                                                    {% endfor %}
+                                                    {{ comment.user }}
+                                                </a>
+                                                    | {{ comment.timestamp|timesince }} ago |
+                                                    {% if comment.children.count > 1 %}
+                                                        {{ comment.children.count }} Replies |
+                                                    {% elif comment.children.count == 1 %}
+                                                        {{ comment.children.count }} Reply |
                                                     {% endif %}
+                                                    <a class="comment-reply-btn" href="#">Reply</a>
+                                            </footer>
+
+                                            <div class="comment-reply" style="display: none;">
+                                                {% for child_comment in comment.children %}
+                                                    <div id="reply-{{ post.pk }}-{{ comment.pk }}">
+                                                        <blockquote>
+                                                        {{ child_comment.comment_text|safe }}
+                                                            <footer>
+                                                            via -
+                                                                <a class="chip" href="{% url 'User Profile' child_comment.user.username %} ">
+                                                                    {% for user_profile in user_profiles %}
+                                                                        {% if user_profile.user == child_comment.user %}
+                                                                            {% if user_profile.avatar %}
+                                                                                <img src="{{ user_profile.avatar.url }}">
+                                                                            {% else %}
+                                                                                <img src="{% static 'default-profile-picture.jpg' %}">
+                                                                            {% endif %}
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                    {{ child_comment.user }}
+                                                                </a>
+                                                                <span id="comment-timestamp" style="color: #0f74a8;">
+                                                                    | {{ child_comment.timestamp|timesince }} ago
+                                                                </span>
+                                                            </footer>
+                                                        </blockquote>
+                                                    </div>
                                                 {% endfor %}
-                                                {{ comment.user }}
-                                            </a>
-                                                | {{ comment.timestamp|timesince }} ago |
-                                                {% if comment.children.count > 1 %}
-                                                    {{ comment.children.count }} Replies |
-                                                {% elif comment.children.count == 1 %}
-                                                    {{ comment.children.count }} Reply |
+                                                {% if user.is_authenticated %}
+                                                    <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" comment-pk="{{ comment.pk }}" data-type="reply">
+                                                        {% csrf_token %}
+                                                        <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
+                                                        <script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+                                                        <div class="django-ckeditor-widget" data-field-id="id_comment_reply_{{ post.pk }}_{{ comment.pk }}" style="display: inline-block;">
+                                                            <textarea cols="40" id="id_comment_reply_{{ post.pk }}_{{ comment.pk }}" name="post_content" rows="10" required data-processed="0" data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;custom&quot;, &quot;height&quot;: &quot;15vh&quot;, &quot;width&quot;: false, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;resize_dir&quot;: &quot;vertical&quot;, &quot;toolbar_custom&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;CodeSnippet&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;extraPlugins&quot;: &quot;resize&quot;, &quot;filebrowserUploadUrl&quot;: &quot;/ckeditor/upload/&quot;, &quot;filebrowserBrowseUrl&quot;: &quot;/ckeditor/browse/&quot;, &quot;language&quot;: &quot;en-us&quot;}" data-external-plugin-resources="[]" data-id="id_comment_reply_{{ post.pk }}_{{ comment.pk }}" data-type="ckeditortype"></textarea>
+                                                        </div>
+    {#                                                    {{ comment_form|materializecss }}#}
+                                                        <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                                                        <button class="btn waves-light" type="submit" name="action">Reply
+                                                            <i class="material-icons right">send</i>
+                                                        </button>
+                                                    </form>
                                                 {% endif %}
-                                                <a class="comment-reply-btn" href="#">Reply</a>
-                                        </footer>
-
-                                        <div class="comment-reply" style="display: none;">
-                                            {% for child_comment in comment.children %}
-                                                <blockquote>
-                                                {{ child_comment.comment_text }}
-                                                    <footer>
-                                                    via -
-                                                        <a class="chip" href="{% url 'User Profile' child_comment.user.username %} ">
-                                                            {% for user_profile in user_profiles %}
-                                                                {% if user_profile.user == child_comment.user %}
-                                                                    {% if user_profile.avatar %}
-                                                                        <img src="{{ user_profile.avatar.url }}">
-                                                                    {% else %}
-                                                                        <img src="{% static 'default-profile-picture.jpg' %}">
-                                                                    {% endif %}
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                            {{ child_comment.user }}
-                                                        </a>
-                                                        <span id="comment-timestamp" style="color: #0f74a8;">
-                                                            | {{ child_comment.timestamp|timesince }} ago
-                                                        </span>
-                                                    </footer>
-
-                                                </blockquote>
-                                            {% endfor %}
-                                            {% if user.is_authenticated %}
-                                                <form method="post" action="{% url 'Add Comment' post.id %}">
-                                                    {% csrf_token %}
-                                                    {{ comment_form|materializecss }}
-                                                    <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                                                    <button class="btn waves-light" type="submit" name="action">Reply
-                                                        <i class="material-icons right">send</i>
-                                                    </button>
-                                                </form>
-                                            {% endif %}
-                                        </div>
-                                    </blockquote>
+                                            </div>
+                                        </blockquote>
+                                    </div>
                                     <div class="divider"></div>
                                 {% endif %}
                             {% endfor %}
