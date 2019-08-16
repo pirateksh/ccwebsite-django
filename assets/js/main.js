@@ -520,3 +520,50 @@ $(".comment-display-btn").click(function (event) {
     $(this).parent().parent().next('.comment-display').fadeToggle();
 });
 
+// Like Feature
+$('.like-btn').click(function (event) {
+   event.preventDefault();
+   console.log("like btn clicked!");
+   var this_ = $(this);
+   var url = this_.attr('href');
+   var likesCount = parseInt(this_.attr('data-likes')) || 0;
+
+   $.ajax({
+       url: url,
+       method: "GET",
+       data: {},
+       success: function (json) {
+           if(json.result !== "ERR") {
+
+               if(json.result === "UNA") {
+                   addToast("Login to like post!");
+                   var elem = $('#modal1');
+                   var instance = M.Modal.getInstance(elem);
+                   instance.open();
+               } else {
+                   var btn = $('#like-btn-' + json.postPK);
+                   if(json.result === "UNLIKED") {
+                       console.log("UNLIKED");
+                       btn.html(
+                           json.likesCount +
+                           " <i class='material-icons large'>thumb_up</i>"
+                        );
+                        addToast("Unliked");
+                   } else if (json.result === "LIKED") {
+                       console.log("LIKED");
+                        btn.html(
+                           json.likesCount +
+                           " <i class='material-icons large'>thumb_down</i>"
+                        );
+                        addToast("Liked");
+                   }
+               }
+           } else if (json.result === "ERR") {
+               addToast('Oops! We have encountered an error. Try Again!');
+           }
+       },
+       error: function (json) {
+           addToast('Oops! We have encountered an error. Try Again!');
+       }
+   });
+});

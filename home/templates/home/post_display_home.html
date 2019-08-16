@@ -59,9 +59,13 @@
                 <li class="collection-item row" id="like-{{ post.pk }}">
                     {% if user == post.author %}
                         <div class="col s4 m4 l4 center">
-                            <a class="btn-flat like-btn light-blue white-text" data-href="{% url 'like_api_toggle' post.slug %}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
+                            <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
                                 {{ post.likes.count }}
-                                <i class="material-icons large">thumb_up</i>
+                                {% if user in post.likes.all %}
+                                    <i class="material-icons large">thumb_down</i>
+                                {% else %}
+                                    <i class="material-icons large">thumb_up</i>
+                                {% endif %}
                             </a>
                         </div>
                         <div class="col s4 m4 l4 center">
@@ -97,9 +101,13 @@
 
                     {% else %}
                         <div class="col s6 m6 l6 center">
-                            <a class="btn-flat like-btn light-blue white-text" data-href="{% url 'like_api_toggle' post.slug %}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
+                            <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
                                 {{ post.likes.count }}
-                                <i class="material-icons large">thumb_up</i>
+                                {% if user in post.likes.all %}
+                                    <i class="material-icons large">thumb_down</i>
+                                {% else %}
+                                    <i class="material-icons large">thumb_up</i>
+                                {% endif %}
                             </a>
                         </div>
                         <div class="col s6 m6 l6 center">
@@ -243,9 +251,14 @@
                 <li class="collection-item row" id="like-{{ post.pk }}">
                     {% if user == post.author %}
                         <div class="col s4 m4 l4 center">
-                            <a class="btn-flat like-btn light-blue white-text" data-href="{% url 'like_api_toggle' post.slug %}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
+
+                            <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
                                 {{ post.likes.count }}
-                                <i class="material-icons large">thumb_up</i>
+                                {% if user in post.likes.all %}
+                                    <i class="material-icons large">thumb_down</i>
+                                {% else %}
+                                    <i class="material-icons large">thumb_up</i>
+                                {% endif %}
                             </a>
                         </div>
                         <div class="col s4 m4 l4 center">
@@ -281,9 +294,14 @@
 
                     {% else %}
                         <div class="col s6 m6 l6 center">
-                            <a class="btn-flat like-btn light-blue white-text" data-href="{% url 'like_api_toggle' post.slug %}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
+                            <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
                                 {{ post.likes.count }}
-                                <i class="material-icons large">thumb_up</i>
+                                {% if user in post.likes.all %}
+                                    <i class="material-icons large">thumb_down</i>
+                                {% else %}
+                                    <i class="material-icons large">thumb_up</i>
+                                {% endif %}
+
                             </a>
                         </div>
                         <div class="col s6 m6 l6 center">

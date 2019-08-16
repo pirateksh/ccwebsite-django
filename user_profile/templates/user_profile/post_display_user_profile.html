@@ -50,9 +50,13 @@
                 {% if user == native_user %}
                     <li class="collection-item row" id="like-{{ native_post.pk }}">
                         <div class="col s3 m3 l3 center">
-                            <a class="btn-flat like-btn light-blue white-text" data-href="{% url 'like_api_toggle' native_post.slug %}" data-likes="{{ native_post.likes.count }}" href="{% url 'like_toggle' native_post.slug %}">
+                            <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ native_post.pk }}" data-likes="{{ native_post.likes.count }}" href="{% url 'like_toggle' native_post.slug %}">
                                 {{ native_post.likes.count }}
-                                <i class="material-icons">thumb_up</i>
+                                {% if user in native_post.likes.all %}
+                                    <i class="material-icons large">thumb_down</i>
+                                {% else %}
+                                    <i class="material-icons large">thumb_up</i>
+                                {% endif %}
                             </a>
                         </div>
                         <div class="col s3 m3 l3 center">
@@ -61,7 +65,7 @@
 
                         <form action="{% url 'ajax_edit_post' %}" id="post-edit-form-{{ native_post.pk }}" method="post" data-pk="{{ native_post.pk }}">
                             <div class="col s3 m3 l3 center">
-                                <a class="btn-flat light-blue white-text modal-trigger edit-btn" href="#edit-post-modal-{{ native_post.pk }}" data-val="{{ native_post.post_content }}" data-pk="{{ native_post.pk }}">
+                                <a class="btn-flat like-btn light-blue white-text modal-trigger edit-btn" href="#edit-post-modal-{{ native_post.pk }}" data-val="{{ native_post.post_content }}" data-pk="{{ native_post.pk }}">
                                     <i class="material-icons">edit</i>
                                 </a>
                             </div>
@@ -127,12 +131,18 @@
                             </div>
                         </form>
                     </li>
+
                 {% else %}
+
                     <li class="collection-item row" id="like-{{ native_post.pk }}">
                         <div class="col s6 m6 l6 center">
-                            <a class="btn-flat like-btn light-blue white-text" data-href="{% url 'like_api_toggle' native_post.slug %}" data-likes="{{ native_post.likes.count }}" href="{% url 'like_toggle' native_post.slug %}">
+                            <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ native_post.pk }}" data-likes="{{ native_post.likes.count }}" href="{% url 'like_toggle' native_post.slug %}">
                                 {{ native_post.likes.count }}
-                                <i class="material-icons">thumb_up</i>
+                                {% if user in native_post.likes.all %}
+                                    <i class="material-icons large">thumb_down</i>
+                                {% else %}
+                                    <i class="material-icons large">thumb_up</i>
+                                {% endif %}
                             </a>
                         </div>
                         <div class="col s6 m6 l6 center">

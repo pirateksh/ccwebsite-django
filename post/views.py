@@ -184,20 +184,43 @@ def ajax_edit_post(request):
         return JsonResponse(response_data)
 
 
-class PostLikeToggle(RedirectView):
+def post_like_toggle(request, slug):
+    post_qs = Post.objects.filter(slug=slug)
+    user = request.user
+    count = -1
+    pk = -1
+    if post_qs is None:
+        result = "ERR"
 
-    def get_redirect_url(self, *args, **kwargs):
-        slug = self.kwargs.get('slug')
-        print(slug)
-        obj = get_object_or_404(Post, slug=slug)
-        url_ = HOME + '#like-' + str(obj.pk)
-        user = self.request.user
+    else:
+        post = post_qs.first()
+        pk = post.pk
         if user.is_authenticated:
-            if user in obj.likes.all():
-                obj.likes.remove(user)
+            if user in post.likes.all():
+                post.likes.remove(user)
+                result = "UNLIKED"
             else:
-                obj.likes.add(user)
-        return url_
+                post.likes.add(user)
+                result = "LIKED"
+            count = post.likes.count()
+        else:
+            result = "UNA"
+    """
+        ERR - Error
+        UNLIKED - Unliked
+        LIKED - Liked
+        UNA - User not authenticated
+    """
+
+    response_data = {
+        'result': result,
+        'likesCount': count,
+        'postPK': pk,
+    }
+
+    return JsonResponse(response_data)
+
+
 
 
 from rest_framework.views import APIView
