@@ -58,13 +58,13 @@ $(function() {
 // Submit post on submit
 $('.post_form').on('submit', function(event){
     event.preventDefault();
-    console.log("form submitted!"); // sanity check
+    //console.log("form submitted!"); // sanity check
     create_post($(this));
 });
 
 // AJAX for posting
 function create_post(this_) {
-    console.log("create post is working!"); // sanity check
+    //console.log("create post is working!"); // sanity check
     var url_ = this_.attr('action');
     var title = $('#id_title');
     var postContent = CKEDITOR.instances['id_post_content'].getData();
@@ -480,7 +480,7 @@ $('.edit-btn').click(function (event) {
             success: function (json) {
 
                 if (json.result === 'SS') {
-                    console.log(json.content + json.title + json.selectedTags);
+                    //(json.content + json.title + json.selectedTags);
                     var ulCollection = $('#user-prof-post-' + postPK);
                     ulCollection.children('.title').children('#post-head-m-down').html(json.title);
                     ulCollection.children('.title').children('#ost-head-s-down-l').html(json.title);
@@ -530,7 +530,7 @@ $(".comment-display-btn").click(function (event) {
 // Like Feature
 $('.like-btn').click(function (event) {
    event.preventDefault();
-   console.log("like btn clicked!");
+   //console.log("like btn clicked!");
    var this_ = $(this);
    var url = this_.attr('href');
    var likesCount = parseInt(this_.attr('data-likes')) || 0;
@@ -550,14 +550,14 @@ $('.like-btn').click(function (event) {
                } else {
                    var btn = $('#like-btn-' + json.postPK);
                    if(json.result === "UNLIKED") {
-                       console.log("UNLIKED");
+                       //console.log("UNLIKED");
                        btn.html(
                            json.likesCount +
                            " <i class='material-icons large'>thumb_up</i>"
                         );
                         addToast("Unliked");
                    } else if (json.result === "LIKED") {
-                       console.log("LIKED");
+                       //console.log("LIKED");
                         btn.html(
                            json.likesCount +
                            " <i class='material-icons large'>thumb_down</i>"
@@ -579,7 +579,7 @@ $('.like-btn').click(function (event) {
 
 $('.comment-add-form').submit(function (event) {
    event.preventDefault();
-   console.log("Post comment button clicked");
+   //console.log("Post comment button clicked");
    var this_ = $(this);
    var commentType = this_.attr('data-type');
    var postPK = this_.attr('post-pk');
@@ -591,7 +591,7 @@ $('.comment-add-form').submit(function (event) {
    } else if(commentType === 'reply') {
        commentContent = CKEDITOR.instances['id_comment_reply_' + postPK + '_' + commentPK].getData();
    }
-   console.log(commentContent);
+   //console.log(commentContent);
 
    $.ajax({
        url: url,
@@ -603,7 +603,7 @@ $('.comment-add-form').submit(function (event) {
        },
        success: function (json) {
            if(json.result === "SS") {
-                console.log("Everything good!");
+                //console.log("Everything good!");
                 if(commentType === 'comment') {
                     var commentDiv = $('#comment-' + postPK);
                     commentDiv.prepend(
@@ -636,6 +636,7 @@ $('.comment-add-form').submit(function (event) {
                         "</blockquote>"
                     );
                     commentContent = CKEDITOR.instances['id_comment_' + postPK].setData('');
+                    addToast("Comment Added Successfully!")
                 } else if (commentType === 'reply') {
                     var replyDiv = $('#reply-' + postPK + '-' + commentPK);
                     replyDiv.prepend(
@@ -655,6 +656,7 @@ $('.comment-add-form').submit(function (event) {
                         "<div class=\"divider\"></div>"
                     );
                     CKEDITOR.instances['id_comment_reply_' + postPK + '_' + commentPK].setData('');
+                    addToast("Reply Added Successfully!")
                 }
            } else if (json.result === "ERR") {
                addToast('Oops! We have encountered an error. Try Again!');
