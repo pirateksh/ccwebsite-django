@@ -606,19 +606,55 @@ $('.comment-add-form').submit(function (event) {
                 console.log("Everything good!");
                 if(commentType === 'comment') {
                     var commentDiv = $('#comment-' + postPK);
-                    console.log(commentDiv.html());
-                    if(json.commentCount === 1) {
-                        commentDiv.html("THis is good comment done!");
-                    } else {
-                        commentDiv.prepend("THis is good comment done!");
-                    }
+                    commentDiv.prepend(
+                        "<blockquote>" +
+                            commentContent +
+                            "<footer>" +
+                                "via -" +
+                                "<a class='chip' href='"+ json.userProfileURL +"'>" +
+                                    "<img src=" + json.avatarURL +">" +
+                                    json.userName +
+                                "</a>" +
+                                "| " + json.timestamp + " ago | " +
+                                    json.countStr +
+                                "<a class='comment-reply-btn' href='#'>Reply</a>" +
+                            "</footer>" +
+                            "<div class='comment-reply' id='reply-" + postPK + "-" + commentPK + "' style='display: none;'>" +
+                                "<form class='comment-add-form' method='post' action="+ json.addCommentURL +" post-pk=" + postPK +" comment-pk="+ commentPK +" data-type='reply'>" +
+                                    "{% csrf_token %}" +
+                                    "<script type=\"text/javascript\" src=\"/static/ckeditor/ckeditor-init.js\" data-ckeditor-basepath=\"/static/ckeditor/ckeditor/\" id=\"ckeditor-init-script\"></script>\n" +
+                                    "<script type=\"text/javascript\" src=\"/static/ckeditor/ckeditor/ckeditor.js\"></script>" +
+                                    "<div class=\"django-ckeditor-widget\" data-field-id='id_comment_reply_" + postPK + "_" + commentPK + "' style='display: inline-block;'>" +
+                                        "<textarea cols='40' id='id_comment_reply_" + postPK + "_" + commentPK + "' name='post_content' rows=\"10\" required data-processed=\"0\" data-config=\"{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;custom&quot;, &quot;height&quot;: &quot;15vh&quot;, &quot;width&quot;: false, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;resize_dir&quot;: &quot;vertical&quot;, &quot;toolbar_custom&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;CodeSnippet&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;extraPlugins&quot;: &quot;resize&quot;, &quot;filebrowserUploadUrl&quot;: &quot;/ckeditor/upload/&quot;, &quot;filebrowserBrowseUrl&quot;: &quot;/ckeditor/browse/&quot;, &quot;language&quot;: &quot;en-us&quot;}\" data-external-plugin-resources=\"[]\" data-id='id_comment_reply_" + postPK + "_" + commentPK + "' data-type=\"ckeditortype\"></textarea>\n" +
+                                    "</div>" +
+                                    "<input type=\"hidden\" name=\"parent_id\" value=\"{{ comment.id }}\">" +
+                                    "<button class=\"btn waves-light\" type=\"submit\" name=\"action\">Reply" +
+                                        "<i class=\"material-icons right\">send</i>" +
+                                    "</button>" +
+                                "</form>" +
+                            "</div>" +
+                        "</blockquote>"
+                    );
+                    commentContent = CKEDITOR.instances['id_comment_' + postPK].setData('');
                 } else if (commentType === 'reply') {
                     var replyDiv = $('#reply-' + postPK + '-' + commentPK);
-                    if (json.replyCount === 1) {
-                        replyDiv.html('This is good reply done!');
-                    } else {
-                        replyDiv.prepend('This is good reply done!');
-                    }
+                    replyDiv.prepend(
+                        "<blockquote>" +
+                            commentContent +
+                            "<footer>" +
+                                "via -" +
+                                "<a class='chip' href='" + json.userProfileURL +"'>" +
+                                    "<img src='" + json.avatarURL +"'>" +
+                                    json.userName +
+                                "</a>" +
+                                "<span id='comment-timestamp' style='color: #0f74a8;'>" +
+                                    "| " + json.timestamp + " ago |" +
+                                "</span>" +
+                            "</footer>" +
+                        "</blockquote>" +
+                        "<div class=\"divider\"></div>"
+                    );
+                    CKEDITOR.instances['id_comment_reply_' + postPK + '_' + commentPK].setData('');
                 }
            } else if (json.result === "ERR") {
                addToast('Oops! We have encountered an error. Try Again!');

@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.http import JsonResponse
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
 from post import views as post_view
+from django.utils.timesince import timesince
 
 # Imported Models
 from post.models import Post, Tags
@@ -115,11 +116,28 @@ def ajax_add_comment(request, post_id):
             parent=parent,
         )
 
-        comments = Comment.objects.filter(post=post)
-        comment_count = comments.count()
+        user_profile = UserProfile.objects.get(user=request.user)
+        if user_profile.avatar:
+            avatar_url = user_profile.avatar.url
+        else:
+            avatar_url = '/static/default-profile-picture.jpg'
 
-        replies = Comment.objects.filter(post=post).filter(parent=parent)
-        reply_count = replies.count()
+        timestamp = new_comment.timestamp
+
+        children_count = new_comment.children().count()
+
+        if children_count == 1:
+            count_str = str(children_count) + " Reply |"
+        else:
+            count_str = str(children_count) + " Replies |"
+
+        # comments = Comment.objects.filter(post=post)
+        # comment_count = comments.count()
+        #
+        # replies = Comment.objects.filter(post=post).filter(parent=parent)
+        # reply_count = replies.count()
+        add_comment_url = reverse('Add Comment', kwargs={'post_id': post_pk})
+        user_profile_url = reverse('User Profile', kwargs={'username': request.user.username})
 
         if created:
             result = "SS"
@@ -128,8 +146,14 @@ def ajax_add_comment(request, post_id):
 
         response_data = {
             'result': result,
-            'commentCount': comment_count,
-            'replyCount': reply_count,
+            'avatarURL': avatar_url,
+            'userName': request.user.username,
+            'timestamp': timesince(timestamp),
+            'countStr': count_str,
+            'addCommentURL': add_comment_url,
+            'userProfileURL': user_profile_url,
+            # 'commentCount': comment_count,
+            # 'replyCount': reply_count,
         }
 
         return JsonResponse(response_data)

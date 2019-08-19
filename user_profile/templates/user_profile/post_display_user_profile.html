@@ -168,9 +168,10 @@
                                 </button>
                             </form>
                         {% endif %}
+                        <div id="comment-{{ native_post.pk }}">
                             {% for comment in comments %}
                                 {% if comment.post.id == native_post.id %}
-                                    <div id="comment-{{ native_post.pk }}">
+
                                         <blockquote>
                                         {{ comment.comment_text|safe }}
                                             <footer>
@@ -196,9 +197,8 @@
                                                     <a class="comment-reply-btn" href="#">Reply</a>
                                             </footer>
 
-                                            <div class="comment-reply" style="display: none;">
+                                            <div class="comment-reply" id="reply={{ native_post.pk }}-{{ comment.pk }}" style="display: none;">
                                                 {% for child_comment in comment.children %}
-                                                    <div id="reply={{ native_post.pk }}-{{ comment.pk }}">
                                                         <blockquote>
                                                         {{ child_comment.comment_text|safe }}
                                                             <footer>
@@ -220,7 +220,7 @@
                                                                 </span>
                                                             </footer>
                                                         </blockquote>
-                                                    </div>
+                                                        <div class="divider"></div>
                                                 {% endfor %}
                                                 {% if user.is_authenticated %}
                                                     <form class="comment-add-form" method="post" action="{% url 'Add Comment' native_post.id %}" post-pk="{{ native_post.pk }}" comment-pk="{{ comment.pk }}" data-type="reply">
@@ -239,10 +239,11 @@
                                                 {% endif %}
                                             </div>
                                         </blockquote>
-                                    </div>
+
                                     <div class="divider"></div>
                                 {% endif %}
                             {% endfor %}
+                        </div>
                 </li>
     {#          <li class="collection-item">#}
     {#          Share to:#}
