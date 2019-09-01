@@ -20,9 +20,9 @@
         <div class="normal-posts">
             <ul class="collection with-header" id="user-prof-post-{{ native_post.pk }}" >
                 <li class="collection-header title">
-                    <h4 id="post-head-m-down" class="hide-on-med-and-down">{{ native_post.title|safe }}</h4>
-                    <h4 id="post-head-s-down-l" class="hide-on-small-and-down hide-on-large-only">{{ native_post.title|safe }}</h4>
-                    <h4 id="post-head-m-up" class="hide-on-med-and-up">{{ native_post.title|safe }}</h4>
+                    <h4 id="post-head-m-down" class="hide-on-med-and-down" style="font-size: 3vw">{{ native_post.title|safe }}</h4>
+                    <h4 id="post-head-s-down-l" class="hide-on-small-and-down hide-on-large-only" style="font-size: 4vw;">{{ native_post.title|safe }}</h4>
+                    <h4 id="post-head-m-up" class="hide-on-med-and-up" style="font-size: 5vw">{{ native_post.title|safe }}</h4>
                     <p class="row">
                         <span class="col s8 m8 l8">
                             <a href="{% url 'User Profile' native_user.username %}" class="chip">
@@ -31,10 +31,14 @@
                                 {% else %}
                                     <img src="{% static 'default-profile-picture.jpg' %}">
                                 {% endif %}
-                                {{ native_post.author }}
+                                <span class="hide-on-med-and-down" style="font-size: 1.2vw">{{ native_post.author }}</span>
+                                <span class="hide-on-small-and-down hide-on-large-only" style="font-size: 1.5vw;">{{ native_post.author }}</span>
+                                <span class="hide-on-med-and-up" style="font-size: 3.5vw">{{ native_post.author }}</span>
                             </a>
                         </span>
-                        <span class="col s4 m4 l4" id="">{{ native_post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-med-and-down" style="font-size: 1.20vw">{{ native_post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-small-and-down hide-on-large-only" style="font-size: 1.80vw;">{{ native_post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-med-and-up" style="font-size: 2.60vw">{{ native_post.published|timesince }} ago.</span>
                     </p>
                 </li>
                 <li class="collection-item tag">

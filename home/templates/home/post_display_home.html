@@ -18,9 +18,9 @@
         {% if post.is_pinned %}
             <ul class="collection with-header" >
                 <li class="collection-header">
-                    <h4 id="title-{{ post.pk }}" class="hide-on-med-and-down post-head-m-down">{{ post.title|safe }}<a class="chip">Pinned to Top</a> </h4>
-                    <h4 id="title-{{ post.pk }}" class="hide-on-small-and-down hide-on-large-only post-head-s-down-l">{{ post.title|safe }}<a class="chip">Pinned to Top</a></h4>
-                    <h4 id="title-{{ post.pk }}" class="hide-on-med-and-up post-head-m-up">{{ post.title|safe }}<a class="chip">Pinned to Top</a></h4>
+                    <h4 id="title-{{ post.pk }}" class="hide-on-med-and-down post-head-m-down" style="font-size: 3vw">{{ post.title|safe }}<a class="chip">Pinned to Top</a> </h4>
+                    <h4 id="title-{{ post.pk }}" class="hide-on-small-and-down hide-on-large-only post-head-s-down-l" style="font-size: 4vw">{{ post.title|safe }}<a class="chip">Pinned to Top</a></h4>
+                    <h4 id="title-{{ post.pk }}" class="hide-on-med-and-up post-head-m-up" style="font-size: 5vw">{{ post.title|safe }}<a class="chip">Pinned to Top</a></h4>
                     <p class="row">
                         <span class="col s8 m8 l7">
                             <a class="chip" href="{% url 'User Profile' post.author.username %} ">
@@ -33,10 +33,14 @@
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}
-                                {{ post.author }}
+                                <span class="hide-on-med-and-down" style="font-size: 1.2vw">{{ post.author }}</span>
+                                <span class="hide-on-small-and-down hide-on-large-only" style="font-size: 1.5vw;">{{ post.author }}</span>
+                                <span class="hide-on-med-and-up" style="font-size: 3.5vw">{{ post.author }}</span>
                             </a>
                         </span>
-                        <span class="col s4 m4 l4">{{ post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-med-and-down" style="font-size: 1.20vw">{{ post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-small-and-down hide-on-large-only" style="font-size: 1.80vw;">{{ post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-med-and-up" style="font-size: 2.60vw">{{ post.published|timesince }} ago.</span>
                     </p>
                 </li>
                 <li class="collection-item">
@@ -224,9 +228,9 @@
         {% if post.is_pinned is False %}
             <ul class="collection with-header" id="home-post-{{ post.pk }}">
                 <li class="collection-header">
-                    <h4 id="title-{{ post.pk }}" class="hide-on-med-and-down post-head-m-down">{{ post.title|safe }}</h4>
-                    <h4 id="title-{{ post.pk }}" class="hide-on-small-and-down hide-on-large-only post-head-s-down-l">{{ post.title|safe }}</h4>
-                    <h4 id="title-{{ post.pk }}" class="hide-on-med-and-up post-head-m-up">{{ post.title|safe }}</h4>
+                    <h4 id="title-{{ post.pk }}" class="hide-on-med-and-down post-head-m-down" style="font-size: 3vw">{{ post.title|safe }}</h4>
+                    <h4 id="title-{{ post.pk }}" class="hide-on-small-and-down hide-on-large-only post-head-s-down-l" style="font-size: 4vw">{{ post.title|safe }}</h4>
+                    <h4 id="title-{{ post.pk }}" class="hide-on-med-and-up post-head-m-up" style="font-size: 5vw">{{ post.title|safe }}</h4>
                     <p class="row">
                         <span class="col s8 m8 l7">
                             <a class="chip" href="{% url 'User Profile' post.author.username %} ">
@@ -239,10 +243,14 @@
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}
-                                {{ post.author }}
+                                <span class="hide-on-med-and-down" style="font-size: 1.2vw">{{ post.author }}</span>
+                                <span class="hide-on-small-and-down hide-on-large-only" style="font-size: 1.5vw;">{{ post.author }}</span>
+                                <span class="hide-on-med-and-up" style="font-size: 3.5vw">{{ post.author }}</span>
                             </a>
                         </span>
-                        <span class="col s4 m4 l4">{{ post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-med-and-down" style="font-size: 1.20vw">{{ post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-small-and-down hide-on-large-only" style="font-size: 1.80vw;">{{ post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-med-and-up" style="font-size: 2.60vw">{{ post.published|timesince }} ago.</span>
                     </p>
                 </li>
                 <li class="collection-item">
