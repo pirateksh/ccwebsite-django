@@ -20,9 +20,15 @@
         <div class="normal-posts">
             <ul class="collection with-header" id="user-prof-post-{{ native_post.pk }}" >
                 <li class="collection-header title">
-                    <h4 id="post-head-m-down" class="hide-on-med-and-down" style="font-size: 3vw">{{ native_post.title|safe }}</h4>
-                    <h4 id="post-head-s-down-l" class="hide-on-small-and-down hide-on-large-only" style="font-size: 4vw;">{{ native_post.title|safe }}</h4>
-                    <h4 id="post-head-m-up" class="hide-on-med-and-up" style="font-size: 5vw">{{ native_post.title|safe }}</h4>
+                    <h4 id="post-head-m-down" class="hide-on-med-and-down" style="font-size: 3vw">
+                        {{ native_post.title }}<i class="material-icons">verified_user</i>
+                    </h4>
+                    <h4 id="post-head-s-down-l" class="hide-on-small-and-down hide-on-large-only" style="font-size: 4vw;">
+                        {{ native_post.title }}<i class="material-icons">verified_user</i>
+                    </h4>
+                    <h4 id="post-head-m-up" class="hide-on-med-and-up" style="font-size: 5vw">
+                        {{ native_post.title|safe }}<i class="material-icons">verified_user</i>
+                    </h4>
                     <p class="row">
                         <span class="col s8 m8 l8">
                             <a href="{% url 'User Profile' native_user.username %}" class="chip">
@@ -266,7 +272,9 @@
 {% else %}
     <ul class="collection with-header" >
         <li class="collection-header">
-            {% if native_user == user %}
+            {% if user.is_superuser %}
+                Add some post or approve your posts from Django Admin Dashboard.
+            {% elif native_user == user %}
                 You have'nt added any posts yet, try to add one.
             {% else %}
                 {{ native_user.first_name }}'s feed is empty. No posts to show.

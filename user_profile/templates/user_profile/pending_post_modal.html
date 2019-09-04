@@ -1,0 +1,36 @@
+{% load materializecss %}
+
+<div id="modal-pending-posts" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Verify Posts</h4>
+            <div class="row">
+            {% if native_pending_posts.count == 0 %}
+                All posts approved/rejected or you have'nt added any post yet.
+            {% else %}
+                <table class="striped">
+                    <thead>
+                        <tr>
+{#                            <th>Author</th>#}
+                            <th>Post Title</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pending_post in native_pending_posts %}
+                            <tr>
+{#                                <td>{{ pending_post.author }}</td>#}
+                                <td>{{ pending_post.title }}</td>
+                                <td>
+    {#                                       <a><i class="material-icons">check_circle</i> </a>#}
+                                    <a href="{% url 'post_detail' pending_post.slug %}">
+                                        <i class="material-icons">remove_red_eye</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+            </div>
+        </div>
+</div>

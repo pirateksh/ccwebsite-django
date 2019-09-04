@@ -13,7 +13,7 @@
 <nav class="amber" role="navigation">
     <div class="nav-wrapper container">
         {% if user.is_authenticated %}
-            <a id="logo-container" href="{% url 'User Profile' user.username%}" class="brand-logo">Hi, {{ user.first_name }}!</a>
+            <a id="logo-container" class="brand-logo">LOGO</a>
         {% else %}
             <a id="logo-container" class="brand-logo">Hi, User!</a>
         {% endif %}
@@ -22,18 +22,21 @@
 
                 {% if user.is_superuser %}
                     <li>
-                        <a class=" waves-light btn" href="/admin">Dashboard</a>
+                        <a class=" waves-light btn" href="/admin"><i class="material-icons">dashboard</i></a>
                     </li>
                 {% endif %}
                 <li>
-                    <a class=" waves-light btn" href="{% url 'Index' %}">Home</a>
+                    <a class=" waves-light btn" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
+                </li>
+                <li class="collection-item amber">
+                    <a class="btn" href="{% url "User Profile" user.username %}" ><i class="material-icons">person_pin</i></a>
                 </li>
                 <li>
                     <a class=" waves-light btn" href="{% url 'Logout' %}">Logout</a>
                 </li>
             {% else %}
                 <li>
-                    <a class=" waves-light btn" href="{% url 'Index' %}">Home</a>
+                    <a class=" waves-light btn" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
                 </li>
                 <li>
                     <a class=" waves-light btn modal-trigger" href="#modal1">Login</a>
@@ -64,11 +67,11 @@
             {% if user.is_authenticated %}
                 {% if user.is_superuser %}
                     <li>
-                        <a class=" waves-light btn" href="/admin">Dashboard</a>
+                        <a class=" waves-light btn" href="/admin"><i class="material-icons">dashboard</i></a>
                     </li>
                 {% endif %}
                 <li>
-                    <a href="{% url 'User Profile' user.username %}" class="btn">Profile</a>
+                    <a href="{% url 'User Profile' user.username %}" class="btn"><i class="material-icons">person_pin</i></a>
                 </li>
                 <li>
                     <a class=" waves-light btn" href="{% url 'Logout' %}">Logout</a>

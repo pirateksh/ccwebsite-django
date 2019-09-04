@@ -22,9 +22,15 @@
         <div class="col m6 l6">
             <ul class="collection with-header" id="user-prof-post-{{ post.pk }}" >
                 <li class="collection-header title">
-                    <h4 id="post-head-m-down" class="hide-on-med-and-down" style="font-size: 3vw">{{ post.title|safe }}</h4>
-                    <h4 id="post-head-s-down-l" class="hide-on-small-and-down hide-on-large-only" style="font-size: 4vw;">{{ post.title|safe }}</h4>
-                    <h4 id="post-head-m-up" class="hide-on-med-and-up" style="font-size: 5vw">{{ post.title|safe }}</h4>
+                    {% if post.verify_status == 1 %}
+                        <h4 id="post-head-m-down" class="hide-on-med-and-down" style="font-size: 3vw">{{ post.title }}<i class="material-icons">verified_user</i></h4>
+                        <h4 id="post-head-s-down-l" class="hide-on-small-and-down hide-on-large-only" style="font-size: 4vw;">{{ post.title }}<i class="material-icons">verified_user</i></h4>
+                        <h4 id="post-head-m-up" class="hide-on-med-and-up" style="font-size: 5vw">{{ post.title }}<i class="material-icons">verified_user</i></h4>
+                    {% elif post.verify_status == -1 %}
+                        <h4 id="post-head-m-down" class="hide-on-med-and-down" style="font-size: 3vw">{{ post.title }}</h4>
+                        <h4 id="post-head-s-down-l" class="hide-on-small-and-down hide-on-large-only" style="font-size: 4vw;">{{ post.title }}</h4>
+                        <h4 id="post-head-m-up" class="hide-on-med-and-up" style="font-size: 5vw">{{ post.title }}</h4>
+                    {% endif %}
                     <p class="row">
                         <span class="col s8 m8 l8">
                             <a href="{% url 'User Profile' author.username %}" class="chip">
@@ -256,12 +262,65 @@
                                 {% endfor %}
                             </div>
                     </li>
-            {% elif post.verify_status == -1 and user.is_superuser%}
-                    <li class="collection-item row">
-                        <div class="center">
-                            <a class="btn green">Approve<i class="material-icons">check_circle</i> </a>
-                        </div>
-                    </li>
+            {% elif post.verify_status == -1 %}
+                    {% if user.is_superuser %}
+                        <li class="collection-item row">
+                            <div class="col s6 m6 l6 center">
+                                <a class="btn green" href="{% url 'approve_post' post.slug %}"><i class="material-icons">check</i> </a>
+                            </div>
+                            <div class="col s6 m6 l6 center">
+                                <a class="btn red" href="{% url 'reject_post' post.slug %}"><i class="material-icons">clear</i> </a>
+                            </div>
+                        </li>
+                    {% elif user == post.author %}
+                        <li class="collection-item">
+                            <form action="{% url 'ajax_edit_post' %}" id="post-edit-form-{{ post.pk }}" method="post" data-pk="{{ post.pk }}">
+                                    <div class="col s12 m12 l12 center">
+                                        <a class="btn-flat like-btn light-blue white-text modal-trigger edit-btn" href="#edit-post-modal-{{ post.pk }}" data-val="{{ post.post_content }}" data-pk="{{ post.pk }}">
+                                            <i class="material-icons">edit</i>
+                                        </a>
+                                    </div>
+
+                                    {# Edit post modal #}
+
+                                    <div id="edit-post-modal-{{ post.pk }}" class="modal modal-fixed-footer">
+                                        <div class="modal-content">
+                                            <h4>Edit Post</h4>
+                                            {% csrf_token %}
+
+                                            <div class="input-field col col s6 m6">
+                                                <i class="material-icons prefix">account_circle</i>
+                                                <input type="text" name="title" maxlength="255" class=" validate validate" required id="id-title-{{ post.pk }}" value="{{ post.title }}" disabled>
+                                                <label class="" for="id_title_{{ post.pk }}">Post Title</label>
+                                            </div>
+                                            <div class="input-field col col s6 m6  ">
+                                                <i class="material-icons prefix">account_circle</i>
+                                                <select multiple id="tags-edit-{{ post.pk }}">
+                                                    {% for tag in tags %}
+                                                        {% if tag in post.tags.all %}
+                                                            <option value="{{ forloop.counter }}" selected>{{ tag }}</option>
+                                                        {% else %}
+                                                            <option value="{{ forloop.counter }}">{{ tag }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                                <label class="control-label col s6 m6 ">Post Tags</label>
+                                            </div>
+
+                                            <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
+                                            <script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+                                            <div class="django-ckeditor-widget" data-field-id="id_post_content_{{ post.pk }}" style="display: inline-block;">
+                                                <textarea cols="40" id="id_post_content_{{ post.pk }}" name="post_content" rows="10" required data-processed="0" data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;custom&quot;, &quot;height&quot;: &quot;15vh&quot;, &quot;width&quot;: false, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;resize_dir&quot;: &quot;vertical&quot;, &quot;toolbar_custom&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;CodeSnippet&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;extraPlugins&quot;: &quot;resize&quot;, &quot;filebrowserUploadUrl&quot;: &quot;/ckeditor/upload/&quot;, &quot;filebrowserBrowseUrl&quot;: &quot;/ckeditor/browse/&quot;, &quot;language&quot;: &quot;en-us&quot;}" data-external-plugin-resources="[]" data-id="id_post_content_{{ post.pk }}" data-type="ckeditortype"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn-flat green white-text" type="submit">Save</button>
+                                        </div>
+                                    </div>
+                            </form>
+                        </li>
+                    {% endif %}
+
             {% endif %}
     {#          <li class="collection-item">#}
     {#          Share to:#}

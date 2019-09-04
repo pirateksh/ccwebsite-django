@@ -29,8 +29,8 @@
             </a>
         </li>
         <li class="collection-item amber lighten-1">
-            <a class="modal-trigger btn-flat" href="#modal-verify-posts">
-                Pending Posts <span class="badge">4</span>
+            <a class="modal-trigger btn-flat" href="#modal-pending-posts">
+                Pending Posts <span class="new badge red">{{ native_pending_posts.count }}</span>
             </a>
         </li>
         <li class="collection-item amber lighten-2">
@@ -42,7 +42,7 @@
     {% if native_user == user and user.is_superuser %}
         <li class="collection-item amber lighten-1">
             <a class="modal-trigger btn-flat" href="#modal-verify-posts">
-                Verify Posts <span class="badge new">4</span>
+                Verify Posts <span class="new badge red">{{ pending_posts.count }}</span>
             </a>
         </li>
     {% endif %}

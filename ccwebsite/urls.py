@@ -6,6 +6,7 @@ from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views
+import notifications.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls, name="Admin"),
@@ -25,6 +26,8 @@ urlpatterns = [
     # Extra URLS
     # url(r'^accounts/', include('allauth.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+
+    url('^inbox/notifications/', include(notifications.urls, namespace='notifications')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

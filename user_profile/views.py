@@ -34,6 +34,7 @@ def user_profile(request, username):
     tags = Tags.objects.all()
     password_change_form = PasswordChangeForm(user=native_user)
     pending_posts = Post.objects.filter(verify_status=-1)
+    native_pending_posts = pending_posts.filter(author=native_user)
     context = {
         'profile': profile,
         'avatar_form': avatar_form,
@@ -47,6 +48,7 @@ def user_profile(request, username):
         'user_profiles': user_profiles,
         'tags': tags,
         'pending_posts': pending_posts,
+        'native_pending_posts': native_pending_posts
     }
     return render(request, 'user_profile/user_profile.html', context)
 

@@ -1,9 +1,12 @@
 {% load materializecss %}
-
+{% load static %}
 <div id="modal-verify-posts" class="modal modal-fixed-footer">
         <div class="modal-content">
             <h4>Verify Posts</h4>
             <div class="row">
+            {% if pending_posts.count == 0 %}
+                No pending posts to approve right now.
+            {% else %}
                 <table class="striped">
                     <thead>
                         <tr>
@@ -13,27 +16,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% if pending_posts.count == 0 %}
-                            No pending posts to approve right now.
-                        {% else %}
-                            {% for pending_post in pending_posts %}
-                                <tr>
-                                    <td>{{ pending_post.author }}</td>
-                                    <td>{{ pending_post.title }}</td>
-                                    <td>
-                                        <a><i class="material-icons">check_circle</i> </a>
-                                        <a href="{% url 'post_detail' pending_post.slug %}" target="_blank">
-                                            <i class="material-icons">remove_red_eye</i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        {% endif %}
+                        {% for pending_post in pending_posts %}
+                            <tr>
+                                <td>
+                                    <a class="chip" href="{% url 'User Profile' pending_post.author.username %}">
+                                    {% for user_profile in user_profiles %}
+                                        {% if user_profile.user == pending_post.author %}
+                                            {% if user_profile.avatar %}
+                                                <img src="{{ user_profile.avatar.url }}">
+                                            {% else %}
+                                                <img src="{% static 'default-profile-picture.jpg' %}">
+                                            {% endif %}
+                                                {{ pending_post.author }}
+                                        {% endif %}
+                                    {% endfor %}
+
+
+                                    </a>
+                                </td>
+                                <td>{{ pending_post.title }}</td>
+                                <td>
+{#                                        <a><i class="material-icons">check_circle</i> </a>#}
+                                    <a href="{% url 'post_detail' pending_post.slug %}">
+                                        <i class="material-icons">remove_red_eye</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
+            {% endif %}
 
             </div>
-        </div>
-        <div class="modal-footer">
         </div>
 </div>

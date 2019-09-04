@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     # 'materialize',
     # 'crispy_forms',
     # 'crispy_forms_materialize',
+    'notifications',
 ]
 
 # Default layout to use with "crispy_forms"

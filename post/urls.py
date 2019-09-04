@@ -9,5 +9,6 @@ urlpatterns = [
     path('edit/', views.ajax_edit_post, name="ajax_edit_post"),
     path('<slug:slug>/like/', views.post_like_toggle, name="like_toggle"),
     path('detail/<slug:slug>/', views.post_detail, name="post_detail"),
-    path('verify/<slug:slug>/', views.verify_post, name="verify_post"),
+    path('approve/<slug:slug>/', views.approve_post, name="approve_post"),
+    path('reject/<slug:slug>/', views.reject_post, name="reject_post"),
 ]

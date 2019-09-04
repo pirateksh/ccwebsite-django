@@ -16,6 +16,7 @@
     user_profiles - Profiles of users
     tags - All tags
     pending_posts: pending_posts not approved by admin
+    native_pending_posts: Pending posts of native user
 {% endcomment %}
 
 {% block title %}
@@ -34,7 +35,7 @@
 
             <div class="col s12 m8 l7">
                 <div class="add-post-user-profile">
-                    {% if user == native_user %}
+                    {% if user == native_user and not user.is_superuser %}
                         {% include 'user_profile/add_post.html' %}
                     {% endif %}
                 </div>
@@ -55,5 +56,6 @@
     {% include 'user_profile/change_password_modal.html' %}
     {% include 'user_profile/avatar_modal.html' %}
     {% include 'user_profile/verify_post_modal.html' %}
+    {% include 'user_profile/pending_post_modal.html' %}
 {% endblock %}
 

@@ -20,11 +20,11 @@
             {% if user.is_authenticated %}
                 {% if user.is_superuser %}
                     <li>
-                        <a class=" waves-light btn" href="/admin">Dashboard</a>
+                        <a class=" waves-light btn" href="/admin"><i class="material-icons">dashboard</i></a>
                     </li>
                 {% endif %}
                 <li>
-                    <a class="waves-light btn" href="{% url 'Index' %}">Home</a>
+                    <a class="waves-light btn" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
                 </li>
                 <li>
                     <a class=" waves-light btn" href="{% url 'Logout' %}">Logout</a>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="divider"></div>
             </li>
-            {% if user == native_user %}
+            {% if user == native_user and not user.is_superuser %}
                 <div class="row">
                     <a class='dropdown-trigger btn-large waves-light col s10 m10 offset-s1 offset-m1' href='#' data-target='dropdown1'>Edit Profile</a>
                     <ul id='dropdown1' class='dropdown-content'>
@@ -94,9 +94,12 @@
                             Verify Posts <span class="new badge amber">4</span>
                         </a>
                     </li>
+                    <li>
+                        <a class=" waves-light btn" href="/admin"><i class="material-icons">dashboard</i></a>
+                    </li>
                 {% endif %}
                 <li>
-                    <a class="btn" href="{% url 'Index' %}">Home</a>
+                    <a class="btn" href="{% url 'Index' %}"><i class="material-icons">dashboard</i></a>
                 </li>
                 <li>
                     <a class="btn" href="{% url 'Logout' %}">Logout</a>

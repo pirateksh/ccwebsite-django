@@ -56,9 +56,9 @@
             </div>
 
             <div class="col s12 m8 l7">
-
-                {% include 'home/add_post.html' %}
-
+                {% if not user.is_superuser %}
+                    {% include 'home/add_post.html' %}
+                {% endif %}
                 <div class="post-display-home">
                     {% include 'home/post_display.html' %}
                 </div>
@@ -68,15 +68,6 @@
             {# Right side Catergory Menu #}
             <div class="col s12 m2 l3 hide-on-med-and-down">
                 <ul class="collection white">
-                    {% if user.is_authenticated %}
-                        <li class="collection-item amber">
-                            <a class="btn" href="{% url "User Profile" user.username %}" ><span class="center-align">Profile</span></a>
-                        </li>
-                    {% else %}
-                        <li class="collection-item amber">
-                            <a class="btn disabled">Profile</a>
-                        </li>
-                    {% endif %}
                     <li class="collection-item amber">
                         <a class="btn-flat" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>
                     </li>

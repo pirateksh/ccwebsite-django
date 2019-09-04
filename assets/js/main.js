@@ -1,14 +1,14 @@
- $(document).ready(function() {
-        //Preloader
-        $(window).on("load", function() {
-        preloaderFadeOutTime = 500;
-        function hidePreloader() {
-        var preloader = $('.spinner-wrapper');
-        preloader.fadeOut(preloaderFadeOutTime);
-        }
-        hidePreloader();
-        });
-        });
+ // $(document).ready(function() {
+ //        //Preloader
+ //        $(window).on("load", function() {
+ //        preloaderFadeOutTime = 500;
+ //        function hidePreloader() {
+ //        var preloader = $('.spinner-wrapper');
+ //        preloader.fadeOut(preloaderFadeOutTime);
+ //        }
+ //        hidePreloader();
+ //        });
+ //        });
 
 
 
@@ -257,9 +257,9 @@ function create_post(this_) {
             // } else if (json.comingFrom === 'user-prof') {
             //     location.href =
             // }
-            location.href = successRedirectURL;
+            // location.href = successRedirectURL;
 
-            addToast(json.result);
+            addToast("Approval pending! Check status from your profile!");
         },
 
         // handle a non-successful response

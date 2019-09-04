@@ -1,13 +1,16 @@
-from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.shortcuts import render, redirect, get_object_or_404, reverse, HttpResponseRedirect
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator  # EmptyPage, PageNotAnInteger
-# from django.contrib import messages
+from django.contrib import messages
 # from django.contrib.contenttypes.models import ContentType
 # from django.views.generic import RedirectView
 from django.utils.timesince import timesince
-from comments.views import add_comment
+# from comments.views import add_comment
 from datetime import datetime
+from django.core import mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 # Imported Models
 from user_profile.models import UserProfile
@@ -17,16 +20,15 @@ from comments.models import Comment
 
 # Imported Forms
 from comments.forms import CommentForm
-# from .forms import PostForm
+from .forms import PostForm
 from home.forms import UserSignupForm
 
 
 NUMBER_OF_POSTS_PER_PAGE = 5
-HOME = '/'
 
 
 def page_maker(request, model, native_user=None, draft=False):
-    post_list = model.objects.all(native_user=native_user, draft=draft)
+    post_list = model.objects.all(native_user=native_user, draft=draft).filter(verify_status=1)
     paginator = Paginator(post_list, NUMBER_OF_POSTS_PER_PAGE)
     page = request.GET.get('page')
     return paginator.get_page(page)
@@ -46,14 +48,13 @@ def page_maker(request, model, native_user=None, draft=False):
 #             for raw_tag in raw_tags:
 #                 if raw_tag in tags:
 #                     post.tags.add(raw_tag)
-#
 #             post.save()
-#             messages.success(request, f"Post Added Successfully!")
-#             return redirect(HOME)
+#             messages.success(request, f"Success! Check Pending Posts in your profile!")
+#             return HttpResponseRedirect(reverse("Index"))
 #     else:
 #         addpostform = PostForm()
 #     form = UserSignupForm()
-#     posts = page_maker(request)
+#     posts = page_maker(request, Post)
 #     comment_form = CommentForm()
 #     context = {
 #         'form': form,
@@ -75,7 +76,6 @@ def ajax_add_post(request):
         user = request.user
         user_profile = get_object_or_404(UserProfile, user=user)
         tags_qs = Tags.objects.all()
-
         post = Post.objects.create(title=title, post_content=post_content, author=user)
 
         selected_tags = []
@@ -87,38 +87,37 @@ def ajax_add_post(request):
 
         post.save()
 
-        likes = post.likes.count()
-        if likes > 1:
-            likes_count = str(likes) + ' Like'
-        else:
-            likes_count = str(likes) + 'Likes'
+        # likes = post.likes.count()
+        # if likes > 1:
+        #     likes_count = str(likes) + ' Like'
+        # else:
+        #     likes_count = str(likes) + 'Likes'
 
-        if user_profile.avatar:
-            avatar_url = user_profile.avatar.url
-        else:
-            avatar_url = '/static/default-profile-picture.jpg'
+        # if user_profile.avatar:
+        #     avatar_url = user_profile.avatar.url
+        # else:
+        #     avatar_url = '/static/default-profile-picture.jpg'
 
         # add_comment_url = reverse(add_comment, kwargs={'post_id': post.pk})
-        like_url = reverse('like_toggle', kwargs={'slug': post.slug})
+        # like_url = reverse('like_toggle', kwargs={'slug': post.slug})
 
         response_data = {
             'result': 'Post added successfully!',
-            'postPk': post.pk,
-            'postTitle': post.title,
-            'postContent': post.post_content,
-            'created': timesince(post.published),
-            'author': post.author.username,
-            'selectedTags':  selected_tags,
-            'avatarURL': avatar_url,
-            'likes': likes,
-            'likesCountStr': likes_count,
+            # 'postPk': post.pk,
+            # 'postTitle': post.title,
+            # 'postContent': post.post_content,
+            # 'created': timesince(post.published),
+            # 'author': post.author.username,
+            # 'selectedTags':  selected_tags,
+            # 'avatarURL': avatar_url,
+            # 'likes': likes,
+            # 'likesCountStr': likes_count,
             # 'addCommentURL': add_comment_url,
-            'isPinned': post.is_pinned,
-            'likeURL': like_url,
+            # 'isPinned': post.is_pinned,
+            # 'likeURL': like_url,
         }
 
         return JsonResponse(response_data)
-        # return HttpResponse('Post added successfully JSON!')
 
 
 @login_required
@@ -142,7 +141,7 @@ def ajax_del_post(request):
         }
         return JsonResponse(response_data)
     else:
-        return redirect(HOME)
+        return HttpResponseRedirect(reverse("Index"))
 
 
 @login_required
@@ -254,8 +253,57 @@ def post_detail(request, slug):
     return render(request, 'post/post_detail.html', context)
 
 
-def verify_post(request, slug):
-    pass
+ADMIN_PROFILE = 'profile/admin/'
+
+
+@login_required
+def approve_post(request, slug):
+    if request.user.is_superuser:
+        post_qs = Post.objects.filter(slug=slug)
+        if post_qs:
+            post = post_qs.first()
+            author = post.author
+            author_profile = UserProfile.objects.get(user=author)
+            if post.verify_status == -1:
+                post.verify_status = 1
+                post.save()
+                messages.success(request, f"You have approved a post.")
+                if author_profile.is_subscribed:
+                    pass
+            else:
+                messages.error(request, f"Oops! Something went wrong. Try again!")
+        else:
+            messages.error(request, f"Oops! Something went wrong. Try again!")
+
+        return HttpResponseRedirect(reverse("User Profile", kwargs={'username': request.user.username}))
+    else:
+        messages.info(request, f"You are not authorised to complete this action!")
+    return HttpResponseRedirect(reverse("Index"))
+
+
+@login_required
+def reject_post(request, slug):
+    if request.user.is_superuser:
+        post_qs = Post.objects.filter(slug=slug)
+        if post_qs:
+            post = post_qs.first()
+            author = post.author
+            author_profile = UserProfile.objects.get(user=author)
+            if post.verify_status == -1:
+                post.verify_status = 0
+                post.save()
+                messages.success(request, f"You have rejected a post.")
+                if author_profile.is_subscribed:
+                    pass
+            else:
+                messages.error(request, f"Oops! Something went wrong. Try again!")
+        else:
+            messages.error(request, f"Oops! Something went wrong. Try again!")
+
+        return HttpResponseRedirect(reverse("User Profile", kwargs={'username': request.user.username}))
+    else:
+        messages.info(request, f"You are not authorised to complete this action!")
+    return HttpResponseRedirect(reverse("Index"))
 
 # from rest_framework.views import APIView
 # from rest_framework.response import Response
