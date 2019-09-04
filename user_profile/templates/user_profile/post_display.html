@@ -48,7 +48,8 @@
                     {% endfor %}
                 </li>
                 <li class="collection-item" id="p">
-                    {{ native_post.post_content|safe }}
+                    {{ native_post.post_content|safe|truncatewords:150 }}
+                    <a href="{% url 'post_detail' native_post.slug %}" target="_blank">Post detail.</a>
                 </li>
 
                 {% if user == native_user %}
@@ -83,7 +84,7 @@
 
                                     <div class="input-field col col s6 m6">
                                         <i class="material-icons prefix">account_circle</i>
-                                        <input type="text" name="title" maxlength="255" class=" validate validate" required id="id-title-{{ native_post.pk }}" value="{{ native_post.title }}">
+                                        <input type="text" name="title" maxlength="255" class=" validate validate" required id="id-title-{{ native_post.pk }}" value="{{ native_post.title }}" disabled>
                                         <label class="" for="id_title_{{ native_post.pk }}">Post Title</label>
                                     </div>
                                     <div class="input-field col col s6 m6  ">
@@ -136,7 +137,7 @@
                         </form>
                     </li>
 
-                {% else %}
+                {% elif user.is_authenticated %}
 
                     <li class="collection-item row" id="like-{{ native_post.pk }}">
                         <div class="col s6 m6 l6 center">
@@ -150,6 +151,12 @@
                             </a>
                         </div>
                         <div class="col s6 m6 l6 center">
+                            <a class="btn-flat comment-display-btn light-blue white-text" href="#"><i class="material-icons">comment</i></a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="collection-item row" id="like-{{ native_post.pk }}">
+                        <div class="center">
                             <a class="btn-flat comment-display-btn light-blue white-text" href="#"><i class="material-icons">comment</i></a>
                         </div>
                     </li>
@@ -268,5 +275,5 @@
     </ul>
 {% endif %}
 {# Pagination #}
-{% include 'user_profile/pagination_user_profile.html' %}
+{% include 'user_profile/pagination.html' %}
 {# Pagination Ended #}

@@ -15,9 +15,34 @@
 </head>
 {#<body style="background: url('{% static 'back2.jpg' %}') fixed no-repeat center; background-size: cover;">#}
 <body style="background: antiquewhite;">
+<!--CSS Spinner-->
+<div class="spinner-wrapper">
+<div class="spinner"></div>
+</div>
+{#    <div class="preloader-background">#}
+{#        <div class="preloader-wrapper big active">#}
+{#            <div class="spinner-layer spinner-blue-only">#}
+{#                <div class="circle-clipper left">#}
+{#                    <div class="circle"></div>#}
+{#                </div>#}
+{#                <div class="gap-patch">#}
+{#                    <div class="circle"></div>#}
+{#                </div>#}
+{#                <div class="circle-clipper right">#}
+{#                    <div class="circle"></div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
     {% block content %}
         {# Content Here #}
     {% endblock %}
+
+    <script>
+
+    </script>
+
         {% include 'scripts.html' %}
     {% block javascript %}
     

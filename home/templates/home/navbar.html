@@ -19,22 +19,29 @@
         {% endif %}
         <ul class="right hide-on-med-and-down">
             {% if user.is_authenticated %}
-            {% if user.is_superuser %}
+
+                {% if user.is_superuser %}
+                    <li>
+                        <a class=" waves-light btn" href="/admin">Dashboard</a>
+                    </li>
+                {% endif %}
                 <li>
-                    <a class=" waves-light btn" href="/admin">Dashboard</a>
+                    <a class=" waves-light btn" href="{% url 'Index' %}">Home</a>
+                </li>
+                <li>
+                    <a class=" waves-light btn" href="{% url 'Logout' %}">Logout</a>
+                </li>
+            {% else %}
+                <li>
+                    <a class=" waves-light btn" href="{% url 'Index' %}">Home</a>
+                </li>
+                <li>
+                    <a class=" waves-light btn modal-trigger" href="#modal1">Login</a>
+                </li>
+                   <li>
+                    <a class=" waves-light btn modal-trigger" href="#modal2">Signup</a>
                 </li>
             {% endif %}
-           <li>
-                <a class=" waves-light btn" href="{% url 'Logout' %}">Logout</a>
-           </li>
-        {% else %}
-        <li>
-            <a class=" waves-light btn modal-trigger" href="#modal1">Login</a>
-        </li>
-           <li>
-            <a class=" waves-light btn modal-trigger" href="#modal2">Signup</a>
-        </li>
-          {% endif %}
         </ul>
 
         {# SideNav for Mobile view #}

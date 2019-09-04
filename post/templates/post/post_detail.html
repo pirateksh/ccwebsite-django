@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+{% load materializecss %}
+{% load static %}
+{% comment %}
+    Context Variables:
+    'post': post,
+    'author': author,
+    'author_profile': author_profile,
+    'comments': comments,
+    'comment_form': comment_form,
+    'user_profiles': user_profiles,
+    'tags': tags,
+    'form': User Signup form,
+{% endcomment %}
+{% block title %}
+    Post Detail
+{% endblock %}
+{% block content %}
+    {% include 'home/navbar.html' %}
+    <div class="row">
+        <div class="col m3 l4"></div>
+        <div class="col m6 l6">
+            <ul class="collection with-header" id="user-prof-post-{{ post.pk }}" >
+                <li class="collection-header title">
+                    <h4 id="post-head-m-down" class="hide-on-med-and-down" style="font-size: 3vw">{{ post.title|safe }}</h4>
+                    <h4 id="post-head-s-down-l" class="hide-on-small-and-down hide-on-large-only" style="font-size: 4vw;">{{ post.title|safe }}</h4>
+                    <h4 id="post-head-m-up" class="hide-on-med-and-up" style="font-size: 5vw">{{ post.title|safe }}</h4>
+                    <p class="row">
+                        <span class="col s8 m8 l8">
+                            <a href="{% url 'User Profile' author.username %}" class="chip">
+                                {% if profile.avatar %}
+                                    <img src="{{ profile.avatar.url }}">
+                                {% else %}
+                                    <img src="{% static 'default-profile-picture.jpg' %}">
+                                {% endif %}
+                                <span class="hide-on-med-and-down" style="font-size: 1.2vw">{{ post.author }}</span>
+                                <span class="hide-on-small-and-down hide-on-large-only" style="font-size: 1.5vw;">{{ post.author }}</span>
+                                <span class="hide-on-med-and-up" style="font-size: 3.5vw">{{ post.author }}</span>
+                            </a>
+                        </span>
+                        <span class="col s4 m4 l4 hide-on-med-and-down" style="font-size: 1.20vw">{{ post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-small-and-down hide-on-large-only" style="font-size: 1.80vw;">{{ post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-med-and-up" style="font-size: 2.60vw">{{ post.published|timesince }} ago.</span>
+                    </p>
+                </li>
+                <li class="collection-item tag">
+                    Tags :
+                    {% for post_tag in post.tags.all %}
+                        <a class="chip">{{ post_tag }}</a>
+                    {% endfor %}
+                </li>
+                <li class="collection-item" id="p">
+                    {{ post.post_content|safe }}
+                </li>
+
+                {% if post.verify_status == 1 %}
+                    {% if user == author %}
+                        <li class="collection-item row" id="like-{{ post.pk }}">
+                            <div class="col s3 m3 l3 center">
+                                <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
+                                    {{ post.likes.count }}
+                                    {% if user in post.likes.all %}
+                                        <i class="material-icons large">thumb_down</i>
+                                    {% else %}
+                                        <i class="material-icons large">thumb_up</i>
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <div class="col s3 m3 l3 center">
+                                <a class="btn-flat comment-display-btn light-blue white-text" href="#"><i class="material-icons">comment</i></a>
+                            </div>
+
+                            <form action="{% url 'ajax_edit_post' %}" id="post-edit-form-{{ post.pk }}" method="post" data-pk="{{ post.pk }}">
+                                <div class="col s3 m3 l3 center">
+                                    <a class="btn-flat like-btn light-blue white-text modal-trigger edit-btn" href="#edit-post-modal-{{ post.pk }}" data-val="{{ post.post_content }}" data-pk="{{ post.pk }}">
+                                        <i class="material-icons">edit</i>
+                                    </a>
+                                </div>
+
+                                {# Edit post modal #}
+
+                                <div id="edit-post-modal-{{ post.pk }}" class="modal modal-fixed-footer">
+                                    <div class="modal-content">
+                                        <h4>Edit Post</h4>
+                                        {% csrf_token %}
+
+                                        <div class="input-field col col s6 m6">
+                                            <i class="material-icons prefix">account_circle</i>
+                                            <input type="text" name="title" maxlength="255" class=" validate validate" required id="id-title-{{ post.pk }}" value="{{ post.title }}" disabled>
+                                            <label class="" for="id_title_{{ post.pk }}">Post Title</label>
+                                        </div>
+                                        <div class="input-field col col s6 m6  ">
+                                            <i class="material-icons prefix">account_circle</i>
+                                            <select multiple id="tags-edit-{{ post.pk }}">
+                                                {% for tag in tags %}
+                                                    {% if tag in post.tags.all %}
+                                                        <option value="{{ forloop.counter }}" selected>{{ tag }}</option>
+                                                    {% else %}
+                                                        <option value="{{ forloop.counter }}">{{ tag }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                            <label class="control-label col s6 m6 ">Post Tags</label>
+                                        </div>
+
+                                        <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
+                                        <script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+                                        <div class="django-ckeditor-widget" data-field-id="id_post_content_{{ post.pk }}" style="display: inline-block;">
+                                            <textarea cols="40" id="id_post_content_{{ post.pk }}" name="post_content" rows="10" required data-processed="0" data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;custom&quot;, &quot;height&quot;: &quot;15vh&quot;, &quot;width&quot;: false, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;resize_dir&quot;: &quot;vertical&quot;, &quot;toolbar_custom&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;CodeSnippet&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;extraPlugins&quot;: &quot;resize&quot;, &quot;filebrowserUploadUrl&quot;: &quot;/ckeditor/upload/&quot;, &quot;filebrowserBrowseUrl&quot;: &quot;/ckeditor/browse/&quot;, &quot;language&quot;: &quot;en-us&quot;}" data-external-plugin-resources="[]" data-id="id_post_content_{{ post.pk }}" data-type="ckeditortype"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn-flat green white-text" type="submit">Save</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <form action="{% url 'ajax_delete_post' %}" class="post-del-form" method="get" data-from="user_prof" data-pk="{{ post.pk }}">
+                                <div class="col s3 m3 l3 center">
+                                    <a class="btn-flat red white-text modal-trigger" href="#delete-post-modal-{{ post.pk }}"><i class="material-icons">delete</i></a>
+                                </div>
+
+                                {# Delete post modal #}
+
+                                <div id="delete-post-modal-{{ post.pk }}" class="modal modal-fixed-footer">
+                                    <div class="modal-content">
+                                        <h4>Delete Post</h4>
+                                        <p>Do you really want to delete this? There is no going back...</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn-flat post-del-btn-no green white-text" type="submit" data-pk="{{ post.pk }}">
+                                            No
+                                        </button>
+                                        <button class="btn-flat red white-text" type="submit">
+                                            Yes
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+
+                    {% elif user.is_authenticated %}
+
+                        <li class="collection-item row" id="like-{{ post.pk }}">
+                            <div class="col s6 m6 l6 center">
+                                <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
+                                    {{ post.likes.count }}
+                                    {% if user in post.likes.all %}
+                                        <i class="material-icons large">thumb_down</i>
+                                    {% else %}
+                                        <i class="material-icons large">thumb_up</i>
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <div class="col s6 m6 l6 center">
+                                <a class="btn-flat comment-display-btn light-blue white-text" href="#"><i class="material-icons">comment</i></a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="collection-item row" id="like-{{ post.pk }}">
+                            <div class="center">
+                                <a class="btn-flat comment-display-btn light-blue white-text" href="#"><i class="material-icons">comment</i></a>
+                            </div>
+                        </li>
+                    {% endif %}
+
+                    <li class="collection-item comment-display" > {# style="display: none;"> #}
+                            {% if user.is_authenticated %}
+                                <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" data-type="comment">
+                                    {% csrf_token %}
+                                    <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
+                                    <script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+                                    <div class="django-ckeditor-widget" data-field-id="id_comment_{{ post.pk }}" style="display: inline-block;">
+                                        <textarea cols="40" id="id_comment_{{ post.pk }}" name="post_content" rows="10" required data-processed="0" data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;custom&quot;, &quot;height&quot;: &quot;15vh&quot;, &quot;width&quot;: false, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;resize_dir&quot;: &quot;vertical&quot;, &quot;toolbar_custom&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;CodeSnippet&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;extraPlugins&quot;: &quot;resize&quot;, &quot;filebrowserUploadUrl&quot;: &quot;/ckeditor/upload/&quot;, &quot;filebrowserBrowseUrl&quot;: &quot;/ckeditor/browse/&quot;, &quot;language&quot;: &quot;en-us&quot;}" data-external-plugin-resources="[]" data-id="id_comment_{{ post.pk }}" data-type="ckeditortype"></textarea>
+                                    </div>
+    {#                                {{ comment_form.comment_text|materializecss }}#}
+                                    <button class="btn waves-light" type="submit" name="action">Post Comment
+                                        <i class="material-icons right">send</i>
+                                    </button>
+                                </form>
+                            {% endif %}
+                            <div id="comment-{{ post.pk }}">
+                                {% for comment in comments %}
+                                    {% if comment.post.id == post.id %}
+
+                                            <blockquote>
+                                            {{ comment.comment_text|safe }}
+                                                <footer>
+                                                via -
+                                                    <a class="chip" href="{% url 'User Profile' comment.user.username %} ">
+                                                        {% for user_profile in user_profiles %}
+                                                            {% if user_profile.user == comment.user %}
+                                                                {% if user_profile.avatar %}
+                                                                    <img src="{{ user_profile.avatar.url }}">
+                                                                {% else %}
+                                                                    <img src="{% static 'default-profile-picture.jpg' %}">
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        {{ comment.user }}
+                                                    </a>
+                                                        | {{ comment.timestamp|timesince }} ago |
+                                                        {% if comment.children.count > 1 %}
+                                                            {{ comment.children.count }} Replies |
+                                                        {% elif comment.children.count == 1 %}
+                                                            {{ comment.children.count }} Reply |
+                                                        {% endif %}
+                                                        <a class="comment-reply-btn" href="#">Reply</a>
+                                                </footer>
+
+                                                <div class="comment-reply" id="reply={{ post.pk }}-{{ comment.pk }}" style="display: none;">
+                                                    {% for child_comment in comment.children %}
+                                                            <blockquote>
+                                                            {{ child_comment.comment_text|safe }}
+                                                                <footer>
+                                                                via -
+                                                                    <a class="chip" href="{% url 'User Profile' child_comment.user.username %} ">
+                                                                        {% for user_profile in user_profiles %}
+                                                                            {% if user_profile.user == child_comment.user %}
+                                                                                {% if user_profile.avatar %}
+                                                                                    <img src="{{ user_profile.avatar.url }}">
+                                                                                {% else %}
+                                                                                    <img src="{% static 'default-profile-picture.jpg' %}">
+                                                                                {% endif %}
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                        {{ child_comment.user }}
+                                                                    </a>
+                                                                    <span id="comment-timestamp" style="color: #0f74a8;">
+                                                                        | {{ child_comment.timestamp|timesince }} ago
+                                                                    </span>
+                                                                </footer>
+                                                            </blockquote>
+                                                            <div class="divider"></div>
+                                                    {% endfor %}
+                                                    {% if user.is_authenticated %}
+                                                        <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" comment-pk="{{ comment.pk }}" data-type="reply">
+                                                            {% csrf_token %}
+                                                            <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
+                                                            <script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+                                                            <div class="django-ckeditor-widget" data-field-id="id_comment_reply_{{ post.pk }}_{{ comment.pk }}" style="display: inline-block;">
+                                                                <textarea cols="40" id="id_comment_reply_{{ post.pk }}_{{ comment.pk }}" name="post_content" rows="10" required data-processed="0" data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;toolbar&quot;: &quot;custom&quot;, &quot;height&quot;: &quot;15vh&quot;, &quot;width&quot;: false, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;resize_dir&quot;: &quot;vertical&quot;, &quot;toolbar_custom&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;CodeSnippet&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;], [&quot;Source&quot;]], &quot;extraPlugins&quot;: &quot;resize&quot;, &quot;filebrowserUploadUrl&quot;: &quot;/ckeditor/upload/&quot;, &quot;filebrowserBrowseUrl&quot;: &quot;/ckeditor/browse/&quot;, &quot;language&quot;: &quot;en-us&quot;}" data-external-plugin-resources="[]" data-id="id_comment_reply_{{ post.pk }}_{{ comment.pk }}" data-type="ckeditortype"></textarea>
+                                                            </div>
+        {#                                                    {{ comment_form.comment_text|materializecss }}#}
+                                                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                                                            <button class="btn waves-light" type="submit" name="action">Reply
+                                                                <i class="material-icons right">send</i>
+                                                            </button>
+                                                        </form>
+                                                    {% endif %}
+                                                </div>
+                                            </blockquote>
+
+                                        <div class="divider"></div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                    </li>
+            {% elif post.verify_status == -1 and user.is_superuser%}
+                    <li class="collection-item row">
+                        <div class="center">
+                            <a class="btn green">Approve<i class="material-icons">check_circle</i> </a>
+                        </div>
+                    </li>
+            {% endif %}
+    {#          <li class="collection-item">#}
+    {#          Share to:#}
+    {#          <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>#}
+    {#          </li>#}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+

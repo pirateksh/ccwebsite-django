@@ -56,7 +56,8 @@
     {#                </div>#}
 
                     <div class="expanded-content">
-                        {{ post.post_content|safe }}
+                        {{ post.post_content|safe|truncatewords:150 }}
+                        <a href="{% url 'post_detail' post.slug %}" target="_blank">Post detail.</a>
                     </div>
                 </li>
 
@@ -103,7 +104,7 @@
                         </form>
 
 
-                    {% else %}
+                    {% elif user.is_authenticated %}
                         <div class="col s6 m6 l6 center">
                             <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
                                 {{ post.likes.count }}
@@ -115,6 +116,12 @@
                             </a>
                         </div>
                         <div class="col s6 m6 l6 center">
+                            <a class="btn-flat comment-display-btn light-blue white-text" href="#">
+                                <i class="material-icons large">comment</i>
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="center">
                             <a class="btn-flat comment-display-btn light-blue white-text" href="#">
                                 <i class="material-icons large">comment</i>
                             </a>
@@ -266,7 +273,8 @@
     {#                </div>#}
 
                     <div class="expanded-content">
-                        {{ post.post_content|safe }}
+                        {{ post.post_content|safe|truncatewords:150 }}
+                        <a href="{% url 'post_detail' post.slug %}" target="_blank">Post detail.</a>
     {#                    <a class="read-less-btn" href="#">Show less</a>#}
                     </div>
                 </li>
@@ -314,7 +322,7 @@
                         </form>
 
 
-                    {% else %}
+                    {% elif user.is_authenticated %}
                         <div class="col s6 m6 l6 center">
                             <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
                                 {{ post.likes.count }}
@@ -327,6 +335,12 @@
                             </a>
                         </div>
                         <div class="col s6 m6 l6 center">
+                            <a class="btn-flat comment-display-btn light-blue white-text" href="#">
+                                <i class="material-icons large">comment</i>
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="center">
                             <a class="btn-flat comment-display-btn light-blue white-text" href="#">
                                 <i class="material-icons large">comment</i>
                             </a>
@@ -444,5 +458,5 @@
 
 {% endif %}
 {# Pagination #}
-{% include 'home/pagination_home.html' %}
+{% include 'home/pagination.html' %}
 {# Pagination Ended #}

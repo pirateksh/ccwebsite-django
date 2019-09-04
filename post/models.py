@@ -66,6 +66,9 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tags, verbose_name='Post Tags', blank=True)
     slug = models.SlugField(default='', blank=True)
 
+    # Is verified or not
+    verify_status = models.IntegerField(default=-1, verbose_name='Is verified')
+
     # Initialising post manager
     objects = PostManager()
 

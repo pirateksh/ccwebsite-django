@@ -12,7 +12,7 @@
         </div>
     </li>
     <div class="divider"></div>
-    {% if native_user == user %}
+    {% if native_user == user and not user.is_superuser %}
         <li class="collection-item amber lighten-1">
             <a class="modal-trigger btn-flat" href="#modal">
                 Add Categories
@@ -28,9 +28,21 @@
                 Change Password
             </a>
         </li>
+        <li class="collection-item amber lighten-1">
+            <a class="modal-trigger btn-flat" href="#modal-verify-posts">
+                Pending Posts <span class="badge">4</span>
+            </a>
+        </li>
         <li class="collection-item amber lighten-2">
             <a class="btn-flat" href="{% url 'Drafts' user.username %}" disabled>
                 Drafts
+            </a>
+        </li>
+    {% endif %}
+    {% if native_user == user and user.is_superuser %}
+        <li class="collection-item amber lighten-1">
+            <a class="modal-trigger btn-flat" href="#modal-verify-posts">
+                Verify Posts <span class="badge new">4</span>
             </a>
         </li>
     {% endif %}

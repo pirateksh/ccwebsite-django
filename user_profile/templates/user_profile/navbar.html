@@ -18,6 +18,11 @@
 {#        {% endif %}#}
         <ul class="right hide-on-med-and-down">
             {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                    <li>
+                        <a class=" waves-light btn" href="/admin">Dashboard</a>
+                    </li>
+                {% endif %}
                 <li>
                     <a class="waves-light btn" href="{% url 'Index' %}">Home</a>
                 </li>
@@ -83,6 +88,13 @@
                 </li>
             {% endif %}
             {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                    <li class="collection-item">
+                        <a class="modal-trigger btn" href="#modal-verify-posts">
+                            Verify Posts <span class="new badge amber">4</span>
+                        </a>
+                    </li>
+                {% endif %}
                 <li>
                     <a class="btn" href="{% url 'Index' %}">Home</a>
                 </li>
@@ -101,6 +113,7 @@
                 </li>
 
             {% endif %}
+
         </ul>
         <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 

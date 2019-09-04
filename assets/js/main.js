@@ -1,3 +1,18 @@
+ $(document).ready(function() {
+        //Preloader
+        $(window).on("load", function() {
+        preloaderFadeOutTime = 500;
+        function hidePreloader() {
+        var preloader = $('.spinner-wrapper');
+        preloader.fadeOut(preloaderFadeOutTime);
+        }
+        hidePreloader();
+        });
+        });
+
+
+
+
 $(function() {
 
     // This function gets cookie with a given name
@@ -68,6 +83,7 @@ function create_post(this_) {
     var url_ = this_.attr('action');
     var title = $('#id_title');
     var postContent = CKEDITOR.instances['id_post_content'].getData();
+    postContent = $.trim(postContent);
     var selected = $('select[name="tags"] :selected');
     var successRedirectURL = this_.attr('data-success');
     $.ajax({
@@ -591,6 +607,7 @@ $('.comment-add-form').submit(function (event) {
    } else if(commentType === 'reply') {
        commentContent = CKEDITOR.instances['id_comment_reply_' + postPK + '_' + commentPK].getData();
    }
+   commentContent = $.trim(commentContent);
    //console.log(commentContent);
 
    $.ajax({
@@ -667,3 +684,13 @@ $('.comment-add-form').submit(function (event) {
        }
    })
 });
+
+// Preloader
+
+// document.addEventListener("DOMContentLoaded", function(){
+// 	$('.preloader-background').delay(1700).fadeOut('slow');
+//
+// 	$(' .preloader-wrapper')
+// 		.delay(1700)
+// 		.fadeOut();
+// });

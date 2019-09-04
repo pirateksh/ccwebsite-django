@@ -12,12 +12,13 @@ from datetime import datetime
 # Imported Models
 from user_profile.models import UserProfile
 from .models import Post, Tags
+from comments.models import Comment
 # from comments.models import Comment
 
 # Imported Forms
-# from comments.forms import CommentForm
+from comments.forms import CommentForm
 # from .forms import PostForm
-# from home.forms import UserSignupForm
+from home.forms import UserSignupForm
 
 
 NUMBER_OF_POSTS_PER_PAGE = 5
@@ -97,7 +98,7 @@ def ajax_add_post(request):
         else:
             avatar_url = '/static/default-profile-picture.jpg'
 
-        add_comment_url = reverse(add_comment, kwargs={'post_id': post.pk})
+        # add_comment_url = reverse(add_comment, kwargs={'post_id': post.pk})
         like_url = reverse('like_toggle', kwargs={'slug': post.slug})
 
         response_data = {
@@ -111,7 +112,7 @@ def ajax_add_post(request):
             'avatarURL': avatar_url,
             'likes': likes,
             'likesCountStr': likes_count,
-            'addCommentURL': add_comment_url,
+            # 'addCommentURL': add_comment_url,
             'isPinned': post.is_pinned,
             'likeURL': like_url,
         }
@@ -193,6 +194,7 @@ def ajax_edit_post(request):
         return JsonResponse(response_data)
 
 
+@login_required
 def post_like_toggle(request, slug):
     post_qs = Post.objects.filter(slug=slug)
     user = request.user
@@ -229,6 +231,31 @@ def post_like_toggle(request, slug):
 
     return JsonResponse(response_data)
 
+
+def post_detail(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    author = post.author
+    author_profile = get_object_or_404(UserProfile, user=author)
+    user_profiles = UserProfile.objects.all()
+    comments = Comment.objects.all()
+    comment_form = CommentForm()
+    form = UserSignupForm()
+    tags = Tags.objects.all()
+    context = {
+        'post': post,
+        'author': author,
+        'author_profile': author_profile,
+        'comments': comments,
+        'comment_form': comment_form,
+        'user_profiles': user_profiles,
+        'tags': tags,
+        'form': form,
+    }
+    return render(request, 'post/post_detail.html', context)
+
+
+def verify_post(request, slug):
+    pass
 
 # from rest_framework.views import APIView
 # from rest_framework.response import Response

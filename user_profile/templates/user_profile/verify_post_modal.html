@@ -1,0 +1,39 @@
+{% load materializecss %}
+
+<div id="modal-verify-posts" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Verify Posts</h4>
+            <div class="row">
+                <table class="striped">
+                    <thead>
+                        <tr>
+                            <th>Author</th>
+                            <th>Post Title</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if pending_posts.count == 0 %}
+                            No pending posts to approve right now.
+                        {% else %}
+                            {% for pending_post in pending_posts %}
+                                <tr>
+                                    <td>{{ pending_post.author }}</td>
+                                    <td>{{ pending_post.title }}</td>
+                                    <td>
+                                        <a><i class="material-icons">check_circle</i> </a>
+                                        <a href="{% url 'post_detail' pending_post.slug %}" target="_blank">
+                                            <i class="material-icons">remove_red_eye</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+        </div>
+</div>

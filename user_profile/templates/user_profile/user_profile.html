@@ -15,6 +15,7 @@
     comment_form - Comment Form
     user_profiles - Profiles of users
     tags - All tags
+    pending_posts: pending_posts not approved by admin
 {% endcomment %}
 
 {% block title %}
@@ -23,22 +24,22 @@
 
 {% block content %}
 
-    {% include 'user_profile/navbar_user_prof.html' %}
+    {% include 'user_profile/navbar.html' %}
     <div class="row">
 
             {# Left side Catergory Menu #}
             <div class="col m4 l3 hide-on-small-and-down">
-                {% include 'user_profile/left_side_bar_user_profile.html' %}
+                {% include 'user_profile/left_side_bar.html' %}
             </div>
 
             <div class="col s12 m8 l7">
                 <div class="add-post-user-profile">
                     {% if user == native_user %}
-                        {% include 'user_profile/add_post_user_prof.html' %}
+                        {% include 'user_profile/add_post.html' %}
                     {% endif %}
                 </div>
                 <div class=" post-display-user-profile">
-                    {% include 'user_profile/post_display_user_profile.html' %}
+                    {% include 'user_profile/post_display.html' %}
                 </div>
             </div>
 
@@ -53,5 +54,6 @@
 
     {% include 'user_profile/change_password_modal.html' %}
     {% include 'user_profile/avatar_modal.html' %}
+    {% include 'user_profile/verify_post_modal.html' %}
 {% endblock %}
 
