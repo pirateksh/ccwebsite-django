@@ -7,6 +7,7 @@
     form: User Signup Form
 {% endcomment %}
 {% load static %}
+{% load notifications_tags %}
 <nav class="amber lighten-1" role="navigation">
     <div class="nav-wrapper container">
 {#        {% if user.is_authenticated %}#}
@@ -18,6 +19,11 @@
 {#        {% endif %}#}
         <ul class="right hide-on-med-and-down">
             {% if user.is_authenticated %}
+                <li>
+
+                    <a class="btn live_notify_badge">{% live_notify_badge %}<i class="material-icons">notifications</i></a>
+
+                </li>
                 {% if user.is_superuser %}
                     <li>
                         <a class=" waves-light btn" href="/admin"><i class="material-icons">dashboard</i></a>
@@ -27,7 +33,7 @@
                     <a class="waves-light btn" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
                 </li>
                 <li>
-                    <a class=" waves-light btn" href="{% url 'Logout' %}">Logout</a>
+                    <a class=" waves-light btn red" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
                 </li>
             {% else %}
                 <li>
@@ -102,7 +108,7 @@
                     <a class="btn" href="{% url 'Index' %}"><i class="material-icons">dashboard</i></a>
                 </li>
                 <li>
-                    <a class="btn" href="{% url 'Logout' %}">Logout</a>
+                    <a class="btn red" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
                 </li>
 
             {% else %}

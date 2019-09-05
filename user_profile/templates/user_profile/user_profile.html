@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load materializecss %}
 {% load static %}
+{% load notifications_tags %}
 {% comment %}
     Context vars:
     profile: profile of native user
@@ -45,11 +46,17 @@
             </div>
 
             <div class="col m4 l2 hide-on-med-and-down">
-                <ul class="collection">
-                    <li class="collection-item amber">
-                        <a class="btn-flat" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>
-                    </li>
-                </ul>
+{#                <ul class="collection">#}
+{#                    <li class="collection-item amber">#}
+{#                        <a class="btn-flat" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        #}
+{#                    </li>#}
+{#                </ul>#}
+                {% live_notify_list %}
+                            <!-- Dropdown Trigger -->
+
             </div>
     </div>
 

@@ -3,14 +3,17 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator  # EmptyPage, PageNotAnInteger
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 # from django.contrib.contenttypes.models import ContentType
 # from django.views.generic import RedirectView
 from django.utils.timesince import timesince
-# from comments.views import add_comment
 from datetime import datetime
 from django.core import mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+
+# 3rd Party imports
+from notifications.signals import notify
 
 # Imported Models
 from user_profile.models import UserProfile
@@ -20,7 +23,7 @@ from comments.models import Comment
 
 # Imported Forms
 from comments.forms import CommentForm
-from .forms import PostForm
+# from .forms import PostForm
 from home.forms import UserSignupForm
 
 
@@ -66,6 +69,9 @@ def page_maker(request, model, native_user=None, draft=False):
 #     return render(request, 'home/index.html', context)
 
 
+User = get_user_model()
+
+
 @login_required
 def ajax_add_post(request):
     if request.method == "POST":
@@ -100,6 +106,10 @@ def ajax_add_post(request):
 
         # add_comment_url = reverse(add_comment, kwargs={'post_id': post.pk})
         # like_url = reverse('like_toggle', kwargs={'slug': post.slug})
+
+        admin = User.objects.get(username="admin")
+        # Notifications
+        notify.send(user, recipient=admin, verb='A new post to verify.')
 
         response_data = {
             'result': 'Post added successfully!',
@@ -253,9 +263,6 @@ def post_detail(request, slug):
     return render(request, 'post/post_detail.html', context)
 
 
-ADMIN_PROFILE = 'profile/admin/'
-
-
 @login_required
 def approve_post(request, slug):
     if request.user.is_superuser:
@@ -267,6 +274,7 @@ def approve_post(request, slug):
             if post.verify_status == -1:
                 post.verify_status = 1
                 post.save()
+                notify.send(request.user, recipient=author, verb='Your post has been approved.')
                 messages.success(request, f"You have approved a post.")
                 if author_profile.is_subscribed:
                     pass
@@ -292,6 +300,7 @@ def reject_post(request, slug):
             if post.verify_status == -1:
                 post.verify_status = 0
                 post.save()
+                notify.send(request.user, recipient=author, verb='Your post has been rejected.')
                 messages.success(request, f"You have rejected a post.")
                 if author_profile.is_subscribed:
                     pass
