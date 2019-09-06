@@ -22,10 +22,27 @@
 {#<script src="{% static 'Bootstrap/js/bootstrap.js' %}"></script>#}
 
 
+
+
+
+<script>
+     function my_special_notification_callback(data) {
+    // for (var i=0; i < data.unread_list.length; i++) {
+    //     msg = data.unread_list[i];
+    //     console.log(msg.actor);
+    // }
+     {#console.log(data);#}
+}
+</script>
 <script src="{% static 'notifications/notify.js' %}" type="text/javascript"></script>
-{% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' %}
+{#{% register_notify_callbacks callbacks='my_special_notification_callback, fill_notification_badge' %}#}
+{% register_notify_callbacks callbacks='fill_notification_list, fill_notification_badge' %}
+
 
 <script src="{% static 'js/main.js' %}"></script>
+
+
+
 
 <script>M.AutoInit();</script>
 

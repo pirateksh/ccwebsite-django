@@ -30,11 +30,11 @@
     <div class="row">
 
             {# Left side Catergory Menu #}
-            <div class="col m4 l3 hide-on-small-and-down">
+            <div class="col m4 l3 hide-on-med-and-down">
                 {% include 'user_profile/left_side_bar.html' %}
             </div>
 
-            <div class="col s12 m8 l7">
+            <div class="col s12 m8 l6">
                 <div class="add-post-user-profile">
                     {% if user == native_user and not user.is_superuser %}
                         {% include 'user_profile/add_post.html' %}
@@ -45,18 +45,8 @@
                 </div>
             </div>
 
-            <div class="col m4 l2 hide-on-med-and-down">
-{#                <ul class="collection">#}
-{#                    <li class="collection-item amber">#}
-{#                        <a class="btn-flat" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>#}
-{#                    </li>#}
-{#                    <li>#}
-{#                        #}
-{#                    </li>#}
-{#                </ul>#}
-                {% live_notify_list %}
-                            <!-- Dropdown Trigger -->
-
+            <div class="col m4 l3 hide-on-small-and-down">
+                {% include 'user_profile/right_side_bar.html' %}
             </div>
     </div>
 

@@ -1,0 +1,47 @@
+{% load notifications_tags %}
+
+<ul class="collection">
+{#    <li class="collection-item amber">#}
+{#        <a class="btn-flat" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>#}
+{#        #}
+{#    </li>#}
+    <li class="collection-header amber center"><h4>Notifications</h4></li>
+{#    <li class="collection-item amber">{% notifications_unread %}</li>#}
+    {% live_notify_list as unread_list %}
+{#    {% for notif in list %}#}
+        <li class="collection-item amber">
+            <blockquote>{{ unread_list }}</blockquote>
+        </li>
+{#    {% endfor %}#}
+</ul>
+
+{% comment %}
+Object
+    unread_count: 2
+    unread_list: Array(2)
+        0:
+            action_object_content_type: null
+            action_object_object_id: null
+            actor: "pirate_ksh"
+            actor_content_type: 8
+            actor_object_id: "2"
+            data: null
+            deleted: false
+            description: null
+            emailed: false
+            id: 2
+            level: "info"
+            public: true
+            recipient: 1
+            slug: 110911
+            target_content_type: null
+            target_object_id: null
+            timestamp: "2019-09-05T18:52:30.025Z"
+            unread: true
+            verb: "A new post to verify."
+            __proto__: Object
+        1: {id: 1, level: "info", recipient: 1, unread: true, actor_content_type: 8, …}
+        length: 2
+        __proto__: Array(0)
+    __proto__: Object
+{% endcomment %}

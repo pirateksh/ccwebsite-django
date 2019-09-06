@@ -60,7 +60,7 @@
 {#                {% endfor %}#}
 {#            </ul>#}
             <li>
-                <div class="user-view">
+                <div class="user-view amber lighten-3">
                     {% if profile.avatar %}
                         <a><img class="circle materialboxed" src="{{ profile.avatar.url }}"></a>
                     {% else %}
@@ -68,48 +68,62 @@
                     {% endif %}
                     <a><span class="name">{{ native_user.first_name }} {{ native_user.last_name }}</span></a>
                     <a><span class="email">{{ native_user.email }}</span></a>
+                    {% if user.is_superuser %}
+                        <div class="row">
+                            <div class="col s4 m4 l4 center">
+                                <a class="btn small" href="/admin"><i class="material-icons">dashboard</i></a>
+                            </div>
+                            <div class="col s4 m4 l4 center">
+                                <a class="btn small" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
+                            </div>
+                            <div class="col s4 m4 l4 center">
+                                <a class="btn small red" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
+                            </div>
+                        </div>
+                    {% elif user.is_authenticated %}
+                        <div class="row">
+                            <div class="col s6 m6 l6 center">
+                                <a class="btn small" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
+                            </div>
+                            <div class="col s6 m6 l6 center">
+                                <a class="btn small red" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
-                <div class="divider"></div>
             </li>
-            {% if user == native_user and not user.is_superuser %}
-                <div class="row">
-                    <a class='dropdown-trigger btn-large waves-light col s10 m10 offset-s1 offset-m1' href='#' data-target='dropdown1'>Edit Profile</a>
-                    <ul id='dropdown1' class='dropdown-content'>
-                        <li class="collection-item amber lighten-1">
-                            <a class="modal-trigger btn-flat" href="#modal1">Add Categories</a>
-                        </li>
-                        <li class="divider" tabindex="-1"></li>
-                        <li class="collection-item amber lighten-1">
-                            <a class="modal-trigger btn-flat" href="#modal-avatar">Add/Change Avatar</a>
-                        </li>
-                        <li class="divider" tabindex="-1"></li>
-                        <li class="collection-item amber lighten-2">
-                            <a class="modal-trigger btn-flat" href="#modal-change-user-password">Change Password</a>
-                        </li>
-                        <li class="divider" tabindex="-1"></li>
-                    </ul>
-                </div>
-                <li>
-                    <a class="btn" href="{% url 'Drafts' user.username %}">Drafts</a>
-                </li>
-            {% endif %}
             {% if user.is_authenticated %}
                 {% if user.is_superuser %}
                     <li class="collection-item">
-                        <a class="modal-trigger btn" href="#modal-verify-posts">
-                            Verify Posts <span class="new badge amber">4</span>
-                        </a>
+                        <div class="center">
+                            <a class="modal-trigger btn" href="#modal-verify-posts">
+                                Verify Posts <span class="new badge amber">4</span>
+                            </a>
+                        </div>
                     </li>
+                {% else %}
+                    <div class="row">
+                        <a class='dropdown-trigger btn-large waves-light col s10 m10 offset-s1 offset-m1' href='#' data-target='dropdown_edit'>Edit Profile</a>
+                        <ul id='dropdown_edit' class='dropdown-content'>
+                            <li class="collection-item amber lighten-1">
+                                <a class="modal-trigger btn-flat" href="#modal1">Add Categories</a>
+                            </li>
+                            <li class="divider" tabindex="-1"></li>
+                            <li class="collection-item amber lighten-1">
+                                <a class="modal-trigger btn-flat" href="#modal-avatar">Add/Change Avatar</a>
+                            </li>
+                            <li class="divider" tabindex="-1"></li>
+                            <li class="collection-item amber lighten-2">
+                                <a class="modal-trigger btn-flat" href="#modal-change-user-password">Change Password</a>
+                            </li>
+                            <li class="divider" tabindex="-1"></li>
+                        </ul>
+                    </div>
                     <li>
-                        <a class=" waves-light btn" href="/admin"><i class="material-icons">dashboard</i></a>
+                        <a class="btn" href="{% url 'Drafts' user.username %}">Drafts</a>
                     </li>
                 {% endif %}
-                <li>
-                    <a class="btn" href="{% url 'Index' %}"><i class="material-icons">dashboard</i></a>
-                </li>
-                <li>
-                    <a class="btn red" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
-                </li>
+
 
             {% else %}
 
