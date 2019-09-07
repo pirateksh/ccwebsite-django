@@ -1,0 +1,81 @@
+{
+    "uid": "org.forgejs.gooeymenu",
+    "name": "Gooey Menu",
+    "slug": "gooey",
+    "version": "1.1.0",
+    "versionName": "Gooey Menu 1.1.0",
+    "description": "A simple Gooey menu",
+
+    "author":
+    {
+        "name": "GoPro",
+        "website": "https://forgejs.org"
+    },
+
+    "licence": "Apache 2",
+
+    "viewer":
+    {
+        "min": "0.9.0",
+        "max": "0.9.5"
+    },
+
+    "options":
+    {
+        "top": null,
+        "left": null,
+        "right": null,
+        "bottom": null,
+
+        "width": 300,
+        "height": 320,
+
+        "items": [
+        {
+            "id": "my-item",
+            "title": "gooeymenu-item-0",
+            "click": {
+                "action": "scene",
+                "target": "next"
+            }
+        }]
+    },
+
+    "i18n":
+    {
+        "locales":
+        [
+            {
+                "uid": "fr-FR",
+                "name": "French",
+                "files":
+                [
+                    {
+                        "key": "org.forgejs.gooeymenu.fr-FR",
+                        "url": "i18n/fr-FR/locale.json"
+                    }
+                ]
+            },
+
+            {
+                "uid": "en-US",
+                "name": "English",
+                "files":
+                [
+                    {
+                        "key": "org.forgejs.gooeymenu.en-US",
+                        "url": "i18n/en-US/locale.json"
+                    }
+                ]
+            }
+        ]
+    },
+
+    "sources":
+    [
+        "src/style.css",
+        "src/GooeyMenu.js"
+    ],
+
+    "constructor": "ForgePlugins.GooeyMenu"
+}

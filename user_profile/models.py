@@ -11,8 +11,9 @@ def user_directory_path(instance, filename):
 
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = ProcessedImageField(
+        default='default.png',
         upload_to=user_directory_path,
         processors=[ResizeToFill(100, 100)],
         format='JPEG',

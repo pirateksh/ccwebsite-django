@@ -1,0 +1,228 @@
+{
+    "story":
+    {
+        "uid": "hotspots-story",
+        "name": "Hotspots Story",
+        "slug": "hotspots-story",
+        "description": "This is sample of hotspots",
+        "default": "scene-0",
+
+        "scenes":
+        [
+            {
+                "uid": "scene-0",
+                "name": "First scene",
+                "slug": "first-scene",
+                "description": "This is the first and only scene",
+
+                "media":
+                {
+                    "uid": "media-0",
+                    "type": "image",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "url": "https://cdn.forgejs.org/samples/common/panos/01-forest.jpg"
+                    }
+                },
+
+                "camera":
+                {
+                    "fov":
+                    {
+                        "min": 30,
+                        "max": 120
+                    },
+
+                    "parallax": 0.5
+                },
+
+                "hotspots":
+                [
+                    {
+                        "uid": "hotspot-3d-plane",
+                        "interactive": false,
+
+                        "transform":
+                        {
+                            "position": { "phi": -10 },
+                            "rotation": { "x": 70 }
+                        },
+
+                        "geometry":
+                        {
+                            "type": "plane",
+                            "options":
+                            {
+                                "width": 200,
+                                "height": 200
+                            }
+                        },
+
+                        "material":
+                        {
+                            "color": "#8ce3ba",
+                            "opacity": 1
+                        }
+                    },
+
+                    {
+                        "uid": "hotspot-3d-box",
+                        "interactive": false,
+
+                        "transform":
+                        {
+                            "position": { "radius": 120, "phi": -10, "theta": -10 },
+                            "rotation": { "x": 70, "z": -20 }
+                        },
+
+                        "geometry":
+                        {
+                            "type": "box",
+                            "options":
+                            {
+                                "width": 30,
+                                "height": 30,
+                                "depth": 30
+                            }
+                        },
+
+                        "material":
+                        {
+                            "color": "#59e2fc",
+                            "opacity": 1
+                        }
+                    },
+
+                    {
+                        "uid": "hotspot-3d-cylinder",
+                        "interactive": false,
+
+                        "transform":
+                        {
+                            "position": { "radius": 160, "phi": -10, "theta": 15 },
+                            "rotation": { "x": -20 }
+                        },
+
+                        "geometry":
+                        {
+                            "type": "cylinder",
+                            "options":
+                            {
+                                "radiusTop": 20,
+                                "radiusBottom": 20,
+                                "height": 100
+                            }
+                        },
+
+                        "material":
+                        {
+                            "color": "#ffeb6f",
+                            "opacity": 1
+                        }
+                    },
+
+                    {
+                        "uid": "hotspot-3d-sphere",
+                        "interactive": false,
+
+                        "geometry":
+                        {
+                            "type": "sphere",
+                            "options":
+                            {
+                                "radius": 50
+                            }
+                        },
+
+                        "material":
+                        {
+                            "color": "#ff3f7f",
+                            "opacity": 1
+                        }
+                    },
+
+                    {
+                        "uid": "hotspot-3d-shape",
+                        "interactive": false,
+
+                        "transform":
+                        {
+                            "position": { "radius": 90, "theta": -20, "phi": -20 },
+                            "rotation": { "x": 70, "z": -20 },
+                            "scale": { "x": 3, "y": 3 }
+                        },
+
+                        "geometry":
+                        {
+                            "type": "shape",
+                            "options":
+                            {
+                                "points":
+                                [
+                                    [ -5, 1 ],
+                                    [ 0, 1 ],
+                                    [ 0, 3 ],
+                                    [ 5, 0 ],
+                                    [ 0, -3 ],
+                                    [ 0, -1 ],
+                                    [ -5, -1 ]
+                                ]
+                            }
+                        },
+
+                        "material":
+                        {
+                            "color": "#b563ee",
+                            "opacity": 1
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+
+    "plugins":
+    {
+        "prefix": "../../plugins/",
+
+        "engines":
+        [
+            {
+                "uid": "org.forgejs.webvrbutton",
+                "url": "WebVRButton/"
+            },
+
+            {
+                "uid": "org.forgejs.gyroscopebutton",
+                "url": "GyroscopeButton/"
+            }
+        ],
+
+        "instances":
+        [
+            {
+                "uid": "webvrbutton",
+                "engine": "org.forgejs.webvrbutton",
+
+                "options":
+                {
+                    "bottom": 10,
+                    "right": 10
+                }
+            },
+
+            {
+                "uid": "gyrobutton",
+                "engine": "org.forgejs.gyroscopebutton",
+
+                "options":
+                {
+                    "bottom": 10,
+                    "left": 10
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,315 @@
+{
+    "story":
+    {
+        "uid": "hotspots-sound-story",
+        "name": "Hotspots with Spatialized Sound Story",
+        "slug": "hotspots-sound-story",
+        "description": "This is sample of hotspots sound spatialization",
+        "default": "scene-0",
+
+        "scenes":
+        [
+            {
+                "uid": "scene-0",
+                "name": "First scene",
+                "slug": "first-scene",
+                "description": "This is the first and only scene",
+
+                "media":
+                {
+                    "uid": "media-0",
+                    "type": "image",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "url": "https://cdn.forgejs.org/samples/hotspots-sounds/rainforest-daniel-wambach.jpg"
+                    }
+                },
+
+                "camera":
+                {
+                    "yaw":
+                    {
+                        "default": 160
+                    },
+
+                    "fov":
+                    {
+                        "min": 30,
+                        "max": 120
+                    }
+                },
+
+                "hotspots":
+                [
+                    {
+                        "uid": "hotspot-3d-0",
+                        "name": "Peeper Frogs Near Lake",
+                        "facingCenter": true,
+                        "interactive": false,
+
+                        "transform":
+                        {
+                            "position":
+                            {
+                                "radius": 400,
+                                "theta": 135
+                            },
+
+                            "scale":
+                            {
+                                "x": 0.8,
+                                "y": 0.8
+                            }
+                        },
+
+                        "material":
+                        {
+                            "image": "https://cdn.forgejs.org/samples/hotspots-sounds/frog-b.png",
+                            "color": "#ffffff",
+                            "opacity": 1,
+                            "transparent": true
+                        },
+
+                        "geometry":
+                        {
+                            "type": "plane",
+                            "options":
+                            {
+                                "width": 100,
+                                "height": 100
+                            }
+                        },
+
+                        "sound":
+                        {
+                            "uid": "hotspot-3d-0-sound",
+
+                            "source":
+                            {
+                                "url": "https://cdn.forgejs.org/samples/hotspots-sounds/Peeper_Frogs_Near_Lake.mp3"
+                            },
+
+                            "options":
+                            {
+                                "volume": { "min": 0, "max": 0.6 },
+                                "loop": true,
+                                "autoPlay": true,
+                                "range": 210
+
+                            }
+                        }
+                    },
+
+                    {
+                        "uid": "hotspot-3d-1",
+                        "name": "Jungle",
+                        "facingCenter": true,
+                        "interactive": false,
+
+                        "transform":
+                        {
+                            "position":
+                            {
+                                "radius": 400,
+                                "theta": -175,
+                                "phi": 12
+                            }
+                        },
+
+                        "geometry":
+                        {
+                            "type": "plane",
+                            "options":
+                            {
+                                "width": 1,
+                                "height": 1
+                            }
+                        },
+
+                        "sound":
+                        {
+                            "uid": "hotspot-3d-1-sound",
+
+                            "source":
+                            {
+                                "url": "https://cdn.forgejs.org/samples/hotspots-sounds/Jungle.mp3"
+                            },
+
+                            "options":
+                            {
+                                "volume": 0.05,
+                                "loop": true,
+                                "autoPlay": true
+                            }
+                        }
+                    },
+
+                    {
+                        "uid": "hotspot-3d-2",
+                        "name": "Frogs",
+                        "facingCenter": true,
+                        "interactive": false,
+
+                        "transform":
+                        {
+                            "position":
+                            {
+                                "radius": 400,
+                                "theta": -110,
+                                "phi": -10
+                            },
+
+                            "scale":
+                            {
+                                "x": 0.8,
+                                "y": 0.8
+                            }
+                        },
+
+                        "geometry":
+                        {
+                            "type": "plane",
+                            "options":
+                            {
+                                "width": 100,
+                                "height": 100
+                            }
+                        },
+
+                        "material":
+                        {
+                            "image": "https://cdn.forgejs.org/samples/hotspots-sounds/frog-a.png",
+                            "color": "#ffffff",
+                            "opacity": 1,
+                            "transparent": true
+                        },
+
+                        "sound":
+                        {
+                            "uid": "hotspot-3d-2-sound",
+
+                            "source":
+                            {
+                                "url": "https://cdn.forgejs.org/samples/hotspots-sounds/Frogs.mp3"
+                            },
+
+                            "options":
+                            {
+                                "volume": { "min": 0.2, "max": 0.8 },
+                                "loop": true,
+                                "startTime": 0,
+                                "autoPlay": true,
+                                "range": 180
+                            }
+                        }
+                    },
+
+                    {
+                        "uid": "hotspot-3d-3",
+                        "name": "Osprey Bird Call",
+                        "facingCenter": true,
+                        "interactive": false,
+
+                        "transform":
+                        {
+                            "position":
+                            {
+                                "radius": 400,
+                                "theta": 6,
+                                "phi": 42
+                            },
+
+                            "scale":
+                            {
+                                "x": 0.75,
+                                "y": 0.75
+                            }
+                        },
+
+                        "geometry":
+                        {
+                            "type": "plane",
+                            "options":
+                            {
+                                "width": 100,
+                                "height": 100
+                            }
+                        },
+
+                        "material":
+                        {
+                            "image": "https://cdn.forgejs.org/samples/hotspots-sounds/osprey.png",
+                            "color": "#ffffff",
+                            "opacity": 1,
+                            "transparent": true
+                        },
+
+                        "sound":
+                        {
+                            "uid": "hotspot-3d-3-sound",
+
+                            "source":
+                            {
+                                "url": "https://cdn.forgejs.org/samples/hotspots-sounds/Osprey_Bird_Call.mp3"
+                            },
+
+                            "options":
+                            {
+                                "volume": { "min": 0.01, "max": 0.8 },
+                                "loop": true,
+                                "startTime": 0,
+                                "autoPlay": true,
+                                "range": 120
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+
+    "plugins":
+    {
+        "prefix": "../../plugins/",
+
+        "engines":
+        [
+            {
+                "uid": "org.forgejs.webvrbutton",
+                "url": "WebVRButton/"
+            },
+
+            {
+                "uid": "org.forgejs.gyroscopebutton",
+                "url": "GyroscopeButton/"
+            }
+        ],
+
+        "instances":
+        [
+            {
+                "uid": "webvrbutton",
+                "engine": "org.forgejs.webvrbutton",
+
+                "options":
+                {
+                    "bottom": 30,
+                    "right": 10
+                }
+            },
+
+            {
+                "uid": "gyrobutton",
+                "engine": "org.forgejs.gyroscopebutton",
+
+                "options":
+                {
+                    "bottom": 10,
+                    "left": 10
+                }
+            }
+        ]
+    }
+}

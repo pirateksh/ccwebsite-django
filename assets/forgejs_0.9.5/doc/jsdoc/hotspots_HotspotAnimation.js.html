@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: hotspots/HotspotAnimation.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: hotspots/HotspotAnimation.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * A FORGE.HotspotAnimation is used to animate a hotspot.
+ *
+ * @constructor FORGE.HotspotAnimation
+ * @param {FORGE.Viewer} viewer - {@link FORGE.Viewer} reference
+ * @param {FORGE.HotspotTransform} hotspotTransform - {@link FORGE.HotspotTransform} reference
+ * @extends {FORGE.MetaAnimation}
+ */
+FORGE.HotspotAnimation = function(viewer, hotspotTransform)
+{
+    /**
+     * The UID of the selected track.
+     * @name FORGE.HotspotAnimation#_track
+     * @type {string}
+     * @private
+     */
+    this._track = "";
+
+    /**
+     * The list of the tracks composing the animation
+     * @name FORGE.HotspotAnimation#_track
+     * @type {?Array&lt;string>}
+     * @private
+     */
+    this._tracks = null;
+
+    /**
+     * Does the animation loop ?
+     * @name FORGE.HotspotAnimation#_loop
+     * @type {boolean}
+     * @private
+     */
+    this._loop = false;
+
+    /**
+     * Does the animation randomized ?
+     * @name FORGE.HotspotAnimation#_random
+     * @type {boolean}
+     * @private
+     */
+    this._random = false;
+
+    /**
+     * Does the animation auto play ?
+     * @name FORGE.HotspotAnimation#_autoPlay
+     * @type {boolean}
+     * @private
+     */
+    this._autoPlay = false;
+
+    /**
+     * Enabled flag
+     * @name FORGE.HotspotAnimation#_autoPlay
+     * @type {boolean}
+     * @private
+     */
+    this._enabled = true;
+
+    /**
+     * On animation progress event dispatcher.
+     * @name FORGE.HotspotAnimation#_onProgress
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onProgress = null;
+
+    FORGE.MetaAnimation.call(this, viewer, hotspotTransform, "HotspotAnimation");
+    this._boot();
+};
+
+FORGE.HotspotAnimation.prototype = Object.create(FORGE.MetaAnimation.prototype);
+FORGE.HotspotAnimation.prototype.constructor = FORGE.HotspotAnimation;
+
+/**
+ * Boot sequence
+ *
+ * @method FORGE.HotspotAnimation#_boot
+ * @private
+ */
+FORGE.HotspotAnimation.prototype._boot = function()
+{
+    this._instructions =
+    [
+        {
+            prop: [ "rotation.x", "rotation.y", "rotation.z" ],
+            wrap: [ [-180, 180], [-180, 180], [-180, 180] ],
+            smooth: false
+        },
+        {
+            prop: [ "position.x", "position.y", "position.z" ],
+            smooth: false
+        },
+        {
+            prop: [ "scale.x", "scale.y", "scale.z" ],
+            smooth: false
+        }
+    ];
+};
+
+/**
+ * Load an animation configuration.
+ *
+ * @method FORGE.HotspotAnimation#load
+ * @param {HotspotTrackConfig} config - The animation config to load.
+ */
+FORGE.HotspotAnimation.prototype.load = function(config)
+{
+    this.stop(); // Stop current aimation if any in all cases.
+
+    this._enabled = (typeof config.enabled === "boolean") ? config.enabled : true;
+    this._loop = (typeof config.loop === "boolean") ? config.loop : false;
+    this._random = (typeof config.random === "boolean") ? config.random : false;
+    this._autoPlay = (typeof config.autoPlay === "boolean") ? config.autoPlay : false;
+
+    if (config.tracks !== null &amp;&amp; FORGE.Utils.isArrayOf(config.tracks, "string"))
+    {
+        // If it is random, mix it here
+        this._tracks = (this._random === true) ? FORGE.Utils.randomize(config.tracks) : config.tracks;
+    }
+};
+
+/**
+ * On track complete event handler
+ *
+ * @method FORGE.HotspotAnimation#_onTrackPartialCompleteHandler
+ * @private
+ */
+FORGE.HotspotAnimation.prototype._onTrackPartialCompleteHandler = function()
+{
+    if (this._tracks.length > 1)
+    {
+        // Go to the next track if any
+        var idx = this._tracks.indexOf( /** @type {string} */ (this._track)) + 1;
+
+        // If the index is too high, play the track
+        if (idx &lt; this._tracks.length)
+        {
+            this.play(idx);
+            return;
+        }
+    }
+
+    // Loop only if it is the end of the last track
+    if (this._loop === true)
+    {
+        // If it is random, change the entire order
+        if (this._random === true)
+        {
+            this._tracks = FORGE.Utils.randomize(this._tracks);
+        }
+
+        this.play(0);
+        return;
+    }
+
+    FORGE.MetaAnimation.prototype._onTrackPartialCompleteHandler.call(this);
+};
+
+/**
+ * On tween progress event handler.
+ *
+ * @method FORGE.HotspotAnimation#_onTweenProgressHandler
+ * @private
+ */
+FORGE.HotspotAnimation.prototype._onTweenProgressHandler = function()
+{
+    if (this._onProgress !== null)
+    {
+        this._onProgress.dispatch();
+    }
+};
+
+/**
+ * Play a set of tracks if specified, else the current one, from the start.
+ *
+ * @method FORGE.HotspotAnimation#play
+ * @param {(string|number)=} track - A track
+ */
+FORGE.HotspotAnimation.prototype.play = function(track)
+{
+    if(this._enabled === false)
+    {
+        return;
+    }
+
+    if (typeof track === "number")
+    {
+        this._track = this._tracks[track];
+    }
+    else if (typeof track === "string")
+    {
+        this._track = track;
+    }
+    else
+    {
+        this._track = this._tracks[0];
+    }
+
+    track = FORGE.UID.get(this._track);
+
+    this._emptyAnimations();
+
+    var kf;
+    var offset = track.offset;
+
+    // First instruction - rotation
+    var rotAnimation = new FORGE.Animation(this._viewer, this._target);
+    rotAnimation.tween.easing = track.easing;
+    rotAnimation.instruction = this._instructions[0];
+    rotAnimation.instruction.smooth = track.smooth;
+    rotAnimation.onComplete.add(this._onTrackPartialCompleteHandler, this);
+    rotAnimation.onProgress.add(this._onTweenProgressHandler, this);
+
+    var rot, x, y, z, time;
+
+    for (var i = 0, ii = track.keyframes.length; i &lt; ii; i++)
+    {
+        time = track.keyframes[i].time + offset;
+        rot = track.keyframes[i].data.rotation;
+
+        if (typeof rot !== "undefined" &amp;&amp; rot !== null)
+        {
+            x = (typeof rot.x !== "undefined" &amp;&amp; rot.x !== null) ? rot.x : this._computeIntermediateValue(time, track.keyframes, "x", rotAnimation.tween.easing, "rotation");
+            y = (typeof rot.y !== "undefined" &amp;&amp; rot.y !== null) ? rot.y : this._computeIntermediateValue(time, track.keyframes, "y", rotAnimation.tween.easing, "rotation");
+            z = (typeof rot.z !== "undefined" &amp;&amp; rot.z !== null) ? rot.z : this._computeIntermediateValue(time, track.keyframes, "z", rotAnimation.tween.easing, "rotation");
+
+            kf = new FORGE.Keyframe(time + offset,
+            {
+                rotation:
+                {
+                    x: x,
+                    y: y,
+                    z: z
+                }
+            });
+
+            rotAnimation.timeline.addKeyframe(kf);
+        }
+    }
+
+    // If the first keyframe is not at time 0 or there is an offset, add a
+    // virtual keyframe
+    if (rotAnimation.timeline.keyframes.length > 0 &amp;&amp; rotAnimation.timeline.keyframes[0].time > 0 || offset > 0)
+    {
+        var data = { rotation: FORGE.Utils.clone(this._target.rotation) };
+        kf = new FORGE.Keyframe(0, data);
+        rotAnimation.timeline.addKeyframe(kf);
+    }
+
+    this._animations.push(rotAnimation);
+
+    // Second instruction - position
+    var posAnimation = new FORGE.Animation(this._viewer, this._target);
+    posAnimation.tween.easing = track.easing;
+    posAnimation.instruction = this._instructions[1];
+    posAnimation.instruction.smooth = track.smooth;
+    posAnimation.onComplete.add(this._onTrackPartialCompleteHandler, this);
+    posAnimation.onProgress.add(this._onTweenProgressHandler, this);
+
+    var pos;
+
+    for (var i = 0, ii = track.keyframes.length; i &lt; ii; i++)
+    {
+        time = track.keyframes[i].time + offset;
+        pos = track.keyframes[i].data.position;
+
+        if (typeof pos !== "undefined" &amp;&amp; pos !== null)
+        {
+            // If no x/y/z are defined, AND there is at least one radius/theta/phi, convert it to x/y/z
+            if (typeof pos.x !== "number" &amp;&amp; typeof pos.y !== "number" &amp;&amp; typeof pos.z !== "number" &amp;&amp; (typeof pos.radius === "number" || typeof pos.theta === "number" || typeof pos.phi === "number"))
+            {
+                var radius = (typeof pos.radius === "number") ? pos.radius : this._computeIntermediateValue(time, track.keyframes, "radius", posAnimation.tween.easing, "position");
+                var theta = (typeof pos.theta === "number") ? FORGE.Math.degToRad(pos.theta) : FORGE.Math.degToRad(this._computeIntermediateValue(time, track.keyframes, "theta", posAnimation.tween.easing, "position"));
+                var phi = (typeof pos.phi === "number") ? FORGE.Math.degToRad(pos.phi) : FORGE.Math.degToRad(this._computeIntermediateValue(time, track.keyframes, "phi", posAnimation.tween.easing, "position"));
+
+                var cartesian = FORGE.Math.sphericalToCartesian(radius, theta, phi);
+
+                x = cartesian.x;
+                y = cartesian.y;
+                z = cartesian.z;
+            }
+            else
+            {
+
+                x = (typeof pos.x !== "undefined" &amp;&amp; pos.x !== null) ? pos.x : this._computeIntermediateValue(time, track.keyframes, "x", posAnimation.tween.easing, "position");
+                y = (typeof pos.y !== "undefined" &amp;&amp; pos.y !== null) ? pos.y : this._computeIntermediateValue(time, track.keyframes, "y", posAnimation.tween.easing, "position");
+                z = (typeof pos.z !== "undefined" &amp;&amp; pos.z !== null) ? pos.z : this._computeIntermediateValue(time, track.keyframes, "z", posAnimation.tween.easing, "position");
+            }
+
+            kf = new FORGE.Keyframe(time + offset,
+            {
+                position:
+                {
+                    x: x,
+                    y: y,
+                    z: z
+                }
+            });
+
+            posAnimation.timeline.addKeyframe(kf);
+        }
+    }
+
+    // If the first keyframe is not at time 0 or there is an offset, add a
+    // virtual keyframe
+    if (posAnimation.timeline.keyframes.length > 0 &amp;&amp; posAnimation.timeline.keyframes[0].time > 0 || offset > 0)
+    {
+        var data = { position: FORGE.Utils.clone(this._target.position) };
+        kf = new FORGE.Keyframe(0, data);
+        posAnimation.timeline.addKeyframe(kf);
+    }
+
+    this._animations.push(posAnimation);
+
+    // Third animation - scale
+    var scaleAnimation = new FORGE.Animation(this._viewer, this._target);
+    scaleAnimation.tween.easing = track.easing;
+    scaleAnimation.instruction = this._instructions[2];
+    scaleAnimation.instruction.smooth = track.smooth;
+    scaleAnimation.onComplete.add(this._onTrackPartialCompleteHandler, this);
+    scaleAnimation.onProgress.add(this._onTweenProgressHandler, this);
+
+    var scale;
+
+    for (var i = 0, ii = track.keyframes.length; i &lt; ii; i++)
+    {
+        time = track.keyframes[i].time + offset;
+        scale = track.keyframes[i].data.scale;
+
+        if (typeof scale !== "undefined" &amp;&amp; scale !== null)
+        {
+            x = (typeof scale.x !== "undefined" &amp;&amp; scale.x !== null) ? scale.x : this._computeIntermediateValue(time, track.keyframes, "x", scaleAnimation.tween.easing, "scale");
+            y = (typeof scale.y !== "undefined" &amp;&amp; scale.y !== null) ? scale.y : this._computeIntermediateValue(time, track.keyframes, "y", scaleAnimation.tween.easing, "scale");
+            z = (typeof scale.z !== "undefined" &amp;&amp; scale.z !== null) ? scale.z : this._computeIntermediateValue(time, track.keyframes, "z", scaleAnimation.tween.easing, "scale");
+
+            kf = new FORGE.Keyframe(time + offset,
+            {
+                scale:
+                {
+                    x: x,
+                    y: y,
+                    z: z
+                }
+            });
+
+            scaleAnimation.timeline.addKeyframe(kf);
+        }
+    }
+
+    // If the first keyframe is not at time 0 or there is an offset, add a
+    // virtual keyframe
+    if (scaleAnimation.timeline.keyframes.length > 0 &amp;&amp; scaleAnimation.timeline.keyframes[0].time > 0 || offset > 0)
+    {
+        var data = { scale: FORGE.Utils.clone(this._target.scale) };
+        kf = new FORGE.Keyframe(0, data);
+        scaleAnimation.timeline.addKeyframe(kf);
+    }
+
+    this._animations.push(scaleAnimation);
+
+    // Play it !
+    this._animations[0].play();
+    this._animations[1].play();
+    this._animations[2].play();
+};
+
+/**
+ * Destroy sequence.
+ * @method FORGE.HotspotAnimation#destroy
+ */
+FORGE.HotspotAnimation.prototype.destroy = function()
+{
+    this._tracks = null;
+
+    if (this._onProgress !== null)
+    {
+        this._onProgress.destroy();
+        this._onProgress = null;
+    }
+
+    FORGE.MetaAnimation.prototype.destroy.call(this);
+};
+
+/**
+ * Enabled flag.
+ * @name FORGE.HotspotAnimation#enabled
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.HotspotAnimation.prototype, "enabled",
+{
+    /** @this {FORGE.HotspotAnimation} */
+    get: function()
+    {
+        return this._enabled;
+    }
+});
+
+/**
+ * Does the animation auto play.
+ * @name FORGE.HotspotAnimation#autoPlay
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.HotspotAnimation.prototype, "autoPlay",
+{
+    /** @this {FORGE.HotspotAnimation} */
+    get: function()
+    {
+        return this._autoPlay;
+    }
+});
+
+/**
+ * Get the "onProgress" {@link FORGE.EventDispatcher} of the target.
+ * @name FORGE.HotspotAnimation#onProgress
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.HotspotAnimation.prototype, "onProgress",
+{
+    /** @this {FORGE.HotspotAnimation} */
+    get: function()
+    {
+        if (this._onProgress === null)
+        {
+            this._onProgress = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onProgress;
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

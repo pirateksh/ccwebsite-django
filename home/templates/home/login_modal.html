@@ -1,37 +1,105 @@
 {% load materializecss %}
+{% load static %}
 {#  Login Modal #}
 <div id="modal1" class="modal modal-fixed-footer">
     <form class="col s12" id="login_form" method="post" action="{% url 'ajax_login' %}" data-success="{% url 'Index' %}">
         {% csrf_token %}
         <div class="modal-content">
         <h4>Login Here</h4>
+         
+        <br> <br>
+         <div class="row">
             <div class="row">
-                <div class="row">
+                <div class="col s4 m4 l4 center">
+                    <a href="{%url 'social:begin' 'google-oauth2'%}" class="btn-large social
+                    google">
+                        <img class="circle" style="display: inline-block;" height="100%" alt="Google &quot;G&quot; Logo" src="{%static 'Images/google-icon.jpg' %}" /> 
+                        <span style="vertical-align: text-bottom;">Google</span>
+                    </a>
+                </div>
+                <div class="col s4 m4 l4 center">
+                    <a href="{%url 'social:begin' 'github'%}" class="btn-large social github">
+                        <img class="circle" style="display: inline-block;" height="100%" alt="GitHub &quot;G&quot; Logo" src="{%static 'Images/git-logo.png' %}"/>
+                        <span style="vertical-align: text-bottom;">Github</span>
+                    </a>
+                </div>
+                <div class="col s4 m4 l4 center">
+                    <a href="{%url 'social:begin' 'facebook'%}" class="btn-large social
+                    facebook">
+                        <img class="circle" style="display: inline-block;" height="100%" alt="Facebook &quot;G&quot; Logo" src="{%static 'Images/facebook-icon.jpg' %}"/>
+                        <span style="vertical-align: text-bottom;">Facebook</span>
+                    </a>
+                </div>
+                <br> <br> <br> <br>
+                <div class="col s12 l12 m12 center">
+                    <a class="chip">OR</a>
+                </div>
+                {% if 'cook_user' and 'cook_pass' in request.COOKIES %}
                     <div class="input-field col s12">
                         <i class="material-icons prefix">account_circle</i>
-                        <input id="login_username" name="username" type="text" class="validate" required>
+                        <input id="login_username" name="username" type="text" 
+                                class="validate" value="{{request.COOKIES.cook_user}}"  required>
                         <label for="login_username">Username/Email</label>
                     </div>
                     <div class="input-field col s12">
                         <i class="material-icons prefix">phone</i>
-                        <input id="login_password" name="password" type="password" class="validate" required>
+                        <input id="login_password" name="password" type="password" 
+                               value="{{request.COOKIES.cook_pass}}" class="validate" required>
                         <label for="login_password">Password</label>
                     </div>
-                    <div class="col s12">
+                    <div class="col s6 m6 l6">
                         <label>
                             <input type="checkbox" class="filled-in" onclick="showPassword()">
                             <span>Show password</span>
                         </label>
                     </div>
-                </div>
+                    <div class="col s6 m6 l6">
+                        <label>
+                            <input  id = "remember_me" type="checkbox" name="remember_me" 
+                                value="remember_me" checked="checked" />
+                                <span>Remember Me</span>
+                        </label>
+                    </div>
+                {% else %}
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="login_username" name="username" type="text" 
+                                class="validate"  required>
+                        <label for="login_username">Username/Email</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">phone</i>
+                        <input id="login_password" name="password" type="password" 
+                               class="validate" required>
+                        <label for="login_password">Password</label>
+                    </div>
+                    <div class="col s6 m6 l6">
+                        <label>
+                            <input type="checkbox" class="filled-in" onclick="showPassword()">
+                            <span>Show password</span>
+                        </label>
+                    </div>
+                    <div class="col s6 m6 l6">
+                        <label>
+                            <input  id = "remember_me" type="checkbox" name="remember_me" 
+                                    value="remember_me" />
+                            <span>Remember Me</span>
+                        </label>
+                    </div>
+                {% endif %}
+                
             </div>
-        </div>
-        <div class="modal-footer">
-            <a class="btn waves-light" href="{% url 'password_reset' %}">Forgot Password?</a>
+         </div>
+        </div>  
+         <div class="modal-footer">
+            <a class="btn waves-light" href="{% url 'password_reset' %}">
+                Forgot Password?
+            </a>
             <button class="btn waves-light" type="submit" name="action">Login
                 <i class="material-icons right">send</i>
             </button>
-        </div>
+         </div>
+          
     </form>
 </div>
 

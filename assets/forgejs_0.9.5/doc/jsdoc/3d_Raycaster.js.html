@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: 3d/Raycaster.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: 3d/Raycaster.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Raycaster for mouse interaction with 3d objects of the scene
+ * @constructor FORGE.Raycaster
+ * @param {FORGE.Viewer} viewer - Viewer reference
+ * @extends {FORGE.BaseObject}
+ */
+FORGE.Raycaster = function(viewer)
+{
+    /**
+     * Viewer reference
+     * @name FORGE.Raycaster#_viewer
+     * @type {FORGE.Viewer}
+     * @private
+     */
+    this._viewer = viewer;
+
+    /**
+     * THREE raycaster instance.
+     * @name FORGE.Raycaster#_raycaster
+     * @type {THREE.Raycaster}
+     * @private
+     */
+    this._raycaster = null;
+
+    /**
+     * The last hovered 3d object
+     * @name FORGE.Raycaster#_hoveredObject
+     * @type {?FORGE.Object3D}
+     * @private
+     */
+    this._hoveredObject = null;
+
+    FORGE.BaseObject.call(this, "Raycaster");
+
+    this._boot();
+};
+
+FORGE.Raycaster.prototype = Object.create(FORGE.BaseObject.prototype);
+FORGE.Raycaster.prototype.constructor = FORGE.Raycaster;
+
+/**
+ * Boot sequence
+ * @method FORGE.Raycaster#_boot
+ * @private
+ */
+FORGE.Raycaster.prototype._boot = function()
+{
+    // this._viewer.story.onSceneLoadComplete.add(this._sceneLoadCompleteHandler, this);
+};
+
+/**
+ * Start raycasting.
+ * Add event on the main canvas for mouse interaction
+ * @method FORGE.Raycaster#_start
+ * @param {string} mode - picking mode
+ */
+FORGE.Raycaster.prototype.start = function(mode)
+{
+    this.log("Raycaster start");
+
+    if (this._raycaster === null)
+    {
+        this._raycaster = new THREE.Raycaster();
+    }
+
+    if (mode === FORGE.PickingManager.modes.POINTER)
+    {
+        this._startPointer();
+    }
+    else if (mode === FORGE.PickingManager.modes.GAZE)
+    {
+        this._startGaze();
+    }
+};
+
+/**
+ * Add the listeners for the pointer mode.
+ * @method FORGE.Raycaster#_startPointer
+ * @private
+ */
+FORGE.Raycaster.prototype._startPointer = function()
+{
+    this.log("Raycating start pointer");
+
+    if (this._viewer.canvas.pointer.onClick.has(this._canvasPointerClickHandler, this) === false)
+    {
+        this._viewer.canvas.pointer.onClick.add(this._canvasPointerClickHandler, this);
+    }
+
+    if (this._viewer.canvas.pointer.onMove.has(this._canvasPointerMoveHandler, this) === false)
+    {
+        this._viewer.canvas.pointer.onMove.add(this._canvasPointerMoveHandler, this);
+    }
+};
+
+/**
+ * Add the listeners for the gaze mode.
+ * @method FORGE.Raycaster#_startGaze
+ * @private
+ */
+FORGE.Raycaster.prototype._startGaze = function()
+{
+    this.log("Raycating start gaze");
+
+    if (this._viewer.renderer.camera.onChange.has(this._cameraChangeHandler, this) === false)
+    {
+        this._viewer.renderer.camera.onChange.add(this._cameraChangeHandler, this);
+    }
+};
+
+/**
+ * Stop raycasting, removes all event listeners
+ * @method FORGE.Raycaster#_stop
+ */
+FORGE.Raycaster.prototype.stop = function()
+{
+    this.log("Raycaster stop");
+
+    // Remove pointer event listeners
+    if (this._viewer.canvas.pointer.onClick.has(this._canvasPointerClickHandler, this))
+    {
+        this._viewer.canvas.pointer.onClick.remove(this._canvasPointerClickHandler, this);
+    }
+
+    if (this._viewer.canvas.pointer.onMove.has(this._canvasPointerMoveHandler, this))
+    {
+        this._viewer.canvas.pointer.onMove.remove(this._canvasPointerMoveHandler, this);
+    }
+
+    //Remove gaze handlers
+    if (this._viewer.renderer.camera.onChange.has(this._cameraChangeHandler, this))
+    {
+        this._viewer.renderer.camera.onChange.remove(this._cameraChangeHandler, this);
+    }
+
+    this._out();
+
+    this._raycaster = null;
+};
+
+
+/**
+ * Pointer click handler, launch raycasting
+ * @method FORGE.Raycaster#_canvasPointerClickHandler
+ * @param {Object} event click event
+ * @private
+ */
+FORGE.Raycaster.prototype._canvasPointerClickHandler = function(event)
+{
+    var position = FORGE.Pointer.getRelativeMousePosition(event.data);
+    this._raycast("click", position);
+};
+
+/**
+ * Pointer over handler, launch raycasting
+ * @method FORGE.Raycaster#_canvasPointerMoveHandler
+ * @param {Object} event move event
+ * @private
+ */
+FORGE.Raycaster.prototype._canvasPointerMoveHandler = function(event)
+{
+    var position = FORGE.Pointer.getRelativeMousePosition(event.data);
+    this._raycast("move", position);
+};
+
+/**
+ * Camera change handler, launch raycasting
+ * @method FORGE.Raycaster#_cameraChangeHandler
+ * @private
+ */
+FORGE.Raycaster.prototype._cameraChangeHandler = function()
+{
+    this._raycast("move");
+};
+
+/**
+ * Raycasting internal method
+ * @method FORGE.Raycaster#_raycast
+ * @param {string} event - triggering event
+ * @param {THREE.Vector2=} screenPoint - raycasting point in screen coordinates, if no screen point defined, it will raycast in the center of the view.
+ * @private
+ */
+FORGE.Raycaster.prototype._raycast = function(event, screenPoint)
+{
+    // If there is an hovered object but not ready (maybe the texture is updating), ignore the raycast
+    if(this._hoveredObject !== null &amp;&amp; this._hoveredObject.ready === false)
+    {
+        return;
+    }
+
+    var resolution = this._viewer.renderer.canvasResolution;
+
+    screenPoint = screenPoint || new THREE.Vector2(resolution.width / 2, resolution.height / 2);
+
+    var camera = this._viewer.renderer.camera;
+    var ndc = new THREE.Vector2(screenPoint.x / resolution.width, 1.0 - screenPoint.y / resolution.height).multiplyScalar(2).addScalar(-1);
+
+    // Get all objects of the object renderer that are ready and interactive
+    var objects = this._viewer.renderer.objects.getRaycastable();
+
+    //Reset the hovered flag to false for all the objects
+    this._setHovered(objects, false);
+
+    // Get the first intersected object
+    var intersected = this._intersect(objects, ndc, camera);
+
+    if (intersected !== null)
+    {
+        if (event === "click")
+        {
+            this._hoveredObject = intersected; // For mobile we have to set the last intersect as the hovered object.
+            this.click();
+        }
+        else if (event === "move")
+        {
+
+            if (intersected !== this._hoveredObject)
+            {
+                this._out();
+
+                this._hoveredObject = intersected;
+                intersected.over();
+
+                if (this._viewer.renderer.pickingManager.mode === FORGE.PickingManager.modes.GAZE)
+                {
+                    this._viewer.renderer.camera.gaze.start();
+                }
+            }
+        }
+    }
+    else
+    {
+        this._out();
+    }
+};
+
+/**
+ * The out routine. Stops the timer, trigger the out method the hovered object and nullify its reference.
+ * @method FORGE.Raycaster#_out
+ * @private
+ */
+FORGE.Raycaster.prototype._out = function()
+{
+    if (this._hoveredObject !== null)
+    {
+        this._hoveredObject.out();
+        this._hoveredObject = null;
+
+        if (this._viewer.renderer.pickingManager.mode === FORGE.PickingManager.modes.GAZE)
+        {
+            this._viewer.renderer.camera.gaze.stop();
+        }
+    }
+};
+
+/**
+ * Set the hovered flag to an array ok {@link FORGE.Object3D}
+ * @method FORGE.Raycaster#_setHovered
+ * @param {Array&lt;FORGE.Object3D>} objects - The array of 3d objects who'll be affected
+ * @param {boolean} hovered - The hovered flag you want to set to all the 3d objects of the array
+ * @private
+ */
+FORGE.Raycaster.prototype._setHovered = function(objects, hovered)
+{
+    for (var i = 0, ii = objects.length; i &lt; ii; i++)
+    {
+        objects[i].hovered = hovered;
+    }
+};
+
+/**
+ * Intrsect 3d objects from a ndc point and a camera
+ * @param  {Array&lt;FORGE.Object3D>} objects - Array of object to test
+ * @param  {THREE.Vector2} ndc - Normalized device coordinate point
+ * @param  {FORGE.Camera} camera - Camera to use
+ * @return {?FORGE.Object3D} Return the first hitted 3d Object
+ * @private
+ */
+FORGE.Raycaster.prototype._intersect = function(objects, ndc, camera)
+{
+    var result = null;
+
+    // Set the three raycaster with the ndc coordinates and the camera.
+    this._raycaster.setFromCamera(ndc, camera.main);
+
+    // Make an array of meshes for the three raycaster
+    var meshes = [];
+    for (var i = 0, ii = objects.length; i &lt; ii; i++)
+    {
+        meshes.push(objects[i].mesh);
+    }
+
+    // Get all objects intersected by the ray
+    var intersects = this._raycaster.intersectObjects(meshes);
+
+    while (result === null &amp;&amp; intersects.length > 0)
+    {
+        var intersect = intersects.shift();
+        var mesh = intersect.object;
+        var uv = intersect.uv;
+        var object = this._viewer.renderer.objects.getByMesh(mesh);
+
+        if (mesh.material.transparent === false)
+        {
+            result = object;
+        }
+        else
+        {
+            var color = this._getObjectColorFromUVCoords(object, uv);
+
+            // If color is null we consider that we are hitting the object but its texture is not ready
+            if (color === null || (color != null &amp;&amp; color.alpha > 10))
+            {
+                result = object;
+            }
+        }
+    }
+
+    return result;
+};
+
+/**
+ * Get RGBA color at a given point on a texture
+ * @method FORGE.Raycaster#_getObjectColorFromUVCoords
+ * @param {THREE.Vector2} uv point with normalized coordinates
+ * @return {FORGE.ColorRGBA} RGBA color at given point or null if image is not available
+ * @private
+ */
+FORGE.Raycaster.prototype._getObjectColorFromUVCoords = function(object, uv)
+{
+    var color = null;
+
+    if (object.mesh !== null &amp;&amp; object.mesh.material !== null &amp;&amp; typeof object.mesh.material.uniforms.tTexture !== "undefined")
+    {
+        var texture = object.mesh.material.uniforms.tTexture.value;
+        var canvas = null;
+
+        if (texture !== null &amp;&amp; texture.image !== null)
+        {
+            if (texture.image.nodeName.toLowerCase() === "img")
+            {
+                canvas = document.createElement("canvas");
+                canvas.width = texture.image.width;
+                canvas.height = texture.image.height;
+                canvas.getContext("2d").drawImage(texture.image, 0, 0);
+            }
+            else if (texture.image.nodeName.toLowerCase() === "canvas")
+            {
+                canvas = texture.image;
+            }
+
+            if (canvas !== null)
+            {
+                var w = canvas.width;
+                var h = canvas.height;
+                var x = Math.floor(uv.x * w);
+                var y = Math.floor(h - uv.y * h);
+                var idx = 4 * (y * w + x);
+
+                var data = canvas.getContext("2d").getImageData(0, 0, w, h).data;
+                color = new FORGE.ColorRGBA(data[idx + 0], data[idx + 1], data[idx + 2], data[idx + 3]);
+            }
+        }
+    }
+    else if (typeof object.mesh.material.color !== "undefined")
+    {
+        color = object.mesh.material.color;
+    }
+
+    return color;
+};
+/**
+ * Triggers the click method of the hovered object if exists.
+ * @method FORGE.Raycaster#click
+ */
+FORGE.Raycaster.prototype.click = function()
+{
+    if (this._hoveredObject !== null)
+    {
+        this._hoveredObject.click();
+    }
+};
+
+/**
+ * Clear raycaster.
+ * Release all references related to the scene
+ * @method FORGE.Raycaster#clear
+ */
+FORGE.Raycaster.prototype.clear = function()
+{
+    this._hoveredObject = null;
+};
+
+/**
+ * Get the hovered object
+ * @name FORGE.Raycaster#hoveredObject
+ * @type {FORGE.Object3D}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Raycaster.prototype, "hoveredObject",
+{
+    /** @this {FORGE.Raycaster} */
+    get: function()
+    {
+        return this._hoveredObject;
+    }
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

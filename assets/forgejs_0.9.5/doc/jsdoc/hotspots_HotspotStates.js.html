@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: hotspots/HotspotStates.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: hotspots/HotspotStates.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Hotspot states
+ *
+ * @constructor FORGE.HotspotStates
+ * @param {FORGE.Viewer} viewer - The viewer reference.
+ * @param {string} hotspotUid - The hotspot uid
+ * @extends {FORGE.BaseObject}
+ */
+FORGE.HotspotStates = function(viewer, hotspotUid)
+{
+    /**
+     * Viewer reference.
+     * @name  FORGE.HotspotStates#_viewer
+     * @type {FORGE.Viewer}
+     * @private
+     */
+    this._viewer = viewer;
+
+    /**
+     * The hotspot uid
+     * @name FORGE.HotspotStates#_hotspotUid
+     * @type {string}
+     * @private
+     */
+    this._hotspotUid = hotspotUid;
+
+    /**
+     * Hotspot material config
+     * @name FORGE.HotspotStates#_config
+     * @type {?HotspotStatesConfig}
+     * @private
+     */
+    this._config = null;
+
+    /**
+     * The current state name
+     * @name FORGE.HotspotStates#_state
+     * @type {string}
+     * @private
+     */
+    this._state = "";
+
+    /**
+     * Default state
+     * @name FORGE.HotspotStates#_default
+     * @type {string}
+     * @private
+     */
+    this._default = "default";
+
+    /**
+     * Does the states change automatically on interactive 3d objects?
+     * @name FORGE.HotspotStates#_auto
+     * @type {boolean}
+     * @private
+     */
+    this._auto = true;
+
+    /**
+     * Ready flag
+     * @name FORGE.HotspotStates#_ready
+     * @type {boolean}
+     * @private
+     */
+    this._ready = false;
+
+    /**
+     * Loading flags
+     * @name FORGE.HotspotStates#_loading
+     * @type {Object}
+     * @private
+     */
+    this._loading =
+    {
+        geometry: false,
+        transform: false,
+        material: false,
+        sound: false,
+        animation: false
+    };
+
+    /**
+     * Load complete event dispatcher for state change.
+     * @name  FORGE.HotspotStates#_onLoadComplete
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onLoadComplete = null;
+
+    FORGE.BaseObject.call(this, "HotspotStates");
+
+    this._boot();
+};
+
+FORGE.HotspotStates.prototype = Object.create(FORGE.BaseObject.prototype);
+FORGE.HotspotStates.prototype.constructor = FORGE.HotspotStates;
+
+/**
+ * List of reserved keyword for states names.
+ * @name FORGE.HotspotStates._RESERVED
+ * @type {Array&lt;string>}
+ * @const
+ * @private
+ */
+FORGE.HotspotStates._RESERVED = ["options"];
+
+/**
+ * Boot method.
+ * @method FORGE.HotspotStates#_boot
+ * @private
+ */
+FORGE.HotspotStates.prototype._boot = function()
+{
+    var hotspot = FORGE.UID.get(this._hotspotUid);
+
+    // If no match, return
+    if(typeof hotspot === "undefined")
+    {
+        throw("No hotspot match with uid: "+this._hotspotUid);
+    }
+
+    // Set the default config
+    this._config =
+    {
+        options: {},
+
+        default: hotspot.config
+    };
+};
+
+/**
+ * Parse the states configuration
+ * @method FORGE.HotspotStates#_parseConfig
+ * @param {?HotspotStatesConfig} config - The configuration to parse
+ * @private
+ */
+FORGE.HotspotStates.prototype._parseConfig = function(config)
+{
+    this._default = (typeof config.options.default === "string") ? config.options.default : "default";
+    this._auto = (typeof config.options.auto === "boolean") ? config.options.auto : true;
+
+    this._config.default = FORGE.Utils.extendSimpleObject(this._config.default, config[this._default]);
+};
+
+/**
+ * Get the state names (states config keys without reserved keys that are not states)
+ * @method FORGE.HotspotStates#_getStatesNames
+ * @return {Array&lt;string>} Returns the names of the available states.
+ * @private
+ */
+FORGE.HotspotStates.prototype._getStatesNames = function()
+{
+    if(this._config === null)
+    {
+        return [];
+    }
+
+    var config = /** @type {!Object} */ (this._config);
+    var keys = Object.keys(config);
+
+    // Remove the reserved keywords from state names
+    for(var i = 0, ii = FORGE.HotspotStates._RESERVED.length; i &lt; ii; i++)
+    {
+        var index = keys.indexOf(FORGE.HotspotStates._RESERVED[i]);
+
+        if(index !== -1)
+        {
+            keys.splice(index, 1);
+        }
+    }
+
+    // Remove the state named "default" if there is a default state in the options
+    if(this._default !== "default" &amp;&amp; typeof this._config[this._default] !== "undefined")
+    {
+        index = keys.indexOf("default");
+
+        if(index !== -1)
+        {
+            keys.splice(index, 1);
+        }
+    }
+
+    return keys;
+};
+
+/**
+ * Update the geometry for the current state
+ * @method FORGE.HotspotStates#_updateGeometry
+ * @param  {HotspotGeometryConfig} config - The hotspot geometry configuration object.
+ * @private
+ */
+FORGE.HotspotStates.prototype._updateGeometry = function(config)
+{
+    this.log("update geometry");
+
+    var hotspot = FORGE.UID.get(this._hotspotUid);
+    hotspot.geometry.onLoadComplete.addOnce(this._geometryLoadCompleteHandler, this);
+    hotspot.geometry.load(config);
+};
+
+/**
+ * Geometry load complete event handler
+ * @method FORGE.HotspotStates#_geometryLoadCompleteHandler
+ * @private
+ */
+FORGE.HotspotStates.prototype._geometryLoadCompleteHandler = function()
+{
+    this._loading.geometry = false;
+    this._checkLoading();
+};
+
+/**
+ * Update the material for the current state
+ * @method FORGE.HotspotStates#_updateMaterial
+ * @param  {HotspotMaterialConfig} config - The hotspot material configuration object.
+ * @private
+ */
+FORGE.HotspotStates.prototype._updateMaterial = function(config)
+{
+    this.log("update material");
+
+    var hotspot = FORGE.UID.get(this._hotspotUid);
+    hotspot.material.onReady.addOnce(this._materialReadyHandler, this);
+    hotspot.material.load(config);
+};
+
+/**
+ * Material ready event handler
+ * @method FORGE.HotspotStates#_materialReadyHandler
+ * @private
+ */
+FORGE.HotspotStates.prototype._materialReadyHandler = function()
+{
+    this._loading.material = false;
+    this._checkLoading();
+};
+
+/**
+ * Update the sound for the current state
+ * @method FORGE.HotspotStates#_updateSound
+ * @param  {SoundConfig} config - The hotspot sound configuration object.
+ * @private
+ */
+FORGE.HotspotStates.prototype._updateSound = function(config)
+{
+    this.log("update sound");
+
+    var hotspot = FORGE.UID.get(this._hotspotUid);
+    hotspot.sound.onReady.addOnce(this._soundReadyHandler, this);
+    hotspot.sound.load(config);
+};
+
+/**
+ * Sound ready event handler
+ * @method FORGE.HotspotStates#_soundReadyHandler
+ * @private
+ */
+FORGE.HotspotStates.prototype._soundReadyHandler = function()
+{
+    this._loading.sound = false;
+    this._checkLoading();
+};
+
+/**
+ * Update the animation for the current state
+ * @method FORGE.HotspotStates#_updateAnimation
+ * @param  {HotspotTrackConfig} config - The hotspot animation configuration object.
+ * @private
+ */
+FORGE.HotspotStates.prototype._updateAnimation = function(config)
+{
+    this.log("update animation");
+
+    var hotspot = FORGE.UID.get(this._hotspotUid);
+    hotspot.animation.load(config, false);
+
+    this._loading.animation = false;
+    this._checkLoading();
+};
+
+/**
+ * Update the transform for the current state
+ * @method FORGE.HotspotStates#_updateTransform
+ * @param  {HotspotTransformConfig} config - The hotspot transform configuration object.
+ * @private
+ */
+FORGE.HotspotStates.prototype._updateTransform = function(config)
+{
+    this.log("update transform");
+
+    var hotspot = FORGE.UID.get(this._hotspotUid);
+    hotspot.transform.load(config, false);
+
+    this._loading.transform = false;
+    this._checkLoading();
+};
+
+/**
+ * Check the loading status of the current state.
+ * Dispatch the laod complete event if all check are ok.
+ * @method FORGE.HotspotStates#_checkLoading
+ * @private
+ */
+FORGE.HotspotStates.prototype._checkLoading = function()
+{
+    for(var prop in this._loading)
+    {
+        if(this._loading[prop] === true)
+        {
+            return true;
+        }
+    }
+
+    this._ready = true;
+
+    if(this._onLoadComplete !== null)
+    {
+        this._onLoadComplete.dispatch();
+    }
+
+    return false;
+};
+
+/**
+ * Add a states configuration object.
+ * @method FORGE.HotspotStates#addConfig
+ * @param  {HotspotStatesConfig} config - Configuration object with hotspots states.
+ */
+FORGE.HotspotStates.prototype.addConfig = function(config)
+{
+    this._config = FORGE.Utils.extendSimpleObject(this._config, config);
+    this._parseConfig(this._config);
+};
+
+/**
+ * Load a state.
+ * @method FORGE.HotspotStates#load
+ * @param  {string=} name - the name of the state to load.
+ */
+FORGE.HotspotStates.prototype.load = function(name)
+{
+    name = (typeof name === "string") ? name : this._default;
+
+    this.log("Hotspot load state: "+name);
+
+    var hotspot = FORGE.UID.get(this._hotspotUid);
+
+    // If no hotspot match OR no state name match OR already on this state THEN return
+    if(typeof hotspot === "undefined" || typeof this._config[name] !== "object" || name === this._state)
+    {
+        return;
+    }
+
+    this._ready = false;
+
+    // Set the state name
+    this._state = name;
+
+    if(typeof this._config[name].sound === "object")
+    {
+        this._loading.sound = true;
+    }
+
+    if(typeof this._config[name].animation === "object")
+    {
+        this._loading.animation = true;
+    }
+
+    this._loading.material = true;
+    this._loading.geometry = true;
+    this._loading.transform = true;
+
+    if(this._loading.material === true)
+    {
+        var materialConfig = /** @type {!HotspotMaterialConfig} */ (FORGE.Utils.extendSimpleObject(hotspot.config.material, this._config[name].material));
+        this._updateMaterial(materialConfig);
+    }
+
+    if(this._loading.sound === true)
+    {
+        var soundConfig = /** @type {!SoundConfig} */ (FORGE.Utils.extendSimpleObject(hotspot.config.sound, this._config[name].sound));
+        this._updateSound(soundConfig);
+    }
+
+    if(this._loading.animation === true)
+    {
+        var animationConfig = /** @type {HotspotTrackConfig} */ (FORGE.Utils.extendSimpleObject(hotspot.config.animation, this._config[name].animation));
+        this._updateAnimation(animationConfig);
+    }
+
+    if(this._loading.geometry === true)
+    {
+        var geometryConfig = /** @type {HotspotGeometryConfig} */ (FORGE.Utils.extendSimpleObject(hotspot.config.geometry, this._config[name].geometry));
+        this._updateGeometry(geometryConfig);
+    }
+
+    if(this._loading.transform === true)
+    {
+        var transformConfig = /** @type {HotspotTransformConfig} */ (FORGE.Utils.extendSimpleObject(hotspot.config.transform, this._config[name].transform));
+        this._updateTransform(transformConfig);
+    }
+};
+
+/**
+ * Toggle from a state to another.
+ * @method FORGE.HotspotStates#toggle
+ * @param  {Array&lt;string>} names - the names of the states to loop through.
+ */
+FORGE.HotspotStates.prototype.toggle = function(names)
+{
+    if(names === null || typeof names === "undefined" || names.length &lt; 2)
+    {
+        names = this._getStatesNames();
+    }
+
+    var current = names.indexOf(this._state);
+    var next = 0;
+
+    if(current &lt; names.length - 1)
+    {
+        next = current + 1;
+    }
+
+    this.load(names[next]);
+};
+
+/**
+ * Destroy sequence.
+ * @method FORGE.HotspotStates#destroy
+ */
+FORGE.HotspotStates.prototype.destroy = function()
+{
+    this._viewer = null;
+
+    if(this._onLoadComplete !== null)
+    {
+        this._onLoadComplete.destroy();
+        this._onLoadComplete = null;
+    }
+
+    FORGE.BaseObject.prototype.destroy.call(this);
+};
+
+/**
+ * Get and set the current state
+ * @name FORGE.HotspotStates#state
+ * @type {string}
+ */
+Object.defineProperty(FORGE.HotspotStates.prototype, "state",
+{
+    /** @this {FORGE.HotspotStates} */
+    get: function()
+    {
+        return this._state;
+    },
+
+    /** @this {FORGE.HotspotStates} */
+    set: function(value)
+    {
+        this.load(value);
+    }
+});
+
+/**
+ * Get the states names.
+ * @name FORGE.HotspotStates#names
+ * @type {Array&lt;string>}
+ * @readonly
+ */
+Object.defineProperty(FORGE.HotspotStates.prototype, "names",
+{
+    /** @this {FORGE.HotspotStates} */
+    get: function()
+    {
+        return this._getStatesNames();
+    }
+});
+
+/**
+ * Get the ready flag.
+ * @name FORGE.HotspotStates#ready
+ * @type {boolean}
+ * @readonly
+ */
+Object.defineProperty(FORGE.HotspotStates.prototype, "ready",
+{
+    /** @this {FORGE.HotspotStates} */
+    get: function()
+    {
+        return this._ready;
+    }
+});
+
+/**
+ * Get the auto flag.
+ * @name FORGE.HotspotStates#auto
+ * @type {boolean}
+ * @readonly
+ */
+Object.defineProperty(FORGE.HotspotStates.prototype, "auto",
+{
+    /** @this {FORGE.HotspotStates} */
+    get: function()
+    {
+        return this._auto;
+    }
+});
+
+/**
+ * Get the onConfigLoadComplete {@link FORGE.EventDispatcher}.
+ * @name  FORGE.HotspotStates#onLoadComplete
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.HotspotStates.prototype, "onLoadComplete",
+{
+    /** @this {FORGE.HotspotStates} */
+    get: function()
+    {
+        if (this._onLoadComplete === null)
+        {
+            this._onLoadComplete = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onLoadComplete;
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

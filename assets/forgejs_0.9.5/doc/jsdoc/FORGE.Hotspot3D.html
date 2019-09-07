@@ -1,0 +1,3575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Class: Hotspot3D</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Class: Hotspot3D</h1> -->
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="FORGE.html">FORGE</a>.</span>
+        
+        Hotspot3D
+        </h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    <h4 class="name" id="Hotspot3D"><span class="type-signature"></span>new Hotspot3D<span class="signature">(viewer, config)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    FORGE.Hotspot3D
+Abstract base class for projeted views. Should be subclassed for every supported projection / view type.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>viewer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="FORGE.Viewer.html">FORGE.Viewer</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">viewer reference</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HotspotConfig</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">hostspot configuration</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="FORGE.Object3D.html">FORGE.Object3D</a></li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+                
+
+<a name="alive"></a>
+
+<div class="public">
+
+    <h4 class="name" id="alive"><span class="type-signature">(readonly) </span>alive<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the alive flag value of the object.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#alive">FORGE.BaseObject#alive</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line291">line 291</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="animation"></a>
+
+<div class="public">
+
+    <h4 class="name" id="animation"><span class="type-signature">(readonly) </span>animation<span class="type-signature"> :<a href="FORGE.HotspotAnimation.html">FORGE.HotspotAnimation</a></span></h4>
+
+    
+
+    
+    <div class="description">
+        Hotspot animation accessor
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="FORGE.HotspotAnimation.html">FORGE.HotspotAnimation</a></span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line526">line 526</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="className"></a>
+
+<div class="public">
+
+    <h4 class="name" id="className"><span class="type-signature">(readonly) </span>className<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the class name of the object.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#className">FORGE.BaseObject#className</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line245">line 245</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="config"></a>
+
+<div class="public">
+
+    <h4 class="name" id="config"><span class="type-signature">(readonly) </span>config<span class="type-signature"> :HotspotConfig</span></h4>
+
+    
+
+    
+    <div class="description">
+        Hotspot config accessor
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">HotspotConfig</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line488">line 488</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="data"></a>
+
+<div class="public">
+
+    <h4 class="name" id="data"><span class="type-signature"></span>data<span class="type-signature"> :*</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get and set any custom data you want to associate to this object.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">*</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#data">FORGE.BaseObject#data</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line306">line 306</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="debug"></a>
+
+<div class="public">
+
+    <h4 class="name" id="debug"><span class="type-signature"></span>debug<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get and set the debug flag.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#debug">FORGE.BaseObject#debug</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line326">line 326</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="events"></a>
+
+<div class="public">
+
+    <h4 class="name" id="events"><span class="type-signature">(readonly) </span>events<span class="type-signature"> :Object</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the events of this object
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.Object3D.html#events">FORGE.Object3D#events</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="3d_Object3D.js.html">3d/Object3D.js</a>, <a href="3d_Object3D.js.html#line377">line 377</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="fx"></a>
+
+<div class="public">
+
+    <h4 class="name" id="fx"><span class="type-signature">(readonly) </span>fx<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the FX applied to this object
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.Object3D.html#fx">FORGE.Object3D#fx</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="3d_Object3D.js.html">3d/Object3D.js</a>, <a href="3d_Object3D.js.html#line362">line 362</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="geometry"></a>
+
+<div class="public">
+
+    <h4 class="name" id="geometry"><span class="type-signature">(readonly) </span>geometry<span class="type-signature"> :<a href="FORGE.HotspotGeometry.html">FORGE.HotspotGeometry</a></span></h4>
+
+    
+
+    
+    <div class="description">
+        Hotspot geometry accessor
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="FORGE.HotspotGeometry.html">FORGE.HotspotGeometry</a></span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line586">line 586</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="hovered"></a>
+
+<div class="public">
+
+    <h4 class="name" id="hovered"><span class="type-signature"></span>hovered<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get and set the hovered flag
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.Object3D.html#hovered">FORGE.Object3D#hovered</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="3d_Object3D.js.html">3d/Object3D.js</a>, <a href="3d_Object3D.js.html#line323">line 323</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="interactive"></a>
+
+<div class="public">
+
+    <h4 class="name" id="interactive"><span class="type-signature"></span>interactive<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get and set the interactive flag
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.Object3D.html#interactive">FORGE.Object3D#interactive</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="3d_Object3D.js.html">3d/Object3D.js</a>, <a href="3d_Object3D.js.html#line343">line 343</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="material"></a>
+
+<div class="public">
+
+    <h4 class="name" id="material"><span class="type-signature">(readonly) </span>material<span class="type-signature"> :<a href="FORGE.HotspotMaterial.html">FORGE.HotspotMaterial</a></span></h4>
+
+    
+
+    
+    <div class="description">
+        Hotspot material accessor
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="FORGE.HotspotMaterial.html">FORGE.HotspotMaterial</a></span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line541">line 541</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="mesh"></a>
+
+<div class="public">
+
+    <h4 class="name" id="mesh"><span class="type-signature">(readonly) </span>mesh<span class="type-signature"> :THREE.Mesh</span></h4>
+
+    
+
+    
+    <div class="description">
+        3D object mesh
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">THREE.Mesh</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.Object3D.html#mesh">FORGE.Object3D#mesh</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="3d_Object3D.js.html">3d/Object3D.js</a>, <a href="3d_Object3D.js.html#line284">line 284</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="name"></a>
+
+<div class="public">
+
+    <h4 class="name" id="name"><span class="type-signature"></span>name<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        Hotspot name accessor
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line503">line 503</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="onClick"></a>
+
+<div class="public">
+
+    <h4 class="name" id="onClick"><span class="type-signature">(readonly) </span>onClick<span class="type-signature"> :<a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a></span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the onClick <a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a>.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a></span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.Object3D.html#onClick">FORGE.Object3D#onClick</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="3d_Object3D.js.html">3d/Object3D.js</a>, <a href="3d_Object3D.js.html#line407">line 407</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="onDestroy"></a>
+
+<div class="public">
+
+    <h4 class="name" id="onDestroy"><span class="type-signature">(readonly) </span>onDestroy<span class="type-signature"> :<a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a></span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the onDestroy <a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a>, this event is emitted at the end of the destroy sequence.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a></span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#onDestroy">FORGE.BaseObject#onDestroy</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line378">line 378</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="onOut"></a>
+
+<div class="public">
+
+    <h4 class="name" id="onOut"><span class="type-signature">(readonly) </span>onOut<span class="type-signature"> :<a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a></span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the onOut <a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a>.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a></span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.Object3D.html#onOut">FORGE.Object3D#onOut</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="3d_Object3D.js.html">3d/Object3D.js</a>, <a href="3d_Object3D.js.html#line447">line 447</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="onOver"></a>
+
+<div class="public">
+
+    <h4 class="name" id="onOver"><span class="type-signature">(readonly) </span>onOver<span class="type-signature"> :<a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a></span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the onOver <a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a>.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a></span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.Object3D.html#onOver">FORGE.Object3D#onOver</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="3d_Object3D.js.html">3d/Object3D.js</a>, <a href="3d_Object3D.js.html#line427">line 427</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="onReady"></a>
+
+<div class="public">
+
+    <h4 class="name" id="onReady"><span class="type-signature">(readonly) </span>onReady<span class="type-signature"> :<a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a></span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the onReady <a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a>.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a></span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.Object3D.html#onReady">FORGE.Object3D#onReady</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="3d_Object3D.js.html">3d/Object3D.js</a>, <a href="3d_Object3D.js.html#line467">line 467</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="ready"></a>
+
+<div class="public">
+
+    <h4 class="name" id="ready"><span class="type-signature">(readonly) </span>ready<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Hotspot3D ready flag
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="FORGE.Object3D.html#ready">FORGE.Object3D#ready</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line601">line 601</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="sound"></a>
+
+<div class="public">
+
+    <h4 class="name" id="sound"><span class="type-signature">(readonly) </span>sound<span class="type-signature"> :<a href="FORGE.HotspotSound.html">FORGE.HotspotSound</a></span></h4>
+
+    
+
+    
+    <div class="description">
+        Hotspot sound accessor
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="FORGE.HotspotSound.html">FORGE.HotspotSound</a></span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line556">line 556</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="states"></a>
+
+<div class="public">
+
+    <h4 class="name" id="states"><span class="type-signature">(readonly) </span>states<span class="type-signature"> :<a href="FORGE.HotspotStates.html">FORGE.HotspotStates</a></span></h4>
+
+    
+
+    
+    <div class="description">
+        Hotspot states accessor
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="FORGE.HotspotStates.html">FORGE.HotspotStates</a></span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line632">line 632</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="states"></a>
+
+<div class="public">
+
+    <h4 class="name" id="states"><span class="type-signature">(readonly) </span>states<span class="type-signature"> :<a href="FORGE.HotspotStates.html">FORGE.HotspotStates</a></span></h4>
+
+    
+
+    
+    <div class="description">
+        Hotspot states accessor
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="FORGE.HotspotStates.html">FORGE.HotspotStates</a></span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line617">line 617</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="tags"></a>
+
+<div class="public">
+
+    <h4 class="name" id="tags"><span class="type-signature">(readonly) </span>tags<span class="type-signature"> :Array</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the tags associated to this object.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Array</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#tags">FORGE.BaseObject#tags</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line276">line 276</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="transform"></a>
+
+<div class="public">
+
+    <h4 class="name" id="transform"><span class="type-signature">(readonly) </span>transform<span class="type-signature"> :<a href="FORGE.HotspotTransform.html">FORGE.HotspotTransform</a></span></h4>
+
+    
+
+    
+    <div class="description">
+        Hotspot transform accessor
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="FORGE.HotspotTransform.html">FORGE.HotspotTransform</a></span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line571">line 571</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="uid"></a>
+
+<div class="public">
+
+    <h4 class="name" id="uid"><span class="type-signature">(readonly) </span>uid<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the uid of the object.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#uid">FORGE.BaseObject#uid</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line261">line 261</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="visible"></a>
+
+<div class="public">
+
+    <h4 class="name" id="visible"><span class="type-signature"></span>visible<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get and set the visible flag
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.Object3D.html#visible">FORGE.Object3D#visible</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="3d_Object3D.js.html">3d/Object3D.js</a>, <a href="3d_Object3D.js.html#line299">line 299</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="warning"></a>
+
+<div class="public">
+
+    <h4 class="name" id="warning"><span class="type-signature"></span>warning<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get and set the warning flag.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#warning">FORGE.BaseObject#warning</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line352">line 352</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="click"><span class="type-signature"></span>click<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Triggers actions for the click event
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.Object3D.html#click">FORGE.Object3D#click</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="3d_Object3D.js.html">3d/Object3D.js</a>, <a href="3d_Object3D.js.html#line166">line 166</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="destroy"><span class="type-signature"></span>destroy<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Destroy routine
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="FORGE.Object3D.html#destroy">FORGE.Object3D#destroy</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line438">line 438</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="dump"><span class="type-signature"></span>dump<span class="signature">()</span><span class="type-signature"> &rarr; {HotspotConfig}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Dump the hotspot actual configuration
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line413">line 413</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Return the hotspot actual configuration object
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">HotspotConfig</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="log"><span class="type-signature"></span>log<span class="signature">(value)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Basic log method, log a string in the console if debug is enabled.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The value you want to log in the console.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#log">FORGE.BaseObject#log</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line185">line 185</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="out"><span class="type-signature"></span>out<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Override of the out method to trigger the state change
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="FORGE.Object3D.html#out">FORGE.Object3D#out</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line380">line 380</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="over"><span class="type-signature"></span>over<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Override of the over method to trigger the state change
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="FORGE.Object3D.html#over">FORGE.Object3D#over</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line364">line 364</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="update"><span class="type-signature"></span>update<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Update hotspot content
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="hotspots_Hotspot3D.js.html">hotspots/Hotspot3D.js</a>, <a href="hotspots_Hotspot3D.js.html#line396">line 396</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="warn"><span class="type-signature"></span>warn<span class="signature">(value<span class="signature-attributes">nullable</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Basic warn method, log a warn string in the console if warning is enabled.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The value you want to warn in the console.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#warn">FORGE.BaseObject#warn</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line205">line 205</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+<div id="quickNav">
+
+    <h4>
+        
+            <span class="ancestors"><a href="FORGE.html">FORGE</a>.</span>
+        
+
+        Hotspot3D
+    </h4>
+   
+    
+        
+        <h5 class="subsection-title">Members</h5>
+
+        <ul>
+            
+                <li class="public">
+                    <a href="#alive">alive</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#animation">animation</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#className">className</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#config">config</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#data">data</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#debug">debug</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#events">events</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#fx">fx</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#geometry">geometry</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#hovered">hovered</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#interactive">interactive</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#material">material</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#mesh">mesh</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#name">name</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#onClick">onClick</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#onDestroy">onDestroy</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#onOut">onOut</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#onOver">onOver</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#onReady">onReady</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#ready">ready</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#sound">sound</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#states">states</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#states">states</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#tags">tags</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#transform">transform</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#uid">uid</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#visible">visible</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#warning">warning</a>
+                </li>
+            
+        </ul>
+
+    
+
+
+    
+        
+        <h5 class="subsection-title">Methods</h5>
+
+        <ul>
+            
+                <li class="public">
+                    <a href="#click">click</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#destroy">destroy</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#dump">dump</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#log">log</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#out">out</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#over">over</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#update">update</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#warn">warn</a>
+                </li>
+            
+        </ul>
+
+    
+
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:27 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

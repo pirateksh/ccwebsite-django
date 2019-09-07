@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: media/MediaStore.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: media/MediaStore.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * This object stores a number of tiles used for multi resolution cases with
+ * tiles. It acts as a LRU map, as we can't store infinite amount of tiles.
+ * The number of tiles to store is Σ(6 * 4^n), with n being the number of levels.
+ *
+ * There is an exception though: the level 0 of a multi resolution is always
+ * kept in the cache.
+ *
+ * @constructor FORGE.MediaStore
+ * @param {FORGE.Viewer} viewer - {@link FORGE.Viewer} reference
+ * @param {SceneMediaSourceConfig} config - the config given by a media to know
+ *                                          how to load each tile
+ * @param {(FORGE.Image|SceneMediaPreviewConfig)} preview - the pattern of the preview
+ * @extends {FORGE.BaseObject}
+ */
+FORGE.MediaStore = function(viewer, config, preview)
+{
+    /**
+     * The viewer reference.
+     * @name FORGE.MediaStore#_viewer
+     * @type {FORGE.Viewer}
+     * @private
+     */
+    this._viewer = viewer;
+
+    /**
+     * Media source configuration
+     * @name FORGE.MediaStore#_config
+     * @type {SceneMediaSourceConfig}
+     * @private
+     */
+    this._config = config;
+
+    /**
+     * Pattern of the preview
+     * @name FORGE.MediaStore#_preview
+     * @type {(FORGE.Image|SceneMediaSourceConfig)}
+     * @private
+     */
+    this._preview = preview;
+
+    /**
+     * A map containing all {@link FORGE.MediaTexture}, with the key being constitued
+     * from the level, face, x and y properties defining the texture
+     * @name FORGE.MediaStore#_textures
+     * @type {?FORGE.Map}
+     * @private
+     */
+    this._textures = null;
+
+    /**
+     * The list of currently being loaded textures
+     * @name FORGE.MediaStore#_loadingTextures
+     * @type {?Array&lt;string>}
+     * @private
+     */
+    this._loadingTextures = null;
+
+    /**
+     * Map of texture promises
+     * @type {FORGE.Map}
+     * @private
+     */
+    this._texturePromises = null;
+
+    /**
+     * LIFO stack holding texture requests
+     * @type {Array}
+     * @private
+     */
+    this._textureStack = null;
+
+    /**
+     * LIFO stack timer interval
+     * @type {?number}
+     * @private
+     */
+    this._textureStackInterval = null;
+
+    /**
+     * The current size of all loaded textures.
+     * @name FORGE.MediaStore#_size
+     * @type {number}
+     * @private
+     */
+    this._size = 0;
+
+    /**
+     * The max size of the cache.
+     * @name FORGE.MediaStore#_maxSize
+     * @type {number}
+     * @private
+     */
+    this._maxSize = 0;
+
+    /**
+     * The global pattern of texture file urls
+     * @name FORGE.MediaStore#_pattern
+     * @type {string}
+     * @private
+     */
+    this._pattern = "";
+
+    /**
+     * Object containing patterns of texture file urls per pyramid level
+     * @name FORGE.MediaStore#_patterns
+     * @type {?Object}
+     * @private
+     */
+    this._patterns = null;
+
+    /**
+     * Faces configuration
+     * @type {?Object}
+     * @private
+     */
+    this._cubeFaceConfig = null;
+
+    FORGE.BaseObject.call(this, "MediaStore");
+
+    this._boot();
+};
+
+FORGE.MediaStore.prototype = Object.create(FORGE.BaseObject.prototype);
+FORGE.MediaStore.prototype.constructor = FORGE.MediaStore;
+
+/**
+ * Texture stack interval in milliseconds
+ * @type {number}
+ */
+FORGE.MediaStore.TEXTURE_STACK_INTERVAL_MS = 250;
+
+/**
+ * Table describing previous cube face
+ * @type {CubeFaceObject}
+ */
+FORGE.MediaStore.CUBE_FACE_CONFIG = {
+    "front": "front",
+    "right": "right",
+    "back": "back",
+    "left": "left",
+    "down": "down",
+    "up": "up"
+};
+
+/**
+ * Boot routine.
+ *
+ * @method FORGE.MediaStore#_boot
+ * @private
+ */
+FORGE.MediaStore.prototype._boot = function()
+{
+    this._register();
+
+    this._textures = new FORGE.Map();
+    this._loadingTextures = [];
+    this._textureStack = [];
+    this._texturePromises = new FORGE.Map();
+    this._patterns = {};
+
+    this._parseConfig(this._config);
+
+    if (FORGE.Device.desktop === true)
+    {
+        this._maxSize = 150000000;
+    }
+    else if (FORGE.Device.iOS === true)
+    {
+        this._maxSize = 40000000;
+    }
+    else
+    {
+        this._maxSize = 50000000;
+    }
+};
+
+/**
+ * Parse config routine.
+ *
+ * @method FORGE.MediaStore#_parseConfig
+ * @param {SceneMediaSourceConfig} config - the config of the media source
+ * @private
+ */
+FORGE.MediaStore.prototype._parseConfig = function(config)
+{
+    // a pattern should contains at least {f}, {l}, {x} or {y}
+    var re = /\{[lfxy].*\}/;
+
+    // Check if there is a global pattern
+    if (typeof config.pattern === "string")
+    {
+        if (config.pattern.match(re) === null)
+        {
+            throw "the pattern of the multi resolution media is wrong";
+        }
+
+        this._pattern = config.pattern;
+    }
+
+    if (this._preview !== null)
+    {
+        if (typeof this._preview.url !== "string" || this._preview.url.match(re) === null)
+        {
+            this.warn("no preview for this panorama");
+        }
+        else
+        {
+            this._patterns[FORGE.Tile.PREVIEW] = this._preview.url;
+        }
+    }
+
+    // Then check if each resolution level has its own pattern
+    for (var l = 0, ll = config.levels.length; l &lt; ll; l++)
+    {
+        if (typeof config.levels[l].pattern === "string")
+        {
+            if (config.pattern.match(re) === null)
+            {
+                throw "the pattern of the multi resolution media is wrong";
+            }
+
+            this._patterns[l] = config.levels[l].pattern;
+        }
+    }
+
+    this._cubeFaceConfig = FORGE.MediaStore.CUBE_FACE_CONFIG;
+    if (typeof config.faces !== "undefined")
+    {
+        this._cubeFaceConfig = config.faces;
+    }
+};
+
+/**
+ * Create the key of an image.
+ *
+ * @method FORGE.MediaStore#_createKey
+ * @param {FORGE.Tile} tile - tile
+ * @return {string} returns the key for this image
+ * @private
+ */
+FORGE.MediaStore.prototype._createKey = function(tile)
+{
+    var key = "";
+    key += typeof tile.face !== "undefined" ? this._cubeFaceConfig[tile.face] + "-" : "";
+    key += typeof tile.level !== "undefined" ? tile.level + "-" : "";
+    key += typeof tile.x !== "undefined" ? tile.x + "-" : "";
+    key += typeof tile.y !== "undefined" ? tile.y : "";
+
+    return key;
+};
+
+/**
+ * Loads an Image from parameters, but doesn't add it to the map yet.
+ *
+ * @method FORGE.MediaStore#_load
+ * @param {FORGE.Tile} tile - tile
+ * @private
+ */
+FORGE.MediaStore.prototype._load = function(tile)
+{
+    var key = this._createKey(tile);
+    if (this._loadingTextures.indexOf(key) !== -1)
+    {
+        return;
+    }
+
+    var entry = this._texturePromises.get(key);
+    if (entry.cancelled)
+    {
+        this.log("Load promise cancelled for tile " + tile.name);
+        entry.load.reject("Tile cancelled");
+        this._texturePromises.delete(key);
+        return;
+    }
+
+    this.log("Push loading texture for tile " + tile.name);
+    this._loadingTextures.push(key);
+
+    var url = this._pattern;
+
+    if (typeof this._patterns[tile.level] !== "undefined")
+    {
+        url = this._patterns[tile.level];
+    }
+
+    url = url.replace(/\{face\}/, this._cubeFaceConfig[tile.face]);
+    url = url.replace(/\{level\}/, tile.level.toString());
+    url = url.replace(/\{x\}/, tile.x.toString());
+    url = url.replace(/\{y\}/, tile.y.toString());
+
+    var config = {
+        url: url
+    };
+
+    var image = new FORGE.Image(this._viewer, config);
+
+    image.data = {
+        tile: tile
+    };
+
+    image.onLoadComplete.add(this._onLoadComplete.bind(this), this);
+};
+
+/**
+ * Add the loaded image to the map.
+ *
+ * @method FORGE.MediaStore#_onLoadComplete
+ * @param {FORGE.Image} image - the loaded image
+ * @private
+ */
+FORGE.MediaStore.prototype._onLoadComplete = function(image)
+{
+    if (this._textures === null)
+    {
+        image.emitter.destroy();
+        // stop it all, it means this mediastore has been destroyed and this is
+        // a late-coming tile
+        return;
+    }
+
+    image = image.emitter;
+    var tile = image.data.tile;
+    var key = this._createKey(tile);
+
+    this.log("Texture load complete for tile " + tile.name);
+
+    var texture = new THREE.Texture();
+    texture.image = image.element;
+
+    var size = image.element.height * image.element.width;
+    this._size += size;
+
+    var mediaTexture = new FORGE.MediaTexture(texture, (tile.level === FORGE.Tile.PREVIEW), size);
+    this._textures.set(key, mediaTexture);
+
+    // destroy the image, it is no longer needed
+    this._loadingTextures.splice(this._loadingTextures.indexOf(image.data.key), 1);
+
+    var entry = this._texturePromises.get(key);
+    entry.load.resolve(mediaTexture.texture);
+    this._texturePromises.delete(key);
+
+    image.destroy();
+
+    this._checkSize();
+};
+
+/**
+ * Discard texture.
+ *
+ * @method FORGE.MediaStore#_discardTexture
+ * @param {string} key - texture key
+ * @private
+ */
+FORGE.MediaStore.prototype._discardTexture = function(key)
+{
+    if (this._textures.has(key) === false)
+    {
+        return;
+    }
+
+    var texture = this._textures.get(key);
+
+    this._size -= texture.size;
+    texture.destroy();
+
+    this._textures.delete(key);
+};
+
+/**
+ * Check the current size of the store, and flush some texture if necessary.
+ *
+ * @method FORGE.MediaStore#_checkSize
+ * @private
+ */
+FORGE.MediaStore.prototype._checkSize = function()
+{
+    if (this._size &lt; this._maxSize)
+    {
+        return;
+    }
+
+    var entries = this._textures.entries(),
+        time = window.performance.now(),
+        force = false,
+        texture;
+
+    entries = FORGE.Utils.sortArrayByProperty(entries, "1.lastTime");
+
+    while (this._size > this._maxSize)
+    {
+        // oldest are first
+        texture = entries.shift();
+
+        // if no more entries (aka all texture are level 0) remove it anyway
+        if (typeof texture === "undefined")
+        {
+            entries = this._textures.entries();
+            entries = FORGE.Utils.sortArrayByProperty(entries, "1.lastTime");
+            force = true;
+        }
+        else
+        // but don't delete if it is locked
+        if (force === true || texture[1].locked !== true)
+        {
+            this._discardTexture(texture[0]);
+        }
+    }
+};
+
+/**
+ * Push item from texture stack.
+ *
+ * @method FORGE.MediaStore#_textureStackPush
+ * @param {FORGE.Tile} tile - tile requesting texture
+ */
+FORGE.MediaStore.prototype._textureStackPush = function(tile)
+{
+    // First clear interval if any and push
+    if (this._textureStackInterval !== null)
+    {
+        window.clearTimeout(this._textureStackInterval);
+        this._textureStackInterval = null;
+    }
+
+    if (tile.level === FORGE.Tile.PREVIEW)
+    {
+        this._load(tile);
+    }
+    else
+    {
+        this._textureStack.push(tile);
+
+        this._textureStackInterval = window.setTimeout(this._textureStackPop.bind(this), FORGE.MediaStore.TEXTURE_STACK_INTERVAL_MS);
+    }
+};
+
+/**
+ * Pop item from texture stack.
+ *
+ * @method FORGE.MediaStore#_textureStackPop
+ */
+FORGE.MediaStore.prototype._textureStackPop = function()
+{
+    this._textureStackInterval = null;
+
+    while (this._textureStack.length > 0)
+    {
+        var tile = this._textureStack.pop();
+        //this.log("Texture stack length (---): " + this._textureStack.length + " (" + tile.name + ")");
+
+        this.log("Pop texture request from stack for tile " + tile.name);
+        this._load(tile);
+    }
+};
+
+/**
+ * Get an image from this store, given four parameters: the face associated to
+ * this image, the level of quality and the x and y positions. It returns
+ * either a {@link THREE.Texture} or null.
+ *
+ * The inner working is as follow: either the image is already loaded and
+ * returned, or either the image is being loaded and nothing is returned yet.
+ * If the latter, the image is added to the map once it is completely loaded
+ * (the onLoadComplete event).
+ *
+ * @method FORGE.MediaStore#get
+ * @param {FORGE.Tile} tile - tile
+ * @return {Promise} returns a promise on the image
+ */
+FORGE.MediaStore.prototype.get = function(tile)
+{
+    var key = this._createKey(tile);
+
+    // If texture is available, return a resolved promise
+    if (this._textures.has(key))
+    {
+        this.log("Texture available, return resolved promise");
+        var promise = FORGE.Utils.makePromise();
+        var mediaTexture = this._textures.get(key);
+        promise.resolve(mediaTexture.texture);
+        return promise;
+    }
+
+    // First check if texture is already loading (pending promise)
+    // Return null, and client should do nothing but wait
+    var promise = this._texturePromises.get(key);
+    if (promise !== undefined)
+    {
+        return null;
+    }
+
+    this.log("Create load promise for tile " + tile.name);
+
+    var loadingPromise = FORGE.Utils.makePromise();
+
+    // Texture already available
+    // Return resolved promise
+    if (this._textures.has(key))
+    {
+        this.log("and resolve it immediately");
+        loadingPromise.resolve(this._textures.get(key));
+        return loadingPromise;
+    }
+
+    // Create new entry in map of promises
+    var entry = /** @type {!TexturePromiseObject} */ (
+    {
+        load: loadingPromise,
+        cancelled: false
+    });
+
+    this._texturePromises.set(key, entry);
+
+    this._textureStackPush(tile);
+
+    return loadingPromise;
+};
+
+/**
+ * Ask store if it has a texture already available
+ * @method FORGE.MediaStore#has
+ * @param {string} key - texture key
+ */
+FORGE.MediaStore.prototype.has = function(key)
+{
+    return this._textures.has(key);
+};
+
+/**
+ * Discard texture for a given tile
+ * @method FORGE.MediaStore#discardTileTexture
+ * @param {FORGE.Tile} tile - tile
+ */
+FORGE.MediaStore.prototype.discardTileTexture = function(tile)
+{
+    this._discardTexture(this._createKey(tile));
+};
+
+/**
+ * Destroy routine.
+ *
+ * @method FORGE.MediaStore#destroy
+ */
+FORGE.MediaStore.prototype.destroy = function()
+{
+    this._unregister();
+
+    this._patterns = null;
+
+    this._viewer = null;
+    this._loadingTextures = null;
+
+    if (this._textureStack !== null)
+    {
+        this._textureStack.length = 0;
+        this._textureStack = null;
+    }
+
+    this._texturePromises = null;
+
+    this._textures.clear();
+    this._textures = null;
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

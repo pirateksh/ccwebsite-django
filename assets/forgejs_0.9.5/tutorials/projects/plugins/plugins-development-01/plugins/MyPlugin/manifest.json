@@ -1,0 +1,15 @@
+{
+    "uid": "org.forgejs.myplugin",
+
+    "options":
+    {
+        "background": "blue"
+    },
+
+    "sources":
+    [
+        "src/main.js"
+    ],
+
+    "constructor": "ForgePlugins.MyPlugin"
+}

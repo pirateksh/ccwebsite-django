@@ -1,0 +1,929 @@
+
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>JSON Reference</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css" media="screen,projection" charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="static/fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="static/forge-iframe.css">
+    <script type="text/javascript">
+        function updateLink()
+        {
+            var url, slug, links = document.getElementsByTagName('a');
+
+            for (var i = 0, ii = links.length; i < ii; i++)
+            {
+                if (!links[i].classList.contains('out'))
+                {
+                    url = links[i].href.replace(/(.+\/)\w+\.html#([\w\-]+)/, function(match, p1, p2) {
+                        var subRefs = p2.split('-');
+
+                        if (subRefs.length > 1)
+                        {
+                            slug = subRefs[0] + '/' + p2;
+                            return p1 + subRefs[0] + '.html#' + p2;
+                        } else {
+                            slug = p2;
+                            return p1 + p2 + '.html'
+                        }
+                    });
+
+                    links[i].href = 'javascript:window.parent.goTo("' + url + '", "' + slug + '");';
+                }
+            }
+        }
+    </script>
+</head>
+<body data-spy="scroll" data-target="#navbar" onload="updateLink()">
+<br>
+
+<article>
+    <header class="col-lg-12">
+        <h2>Story</h2>
+        <p class="lead">This is the main section of ForgeJS, describing each scene present in the story. It is essentially composed of <a href="#scene">scenes</a> that can be put in <a href="#group">groups</a>.</p>
+    </header>
+
+    
+    <section class="col-lg-12">
+        <h4>Example :</h4>
+        <small class="example-code"><pre>{
+  &quot;uid&quot;: &quot;story-0&quot;,
+  &quot;name&quot;: &quot;My Story&quot;,
+  &quot;slug&quot;: &quot;my-story&quot;,
+  &quot;description&quot;: &quot;This is a super story about awesome things&quot;,
+  &quot;default&quot;: &quot;scene-0&quot;,
+  &quot;thumbnails&quot;: [
+    {
+      &quot;uid&quot;: &quot;thumb-0&quot;,
+      &quot;width&quot;: 100,
+      &quot;height&quot;: 50,
+      &quot;url&quot;: &quot;./images/scene-0-thumbnail.jpg&quot;
+    }
+  ],
+  &quot;scenes&quot;: [
+    {
+      &quot;uid&quot;: &quot;scene-0&quot;,
+      &quot;name&quot;: &quot;My Scene&quot;,
+      &quot;slug&quot;: &quot;my-scene&quot;,
+      &quot;description&quot;: &quot;This is a super scene with awesome things in it&quot;,
+      &quot;background&quot;: &quot;#000&quot;,
+      &quot;fx&quot;: &quot;fx-0&quot;,
+      &quot;tags&quot;: [
+        &quot;awesome&quot;,
+        &quot;beach&quot;,
+        &quot;surf&quot;
+      ],
+      &quot;sync&quot;: [
+        &quot;scene-0&quot;,
+        &quot;scene-1&quot;
+      ],
+      &quot;thumbnails&quot;: [
+        {
+          &quot;uid&quot;: &quot;thumb-0&quot;,
+          &quot;width&quot;: 100,
+          &quot;height&quot;: 50,
+          &quot;url&quot;: &quot;./images/scene-0-thumbnail.jpg&quot;
+        }
+      ],
+      &quot;media&quot;: {
+        &quot;uid&quot;: &quot;media-0&quot;,
+        &quot;type&quot;: &quot;image&quot;,
+        &quot;preview&quot;: {
+          &quot;url&quot;: &quot;multi/preview/{face}.jpg&quot;,
+          &quot;tile&quot;: 512
+        },
+        &quot;source&quot;: {
+          &quot;format&quot;: &quot;equi&quot;,
+          &quot;streaming&quot;: &quot;html5&quot;,
+          &quot;url&quot;: &quot;./images/scene-0.jpg&quot;,
+          &quot;fov&quot;: {
+            &quot;vertical&quot;: 90,
+            &quot;horizontal&quot;: 90,
+            &quot;diagonal&quot;: 90
+          },
+          &quot;pattern&quot;: &quot;multi/equi/{level}/{y}/{x}.jpg&quot;,
+          &quot;levels&quot;: [
+            {
+              &quot;name&quot;: &quot;4K&quot;,
+              &quot;url&quot;: &quot;multi/video-2K.mp4&quot;,
+              &quot;device&quot;: {
+                &quot;safari&quot;: false,
+                &quot;webvr&quot;: true,
+                &quot;os&quot;: &quot;Windows&quot;
+              },
+              &quot;pattern&quot;: &quot;multi/equi/{level}/{y}/{x}.jpg&quot;,
+              &quot;width&quot;: 2048,
+              &quot;height&quot;: 1024,
+              &quot;tile&quot;: 512
+            }
+          ],
+          &quot;order&quot;: &quot;RLUDBF&quot;,
+          &quot;tile&quot;: 512,
+          &quot;faces&quot;: [
+            {
+              &quot;F&quot;: &quot;front&quot;
+            },
+            {
+              &quot;B&quot;: &quot;back&quot;
+            },
+            {
+              &quot;R&quot;: &quot;right&quot;
+            },
+            {
+              &quot;L&quot;: &quot;left&quot;
+            },
+            {
+              &quot;D&quot;: &quot;down&quot;
+            },
+            {
+              &quot;U&quot;: &quot;up&quot;
+            }
+          ]
+        },
+        &quot;options&quot;: {
+          &quot;autoPlay&quot;: false,
+          &quot;loop&quot;: false,
+          &quot;volume&quot;: 1,
+          &quot;startTime&quot;: 0,
+          &quot;autoPause&quot;: true,
+          &quot;autoResume&quot;: false
+        },
+        &quot;events&quot;: {
+          &quot;onPlay&quot;: {},
+          &quot;onPause&quot;: {},
+          &quot;onSeeked&quot;: {},
+          &quot;onEnded&quot;: {}
+        },
+        &quot;fx&quot;: &quot;fx-0&quot;
+      },
+      &quot;sound&quot;: {
+        &quot;uid&quot;: &quot;sound-0&quot;,
+        &quot;type&quot;: &quot;stereo&quot;,
+        &quot;source&quot;: {
+          &quot;url&quot;: &quot;audio/scene-0-hotspot.mp3&quot;,
+          &quot;target&quot;: &quot;video-0&quot;
+        },
+        &quot;options&quot;: {
+          &quot;volume&quot;: {},
+          &quot;loop&quot;: true,
+          &quot;autoPlay&quot;: true,
+          &quot;startTime&quot;: 0,
+          &quot;range&quot;: 180
+        }
+      },
+      &quot;playlists&quot;: {
+        &quot;enabled&quot;: true,
+        &quot;volume&quot;: {
+          &quot;default&quot;: 1,
+          &quot;max&quot;: 1
+        },
+        &quot;default&quot;: {},
+        &quot;lists&quot;: [
+          {
+            &quot;uid&quot;: &quot;playlist-0&quot;,
+            &quot;name&quot;: &quot;Killer Playlist&quot;,
+            &quot;default&quot;: {},
+            &quot;autoPlay&quot;: true,
+            &quot;loop&quot;: true,
+            &quot;volume&quot;: {
+              &quot;default&quot;: 1,
+              &quot;max&quot;: 1
+            },
+            &quot;tracks&quot;: [
+              &quot;track-0&quot;,
+              &quot;track-1&quot;
+            ]
+          }
+        ],
+        &quot;tracks&quot;: [
+          {
+            &quot;uid&quot;: &quot;track-0&quot;,
+            &quot;name&quot;: &quot;My awesome song&quot;,
+            &quot;author&quot;: &quot;John Doo&quot;,
+            &quot;url&quot;: &quot;audio/track-0.mp3&quot;,
+            &quot;loop&quot;: false
+          }
+        ]
+      },
+      &quot;view&quot;: {
+        &quot;type&quot;: &quot;Rectilinear&quot;,
+        &quot;options&quot;: {
+          &quot;repeatX&quot;: &quot;false&quot;,
+          &quot;repeatY&quot;: &quot;false&quot;
+        }
+      },
+      &quot;camera&quot;: {
+        &quot;parallax&quot;: 0.2,
+        &quot;keep&quot;: &quot;true&quot;,
+        &quot;yaw&quot;: {
+          &quot;default&quot;: 45,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: 90
+        },
+        &quot;pitch&quot;: {
+          &quot;default&quot;: 45,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: 90
+        },
+        &quot;roll&quot;: {
+          &quot;default&quot;: 45,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: 90
+        },
+        &quot;fov&quot;: {
+          &quot;default&quot;: 45,
+          &quot;min&quot;: 0,
+          &quot;max&quot;: 90
+        },
+        &quot;gaze&quot;: {
+          &quot;delay&quot;: 2000,
+          &quot;cursor&quot;: {
+            &quot;innerRadius&quot;: 0.02,
+            &quot;outerRadius&quot;: 0.04,
+            &quot;color&quot;: {},
+            &quot;opacity&quot;: 0.5
+          },
+          &quot;progress&quot;: {
+            &quot;innerRadius&quot;: 0.02,
+            &quot;outerRadius&quot;: 0.04,
+            &quot;color&quot;: {},
+            &quot;opacity&quot;: 0.5
+          }
+        }
+      },
+      &quot;audio&quot;: {
+        &quot;enabled&quot;: true,
+        &quot;volume&quot;: {
+          &quot;default&quot;: 1,
+          &quot;max&quot;: 1
+        }
+      },
+      &quot;hotspots&quot;: [
+        {
+          &quot;uid&quot;: &quot;hotspot-0&quot;,
+          &quot;tags&quot;: [
+            &quot;awesome&quot;,
+            &quot;hotspot&quot;,
+            &quot;turtle&quot;
+          ],
+          &quot;type&quot;: &quot;3d&quot;,
+          &quot;visible&quot;: true,
+          &quot;interactive&quot;: true,
+          &quot;cursor&quot;: &quot;crosshair&quot;,
+          &quot;fx&quot;: &quot;fx-0&quot;,
+          &quot;facingCenter&quot;: true,
+          &quot;transform&quot;: {
+            &quot;position&quot;: {
+              &quot;radius&quot;: 200,
+              &quot;theta&quot;: 90,
+              &quot;phi&quot;: 30,
+              &quot;x&quot;: 240,
+              &quot;y&quot;: 350,
+              &quot;z&quot;: 480
+            },
+            &quot;rotation&quot;: {
+              &quot;x&quot;: 8,
+              &quot;y&quot;: 3,
+              &quot;z&quot;: 5
+            },
+            &quot;scale&quot;: {
+              &quot;x&quot;: 8,
+              &quot;y&quot;: 3,
+              &quot;z&quot;: 5
+            }
+          },
+          &quot;geometry&quot;: {
+            &quot;type&quot;: &quot;plane&quot;,
+            &quot;offset&quot;: {
+              &quot;x&quot;: 20,
+              &quot;y&quot;: -50,
+              &quot;z&quot;: 5
+            },
+            &quot;options&quot;: {
+              &quot;points&quot;: [
+                [
+                  0,
+                  0
+                ],
+                [
+                  10,
+                  0
+                ],
+                [
+                  5,
+                  4
+                ]
+              ]
+            }
+          },
+          &quot;animation&quot;: {
+            &quot;enabled&quot;: true,
+            &quot;random&quot;: false,
+            &quot;loop&quot;: false,
+            &quot;autostart&quot;: false,
+            &quot;order&quot;: [
+              &quot;track-0&quot;,
+              &quot;track-2&quot;
+            ]
+          },
+          &quot;material&quot;: {
+            &quot;color&quot;: {},
+            &quot;opacity&quot;: 0.5,
+            &quot;transparent&quot;: false,
+            &quot;side&quot;: &quot;front&quot;,
+            &quot;image&quot;: &quot;images/scene-0-hotspot.jpg&quot;,
+            &quot;sprite&quot;: {
+              &quot;url&quot;: &quot;./sprites/sprite-map.png&quot;,
+              &quot;frames&quot;: &quot;./sprites/sprite-map.json&quot;,
+              &quot;frameRate&quot;: 24,
+              &quot;frame&quot;: 5,
+              &quot;paused&quot;: true,
+              &quot;loop&quot;: false,
+              &quot;animation&quot;: &quot;animation-0&quot;,
+              &quot;animations&quot;: [
+                {
+                  &quot;name&quot;: &quot;animation-0&quot;,
+                  &quot;start&quot;: 0,
+                  &quot;end&quot;: 24,
+                  &quot;loop&quot;: false,
+                  &quot;frameRate&quot;: 24
+                }
+              ]
+            },
+            &quot;video&quot;: {
+              &quot;url&quot;: &quot;./videos/video.mp4&quot;
+            },
+            &quot;plugin&quot;: &quot;plugin-0&quot;,
+            &quot;update&quot;: false
+          },
+          &quot;sound&quot;: {
+            &quot;uid&quot;: &quot;sound-0&quot;,
+            &quot;type&quot;: &quot;stereo&quot;,
+            &quot;source&quot;: {
+              &quot;url&quot;: &quot;audio/scene-0-hotspot.mp3&quot;,
+              &quot;target&quot;: &quot;video-0&quot;
+            },
+            &quot;options&quot;: {
+              &quot;volume&quot;: {},
+              &quot;loop&quot;: true,
+              &quot;autoPlay&quot;: true,
+              &quot;startTime&quot;: 0,
+              &quot;range&quot;: 180
+            }
+          },
+          &quot;dom&quot;: {
+            &quot;id&quot;: &quot;hotspot-dom-billboard&quot;,
+            &quot;class&quot;: {},
+            &quot;width&quot;: {},
+            &quot;height&quot;: {},
+            &quot;color&quot;: &quot;#ff5e9d&quot;,
+            &quot;index&quot;: 20,
+            &quot;offset&quot;: {
+              &quot;x&quot;: 10,
+              &quot;y&quot;: -5
+            }
+          },
+          &quot;events&quot;: {
+            &quot;onClick&quot;: {},
+            &quot;onOver&quot;: {},
+            &quot;onOut&quot;: {}
+          },
+          &quot;states&quot;: {
+            &quot;default&quot;: &quot;default&quot;,
+            &quot;auto&quot;: true,
+            &quot;over&quot;: {
+              &quot;material&quot;: {
+                &quot;color&quot;: {},
+                &quot;opacity&quot;: 0.5,
+                &quot;transparent&quot;: false,
+                &quot;side&quot;: &quot;front&quot;,
+                &quot;image&quot;: &quot;images/scene-0-hotspot.jpg&quot;,
+                &quot;sprite&quot;: {
+                  &quot;url&quot;: &quot;./sprites/sprite-map.png&quot;,
+                  &quot;frames&quot;: &quot;./sprites/sprite-map.json&quot;,
+                  &quot;frameRate&quot;: 24,
+                  &quot;frame&quot;: 5,
+                  &quot;paused&quot;: true,
+                  &quot;loop&quot;: false,
+                  &quot;animation&quot;: &quot;animation-0&quot;,
+                  &quot;animations&quot;: [
+                    {
+                      &quot;name&quot;: &quot;animation-0&quot;,
+                      &quot;start&quot;: 0,
+                      &quot;end&quot;: 24,
+                      &quot;loop&quot;: false,
+                      &quot;frameRate&quot;: 24
+                    }
+                  ]
+                },
+                &quot;video&quot;: {
+                  &quot;url&quot;: &quot;./videos/video.mp4&quot;
+                },
+                &quot;plugin&quot;: &quot;plugin-0&quot;,
+                &quot;update&quot;: false
+              }
+            }
+          }
+        }
+      ],
+      &quot;director&quot;: {
+        &quot;animation&quot;: {
+          &quot;enabled&quot;: true,
+          &quot;delay&quot;: 2000,
+          &quot;smooth&quot;: true,
+          &quot;stoppable&quot;: false,
+          &quot;idleTime&quot;: 3000,
+          &quot;random&quot;: false,
+          &quot;loop&quot;: false,
+          &quot;tracks&quot;: [
+            &quot;track-0&quot;,
+            &quot;track-2&quot;
+          ]
+        },
+        &quot;tracks&quot;: [
+          {
+            &quot;uid&quot;: &quot;track-0&quot;,
+            &quot;name&quot;: &quot;Sea to beach&quot;,
+            &quot;description&quot;: &quot;This is the track going from the sea to the beach.&quot;,
+            &quot;smooth&quot;: true,
+            &quot;cancelRoll&quot;: false,
+            &quot;easing&quot;: {
+              &quot;default&quot;: &quot;easeInQuad&quot;,
+              &quot;start&quot;: 5000
+            },
+            &quot;keyframes&quot;: [
+              {
+                &quot;time&quot;: 20,
+                &quot;data&quot;: {
+                  &quot;yaw&quot;: 10,
+                  &quot;pitch&quot;: 20,
+                  &quot;roll&quot;: -50,
+                  &quot;fov&quot;: 270
+                }
+              }
+            ]
+          }
+        ]
+      },
+      &quot;plugins&quot;: {
+        &quot;prefix&quot;: &quot;./plugins&quot;,
+        &quot;engines&quot;: [
+          {
+            &quot;uid&quot;: &quot;com.awesome.plugin&quot;,
+            &quot;prefix&quot;: &quot;./other-plugin-folder/&quot;,
+            &quot;url&quot;: &quot;AwesomePlugin&quot;,
+            &quot;manifest&quot;: &quot;manifest.json&quot;
+          }
+        ],
+        &quot;instances&quot;: [
+          {
+            &quot;uid&quot;: &quot;awesome-plugin-instance&quot;,
+            &quot;engine&quot;: &quot;com.awesome.plugin&quot;,
+            &quot;tags&quot;: [
+              &quot;plugin&quot;,
+              &quot;beach&quot;,
+              &quot;awesome&quot;
+            ],
+            &quot;scenes&quot;: [
+              &quot;scene-0&quot;,
+              &quot;scene-2&quot;
+            ],
+            &quot;options&quot;: {
+              &quot;awesomeness&quot;: 360,
+              &quot;key&quot;: &quot;i18n-awesome&quot;,
+              &quot;another_options&quot;: {
+                &quot;target&quot;: &quot;scene-1&quot;,
+                &quot;enabled&quot;: true
+              }
+            },
+            &quot;data&quot;: {},
+            &quot;actions&quot;: [
+              &quot;action-awesome-thing&quot;,
+              &quot;action-more-awesome&quot;
+            ],
+            &quot;events&quot;: {
+              &quot;onClick&quot;: [
+                &quot;action-awesome-thing&quot;
+              ]
+            },
+            &quot;index&quot;: 10,
+            &quot;enabled&quot;: true,
+            &quot;keep&quot;: false
+          }
+        ],
+        &quot;configurations&quot;: [
+          {
+            &quot;data&quot;: {},
+            &quot;options&quot;: {
+              &quot;key&quot;: &quot;overwritting-previous-key&quot;,
+              &quot;missing-options&quot;: 42
+            },
+            &quot;actions&quot;: [
+              &quot;action-awesome-thing&quot;,
+              &quot;action-more-awesome&quot;
+            ],
+            &quot;events&quot;: {
+              &quot;onDrag&quot;: [
+                &quot;action-more-awesome&quot;
+              ]
+            }
+          }
+        ]
+      },
+      &quot;events&quot;: {
+        &quot;onLoadRequest&quot;: {},
+        &quot;onLoadStart&quot;: {},
+        &quot;onLoadComplete&quot;: {},
+        &quot;onUnloadStart&quot;: {},
+        &quot;onUnloadComplete&quot;: {}
+      }
+    }
+  ],
+  &quot;groups&quot;: [
+    {
+      &quot;uid&quot;: &quot;group-0&quot;,
+      &quot;children&quot;: [
+        &quot;scene-0&quot;,
+        &quot;scene-1&quot;
+      ],
+      &quot;default&quot;: 1,
+      &quot;name&quot;: &quot;My Group&quot;,
+      &quot;slug&quot;: &quot;my-group&quot;,
+      &quot;description&quot;: &quot;This a group with two awesome scenes&quot;
+    }
+  ],
+  &quot;events&quot;: {
+    &quot;onReady&quot;: {},
+    &quot;onGroupChange&quot;: {},
+    &quot;onSceneLoadRequest&quot;: {},
+    &quot;onSceneLoadStart&quot;: {},
+    &quot;onSceneLoadComplete&quot;: {}
+  }
+}</pre></small>
+    </section>
+    
+
+    <section id="storyconfig" class="col-lg-12">
+        <section id="storyconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="story">
+                        story
+                        <a href="#story" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            uid
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The UID of the story.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;story-0&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            name
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The name of the story or its i18n key.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;My Story&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            slug
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The slug of the story or its i18n key.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;my-story&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            description
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The description of the story or its i18n key.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;This is a super story about awesome things&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            default
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The UID of the default scene to load on start.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;scene-0&quot;</pre></small>
+            
+        </td>
+    </tr>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            thumbnails
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The list of thumbnails in the story. Each member is an instance of <a href="#scene-thumbnail">a thumbnail</a>.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            scenes
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The list of scenes in the story. Each member is an instance of <a href="#scene">a scene.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            groups
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The list of groups in the story. Each member is an instance of <a href="#group">a group.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            events
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#story-events">the story events configuration</a>.<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="storyeventsconfig" class="col-lg-12">
+        <section id="storyeventsconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="story-events">
+                        story-events
+                        <a href="#story-events" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            onReady
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;string&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The onReady event of the story. The action uid or an array of action uids<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            onGroupChange
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;string&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The onGroupChange event of the story. The action uid or an array of action uids<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            onSceneLoadRequest
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;string&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The onSceneLoadRequest event of the story. The action uid or an array of action uids<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            onSceneLoadStart
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;string&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The onSceneLoadStart event of the story. The action uid or an array of action uids<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            onSceneLoadComplete
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;string&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The onSceneLoadComplete event of the story. The action uid or an array of action uids<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+</article>
+</body>
+</html>

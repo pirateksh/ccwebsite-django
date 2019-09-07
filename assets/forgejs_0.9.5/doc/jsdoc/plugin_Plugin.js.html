@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: plugin/Plugin.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: plugin/Plugin.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
+ * A plugin object is an instance of a {@link FORGE.PluginEngine} on top of the viewer.&lt;br>
+ * It can be visual (display a logo) or not (gyroscope, stats ...).
+ *
+ * @constructor FORGE.Plugin
+ * @param {FORGE.Viewer} viewer - {@link FORGE.Viewer} reference.
+ * @param {FORGE.PluginEngine} engine - The engine used to instantiate tis plugin.
+ * @param {PluginInstanceConfig} config - The config of the plugin instance.
+ * @param {number} index - The index of the plugin, use for display order.
+ * @extends {FORGE.BaseObject}
+ *
+ * @todo  Scene array upgrade : Have a scene array with inclusive and exclusive uids
+ * @todo  Same filter array for groups ?
+ */
+FORGE.Plugin = function(viewer, engine, config, index)
+{
+    /**
+     * The viewer reference.
+     * @name FORGE.Plugin#_viewer
+     * @type {FORGE.Viewer}
+     * @private
+     */
+    this._viewer = viewer;
+
+    /**
+     * The engine this plugin is based on.
+     * @name  FORGE.Plugin#_engine
+     * @type {FORGE.PluginEngine}
+     * @private
+     */
+    this._engine = engine;
+
+    /**
+     * The instance config of the plugin.
+     * @name  FORGE.Plugin#_instanceConfig
+     * @type {?PluginInstanceConfig}
+     * @private
+     */
+    this._instanceConfig = config;
+
+    /**
+     * The contextual config is the plugin configuration specific to a scene or a group.&lt;br/>
+     * It doesn't last at scene change.
+     * @name FORGE.Plugin#_contextualConfig
+     * @type {?PluginConfigurationConfig}
+     * @private
+     */
+    this._contextualConfig = null;
+
+    /**
+     * This config will be the final config object that merges the default engine config, the instance config and the contextual config.
+     * @name  FORGE.Plugin#_config
+     * @type {?PluginInstanceConfig}
+     * @private
+     */
+    this._config = null;
+
+    /**
+     * The index of the plugin, used if the plugin is a visual one.
+     * @name FORGE.Plugin#_index
+     * @type {number}
+     * @private
+     */
+    this._index = index;
+
+    /**
+     * The options of this Plugin.
+     * @name FORGE.Plugin#_options
+     * @type {Object}
+     * @private
+     */
+    this._options = null;
+
+    /**
+     * The actions of this Plugin.
+     * @name FORGE.Plugin#_actions
+     * @type {Object}
+     * @private
+     */
+    this._actions = null;
+
+    /**
+     * Object that stores {@link FORGE.ActionEventDispatcher}.
+     * @name FORGE.Plugin#_events
+     * @type {Object&lt;FORGE.ActionEventDispatcher>}
+     * @private
+     */
+    this._events = null;
+
+    /**
+     * Instance of the plugin engine constructor.
+     * @name  FORGE.Plugin#_instance
+     * @type {?PluginStructure}
+     * @private
+     */
+    this._instance = null;
+
+    /**
+     * Flag to tell if the instance is ready.&lt;br>
+     * It is the plugin developper that set the ready flag by calling the notifyInstanceReady method from its instance.
+     * @name  FORGE.Plugin#_instanceReady
+     * @type {boolean}
+     * @private
+     */
+    this._instanceReady = false;
+
+    /**
+     * A DOM id or a DOM element.&lt;br>
+     * Used to inject graphical plugins anywhere in the document (outside the viewer container).
+     * @name  FORGE.Plugin#_parent
+     * @type {Element|HTMLElement|string}
+     * @private
+     */
+    this._parent = null;
+
+    /**
+     * The display object container for this plugin if it is a graphical one.
+     * @name FORGE.Plugin#_container
+     * @type {?FORGE.DisplayObjectContainer}
+     * @private
+     */
+    this._container = null;
+
+    /**
+     * Reference to the plugin object factory, every plugin have its own factory.
+     * @name FORGE.Plugin#_create
+     * @type {FORGE.PluginObjectFactory}
+     * @private
+     */
+    this._create = null;
+
+    /**
+     * Scenes UID array, this plugin is allow to instantiate only on these scene if not null.
+     * @name  FORGE.Plugin#_scenes
+     * @type {Array&lt;string>}
+     * @private
+     */
+    this._scenes = null;
+
+    /**
+     * Object to handle persistent data.
+     * @name  FORGE.Plugin#_persistentData
+     * @type {Object}
+     * @private
+     */
+    this._persistentData = null;
+
+    /**
+     * Is this plugin stay at the scene change event?
+     * @name  FORGE.Plugin#_keep
+     * @type {boolean}
+     * @private
+     */
+    this._keep = true;
+
+    /**
+     * Is this plugin have to reset between each scene?
+     * @name  FORGE.Plugin#_reset
+     * @type {boolean}
+     * @private
+     */
+    this._reset = true;
+
+    /**
+     * Event dispatcher for instance creation
+     * @name  FORGE.Plugin#_onInstanceCreate
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onInstanceCreate = null;
+
+     /**
+     * Event dispatcher for instance ready
+     * @name  FORGE.Plugin#_onInstanceReady
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onInstanceReady = null;
+
+    FORGE.BaseObject.call(this, "Plugin");
+
+    this._boot();
+};
+
+FORGE.Plugin.prototype = Object.create(FORGE.BaseObject.prototype);
+FORGE.Plugin.prototype.constructor = FORGE.Plugin;
+
+/**
+ * Boot sequence
+ * @method  FORGE.Plugin#_boot
+ * @private
+ */
+FORGE.Plugin.prototype._boot = function()
+{
+    //First thing, very important is to register the plugin object!
+    //We can't parse the rest of the config here, maybe the engine is not loaded yet.
+    this._uid = this._instanceConfig.uid;
+    this._tags = this._instanceConfig.tags;
+    this._register();
+
+    this._persistentData = {};
+};
+
+/**
+ * Internal method to parse the config.
+ * @method FORGE.Plugin#_parseConfig
+ * @private
+ * @param {Object} config - The config object to parse.
+ */
+FORGE.Plugin.prototype._parseConfig = function(config)
+{
+    //If there is a parent string in config, this should be an dom element id where to inject the plugin.
+    if(typeof config.parent === "string")
+    {
+        this._parent = config.parent;
+    }
+
+    this._keep = (typeof config.keep === "boolean") ? config.keep : true;
+    this._reset = (typeof config.reset === "boolean") ? config.reset : true;
+
+    //If there is no scenes array alerady set and if there is a scene array in the instance config.
+    if(this._scenes === null &amp;&amp; FORGE.Utils.isArrayOf(config.scenes, "string") === true)
+    {
+        this._scenes = config.scenes;
+    }
+
+    this._mergeConfigurations();
+};
+
+/**
+ * Merge the plugin configurations
+ * @method FORGE.Plugin#_mergeConfigurations
+ * @private
+ */
+FORGE.Plugin.prototype._mergeConfigurations = function()
+{
+    this._config = /** @type {PluginInstanceConfig} */ (FORGE.Utils.extendMultipleObjects(this._engine.defaultConfig, this._instanceConfig, this._contextualConfig));
+    this._options = this._config.options || {};
+    this._data = this._config.data || {};
+    this._actions = this._config.actions || {};
+
+    this._clearEvents();
+    this._createEvents(this._config.events);
+};
+
+/**
+ * Create events dispatchers that the engine needs.
+ * @method FORGE.Plugin#_createEvents
+ * @private
+ * @param {Object=} events - The events config of the plugin engine.
+ */
+FORGE.Plugin.prototype._createEvents = function(events)
+{
+    this._events = {};
+
+    var event;
+    for(var e in events)
+    {
+        event = new FORGE.ActionEventDispatcher(this._viewer, e);
+        event.addActions(events[e]);
+        this._events[e] = event;
+    }
+};
+
+/**
+ * Clear all plugin events.
+ * @method FORGE.Plugin#_clearEvents
+ * @private
+ */
+FORGE.Plugin.prototype._clearEvents = function()
+{
+    for(var e in this._events)
+    {
+        this._events[e].destroy();
+        this._events[e] = null;
+    }
+};
+
+/**
+ * Instantiate the plugin engine if it is loaded, if not listen to the engine load complete to retry to instantiate.
+ * @method FORGE.Plugin#instantiate
+ */
+FORGE.Plugin.prototype.instantiate = function()
+{
+    if(this._engine.loaded === true)
+    {
+        this._instantiatePlugin();
+    }
+    else
+    {
+        this._engine.onLoadComplete.addOnce(this._engineLoadComplete, this);
+    }
+};
+
+/**
+ * Handler for engine load complete.
+ * @method FORGE.Plugin#_engineLoadComplete
+ * @private
+ */
+FORGE.Plugin.prototype._engineLoadComplete = function()
+{
+    this._instantiatePlugin();
+};
+
+/**
+ * Parse the config then instantiate the plugin.
+ * @method FORGE.Plugin#_instantiatePlugin
+ * @private
+ */
+FORGE.Plugin.prototype._instantiatePlugin = function()
+{
+    this.log("Plugin._instantiatePlugin(); "+this._uid);
+
+    this._parseConfig(this._instanceConfig);
+
+    this._instance = this._engine.getNewInstance(this._viewer, this);
+
+    this._instance.boot.call(this._instance);
+
+    if(this._onInstanceCreate !== null)
+    {
+        this._onInstanceCreate.dispatch();
+    }
+};
+
+/**
+ * Instance can notify with this method that the instance is ready
+ * @method FORGE.Plugin.notifyInstanceReady
+ */
+FORGE.Plugin.prototype.notifyInstanceReady = function()
+{
+    this._instanceReady = true;
+
+    if(this._onInstanceReady !== null)
+    {
+        this._onInstanceReady.dispatch();
+    }
+};
+
+/**
+ * Update method called by the plugin manager.
+ * @method FORGE.Plugin#update
+ */
+FORGE.Plugin.prototype.update = function()
+{
+    if(this._instance !== null &amp;&amp; typeof this._instance.update === "function")
+    {
+        this._instance.update.call(this._instance);
+    }
+};
+
+/**
+ * Reset the plugin to a specified configuration.
+ * @method FORGE.Plugin#reset
+ */
+FORGE.Plugin.prototype.resetInstance = function()
+{
+    this._mergeConfigurations();
+
+    if(this._instance !== null)
+    {
+        if(typeof this._instance.reset === "function")
+        {
+            this._instance.reset.call(this._instance);
+        }
+        else
+        {
+            this.log("There is no reset function on plugin "+this._engine.uid);
+        }
+    }
+};
+
+/**
+ * Destroy method.
+ * @method FORGE.Plugin#destroy
+ */
+FORGE.Plugin.prototype.destroy = function()
+{
+    if(this._alive === false)
+    {
+        return;
+    }
+
+    if(this._instance !== null)
+    {
+        this._instance.viewer = null;
+        this._instance.plugin = null;
+
+        this._instance.destroy();
+        this._instance = null;
+    }
+
+    if(this._create !== null)
+    {
+        this._create.destroy();
+        this._create = null;
+    }
+
+    if(this._container !== null)
+    {
+        this._container.destroy();
+        this._container = null;
+    }
+
+    if(this._onInstanceCreate !== null)
+    {
+        this._onInstanceCreate.destroy();
+        this._onInstanceCreate = null;
+    }
+
+    if(this._onInstanceReady !== null)
+    {
+        this._onInstanceReady.destroy();
+        this._onInstanceReady = null;
+    }
+
+    this._clearEvents();
+    this._events = null;
+
+    this._viewer = null;
+
+    this._persistentData = null;
+
+    FORGE.BaseObject.prototype.destroy.call(this);
+};
+
+/**
+ * Get the plugin full url.
+ * @name FORGE.Plugin#fullUrl
+ * @readonly
+ * @type {string}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "fullUrl",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        return this._engine.fullUrl;
+    }
+});
+
+/**
+ * Get the plugin options.
+ * @name FORGE.Plugin#options
+ * @readonly
+ * @type {Object}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "options",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        return this._options;
+    }
+});
+
+/**
+ * Get the plugin actions.
+ * @name FORGE.Plugin#actions
+ * @readonly
+ * @type {Object}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "actions",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        return this._actions;
+    }
+});
+
+/**
+ * Get the plugin events.
+ * @name FORGE.Plugin#events
+ * @readonly
+ * @type {Object}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "events",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        return this._events;
+    }
+});
+
+/**
+ * Get the scenes array. This plugin will be alive only on these scenes.
+ * @name FORGE.Plugin#scenes
+ * @readonly
+ * @type {Array}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "scenes",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        return this._scenes;
+    }
+});
+
+/**
+ * Get and set pesistent data.
+ * @name FORGE.Plugin#persistentData
+ * @type {Object}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "persistentData",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        return this._persistentData;
+    },
+
+    /** @this {FORGE.Plugin} */
+    set: function(value)
+    {
+        this._persistentData = value;
+    }
+});
+
+/**
+ * Get the plugin instance.
+ * @name FORGE.Plugin#instance
+ * @readonly
+ * @type {Object}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "instance",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        return this._instance;
+    }
+});
+
+/**
+ * Get the plugin instance ready flag.
+ * @name FORGE.Plugin#instanceReady
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "instanceReady",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        return this._instanceReady;
+    }
+});
+
+/**
+ * Get the plugin container.
+ * @name FORGE.Plugin#container
+ * @readonly
+ * @type {FORGE.DisplayObjectContainer}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "container",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        if(this._container === null)
+        {
+            if(typeof this._parent === "string" &amp;&amp; this._parent !== "")
+            {
+                this._parent = document.getElementById(this._parent);
+
+                if(typeof this._parent === "undefined" || this._parent === null || FORGE.Dom.isHtmlElement(this._parent) === false)
+                {
+                    throw "FORGE.Plugin.boot : Plugin parent is invalid";
+                }
+
+                this._container = new FORGE.DisplayObjectContainer(this._viewer, null, null, this._parent);
+            }
+            else
+            {
+                this._container = new FORGE.DisplayObjectContainer(this._viewer);
+                this._viewer.pluginContainer.addChild(this._container);
+                this._container.maximize(true);
+            }
+
+            this._container.id = this._uid;
+            this._container.index = this._index;
+        }
+
+        return this._container;
+    }
+});
+
+/**
+ * Get the plugin object factory.
+ * @name FORGE.Plugin#create
+ * @readonly
+ * @type {FORGE.PluginObjectFactory}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "create",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        if(this._create === null)
+        {
+            this._create = new FORGE.PluginObjectFactory(this._viewer, this);
+        }
+
+        return this._create;
+    }
+});
+
+/**
+ * Get the plugin keep flag.
+ * @name FORGE.Plugin#keep
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "keep",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        return this._keep;
+    }
+});
+
+/**
+ * Get the plugin reset flag.
+ * @name FORGE.Plugin#reset
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "reset",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        return this._reset;
+    }
+});
+
+/**
+ * Get the contextual config.
+ * @name FORGE.Plugin#contextualConfig
+ * @type {Object}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "contextualConfig",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        return this._contextualConfig;
+    },
+
+    /** @this {FORGE.Plugin} */
+    set: function(value)
+    {
+        this._contextualConfig = value;
+    }
+});
+
+/**
+ * Get the instance config.
+ * @name FORGE.Plugin#instanceConfig.
+ * @readonly
+ * @type {Object}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "instanceConfig",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        return this._instanceConfig;
+    }
+});
+
+/**
+ * Get the final merged config.
+ * @name FORGE.Plugin#config
+ * @readonly
+ * @type {Object}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "config",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        return this._config;
+    }
+});
+
+
+/**
+ * Get the "onInstanceCreate" {@link FORGE.EventDispatcher} of the Plugin.
+ * @name FORGE.Plugin#onInstanceCreate
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "onInstanceCreate",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        if(this._onInstanceCreate === null)
+        {
+            this._onInstanceCreate = new FORGE.EventDispatcher(this, true);
+        }
+
+        return this._onInstanceCreate;
+    }
+});
+
+/**
+ * Get the "onInstanceReady" {@link FORGE.EventDispatcher} of the Plugin.
+ * @name FORGE.Plugin#onInstanceReady
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Plugin.prototype, "onInstanceReady",
+{
+    /** @this {FORGE.Plugin} */
+    get: function()
+    {
+        if(this._onInstanceReady === null)
+        {
+            this._onInstanceReady = new FORGE.EventDispatcher(this, true);
+        }
+
+        return this._onInstanceReady;
+    }
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

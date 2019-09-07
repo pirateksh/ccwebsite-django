@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponseRedirect, HttpResponse,reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 # from django.contrib.auth import get_user_model
@@ -17,10 +17,6 @@ from home.models import EmailBackend
 from home.forms import UserSignupForm
 from post.forms import PostForm
 from comments.forms import CommentForm
-
-# A function to paginate posts and return them
-
-HOME = '/'
 
 
 def index(request):
@@ -65,27 +61,54 @@ def index(request):
 
 def ajax_login_view(request):
     if request.method == "POST":
+        print(request.POST)
         username = request.POST['username']
         password = request.POST['password']
+        remember_me = request.POST.get('remember_me')
         user = authenticate(request, username=username, password=password)
         '''
             Response Codes(Acronyms):
             LS: Login success.
             LF: Login failed.
-        '''
+        '''       
         if user is not None:
             login(request, user)
-            return HttpResponse('LS')
+            response = HttpResponse('LS')
+            if remember_me is None:
+                # Executed when remember_me is None i.e. not checked.
+                print("step1")
+                if 'cook_user' and 'cook_pass' in request.COOKIES:
+                    #ENTERS When either of the cookie is present.                    
+                    # response = render(request,'blogapp/newhome.html',context)
+                    print("step2")
+                    response.delete_cookie('cook_user')
+                    response.delete_cookie('cook_pass')
+                    return response
+                else:
+                    #ENTERS When both of the cookie is not present i.e.deleted .
+                    print("step3")
+                    return response
+            else:
+                print("step4")
+                if 'cook_user' and 'cook_pass' not in request.COOKIES:
+                    print("step5")
+                    response.set_cookie('cook_user',username,max_age=86400,path='/')
+                    response.set_cookie('cook_pass',password,max_age=86400,path='/')
+                    return response
+                else:
+                    print("step6")
+                    return response
         else:
             return HttpResponse('LF')
     # else:
     #     return redirect(HOME)
 
 
+
 def logout_view(request):
     logout(request)
     messages.success(request, f"Logout Success")
-    return redirect(HOME)
+    return HttpResponseRedirect(reverse('Index'))
 
 
 # def signup_view(request):

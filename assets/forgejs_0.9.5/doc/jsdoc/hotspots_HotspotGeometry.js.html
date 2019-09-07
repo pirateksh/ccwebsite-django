@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: hotspots/HotspotGeometry.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: hotspots/HotspotGeometry.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Forge Hotspot Geometry
+ * @constructor FORGE.HotspotGeometry
+ */
+FORGE.HotspotGeometry = function()
+{
+    /**
+     * Geometry configuration
+     * @name FORGE.HotspotGeometry#_config
+     * @type {HotspotGeometryConfig}
+     * @private
+     */
+    this._config = FORGE.HotspotGeometry.DEFAULT_CONFIG;
+
+    /**
+     * The geometry type
+     * @name FORGE.HotspotGeometry#_type
+     * @type {string}
+     * @private
+     */
+    this._type = "";
+
+    /**
+     * The THREE geometry object
+     * @name FORGE.HotspotGeometry#_geometry
+     * @type {(THREE.Geometry|THREE.PlaneBufferGeometry|THREE.BoxBufferGeometry|THREE.SphereBufferGeometry|THREE.CylinderBufferGeometry|THREE.ShapeBufferGeometry)}
+     * @private
+     */
+    this._geometry = null;
+
+    /**
+     * The offset applied to the geometry object from it's center.&lt;br>
+     * Is expressed in world units (x, y, z).
+     * @name FORGE.HotspotGeometry#_offset
+     * @type {HotspotGeometryOffset}
+     * @private
+     */
+    this._offset = FORGE.HotspotGeometry.DEFAULT_OFFSET;
+
+    /**
+     * Event dispatcher for the onLoadComplete
+     * @name FORGE.HotspotGeometry#_onLoadComplete
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onLoadComplete = null;
+};
+
+/**
+ * @name FORGE.HotspotGeometry.DEFAULT_CONFIG
+ * @type {HotspotGeometryConfig}
+ * @const
+ */
+FORGE.HotspotGeometry.DEFAULT_CONFIG =
+{
+    type: "plane",
+
+    options:
+    {
+        width: 20,
+        height: 20,
+        widthSegments: 8,
+        heightSegments: 8
+    },
+
+    offset: FORGE.HotspotGeometry.DEFAULT_OFFSET
+};
+
+/**
+ * @name FORGE.HotspotGeometry.DEFAULT_OFFSET
+ * @type {HotspotGeometryOffset}
+ * @const
+ */
+FORGE.HotspotGeometry.DEFAULT_OFFSET =
+{
+    x: 0,
+    y: 0,
+    z: 0
+};
+
+/**
+ * Parse the hotspot geometry config
+ * @method FORGE.HotspotGeometry#_parseConfig
+ * @param {HotspotGeometryConfig} config
+ */
+FORGE.HotspotGeometry.prototype._parseConfig = function(config)
+{
+    this._type = config.type;
+
+    var options = config.options;
+
+    this._offset = (typeof config.offset !== "undefined") ? config.offset : { x: 0, y: 0, z: 0 };
+
+    switch (this._type)
+    {
+        case FORGE.HotspotGeometryType.PLANE:
+            this._geometry = this._createPlane(options);
+            break;
+
+        case FORGE.HotspotGeometryType.BOX:
+            this._geometry = this._createBox(options);
+            break;
+
+        case FORGE.HotspotGeometryType.SPHERE:
+            this._geometry = this._createSphere(options);
+            break;
+
+        case FORGE.HotspotGeometryType.CYLINDER:
+            this._geometry = this._createCylinder(options);
+            break;
+
+        case FORGE.HotspotGeometryType.SHAPE:
+            this._geometry = this._createShape(options);
+            break;
+
+        default:
+            this._geometry = this._createPlane(options);
+            break;
+    }
+
+    // apply init offset values
+    this._geometry.applyMatrix( new THREE.Matrix4().makeTranslation( this._offset.x, this._offset.y, this._offset.z ) );
+};
+
+/**
+ * @method FORGE.HotspotGeometry#_createPlane
+ * @param {HotspotGeometryPlane=} options
+ * @return {THREE.PlaneBufferGeometry}
+ * @private
+ */
+FORGE.HotspotGeometry.prototype._createPlane = function(options)
+{
+    options = options || {};
+
+    var width = options.width || 20;
+    var height = options.height || 20;
+    var widthSegments = options.widthSegments || 8;
+    var heightSegments = options.heightSegments || 8;
+
+    return new THREE.PlaneBufferGeometry(width, height, widthSegments, heightSegments);
+};
+
+/**
+ * @method FORGE.HotspotGeometry#_createBox
+ * @param {HotspotGeometryBox=} options
+ * @return {THREE.BoxBufferGeometry}
+ * @private
+ */
+FORGE.HotspotGeometry.prototype._createBox = function(options)
+{
+    options = options || {};
+
+    var width = options.width || 20;
+    var height = options.height || 20;
+    var depth = options.depth || 20;
+    var widthSegments = options.widthSegments || 8;
+    var heightSegments = options.heightSegments || 8;
+    var depthSegments = options.depthSegments || 8;
+
+    return new THREE.BoxBufferGeometry(width, height, depth, widthSegments, heightSegments, depthSegments);
+};
+
+/**
+ * @method FORGE.HotspotGeometry#_createSphere
+ * @param {HotspotGeometrySphere=} options
+ * @return {THREE.SphereBufferGeometry}
+ * @private
+ */
+FORGE.HotspotGeometry.prototype._createSphere = function(options)
+{
+    options = options || {};
+
+    var radius = options.radius || 10;
+    var widthSegments = options.widthSegments || 64;
+    var heightSegments = options.heightSegments || 64;
+    var phiStart = options.phiStart || 0;
+    var phiLength = options.phiLength || 2 * Math.PI;
+    var thetaStart = options.thetaStart || 0;
+    var thetaLength = options.thetaLength || 2 * Math.PI;
+
+    return new THREE.SphereBufferGeometry(radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength);
+};
+
+/**
+ * @method FORGE.HotspotGeometry#_createCylinder
+ * @param {HotspotGeometryCylinder=} options
+ * @return {THREE.CylinderBufferGeometry}
+ * @private
+ */
+FORGE.HotspotGeometry.prototype._createCylinder = function(options)
+{
+    options = options || {};
+
+    var radiusTop = options.radiusTop || 10;
+    var radiusBottom = options.radiusBottom || 10;
+    var height = options.height || 20;
+    var radiusSegments = options.radiusSegments || 32;
+    var heightSegments = options.heightSegments || 1;
+    var openEnded = options.openEnded || false;
+    var thetaStart = options.thetaStart || 0;
+    var thetaLength = options.thetaLength || 2 * Math.PI;
+
+    return new THREE.CylinderBufferGeometry(radiusTop, radiusBottom, height, radiusSegments, heightSegments, openEnded, thetaStart, thetaLength);
+};
+
+/**
+ * @method FORGE.HotspotGeometry#_createShape
+ * @param {HotspotGeometryShape=} options
+ * @return {THREE.ShapeBufferGeometry}
+ * @private
+ */
+FORGE.HotspotGeometry.prototype._createShape = function(options)
+{
+    options = options || {};
+
+    // clean the points given to remove any duplicate when points are following each other
+    if (Array.isArray(options.points))
+    {
+        options.points.push(options.points[0]);
+
+        var a, b, res = [];
+        for (var i = 0, ii = options.points.length - 1; i &lt; ii; i++)
+        {
+            a = options.points[i];
+            b = options.points[i + 1];
+
+            if (a[0] !== b[0] || a[1] !== b[1])
+            {
+                res.push(a);
+            }
+        }
+
+        options.points = res;
+
+        if (options.points.length &lt; 3)
+        {
+            console.warn("FORGE.HotspotGeometry.SHAPE: the points given to draw the shape should be a least 3");
+            options.points = null;
+        }
+    }
+
+    //Default points array that is a square
+    if (Array.isArray(options.points) === false)
+    {
+        //Arrow shape
+        options.points =
+        [
+            [ -10, 3 ],
+            [ 3, 3 ],
+            [ 3, 8 ],
+            [ 15, 0 ],
+            [ 3, -8 ],
+            [ 3, -3 ],
+            [ -10, -3 ]
+        ];
+    }
+
+    var points = [];
+    for (var i = 0, ii = options.points.length; i &lt; ii; i++)
+    {
+        var point = options.points[i];
+        var x, y;
+
+        if(Array.isArray(point) === true)
+        {
+            x = (typeof point[0] === "number" &amp;&amp; isNaN(point[0]) === false) ? point[0] : 0;
+            y = (typeof point[1] === "number" &amp;&amp; isNaN(point[1]) === false) ? point[1] : 0;
+            points.push(new THREE.Vector2(x, y));
+        }
+    }
+
+    return new THREE.ShapeBufferGeometry(new THREE.Shape(points));
+};
+
+/**
+ * Load a hotspot geometry config
+ * @method FORGE.HotspotGeometry#load
+ * @param {HotspotGeometryConfig} config
+ */
+FORGE.HotspotGeometry.prototype.load = function(config)
+{
+    if (typeof config !== "undefined" &amp;&amp; typeof config.type === "string")
+    {
+        this._config = config;
+    }
+    else
+    {
+        this._config = /** @type {HotspotGeometryConfig} */ (FORGE.Utils.extendSimpleObject({}, FORGE.HotspotGeometry.DEFAULT_CONFIG));
+    }
+
+    this._parseConfig(this._config);
+
+    if(this._onLoadComplete !== null)
+    {
+        this._onLoadComplete.dispatch();
+    }
+};
+
+/**
+ * Dump the geometry configuration
+ * @method FORGE.HotspotGeometry#dump
+ * @return {HotspotGeometryConfig} Return the actual hotspot geometry config
+ */
+FORGE.HotspotGeometry.prototype.dump = function()
+{
+    var dump =
+    {
+        type: this._type
+    };
+
+    var options = {};
+
+    switch(this._type)
+    {
+        case FORGE.HotspotGeometryType.PLANE:
+        case FORGE.HotspotGeometryType.BOX:
+        case FORGE.HotspotGeometryType.SPHERE:
+        case FORGE.HotspotGeometryType.CYLINDER:
+            options = this._geometry.parameters;
+            break;
+
+        case FORGE.HotspotGeometryType.SHAPE:
+
+            var points = [];
+            if(Array.isArray(this._geometry.parameters.shapes.curves) === true)
+            {
+                var c = this._geometry.parameters.shapes.curves;
+
+                points.push([c[0].v1.x, c[0].v1.y]);
+                points.push([c[0].v2.x, c[0].v2.y]);
+
+                for(var i = 1, ii = c.length; i &lt; ii; i++)
+                {
+                    points.push([c[i].v2.x, c[i].v2.y]);
+                }
+            }
+            else
+            {
+                points = this._config.options.points;
+            }
+
+            options = { points: points };
+
+            break;
+    }
+
+    dump.options = options;
+
+    return dump;
+};
+
+/**
+ * Destroy sequence
+ * @method FORGE.HotspotGeometry#destroy
+ */
+FORGE.HotspotGeometry.prototype.destroy = function()
+{
+    if(this._geometry !== null)
+    {
+        this._geometry.dispose();
+        this._geometry = null;
+    }
+
+    if(this._onLoadComplete !== null)
+    {
+        this._onLoadComplete.destroy();
+        this._onLoadComplete = null;
+    }
+};
+
+/**
+ * Geometry type accessor
+ * @name FORGE.HotspotGeometry#type
+ * @readonly
+ * @type {string}
+ */
+Object.defineProperty(FORGE.HotspotGeometry.prototype, "type",
+{
+    /** @this {FORGE.HotspotGeometry} */
+    get: function()
+    {
+        return this._type;
+    }
+});
+
+/**
+ * Geometry accessor
+ * @name FORGE.HotspotGeometry#geometry
+ * @readonly
+ * @type {THREE.Geometry}
+ */
+Object.defineProperty(FORGE.HotspotGeometry.prototype, "geometry",
+{
+    /** @this {FORGE.HotspotGeometry} */
+    get: function()
+    {
+        return this._geometry;
+    }
+});
+
+/**
+ * Get the onLoadComplete {@link FORGE.EventDispatcher}.
+ * @name  FORGE.HotspotGeometry#onLoadComplete
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.HotspotGeometry.prototype, "onLoadComplete",
+{
+    /** @this {FORGE.HotspotGeometry} */
+    get: function()
+    {
+        if (this._onLoadComplete === null)
+        {
+            this._onLoadComplete = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onLoadComplete;
+    }
+});
+
+/**
+ * Get/set the offset of the geomerty object.&lt;br>
+ * The current offset is updated with these values and don't erase the init offset.
+ * @name FORGE.HotspotGeometry#offset
+ * @type {HotspotGeometryOffset}
+ */
+Object.defineProperty(FORGE.HotspotGeometry.prototype, "offset",
+{
+    /** @this {FORGE.HotspotGeometry} */
+    get: function()
+    {
+        return this._offset;
+    },
+
+    /** @this {FORGE.HotspotGeometry} */
+    set: function(value)
+    {
+        if (typeof value !== "undefined" &amp;&amp; (typeof value.x === "number" || typeof value.y === "number" || typeof value.z === "number"))
+        {
+            var offset = /** @type {HotspotGeometryOffset} */ (FORGE.Utils.extendSimpleObject(FORGE.HotspotGeometry.DEFAULT_OFFSET, value));
+            this._geometry.applyMatrix( new THREE.Matrix4().makeTranslation( offset.x, offset.y, offset.z ) );
+
+            // update current offset values
+            this._offset.x += offset.x;
+            this._offset.y += offset.y;
+            this._offset.z += offset.z;
+        }
+    }
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

@@ -1,0 +1,2131 @@
+
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>JSON Reference</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css" media="screen,projection" charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="static/fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="static/forge-iframe.css">
+    <script type="text/javascript">
+        function updateLink()
+        {
+            var url, slug, links = document.getElementsByTagName('a');
+
+            for (var i = 0, ii = links.length; i < ii; i++)
+            {
+                if (!links[i].classList.contains('out'))
+                {
+                    url = links[i].href.replace(/(.+\/)\w+\.html#([\w\-]+)/, function(match, p1, p2) {
+                        var subRefs = p2.split('-');
+
+                        if (subRefs.length > 1)
+                        {
+                            slug = subRefs[0] + '/' + p2;
+                            return p1 + subRefs[0] + '.html#' + p2;
+                        } else {
+                            slug = p2;
+                            return p1 + p2 + '.html'
+                        }
+                    });
+
+                    links[i].href = 'javascript:window.parent.goTo("' + url + '", "' + slug + '");';
+                }
+            }
+        }
+    </script>
+</head>
+<body data-spy="scroll" data-target="#navbar" onload="updateLink()">
+<br>
+
+<article>
+    <header class="col-lg-12">
+        <h2>Scene</h2>
+        <p class="lead">A scene is essentially composed of a 360&ordm; media to display, but also local configuration to itself. It can contain a specific view or camera configuration for example. This is also where <a href="#hotspot">hotspots</a> are defined, along with the <a href="#director">director's cut</a> and specific <a href="#plugins">plugins</a> configuration.</p>
+    </header>
+
+    
+    <section class="col-lg-12">
+        <h4>Example :</h4>
+        <small class="example-code"><pre>{
+  &quot;uid&quot;: &quot;scene-0&quot;,
+  &quot;name&quot;: &quot;My Scene&quot;,
+  &quot;slug&quot;: &quot;my-scene&quot;,
+  &quot;description&quot;: &quot;This is a super scene with awesome things in it&quot;,
+  &quot;background&quot;: &quot;#000&quot;,
+  &quot;fx&quot;: &quot;fx-0&quot;,
+  &quot;tags&quot;: [
+    &quot;awesome&quot;,
+    &quot;beach&quot;,
+    &quot;surf&quot;
+  ],
+  &quot;sync&quot;: [
+    &quot;scene-0&quot;,
+    &quot;scene-1&quot;
+  ],
+  &quot;thumbnails&quot;: [
+    {
+      &quot;uid&quot;: &quot;thumb-0&quot;,
+      &quot;width&quot;: 100,
+      &quot;height&quot;: 50,
+      &quot;url&quot;: &quot;./images/scene-0-thumbnail.jpg&quot;
+    }
+  ],
+  &quot;media&quot;: {
+    &quot;uid&quot;: &quot;media-0&quot;,
+    &quot;type&quot;: &quot;image&quot;,
+    &quot;preview&quot;: {
+      &quot;url&quot;: &quot;multi/preview/{face}.jpg&quot;,
+      &quot;tile&quot;: 512
+    },
+    &quot;source&quot;: {
+      &quot;format&quot;: &quot;equi&quot;,
+      &quot;streaming&quot;: &quot;html5&quot;,
+      &quot;url&quot;: &quot;./images/scene-0.jpg&quot;,
+      &quot;fov&quot;: {
+        &quot;vertical&quot;: 90,
+        &quot;horizontal&quot;: 90,
+        &quot;diagonal&quot;: 90
+      },
+      &quot;pattern&quot;: &quot;multi/equi/{level}/{y}/{x}.jpg&quot;,
+      &quot;levels&quot;: [
+        {
+          &quot;name&quot;: &quot;4K&quot;,
+          &quot;url&quot;: &quot;multi/video-2K.mp4&quot;,
+          &quot;device&quot;: {
+            &quot;safari&quot;: false,
+            &quot;webvr&quot;: true,
+            &quot;os&quot;: &quot;Windows&quot;
+          },
+          &quot;pattern&quot;: &quot;multi/equi/{level}/{y}/{x}.jpg&quot;,
+          &quot;width&quot;: 2048,
+          &quot;height&quot;: 1024,
+          &quot;tile&quot;: 512
+        }
+      ],
+      &quot;order&quot;: &quot;RLUDBF&quot;,
+      &quot;tile&quot;: 512,
+      &quot;faces&quot;: [
+        {
+          &quot;F&quot;: &quot;front&quot;
+        },
+        {
+          &quot;B&quot;: &quot;back&quot;
+        },
+        {
+          &quot;R&quot;: &quot;right&quot;
+        },
+        {
+          &quot;L&quot;: &quot;left&quot;
+        },
+        {
+          &quot;D&quot;: &quot;down&quot;
+        },
+        {
+          &quot;U&quot;: &quot;up&quot;
+        }
+      ]
+    },
+    &quot;options&quot;: {
+      &quot;autoPlay&quot;: false,
+      &quot;loop&quot;: false,
+      &quot;volume&quot;: 1,
+      &quot;startTime&quot;: 0,
+      &quot;autoPause&quot;: true,
+      &quot;autoResume&quot;: false
+    },
+    &quot;events&quot;: {
+      &quot;onPlay&quot;: {},
+      &quot;onPause&quot;: {},
+      &quot;onSeeked&quot;: {},
+      &quot;onEnded&quot;: {}
+    },
+    &quot;fx&quot;: &quot;fx-0&quot;
+  },
+  &quot;sound&quot;: {
+    &quot;uid&quot;: &quot;sound-0&quot;,
+    &quot;type&quot;: &quot;stereo&quot;,
+    &quot;source&quot;: {
+      &quot;url&quot;: &quot;audio/scene-0-hotspot.mp3&quot;,
+      &quot;target&quot;: &quot;video-0&quot;
+    },
+    &quot;options&quot;: {
+      &quot;volume&quot;: {},
+      &quot;loop&quot;: true,
+      &quot;autoPlay&quot;: true,
+      &quot;startTime&quot;: 0,
+      &quot;range&quot;: 180
+    }
+  },
+  &quot;playlists&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;volume&quot;: {
+      &quot;default&quot;: 1,
+      &quot;max&quot;: 1
+    },
+    &quot;default&quot;: {},
+    &quot;lists&quot;: [
+      {
+        &quot;uid&quot;: &quot;playlist-0&quot;,
+        &quot;name&quot;: &quot;Killer Playlist&quot;,
+        &quot;default&quot;: {},
+        &quot;autoPlay&quot;: true,
+        &quot;loop&quot;: true,
+        &quot;volume&quot;: {
+          &quot;default&quot;: 1,
+          &quot;max&quot;: 1
+        },
+        &quot;tracks&quot;: [
+          &quot;track-0&quot;,
+          &quot;track-1&quot;
+        ]
+      }
+    ],
+    &quot;tracks&quot;: [
+      {
+        &quot;uid&quot;: &quot;track-0&quot;,
+        &quot;name&quot;: &quot;My awesome song&quot;,
+        &quot;author&quot;: &quot;John Doo&quot;,
+        &quot;url&quot;: &quot;audio/track-0.mp3&quot;,
+        &quot;loop&quot;: false
+      }
+    ]
+  },
+  &quot;view&quot;: {
+    &quot;type&quot;: &quot;Rectilinear&quot;,
+    &quot;options&quot;: {
+      &quot;repeatX&quot;: &quot;false&quot;,
+      &quot;repeatY&quot;: &quot;false&quot;
+    }
+  },
+  &quot;camera&quot;: {
+    &quot;parallax&quot;: 0.2,
+    &quot;keep&quot;: &quot;true&quot;,
+    &quot;yaw&quot;: {
+      &quot;default&quot;: 45,
+      &quot;min&quot;: 0,
+      &quot;max&quot;: 90
+    },
+    &quot;pitch&quot;: {
+      &quot;default&quot;: 45,
+      &quot;min&quot;: 0,
+      &quot;max&quot;: 90
+    },
+    &quot;roll&quot;: {
+      &quot;default&quot;: 45,
+      &quot;min&quot;: 0,
+      &quot;max&quot;: 90
+    },
+    &quot;fov&quot;: {
+      &quot;default&quot;: 45,
+      &quot;min&quot;: 0,
+      &quot;max&quot;: 90
+    },
+    &quot;gaze&quot;: {
+      &quot;delay&quot;: 2000,
+      &quot;cursor&quot;: {
+        &quot;innerRadius&quot;: 0.02,
+        &quot;outerRadius&quot;: 0.04,
+        &quot;color&quot;: {},
+        &quot;opacity&quot;: 0.5
+      },
+      &quot;progress&quot;: {
+        &quot;innerRadius&quot;: 0.02,
+        &quot;outerRadius&quot;: 0.04,
+        &quot;color&quot;: {},
+        &quot;opacity&quot;: 0.5
+      }
+    }
+  },
+  &quot;audio&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;volume&quot;: {
+      &quot;default&quot;: 1,
+      &quot;max&quot;: 1
+    }
+  },
+  &quot;hotspots&quot;: [
+    {
+      &quot;uid&quot;: &quot;hotspot-0&quot;,
+      &quot;tags&quot;: [
+        &quot;awesome&quot;,
+        &quot;hotspot&quot;,
+        &quot;turtle&quot;
+      ],
+      &quot;type&quot;: &quot;3d&quot;,
+      &quot;visible&quot;: true,
+      &quot;interactive&quot;: true,
+      &quot;cursor&quot;: &quot;crosshair&quot;,
+      &quot;fx&quot;: &quot;fx-0&quot;,
+      &quot;facingCenter&quot;: true,
+      &quot;transform&quot;: {
+        &quot;position&quot;: {
+          &quot;radius&quot;: 200,
+          &quot;theta&quot;: 90,
+          &quot;phi&quot;: 30,
+          &quot;x&quot;: 240,
+          &quot;y&quot;: 350,
+          &quot;z&quot;: 480
+        },
+        &quot;rotation&quot;: {
+          &quot;x&quot;: 8,
+          &quot;y&quot;: 3,
+          &quot;z&quot;: 5
+        },
+        &quot;scale&quot;: {
+          &quot;x&quot;: 8,
+          &quot;y&quot;: 3,
+          &quot;z&quot;: 5
+        }
+      },
+      &quot;geometry&quot;: {
+        &quot;type&quot;: &quot;plane&quot;,
+        &quot;offset&quot;: {
+          &quot;x&quot;: 20,
+          &quot;y&quot;: -50,
+          &quot;z&quot;: 5
+        },
+        &quot;options&quot;: {
+          &quot;points&quot;: [
+            [
+              0,
+              0
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              5,
+              4
+            ]
+          ]
+        }
+      },
+      &quot;animation&quot;: {
+        &quot;enabled&quot;: true,
+        &quot;random&quot;: false,
+        &quot;loop&quot;: false,
+        &quot;autostart&quot;: false,
+        &quot;order&quot;: [
+          &quot;track-0&quot;,
+          &quot;track-2&quot;
+        ]
+      },
+      &quot;material&quot;: {
+        &quot;color&quot;: {},
+        &quot;opacity&quot;: 0.5,
+        &quot;transparent&quot;: false,
+        &quot;side&quot;: &quot;front&quot;,
+        &quot;image&quot;: &quot;images/scene-0-hotspot.jpg&quot;,
+        &quot;sprite&quot;: {
+          &quot;url&quot;: &quot;./sprites/sprite-map.png&quot;,
+          &quot;frames&quot;: &quot;./sprites/sprite-map.json&quot;,
+          &quot;frameRate&quot;: 24,
+          &quot;frame&quot;: 5,
+          &quot;paused&quot;: true,
+          &quot;loop&quot;: false,
+          &quot;animation&quot;: &quot;animation-0&quot;,
+          &quot;animations&quot;: [
+            {
+              &quot;name&quot;: &quot;animation-0&quot;,
+              &quot;start&quot;: 0,
+              &quot;end&quot;: 24,
+              &quot;loop&quot;: false,
+              &quot;frameRate&quot;: 24
+            }
+          ]
+        },
+        &quot;video&quot;: {
+          &quot;url&quot;: &quot;./videos/video.mp4&quot;
+        },
+        &quot;plugin&quot;: &quot;plugin-0&quot;,
+        &quot;update&quot;: false
+      },
+      &quot;sound&quot;: {
+        &quot;uid&quot;: &quot;sound-0&quot;,
+        &quot;type&quot;: &quot;stereo&quot;,
+        &quot;source&quot;: {
+          &quot;url&quot;: &quot;audio/scene-0-hotspot.mp3&quot;,
+          &quot;target&quot;: &quot;video-0&quot;
+        },
+        &quot;options&quot;: {
+          &quot;volume&quot;: {},
+          &quot;loop&quot;: true,
+          &quot;autoPlay&quot;: true,
+          &quot;startTime&quot;: 0,
+          &quot;range&quot;: 180
+        }
+      },
+      &quot;dom&quot;: {
+        &quot;id&quot;: &quot;hotspot-dom-billboard&quot;,
+        &quot;class&quot;: {},
+        &quot;width&quot;: {},
+        &quot;height&quot;: {},
+        &quot;color&quot;: &quot;#ff5e9d&quot;,
+        &quot;index&quot;: 20,
+        &quot;offset&quot;: {
+          &quot;x&quot;: 10,
+          &quot;y&quot;: -5
+        }
+      },
+      &quot;events&quot;: {
+        &quot;onClick&quot;: {},
+        &quot;onOver&quot;: {},
+        &quot;onOut&quot;: {}
+      },
+      &quot;states&quot;: {
+        &quot;default&quot;: &quot;default&quot;,
+        &quot;auto&quot;: true,
+        &quot;over&quot;: {
+          &quot;material&quot;: {
+            &quot;color&quot;: {},
+            &quot;opacity&quot;: 0.5,
+            &quot;transparent&quot;: false,
+            &quot;side&quot;: &quot;front&quot;,
+            &quot;image&quot;: &quot;images/scene-0-hotspot.jpg&quot;,
+            &quot;sprite&quot;: {
+              &quot;url&quot;: &quot;./sprites/sprite-map.png&quot;,
+              &quot;frames&quot;: &quot;./sprites/sprite-map.json&quot;,
+              &quot;frameRate&quot;: 24,
+              &quot;frame&quot;: 5,
+              &quot;paused&quot;: true,
+              &quot;loop&quot;: false,
+              &quot;animation&quot;: &quot;animation-0&quot;,
+              &quot;animations&quot;: [
+                {
+                  &quot;name&quot;: &quot;animation-0&quot;,
+                  &quot;start&quot;: 0,
+                  &quot;end&quot;: 24,
+                  &quot;loop&quot;: false,
+                  &quot;frameRate&quot;: 24
+                }
+              ]
+            },
+            &quot;video&quot;: {
+              &quot;url&quot;: &quot;./videos/video.mp4&quot;
+            },
+            &quot;plugin&quot;: &quot;plugin-0&quot;,
+            &quot;update&quot;: false
+          }
+        }
+      }
+    }
+  ],
+  &quot;director&quot;: {
+    &quot;animation&quot;: {
+      &quot;enabled&quot;: true,
+      &quot;delay&quot;: 2000,
+      &quot;smooth&quot;: true,
+      &quot;stoppable&quot;: false,
+      &quot;idleTime&quot;: 3000,
+      &quot;random&quot;: false,
+      &quot;loop&quot;: false,
+      &quot;tracks&quot;: [
+        &quot;track-0&quot;,
+        &quot;track-2&quot;
+      ]
+    },
+    &quot;tracks&quot;: [
+      {
+        &quot;uid&quot;: &quot;track-0&quot;,
+        &quot;name&quot;: &quot;Sea to beach&quot;,
+        &quot;description&quot;: &quot;This is the track going from the sea to the beach.&quot;,
+        &quot;smooth&quot;: true,
+        &quot;cancelRoll&quot;: false,
+        &quot;easing&quot;: {
+          &quot;default&quot;: &quot;easeInQuad&quot;,
+          &quot;start&quot;: 5000
+        },
+        &quot;keyframes&quot;: [
+          {
+            &quot;time&quot;: 20,
+            &quot;data&quot;: {
+              &quot;yaw&quot;: 10,
+              &quot;pitch&quot;: 20,
+              &quot;roll&quot;: -50,
+              &quot;fov&quot;: 270
+            }
+          }
+        ]
+      }
+    ]
+  },
+  &quot;plugins&quot;: {
+    &quot;prefix&quot;: &quot;./plugins&quot;,
+    &quot;engines&quot;: [
+      {
+        &quot;uid&quot;: &quot;com.awesome.plugin&quot;,
+        &quot;prefix&quot;: &quot;./other-plugin-folder/&quot;,
+        &quot;url&quot;: &quot;AwesomePlugin&quot;,
+        &quot;manifest&quot;: &quot;manifest.json&quot;
+      }
+    ],
+    &quot;instances&quot;: [
+      {
+        &quot;uid&quot;: &quot;awesome-plugin-instance&quot;,
+        &quot;engine&quot;: &quot;com.awesome.plugin&quot;,
+        &quot;tags&quot;: [
+          &quot;plugin&quot;,
+          &quot;beach&quot;,
+          &quot;awesome&quot;
+        ],
+        &quot;scenes&quot;: [
+          &quot;scene-0&quot;,
+          &quot;scene-2&quot;
+        ],
+        &quot;options&quot;: {
+          &quot;awesomeness&quot;: 360,
+          &quot;key&quot;: &quot;i18n-awesome&quot;,
+          &quot;another_options&quot;: {
+            &quot;target&quot;: &quot;scene-1&quot;,
+            &quot;enabled&quot;: true
+          }
+        },
+        &quot;data&quot;: {},
+        &quot;actions&quot;: [
+          &quot;action-awesome-thing&quot;,
+          &quot;action-more-awesome&quot;
+        ],
+        &quot;events&quot;: {
+          &quot;onClick&quot;: [
+            &quot;action-awesome-thing&quot;
+          ]
+        },
+        &quot;index&quot;: 10,
+        &quot;enabled&quot;: true,
+        &quot;keep&quot;: false
+      }
+    ],
+    &quot;configurations&quot;: [
+      {
+        &quot;data&quot;: {},
+        &quot;options&quot;: {
+          &quot;key&quot;: &quot;overwritting-previous-key&quot;,
+          &quot;missing-options&quot;: 42
+        },
+        &quot;actions&quot;: [
+          &quot;action-awesome-thing&quot;,
+          &quot;action-more-awesome&quot;
+        ],
+        &quot;events&quot;: {
+          &quot;onDrag&quot;: [
+            &quot;action-more-awesome&quot;
+          ]
+        }
+      }
+    ]
+  },
+  &quot;events&quot;: {
+    &quot;onLoadRequest&quot;: {},
+    &quot;onLoadStart&quot;: {},
+    &quot;onLoadComplete&quot;: {},
+    &quot;onUnloadStart&quot;: {},
+    &quot;onUnloadComplete&quot;: {}
+  }
+}</pre></small>
+    </section>
+    
+
+    <section id="sceneconfig" class="col-lg-12">
+        <section id="sceneconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="scene">
+                        scene
+                        <a href="#scene" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            uid
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The UID of the scene.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;scene-0&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            name
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The name of the scene or its i18n key.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;My Scene&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            slug
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The slug name of the scene or its i18n key.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;my-scene&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            description
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The description of the scene or its i18n key.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;This is a super scene with awesome things in it&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            background
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The background color of the scene.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;#000&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            fx
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The UID of the special effect (FX) set to apply to the scene.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;fx-0&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            tags
+        </th>
+        <td class="param-type">
+                <em>array&lt;string&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The list of tags associated to the scene.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            sync
+        </th>
+        <td class="param-type">
+                <em>array&lt;string&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The list of scene uids to sync this scene with.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            thumbnails
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The configuration of a thumbnail associated to a scene. Each member is an instance of <a href="#scene-thumbnail">a scene thumbnail.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            media
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The media object associated to the scene. An instance of <a href="#scene-media">a scene media.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            sound
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href='#sound'>a sound.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            playlists
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#playlist">the global playlist configuration.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            view
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#view">the view configuration.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            camera
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#camera">the camera object.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            audio
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#audio">the audio configuration.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            hotspots
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The list of hotspots associated to this scene. Each member is and instance of <a href="#hotspot">a hotspot.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            director
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#director">a director configuration</a>.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            plugins
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#plugin">the plugin object.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            events
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#scene-events">the scene events configuration</a>.<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="scenethumbconfig" class="col-lg-12">
+        <section id="scenethumbconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="scene-thumbnail">
+                        scene-thumbnail
+                        <a href="#scene-thumbnail" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            uid
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The UID of the thumbnail.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;thumb-0&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            width
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Width of the thumbnail.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>100</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            height
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Height of the thumbnail.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>50</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            url
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            URL of the thumbnail: the file can be local or on a distant server, but must be a valid image format.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;./images/scene-0-thumbnail.jpg&quot;</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="scenemediaconfig" class="col-lg-12">
+        <section id="scenemediaconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="scene-media">
+                        scene-media
+                        <a href="#scene-media" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            uid
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The UID of the media.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;media-0&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            type
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The type of the media. Can be :<ul><li>image</li><li>video</li><li>grid</li></ul><br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;image&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            preview
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>object</em></li>
+                    <li class="param-anyof"><em>string</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            source
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The source of a media object. An instance of <a href="#scene-media-source">a scene media source.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            options
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The options of a media object. An instance of <a href="#scene-media-options">a scene media options object.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            events
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#scene-events">the scene media events configuration</a>.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            fx
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The FX associated to the media.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;fx-0&quot;</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="scenemediapreviewconfig" class="col-lg-12">
+        <section id="scenemediapreviewconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="scene-media-preview">
+                        scene-media-preview
+                        <a href="#scene-media-preview" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            url
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The URL for the preview of the media, with a <code>{face}</code> parameter to specify the face when parsing. Only one image per face is authorized, so no other parameter can be specified.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;multi/preview/{face}.jpg&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            tile
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The size of a tile, which corresponds to the width and the height of a tile. It will be used with the width and height to compute the value of the <code>{x}</code> and <code>{y}</code> patterns.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>512</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="scenemediasourceconfig" class="col-lg-12">
+        <section id="scenemediasourceconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="scene-media-source">
+                        scene-media-source
+                        <a href="#scene-media-source" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            format
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The format of the media: equi is for an equirectangular resource (the most common one) and cube is for a cubemap resource (less common but more efficient to display). Can be :<ul><li>equi</li><li>cube</li><li>flat</li><li>hotspot</li></ul><br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;equi&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            streaming
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The streaming method: either a html5 video (usually .mp4 or .webm), or a dash flux (.mpd). The authorized values are :<ul><li>html5</li><li>dash</li></ul><br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;html5&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            url
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            This property is only set when the media is an image. The file can be local or on a distant server, but must be a valid image format.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;./images/scene-0.jpg&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            fov
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The field of view of a media object. An instance of <a href="#scene-media-fov">a scene media fov object.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            pattern
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The pattern to respect in case of a multi tiles media. Four parameters are authorized:<ul><li><code>{face}</code> is for the face, in case of a cubemap media</li><li><code>{level}</code> is for the level of quality of the tile, in case of a multi resolution media</li><li><code>{x}</code> if for the <b>x</b> coordinates of the tile</li><li><code>{y}</code> if for the <b>y</b> coordinates of the tile</li><br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;multi/equi/{level}/{y}/{x}.jpg&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            levels
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            This property is only set when the media is a video. The files can be local or on a distant server, but must be a valid video format. If the array is composed of multiple URLs, it is considered that there are multiple qualities to consider. Each member is an instance of <a href="#scene-media-level">a scene source level</a>.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            order
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>RLUDBF</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Order of the layout in the cubemap media, ie where are the faces in the media, starting from the top left of the media. Needs to be a 6-char string, constitued with all of the following letter: <ul><li>R for Right</li><li>L for Left</li><li>U for Up</li><li>D for Down</li><li>B for Back</li><li>F for Front</li></ul><br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;RLUDBF&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            tile
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The size of a tile, in case the chosen format is cube. The size corresponds to the width and the height of a face.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>512</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            faces
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="scenemedialevelconfig" class="col-lg-12">
+        <section id="scenemedialevelconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="scene-media-level">
+                        scene-media-level
+                        <a href="#scene-media-level" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            name
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            If set, specifies the <code>{level}</code> pattern for this level. If not, the value will be the index of the level in the levels array.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;4K&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            url
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            If set, overrides any computed URL by this one. If not, the URL will be computed from other values<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;multi/video-2K.mp4&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            device
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The device requirements.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>{
+  &quot;safari&quot;: false,
+  &quot;webvr&quot;: true,
+  &quot;os&quot;: &quot;Windows&quot;
+}</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            pattern
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The pattern to respect in case of a multi tiles media. Four parameters are authorized:<ul><li><code>{face}</code> is for the face, in case of a cubemap media</li><li><code>{level}</code> is for the level of quality of the tile, in case of a multi resolution media</li><li><code>{x}</code> if for the <b>x</b> coordinates of the tile</li><li><code>{y}</code> if for the <b>y</b> coordinates of the tile</li><br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;multi/equi/{level}/{y}/{x}.jpg&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            width
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The width of the source. It will be used with the height and tile to compute the value of the <code>{x}</code> and <code>{y}</code> patterns.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>2048</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            height
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The height of the source. It will be used with the width and tile to compute the value of the <code>{x}</code> and <code>{y}</code> patterns.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>1024</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            tile
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The size of a tile, which corresponds to the width and the height of a tile. It will be used with the width and height to compute the value of the <code>{x}</code> and <code>{y}</code> patterns.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>512</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="" class="col-lg-12">
+        <section id="-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="">
+                        
+                        <a href="#" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="scenemediarangeconfig" class="col-lg-12">
+        <section id="scenemediarangeconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="scene-media-range">
+                        scene-media-range
+                        <a href="#scene-media-range" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            min
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Minimum value of the range.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            max
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Maximum value of the range.<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="scenemediaoptionsconfig" class="col-lg-12">
+        <section id="scenemediaoptionsconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="scene-media-options">
+                        scene-media-options
+                        <a href="#scene-media-options" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            autoPlay
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Does the video need to be played automatically at start ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            loop
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Does the video need to be looped automatically at the end of playing ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            volume
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>1</code></small></span><br>
+
+
+            <span class="param-max"><small>max: <code>1</code></small></span><br>
+        </td>
+        <td class="param-description object-definition-param-description">
+            The volume of the media.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>1</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            startTime
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Set the current position (in seconds) of the video playback.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>0</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            autoPause
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>true</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Does the video need to be paused automatically when the page is not visible anymore ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>true</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            autoResume
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Does the video need to be resumed automatically when the page is visible again ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="sceneeventsconfig" class="col-lg-12">
+        <section id="sceneeventsconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="scene-events">
+                        scene-events
+                        <a href="#scene-events" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            onLoadRequest
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;string&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The onLoadRequest event of the scene. The action uid or an array of action uids<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            onLoadStart
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;string&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The onLoadStart event of the scene. The action uid or an array of action uids<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            onLoadComplete
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;string&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The onLoadComplete event of the scene. The action uid or an array of action uids<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            onUnloadStart
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;string&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The onUnloadStart event of the scene. The action uid or an array of action uids<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            onUnloadComplete
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;string&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The onUnloadComplete event of the scene. The action uid or an array of action uids<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+</article>
+</body>
+</html>

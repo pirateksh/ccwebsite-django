@@ -1,0 +1,661 @@
+{
+    "audio":
+    {
+        "enabled": true,
+
+        "volume":
+        {
+            "default": 1.0,
+            "max": 1.0
+        }
+    },
+
+    "playlists":
+    {
+        "enabled": false,
+
+        "volume":
+        {
+            "default": 0.5,
+            "max": 1.0
+        },
+
+        "default": "playlist-0",
+
+        "lists":
+        [
+            {
+                "uid": "playlist-0",
+                "name": "telemetry-spherical",
+                "default": "track-0",
+                "loop": true,
+                "autoPlay": true,
+
+                "tracks": ["track-0"]
+            },
+
+            {
+                "uid": "playlist-1",
+                "name": "telemetry-flat",
+                "default": "track-1",
+                "loop": true,
+                "autoPlay": true,
+
+                "tracks": ["track-1"]
+            }
+        ],
+
+        "tracks":
+        [
+            {
+                "uid": "track-0",
+                "author": "Broke For Free",
+                "name": "Night Owl",
+                "url": "https://cdn.forgejs.org/samples/common/sounds/Broke_For_Free-01-Night_Owl.mp3"
+            },
+
+            {
+                "uid": "track-1",
+                "author": "Tours",
+                "name": "Enthusiast",
+                "url": "https://cdn.forgejs.org/samples/common/sounds/Tours-01-Enthusiast.mp3"
+            }
+        ]
+    },
+
+    "story":
+    {
+        "uid": "telemetry",
+        "name": "Telemetry showcase",
+        "slug": "telemetry",
+        "description": "This story demonstrates telemetry display extracted from GoPro Fusion and GoPro HERO6",
+        "default": "scene-0",
+
+        "scenes":
+        [
+            {
+                "uid": "scene-0",
+                "name": "Spherical video scene",
+                "slug": "spherical-video",
+
+                "media":
+                {
+                    "uid": "media-0",
+                    "type": "video",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "streaming": "dash",
+                        "url": "https://cdn.forgejs.org/samples/telemetry/Descente_Marocaz/manifest.mpd"
+                    },
+
+                    "options":
+                    {
+                        "autoPlay": true,
+                        "loop": true,
+                        "volume": 0
+                    }
+                },
+
+                "playlists":
+                {
+                    "enabled": true,
+                    "default": "playlist-0"
+                },
+
+                "plugins":
+                {
+                    "configurations":
+                    [
+                        {
+                            "instance": "accelerometer",
+
+                            "data":
+                            {
+                                "json": "https://cdn.forgejs.org/samples/telemetry/descente-martin-raw_accl.json"
+                            },
+
+                            "options":
+                            {
+                                "visible": false
+                            }
+                        },
+
+                        {
+                            "instance": "altimeter",
+
+                            "data":
+                            {
+                                "json": "https://cdn.forgejs.org/samples/telemetry/descente-martin-raw_altitude.json"
+                            },
+
+                            "options":
+                            {
+                                "visible": false
+                            }
+                        },
+
+                        {
+                            "instance": "compass",
+
+                            "data":
+                            {
+                                "json": "https://cdn.forgejs.org/samples/telemetry/descente-martin-raw_gyro.json"
+                            },
+
+                            "options":
+                            {
+                                "visible": false
+                            }
+                        },
+
+                        {
+                            "instance": "speedometer",
+
+                            "data":
+                            {
+                                "json": "https://cdn.forgejs.org/samples/telemetry/descente-martin-raw_speed.json"
+                            },
+
+                            "options":
+                            {
+                                "visible": false
+                            }
+                        }
+                    ]
+                },
+
+                "hotspots":
+                [
+                    {
+                        "uid": "hotspot-accelerometer",
+                        "name": "accelerometer",
+                        "facingCenter": false,
+
+                        "transform":
+                        {
+                            "position":
+                            {
+                                "radius": 250,
+                                "theta": 0,
+                                "phi": -30
+                            },
+
+                            "rotation":
+                            {
+                                "x": 70
+                            }
+                        },
+
+                        "material":
+                        {
+                            "plugin": "accelerometer",
+                            "update": true
+                        },
+
+                        "geometry":
+                        {
+                            "type": "plane",
+                            "options":
+                            {
+                                "width": 64,
+                                "height": 64
+                            }
+                        }
+                    },
+
+                    {
+                        "uid": "hotspot-altimeter",
+                        "name": "altimeter",
+                        "facingCenter": false,
+
+                        "transform":
+                        {
+                            "position":
+                            {
+                                "radius": 250,
+                                "theta": 40,
+                                "phi": -4
+                            },
+
+                            "rotation":
+                            {
+                                "y": -45
+                            }
+                        },
+
+                        "material":
+                        {
+                            "plugin": "altimeter",
+                            "update": true
+                        },
+
+                        "geometry":
+                        {
+                            "type": "plane",
+                            "options":
+                            {
+                                "width": 45,
+                                "height": 25
+                            }
+                        }
+                    },
+
+                    {
+                        "uid": "hotspot-compass",
+                        "name": "compass",
+                        "facingCenter": false,
+
+                        "transform":
+                        {
+                            "position":
+                            {
+                                "radius": 250,
+                                "theta": 30,
+                                "phi": -20
+                            }
+                        },
+
+                        "material":
+                        {
+                            "plugin": "compass",
+                            "update": true,
+                            "transparent": true
+                        },
+
+                        "geometry":
+                        {
+                            "type": "plane",
+                            "options":
+                            {
+                                "width": 100,
+                                "height": 100
+                            }
+                        }
+                    },
+
+                    {
+                        "uid": "hotspot-speedometer",
+                        "name": "speedometer",
+                        "facingCenter": false,
+
+                        "transform":
+                        {
+                            "position":
+                            {
+                                "radius": 250,
+                                "theta": -30,
+                                "phi": -20
+                            }
+                        },
+
+                        "material":
+                        {
+                            "plugin": "speedometer",
+                            "update": true
+                        },
+
+                        "geometry":
+                        {
+                            "type": "plane",
+                            "options":
+                            {
+                                "width": 100,
+                                "height": 100
+                            }
+                        }
+                    }
+                ]
+            },
+
+            {
+                "uid": "scene-1",
+                "name": "Flat video scene",
+                "slug": "flat-video-scene",
+
+                "media":
+                {
+                    "uid": "media-1",
+                    "type": "video",
+
+                    "source":
+                    {
+                        "format": "flat",
+                        "streaming": "dash",
+                        "url": "https://cdn.forgejs.org/samples/telemetry/GH014181/manifest.mpd"
+                    },
+
+                    "options":
+                    {
+                        "autoPlay": true,
+                        "loop": false,
+                        "volume": 0
+                    }
+                },
+
+                "view":
+                {
+                    "type": "flat",
+                    "options":
+                    {
+                        "repeatX": false,
+                        "repeatY": false
+                    }
+                },
+
+                "camera":
+                {
+                    "yaw": {"min": 0, "max": 0, "default": 0},
+                    "pitch": {"min": 0, "max": 0, "default": 0},
+                    "fov": {"min": 180, "max": 180, "default": 180}
+                },
+
+                "playlists":
+                {
+                    "enabled": true,
+                    "default": "playlist-1"
+                },
+
+                "plugins":
+                {
+                    "configurations":
+                    [
+                        {
+                            "instance": "accelerometer",
+
+                            "data":
+                            {
+                                "json": "https://cdn.forgejs.org/samples/telemetry/GH014181_gpmf_accl_cut.json"
+                            },
+
+                            "options":
+                            {
+                                "visible": true
+                            }
+                        },
+
+                        {
+                            "instance": "altimeter",
+
+                            "data":
+                            {
+                                "json": "https://cdn.forgejs.org/samples/telemetry/GH014181_gpmf_altitude_cut.json"
+                            },
+
+                            "options":
+                            {
+                                "visible": true
+                            }
+                        },
+
+                        {
+                            "instance": "compass",
+
+                            "data":
+                            {
+                                "json": "https://cdn.forgejs.org/samples/telemetry/GH014181_gpmf_gyro_cut.json"
+                            },
+
+                            "options":
+                            {
+                                "visible": true
+                            }
+                        },
+
+                        {
+                            "instance": "speedometer",
+
+                            "data":
+                            {
+                                "json": "https://cdn.forgejs.org/samples/telemetry/GH014181_gpmf_speed_cut.json"
+                            },
+
+                            "options":
+                            {
+                                "visible": true
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+
+    "plugins":
+    {
+        "prefix": "../../plugins/",
+
+        "engines":
+        [
+            {
+                "uid": "org.forgejs.previousnextbuttons",
+                "url": "PreviousNextButtons/"
+            },
+
+            {
+                "uid": "org.forgejs.googlemaps",
+                "url": "GoogleMaps/"
+            },
+
+            {
+                "uid": "org.forgejs.accelerometer",
+                "url": "Accelerometer/"
+            },
+
+            {
+                "uid": "org.forgejs.altimeter",
+                "url": "Altimeter/"
+            },
+
+            {
+                "uid": "org.forgejs.compass",
+                "url": "Compass/"
+            },
+
+            {
+                "uid": "org.forgejs.speedometer",
+                "url": "Speedometer/"
+            }
+        ],
+
+        "instances":
+        [
+            {
+                "uid": "previousnextbuttons",
+                "engine": "org.forgejs.previousnextbuttons"
+            },
+
+            {
+                "uid": "accelerometer",
+                "engine": "org.forgejs.accelerometer",
+                "options":
+                {
+                    "right": 20,
+                    "bottom": 20
+                },
+
+                "keep": true,
+                "reset": true
+            },
+
+            {
+                "uid": "altimeter",
+                "engine": "org.forgejs.altimeter",
+                "options":
+                {
+                    "align": "right",
+                    "right": 20,
+                    "bottom": 150
+                },
+
+                "keep": true,
+                "reset": true
+            },
+
+            {
+                "uid": "compass",
+                "engine": "org.forgejs.compass",
+                "options":
+                {
+                    "left": 20,
+                    "top": 20
+                },
+
+                "keep": true,
+                "reset": true
+            },
+
+            {
+                "uid": "speedometer",
+                "engine": "org.forgejs.speedometer",
+                "options":
+                {
+                    "left": 20,
+                    "bottom": 20
+                },
+
+                "keep": true,
+                "reset": true
+            },
+
+            {
+                "uid": "googlemaps",
+                "engine": "org.forgejs.googlemaps",
+
+                "scenes": ["scene-1"],
+
+                "options":
+                {
+                    "strokeColor": "#009ee2",
+                    "strokeOpacity": 1,
+                    "strokeWeight": 3,
+                    "width": 200,
+                    "height": 200,
+                    "right": 20,
+                    "top": 20,
+
+                    "googleMapsStyle":
+                    [
+                        {
+                            "featureType": "all",
+                            "elementType": "labels.text.fill",
+                            "stylers": [
+                                { "saturation": 36 },
+                                { "color": "#000000" },
+                                { "lightness": 40 }
+                            ]
+                        },
+                        {
+                            "featureType": "all",
+                            "elementType": "labels.text.stroke",
+                            "stylers": [
+                                { "visibility": "on" },
+                                { "color": "#000000" },
+                                { "lightness": 16 }
+                            ]
+                        },
+                        {
+                            "featureType": "all",
+                            "elementType": "labels.icon",
+                            "stylers": [
+                                { "visibility": "off" }
+                            ]
+                        },
+                        {
+                            "featureType": "administrative",
+                            "elementType": "geometry.fill",
+                            "stylers": [
+                                { "color": "#000000" },
+                                { "lightness": 20 }
+                            ]
+                        },
+                        {
+                            "featureType": "administrative",
+                            "elementType": "geometry.stroke",
+                            "stylers": [
+                                { "color": "#000000" },
+                                { "lightness": 17 },
+                                { "weight": 1.2 }
+                            ]
+                        },
+                        {
+                            "featureType": "landscape",
+                            "elementType": "geometry",
+                            "stylers": [
+                                { "color": "#000000" },
+                                { "lightness": 20 }
+                            ]
+                        },
+                        {
+                            "featureType": "poi",
+                            "elementType": "geometry",
+                            "stylers": [
+                                { "color": "#000000" },
+                                { "lightness": 21 }
+                            ]
+                        },
+                        {
+                            "featureType": "road.highway",
+                            "elementType": "geometry.fill",
+                            "stylers": [
+                                { "color": "#000000" },
+                                { "lightness": 17 }
+                            ]
+                        },
+                        {
+                            "featureType": "road.highway",
+                            "elementType": "geometry.stroke",
+                            "stylers": [
+                                { "color": "#000000" },
+                                { "lightness": 29 },
+                                {"weight": 0.2 }
+                            ]
+                        },
+                        {
+                            "featureType": "road.arterial",
+                            "elementType": "geometry",
+                            "stylers": [
+                                { "color": "#000000" },
+                                { "lightness": 18 }
+                            ]
+                        },
+                        {
+                            "featureType": "road.local",
+                            "elementType": "geometry",
+                            "stylers": [
+                                { "color": "#000000" },
+                                { "lightness": 16 }
+                            ]
+                        },
+                        {
+                            "featureType": "transit",
+                            "elementType": "geometry",
+                            "stylers": [
+                                { "color": "#000000" },
+                                { "lightness": 19 }
+                            ]
+                        },
+                        {
+                            "featureType": "water",
+                            "elementType": "geometry",
+                            "stylers": [
+                                { "color": "#000000" },
+                                { "lightness": 17 }
+                            ]
+                        }
+                    ]
+                },
+
+                "data":
+                {
+                    "googleMapsKey": "AIzaSyBaXB43aQIplDPVJ53ZzPfyUqxoHrd0HZk",
+                    "gpx": "https://cdn.forgejs.org/samples/telemetry/GH014181.gpx"
+                },
+
+                "keep": true,
+                "reset": true
+            }
+        ]
+    }
+}

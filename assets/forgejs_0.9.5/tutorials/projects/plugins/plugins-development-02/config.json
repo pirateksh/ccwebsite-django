@@ -1,0 +1,65 @@
+{
+    "story":
+    {
+        "scenes":
+        [
+            {
+                "uid": "scene-0",
+
+                "media":
+                {
+                    "uid": "media-0",
+                    "type": "image",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "url": "https://cdn.forgejs.org/samples/common/panos/01-forest.jpg"
+                    }
+                }
+            }
+        ]
+    },
+
+    "actions":
+    [
+        {
+            "uid": "action-0",
+            "target": "viewer.camera",
+            "method":
+            {
+                "name": "lookAt",
+                "args": [0, 90, 0, null, 1500, true]
+            }
+        }
+    ],
+
+    "plugins":
+    {
+        "engines":
+        [
+            {
+                "uid": "org.forgejs.myplugin",
+                "url": "MyPlugin/"
+            }
+        ],
+
+        "instances":
+        [
+            {
+                "uid": "myplugin-instance-0",
+                "engine": "org.forgejs.myplugin",
+
+                "options":
+                {
+                    "background": "green"
+                },
+
+                "events":
+                {
+                    "onClick": ["action-0"]
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,11215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Class: Device</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Class: Device</h1> -->
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="FORGE.html">FORGE</a>.</span>
+        
+        Device
+        </h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    <h4 class="name" id="Device"><span class="type-signature"></span>new Device<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Manage Devices inside FORGE.<br>
+Device is singleton, so if you have multiple instances in the same page you MUST avoid UID conflict.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line7">line 7</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="FORGE.BaseObject.html">FORGE.BaseObject</a></li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+                
+
+<a name="aac"></a>
+
+<div class="public">
+
+    <h4 class="name" id="aac"><span class="type-signature">(readonly) </span>aac<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Can play aac files?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1934">line 1934</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="addEventListener"></a>
+
+<div class="public">
+
+    <h4 class="name" id="addEventListener"><span class="type-signature">(readonly) </span>addEventListener<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is native support of addEventListener available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2106">line 2106</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="alive"></a>
+
+<div class="public">
+
+    <h4 class="name" id="alive"><span class="type-signature">(readonly) </span>alive<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the alive flag value of the object.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#alive">FORGE.BaseObject#alive</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line291">line 291</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="android"></a>
+
+<div class="public">
+
+    <h4 class="name" id="android"><span class="type-signature">(readonly) </span>android<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on android?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1181">line 1181</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="androidStockBrowserVersion"></a>
+
+<div class="public">
+
+    <h4 class="name" id="androidStockBrowserVersion"><span class="type-signature">(readonly) </span>androidStockBrowserVersion<span class="type-signature"> :number</span></h4>
+
+    
+
+    
+    <div class="description">
+        The Android version linked to the stock browser.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1519">line 1519</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="applicationCache"></a>
+
+<div class="public">
+
+    <h4 class="name" id="applicationCache"><span class="type-signature">(readonly) </span>applicationCache<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is Application Cache supported to enable web-based applications run offline?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2205">line 2205</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="audioTag"></a>
+
+<div class="public">
+
+    <h4 class="name" id="audioTag"><span class="type-signature">(readonly) </span>audioTag<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Are Audio tags available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1822">line 1822</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="battery"></a>
+
+<div class="public">
+
+    <h4 class="name" id="battery"><span class="type-signature">(readonly) </span>battery<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is the Battery API available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1705">line 1705</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="browser"></a>
+
+<div class="public">
+
+    <h4 class="name" id="browser"><span class="type-signature">(readonly) </span>browser<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        The nick name of the browser.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1463">line 1463</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="browserVersion"></a>
+
+<div class="public">
+
+    <h4 class="name" id="browserVersion"><span class="type-signature">(readonly) </span>browserVersion<span class="type-signature"> :number</span></h4>
+
+    
+
+    
+    <div class="description">
+        The browser major version.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1477">line 1477</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="canvas"></a>
+
+<div class="public">
+
+    <h4 class="name" id="canvas"><span class="type-signature">(readonly) </span>canvas<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is canvas available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2064">line 2064</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="canvasText"></a>
+
+<div class="public">
+
+    <h4 class="name" id="canvasText"><span class="type-signature">(readonly) </span>canvasText<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is text API for canvas available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2092">line 2092</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="canvasWinding"></a>
+
+<div class="public">
+
+    <h4 class="name" id="canvasWinding"><span class="type-signature">(readonly) </span>canvasWinding<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Are winding rules for '<canvas>' (go clockwise or counterclockwise) available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2078">line 2078</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="chrome"></a>
+
+<div class="public">
+
+    <h4 class="name" id="chrome"><span class="type-signature">(readonly) </span>chrome<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running in Chrome?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1309">line 1309</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="chromeOS"></a>
+
+<div class="public">
+
+    <h4 class="name" id="chromeOS"><span class="type-signature">(readonly) </span>chromeOS<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on chromeOS?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1195">line 1195</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="chromeVersion"></a>
+
+<div class="public">
+
+    <h4 class="name" id="chromeVersion"><span class="type-signature">(readonly) </span>chromeVersion<span class="type-signature"> :number</span></h4>
+
+    
+
+    
+    <div class="description">
+        Chrome major version number.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1323">line 1323</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="className"></a>
+
+<div class="public">
+
+    <h4 class="name" id="className"><span class="type-signature">(readonly) </span>className<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the class name of the object.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#className">FORGE.BaseObject#className</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line245">line 245</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="contextMenu"></a>
+
+<div class="public">
+
+    <h4 class="name" id="contextMenu"><span class="type-signature">(readonly) </span>contextMenu<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is context menu available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2247">line 2247</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="css3D"></a>
+
+<div class="public">
+
+    <h4 class="name" id="css3D"><span class="type-signature">(readonly) </span>css3D<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is css3D available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2389">line 2389</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="cssAnimation"></a>
+
+<div class="public">
+
+    <h4 class="name" id="cssAnimation"><span class="type-signature">(readonly) </span>cssAnimation<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Are css animations (keyframes) supported?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2431">line 2431</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="cssPointerEvents"></a>
+
+<div class="public">
+
+    <h4 class="name" id="cssPointerEvents"><span class="type-signature">(readonly) </span>cssPointerEvents<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is pointer-events available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2417">line 2417</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="cssRgba"></a>
+
+<div class="public">
+
+    <h4 class="name" id="cssRgba"><span class="type-signature">(readonly) </span>cssRgba<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is rgba (alpha) available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2403">line 2403</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="data"></a>
+
+<div class="public">
+
+    <h4 class="name" id="data"><span class="type-signature"></span>data<span class="type-signature"> :*</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get and set any custom data you want to associate to this object.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">*</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#data">FORGE.BaseObject#data</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line306">line 306</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="debug"></a>
+
+<div class="public">
+
+    <h4 class="name" id="debug"><span class="type-signature"></span>debug<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get and set the debug flag.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#debug">FORGE.BaseObject#debug</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line326">line 326</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="desktop"></a>
+
+<div class="public">
+
+    <h4 class="name" id="desktop"><span class="type-signature">(readonly) </span>desktop<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on a desktop?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1719">line 1719</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="deviceMotion"></a>
+
+<div class="public">
+
+    <h4 class="name" id="deviceMotion"><span class="type-signature">(readonly) </span>deviceMotion<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is Device Motion Event supported? (Accelerometer)
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2461">line 2461</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="deviceMotionAcceleration"></a>
+
+<div class="public">
+
+    <h4 class="name" id="deviceMotionAcceleration"><span class="type-signature">(readonly) </span>deviceMotionAcceleration<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is Device Motion acceleration supported?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2489">line 2489</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="deviceMotionRotationRate"></a>
+
+<div class="public">
+
+    <h4 class="name" id="deviceMotionRotationRate"><span class="type-signature">(readonly) </span>deviceMotionRotationRate<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is Device Motion rotation supported?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2503">line 2503</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="deviceOrientation"></a>
+
+<div class="public">
+
+    <h4 class="name" id="deviceOrientation"><span class="type-signature">(readonly) </span>deviceOrientation<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is Device Orientation Event supported? (Magnetometer)
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2475">line 2475</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="deviceOrientationMagnetometer"></a>
+
+<div class="public">
+
+    <h4 class="name" id="deviceOrientationMagnetometer"><span class="type-signature">(readonly) </span>deviceOrientationMagnetometer<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is Device Orientation motion supported?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2517">line 2517</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="dpi"></a>
+
+<div class="public">
+
+    <h4 class="name" id="dpi"><span class="type-signature">(readonly) </span>dpi<span class="type-signature"> :number</span></h4>
+
+    
+
+    
+    <div class="description">
+        Pixel density of the screen.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2531">line 2531</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="edge"></a>
+
+<div class="public">
+
+    <h4 class="name" id="edge"><span class="type-signature">(readonly) </span>edge<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running in Edge?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1393">line 1393</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="edgeVersion"></a>
+
+<div class="public">
+
+    <h4 class="name" id="edgeVersion"><span class="type-signature">(readonly) </span>edgeVersion<span class="type-signature"> :number</span></h4>
+
+    
+
+    
+    <div class="description">
+        Edge major version number.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1407">line 1407</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="encryptedMedia"></a>
+
+<div class="public">
+
+    <h4 class="name" id="encryptedMedia"><span class="type-signature">(readonly) </span>encryptedMedia<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is Encrypted Media Extensions API available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2275">line 2275</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="exitFullscreen"></a>
+
+<div class="public">
+
+    <h4 class="name" id="exitFullscreen"><span class="type-signature">(readonly) </span>exitFullscreen<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        Exit full screen method name.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1577">line 1577</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="file"></a>
+
+<div class="public">
+
+    <h4 class="name" id="file"><span class="type-signature">(readonly) </span>file<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is file available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2163">line 2163</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="fileSystem"></a>
+
+<div class="public">
+
+    <h4 class="name" id="fileSystem"><span class="type-signature">(readonly) </span>fileSystem<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is fileSystem available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2177">line 2177</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="firefox"></a>
+
+<div class="public">
+
+    <h4 class="name" id="firefox"><span class="type-signature">(readonly) </span>firefox<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running in Firefox?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1281">line 1281</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="firefoxVersion"></a>
+
+<div class="public">
+
+    <h4 class="name" id="firefoxVersion"><span class="type-signature">(readonly) </span>firefoxVersion<span class="type-signature"> :number</span></h4>
+
+    
+
+    
+    <div class="description">
+        Firefox major version number.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1295">line 1295</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="fullscreenElement"></a>
+
+<div class="public">
+
+    <h4 class="name" id="fullscreenElement"><span class="type-signature">(readonly) </span>fullscreenElement<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        fullscreenElement accessor name.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1591">line 1591</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="fullscreenEnabled"></a>
+
+<div class="public">
+
+    <h4 class="name" id="fullscreenEnabled"><span class="type-signature">(readonly) </span>fullscreenEnabled<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        Does the browser support full screen API?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1549">line 1549</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="fullscreenKeyboard"></a>
+
+<div class="public">
+
+    <h4 class="name" id="fullscreenKeyboard"><span class="type-signature">(readonly) </span>fullscreenKeyboard<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Does the browser support keyboard during full screen mode?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1605">line 1605</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="gamepad"></a>
+
+<div class="public">
+
+    <h4 class="name" id="gamepad"><span class="type-signature">(readonly) </span>gamepad<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is Gamepad API available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1791">line 1791</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="geolocation"></a>
+
+<div class="public">
+
+    <h4 class="name" id="geolocation"><span class="type-signature">(readonly) </span>geolocation<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is Geolocation API available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2219">line 2219</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="gyroscope"></a>
+
+<div class="public">
+
+    <h4 class="name" id="gyroscope"><span class="type-signature">(readonly) </span>gyroscope<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Device has a real gyroscope?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2447">line 2447</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="h264Video"></a>
+
+<div class="public">
+
+    <h4 class="name" id="h264Video"><span class="type-signature">(readonly) </span>h264Video<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Can play h264 video files?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1992">line 1992</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="history"></a>
+
+<div class="public">
+
+    <h4 class="name" id="history"><span class="type-signature">(readonly) </span>history<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is History API available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2303">line 2303</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="hlsVideo"></a>
+
+<div class="public">
+
+    <h4 class="name" id="hlsVideo"><span class="type-signature">(readonly) </span>hlsVideo<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Can play hls video files?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2048">line 2048</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="ie"></a>
+
+<div class="public">
+
+    <h4 class="name" id="ie"><span class="type-signature">(readonly) </span>ie<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running in Internet Explorer?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1337">line 1337</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="ieVersion"></a>
+
+<div class="public">
+
+    <h4 class="name" id="ieVersion"><span class="type-signature">(readonly) </span>ieVersion<span class="type-signature"> :number</span></h4>
+
+    
+
+    
+    <div class="description">
+        Internet Explorer major version number.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1351">line 1351</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="iOS"></a>
+
+<div class="public">
+
+    <h4 class="name" id="iOS"><span class="type-signature">(readonly) </span>iOS<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on iOS?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1209">line 1209</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="iPad"></a>
+
+<div class="public">
+
+    <h4 class="name" id="iPad"><span class="type-signature">(readonly) </span>iPad<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on iPad?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1663">line 1663</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="iPhone"></a>
+
+<div class="public">
+
+    <h4 class="name" id="iPhone"><span class="type-signature">(readonly) </span>iPhone<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on iPhone?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1621">line 1621</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="iPod"></a>
+
+<div class="public">
+
+    <h4 class="name" id="iPod"><span class="type-signature">(readonly) </span>iPod<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on iPod?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1649">line 1649</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="isAndroidStockBrowser"></a>
+
+<div class="public">
+
+    <h4 class="name" id="isAndroidStockBrowser"><span class="type-signature">(readonly) </span>isAndroidStockBrowser<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Detect if it's an Android Stock browser.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1505">line 1505</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="isIframe"></a>
+
+<div class="public">
+
+    <h4 class="name" id="isIframe"><span class="type-signature">(readonly) </span>isIframe<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is the current page is into an Iframe ?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2345">line 2345</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="isSecure"></a>
+
+<div class="public">
+
+    <h4 class="name" id="isSecure"><span class="type-signature">(readonly) </span>isSecure<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is the current page in secure mode?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2331">line 2331</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="JSON"></a>
+
+<div class="public">
+
+    <h4 class="name" id="JSON"><span class="type-signature">(readonly) </span>JSON<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is JSON native support available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2289">line 2289</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="kindle"></a>
+
+<div class="public">
+
+    <h4 class="name" id="kindle"><span class="type-signature">(readonly) </span>kindle<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on Kindle?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1167">line 1167</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="language"></a>
+
+<div class="public">
+
+    <h4 class="name" id="language"><span class="type-signature">(readonly) </span>language<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        The browser language.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1095">line 1095</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="linux"></a>
+
+<div class="public">
+
+    <h4 class="name" id="linux"><span class="type-signature">(readonly) </span>linux<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on Linux?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1223">line 1223</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="localStorage"></a>
+
+<div class="public">
+
+    <h4 class="name" id="localStorage"><span class="type-signature">(readonly) </span>localStorage<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is localStorage available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2191">line 2191</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="lockOrientation"></a>
+
+<div class="public">
+
+    <h4 class="name" id="lockOrientation"><span class="type-signature">(readonly) </span>lockOrientation<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        Lock screen orientation method name.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2601">line 2601</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="m4a"></a>
+
+<div class="public">
+
+    <h4 class="name" id="m4a"><span class="type-signature">(readonly) </span>m4a<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Can play m4a files?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1906">line 1906</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="macOS"></a>
+
+<div class="public">
+
+    <h4 class="name" id="macOS"><span class="type-signature">(readonly) </span>macOS<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on MacOS?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1237">line 1237</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="mediaSource"></a>
+
+<div class="public">
+
+    <h4 class="name" id="mediaSource"><span class="type-signature">(readonly) </span>mediaSource<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is Media Source Extensions API available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2261">line 2261</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="mobile"></a>
+
+<div class="public">
+
+    <h4 class="name" id="mobile"><span class="type-signature">(readonly) </span>mobile<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on a mobile?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1747">line 1747</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="mp3"></a>
+
+<div class="public">
+
+    <h4 class="name" id="mp3"><span class="type-signature">(readonly) </span>mp3<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Can play mp3 files?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1864">line 1864</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="mp4"></a>
+
+<div class="public">
+
+    <h4 class="name" id="mp4"><span class="type-signature">(readonly) </span>mp4<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Can play mp4 files?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1920">line 1920</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="mp4Video"></a>
+
+<div class="public">
+
+    <h4 class="name" id="mp4Video"><span class="type-signature">(readonly) </span>mp4Video<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Can play mp4 video files?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2006">line 2006</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="ogg"></a>
+
+<div class="public">
+
+    <h4 class="name" id="ogg"><span class="type-signature">(readonly) </span>ogg<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Can play ogg files?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1850">line 1850</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="oggVideo"></a>
+
+<div class="public">
+
+    <h4 class="name" id="oggVideo"><span class="type-signature">(readonly) </span>oggVideo<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Can play ogg video files?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1978">line 1978</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="onDestroy"></a>
+
+<div class="public">
+
+    <h4 class="name" id="onDestroy"><span class="type-signature">(readonly) </span>onDestroy<span class="type-signature"> :<a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a></span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the onDestroy <a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a>, this event is emitted at the end of the destroy sequence.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a></span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#onDestroy">FORGE.BaseObject#onDestroy</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line378">line 378</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="onReady"></a>
+
+<div class="public">
+
+    <h4 class="name" id="onReady"><span class="type-signature">(readonly) </span>onReady<span class="type-signature"> :<a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a></span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the onReady EventDispatcher.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="FORGE.EventDispatcher.html">FORGE.EventDispatcher</a></span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2629">line 2629</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="opera"></a>
+
+<div class="public">
+
+    <h4 class="name" id="opera"><span class="type-signature">(readonly) </span>opera<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running in Opera?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1365">line 1365</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="operaVersion"></a>
+
+<div class="public">
+
+    <h4 class="name" id="operaVersion"><span class="type-signature">(readonly) </span>operaVersion<span class="type-signature"> :number</span></h4>
+
+    
+
+    
+    <div class="description">
+        Opera major version number.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1379">line 1379</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="opus"></a>
+
+<div class="public">
+
+    <h4 class="name" id="opus"><span class="type-signature">(readonly) </span>opus<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Can play opus files?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1878">line 1878</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="orientation"></a>
+
+<div class="public">
+
+    <h4 class="name" id="orientation"><span class="type-signature">(readonly) </span>orientation<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        Screen orientation object name.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2587">line 2587</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="os"></a>
+
+<div class="public">
+
+    <h4 class="name" id="os"><span class="type-signature">(readonly) </span>os<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        The OS name
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1111">line 1111</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="osVersion"></a>
+
+<div class="public">
+
+    <h4 class="name" id="osVersion"><span class="type-signature">(readonly) </span>osVersion<span class="type-signature"> :number</span></h4>
+
+    
+
+    
+    <div class="description">
+        The OS major version number.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1125">line 1125</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="other"></a>
+
+<div class="public">
+
+    <h4 class="name" id="other"><span class="type-signature">(readonly) </span>other<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on a other device as smartTv...?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1761">line 1761</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="pixelRatio"></a>
+
+<div class="public">
+
+    <h4 class="name" id="pixelRatio"><span class="type-signature">(readonly) </span>pixelRatio<span class="type-signature"> :number</span></h4>
+
+    
+
+    
+    <div class="description">
+        Pixel ratio of the device.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1677">line 1677</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="pointerLock"></a>
+
+<div class="public">
+
+    <h4 class="name" id="pointerLock"><span class="type-signature">(readonly) </span>pointerLock<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is pointerLock available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2233">line 2233</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="quirksMode"></a>
+
+<div class="public">
+
+    <h4 class="name" id="quirksMode"><span class="type-signature">(readonly) </span>quirksMode<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is the browser running in strict mode or quirks mode?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1533">line 1533</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="ready"></a>
+
+<div class="public">
+
+    <h4 class="name" id="ready"><span class="type-signature">(readonly) </span>ready<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is device detection done?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1067">line 1067</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="requestFullscreen"></a>
+
+<div class="public">
+
+    <h4 class="name" id="requestFullscreen"><span class="type-signature">(readonly) </span>requestFullscreen<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        Request full screen method name.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1563">line 1563</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="retina"></a>
+
+<div class="public">
+
+    <h4 class="name" id="retina"><span class="type-signature">(readonly) </span>retina<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on Apple Retina display?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1635">line 1635</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="safari"></a>
+
+<div class="public">
+
+    <h4 class="name" id="safari"><span class="type-signature">(readonly) </span>safari<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running in Safari?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1421">line 1421</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="safariVersion"></a>
+
+<div class="public">
+
+    <h4 class="name" id="safariVersion"><span class="type-signature">(readonly) </span>safariVersion<span class="type-signature"> :number</span></h4>
+
+    
+
+    
+    <div class="description">
+        Safari (or Mobile Safari) major version number.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1435">line 1435</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="screenHeight"></a>
+
+<div class="public">
+
+    <h4 class="name" id="screenHeight"><span class="type-signature">(readonly) </span>screenHeight<span class="type-signature"> :number</span></h4>
+
+    
+
+    
+    <div class="description">
+        Device screen height in pixels.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2559">line 2559</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="screenOrientation"></a>
+
+<div class="public">
+
+    <h4 class="name" id="screenOrientation"><span class="type-signature">(readonly) </span>screenOrientation<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is screen orienation API available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2573">line 2573</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="screenWidth"></a>
+
+<div class="public">
+
+    <h4 class="name" id="screenWidth"><span class="type-signature">(readonly) </span>screenWidth<span class="type-signature"> :number</span></h4>
+
+    
+
+    
+    <div class="description">
+        Device screen width in pixels.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2545">line 2545</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="silk"></a>
+
+<div class="public">
+
+    <h4 class="name" id="silk"><span class="type-signature">(readonly) </span>silk<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running in Silk (Kindle)?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1449">line 1449</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="svg"></a>
+
+<div class="public">
+
+    <h4 class="name" id="svg"><span class="type-signature">(readonly) </span>svg<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is SVG in '<embed>' or '<object>' supported?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2317">line 2317</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="tablet"></a>
+
+<div class="public">
+
+    <h4 class="name" id="tablet"><span class="type-signature">(readonly) </span>tablet<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on a tablet?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1733">line 1733</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="tags"></a>
+
+<div class="public">
+
+    <h4 class="name" id="tags"><span class="type-signature">(readonly) </span>tags<span class="type-signature"> :Array</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the tags associated to this object.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Array</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#tags">FORGE.BaseObject#tags</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line276">line 276</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="touch"></a>
+
+<div class="public">
+
+    <h4 class="name" id="touch"><span class="type-signature">(readonly) </span>touch<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is Touch API available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1777">line 1777</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="touchForce"></a>
+
+<div class="public">
+
+    <h4 class="name" id="touchForce"><span class="type-signature">(readonly) </span>touchForce<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Are Force Touch Events supported?
+Force Touch events are available in OS X 10.11 and later on devices equipped with Force Touch trackpads.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1805">line 1805</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="ua"></a>
+
+<div class="public">
+
+    <h4 class="name" id="ua"><span class="type-signature">(readonly) </span>ua<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        The user agent string.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1081">line 1081</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="uid"></a>
+
+<div class="public">
+
+    <h4 class="name" id="uid"><span class="type-signature">(readonly) </span>uid<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get the uid of the object.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#uid">FORGE.BaseObject#uid</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line261">line 261</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="unlockOrientation"></a>
+
+<div class="public">
+
+    <h4 class="name" id="unlockOrientation"><span class="type-signature">(readonly) </span>unlockOrientation<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        Unlock screen orientation method name.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2615">line 2615</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="vibrate"></a>
+
+<div class="public">
+
+    <h4 class="name" id="vibrate"><span class="type-signature">(readonly) </span>vibrate<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Does the device support the Vibration API?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1691">line 1691</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="visibilityChange"></a>
+
+<div class="public">
+
+    <h4 class="name" id="visibilityChange"><span class="type-signature">(readonly) </span>visibilityChange<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        Visibility change event name for the PageVisibility API.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2373">line 2373</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="visibilityState"></a>
+
+<div class="public">
+
+    <h4 class="name" id="visibilityState"><span class="type-signature">(readonly) </span>visibilityState<span class="type-signature"> :string</span></h4>
+
+    
+
+    
+    <div class="description">
+        Hidden state name for the PageVisibility API.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2359">line 2359</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="vita"></a>
+
+<div class="public">
+
+    <h4 class="name" id="vita"><span class="type-signature">(readonly) </span>vita<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on PS Vita?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1139">line 1139</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="vp9Video"></a>
+
+<div class="public">
+
+    <h4 class="name" id="vp9Video"><span class="type-signature">(readonly) </span>vp9Video<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Can play vp9 video files?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2034">line 2034</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="warning"></a>
+
+<div class="public">
+
+    <h4 class="name" id="warning"><span class="type-signature"></span>warning<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Get and set the warning flag.
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#warning">FORGE.BaseObject#warning</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line352">line 352</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="wav"></a>
+
+<div class="public">
+
+    <h4 class="name" id="wav"><span class="type-signature">(readonly) </span>wav<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Can play wav files?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1892">line 1892</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="weba"></a>
+
+<div class="public">
+
+    <h4 class="name" id="weba"><span class="type-signature">(readonly) </span>weba<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Can play weba files?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1962">line 1962</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="webApp"></a>
+
+<div class="public">
+
+    <h4 class="name" id="webApp"><span class="type-signature">(readonly) </span>webApp<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running in a standalone app?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1491">line 1491</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="webAudio"></a>
+
+<div class="public">
+
+    <h4 class="name" id="webAudio"><span class="type-signature">(readonly) </span>webAudio<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is the WebAudio API available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1836">line 1836</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="webGL"></a>
+
+<div class="public">
+
+    <h4 class="name" id="webGL"><span class="type-signature">(readonly) </span>webGL<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is webGL available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2135">line 2135</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="webm"></a>
+
+<div class="public">
+
+    <h4 class="name" id="webm"><span class="type-signature">(readonly) </span>webm<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Can play webm files?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1948">line 1948</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="webmVideo"></a>
+
+<div class="public">
+
+    <h4 class="name" id="webmVideo"><span class="type-signature">(readonly) </span>webmVideo<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Can play webm video files?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2020">line 2020</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="webVR"></a>
+
+<div class="public">
+
+    <h4 class="name" id="webVR"><span class="type-signature">(readonly) </span>webVR<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is WebVR available?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line2149">line 2149</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="windows"></a>
+
+<div class="public">
+
+    <h4 class="name" id="windows"><span class="type-signature">(readonly) </span>windows<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on Windows?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1251">line 1251</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="windowsPhone"></a>
+
+<div class="public">
+
+    <h4 class="name" id="windowsPhone"><span class="type-signature">(readonly) </span>windowsPhone<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on Windows Phone?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1265">line 1265</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+                
+
+<a name="xbox"></a>
+
+<div class="public">
+
+    <h4 class="name" id="xbox"><span class="type-signature">(readonly) </span>xbox<span class="type-signature"> :boolean</span></h4>
+
+    
+
+    
+    <div class="description">
+        Is running on XBox?
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">boolean</span>
+
+
+            </li>
+        </ul>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1153">line 1153</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+    
+
+</div>
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".check"><span class="type-signature">(static) </span>check<span class="signature">(config, device<span class="signature-attributes">opt</span>, condition<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Check device requirement for an object from configuration/manifest.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">The device requirement configuration of the configuration/manifest.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>device</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    FORGE.Device
+                
+                </td>
+            
+
+            <td class="description last">The device environment to test. The default is FORGE.Device detection, but we need to modify it in test suites.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>condition</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "and"
+                
+                </td>
+            
+
+            <td class="description last">[description]</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line962">line 962</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Returns true if the object is compatible with the device environment, false if not.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".checkValue"><span class="type-signature">(static) </span>checkValue<span class="signature">(config, device)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Check a single device config for the main check method
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">boolean</span>
+|
+
+<span class="param-type">number</span>
+|
+
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The configuration to check</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>device</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+|
+
+<span class="param-type">number</span>
+|
+
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The device value</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line1006">line 1006</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="canPlayAudio"><span class="type-signature"></span>canPlayAudio<span class="signature">(type)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Check if the device can play audio.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">One of 'mp3, 'ogg', 'm4a', 'wav', 'webm'.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line866">line 866</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="canPlayVideo"><span class="type-signature"></span>canPlayVideo<span class="signature">(type)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Check If the device can play video files.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">One of 'mp4, 'ogg', 'webm' or 'mpeg'.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line914">line 914</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="destroy"><span class="type-signature"></span>destroy<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Basic destroy method, prevent double destroy, change the alive flag.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#destroy">FORGE.BaseObject#destroy</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line218">line 218</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="isLowBattery"><span class="type-signature"></span>isLowBattery<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;boolean>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Check If the battery is low.<br>
+Note "low" is defined as less than 20%.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_Device.js.html">system/Device.js</a>, <a href="system_Device.js.html#line942">line 942</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;boolean></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="log"><span class="type-signature"></span>log<span class="signature">(value)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Basic log method, log a string in the console if debug is enabled.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The value you want to log in the console.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#log">FORGE.BaseObject#log</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line185">line 185</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="warn"><span class="type-signature"></span>warn<span class="signature">(value<span class="signature-attributes">nullable</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Basic warn method, log a warn string in the console if warning is enabled.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The value you want to warn in the console.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="FORGE.BaseObject.html#warn">FORGE.BaseObject#warn</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="core_BaseObject.js.html">core/BaseObject.js</a>, <a href="core_BaseObject.js.html#line205">line 205</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+<div id="quickNav">
+
+    <h4>
+        
+            <span class="ancestors"><a href="FORGE.html">FORGE</a>.</span>
+        
+
+        Device
+    </h4>
+   
+    
+        
+        <h5 class="subsection-title">Members</h5>
+
+        <ul>
+            
+                <li class="public">
+                    <a href="#aac">aac</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#addEventListener">addEventListener</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#alive">alive</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#android">android</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#androidStockBrowserVersion">androidStockBrowserVersion</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#applicationCache">applicationCache</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#audioTag">audioTag</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#battery">battery</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#browser">browser</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#browserVersion">browserVersion</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#canvas">canvas</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#canvasText">canvasText</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#canvasWinding">canvasWinding</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#chrome">chrome</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#chromeOS">chromeOS</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#chromeVersion">chromeVersion</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#className">className</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#contextMenu">contextMenu</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#css3D">css3D</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#cssAnimation">cssAnimation</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#cssPointerEvents">cssPointerEvents</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#cssRgba">cssRgba</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#data">data</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#debug">debug</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#desktop">desktop</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#deviceMotion">deviceMotion</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#deviceMotionAcceleration">deviceMotionAcceleration</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#deviceMotionRotationRate">deviceMotionRotationRate</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#deviceOrientation">deviceOrientation</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#deviceOrientationMagnetometer">deviceOrientationMagnetometer</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#dpi">dpi</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#edge">edge</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#edgeVersion">edgeVersion</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#encryptedMedia">encryptedMedia</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#exitFullscreen">exitFullscreen</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#file">file</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#fileSystem">fileSystem</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#firefox">firefox</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#firefoxVersion">firefoxVersion</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#fullscreenElement">fullscreenElement</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#fullscreenEnabled">fullscreenEnabled</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#fullscreenKeyboard">fullscreenKeyboard</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#gamepad">gamepad</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#geolocation">geolocation</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#gyroscope">gyroscope</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#h264Video">h264Video</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#history">history</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#hlsVideo">hlsVideo</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#ie">ie</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#ieVersion">ieVersion</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#iOS">iOS</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#iPad">iPad</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#iPhone">iPhone</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#iPod">iPod</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#isAndroidStockBrowser">isAndroidStockBrowser</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#isIframe">isIframe</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#isSecure">isSecure</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#JSON">JSON</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#kindle">kindle</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#language">language</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#linux">linux</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#localStorage">localStorage</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#lockOrientation">lockOrientation</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#m4a">m4a</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#macOS">macOS</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#mediaSource">mediaSource</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#mobile">mobile</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#mp3">mp3</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#mp4">mp4</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#mp4Video">mp4Video</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#ogg">ogg</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#oggVideo">oggVideo</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#onDestroy">onDestroy</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#onReady">onReady</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#opera">opera</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#operaVersion">operaVersion</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#opus">opus</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#orientation">orientation</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#os">os</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#osVersion">osVersion</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#other">other</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#pixelRatio">pixelRatio</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#pointerLock">pointerLock</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#quirksMode">quirksMode</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#ready">ready</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#requestFullscreen">requestFullscreen</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#retina">retina</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#safari">safari</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#safariVersion">safariVersion</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#screenHeight">screenHeight</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#screenOrientation">screenOrientation</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#screenWidth">screenWidth</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#silk">silk</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#svg">svg</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#tablet">tablet</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#tags">tags</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#touch">touch</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#touchForce">touchForce</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#ua">ua</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#uid">uid</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#unlockOrientation">unlockOrientation</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#vibrate">vibrate</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#visibilityChange">visibilityChange</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#visibilityState">visibilityState</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#vita">vita</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#vp9Video">vp9Video</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#warning">warning</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#wav">wav</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#weba">weba</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#webApp">webApp</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#webAudio">webAudio</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#webGL">webGL</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#webm">webm</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#webmVideo">webmVideo</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#webVR">webVR</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#windows">windows</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#windowsPhone">windowsPhone</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#xbox">xbox</a>
+                </li>
+            
+        </ul>
+
+    
+
+
+    
+        
+        <h5 class="subsection-title">Methods</h5>
+
+        <ul>
+            
+                <li class="public">
+                    <a href="#check">check</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#checkValue">checkValue</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#canPlayAudio">canPlayAudio</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#canPlayVideo">canPlayVideo</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#destroy">destroy</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#isLowBattery">isLowBattery</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#log">log</a>
+                </li>
+            
+                <li class="public">
+                    <a href="#warn">warn</a>
+                </li>
+            
+        </ul>
+
+    
+
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:26 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

@@ -381,13 +381,16 @@ function login_user(this_) {
     var url = this_.attr('action');
     var username = $('#login_username').val();
     var password = $('#login_password').val();
-
+    if($('#remember_me').is(":checked")){
+        var remember_me = $('#remember_me').val();
+    }
     $.ajax({
         url: url,
         type: "POST",
         data: {
             username: username,
-            password: password
+            password: password,
+            remember_me: remember_me
         },
 
         success: function (data) {

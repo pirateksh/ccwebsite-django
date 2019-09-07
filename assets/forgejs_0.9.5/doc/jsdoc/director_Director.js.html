@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: director/Director.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: director/Director.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * A FORGE.Director is used to animate a hotspot.
+ *
+ * @constructor FORGE.Director
+ * @param {FORGE.Viewer} viewer - {@link FORGE.Viewer} reference
+ * @extends {FORGE.Animation}
+ */
+FORGE.Director = function(viewer)
+{
+    /**
+     * Viewer reference.
+     * @name FORGE.Director#_viewer
+     * @type {FORGE.Viewer}
+     * @private
+     */
+    this._viewer = viewer;
+
+    /**
+     * The UID of the selected track.
+     * @name FORGE.Director#_track
+     * @type {?string}
+     * @private
+     */
+    this._track = null;
+
+    /**
+     * The list of the tracks composing the director's cut
+     * @name FORGE.Director#_track
+     * @type {?Array&lt;string>}
+     * @private
+     */
+    this._tracks = null;
+
+    /**
+     * Does the director's cut loop ?
+     * @name FORGE.Director#_loop
+     * @type {boolean}
+     * @private
+     */
+    this._loop = false;
+
+    /**
+     * Does the director's cut randomized ?
+     * @name FORGE.Director#_random
+     * @type {boolean}
+     * @private
+     */
+    this._random = false;
+
+    /**
+     * Can the director's cut be stopped ?
+     * @name FORGE.Director#_stoppable
+     * @type {boolean}
+     * @private
+     */
+    this._stoppable = false;
+
+    /**
+     * The idle time to resume the animation after it was stopped by the user.
+     * @name FORGE.Director#_idleTime
+     * @type {number}
+     * @private
+     */
+    this._idleTime = -1;
+
+    /**
+     * Timer reference used to trigger an animation after idle time
+     * @name FORGE.Director#_idleTimer
+     * @type {FORGE.Timer}
+     * @private
+     */
+    this._idleTimer = null;
+
+    /**
+     * Timer idle event reference
+     * @name FORGE.Director#_idleEvent
+     * @type {FORGE.TimerEvent}
+     * @private
+     */
+    this._idleEvent = null;
+
+    /**
+     * Event handler for the synchronization of the video. Needed for the visibilitychange event.
+     * See https://www.w3.org/TR/page-visibility/#sec-visibilitychange-event
+     * @name FORGE.Director#_onVisibilityChangeBind
+     * @type {Function}
+     * @private
+     */
+    this._onVisibilityChangeBind = null;
+
+    FORGE.BaseObject.call(this, "Director");
+    this._boot();
+};
+
+FORGE.Director.prototype = Object.create(FORGE.BaseObject.prototype);
+FORGE.Director.prototype.constructor = FORGE.Director;
+
+/**
+ * Boot sequence
+ *
+ * @method FORGE.Director#_boot
+ * @private
+ */
+FORGE.Director.prototype._boot = function()
+{
+    // Idle timer
+    this._idleTimer = this._viewer.clock.create(false);
+
+    // Start the cut once the scene is loaded
+    this._viewer.story.onSceneLoadComplete.add(this._sceneLoadCompleteHandler, this);
+
+    // Add controllers after viewer is ready
+    this._viewer.onReady.add(this._onViewerReady, this);
+
+    // Bind onVisibilityChange handler
+    this._onVisibilityChangeBind = this._onVisibilityChange.bind(this);
+};
+
+/**
+ * Load director's cut configuration.
+ *
+ * @method FORGE.Director#load
+ * @param {HotspotTrackConfig} config - The animation config to load.
+ */
+FORGE.Director.prototype.load = function(config)
+{
+    // Register tracks, no need to store them here
+    if (config.tracks !== null &amp;&amp; Array.isArray(config.tracks))
+    {
+        for (var i = 0, ii = config.tracks.length; i &lt; ii; i++)
+        {
+            new FORGE.DirectorTrack(config.tracks[i]);
+        }
+    }
+};
+
+/**
+ * Viewer ready handler
+ * @method FORGE.Director#_onViewerReady
+ * @private
+ */
+FORGE.Director.prototype._onViewerReady = function()
+{
+    this._viewer.controllers.onControlStart.add(this._controlStartHandler, this);
+    this._viewer.controllers.onControlEnd.add(this._controlEndHandler, this);
+};
+
+/**
+ * Event handler for scene load complete.
+ * @method  FORGE.Director#_sceneLoadCompleteHandler
+ * @private
+ */
+FORGE.Director.prototype._sceneLoadCompleteHandler = function()
+{
+    var scene = this._viewer.story.scene;
+
+    // Stop all
+    this.stop();
+    this._clearEvents();
+
+    // Empty tracks
+    this._track = null;
+    this._tracks = [];
+
+    if (typeof scene.config.director !== "undefined")
+    {
+        var animation = scene.config.director.animation;
+
+        if (typeof animation === "undefined" || animation === null || animation.enabled === false)
+        {
+            return;
+        }
+
+        // General properties
+        this._loop = (typeof animation.loop === "boolean") ? animation.loop : false;
+        this._random = (typeof animation.random === "boolean") ? animation.random : false;
+        this._stoppable = (typeof animation.stoppable === "boolean") ? animation.stoppable : false;
+        this._idleTime = (typeof animation.idleTime === "number") ? animation.idleTime : 0;
+
+        // Load tracks
+        if (animation.tracks !== null &amp;&amp; FORGE.Utils.isArrayOf(animation.tracks, "string"))
+        {
+            this._tracks = (this._random === true) ? FORGE.Utils.randomize(animation.tracks) : animation.tracks;
+        }
+
+        // Add on complete handler
+        this._viewer.camera.animation.onComplete.add(this._onTrackCompleteHandler, this);
+
+        // Add specific behavior if the current media is a video
+        if (this._viewer.story.scene.media.type === FORGE.MediaType.VIDEO)
+        {
+            this._viewer.story.scene.media.displayObject.onPause.add(this._pauseHandler, this);
+
+            // React on loading/buffering event
+            this._viewer.story.scene.media.displayObject.onWaiting.add(this._waitingHandler, this);
+            this._viewer.story.scene.media.displayObject.onStalled.add(this._waitingHandler, this);
+            this._viewer.story.scene.media.displayObject.onSeeking.add(this._waitingHandler, this);
+
+            // The director's cut begin again if video is looping
+            this._viewer.story.scene.media.displayObject.onEnded.add(this._endedHandler, this);
+
+            // Synchronization !
+            this._viewer.story.scene.media.displayObject.onCurrentTimeChange.add(this._synchronizeWithVideo, this);
+
+            // Double synchronization when the window lose visibility
+            // Needed because we rely on RAF which is only working on visibility
+            document.addEventListener(FORGE.Device.visibilityChange, this._onVisibilityChangeBind);
+        }
+
+        // Start given the idle time
+        if (typeof animation.delay === "number")
+        {
+            this._idleEvent = this._idleTimer.add(animation.delay, this._idleTimerCompleteHandler, this);
+            this._idleTimer.start();
+        }
+    }
+};
+
+/**
+ * Event handler when the video is paused. Not trigger only after the "pause" event.
+ * @method FORGE.Director#_pauseHandler
+ * @private
+ */
+FORGE.Director.prototype._pauseHandler = function()
+{
+    // Stopping the animation
+    this.stop();
+
+    // Event handling
+    // for animation
+    if (this._viewer.story.scene.media.type === FORGE.MediaType.VIDEO)
+    {
+        this._viewer.story.scene.media.displayObject.onPause.remove(this._pauseHandler, this);
+        this._viewer.story.scene.media.displayObject.onPlay.add(this._playHandler, this);
+    }
+
+    // for controllers
+    this._viewer.controllers.onControlStart.remove(this._controlStartHandler, this);
+    this._viewer.controllers.onControlEnd.remove(this._controlEndHandler, this);
+};
+
+/**
+ * Event handler when the video start playing again. Not trigger only after the "play" event.
+ * @method FORGE.Director#_playHandler
+ * @private
+ */
+FORGE.Director.prototype._playHandler = function()
+{
+    // Starting the animation
+    if (this._track !== null)
+    {
+        this.play(this._track);
+
+        if (this._viewer.story.scene.media.type === FORGE.MediaType.VIDEO)
+        {
+            this._synchronizeWithVideo();
+        }
+    }
+
+    // Event handling
+    // for animation
+    if (this._viewer.story.scene.media.type === FORGE.MediaType.VIDEO)
+    {
+        this._viewer.story.scene.media.displayObject.onPause.add(this._pauseHandler, this);
+        this._viewer.story.scene.media.displayObject.onPlay.remove(this._playHandler, this);
+    }
+    // for controllers
+    this._viewer.controllers.onControlStart.add(this._controlStartHandler, this);
+    this._viewer.controllers.onControlEnd.add(this._controlEndHandler, this);
+};
+
+/**
+ * Waiting and stalled handler
+ * @method FORGE.Director#_waitingHandler
+ * @private
+ */
+FORGE.Director.prototype._waitingHandler = function()
+{
+    // Stopping the animation
+    this.stop();
+
+    // Event handling
+    // for waiting
+    if (this._viewer.story.scene.media.type === FORGE.MediaType.VIDEO)
+    {
+        this._viewer.story.scene.media.displayObject.onWaiting.remove(this._waitingHandler, this);
+        this._viewer.story.scene.media.displayObject.onStalled.remove(this._waitingHandler, this);
+        this._viewer.story.scene.media.displayObject.onSeeking.remove(this._waitingHandler, this);
+        this._viewer.story.scene.media.displayObject.onPlaying.add(this._playingHandler, this);
+        this._viewer.story.scene.media.displayObject.onSeeked.add(this._playingHandler, this);
+    }
+    // for controllers
+    this._viewer.controllers.onControlStart.remove(this._controlStartHandler, this);
+    this._viewer.controllers.onControlEnd.remove(this._controlEndHandler, this);
+};
+
+/**
+ * Playing handler
+ * @method FORGE.Director#_playingHandler
+ * @private
+ */
+FORGE.Director.prototype._playingHandler = function()
+{
+    // Starting the animation
+    if (this._track !== null)
+    {
+        this.play(this._track);
+
+        if (this._viewer.story.scene.media.type === FORGE.MediaType.VIDEO)
+        {
+            this._synchronizeWithVideo();
+        }
+    }
+
+    // Event handling
+    // for waiting
+    if (this._viewer.story.scene.media.type === FORGE.MediaType.VIDEO)
+    {
+        this._viewer.story.scene.media.displayObject.onPlaying.remove(this._playingHandler, this);
+        this._viewer.story.scene.media.displayObject.onSeeked.remove(this._playingHandler, this);
+        this._viewer.story.scene.media.displayObject.onWaiting.add(this._waitingHandler, this);
+        this._viewer.story.scene.media.displayObject.onStalled.add(this._waitingHandler, this);
+        this._viewer.story.scene.media.displayObject.onSeeking.add(this._waitingHandler, this);
+    }
+    // for controllers
+    this._viewer.controllers.onControlStart.add(this._controlStartHandler, this);
+    this._viewer.controllers.onControlEnd.add(this._controlEndHandler, this);
+};
+
+/**
+ * If the video is looping, this handler will start the director's cut all over again.
+ * @method FORGE.Director#_endedHandler
+ * @private
+ */
+FORGE.Director.prototype._endedHandler = function()
+{
+    if (this._viewer.story.scene.media.type === FORGE.MediaType.VIDEO &amp;&amp; this._viewer.story.scene.media.displayObject.loop === true)
+    {
+        // Starting the animation by considering it is a new scene
+        this._sceneLoadCompleteHandler();
+    }
+};
+
+/**
+ * Event handler for control start.
+ * @method FORGE.Director#_controlStartHandler
+ * @private
+ */
+FORGE.Director.prototype._controlStartHandler = function()
+{
+    if (this._track !== null &amp;&amp; this._stoppable === true)
+    {
+        this.stop();
+    }
+
+    this._idleTimer.stop(true);
+};
+
+/**
+ * Event handler for control end.
+ * @method FORGE.Director#_controlEndHandler
+ * @private
+ */
+FORGE.Director.prototype._controlEndHandler = function()
+{
+    if (this._idleEvent !== null)
+    {
+        this._idleTimer.remove(this._idleEvent);
+    }
+
+    if (this._track !== null &amp;&amp; this._stoppable === true)
+    {
+        // If the track is null, we haven't began yet the director's cut
+        if (this._track === null &amp;&amp; typeof this._viewer.story.scene.config.director.animation.delay === "number")
+        {
+            this._idleEvent = this._idleTimer.add(this._viewer.story.scene.config.director.animation.delay, this._idleTimerCompleteHandler, this);
+            this._idleTimer.start();
+        }
+        else if (typeof this._idleTime === "number" &amp;&amp; this._idleTime > -1)
+        {
+            this._idleEvent = this._idleTimer.add(this._idleTime, this._idleTimerCompleteHandler, this);
+            this._idleTimer.start();
+        }
+    }
+};
+
+/**
+ * Event handler when a track is completed. Play the next track in the list if
+ * any, or a random one.
+ * @method FORGE.Director#_onTrackCompleteHandler
+ * @private
+ */
+FORGE.Director.prototype._onTrackCompleteHandler = function()
+{
+    if (this._tracks.length > 1)
+    {
+        // Go to the next track if any
+        var idx = this._tracks.indexOf( /** @type {string} */ (this._track)) + 1;
+
+        // If the index is too high, play the track
+        if (idx &lt; this._tracks.length)
+        {
+            this.play(idx);
+            return;
+        }
+    }
+
+    // Loop only if it is the end of the last track
+    if (this._loop === true)
+    {
+        // If it is random, change the entire order
+        if (this._random === true)
+        {
+            this._tracks = FORGE.Utils.randomize(this._tracks);
+        }
+
+        this.play(0);
+        return;
+    }
+};
+
+/**
+ * Event handler for idle timer complete.
+ *
+ * @method FORGE.Director#_idleTimerCompleteHandler
+ * @private
+ */
+FORGE.Director.prototype._idleTimerCompleteHandler = function()
+{
+    // Resume the current track
+    this.play(this._track);
+
+    this._idleTimer.stop(true);
+};
+
+/**
+ * Event handler for visibility change on the window.
+ * @method FORGE.Director#_onVisibilityChange
+ * @private
+ */
+FORGE.Director.prototype._onVisibilityChange = function()
+{
+    if (document[FORGE.Device.visibilityState] !== "hidden" &amp;&amp; this._viewer.story.scene.media.type === FORGE.MediaType.VIDEO)
+    {
+        this._viewer.story.scene.media.displayObject.onCurrentTimeChange.dispatch(this._viewer.story.scene.media.displayObject.currentTime);
+    }
+};
+
+/**
+ * When the currentTime property of the video change, synchronize the director's cut on it.
+ * @method FORGE.Director#_synchronizeWithVideo
+ * @param  {(number|FORGE.Event)=} time - the emitted event, containing the time to synchronize to, or the time to synchronize to (in seconds).
+ * @private
+ */
+FORGE.Director.prototype._synchronizeWithVideo = function(time)
+{
+    this.stop();
+
+    // Remove the current track
+    this._track = null;
+
+    // Get the correct time to sync
+    if (typeof time === "number")
+    {
+        time = time * 1000;
+    }
+    else if (typeof time === "object" &amp;&amp; typeof time.data === "number")
+    {
+        time = time.data * 1000;
+    }
+    else if (this._viewer.story.scene.media.type === FORGE.MediaType.VIDEO)
+    {
+        time = this._viewer.story.scene.media.displayObject.currentTimeMS;
+    }
+    else
+    {
+        time = 0;
+    }
+
+    var offset = 0;
+    var trackA, trackB;
+    trackB = FORGE.UID.get(this._tracks[0]);
+
+    // If the time is lower than the duration of the first track, it is this one
+    if (trackB.duration > time)
+    {
+        this._track = trackB.uid;
+    }
+    else
+    {
+        // Else check for each track and its following one if the time is between this two.
+        for (var i = 1, ii = this._tracks.length - 1; i &lt; ii; i++)
+        {
+            trackA = trackB;
+            trackB = FORGE.UID.get(this._tracks[i]);
+
+            if (trackA.duration + offset &lt; time &amp;&amp; trackB.duration + trackA.duration + offset > time)
+            {
+                this._track = trackB.uid;
+                offset += trackA.duration;
+                break;
+            }
+
+            offset += trackA.duration;
+        }
+    }
+
+    // If no track found, it is after the last track, so change the camera
+    if (this._track === null)
+    {
+        // Look the same as the last point of our last track
+        var point = trackB.keyframes[trackB.keyframes.length - 1].data;
+        this._viewer.camera.lookAt(point.yaw, point.pitch, point.roll, point.fov);
+    }
+    else
+    {
+        this._viewer.camera.animation.play(this._track, time);
+    }
+};
+
+/**
+ * Play a set of tracks if specified, else the current one, from the start.
+ *
+ * @method FORGE.Director#play
+ * @param {?(string|number)=} track - A track
+ */
+FORGE.Director.prototype.play = function(track)
+{
+    this.stop();
+    this._track = null;
+
+    if (typeof track === "number")
+    {
+        this._track = this._tracks[track];
+    }
+    else if (typeof track === "string")
+    {
+        this._track = track;
+    }
+    else
+    {
+        this._track = this._tracks[0];
+    }
+
+    this._viewer.camera.animation.play(this._track);
+};
+
+/**
+ * Stops the current animation.
+ * @method FORGE.Director#stop
+ */
+FORGE.Director.prototype.stop = function()
+{
+    this.log("stopping");
+    this._viewer.camera.animation.stop();
+};
+
+FORGE.Director.prototype._clearEvents = function()
+{
+    this._viewer.camera.animation.onComplete.remove(this._onTrackCompleteHandler, this);
+
+    if (this._viewer.story.scene !== null &amp;&amp; this._viewer.story.scene.media.type === FORGE.MediaType.VIDEO)
+    {
+        this._viewer.story.scene.media.displayObject.onPlay.remove(this._playHandler, this);
+        this._viewer.story.scene.media.displayObject.onPause.remove(this._pauseHandler, this);
+        this._viewer.story.scene.media.displayObject.onWaiting.remove(this._waitingHandler, this);
+        this._viewer.story.scene.media.displayObject.onStalled.remove(this._waitingHandler, this);
+        this._viewer.story.scene.media.displayObject.onPlaying.remove(this._playingHandler, this);
+        this._viewer.story.scene.media.displayObject.onEnded.remove(this._endedHandler, this);
+        this._viewer.story.scene.media.displayObject.onCurrentTimeChange.remove(this._synchronizeWithVideo, this);
+
+        document.removeEventListener(FORGE.Device.visibilityChange, this._onVisibilityChangeBind);
+    }
+};
+
+/**
+ * Destroy method.
+ * @method  FORGE.Director#destroy
+ */
+FORGE.Director.prototype.destroy = function()
+{
+    this._clearEvents();
+
+    this._viewer.onReady.remove(this._onViewerReady, this);
+    this._viewer = null;
+
+    this._tracks = null;
+
+    this._track = null;
+
+    FORGE.BaseObject.prototype.destroy.call(this);
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>
