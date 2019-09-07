@@ -1,0 +1,159 @@
+{% comment %}
+    Context vars:
+    'read_notif': All read notifications,
+    'unread_notif': All unread notifications,
+    'user_profile_qs': ALl user profiles,
+{% endcomment %}
+{% load static %}
+{% load notifications_tags %}
+{% notifications_unread as unread_count %}
+{% live_notify_badge as live_unread_count %}
+<nav class="amber lighten-1" role="navigation">
+    <div class="nav-wrapper container">
+{#        {% if user.is_authenticated %}#}
+            <a id="logo-container" class="brand-logo hide-on-med-and-down" style="font-size:3vw;">{{ user.first_name }} {{ user.last_name }}</a>
+            <a id="logo-container" class="brand-logo hide-on-small-and-down hide-on-large-only" style="font-size:4vw;">{{ user.first_name }} {{ user.last_name }}</a>
+            <a id="logo-container" class="brand-logo hide-on-med-and-up" style="font-size:5vw;">{{ user.first_name }} {{ user.last_name }}</a>
+{#        {% else %}#}
+{#            <a id="logo-container" class="brand-logo">Hi, User!</a>#}
+{#        {% endif %}#}
+        <ul class="right hide-on-med-and-down">
+            {% if user.is_authenticated %}
+                <li>
+                    <a class="btn tooltipped" data-tooltip="Profile" href="{% url 'User Profile' user.username %}"><i class="material-icons">person_pin</i></a>
+                </li>
+                {% if user.is_superuser %}
+                    <li>
+                        <a class="btn tooltipped" data-tooltip="Dashboard" href="/admin"><i class="material-icons">dashboard</i></a>
+                    </li>
+                {% endif %}
+
+                <li>
+                    <a class="btn tooltipped" data-tooltip="Home" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
+                </li>
+                <li>
+                    <a class="btn red tooltipped" data-tooltip="Logout" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
+                </li>
+            {% else %}
+                <li>
+                    <a class=" waves-light btn modal-trigger" href="#modal1">Login</a>
+                </li>
+                <li>
+                    <a class=" waves-light btn modal-trigger" href="#modal2">Signup</a>
+                </li>
+            {% endif %}
+        </ul>
+
+        {# SideNav for Mobile view #}
+        <ul id="nav-mobile" class="sidenav">
+
+            {# Loop through categories #}
+
+{#            <li><a class="waves-light btn" id="cate" href="#cate">CATEGORIES</a></li>#}
+{#            <ul class="collapsible popout black-text">#}
+{#                {% for tag in tags %}#}
+{#                    <li>#}
+{#                        <div class="collapsible-header">{{ tag.name }}</div>#}
+{#                        <div class="collapsible-body">{{ tag.description }}</div>#}
+{#                    </li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+            <li>
+                <div class="user-view amber lighten-3">
+                    {% if profile.avatar %}
+                        <a><img class="circle materialboxed" src="{{ profile.avatar.url }}"></a>
+                    {% else %}
+                        <a><img class="circle" src="{% static 'default-profile-picture.jpg' %}"></a>
+                    {% endif %}
+                    <a><span class="name">{{ user.first_name }} {{ user.last_name }}</span></a>
+                    <a><span class="email">{{ user.email }}</span></a>
+                    {% if user.is_superuser %}
+                        <div class="row">
+                            <div class="col s3 m3 l3 center">
+                                <a class="btn-small tooltipped" data-tooltip="Profile" href="{% url 'User Profile' user.username %}"><i class="material-icons">person_pin</i></a>
+                            </div>
+                            <div class="col s3 m3 l3 center">
+                                <a class="btn-small tooltipped" data-tooltip="Dashboard" href="/admin"><i class="material-icons">dashboard</i></a>
+                            </div>
+                            <div class="col s3 m3 l3 center">
+                                <a class="btn-small tooltipped" data-tooltip="Home" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
+                            </div>
+                            <div class="col s3 m3 l3 center">
+                                <a class="btn-small red tooltipped" data-tooltip="Logout" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
+                            </div>
+                        </div>
+                    {% elif user.is_authenticated %}
+                        <div class="row">
+                            <div class="col s6 m6 l6 center">
+                                <a class="btn-small tooltipped" data-tooltip="Home" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
+                            </div>
+                            <div class="col s6 m6 l6 center">
+                                <a class="btn-small red tooltipped" data-tooltip="Logout" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </li>
+            {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+{#                    <li class="collection-item">#}
+{#                        <div class="center">#}
+{#                            <a class="modal-trigger btn" href="#modal-verify-posts">#}
+{#                                Verify Posts#}
+{#                                {% if live_unread_count %}#}
+{#                                    <span class="new badge amber">#}
+{#                                        {{ live_unread_count }}#}
+{#                                    </span>#}
+{#                                    {% else %}#}
+{#                                    <span class="badge amber">#}
+{#                                        {{ unread_count }}#}
+{#                                    </span>#}
+{#                                {% endif %}#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    </li>#}
+                {% else %}
+                    <div class="row">
+                        <a class='dropdown-trigger btn-large waves-light col s10 m10 offset-s1 offset-m1' href='#' data-target='dropdown_edit'>Edit Profile</a>
+                        <ul id='dropdown_edit' class='dropdown-content'>
+                            <li class="collection-item amber lighten-1">
+                                <a class="modal-trigger btn-flat" href="#modal1">Add Categories</a>
+                            </li>
+                            <li class="divider" tabindex="-1"></li>
+                            <li class="collection-item amber lighten-1">
+                                <a class="modal-trigger btn-flat" href="#modal-avatar">Add/Change Avatar</a>
+                            </li>
+                            <li class="divider" tabindex="-1"></li>
+                            <li class="collection-item amber lighten-2">
+                                <a class="modal-trigger btn-flat" href="#modal-change-user-password">Change Password</a>
+                            </li>
+                            <li class="divider" tabindex="-1"></li>
+                        </ul>
+                    </div>
+                    <li>
+                        <a class="btn" href="{% url 'Drafts' user.username %}">Drafts</a>
+                    </li>
+                {% endif %}
+
+
+            {% else %}
+
+                <li>
+                    <a class=" waves-light btn modal-trigger" href="#modal1">Login</a>
+                </li>
+
+                <li>
+                    <a class=" waves-light btn modal-trigger" href="#modal2">Signup</a>
+                </li>
+
+            {% endif %}
+
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+    </div>
+</nav>
+
+{#{% include 'home/login_modal.html' %}#}
+
+{#{% include 'home/signup_modal.html' %}#}

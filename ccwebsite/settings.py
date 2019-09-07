@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['herokuccwebsite.herokuapp.com', '127.0.0.1']
 
 INSTALLED_APPS = [
     # Local Apps
+    'notif.apps.NotifConfig',
     'comments.apps.CommentsConfig',
     'home.apps.RegistrationConfig',
     'post.apps.PostConfig',
@@ -59,7 +60,12 @@ INSTALLED_APPS = [
     # 'crispy_forms',
     # 'crispy_forms_materialize',
     'notifications',
+    # 'notify',
 ]
+
+DJANGO_NOTIFICATIONS_CONFIG = {
+    'SOFT_DELETE': True,
+}
 
 # Default layout to use with "crispy_forms"
 # CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
@@ -93,9 +99,9 @@ CKEDITOR_CONFIGS = {
 }
 
 
-#
 # SITE_ID = 1
-#
+
+
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     # 'allauth.account.auth_backends.AuthenticationBackend',
@@ -214,14 +220,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
-# import  os, sys
-# from manage import DEFAULT_SETTINGS_MODULE
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", DEFAULT_SETTINGS_MODULE)
-#
-# import django
-# django.setup()
 
 import dj_database_url
 prod_db = dj_database_url.config(conn_max_age=500)

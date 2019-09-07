@@ -14,6 +14,7 @@ from django.utils.html import strip_tags
 
 # 3rd Party imports
 from notifications.signals import notify
+# from notify.signals import notify
 
 # Imported Models
 from user_profile.models import UserProfile
@@ -31,6 +32,9 @@ NUMBER_OF_POSTS_PER_PAGE = 5
 
 
 def page_maker(request, model, native_user=None, draft=False):
+    """
+        Function to make pages taking NUMBER_OF_POSTS_PER_PAGE in one page.
+    """
     post_list = model.objects.all(native_user=native_user, draft=draft).filter(verify_status=1)
     paginator = Paginator(post_list, NUMBER_OF_POSTS_PER_PAGE)
     page = request.GET.get('page')
@@ -74,6 +78,9 @@ User = get_user_model()
 
 @login_required
 def ajax_add_post(request):
+    """
+        Function to add post and send it for approval using AJAX.
+    """
     if request.method == "POST":
         title = request.POST['title']
         tags_str = request.POST['tags']
@@ -109,7 +116,10 @@ def ajax_add_post(request):
 
         admin = User.objects.get(username="admin")
         # Notifications
-        notify.send(user, recipient=admin, verb='A new post to verify.')
+        notify.send(user_profile, recipient=admin, verb='requested approval to post.', target=post)
+        # notify.send(request.user, recipient=admin,
+        #             actor=request.user, verb='A new post to verify.',
+        #             nf_type='post_approval_request')
 
         response_data = {
             'result': 'Post added successfully!',
@@ -132,6 +142,9 @@ def ajax_add_post(request):
 
 @login_required
 def ajax_del_post(request):
+    """
+            Function to delete post using AJAX.
+    """
     if request.method == "GET":
         coming_from = request.GET['coming_from']
         post_pk = request.GET['post_pk']
@@ -156,6 +169,9 @@ def ajax_del_post(request):
 
 @login_required
 def ajax_edit_post(request):
+    """
+        Function to edit post using AJAX.
+    """
     if request.method == "POST":
         pk = request.POST['pk']
         updated_title = request.POST['title']
@@ -205,6 +221,9 @@ def ajax_edit_post(request):
 
 @login_required
 def post_like_toggle(request, slug):
+    """
+        Function to like/unlike posts using AJAX.
+    """
     post_qs = Post.objects.filter(slug=slug)
     user = request.user
     count = -1
@@ -222,6 +241,8 @@ def post_like_toggle(request, slug):
             else:
                 post.likes.add(user)
                 result = "LIKED"
+                user_profile = get_object_or_404(UserProfile, user=user)
+                notify.send(user_profile, recipient=post.author, verb='liked your post.', target=post)
             count = post.likes.count()
         else:
             result = "UNA"
@@ -242,6 +263,9 @@ def post_like_toggle(request, slug):
 
 
 def post_detail(request, slug):
+    """
+        This function renders Post Detail View.
+    """
     post = get_object_or_404(Post, slug=slug)
     author = post.author
     author_profile = get_object_or_404(UserProfile, user=author)
@@ -265,6 +289,9 @@ def post_detail(request, slug):
 
 @login_required
 def approve_post(request, slug):
+    """
+        This function approves the post to be posted among public.
+    """
     if request.user.is_superuser:
         post_qs = Post.objects.filter(slug=slug)
         if post_qs:
@@ -274,7 +301,8 @@ def approve_post(request, slug):
             if post.verify_status == -1:
                 post.verify_status = 1
                 post.save()
-                notify.send(request.user, recipient=author, verb='Your post has been approved.')
+                admin_prof = get_object_or_404(UserProfile, user=request.user)
+                notify.send(admin_prof, recipient=author, verb='approved this post.', target=post)
                 messages.success(request, f"You have approved a post.")
                 if author_profile.is_subscribed:
                     pass
@@ -291,6 +319,9 @@ def approve_post(request, slug):
 
 @login_required
 def reject_post(request, slug):
+    """
+        This function rejects the post to be posted among public.
+    """
     if request.user.is_superuser:
         post_qs = Post.objects.filter(slug=slug)
         if post_qs:
@@ -300,7 +331,8 @@ def reject_post(request, slug):
             if post.verify_status == -1:
                 post.verify_status = 0
                 post.save()
-                notify.send(request.user, recipient=author, verb='Your post has been rejected.')
+                admin_prof = get_object_or_404(UserProfile, user=request.user)
+                notify.send(admin_prof, recipient=author, verb='rejected this post.', target=post)
                 messages.success(request, f"You have rejected a post.")
                 if author_profile.is_subscribed:
                     pass
@@ -313,6 +345,7 @@ def reject_post(request, slug):
     else:
         messages.info(request, f"You are not authorised to complete this action!")
     return HttpResponseRedirect(reverse("Index"))
+
 
 # from rest_framework.views import APIView
 # from rest_framework.response import Response

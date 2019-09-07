@@ -672,7 +672,7 @@ XRegExp = XRegExp || (function (undef) {
 /**
  * Returns a new string with one or all matches of a pattern replaced. The pattern can be a string
  * or regex, and the replacement can be a string or a function to be called for each match. To
- * perform a global search and replace, use the optional `scope` argument or include flag `g` if
+ * perform a global search and replace, use the optional `scope` argument or includes flag `g` if
  * using a regex. Replacement strings can use `${n}` for named and numbered backreferences.
  * Replacement functions can use named backreferences via `arguments[0].name`. Also fixes browser
  * bugs compared to the native `String.prototype.replace` and can be used reliably cross-browser.
@@ -680,7 +680,7 @@ XRegExp = XRegExp || (function (undef) {
  * @param {String} str String to search.
  * @param {RegExp|String} search Search pattern to be replaced.
  * @param {String|Function} replacement Replacement string or a function invoked to create it.
- *   Replacement strings can include special replacement syntax:
+ *   Replacement strings can includes special replacement syntax:
  *     <li>$$ - Inserts a literal '$'.
  *     <li>$&, $0 - Inserts the matched substring.
  *     <li>$` - Inserts the string that precedes the matched substring (left context).
@@ -744,7 +744,7 @@ XRegExp = XRegExp || (function (undef) {
  * @memberOf XRegExp
  * @param {String} str String to split.
  * @param {RegExp|String} separator Regex or string to use for separating the string.
- * @param {Number} [limit] Maximum number of items to include in the result array.
+ * @param {Number} [limit] Maximum number of items to includes in the result array.
  * @returns {Array} Array of substrings.
  * @example
  *
@@ -1083,7 +1083,7 @@ XRegExp = XRegExp || (function (undef) {
  * uses this to override the native method. Use via `XRegExp.split` without overriding natives.
  * @private
  * @param {RegExp|String} separator Regex or string to use for separating the string.
- * @param {Number} [limit] Maximum number of items to include in the result array.
+ * @param {Number} [limit] Maximum number of items to includes in the result array.
  * @returns {Array} Array of substrings.
  */
     fixed.split = function (separator, limit) {
@@ -1389,7 +1389,7 @@ XRegExp = XRegExp || (function (undef) {
         }
     };
 
-/* Adds data for the Unicode `Letter` category. Addon packages include other categories, scripts,
+/* Adds data for the Unicode `Letter` category. Addon packages includes other categories, scripts,
  * blocks, and properties.
  */
     XRegExp.addUnicodePackage({
@@ -1981,7 +1981,7 @@ XRegExp = XRegExp || (function (undef) {
             0  | 1  | 0  | throw
             0  | 0  | 1  | throw
             0  | 0  | 0  | break
-            * Doesn't include the sticky mode special case
+            * Doesn't includes the sticky mode special case
             * Loop ends after the first completed match if `!global` */
             if (leftMatch || rightMatch) {
                 delimStart = (leftMatch || rightMatch).index;

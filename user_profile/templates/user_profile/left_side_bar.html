@@ -1,4 +1,7 @@
 {% load static %}
+{% load notifications_tags %}
+{% notifications_unread as unread_count %}
+{% live_notify_badge as live_unread_count %}
 <ul class="collection">
     <li class="collection-item amber">
         <div class="user-view">
@@ -42,7 +45,18 @@
     {% if native_user == user and user.is_superuser %}
         <li class="collection-item amber lighten-1">
             <a class="modal-trigger btn-flat" href="#modal-verify-posts">
-                Verify Posts <span class="new badge red">{{ pending_posts.count }}</span>
+                Verify Posts
+
+                {% if live_unread_count > 0 %}
+                    <span class="new badge red">
+                    {{ live_unread_count }}
+                    </span>
+                {% else %}
+                    <span class="badge red white-text">
+{#                        {{ unread_count }}#}
+                        {{ pending_posts.count }}
+                    </span>
+                {% endif %}
             </a>
         </li>
     {% endif %}

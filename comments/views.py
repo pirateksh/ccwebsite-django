@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import JsonResponse
-from django.contrib.contenttypes.models import ContentType
+# from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
 from post import views as post_view
 from django.utils.timesince import timesince
@@ -15,12 +15,18 @@ from .forms import CommentForm
 from home.forms import UserSignupForm
 from post.forms import PostForm
 
+# 3rd Party imports
+from notifications.signals import notify
 # Create your views here.
 
 HOME = '/'
 
 
 def add_comment(request, post_id):
+    """
+        Function to add comments.
+        Currently NOT IN USE.
+    """
     post = Post.objects.get(id=post_id)
     # initial_data = {
     #     'content_type': post.get_content_type,
@@ -94,6 +100,10 @@ def add_comment(request, post_id):
 
 
 def ajax_add_comment(request, post_id):
+    """
+        Function to add comments through AJAX.
+        Currently IN USE.
+    """
     if request.method == "POST":
         post_pk = request.POST['post_pk']
         parent_pk = request.POST['comment_pk']
@@ -131,6 +141,15 @@ def ajax_add_comment(request, post_id):
         else:
             count_str = str(children_count) + " Replies |"
 
+        # Sending Notificaions
+        if created:
+            if parent is None:
+                notify.send(user_profile, recipient=post.author, verb='commented on your post.', target=post)
+            else:
+                notify.send(user_profile, recipient=post.author, verb='liked your post.', target=post)
+
+
+
         # comments = Comment.objects.filter(post=post)
         # comment_count = comments.count()
         #
@@ -143,6 +162,12 @@ def ajax_add_comment(request, post_id):
             result = "SS"
         else:
             result = "ERR"
+
+        """
+            Acronyms:
+            SS: Success
+            ERR: Error
+        """
 
         response_data = {
             'result': result,
