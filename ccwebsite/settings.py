@@ -9,9 +9,6 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-
-import os
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,6 +28,7 @@ ALLOWED_HOSTS = ['herokuccwebsite.herokuapp.com', '127.0.0.1','localhost']
 
 INSTALLED_APPS = [
     # Local Apps
+    'notif.apps.NotifConfig',
     'comments.apps.CommentsConfig',
     'home.apps.RegistrationConfig',
     'post.apps.PostConfig',
@@ -60,7 +58,12 @@ INSTALLED_APPS = [
     # 'crispy_forms',
     # 'crispy_forms_materialize',
     'notifications',
+    # 'notify',
 ]
+
+DJANGO_NOTIFICATIONS_CONFIG = {
+    'SOFT_DELETE': True,
+}
 
 # Default layout to use with "crispy_forms"
 # CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
@@ -94,8 +97,8 @@ CKEDITOR_CONFIGS = {
 }
 
 
-#
 # SITE_ID = 1
+<<<<<<< HEAD
 #
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
@@ -103,6 +106,11 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',  # for Google authentication
     'social_core.backends.github.GithubOAuth2', # Auth Backend for github
     'social_core.backends.facebook.FacebookOAuth2', # Auth backend for Facebook 
+=======
+
+
+AUTHENTICATION_BACKENDS = [
+>>>>>>> master
     'django.contrib.auth.backends.ModelBackend',
     # 'allauth.account.auth_backends.AuthenticationBackend',
     'home.models.EmailBackend',
@@ -220,14 +228,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
-# import  os, sys
-# from manage import DEFAULT_SETTINGS_MODULE
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", DEFAULT_SETTINGS_MODULE)
-#
-# import django
-# django.setup()
 
 import dj_database_url
 prod_db = dj_database_url.config(conn_max_age=500)

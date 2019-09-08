@@ -259,6 +259,7 @@ function create_post(this_) {
             // location.href = successRedirectURL;
 
             addToast("Approval pending! Check status from your profile!");
+            $('.post_form').trigger("reset");
         },
 
         // handle a non-successful response
@@ -520,6 +521,7 @@ $('.edit-btn').click(function (event) {
                     var instance = M.Modal.getInstance(elem);
                     instance.close();
                     addToast('Post edited successfully!');
+                    $('#post-edit-form-' + postPK).trigger("reset");
 
                 } else if (json.result === 'ERR') {
                     addToast('Oops! We have encountered an error. Try Again!');

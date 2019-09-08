@@ -14,15 +14,23 @@ from django.shortcuts import reverse
 
 
 class PostManager(models.Manager):
-    # Overriding all() model manager
+    """
+        Overriding all() model manager.
+    """
     def all(self, native_user=None, draft=False, *args, **kwargs):
         if native_user is None:
+            """
+                All posts
+            """
             if not draft:
                 return super(PostManager, self).filter(draft=False).filter(post_on_date__lte=timezone.now()).order_by(
                     '-published')
             return super(PostManager, self).filter(draft=True).filter(post_on_date__lte=timezone.now()).order_by(
                     '-published')
         else:
+            """
+                Posts whose author is native_user
+            """
             if not draft:
                 return super(PostManager, self).filter(draft=False).filter(post_on_date__lte=timezone.now()).filter(
                     author=native_user).order_by('-published')

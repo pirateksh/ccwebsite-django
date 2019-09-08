@@ -34,8 +34,9 @@
                     <p class="row">
                         <span class="col s8 m8 l8">
                             <a href="{% url 'User Profile' author.username %}" class="chip">
-                                {% if profile.avatar %}
-                                    <img src="{{ profile.avatar.url }}">
+
+                                {% if author_profile.avatar %}
+                                    <img src="{{ author_profile.avatar.url }}">
                                 {% else %}
                                     <img src="{% static 'default-profile-picture.jpg' %}">
                                 {% endif %}

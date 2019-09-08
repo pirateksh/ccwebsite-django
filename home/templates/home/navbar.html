@@ -22,21 +22,21 @@
 
                 {% if user.is_superuser %}
                     <li>
-                        <a class=" waves-light btn" href="/admin"><i class="material-icons">dashboard</i></a>
+                        <a class="btn tooltipped" data-tooltip="Dashboard" href="/admin"><i class="material-icons">dashboard</i></a>
                     </li>
                 {% endif %}
                 <li>
-                    <a class=" waves-light btn" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
+                    <a class="btn tooltipped" data-tooltip="Home" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
                 </li>
                 <li class="collection-item amber">
-                    <a class="btn" href="{% url "User Profile" user.username %}" ><i class="material-icons">person_pin</i></a>
+                    <a class="btn tooltipped" data-tooltip="Profile" href="{% url "User Profile" user.username %}" ><i class="material-icons">person_pin</i></a>
                 </li>
                 <li>
-                    <a class=" waves-light btn red" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
+                    <a class="btn red tooltipped" data-tooltip="Logout" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
                 </li>
             {% else %}
                 <li>
-                    <a class=" waves-light btn" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
+                    <a class="btn tooltipped" data-tooltip="Home" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
                 </li>
                 <li>
                     <a class=" waves-light btn modal-trigger" href="#modal1">Login</a>
@@ -66,17 +66,26 @@
 
             {% if user.is_authenticated %}
                 {% if user.is_superuser %}
-                    <li>
-                        <a class=" waves-light btn" href="/admin"><i class="material-icons">dashboard</i></a>
-                    </li>
-                {% endif %}
-                <li>
-                    <a href="{% url 'User Profile' user.username %}" class="btn"><i class="material-icons">person_pin</i></a>
-                </li>
-                <li>
-                    <a class=" waves-light btn red" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
-                </li>
+                    <div class="row">
+                        <div class="col s4 m4 l4 center">
+                            <a class="btn-small tooltipped" data-tooltip="Dashboard" href="/admin"><i class="material-icons">dashboard</i></a>
+                        </div>
+                        <div class="col s4 m4 l4 center">
+                            <a class="btn-small tooltipped" data-tooltip="Profile" href="{% url "User Profile" user.username %}" ><i class="material-icons">person_pin</i></a>
+                        </div>
 
+                        <div class="col s4 m4 l4 center">
+                            <a class="btn-small red tooltipped" data-tooltip="Logout" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col s6 m6 l6 center">
+                        <a class="btn-small tooltipped" data-tooltip="Profile" href="{% url "User Profile" user.username %}" ><i class="material-icons">person_pin</i></a>
+                    </div>
+                    <div class="col s6 m6 l6 center">
+                        <a class="btn-small red tooltipped" data-tooltip="Logout" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
+                    </div>
+                {% endif %}
             {% else %}
 
                 <li>

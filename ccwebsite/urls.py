@@ -8,12 +8,14 @@ from django.conf.urls.static import static
 from django.contrib.auth import views
 import notifications.urls
 
+
 urlpatterns = [
     path('admin/', admin.site.urls, name="Admin"),
     path('', include('home.urls')),
     path('post/', include('post.urls')),
     path('profile/', include('user_profile.urls')),
     path('comments/', include('comments.urls')),
+    path('notification/', include('notif.urls')),
     # Account URLS
 
     url(r'^password_reset/$', views.PasswordResetView.as_view(), name='password_reset'),
@@ -24,7 +26,7 @@ urlpatterns = [
     url(r'^reset/done/$', views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 
     # Extra URLS
-    # url(r'^accounts/', include('allauth.urls')),
+    # url(r'^accounts/', includes('allauth.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
     url('^inbox/notifications/', include(notifications.urls, namespace='notifications')),

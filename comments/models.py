@@ -10,10 +10,16 @@ from ckeditor_uploader.fields import RichTextUploadingField
 class CommentManager(models.Manager):
 
     def all(self):
+        """
+            Overriding all() manager.
+        """
         qs = super(CommentManager, self).filter(parent=None)
         return qs
 
     def filter_by_post(self, instance=None):
+        """
+            Created a new manager filter_by_post()
+        """
         if instance is not None:
             content_type = ContentType.objects.get_for_model(instance.__class__)
             obj_id = instance.id
