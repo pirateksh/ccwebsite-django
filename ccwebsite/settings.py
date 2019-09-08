@@ -1,3 +1,4 @@
+import os
 """
 Django settings for ccwebsite project.
 
@@ -98,7 +99,7 @@ CKEDITOR_CONFIGS = {
 
 
 # SITE_ID = 1
-<<<<<<< HEAD
+
 #
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
@@ -106,11 +107,6 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',  # for Google authentication
     'social_core.backends.github.GithubOAuth2', # Auth Backend for github
     'social_core.backends.facebook.FacebookOAuth2', # Auth backend for Facebook 
-=======
-
-
-AUTHENTICATION_BACKENDS = [
->>>>>>> master
     'django.contrib.auth.backends.ModelBackend',
     # 'allauth.account.auth_backends.AuthenticationBackend',
     'home.models.EmailBackend',
