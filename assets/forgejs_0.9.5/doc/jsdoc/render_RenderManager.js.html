@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: render/RenderManager.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: render/RenderManager.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * RenderManager class.
+ *
+ * @constructor FORGE.RenderManager
+ * @param {FORGE.Viewer} viewer - viewer reference
+ * @extends {FORGE.BaseObject}
+ *
+ * @todo think about how to render multiple scene at the same time, with blending / overlap / viewport layouting...
+ * maybe add a layer object encapsulating background / foreground renderings to ease the process
+ */
+FORGE.RenderManager = function(viewer)
+{
+    /**
+     * The viewer reference.
+     * @name FORGE.RenderManager#_viewer
+     * @type {FORGE.Viewer}
+     * @private
+     */
+    this._viewer = viewer;
+
+    /**
+     * WebGL Renderer
+     * @name FORGE.RenderManager#_webGLRenderer
+     * @type {?THREE.WebGLRenderer}
+     * @private
+     */
+    this._webGLRenderer = null;
+
+    /**
+     * Render pipeline managing composers
+     * @name FORGE.RenderManager#_renderPipeline
+     * @type {FORGE.RenderPipeline}
+     * @private
+     */
+    this._renderPipeline = null;
+
+    /**
+     * Object managing screen/VR display
+     * @name FORGE.RenderManager#_renderDisplay
+     * @type {FORGE.RenderDisplay}
+     * @private
+     */
+    this._renderDisplay = null;
+
+    /**
+     * View manager reference
+     * @name FORGE.RenderManager#_viewManager
+     * @type {FORGE.ViewManager}
+     * @private
+     */
+    this._viewManager = null;
+
+    /**
+     * The sound reference linked to the media.
+     * @name FORGE.RenderManager#_mediaSound
+     * @type {?(FORGE.Sound|Object)}
+     * @private
+     */
+    this._mediaSound = null;
+
+    /**
+     * Picking manager
+     * @name FORGE.RenderManager#_pickingManager
+     * @type {FORGE.PickingManager}
+     * @private
+     */
+    this._pickingManager = null;
+
+    /**
+     * Background renderer.
+     * @name FORGE.RenderManager#_backgroundRenderer
+     * @type {?(FORGE.BackgroundMeshRenderer|FORGE.BackgroundShaderRenderer|FORGE.BackgroundPyramidRenderer)}
+     * @private
+     */
+    this._backgroundRenderer = null;
+
+    /**
+     * Type of the background renderer.
+     * @name FORGE.RenderManager#_backgroundRendererType
+     * @type {string}
+     * @private
+     */
+    this._backgroundRendererType = FORGE.BackgroundType.UNDEFINED;
+
+    /**
+     * Camera reference.
+     * @name FORGE.RenderManager#_camera
+     * @type {?FORGE.Camera}
+     * @private
+     */
+    this._camera = null;
+
+    /**
+     * Canvas resolution (px)
+     * @name FORGE.RenderManager#_canvasResolution
+     * @type {?FORGE.Size}
+     * @private
+     */
+    this._canvasResolution = null;
+
+    /**
+     * Display resolution (px)
+     * @name FORGE.RenderManager#_displayResolution
+     * @type {?FORGE.Size}
+     * @private
+     */
+    this._displayResolution = null;
+
+    /**
+     * objects renderer
+     * @name  FORGE.RenderManager#_objectRenderer
+     * @type {?FORGE.ObjectRenderer}
+     * @private
+     */
+    this._objectRenderer = null;
+
+    /**
+     * Background renderer ready flag
+     * @name FORGE.RenderManager#_backgroundReady
+     * @type {boolean}
+     * @private
+     */
+    this._backgroundReady = false;
+
+    /**
+     * Render pipeline renderer ready flag
+     * @name FORGE.RenderManager#_renderPipelineReady
+     * @type {boolean}
+     * @private
+     */
+    this._renderPipelineReady = false;
+
+    /**
+     * Event dispatcher for background renderer ready.
+     * @name FORGE.RenderManager#_onBackgroundReady
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onBackgroundReady = null;
+
+    /**
+     * Event dispatcher for on before render.
+     * @name FORGE.RenderManager#_onBeforeRender
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onBeforeRender = null;
+
+    /**
+     * Event dispatcher for on after render.
+     * @name FORGE.RenderManager#_onAfterRender
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onAfterRender = null;
+
+    FORGE.BaseObject.call(this, "RenderManager");
+
+    this._boot();
+};
+
+FORGE.RenderManager.prototype = Object.create(FORGE.BaseObject.prototype);
+FORGE.RenderManager.prototype.constructor = FORGE.RenderManager;
+
+/**
+ * Render manager constant near depth
+ * @type {number}
+ */
+FORGE.RenderManager.DEPTH_NEAR = 0.01;
+
+/**
+ * Render manager constant far depth
+ * @type {number}
+ */
+FORGE.RenderManager.DEPTH_FAR = 10000;
+
+/**
+ * Boot sequence.
+ * @method FORGE.RenderManager#_boot
+ * @private
+ */
+FORGE.RenderManager.prototype._boot = function()
+{
+    this._clock = new THREE.Clock();
+
+    this._viewer.onConfigLoadComplete.add(this._onViewerConfigLoadComplete, this, 1000);
+};
+
+/**
+ * Viewer ready handler
+ * @method FORGE.RenderManager#_onViewerConfigLoadComplete
+ * @private
+ */
+FORGE.RenderManager.prototype._onViewerConfigLoadComplete = function()
+{
+    var canvas = this._viewer.canvas.dom;
+
+    var options = this._viewer.config.webgl;
+    options.canvas = canvas;
+
+    // WebGLRenderer will draw any component supported by WebGL
+    try
+    {
+        this._webGLRenderer = new THREE.WebGLRenderer(options);
+    }
+    catch (error)
+    {
+        this.destroy();
+        return;
+    }
+
+    this._webGLRenderer.autoClear = false;
+    this._webGLRenderer.autoClearDepth = true;
+    this._webGLRenderer.autoClearColor = true;
+
+    this._viewManager = new FORGE.ViewManager(this._viewer);
+    this._viewManager.onChange.add(this._onViewChangeHandler, this);
+
+    this._pickingManager = new FORGE.PickingManager(this._viewer);
+    this._renderDisplay = new FORGE.RenderDisplay(this._viewer);
+    this._objectRenderer = new FORGE.ObjectRenderer(this._viewer);
+    this._renderPipeline = new FORGE.RenderPipeline(this._viewer);
+
+    this._renderDisplay.onDisplayChange.add(this._renderDisplayChangeHandler, this);
+    this._setRendererSize(this._renderDisplay.rendererSize);
+
+    this._camera = new FORGE.Camera(this._viewer);
+
+    this._viewer.canvas.onResize.add(this._canvasResizeHandler, this);
+    this._viewer.story.onSceneLoadStart.add(this._onSceneLoadStartHandler, this);
+};
+
+/**
+ * Scene has started to load.
+ * Init the view, the camera and the media
+ * @todo create media / background renderer
+ *
+ * @method FORGE.RenderManager#_onSceneLoadStartHandler
+ * @private
+ */
+FORGE.RenderManager.prototype._onSceneLoadStartHandler = function()
+{
+    // Listen to scene unload
+    this._viewer.story.scene.onUnloadStart.addOnce(this._onSceneUnloadStartHandler, this);
+
+    var sceneConfig = this._viewer.story.scene.config;
+
+    // Apply background to renderer
+    this._viewer.container.background = this._viewer.story.scene.background;
+
+    // Create render scenes before initing the view to ensure pipeline is ready when
+    // enabling the picking manager
+    this._objectRenderer.createRenderScenes();
+    this._renderPipeline.addRenderScenes(this._objectRenderer.renderScenes);
+
+    this._viewManager.load(sceneConfig.view);
+
+    this._initCamera(sceneConfig);
+
+    this._initSound(sceneConfig);
+
+    this._setupMedia();
+};
+
+/**
+ * Bind event handlers on media.
+ * @method FORGE.RenderManager#_setupMedia
+ * @private
+ */
+FORGE.RenderManager.prototype._setupMedia = function()
+{
+    var media = this._viewer.story.scene.media;
+
+    media.onLoadComplete.addOnce(this._mediaLoadCompleteHandler, this);
+
+    // If media is a video, listen to the quality change event
+    if (FORGE.Utils.isTypeOf(media.displayObject, ["VideoHTML5", "VideoDash"]))
+    {
+        media.displayObject.onQualityChange.add(this._mediaQualityChangeHandler, this);
+    }
+};
+
+/**
+ * Scene has started to unload
+ * @todo clean media / background renderer
+ *
+ * @method FORGE.RenderManager#_onSceneUnloadStartHandler
+ * @private
+ */
+FORGE.RenderManager.prototype._onSceneUnloadStartHandler = function()
+{
+    this._renderPipelineReady = false;
+
+    this._clearBackgroundRenderer();
+
+    // Clear fx composer and hotspot renderer
+    if (this._objectRenderer !== null)
+    {
+        this._objectRenderer.clear();
+    }
+
+    if (this._pickingManager !== null)
+    {
+        this._pickingManager.clear();
+    }
+
+    if (this._renderPipeline !== null)
+    {
+        this._renderPipeline.clear();
+    }
+
+    // Destroy media
+    if (this._mediaSound !== null)
+    {
+        this._mediaSound.destroy();
+        this._mediaSound = null;
+    }
+};
+
+/**
+ * Init camera with info contained in configuration
+ * @method FORGE.RenderManager#_initCamera
+ * @param {SceneConfig} sceneConfig - scene configuration
+ * @private
+ */
+FORGE.RenderManager.prototype._initCamera = function(sceneConfig)
+{
+    var sceneCameraConfig = /** @type {CameraConfig} */ (sceneConfig.camera);
+    var storyCameraConfig = /** @type {CameraConfig} */ (this._viewer.mainConfig.camera);
+    var extendedCameraConfig = /** @type {CameraConfig} */ (FORGE.Utils.extendMultipleObjects(storyCameraConfig, sceneCameraConfig));
+
+    this._camera.load(extendedCameraConfig);
+};
+
+/**
+ * Init the scene sound with info contained in configuration
+ * @method FORGE.RenderManager#_initSound
+ * @param {SceneConfig} sceneConfig - scene configuration
+ * @private
+ */
+FORGE.RenderManager.prototype._initSound = function(sceneConfig)
+{
+    var soundConfig = /** @type {SoundConfig} */ (sceneConfig.sound);
+
+    // Create sound from the SceneConfig
+    if (typeof soundConfig !== "undefined" &amp;&amp; typeof soundConfig.source !== "undefined")
+    {
+        var volume, loop, startTime, autoPlay;
+
+        if (typeof soundConfig.options !== "undefined")
+        {
+            volume = (typeof soundConfig.options.volume === "number") ? FORGE.Math.clamp(soundConfig.options.volume, 0, 1) : 1;
+            loop = (typeof soundConfig.options.loop === "boolean") ? soundConfig.options.loop : false;
+            startTime = (typeof soundConfig.options.startTime === "number") ? soundConfig.options.startTime : 0;
+            autoPlay = (typeof soundConfig.options.autoPlay === "boolean") ? soundConfig.options.autoPlay : false;
+        }
+
+        if (typeof soundConfig.source.url !== "undefined" &amp;&amp; soundConfig.source.url !== "")
+        {
+            // Warning : UID is not registered and applied to the FORGE.Sound object for registration
+            this._mediaSound = new FORGE.Sound(this._viewer, sceneConfig.sound.uid, sceneConfig.sound.source.url, (sceneConfig.sound.type === FORGE.SoundType.AMBISONIC));
+
+            if (typeof soundConfig.options !== "undefined" &amp;&amp; soundConfig.options !== null)
+            {
+                this._mediaSound.volume = volume;
+                this._mediaSound.loop = loop;
+                this._mediaSound.startTime = startTime;
+
+                if (autoPlay === true)
+                {
+                    this._mediaSound.play(this._mediaSound.startTime, this._mediaSound.loop, true);
+                }
+            }
+        }
+        // @todo Ability to use a target uid rather than a source url (ie. soundConfig.source.target)
+    }
+};
+
+/**
+ * View change handler
+ * @method FORGE.RenderManager#_onViewChangeHandler
+ * @private
+ */
+FORGE.RenderManager.prototype._onViewChangeHandler = function()
+{
+    if (this._backgroundRenderer !== null)
+    {
+        this._backgroundRenderer.updateAfterViewChange();
+    }
+
+    this._pickingManager.updateForViewType(this._viewManager.type);
+
+    if (this._viewManager.type === FORGE.ViewType.RECTILINEAR)
+    {
+        this._renderPipeline.enablePicking(false);
+    }
+    else
+    {
+        this._renderPipeline.enablePicking(true, this._pickingManager.material, this._pickingManager.renderTarget);
+    }
+};
+
+/**
+ * Handler of media load complete event
+ * @method FORGE.RenderManager#_mediaLoadCompleteHandler
+ * @param {FORGE.Event} event - Event object
+ * @private
+ */
+FORGE.RenderManager.prototype._mediaLoadCompleteHandler = function(event)
+{
+    this.log("Media load is complete");
+
+    var media = event.emitter;
+
+    this._setBackgroundRendererType(this._renderDisplay.presentingVR);
+    this._setBackgroundRenderer(this._backgroundRendererType);
+
+    if (this._backgroundRenderer !== null)
+    {
+        this._backgroundRenderer.displayObject = media.displayObject;
+    }
+
+    this._setupRenderPipeline();
+};
+
+/**
+ * Handler of media quality change event
+ * @method FORGE.RenderManager#_mediaQualityChangeHandler
+ * @private
+ */
+FORGE.RenderManager.prototype._mediaQualityChangeHandler = function(event)
+{
+    this.log("Media quality has changed");
+
+    this._backgroundRenderer.displayObject = event.emitter;
+};
+
+/**
+ * Setup render pipeline
+ * @method FORGE.RenderManager#_setupRenderPipeline
+ * @private
+ */
+FORGE.RenderManager.prototype._setupRenderPipeline = function()
+{
+    var fxSet = null;
+
+    var sceneConfig = this._viewer.story.scene.config;
+    var mediaConfig = sceneConfig.media;
+
+    if (typeof mediaConfig !== "undefined" &amp;&amp; mediaConfig !== null &amp;&amp;
+        typeof mediaConfig.fx !== "undefined" &amp;&amp; mediaConfig.fx !== null)
+    {
+        fxSet = this._viewer.postProcessing.getFxSetByUID(mediaConfig.fx);
+    }
+
+    if(this._backgroundRenderer !== null)
+    {
+        this._renderPipeline.addBackground(this._backgroundRenderer.renderTarget.texture, fxSet, 1.0);
+    }
+
+    if (typeof sceneConfig.fx !== "undefined" &amp;&amp; sceneConfig.fx !== null)
+    {
+        var globalFxSet = this._viewer.postProcessing.getFxSetByUID(sceneConfig.fx);
+        this._renderPipeline.addGlobalFx(globalFxSet);
+    }
+
+    this._renderPipelineReady = true;
+};
+
+/**
+ * Render background.
+ * @method FORGE.RenderManager#_drawBackground
+ * @param {THREE.PerspectiveCamera} camera - perspective camera used to render mesh, N/A with shader rendering
+ * @private
+ */
+FORGE.RenderManager.prototype._drawBackground = function(camera)
+{
+    // this.log("_drawBackground");
+
+    if (this._backgroundRenderer === null)
+    {
+        return;
+    }
+
+    this._backgroundRenderer.render(camera || null);
+};
+
+/**
+ * Set renderer size and all objects aware of resolution
+ * @method FORGE.RenderManager#_setRendererSize
+ * @param {FORGE.Size} size - new renderer size
+ * @private
+ */
+FORGE.RenderManager.prototype._setRendererSize = function(size)
+{
+    var vr = this._renderDisplay.presentingVR;
+
+    var keepCanvasStyle = true;
+
+    if (vr === true)
+    {
+        size = this._renderDisplay.rendererSize;
+        keepCanvasStyle = false;
+    }
+    else
+    {
+        this._renderDisplay.setSize(size);
+    }
+
+    this.log("set renderer size: " + size.width + "x" + size.height);
+
+    this._webGLRenderer.setSize(size.width, size.height, keepCanvasStyle);
+    this._canvasResolution = size;
+
+    this._displayResolution = new FORGE.Size(size.width, size.height);
+
+    if (vr === true)
+    {
+        this._displayResolution.width *= 0.5;
+    }
+
+    if (this._backgroundRenderer !== null)
+    {
+        this._backgroundRenderer.setSize(this._displayResolution);
+    }
+
+    this._pickingManager.setSize(this._displayResolution);
+
+    this._renderPipeline.setSize(this._displayResolution);
+
+    this.log("render size change in " + (vr ? "VR" : "screen") + " mode, resolution: " + this._displayResolution.width + "x" + this._displayResolution.height);
+};
+
+/**
+ * Internal handler on canvas resize.
+ * @method FORGE.RenderManager#_canvasResizeHandler
+ * @private
+ */
+FORGE.RenderManager.prototype._canvasResizeHandler = function()
+{
+    this.log("canvas resize handler");
+
+    var canvas = this._viewer.canvas.dom;
+    this._setRendererSize(new FORGE.Size(canvas.width, canvas.height));
+};
+
+/**
+ * VR Renderer display change event handler
+ * @method FORGE.RenderManager#_renderDisplayChangeHandler
+ * @private
+ */
+FORGE.RenderManager.prototype._renderDisplayChangeHandler = function()
+{
+    this.log("render display change handler");
+
+    this._setRendererSize(this._renderDisplay.rendererSize);
+
+    if (this._renderDisplay.presentingVR === true)
+    {
+        this._pickingManager.mode = FORGE.PickingManager.modes.GAZE;
+    }
+    else
+    {
+        this._pickingManager.mode = FORGE.PickingManager.modes.POINTER;
+    }
+};
+
+/**
+ * Renderer set background renderer
+ *
+ * @method FORGE.RenderManager#_setBackgroundRenderer
+ * @param {string} type - type of background renderer
+ * @private
+ */
+FORGE.RenderManager.prototype._setBackgroundRenderer = function(type)
+{
+    this.log("set background renderer");
+
+    var displayObject = null;
+    var renderTarget = null;
+
+    if (this._backgroundRenderer !== null)
+    {
+        if (this._backgroundRenderer.displayObject !== null)
+        {
+            displayObject = this._backgroundRenderer.displayObject;
+        }
+
+        if (this._backgroundRenderer.renderTarget !== null)
+        {
+            renderTarget = this._backgroundRenderer.renderTarget;
+        }
+    }
+
+    this._clearBackgroundRenderer();
+
+    var config = {};
+    var media = this._viewer.story.scene.media;
+    var mediaConfig = media.config;
+
+    if (typeof mediaConfig !== "undefined" &amp;&amp; mediaConfig !== null)
+    {
+        config.type = mediaConfig.type;
+
+        if (typeof mediaConfig.source !== "undefined" &amp;&amp; mediaConfig.source !== null)
+        {
+            var source = mediaConfig.source;
+
+            if (typeof source.levels === "undefined")
+            {
+                config.mediaFormat = mediaConfig.source.format;
+                var ratio = media.displayObject.element.width / media.displayObject.element.height || 1;
+
+                if (typeof source.fov !== "undefined")
+                {
+                    var vFov;
+                    if (typeof source.fov === "number")
+                    {
+                        vFov = source.fov.vertical;
+                    }
+                    else if (typeof source.fov.vertical === "number")
+                    {
+                        vFov = source.fov.vertical;
+                    }
+                    else if (typeof source.fov.horizontal === "number")
+                    {
+                        vFov = source.fov.horizontal / ratio;
+                    }
+                    else if (typeof source.fov.diagonal === "number")
+                    {
+                        vFov = source.fov.diagonal / Math.sqrt(1 + ratio * ratio);
+                    }
+                    else
+                    {
+                        vFov = 90;
+                    }
+
+                    config.verticalFov = FORGE.Math.degToRad(vFov);
+                }
+            }
+        }
+
+        if (typeof mediaConfig.options !== "undefined" &amp;&amp; mediaConfig.options !== null)
+        {
+            if (typeof mediaConfig.options.color !== "undefined")
+            {
+                config.color = mediaConfig.options.color;
+            }
+        }
+    }
+
+    if (type === FORGE.BackgroundType.SHADER)
+    {
+        this.log("Create background shader renderer");
+        this._backgroundRenderer = new FORGE.BackgroundShaderRenderer(this._viewer, renderTarget, config);
+
+        var size = this._webGLRenderer.getSize();
+        this._setRendererSize(new FORGE.Size(size.width, size.height));
+    }
+    else if (type === FORGE.BackgroundType.PYRAMID)
+    {
+        this.log("Create background pyramid renderer (multiresolution image)");
+        this._backgroundRenderer = new FORGE.BackgroundPyramidRenderer(this._viewer, renderTarget, mediaConfig);
+    }
+    else if (type === FORGE.BackgroundType.MESH)
+    {
+        this.log("Create background mesh renderer");
+
+        if (typeof mediaConfig !== "undefined" &amp;&amp; mediaConfig !== null)
+        {
+            if (typeof mediaConfig.source !== "undefined" &amp;&amp; mediaConfig.source !== null)
+            {
+                config.order = mediaConfig.source.order || "RLUDFB";
+
+                // Get the right tile
+                if (typeof mediaConfig.source.tile === "number")
+                {
+                    config.tile = mediaConfig.source.tile;
+                }
+                else if (Array.isArray(mediaConfig.source.levels) &amp;&amp; typeof mediaConfig.source.levels[0].tile === "number")
+                {
+                    config.tile = mediaConfig.source.levels[0].tile;
+                }
+            }
+        }
+
+        this._backgroundRenderer = new FORGE.BackgroundMeshRenderer(this._viewer, renderTarget, config);
+    }
+    else
+    {
+        //@todo not implemented
+        // auto mode: try with fragment shader and fall back to mesh if fps is too low
+    }
+
+    if (displayObject !== null)
+    {
+        this._backgroundRenderer.displayObject = displayObject;
+    }
+
+    if (this._backgroundRenderer !== null)
+    {
+        this._backgroundRenderer.updateAfterViewChange();
+    }
+
+    this._backgroundReady = true;
+
+    if (this._onBackgroundReady !== null)
+    {
+        this._onBackgroundReady.dispatch();
+    }
+};
+
+/**
+ * Set the background renderer depending on current media format and view type.
+ * @method FORGE.RenderManager#_setBackgroundRendererType
+ * @param {boolean} vrEnabled - VR enabled flag
+ * @private
+ */
+FORGE.RenderManager.prototype._setBackgroundRendererType = function(vrEnabled)
+{
+    this.log("set background renderer type");
+
+    var media = this._viewer.story.scene.media;
+
+    if(media.type === FORGE.MediaType.UNDEFINED)
+    {
+        this._backgroundRendererType = FORGE.BackgroundType.UNDEFINED;
+        return;
+    }
+
+    if (vrEnabled === true)
+    {
+        this.log("VR on - background type = MESH");
+        this._backgroundRendererType = FORGE.BackgroundType.MESH;
+        return;
+    }
+
+    var mediaConfig = media.config;
+
+    if (mediaConfig.type === FORGE.MediaType.GRID)
+    {
+        this._backgroundRendererType = FORGE.BackgroundType.MESH;
+    }
+    else if (typeof mediaConfig.source !== "undefined")
+    {
+        if (typeof mediaConfig.source.levels !== "undefined" &amp;&amp; media.type === FORGE.MediaType.IMAGE)
+        {
+            this._backgroundRendererType = FORGE.BackgroundType.PYRAMID;
+        }
+        else if (mediaConfig.source.format === FORGE.MediaFormat.CUBE)
+        {
+            this._backgroundRendererType = FORGE.BackgroundType.MESH;
+        }
+        else
+        {
+            this._backgroundRendererType = FORGE.BackgroundType.SHADER;
+        }
+    }
+    else
+    {
+        this._backgroundRendererType = FORGE.BackgroundType.SHADER;
+    }
+
+    if (typeof mediaConfig.source === "undefined" || typeof mediaConfig.source.format === "undefined")
+    {
+        this.log("VR off - view " + this._viewManager.current.type + ", background type = " + this._backgroundRendererType);
+    }
+    else
+    {
+        this.log("VR off - media " + mediaConfig.source.format + ", view " + this._viewManager.current.type +
+            ", background type = " + this._backgroundRendererType);
+    }
+};
+
+
+/**
+ * Clear the background renderer.
+ * @method FORGE.RenderManager#_clearBackgroundRenderer
+ * @private
+ */
+FORGE.RenderManager.prototype._clearBackgroundRenderer = function()
+{
+    this.log("clear background renderer");
+
+    if (this._backgroundRenderer !== null)
+    {
+        this._backgroundRenderer.destroy();
+        this._backgroundRenderer = null;
+    }
+
+    this._backgroundReady = false;
+};
+
+/**
+ * Update routine
+ * @method FORGE.RenderManager#update
+ */
+FORGE.RenderManager.prototype.update = function()
+{
+    this._camera.update();
+};
+
+/**
+ * Render routine
+ * @method FORGE.RenderManager#render
+ */
+FORGE.RenderManager.prototype.render = function()
+{
+    if (this._viewManager === null ||
+        this._renderPipelineReady === false ||
+        this._renderPipeline === null)
+    {
+        return;
+    }
+
+    if(this._onBeforeRender !== null)
+    {
+        this._onBeforeRender.dispatch();
+    }
+
+    if (this._backgroundRenderer !== null)
+    {
+        this._backgroundRenderer.update();
+    }
+
+    var vr = this._renderDisplay.presentingVR;
+    var renderParams = this._renderDisplay.getRenderParams();
+
+    for (var i = 0, ii = renderParams.length; i &lt; ii; i++)
+    {
+        var params = renderParams[i];
+        var rect = params.rectangle;
+        var camera = params.camera;
+
+        this._webGLRenderer.setViewport(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+
+        this._drawBackground((vr === true) ? camera : null);
+
+        this._renderPipeline.render(camera);
+
+        // Render perspective camera children (objects in camera local space)
+        this._webGLRenderer.clearDepth();
+
+        if (vr === true)
+        {
+            var scene = new THREE.Scene();
+            scene.add(camera);
+            //window.scene = scene;
+
+            this._webGLRenderer.render(scene, camera);
+        }
+    }
+
+    if (this._renderDisplay.presentingVR === true)
+    {
+        this._renderDisplay.submitFrame();
+    }
+
+    if(this._onAfterRender !== null)
+    {
+        this._onAfterRender.dispatch();
+    }
+
+    // @todo implement event for render stats (fps, objects count...)
+};
+
+/**
+ * Enable VR display
+ * @method FORGE.RenderManager#enableVR
+ */
+FORGE.RenderManager.prototype.enableVR = function()
+{
+    if (this._renderDisplay.presentingVR === true || FORGE.Device.webVR !== true)
+    {
+        return;
+    }
+
+    this._renderDisplay.enableVR();
+    this._viewManager.enableVR();
+
+    var sceneConfig = this._viewer.story.scene.config;
+
+    // If we enter VR with a cubemap: do nothing. With an equi: toggle to mesh renderer
+    if (typeof sceneConfig.media !== "undefined" &amp;&amp; sceneConfig.media !== null &amp;&amp; typeof sceneConfig.media.source !== "undefined" &amp;&amp; sceneConfig.media.source !== null &amp;&amp; sceneConfig.media.source.format === FORGE.MediaFormat.EQUIRECTANGULAR)
+    {
+        this._setBackgroundRenderer(FORGE.BackgroundType.MESH);
+    }
+};
+
+/**
+ * Disable VR display
+ * @method FORGE.RenderManager#disableVR
+ */
+FORGE.RenderManager.prototype.disableVR = function()
+{
+    if (this._renderDisplay.presentingVR === false || FORGE.Device.webVR !== true)
+    {
+        return;
+    }
+
+    this._renderDisplay.disableVR();
+    this._viewManager.disableVR();
+
+    // If we exit VR with a cubemap: do nothing. With an equi: toggle to shader renderer
+    var sceneConfig = this._viewer.story.scene.config;
+    var mediaConfig = sceneConfig.media;
+
+    if (typeof mediaConfig !== "undefined" &amp;&amp; mediaConfig !== null &amp;&amp;
+        typeof mediaConfig.source !== "undefined" &amp;&amp; mediaConfig.source !== null &amp;&amp;
+        mediaConfig.source.format === FORGE.MediaFormat.EQUIRECTANGULAR)
+    {
+        this._setBackgroundRendererType(false);
+        this._setBackgroundRenderer(this._backgroundRendererType);
+    }
+};
+
+/**
+ * Toggle VR display
+ * @method FORGE.RenderManager#toggleVR
+ */
+FORGE.RenderManager.prototype.toggleVR = function()
+{
+    if(this._renderDisplay.presentingVR === true)
+    {
+        this.disableVR();
+    }
+    else
+    {
+        this.enableVR();
+    }
+};
+
+/**
+ * Renderer destroy sequence
+ *
+ * @method FORGE.RenderManager#destroy
+ */
+FORGE.RenderManager.prototype.destroy = function()
+{
+    this._viewer.canvas.onResize.remove(this._canvasResizeHandler, this);
+    this._viewer.story.onSceneLoadStart.remove(this._onSceneLoadStartHandler, this);
+    this._viewer.onConfigLoadComplete.remove(this._onViewerConfigLoadComplete, this);
+
+    if (this._pickingManager !== null)
+    {
+        this._pickingManager.destroy();
+        this._pickingManager = null;
+    }
+
+    if (this._onBackgroundReady !== null)
+    {
+        this._onBackgroundReady.destroy();
+        this._onBackgroundReady = null;
+    }
+
+    if (this._mediaSound !== null)
+    {
+        this._mediaSound.destroy();
+        this._mediaSound = null;
+    }
+
+    if (this._objectRenderer !== null)
+    {
+        this._objectRenderer.destroy();
+        this._objectRenderer = null;
+    }
+
+    if (this._backgroundRenderer !== null)
+    {
+        this._backgroundRenderer.destroy();
+        this._backgroundRenderer = null;
+    }
+
+    if (this._camera !== null)
+    {
+        this._camera.destroy();
+        this._camera = null;
+    }
+
+    if (this._viewManager !== null)
+    {
+        this._viewManager.destroy();
+        this._viewManager = null;
+    }
+
+    if (this._renderDisplay !== null)
+    {
+        this._renderDisplay.onDisplayChange.remove(this._renderDisplayChangeHandler, this);
+        this._renderDisplay.destroy();
+        this._renderDisplay = null;
+    }
+
+    if (this._renderPipeline !== null)
+    {
+        this._renderPipeline.destroy();
+        this._renderPipeline = null;
+    }
+
+    if(this._onBeforeRender !== null)
+    {
+        this._onBeforeRender.destroy();
+        this._onBeforeRender = null;
+    }
+
+    if(this._onAfterRender !== null)
+    {
+        this._onAfterRender.destroy();
+        this._onAfterRender = null;
+    }
+
+    this._clock = null;
+    this._webGLRenderer = null;
+
+    FORGE.BaseObject.prototype.destroy.call(this);
+};
+
+/**
+ * Get viewer.
+ * @name FORGE.RenderManager#viewer
+ * @type {FORGE.Viewer}
+ * @readonly
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "viewer",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        return this._viewer;
+    }
+});
+
+/**
+ * Get sound linked to the media.
+ * @name FORGE.RenderManager#mediaSound
+ * @type {(FORGE.Sound|Object)}
+ * @readonly
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "mediaSound",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        return this._mediaSound;
+    }
+});
+
+/**
+ * Get WebGL renderer.
+ * @name FORGE.RenderManager#WebGLRenderer
+ * @type {THREE.WebGLRenderer}
+ * @readonly
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "webGLRenderer",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        return this._webGLRenderer;
+    }
+});
+
+/**
+ * Get FX Composer.
+ * @name FORGE.RenderManager#renderPipeline
+ * @type {FORGE.RenderPipeline}
+ * @readonly
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "renderPipeline",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        return this._renderPipeline;
+    }
+});
+
+/**
+ * Get background renderer.
+ * @name FORGE.RenderManager#backgroundRenderer
+ * @type {(FORGE.BackgroundMeshRenderer|FORGE.BackgroundShaderRenderer)}
+ * @readonly
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "backgroundRenderer",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        return this._backgroundRenderer;
+    }
+});
+
+/**
+ * Get picking manager.
+ * @name FORGE.RenderManager#pickingManager
+ * @type {FORGE.PickingManager}
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "pickingManager",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        return this._pickingManager;
+    }
+});
+
+/**
+ * Get the view manager.
+ * @name FORGE.RenderManager#view
+ * @type {FORGE.ViewManager}
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "view",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        return this._viewManager;
+    }
+});
+
+/**
+ * Get camera.
+ * @name FORGE.RenderManager#camera
+ * @type {FORGE.Camera}
+ * @readonly
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "camera",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        return this._camera;
+    }
+});
+
+/**
+ * Get canvas resolution in pixels.
+ * @name FORGE.RenderManager#canvasResolution
+ * @type {FORGE.Size}
+ * @readonly
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "canvasResolution",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        return this._canvasResolution;
+    }
+});
+
+/**
+ * Get display resolution in pixels.
+ * @name FORGE.RenderManager#displayResolution
+ * @type {FORGE.Size}
+ * @readonly
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "displayResolution",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        return this._displayResolution;
+    }
+});
+
+/**
+ * VR presenting status.
+ * @name FORGE.RenderManager#presentingVR
+ * @type {boolean}
+ * @readonly
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "presentingVR",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        return this._renderDisplay.presentingVR;
+    }
+});
+
+/**
+ * Get the render display.
+ * @name FORGE.RenderManager#display
+ * @type {FORGE.RenderDisplay}
+ * @readonly
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "display",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        return this._renderDisplay;
+    }
+});
+
+/**
+ * Get the backgroundReady flag
+ * @name FORGE.RenderManager#backgroundReady
+ * @type {boolean}
+ * @readonly
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "backgroundReady",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        return this._backgroundReady;
+    }
+});
+
+/**
+ * Get the FORGE.ObjectRenderer instance
+ * @name FORGE.RenderManager#objects
+ * @type {FORGE.ObjectRenderer}
+ * @readonly
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "objects",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        return this._objectRenderer;
+    }
+});
+
+/**
+ * Get the onBackgroundReady {@link FORGE.EventDispatcher}.
+ * @name FORGE.RenderManager#onBackgroundReady
+ * @type {FORGE.EventDispatcher}
+ * @readonly
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "onBackgroundReady",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        if (this._onBackgroundReady === null)
+        {
+            this._onBackgroundReady = new FORGE.EventDispatcher(this, true);
+        }
+
+        return this._onBackgroundReady;
+    }
+});
+
+/**
+ * Get the onBeforeRender {@link FORGE.EventDispatcher}.
+ * @name FORGE.RenderManager#onBeforeRender
+ * @type {FORGE.EventDispatcher}
+ * @readonly
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "onBeforeRender",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        if (this._onBeforeRender === null)
+        {
+            this._onBeforeRender = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onBeforeRender;
+    }
+});
+
+/**
+ * Get the onAfterRender {@link FORGE.EventDispatcher}.
+ * @name FORGE.RenderManager#onAfterRender
+ * @type {FORGE.EventDispatcher}
+ * @readonly
+ */
+Object.defineProperty(FORGE.RenderManager.prototype, "onAfterRender",
+{
+    /** @this {FORGE.RenderManager} */
+    get: function()
+    {
+        if (this._onAfterRender === null)
+        {
+            this._onAfterRender = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onAfterRender;
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

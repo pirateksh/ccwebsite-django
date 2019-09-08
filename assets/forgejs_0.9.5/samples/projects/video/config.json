@@ -1,0 +1,107 @@
+{
+    "story":
+    {
+        "uid": "video-story",
+        "name": "Video Story",
+        "slug": "video-story",
+        "description": "This is the simpliest story ever, but with a video",
+        "default": "scene-0",
+
+        "scenes":
+        [
+            {
+                "uid": "scene-0",
+                "name": "First scene",
+                "slug": "first-scene",
+                "description": "This is the first and only scene",
+
+                "media":
+                {
+                    "uid": "media-0",
+                    "type": "video",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "levels": [
+                            { "url": "https://cdn.forgejs.org/samples/common/videos/omni-highlights/source.02-720p_HD.mp4" },
+                            { "url": "https://cdn.forgejs.org/samples/common/videos/omni-highlights/source.03-1080p_HD.mp4" },
+                            { "url": "https://cdn.forgejs.org/samples/common/videos/omni-highlights/source.04-1440p_HD.mp4" },
+                            { "url": "https://cdn.forgejs.org/samples/common/videos/omni-highlights/source.07-2160p_4K_H264_12M.mp4" }
+                        ]
+                    },
+
+                    "options":
+                    {
+                        "autoPlay": true,
+                        "loop": true,
+                        "volume": 1
+                    }
+                }
+            }
+        ]
+    },
+
+    "plugins":
+    {
+        "prefix": "../../plugins/",
+
+        "engines":
+        [
+            {
+                "uid": "org.forgejs.webvrbutton",
+                "url": "WebVRButton/"
+            },
+
+            {
+                "uid": "org.forgejs.videocors",
+                "url": "VideoCORS/"
+            },
+
+            {
+                "uid": "org.forgejs.mobilevideoplay",
+                "url": "MobileVideoPlay/"
+            },
+
+            {
+                "uid": "org.forgejs.gyroscopebutton",
+                "url": "GyroscopeButton/"
+            }
+        ],
+
+        "instances":
+        [
+            {
+                "uid": "videocors",
+                "engine": "org.forgejs.videocors"
+            },
+
+            {
+                "uid": "mobilevideoplay",
+                "engine": "org.forgejs.mobilevideoplay"
+            },
+
+            {
+                "uid": "webvrbutton",
+                "engine": "org.forgejs.webvrbutton",
+
+                "options":
+                {
+                    "bottom": 10,
+                    "right": 10
+                }
+            },
+
+            {
+                "uid": "gyrobutton",
+                "engine": "org.forgejs.gyroscopebutton",
+
+                "options":
+                {
+                    "bottom": 10,
+                    "left": 10
+                }
+            }
+        ]
+    }
+}

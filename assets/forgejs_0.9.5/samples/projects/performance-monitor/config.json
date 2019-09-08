@@ -1,0 +1,115 @@
+{
+    "story":
+    {
+        "uid": "performance-monitor-plugin-demo",
+        "name": "Performance monitor plugin demo",
+        "slug": "performance-monitor-plugin-demo",
+        "description": "Demonstrates the performance monitor plugin",
+        "default": "scene-1",
+
+        "scenes":
+        [
+            {
+                "uid": "scene-1",
+                "name": "Scene image",
+                "slug": "scene-image",
+                "description": "This is an image scene",
+
+                "media":
+                {
+                    "uid": "media-1",
+                    "type": "image",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "url": "https://cdn.forgejs.org/samples/common/panos/01-forest.jpg"
+                    }
+                }
+            },
+
+            {
+                "uid": "scene-2",
+                "name": "Scene Video",
+                "slug": "scene-video",
+                "description": "This is a video scene",
+
+                "media":
+                {
+                    "uid": "media-2",
+                    "type": "video",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "url": "https://cdn.forgejs.org/samples/common/videos/omni-highlights/source.03-1080p_HD.mp4"
+                    },
+
+                    "options":
+                    {
+                        "autoPlay": true,
+                        "loop": true,
+                        "volume": 0.5
+                    }
+                }
+            }
+        ]
+    },
+
+    "plugins":
+    {
+        "prefix": "../../plugins/",
+
+        "engines":
+        [
+            {
+                "uid": "org.forgejs.performancemonitor",
+                "url": "PerformanceMonitor/"
+            },
+
+            {
+                "uid": "org.forgejs.previousnextbuttons",
+                "url": "PreviousNextButtons/"
+            },
+
+            {
+                "uid": "org.forgejs.videocors",
+                "url": "VideoCORS/"
+            },
+
+            {
+                "uid": "org.forgejs.mobilevideoplay",
+                "url": "MobileVideoPlay/"
+            }
+        ],
+
+        "instances":
+        [
+            {
+                "uid": "performancemonitor",
+                "engine": "org.forgejs.performancemonitor",
+                "options":
+                {
+                    "mode": "fps",
+                    "horizontalCenter": true,
+                    "top": 5
+                }
+            },
+
+            {
+                "uid": "previousnextbuttons",
+                "engine": "org.forgejs.previousnextbuttons"
+            },
+
+            {
+                "uid": "videocors",
+                "engine": "org.forgejs.videocors"
+            },
+
+            {
+                "uid": "mobilevideoplay",
+                "engine": "org.forgejs.mobilevideoplay"
+            }
+        ]
+    }
+}

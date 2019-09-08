@@ -1,0 +1,384 @@
+{
+    "story":
+    {
+        "uid": "hotspots-animated",
+        "name": "Hotspots with animation",
+        "slug": "hotspots-animated",
+        "description": "This is a sample project with animation applied on hotspots",
+        "default": "scene-0",
+
+        "scenes":
+        [
+            {
+                "uid": "scene-0",
+                "name": "First scene",
+                "slug": "first-scene",
+                "description": "This is the first scene",
+
+                "media":
+                {
+                    "uid": "media-0",
+                    "type": "image",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "url": "https://cdn.forgejs.org/samples/common/panos/01-forest.jpg"
+                    }
+                },
+
+                "hotspots":
+                [
+                    {
+                        "uid": "hotspot-0",
+                        "name": "White rabbit",
+                        "facingCenter": true,
+                        "interactive": false,
+
+                        "transform":
+                        {
+                            "position":
+                            {
+                                "radius": 300,
+                                "theta": 0
+                            },
+
+                            "rotation":
+                            {
+                                "x": 0,
+                                "y": 0
+                            },
+
+                            "scale":
+                            {
+                                "x": 0.6,
+                                "y": 0.6
+                            }
+                        },
+
+                        "material":
+                        {
+                            "image": "https://cdn.forgejs.org/samples/hotspots-animation/clipart-friendly-rabbit-128x128-4854.png",
+                            "transparent": true
+                        },
+
+                        "geometry":
+                        {
+                            "type": "plane",
+                            "options":
+                            {
+                                "width": 75,
+                                "height": 71
+                            }
+                        },
+
+                        "animation":
+                        {
+                            "enabled": true,
+                            "loop": false,
+                            "random": false,
+                            "autoPlay": true,
+
+                            "tracks": [ "hotspot-0-track-0", "hotspot-0-track-1"]
+                        }
+                    },
+
+                    {
+                        "uid": "hotspot-1",
+                        "name": "Butterfly",
+                        "facingCenter": true,
+                        "interactive": false,
+
+                        "transform":
+                        {
+                            "position":
+                            {
+                                "radius": 400,
+                                "theta": 10,
+                                "phi": -5
+                            },
+
+                            "rotation":
+                            {
+                                "x": 0,
+                                "y": 0,
+                                "z": -10
+                            },
+
+                            "scale":
+                            {
+                                "x": 0.5,
+                                "y": 0.5
+                            }
+                        },
+
+                        "material":
+                        {
+                            "image": "https://cdn.forgejs.org/samples/hotspots-animation/clipart-papilio-buddha-64x64-5c24.png",
+                            "transparent": true
+                        },
+
+                        "geometry":
+                        {
+                            "type": "plane",
+                            "options":
+                            {
+                                "width": 45,
+                                "height": 40
+                            }
+                        },
+
+                        "animation":
+                        {
+                            "enabled": true,
+                            "loop": true,
+                            "random": false,
+                            "autoPlay": true,
+
+                            "tracks": [ "hotspot-1-track-0"]
+                        }
+                    }
+                ]
+            },
+
+            {
+                "uid": "scene-1",
+                "name": "First scene",
+                "slug": "first-scene",
+                "description": "This is the first scene",
+
+                "media":
+                {
+                    "uid": "media-1",
+                    "type": "image",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "url": "https://cdn.forgejs.org/samples/common/panos/01-forest.jpg"
+                    }
+                }
+            }
+        ]
+    },
+
+    "hotspots":
+    {
+        "tracks":
+        [
+            {
+                "uid": "hotspot-0-track-0",
+                "name": "Animation track #0",
+                "description": "First animation track",
+                "smooth": true,
+
+                "keyframes":
+                [
+                    {
+                        "time": 4000,
+                        "data": {
+                            "position": { "radius": 333, "theta": 10, "phi": -5 }
+                        }
+                    },
+                    {
+                        "time": 5000,
+                        "data": {
+                            "position": { "radius": 316, "theta": 8, "phi": -6 }
+                        }
+                    },
+                    {
+                        "time": 8000,
+                        "data": {
+                            "position": { "radius": 266, "theta": 3, "phi": -8 }
+                        }
+                    },
+                    {
+                        "time": 9000,
+                        "data": {
+                            "position": { "radius": 250, "theta": 5, "phi": -10 }
+                        }
+                    },
+                    {
+                        "time": 12000,
+                        "data": {
+                            "position": { "radius": 200, "theta": 6, "phi": -15 }
+                        }
+                    }
+                ]
+            },
+
+            {
+                "uid": "hotspot-0-track-1",
+                "name": "Animation track #1",
+                "description": "Second animation track",
+                "smooth": true,
+
+                "keyframes":
+                [
+                    {
+                        "time": 5000,
+                        "data": {
+                            "position": { "radius": 200, "theta": 90, "phi": -15 }
+                        }
+                    },
+                    {
+                        "time": 6000,
+                        "data": {
+                            "position": { "theta": 110, "phi": -10 }
+                        }
+                    },
+                    {
+                        "time": 7000,
+                        "data": {
+                            "position": { "theta": 130, "phi": -15 }
+                        }
+                    },
+                    {
+                        "time": 10000,
+                        "data": {
+                            "position": { "theta": 180 }
+                        }
+                    },
+                    {
+                        "time": 15000,
+                        "data": {
+                            "position": { "theta": -90 }
+                        }
+                    },
+                    {
+                        "time": 20000,
+                        "data": {
+                            "position": { "theta": 6 }
+                        }
+                    }
+                ]
+            },
+
+            {
+                "uid": "hotspot-1-track-0",
+                "name": "Animation track #3",
+                "description": "Third animation track",
+                "smooth": true,
+
+                "keyframes":
+                [
+                    {
+                        "time": 3500,
+                        "data": {
+                            "position": { "radius": 400, "theta": 10, "phi": -5 }
+                        }
+                    },
+                    {
+                        "time": 6000,
+                        "data": {
+                            "position": { "radius": 420, "theta": 25, "phi": 20 }
+                        }
+                    },
+                    {
+                        "time": 8000,
+                        "data": {
+                            "position": { "radius": 450, "theta": 40, "phi": 45 }
+                        }
+                    },
+                    {
+                        "time": 10000,
+                        "data": {
+                            "position": { "radius": 470, "theta": 25, "phi": 60 }
+                        }
+                    },
+                    {
+                        "time": 12000,
+                        "data": {
+                            "position": { "radius": 500, "theta": 45, "phi": 75 }
+                        }
+                    },
+                    {
+                        "time": 14000,
+                        "data": {
+                            "position": { "radius": 500, "theta": 180, "phi": 75 }
+                        }
+                    },
+                    {
+                        "time": 16000,
+                        "data": {
+                            "position": { "radius": 510, "theta": -90, "phi": 80 }
+                        }
+                    },
+                    {
+                        "time": 18000,
+                        "data": {
+                            "position": { "radius": 510, "theta": 6, "phi": 85 }
+                        }
+                    },
+                    {
+                        "time": 20000,
+                        "data": {
+                            "position": { "radius": 480, "theta": -15, "phi": 65 }
+                        }
+                    },
+                    {
+                        "time": 22000,
+                        "data": {
+                            "position": { "radius": 430, "theta": 2, "phi": 35 }
+                        }
+                    },
+                    {
+                        "time": 24000,
+                        "data": {
+                            "position": { "radius": 410, "theta": 15, "phi": 5 }
+                        }
+                    },
+                    {
+                        "time": 26000,
+                        "data": {
+                            "position": { "radius": 400, "theta": 10, "phi": -5 }
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+
+    "plugins":
+    {
+        "prefix": "../../plugins/",
+
+        "engines":
+        [
+            {
+                "uid": "org.forgejs.webvrbutton",
+                "url": "WebVRButton/"
+            },
+
+            {
+                "uid": "org.forgejs.gyroscopebutton",
+                "url": "GyroscopeButton/"
+            }
+        ],
+
+        "instances":
+        [
+            {
+                "uid": "webvrbutton",
+                "engine": "org.forgejs.webvrbutton",
+
+                "options":
+                {
+                    "bottom": 10,
+                    "right": 10
+                }
+            },
+
+            {
+                "uid": "gyrobutton",
+                "engine": "org.forgejs.gyroscopebutton",
+
+                "options":
+                {
+                    "bottom": 10,
+                    "left": 10
+                }
+            }
+        ]
+    }
+}

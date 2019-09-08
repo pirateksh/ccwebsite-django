@@ -1,0 +1,2203 @@
+
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>JSON Reference</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css" media="screen,projection" charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="static/fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="static/forge-iframe.css">
+    <script type="text/javascript">
+        function updateLink()
+        {
+            var url, slug, links = document.getElementsByTagName('a');
+
+            for (var i = 0, ii = links.length; i < ii; i++)
+            {
+                if (!links[i].classList.contains('out'))
+                {
+                    url = links[i].href.replace(/(.+\/)\w+\.html#([\w\-]+)/, function(match, p1, p2) {
+                        var subRefs = p2.split('-');
+
+                        if (subRefs.length > 1)
+                        {
+                            slug = subRefs[0] + '/' + p2;
+                            return p1 + subRefs[0] + '.html#' + p2;
+                        } else {
+                            slug = p2;
+                            return p1 + p2 + '.html'
+                        }
+                    });
+
+                    links[i].href = 'javascript:window.parent.goTo("' + url + '", "' + slug + '");';
+                }
+            }
+        }
+    </script>
+</head>
+<body data-spy="scroll" data-target="#navbar" onload="updateLink()">
+<br>
+
+<article>
+    <header class="col-lg-12">
+        <h2>Hotspot</h2>
+        <p class="lead">A hotspot can only be a 3D hotspot for now. A 3D hotspot is a hotspot attached to the sphere containing the 360&ordm; media. It can have a visual representation, from an image showing the hotspot, but also a sound, that will be an ambisonic one. The hotspot can stay just like this, or it can be bind to an <a href="#actions">action</a>, to give an interaction.</p>
+    </header>
+
+    
+    <section class="col-lg-12">
+        <h4>Example :</h4>
+        <small class="example-code"><pre>{
+  &quot;uid&quot;: &quot;hotspot-0&quot;,
+  &quot;tags&quot;: [
+    &quot;awesome&quot;,
+    &quot;hotspot&quot;,
+    &quot;turtle&quot;
+  ],
+  &quot;type&quot;: &quot;3d&quot;,
+  &quot;visible&quot;: true,
+  &quot;interactive&quot;: true,
+  &quot;cursor&quot;: &quot;crosshair&quot;,
+  &quot;fx&quot;: &quot;fx-0&quot;,
+  &quot;facingCenter&quot;: true,
+  &quot;transform&quot;: {
+    &quot;position&quot;: {
+      &quot;radius&quot;: 200,
+      &quot;theta&quot;: 90,
+      &quot;phi&quot;: 30,
+      &quot;x&quot;: 240,
+      &quot;y&quot;: 350,
+      &quot;z&quot;: 480
+    },
+    &quot;rotation&quot;: {
+      &quot;x&quot;: 8,
+      &quot;y&quot;: 3,
+      &quot;z&quot;: 5
+    },
+    &quot;scale&quot;: {
+      &quot;x&quot;: 8,
+      &quot;y&quot;: 3,
+      &quot;z&quot;: 5
+    }
+  },
+  &quot;geometry&quot;: {
+    &quot;type&quot;: &quot;plane&quot;,
+    &quot;offset&quot;: {
+      &quot;x&quot;: 20,
+      &quot;y&quot;: -50,
+      &quot;z&quot;: 5
+    },
+    &quot;options&quot;: {
+      &quot;points&quot;: [
+        [
+          0,
+          0
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          5,
+          4
+        ]
+      ]
+    }
+  },
+  &quot;animation&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;random&quot;: false,
+    &quot;loop&quot;: false,
+    &quot;autostart&quot;: false,
+    &quot;order&quot;: [
+      &quot;track-0&quot;,
+      &quot;track-2&quot;
+    ]
+  },
+  &quot;material&quot;: {
+    &quot;color&quot;: {},
+    &quot;opacity&quot;: 0.5,
+    &quot;transparent&quot;: false,
+    &quot;side&quot;: &quot;front&quot;,
+    &quot;image&quot;: &quot;images/scene-0-hotspot.jpg&quot;,
+    &quot;sprite&quot;: {
+      &quot;url&quot;: &quot;./sprites/sprite-map.png&quot;,
+      &quot;frames&quot;: &quot;./sprites/sprite-map.json&quot;,
+      &quot;frameRate&quot;: 24,
+      &quot;frame&quot;: 5,
+      &quot;paused&quot;: true,
+      &quot;loop&quot;: false,
+      &quot;animation&quot;: &quot;animation-0&quot;,
+      &quot;animations&quot;: [
+        {
+          &quot;name&quot;: &quot;animation-0&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 24,
+          &quot;loop&quot;: false,
+          &quot;frameRate&quot;: 24
+        }
+      ]
+    },
+    &quot;video&quot;: {
+      &quot;url&quot;: &quot;./videos/video.mp4&quot;
+    },
+    &quot;plugin&quot;: &quot;plugin-0&quot;,
+    &quot;update&quot;: false
+  },
+  &quot;sound&quot;: {
+    &quot;uid&quot;: &quot;sound-0&quot;,
+    &quot;type&quot;: &quot;stereo&quot;,
+    &quot;source&quot;: {
+      &quot;url&quot;: &quot;audio/scene-0-hotspot.mp3&quot;,
+      &quot;target&quot;: &quot;video-0&quot;
+    },
+    &quot;options&quot;: {
+      &quot;volume&quot;: {},
+      &quot;loop&quot;: true,
+      &quot;autoPlay&quot;: true,
+      &quot;startTime&quot;: 0,
+      &quot;range&quot;: 180
+    }
+  },
+  &quot;dom&quot;: {
+    &quot;id&quot;: &quot;hotspot-dom-billboard&quot;,
+    &quot;class&quot;: {},
+    &quot;width&quot;: {},
+    &quot;height&quot;: {},
+    &quot;color&quot;: &quot;#ff5e9d&quot;,
+    &quot;index&quot;: 20,
+    &quot;offset&quot;: {
+      &quot;x&quot;: 10,
+      &quot;y&quot;: -5
+    }
+  },
+  &quot;events&quot;: {
+    &quot;onClick&quot;: {},
+    &quot;onOver&quot;: {},
+    &quot;onOut&quot;: {}
+  },
+  &quot;states&quot;: {
+    &quot;default&quot;: &quot;default&quot;,
+    &quot;auto&quot;: true,
+    &quot;over&quot;: {
+      &quot;material&quot;: {
+        &quot;color&quot;: {},
+        &quot;opacity&quot;: 0.5,
+        &quot;transparent&quot;: false,
+        &quot;side&quot;: &quot;front&quot;,
+        &quot;image&quot;: &quot;images/scene-0-hotspot.jpg&quot;,
+        &quot;sprite&quot;: {
+          &quot;url&quot;: &quot;./sprites/sprite-map.png&quot;,
+          &quot;frames&quot;: &quot;./sprites/sprite-map.json&quot;,
+          &quot;frameRate&quot;: 24,
+          &quot;frame&quot;: 5,
+          &quot;paused&quot;: true,
+          &quot;loop&quot;: false,
+          &quot;animation&quot;: &quot;animation-0&quot;,
+          &quot;animations&quot;: [
+            {
+              &quot;name&quot;: &quot;animation-0&quot;,
+              &quot;start&quot;: 0,
+              &quot;end&quot;: 24,
+              &quot;loop&quot;: false,
+              &quot;frameRate&quot;: 24
+            }
+          ]
+        },
+        &quot;video&quot;: {
+          &quot;url&quot;: &quot;./videos/video.mp4&quot;
+        },
+        &quot;plugin&quot;: &quot;plugin-0&quot;,
+        &quot;update&quot;: false
+      }
+    }
+  }
+}</pre></small>
+    </section>
+    
+
+    <section id="hotspotconfig" class="col-lg-12">
+        <section id="hotspotconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="hotspot">
+                        hotspot
+                        <a href="#hotspot" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            uid
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The UID of the hotspot.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;hotspot-0&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            tags
+        </th>
+        <td class="param-type">
+                <em>array&lt;string&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The list of tags associated to the hotspot.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            type
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>3d</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The type of the hotspot. Can be one of :<ul><li>3d</li></ul><br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;3d&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            visible
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>true</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Is the hotspot visible ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>true</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            interactive
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>true</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Is this hotspot is interactive and eligible to raycast<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>true</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            cursor
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>pointer</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The cursor to display when the pointer is over the hotspot. Any valid css cursor value can be set.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;crosshair&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            fx
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The UID of the special effect (FX) to apply to the hotspot.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;fx-0&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            facingCenter
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Is the hotspot (for a flat 3D one) facing the center of the scene (the camera) constantly ? Its rotation will be determined given this facing.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>true</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            autoScale
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Does the hotspot auto changes its scale when the fov change?<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            transform
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href='#hotspot-transform'>a hotspot transform.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            geometry
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#hotspot-geometry">a hotspot geometry configuration</a>.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            animation
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#hotspot-animation">a hotspot animation</a>.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            material
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href='#hotspot-material'>a hotspot material.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            sound
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href='#sound'>a sound.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            dom
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href='#hotspot-dom'>a hotspot dom.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            events
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href='#hotspot-events'>the hotspot events object.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            states
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href='#hotspot-states'>the hotspot states object.</a><br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="hotspottransformconfig" class="col-lg-12">
+        <section id="hotspottransformconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="hotspot-transform">
+                        hotspot-transform
+                        <a href="#hotspot-transform" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            position
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href='#hotspot-transform-position'>a hotspot transform position.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            rotation
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href='#hotspot-transform-rotation'>a hotspot transform rotation.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            scale
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href='#hotspot-transform-scale'>a hotspot transform scale.</a><br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="hotspottransformpositionconfig" class="col-lg-12">
+        <section id="hotspottransformpositionconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="hotspot-transform-position">
+                        hotspot-transform-position
+                        <a href="#hotspot-transform-position" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            radius
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+            <span class="param-max"><small>max: <code>1000</code></small></span><br>
+        </td>
+        <td class="param-description object-definition-param-description">
+            The radius, ie the distance between the camera and the hotspot<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>200</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            theta
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+            <span class="param-max"><small>max: <code>360</code></small></span><br>
+        </td>
+        <td class="param-description object-definition-param-description">
+            The position on the horizontal axis in degrees<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>90</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            phi
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+            <span class="param-min"><small>min: <code>-90</code></small></span><br>
+
+            <span class="param-max"><small>max: <code>90</code></small></span><br>
+        </td>
+        <td class="param-description object-definition-param-description">
+            The position on the vertical axis in degrees<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>30</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            x
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+            <span class="param-min"><small>min: <code>-10000</code></small></span><br>
+
+            <span class="param-max"><small>max: <code>10000</code></small></span><br>
+        </td>
+        <td class="param-description object-definition-param-description">
+            The position on the X axis of the world<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>240</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            y
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+            <span class="param-min"><small>min: <code>-10000</code></small></span><br>
+
+            <span class="param-max"><small>max: <code>10000</code></small></span><br>
+        </td>
+        <td class="param-description object-definition-param-description">
+            The position on the Y axis of the world<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>350</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            z
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+            <span class="param-min"><small>min: <code>-10000</code></small></span><br>
+
+            <span class="param-max"><small>max: <code>10000</code></small></span><br>
+        </td>
+        <td class="param-description object-definition-param-description">
+            The position on the Z axis of the world<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>480</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="hotspottransformrotationconfig" class="col-lg-12">
+        <section id="hotspottransformrotationconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="hotspot-transform-rotation">
+                        hotspot-transform-rotation
+                        <a href="#hotspot-transform-rotation" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            x
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Rotation on x in the local hotspot system<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>8</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            y
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Rotation on y in the local hotspot system<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>3</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            z
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Rotation on z in the local hotspot system<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>5</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="hotspottransformscaleconfig" class="col-lg-12">
+        <section id="hotspottransformscaleconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="hotspot-transform-scale">
+                        hotspot-transform-scale
+                        <a href="#hotspot-transform-scale" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            x
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>1</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Scale on x.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>8</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            y
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>1</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Scale on y.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>3</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            z
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>1</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Scale on z.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>5</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="hotspotgeometryconfig" class="col-lg-12">
+        <section id="hotspotgeometryconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="hotspot-geometry">
+                        hotspot-geometry
+                        <a href="#hotspot-geometry" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            type
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>plane</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The type of geometry to create. There are all derivate of THREE.JS geometries. Available values are :<ul><li><code>plane</code> for <a class="out" href="https://threejs.org/docs/#Reference/Geometries/PlaneBufferGeometry">PlaneBufferGeometry</a></li><li><code>box</code> for <a class="out" href="https://threejs.org/docs/#Reference/Geometries/BoxBufferGeometry">BoxBufferGeometry</a></li><li><code>sphere</code> for <a class="out" href="https://threejs.org/docs/#Reference/Geometries/SphereBufferGeometry">SphereBufferGeometry</a></li><li><code>cylinder</code> for <a class="out" href="https://threejs.org/docs/#Reference/Geometries/CylinderBufferGeometry">CylinderBufferGeometry</a></li><li><code>shape</code> for <a class="out" href="https://threejs.org/docs/#Reference/Geometries/ShapeBufferGeometry">ShapeBufferGeometry</a></li></ul><br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;plane&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            offset
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href='#hotspot-geometry-offset'>a hotspot geometry offset.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            options
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The options of the geometry, specific and different for each geometry. See the list of available geometry above and their list of parameters.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>{
+  &quot;points&quot;: [
+    [
+      0,
+      0
+    ],
+    [
+      10,
+      0
+    ],
+    [
+      5,
+      4
+    ]
+  ]
+}</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="hotspotanimationconfig" class="col-lg-12">
+        <section id="hotspotanimationconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="hotspot-animation">
+                        hotspot-animation
+                        <a href="#hotspot-animation" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            enabled
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Is the animation enabled ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>true</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            random
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Are the tracks played randomly ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            loop
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Does the animation loop ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            autostart
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Does the animation autostart ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            order
+        </th>
+        <td class="param-type">
+                <em>array&lt;string&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The list of tracks UID ot execute. The tracks are executed in the order they are written in this array.<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="hotspotmaterialconfig" class="col-lg-12">
+        <section id="hotspotmaterialconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="hotspot-material">
+                        hotspot-material
+                        <a href="#hotspot-material" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            color
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>number</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The color of the hotspot if there is no texture.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            opacity
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>1</code></small></span><br>
+
+
+            <span class="param-max"><small>max: <code>1</code></small></span><br>
+        </td>
+        <td class="param-description object-definition-param-description">
+            The opacity of the texture.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>0.5</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            transparent
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Does the texture needs to renderer transparency (like a PNG) ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            side
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>double</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The side of the material. Can be front, back or double. See FORGE.HotspotMaterial.sides constants<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;front&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            image
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The image configuration that will be used for the texture.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;images/scene-0-hotspot.jpg&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            sprite
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            A configuration of the sprite display object.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            video
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            A configuration of the video display object.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            plugin
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The plugin UID that will provide a texture property.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;plugin-0&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            update
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Does the texture need update ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="hotspotdomconfig" class="col-lg-12">
+        <section id="hotspotdomconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="hotspot-dom">
+                        hotspot-dom
+                        <a href="#hotspot-dom" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            id
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The HTML ID to append to this DOM hotspot. This ID is different than the UID one<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;hotspot-dom-billboard&quot;</pre></small>
+            
+        </td>
+    </tr>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            class
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;string&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The class or list of class to add to the hotspot, useful to set CSS to the hotspot by group.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            width
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>number</em></li>
+                    <li class="param-anyof"><em>string</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The width (in HTML referential) of the hotspot. It is used for placing the hotspot according to its center.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            height
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>number</em></li>
+                    <li class="param-anyof"><em>string</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The height (in HTML referential) of the hotspot. It is used for placing the hotspot according to its center.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            color
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The default background color of the hotspot, in any valide CSS value.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;#ff5e9d&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            index
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The index of the hotspot, will be used to order hotspots in the z axis.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>20</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            offset
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href='#hotspot-dom-offset'>a hotspot DOM offset.</a><br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="hotspoteventconfig" class="col-lg-12">
+        <section id="hotspoteventconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="hotspot-events">
+                        hotspot-events
+                        <a href="#hotspot-events" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            onClick
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;string&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The action uids to trigger on click.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            onOver
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;string&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The action uids to trigger on over.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            onOut
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;string&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The action uids to trigger on out.<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+</article>
+<hr id="hotspot-anim" >
+<article>
+    <header class="col-lg-12">
+        <h2>Hotspot Animation</h2>
+        <p class="lead">Each hotspot can be animated. The animation can begin at any time specified by the user, for example by a click or automatically after 10 seconds. This section is placed at the root of the JSON configuration.</p>
+    </header>
+
+    
+    <section class="col-lg-12">
+        <h4>Example :</h4>
+        <small class="example-code"><pre>{
+  &quot;tracks&quot;: [
+    {
+      &quot;uid&quot;: &quot;track-0&quot;,
+      &quot;name&quot;: &quot;Sea to beach&quot;,
+      &quot;description&quot;: &quot;This is the track going from the sea to the beach.&quot;,
+      &quot;smooth&quot;: true,
+      &quot;cancelRoll&quot;: false,
+      &quot;easing&quot;: {
+        &quot;default&quot;: &quot;easeInQuad&quot;,
+        &quot;start&quot;: 5000
+      },
+      &quot;keyframes&quot;: [
+        {
+          &quot;time&quot;: 20,
+          &quot;position&quot;: {
+            &quot;radius&quot;: 200,
+            &quot;theta&quot;: 90,
+            &quot;phi&quot;: 30,
+            &quot;x&quot;: 240,
+            &quot;y&quot;: 350,
+            &quot;z&quot;: 480
+          },
+          &quot;rotation&quot;: {
+            &quot;x&quot;: 8,
+            &quot;y&quot;: 3,
+            &quot;z&quot;: 5
+          },
+          &quot;scale&quot;: {
+            &quot;x&quot;: 8,
+            &quot;y&quot;: 3,
+            &quot;z&quot;: 5
+          }
+        }
+      ]
+    }
+  ]
+}</pre></small>
+    </section>
+    
+
+    <section id="hotspotsconfig" class="col-lg-12">
+        <section id="hotspotsconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="hotspot-anim">
+                        hotspot-anim
+                        <a href="#hotspot-anim" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            tracks
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            A list of the tracks that can be used for animating hotspot-anim. Each member is an instance of <a href="#hotspot-track">a hotspot track</a>.<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="hotspottrackconfig" class="col-lg-12">
+        <section id="hotspottrackconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="hotspot-track">
+                        hotspot-track
+                        <a href="#hotspot-track" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            uid
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The UID of the track.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;track-0&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            name
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The name of the track.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;Sea to beach&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            description
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The description of the track.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;This is the track going from the sea to the beach.&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            smooth
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Is the track smooth ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>true</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            cancelRoll
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Is the roll cancelled ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            easing
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#animation-track-easing">an animation track</a>.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            keyframes
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            A list of the keyframes composing the track. Each member is an instance of <a href="#hotspot-track-keyframe">a hotspot track keyframe</a>.<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="hotspottrackkeyframeconfig" class="col-lg-12">
+        <section id="hotspottrackkeyframeconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="hotspot-track-keyframe">
+                        hotspot-track-keyframe
+                        <a href="#hotspot-track-keyframe" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            position
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href='#hotspot-transform-position'>a hotspot transform position.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            rotation
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href='#hotspot-transform-rotation'>a hotspot transform rotation.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            scale
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href='#hotspot-transform-scale'>a hotspot transform scale.</a><br><br>
+
+            
+        </td>
+    </tr>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            time
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The time to trigger the action.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>20</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+</article>
+</body>
+</html>

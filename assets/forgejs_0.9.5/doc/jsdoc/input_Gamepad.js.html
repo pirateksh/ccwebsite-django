@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: input/Gamepad.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: input/Gamepad.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Gamepads manager that handles gamepads
+ *
+ * @constructor FORGE.Gamepad
+ * @param {FORGE.Viewer} viewer - {@link FORGE.Viewer} reference.
+ * @param {Gamepad} ref - the reference to the Gamepad object.
+ * @extends {FORGE.BaseObject}
+ */
+FORGE.Gamepad = function(viewer, ref)
+{
+    /**
+     * The viewer reference.
+     * @name FORGE.Gamepad#_viewer
+     * @type {FORGE.Viewer}
+     * @private
+     */
+    this._viewer = viewer;
+
+    /**
+     * The reference to the Gamepad object
+     * @name FORGE.Gamepad#_gamepad
+     * @type {Gamepad}
+     * @private
+     */
+    this._gamepad = ref;
+
+    /**
+     * The timestamp saved the last time the gamepad was updated.
+     * @name FORGE.Gamepad#_previousTimestamp
+     * @type {number}
+     * @private
+     */
+    this._previousTimestamp = 0;
+
+    /**
+     * Is the gamepad enabled?
+     * @name FORGE.Gamepad#_enabled
+     * @type {boolean}
+     * @private
+     */
+    this._enabled = true;
+
+    /**
+     * The array that handles the {@link FORGE.ButtonBinding} objects.
+     * @name FORGE.Gamepad#_buttonBindings
+     * @type {?Array&lt;FORGE.ButtonBinding>}
+     * @private
+     */
+    this._buttonBindings = null;
+
+    /**
+     * The array that handles the {@link FORGE.AxesBinding} objects.
+     * @name FORGE.Gamepad#_axisBindings
+     * @type {?Array&lt;FORGE.AxisBinding>}
+     * @private
+     */
+    this._axisBindings = null;
+
+    /**
+     * The array that handles the button codes that are considered as pressed.
+     * @name FORGE.Gamepad#_buttonPressed
+     * @type {?Array&lt;number>}
+     * @private
+     */
+    this._buttonPressed = null;
+
+    FORGE.BaseObject.call(this, "Gamepad");
+
+    this._boot();
+};
+
+FORGE.Gamepad.prototype = Object.create(FORGE.BaseObject.prototype);
+FORGE.Gamepad.prototype.constructor = FORGE.Gamepad;
+
+/**
+ * Boot sequence.
+ * @method FORGE.Gamepad#_boot
+ * @private
+ */
+FORGE.Gamepad.prototype._boot = function()
+{
+    this._uid = this._gamepad.id + "-" + this._gamepad.index;
+    this._register();
+
+    this._buttonBindings = [];
+    this._axisBindings = [];
+
+    this._buttonPressed = [];
+};
+
+/**
+ * Get the index of a ButtonBinding.
+ * @method FORGE.Gamepad#_indexOfBinding
+ * @param  {FORGE.BaseBinding} value - The ButtonBinding.
+ * @return {number} Returns the searched index if found, if not, returns -1.
+ * @private
+ */
+FORGE.Gamepad.prototype._indexOfBinding = function(value)
+{
+    if (this._buttonBindings === null || this._buttonBindings.length === 0)
+    {
+        return -1;
+    }
+
+    if (typeof value === "object")
+    {
+        if (value.type === "ButtonBinding")
+        {
+            return this._buttonBindings.indexOf(/** @type {FORGE.ButtonBinding} */ (value));
+        }
+        else if (value.type === "AxisBinding")
+        {
+            return this._axisBindings.indexOf(/** @type {FORGE.AxisBinding} */ (value));
+        }
+    }
+
+    return -1;
+};
+
+/**
+ * Process all buttons in the gamepad.
+ * @method FORGE.Gamepad#_processButtons
+ * @param {Array&lt;GamepadButton>} buttons - the array of GamepadButton
+ * @private
+ */
+FORGE.Gamepad.prototype._processButtons = function(buttons)
+{
+    var button, index, binding;
+
+    // First process buttons
+    for (var i = 0, ii = buttons.length; i &lt; ii; i++)
+    {
+        button = buttons[i];
+        index = this._buttonPressed.indexOf(i);
+
+        if (button.pressed === true &amp;&amp; index === -1)
+        {
+            this.log("button pressed " + i);
+            this._buttonPressed.push(i);
+
+            this._applyButton(i, button.value, true);
+        }
+        else if (button.pressed === false &amp;&amp; index !== -1)
+        {
+            this.log("button released " + i);
+            this._buttonPressed.splice(index, 1);
+
+            this._applyButton(i, button.value, false);
+        }
+    }
+};
+
+/**
+ * Apply any hold action present for a button.
+ * @method FORGE.Gamepad#_applyHoldButtons
+ * @private
+ */
+FORGE.Gamepad.prototype._applyHoldButtons = function()
+{
+    var binding;
+
+    for (var i = 0, ii = this._buttonBindings.length; i &lt; ii; i++)
+    {
+        binding = this._buttonBindings[i];
+
+        if (binding.pressed === true)
+        {
+            if (binding.hasToWaitToHold === true &amp;&amp; binding.downComplete === false)
+            {
+                continue;
+            }
+
+            binding.hold();
+        }
+    }
+};
+
+
+/**
+ * Get an array of bindings associated to the button.
+ * @method FORGE.Gamepad#_getButtonBindings
+ * @param {number} index - the index of the button
+ * @return {Array&lt;FORGE.ButtonBinding>} an array of bindings
+ * */
+FORGE.Gamepad.prototype._getButtonBindings = function(index)
+{
+    var bindings = [];
+
+    for (var i = 0, ii = this._buttonBindings.length; i &lt; ii; i++)
+    {
+        if (this._buttonBindings[i].hasButtonIn(index) === true)
+        {
+            bindings.push(this._buttonBindings[i]);
+        }
+    }
+
+    return bindings;
+};
+
+/**
+ * Apply the callbacks associated to the button.
+ * @method FORGE.Gamepad#_applyButton
+ * @param {number} index - the index of the button
+ * @param {number} value - the value of the button
+ * @param {boolean} pressed - is the button pressed ?
+ * @private
+ */
+FORGE.Gamepad.prototype._applyButton = function(index, value, pressed)
+{
+    var binding, bindings = this._getButtonBindings(index);
+
+    for (var i = 0, ii = bindings.length; i &lt; ii; i++)
+    {
+        binding = bindings[i];
+
+        // Button down
+        if (pressed === true &amp;&amp; binding.pressed === false)
+        {
+            binding.down(value);
+        }
+        // Button up
+        else if (pressed === false &amp;&amp; binding.pressed === true)
+        {
+            binding.up(value);
+        }
+    }
+};
+
+/**
+ * Get an array of bindings associated to the axis.
+ * @method FORGE.Gamepad#_getAxisBindings
+ * @param {number} index - the index of the axis
+ * @return {Array&lt;FORGE.AxisBinding>} an array of bindings
+ */
+FORGE.Gamepad.prototype._getAxisBindings = function(index)
+{
+    var bindings = [];
+
+    for (var i = 0, ii = this._axisBindings.length; i &lt; ii; i++)
+    {
+        if (this._axisBindings[i].axis === index)
+        {
+            bindings.push(this._axisBindings[i]);
+        }
+    }
+
+    return bindings;
+};
+
+/**
+ * Process all buttons in the gamepad.
+ * @method FORGE.Gamepad#_processAxes
+ * @param {Array&lt;number>} axes - the value of each axis
+ * @private
+ */
+FORGE.Gamepad.prototype._processAxes = function(axes)
+{
+    var bindings;
+
+    // First process buttons
+    for (var i = 0, ii = axes.length; i &lt; ii; i++)
+    {
+        bindings = this._getAxisBindings(i);
+
+        for (var j = 0, jj = bindings.length; j &lt; jj; j++)
+        {
+            bindings[j].change(axes[i]);
+        }
+    }
+};
+
+/**
+ * Update routine.
+ * @method FORGE.Gamepad#update
+ */
+FORGE.Gamepad.prototype.update = function()
+{
+    if (this._enabled === true)
+    {
+        if (this._gamepad.timestamp > this._previousTimestamp)
+        {
+            this._previousTimestamp = this._gamepad.timestamp;
+
+            // Process buttons
+            if (typeof this._gamepad.buttons !== "undefined")
+            {
+                this._processButtons(this._gamepad.buttons);
+            }
+
+            // Process axis
+            if (typeof this._gamepad.axes !== "undefined")
+            {
+                this._processAxes(this._gamepad.axes);
+            }
+        }
+
+        // Apply buttons holdings
+        this._applyHoldButtons();
+    }
+};
+
+/**
+ * Add a BaseBinding to the Gamepad's correct bindings array.
+ * @method FORGE.Gamepad#addBinding
+ * @param {FORGE.BaseBinding} binding - The FORGE.BaseBinding you want to add.
+ * @return {boolean} Returns true if it's correctly added, false if it's already in or if wrong type.
+ */
+FORGE.Gamepad.prototype.addBinding = function(binding)
+{
+    if (typeof binding !== "object" &amp;&amp; binding.type !== "ButtonBinding" &amp;&amp; binding.type !== "AxisBinding")
+    {
+        return false;
+    }
+
+    var index = this._indexOfBinding(binding);
+
+    if (index === -1)
+    {
+        if (binding.type === "ButtonBinding")
+        {
+            this._buttonBindings.push(/** @type {FORGE.ButtonBinding} */ (binding));
+            return true;
+        }
+        else if (binding.type === "AxisBinding")
+        {
+            this._axisBindings.push(/** @type {FORGE.AxisBinding} */ (binding));
+            return true;
+        }
+    }
+    else
+    {
+        this.warn("Trying to add a duplicate binding on the gamepad !");
+    }
+
+    return false;
+};
+
+/**
+ * Remove a BaseBinding of the Gamepad.
+ * @method FORGE.Gamepad#removeBinding
+ * @param  {FORGE.BaseBinding} binding - The binding to remove.
+ * @return {boolean} Returns true if it's removed, false if not found.
+ */
+FORGE.Gamepad.prototype.removeBinding = function(binding)
+{
+    var index = this._indexOfBinding(binding);
+
+    if (index === -1)
+    {
+        if (binding.type === "ButtonBinding")
+        {
+            this._buttonBindings[index].destroy();
+            this._buttonBindings.splice(index, 1);
+            return true;
+        }
+        else if (binding.type === "AxisBinding")
+        {
+            this._axisBindings[index].destroy();
+            this._axisBindings.splice(index, 1);
+            return true;
+        }
+    }
+
+    return false;
+};
+
+/**
+ * Destroy sequence.
+ * @method FORGE.Gamepad#destroy
+ */
+FORGE.Gamepad.prototype.destroy = function()
+{
+    this._viewer = null;
+
+    var buttonBinding;
+
+    while (this._buttonBindings !== null &amp;&amp; this._buttonBindings.length > 0)
+    {
+        buttonBinding = this._buttonBindings.pop();
+        buttonBinding.destroy();
+    }
+    this._buttonBindings = null;
+
+    var axisBinding;
+
+    while (this._axisBindings !== null &amp;&amp; this._axisBindings.length > 0)
+    {
+        axisBinding = this._axisBindings.pop();
+        axisBinding.destroy();
+    }
+    this._axisBindings = null;
+
+    FORGE.BaseObject.prototype.destroy.call(this);
+};
+
+/**
+ * Gets the name of the gamepad.
+ * @name FORGE.Gamepad#name
+ * @type {string}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Gamepad.prototype, "name",
+{
+    /** @this {FORGE.Gamepad} */
+    get: function()
+    {
+        return this._gamepad.id + "-" + this._gamepad.index;
+    }
+});
+
+/**
+ * Gets the mapping of the gamepad.
+ * @name FORGE.Gamepad#mapping
+ * @type {string}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Gamepad.prototype, "mapping",
+{
+    /** @this {FORGE.Gamepad} */
+    get: function()
+    {
+        return this._gamepad.mapping;
+    }
+});
+
+/**
+ * Gets the hand of the gamepad if any.
+ * @name FORGE.Gamepad#hand
+ * @type {string}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Gamepad.prototype, "hand",
+{
+    /** @this {FORGE.Gamepad} */
+    get: function()
+    {
+        return this._gamepad.hand;
+    }
+});
+
+/**
+ * Gets the position of the gamepad, relative to the camera.
+ * @name FORGE.Gamepad#position
+ * @type {GamepadPose}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Gamepad.prototype, "position",
+{
+    /** @this {FORGE.Gamepad} */
+    get: function()
+    {
+        return this._gamepad.pose;
+    }
+});
+
+/**
+ * Gets or sets the enabled status of the gamepad.
+ * @name FORGE.Gamepad#enabled
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.Gamepad.prototype, "enabled",
+{
+    /** @this {FORGE.Gamepad} */
+    get: function()
+    {
+        return this._enabled;
+    },
+
+    /** @this {FORGE.Gamepad} */
+    set: function(value)
+    {
+        this._enabled = Boolean(value);
+    }
+});
+
+/**
+ * Gets the raw data of the gamepad (the Gamepad object, not the FORGE one).
+ * @name FORGE.Gamepad#gamepad
+ * @type {Gamepad}
+ */
+Object.defineProperty(FORGE.Gamepad.prototype, "gamepad",
+{
+    /** @this {FORGE.Gamepad} */
+    get: function()
+    {
+        return this._gamepad;
+    },
+
+    /** @this {FORGE.Gamepad} */
+    set: function(value)
+    {
+        if (value !== null)
+        {
+            this._gamepad = value;
+        }
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

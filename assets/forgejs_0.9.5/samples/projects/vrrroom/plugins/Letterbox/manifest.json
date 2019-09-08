@@ -1,0 +1,35 @@
+{
+    "uid": "org.forgejs.letterbox",
+    "name": "Letterbox",
+    "slug": "letterbox",
+    "version": "1.0.0",
+    "versionName": "Letterbox 1.0.0",
+    "description": "Add a letterboxing effect to a scene.",
+
+    "author":
+    {
+        "name": "GoPro",
+        "website": "https://forgejs.org"
+    },
+
+    "licence": "Apache 2",
+
+    "viewer":
+    {
+        "min": "0.9.0",
+        "max": "0.9.5"
+    },
+
+    "options":
+    {
+        "stripeHeight": 50,
+        "stripeColor": "black"
+    },
+
+    "sources":
+    [
+        "src/Letterbox.js"
+    ],
+
+    "constructor": "ForgePlugins.Letterbox"
+}

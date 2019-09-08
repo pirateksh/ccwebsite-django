@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: core/Uid.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: core/Uid.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Manage UIDs inside FORGE.&lt;br>
+ * UID is singleton, so if you have multiple instances in the same page you MUST avoid UID conflict.
+ * @constructor
+ * @extends {FORGE.BaseObject}
+ */
+FORGE.UID = (function(c)
+{
+    var Tmp = c();
+    Tmp.prototype = Object.create(FORGE.BaseObject.prototype);
+    Tmp.prototype.constructor = Tmp;
+
+    /**
+     * Generate a uid.
+     * @method FORGE.UID.generate
+     * @return {string} Return a UID string.
+     */
+    Tmp.prototype.generate = function()
+    {
+        // see http://stackoverflow.com/a/2117523/1233787
+        var uid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c)
+        {
+            var h = Math.random() * 16 | 0;
+            h = c == "x" ? h : (h &amp; 0x3 | 0x8);
+            return h.toString(16);
+        });
+
+        if (FORGE.UID.exists(uid) === false)
+        {
+            return uid;
+        }
+        else
+        {
+            return FORGE.UID.generate();
+        }
+    };
+
+    /**
+     * Validate recursively a uid.
+     * @method FORGE.UID.validate
+     * @param  {Object} object - The object you want to validate into the index.
+     * @return {boolean} Returns the validate status.
+     */
+    Tmp.prototype.validate = function(object)
+    {
+        var uids = [];
+
+        var validateRecursive = function(object)
+        {
+            var uid;
+
+            for (var i in object)
+            {
+                if (i === "uid")
+                {
+                    uid = object[i];
+
+                    if (typeof uid === "string")
+                    {
+                        if (FORGE.UID.exists(uid) || uids.indexOf(uid) !== -1)
+                        {
+                            this.warn("UID configuration not valid, uid " + uid + " already exists!");
+                            return false;
+                        }
+                        else
+                        {
+                            uids.push(object[i]);
+                        }
+                    }
+                    else
+                    {
+                        this.warn("Found a uid in configuration that is not a string!");
+                        return false;
+                    }
+                }
+                else if (typeof(object[i]) === "object")
+                {
+                    return validateRecursive.apply(this, [object[i]]);
+                }
+            }
+
+            return true;
+        };
+
+        return validateRecursive.apply(this, [object]);
+    };
+
+
+    /**
+     * Register an object into the uid index.
+     * @method FORGE.UID.register
+     * @param  {Object} object - The object you want to register into the index.
+     * @return {boolean} Return true if the object is added to UID, false if not.
+     */
+    Tmp.prototype.register = function(object)
+    {
+        if (typeof object === "object" &amp;&amp; typeof object.uid === "string")
+        {
+            var uid = object.uid;
+
+            if (FORGE.UID.exists(uid) === false)
+            {
+                this._objects[uid] = object;
+                return true;
+            }
+            else
+            {
+                this.warn("The uid you want to register already exists!");
+                this.warn(object);
+            }
+        }
+        else
+        {
+            this.warn("No uid on the object you try to register!");
+            this.warn(object);
+        }
+
+        return false;
+    };
+
+    /**
+     * Unregister an object from the uid index.
+     * @method FORGE.UID.unregister
+     * @param  {Object} object - The object you want to unregister from the index.
+     */
+    Tmp.prototype.unregister = function(object)
+    {
+        if (typeof object === "object" &amp;&amp; typeof object.uid === "string")
+        {
+            var uid = object.uid;
+            this._objects[uid] = null;
+            delete this._objects[uid];
+            return;
+        }
+
+        this.warn("No uid on the object you try to unregister!");
+    };
+
+    /**
+     * Get all uids or uids of a specific className.
+     * @method  FORGE.UID.getuids
+     * @param  {string} className - Type of uids you want to get, if undefined this will return all the uids.
+     * @return {Array&lt;string>} Returns an array of uids.
+     */
+    Tmp.prototype.getUids = function(className)
+    {
+        if (typeof className === "undefined" || className === null)
+        {
+            return Object.keys(this._objects);
+        }
+        else
+        {
+            return FORGE.UID.filterType(Object.keys(this._objects), className);
+        }
+    };
+
+    /**
+     * Filter an array of uids and return only uids of a specific className.
+     * @method FORGE.UID.filterType
+     * @param  {Array&lt;string>} uids - Array of uids to filter by className.
+     * @param  {string} className - Class name of object to filter.
+     * @return {Array&lt;string>} Returns an array of uids filtered by className.
+     */
+    Tmp.prototype.filterType = function(uids, className)
+    {
+        var filter = function(uid)
+        {
+            if (FORGE.UID.isTypeOf(uid, className))
+            {
+                return true;
+            }
+
+            return false;
+        };
+
+        return uids.filter(filter);
+    };
+
+    /**
+     * Get a registered object from its uid.
+     * @method FORGE.UID.get
+     * @param  {string|Array} value - The uid or array of uids of object(s) you want to get.
+     * @param  {string=} className - The className of the object you want
+     * @return {*} Returns the object(s) related to the filters.
+     */
+    Tmp.prototype.get = function(value, className)
+    {
+        //If no value is passed, the whole uids array is used as values
+        if (typeof value === "undefined" || value === null)
+        {
+            //If no value and no className, return all the objects.
+            if (typeof className !== "string")
+            {
+                return this._objects;
+            }
+
+            value = Object.keys(this._objects);
+        }
+
+        if (typeof value === "string")
+        {
+            return this._objects[value];
+        }
+        else if (Array.isArray(value))
+        {
+            if (typeof className === "string")
+            {
+                value = FORGE.UID.filterType(value, className);
+            }
+
+            var result = [];
+            var uid;
+            for (var i = 0, ii = value.length; i &lt; ii; i++)
+            {
+                uid = value[i];
+                if (FORGE.UID.exists(uid) === true)
+                {
+                    result.push(this._objects[uid]);
+                }
+            }
+
+            return result;
+        }
+
+        return undefined;
+    };
+
+    /**
+     * Tell if this uid matches an object of a specific className.
+     * @method  FORGE.UID.isTypeOf
+     * @param {string}  uid - uid of the object you want to check the className of.
+     * @param {string} className - The className you want to check.
+     * @return {boolean} Returns true if the object is of the asked className.
+     */
+    Tmp.prototype.isTypeOf = function(uid, className)
+    {
+        var object = FORGE.UID.get(uid);
+        return FORGE.Utils.isTypeOf(object, className);
+    };
+
+    /**
+     * Does a uid exists?
+     * @method FORGE.UID.exists
+     * @param  {string} uid - The uid you want to check.
+     * @return {boolean} Return true if uid is already registered, false if not.
+     */
+    Tmp.prototype.exists = function(uid)
+    {
+        return (typeof this._objects[uid] !== "undefined" &amp;&amp; this._objects[uid] !== null);
+    };
+
+    return new Tmp();
+
+})(function()
+{
+    return function()
+    {
+        /**
+         * The object that reference all uids objects couples.
+         * @name FORGE.UID#_objects
+         * @type {Object}
+         * @private
+         */
+        this._objects = {};
+
+        FORGE.BaseObject.call(this, "UID");
+    };
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

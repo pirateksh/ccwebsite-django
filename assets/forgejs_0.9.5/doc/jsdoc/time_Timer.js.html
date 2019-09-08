@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: time/Timer.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: time/Timer.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
+ * Timer utility that work with {@link FORGE.Clock}.
+ * @constructor FORGE.Timer
+ * @param {FORGE.Viewer} viewer - The {@link FORGE.Viewer} reference.
+ * @param {boolean} autoDestroy - Does the timer will autodestroy on time complete?
+ * @extends {FORGE.BaseObject}
+ */
+FORGE.Timer = function(viewer, autoDestroy)
+{
+    /**
+     * The viewer reference.
+     * @name FORGE.Timer#_viewer
+     * @type {FORGE.Viewer}
+     * @private
+     */
+    this._viewer = viewer;
+
+    /**
+     * Must be destoyed when time complete?
+     * @name FORGE.Timer#_viewer
+     * @type {boolean}
+     * @private
+     */
+    this._autoDestroy = (typeof autoDestroy !== "undefined") ? autoDestroy : true;
+
+    /**
+     * The start time.
+     * @name FORGE.Timer#_startTime
+     * @type {number}
+     * @private
+     */
+    this._startTime = 0;
+
+    /**
+     * Is timer running?
+     * @name FORGE.Timer#_running
+     * @type {boolean}
+     * @private
+     */
+    this._running = false;
+
+    /**
+     * The time when paused.
+     * @name FORGE.Timer#_pauseTime
+     * @type {number}
+     * @private
+     */
+    this._pauseTime = 0;
+
+    /**
+     * The number of pauses.
+     * @name FORGE.Timer#_pauseTotal
+     * @type {number}
+     * @private
+     */
+    this._pauseTotal = 0;
+
+    /**
+     * Is timer paused?
+     * @name FORGE.Timer#_paused
+     * @type {boolean}
+     * @private
+     */
+    this._paused = false;
+
+    /**
+     * The current time.
+     * @name FORGE.Timer#_now
+     * @type {number}
+     * @private
+     */
+    this._now = 0;
+
+    /**
+     * The clock tick.
+     * @name FORGE.Timer#_tick
+     * @type {number}
+     * @private
+     */
+    this._tick = 0;
+
+    /**
+     * Is timer expired?
+     * @name FORGE.Timer#_expired
+     * @type {boolean}
+     * @private
+     */
+    this._expired = false;
+
+    /**
+     * The list of events.
+     * @name FORGE.Timer#_events
+     * @type {Array&lt;FORGE.TimerEvent>}
+     * @private
+     */
+    this._events = null;
+
+     /**
+     * Internal reference to the onStart {@link FORGE.EventDispatcher}.
+     * @name FORGE.Timer#_onStart
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onStart = null;
+
+     /**
+     * Internal reference to the onPause {@link FORGE.EventDispatcher}.
+     * @name FORGE.Timer#_onPause
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onPause = null;
+
+    /**
+     * Internal reference to the onResume {@link FORGE.EventDispatcher}.
+     * @name FORGE.Timer#_onResume
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onResume = null;
+
+     /**
+     * Internal reference to the onStop {@link FORGE.EventDispatcher}.
+     * @name FORGE.Timer#_onStop
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onStop = null;
+
+    /**
+     * Internal reference to the onComplete {@link FORGE.EventDispatcher}.
+     * @name FORGE.Timer#_onComplete
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onComplete = null;
+
+    FORGE.BaseObject.call(this, "Timer");
+
+    this._boot();
+};
+
+FORGE.Timer.prototype = Object.create(FORGE.BaseObject.prototype);
+FORGE.Timer.prototype.constructor = FORGE.Timer;
+
+/**
+ * Boot sequence.
+ * @method FORGE.Timer#_boot
+ * @private
+ */
+FORGE.Timer.prototype._boot = function()
+{
+    this._events = [];
+    this._now = Date.now();
+};
+
+/**
+ * Update events.
+ * @method FORGE.Timer#_updateEvents
+ * @param  {number} baseTime - The reference time.
+ * @private
+ */
+FORGE.Timer.prototype._updateEvents = function(baseTime)
+{
+    for(var i = 0; i &lt; this._events.length; i++)
+    {
+        var event = this._events[i];
+
+        if (event.pendingDelete === false)
+        {
+            // Work out how long there would have been from when the game paused until the events next tick
+            var t = event.tick - baseTime;
+
+            if (t &lt; 0)
+            {
+                t = 0;
+            }
+
+            // Add the difference on to the time now
+            event.tick = this._now + t;
+        }
+    }
+
+    var d = this._nextTick - baseTime;
+
+    if (d &lt; 0)
+    {
+        this._nextTick = this._now;
+    }
+    else
+    {
+        this._nextTick = this._now + d;
+    }
+};
+
+/**
+ * Sort events list to get the next event.
+ * @method FORGE.Timer#_sort
+ * @private
+ */
+FORGE.Timer.prototype._sort = function()
+{
+    if (this._events.length > 0)
+    {
+        this._events.sort(this._sortCompare);
+        this._nextTick = this._events[0].tick;
+    }
+};
+
+/**
+ * Sort comparison for events.
+ * @param  {FORGE.TimerEvent} a - First event to compare.
+ * @param  {FORGE.TimerEvent} b - Second event to compare.
+ * @return {number} Returns 1 if bigger, -1 if lower, 0 if equal.
+ * @private
+ */
+FORGE.Timer.prototype._sortCompare = function (a, b)
+{
+    if (a.tick &lt; b.tick)
+    {
+        return -1;
+    }
+    else if (a.tick > b.tick)
+    {
+        return 1;
+    }
+
+    return 0;
+};
+
+/**
+ * Clear pending events.
+ * @method FORGE.Timer#_clearPendingEvents
+ * @private
+ */
+FORGE.Timer.prototype._clearPendingEvents = function ()
+{
+    var count = this._events.length;
+
+    while (count--)
+    {
+        if (this._events[count].pendingDelete === true)
+        {
+            this._events.splice(count, 1);
+        }
+    }
+};
+
+/**
+ * Create an event in the timer.
+ * @method FORGE.Timer#create
+ * @param {number} delay - The delay to call the event.
+ * @param {boolean} loop - Must be looped?
+ * @param {number} repeatCount - Number of repetition.
+ * @param {Function} callback - The callback function.
+ * @param {Object} callbackContext - The context for the callback function.
+ * @param {Array&lt;*>} args - List of arguments.
+ * @return {FORGE.TimerEvent} Returns the created event.
+ */
+FORGE.Timer.prototype.create = function(delay, loop, repeatCount, callback, callbackContext, args)
+{
+
+    delay = Math.round(delay);
+
+    var tick = delay;
+
+    if (this._now === 0)
+    {
+        tick += this._viewer.clock.time;
+    }
+    else
+    {
+        tick += this._now;
+    }
+
+    var event = new FORGE.TimerEvent(this, delay, tick, repeatCount, loop, callback, callbackContext, args);
+
+    this._events.push(event);
+
+    this._sort();
+
+    this._expired = false;
+
+    return event;
+};
+
+/**
+ * Add an event in the timer
+ * @method FORGE.Timer#add
+ * @param {number} delay - The delay to call the event.
+ * @param {Function} callback - The callback function.
+ * @param {Object} callbackContext - The context for the callback function.
+ * @param {...*} args - Arguments to pass to the timer event handler
+ * @return {FORGE.TimerEvent} Returns the created event.
+ */
+//jscs:disable
+FORGE.Timer.prototype.add = function(delay, callback, callbackContext, args)
+{
+    return this.create(delay, false, 0, callback, callbackContext, Array.prototype.splice.call(arguments, 3));
+};
+//jscs:enable
+
+/**
+ * Repeat an event in the timer.
+ * @method FORGE.Timer#repeat
+ * @param {number} delay - The delay to call the event.
+ * @param {number} repeatCount - The number of repetition.
+ * @param {Function} callback - The callback function.
+ * @param {Object}   callbackContext - The context for the callback function.
+ * @return {FORGE.TimerEvent} Returns the created event.
+ */
+FORGE.Timer.prototype.repeat = function(delay, repeatCount, callback, callbackContext)
+{
+    return this.create(delay, false, repeatCount, callback, callbackContext, Array.prototype.splice.call(arguments, 4));
+};
+
+/**
+ * Loop an event in the timer.
+ * @method FORGE.Timer#loop
+ * @param {number} delay - The delay to call the event.
+ * @param {Function} callback - The callback function.
+ * @param {Object} callbackContext - The context for the callback function.
+ * @return {FORGE.TimerEvent} Returns the created event.
+ */
+FORGE.Timer.prototype.loop = function(delay, callback, callbackContext)
+{
+    return this.create(delay, true, 0, callback, callbackContext, Array.prototype.splice.call(arguments, 3));
+};
+
+/**
+ * Remove an event from the timer.
+ * @method FORGE.Timer#remove
+ * @param {FORGE.TimerEvent} event - The event to remove.
+ * @return {boolean} Returns true if event has been removed, if not, returns false.
+ */
+FORGE.Timer.prototype.remove = function(event)
+{
+    for (var i = 0; i &lt; this._events.length; i++)
+    {
+        if (this._events[i] === event)
+        {
+            this._events[i].pendingDelete = true;
+            return true;
+        }
+    }
+
+    return false;
+};
+
+/**
+ * Start the timer.
+ * @method FORGE.Timer#start
+ */
+FORGE.Timer.prototype.start = function()
+{
+    if(this._running === true)
+    {
+        return;
+    }
+
+    this._startTime = this._viewer.clock.time;
+    this._running = true;
+
+    var event;
+    for (var i = 0; i &lt; this._events.length; i++)
+    {
+        event = this._events[i];
+        event.tick = event.delay + this._startTime;
+    }
+
+    if(this._onStart !== null)
+    {
+        this._onStart.dispatch();
+    }
+};
+
+/**
+ * Stop the timer.
+ * @method FORGE.Timer#stop
+ * @param {boolean} [clear=true] - Clear the events list.
+ */
+FORGE.Timer.prototype.stop = function(clear)
+{
+    this._running = false;
+
+    if (clear !== false)
+    {
+        this._events.length = 0;
+    }
+
+    if(this._onStop !== null)
+    {
+        this._onStop.dispatch();
+    }
+};
+
+/**
+ * Pause the timer.
+ * @method FORGE.Timer#pause
+ */
+FORGE.Timer.prototype.pause = function()
+{
+    if (this._running === false || this._paused === true)
+    {
+        return;
+    }
+
+    this._pauseTime = this._viewer.clock.time;
+    this._paused = true;
+
+    if(this._onPause !== null)
+    {
+        this._onPause.dispatch();
+    }
+};
+
+/**
+ * Resume the timer.
+ * @method FORGE.Timer#resume
+ */
+FORGE.Timer.prototype.resume = function()
+{
+    if (this._paused === false)
+    {
+        return;
+    }
+
+    var now = this._viewer.clock.time;
+    this._pauseTotal += now - this._now;
+
+    this._now = now;
+    this._updateEvents(this._pauseTime);
+    this._paused = false;
+
+    if(this._onResume !== null)
+    {
+        this._onResume.dispatch();
+    }
+};
+
+/**
+ * Update the timer from the main loop.
+ * @method FORGE.Timer#update
+ * @param {number} time - The current time.
+ */
+FORGE.Timer.prototype.update = function(time)
+{
+    if(this._paused === true)
+    {
+        return;
+    }
+
+    var elapsed = time - this._now;
+    this._now = time;
+
+    //If elapsed time is superior to 1000ms, we can consider that time has been paused by a brower tab change which makes the raf pause.
+    if(elapsed > 1000)
+    {
+        this._updateEvents(time - elapsed);
+    }
+
+    this._clearPendingEvents();
+
+    var count = this._events.length;
+    var i = 0;
+    var markedForDeletion = 0;
+
+    if (this._running === true &amp;&amp; this._now >= this._nextTick &amp;&amp; count > 0)
+    {
+        var event;
+
+        while (i &lt; count &amp;&amp; this._running === true)
+        {
+            event = this._events[i];
+
+            if (this._now >= event.tick &amp;&amp; event.pendingDelete === false)
+            {
+                //  (now + delay) - (time difference from last tick to now)
+                var newTick = (this._now + event.delay) - (this._now - event.tick);
+
+                if (newTick &lt; 0)
+                {
+                    newTick = this._now + event.delay;
+                }
+
+                if (event.loop === true)
+                {
+                    event.tick = newTick;
+                    event.execute();
+                }
+                else if (event.repeatCount > 0)
+                {
+                    event.repeatCount--;
+                    event.tick = newTick;
+                    event.execute();
+                }
+                else
+                {
+                    markedForDeletion++;
+                    event.pendingDelete = true;
+                    event.execute();
+                }
+
+                i++;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        //  Are there any events left?
+        if (this._events.length > markedForDeletion)
+        {
+            this._sort();
+        }
+        else
+        {
+            this._expired = true;
+            this._running = false;
+
+            if(this._onComplete !== null)
+            {
+                this._onComplete.dispatch();
+            }
+        }
+    }
+
+    if (this._expired &amp;&amp; this._autoDestroy)
+    {
+        this.destroy();
+    }
+
+};
+
+/**
+ * Destroy method.
+ * @method FORGE.Timer#destroy
+ */
+FORGE.Timer.prototype.destroy = function()
+{
+    this._running = false;
+    this._events = [];
+
+    FORGE.BaseObject.prototype.destroy.call(this);
+};
+
+/**
+ * Get the auto destroy value.
+ * @name FORGE.Timer#autoDestroy
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.Timer.prototype, "autoDestroy",
+{
+    /** @this {FORGE.Timer} */
+    get: function()
+    {
+        return this._autoDestroy;
+    }
+});
+
+/**
+ * Get the running value.
+ * @name FORGE.Timer#running
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.Timer.prototype, "running",
+{
+    /** @this {FORGE.Timer} */
+    get: function()
+    {
+        return this._running;
+    }
+});
+
+/**
+ * Get the paused value.
+ * @name FORGE.Timer#paused
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.Timer.prototype, "paused",
+{
+    /** @this {FORGE.Timer} */
+    get: function()
+    {
+        return this._paused;
+    }
+});
+
+/**
+ * Get the time tick at which the next event will occur.
+ * @name FORGE.Timer#next
+ * @type {number}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Timer.prototype, "next",
+{
+    /** @this {FORGE.Timer} */
+    get: function ()
+    {
+        return this._nextTick;
+    }
+});
+
+/**
+ * The duration in ms remaining until the next event will occur.
+ * @name FORGE.Timer#duration
+ * @type {number}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Timer.prototype, "duration",
+{
+    /** @this {FORGE.Timer} */
+    get: function ()
+    {
+        if (this._running &amp;&amp; this._nextTick > this._now)
+        {
+            return this._nextTick - this._now;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+});
+
+/**
+ * The number of pending events in the queue.
+ * @name FORGE.Timer#length
+ * @type {number}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Timer.prototype, "length",
+{
+    /** @this {FORGE.Timer} */
+    get: function ()
+    {
+        return this._events.length;
+    }
+});
+
+/**
+ * The duration in milliseconds that this Timer has been running for.
+ * @name FORGE.Timer#ms
+ * @type {number}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Timer.prototype, "ms",
+{
+    /** @this {FORGE.Timer} */
+    get: function ()
+    {
+        if (this._running)
+        {
+            return this._now - this._startTime - this._pauseTotal;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+});
+
+/**
+ * The duration in seconds that this Timer has been running for.
+ * @name FORGE.Timer#seconds
+ * @type {number}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Timer.prototype, "seconds",
+{
+    /** @this {FORGE.Timer} */
+    get: function ()
+    {
+        if (this._running)
+        {
+            return this.ms * 0.001;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+});
+
+/**
+ * Get the "onStart" event {@link FORGE.EventDispatcher} of the timer.
+ * @name FORGE.Timer#onStart
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Timer.prototype, "onStart",
+{
+    /** @this {FORGE.Timer} */
+    get: function()
+    {
+        if(this._onStart === null)
+        {
+            this._onStart = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onStart;
+    }
+});
+
+/**
+ * Get the "onPause" event {@link FORGE.EventDispatcher} of the timer.
+ * @name FORGE.Timer#onPause
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Timer.prototype, "onPause",
+{
+    /** @this {FORGE.Timer} */
+    get: function()
+    {
+        if(this._onPause === null)
+        {
+            this._onPause = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onPause;
+    }
+});
+
+/**
+ * Get the "onResume" event {@link FORGE.EventDispatcher} of the timer.
+ * @name FORGE.Timer#onResume
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Timer.prototype, "onResume",
+{
+    /** @this {FORGE.Timer} */
+    get: function()
+    {
+        if(this._onResume === null)
+        {
+            this._onResume = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onResume;
+    }
+});
+
+/**
+ * Get the "onStop" event {@link FORGE.EventDispatcher} of the timer.
+ * @name FORGE.Timer#onStop
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Timer.prototype, "onStop",
+{
+    /** @this {FORGE.Timer} */
+    get: function()
+    {
+        if(this._onStop === null)
+        {
+            this._onStop = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onStop;
+    }
+});
+
+/**
+ * Get the "onComplete" event {@link FORGE.EventDispatcher} of the timer.
+ * @name FORGE.Timer#onComplete
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Timer.prototype, "onComplete",
+{
+    /** @this {FORGE.Timer} */
+    get: function()
+    {
+        if(this._onComplete === null)
+        {
+            this._onComplete = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onComplete;
+    }
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

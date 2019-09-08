@@ -1,0 +1,758 @@
+
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>JSON Reference</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css" media="screen,projection" charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="static/fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="static/forge-iframe.css">
+    <script type="text/javascript">
+        function updateLink()
+        {
+            var url, slug, links = document.getElementsByTagName('a');
+
+            for (var i = 0, ii = links.length; i < ii; i++)
+            {
+                if (!links[i].classList.contains('out'))
+                {
+                    url = links[i].href.replace(/(.+\/)\w+\.html#([\w\-]+)/, function(match, p1, p2) {
+                        var subRefs = p2.split('-');
+
+                        if (subRefs.length > 1)
+                        {
+                            slug = subRefs[0] + '/' + p2;
+                            return p1 + subRefs[0] + '.html#' + p2;
+                        } else {
+                            slug = p2;
+                            return p1 + p2 + '.html'
+                        }
+                    });
+
+                    links[i].href = 'javascript:window.parent.goTo("' + url + '", "' + slug + '");';
+                }
+            }
+        }
+    </script>
+</head>
+<body data-spy="scroll" data-target="#navbar" onload="updateLink()">
+<br>
+
+<article>
+    <header class="col-lg-12">
+        <h2>Plugins</h2>
+        <p class="lead">A plugin can add elements and functionnalities that are not available through ForgeJS. It can be as simple as a button reacting to a click by going to the next scene, to a complex plugin of chromakey, detouring in real time something on top of a green screen.</p>
+    </header>
+
+    
+    <section class="col-lg-12">
+        <h4>Example :</h4>
+        <small class="example-code"><pre>{
+  &quot;prefix&quot;: &quot;./plugins&quot;,
+  &quot;engines&quot;: [
+    {
+      &quot;uid&quot;: &quot;com.awesome.plugin&quot;,
+      &quot;prefix&quot;: &quot;./other-plugin-folder/&quot;,
+      &quot;url&quot;: &quot;AwesomePlugin&quot;,
+      &quot;manifest&quot;: &quot;manifest.json&quot;
+    }
+  ],
+  &quot;instances&quot;: [
+    {
+      &quot;uid&quot;: &quot;awesome-plugin-instance&quot;,
+      &quot;engine&quot;: &quot;com.awesome.plugin&quot;,
+      &quot;tags&quot;: [
+        &quot;plugin&quot;,
+        &quot;beach&quot;,
+        &quot;awesome&quot;
+      ],
+      &quot;scenes&quot;: [
+        &quot;scene-0&quot;,
+        &quot;scene-2&quot;
+      ],
+      &quot;options&quot;: {
+        &quot;awesomeness&quot;: 360,
+        &quot;key&quot;: &quot;i18n-awesome&quot;,
+        &quot;another_options&quot;: {
+          &quot;target&quot;: &quot;scene-1&quot;,
+          &quot;enabled&quot;: true
+        }
+      },
+      &quot;data&quot;: {},
+      &quot;actions&quot;: [
+        &quot;action-awesome-thing&quot;,
+        &quot;action-more-awesome&quot;
+      ],
+      &quot;events&quot;: {
+        &quot;onClick&quot;: [
+          &quot;action-awesome-thing&quot;
+        ]
+      },
+      &quot;index&quot;: 10,
+      &quot;enabled&quot;: true,
+      &quot;keep&quot;: false
+    }
+  ],
+  &quot;configurations&quot;: [
+    {
+      &quot;data&quot;: {},
+      &quot;options&quot;: {
+        &quot;key&quot;: &quot;overwritting-previous-key&quot;,
+        &quot;missing-options&quot;: 42
+      },
+      &quot;actions&quot;: [
+        &quot;action-awesome-thing&quot;,
+        &quot;action-more-awesome&quot;
+      ],
+      &quot;events&quot;: {
+        &quot;onDrag&quot;: [
+          &quot;action-more-awesome&quot;
+        ]
+      }
+    }
+  ]
+}</pre></small>
+    </section>
+    
+
+    <section id="pluginsconfig" class="col-lg-12">
+        <section id="pluginsconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="plugin">
+                        plugin
+                        <a href="#plugin" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            engines
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            List of plugin engines. Each member is an instance of <a href="#plugin-engine">a plugin engine</a>.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            instances
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            List of plugin instances. Each member is an instance of <a href="plugin-instance">a plugin instance</a>.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            configurations
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            List of plugin configurations. Each member is an instance of <a href="plugin-configuration">a plugin configuration</a>.<br><br>
+
+            
+        </td>
+    </tr>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            prefix
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The prefix to put before the path of each plugin. Can be override by the prefix properties in <a href="#plugin-engine">the plugin engine declaration</a>.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;./plugins&quot;</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="pluginengineconfig" class="col-lg-12">
+        <section id="pluginengineconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="plugin-engine">
+                        plugin-engine
+                        <a href="#plugin-engine" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            uid
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The UID of the engine.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;com.awesome.plugin&quot;</pre></small>
+            
+        </td>
+    </tr>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            prefix
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The prefix of the url.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;./other-plugin-folder/&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            url
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The url/root of the Plugin relative to the prefix.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;AwesomePlugin&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            manifest
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The manifest to read to know the configuration of the plugin.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;manifest.json&quot;</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="plugininstanceconfig" class="col-lg-12">
+        <section id="plugininstanceconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="plugin-instance">
+                        plugin-instance
+                        <a href="#plugin-instance" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            uid
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The UID of the instance.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;awesome-plugin-instance&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            tags
+        </th>
+        <td class="param-type">
+                <em>array&lt;string&gt;</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            A list of tags.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            options
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The options of this instance, specific and different for each plugin.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>{
+  &quot;awesomeness&quot;: 360,
+  &quot;key&quot;: &quot;i18n-awesome&quot;,
+  &quot;another_options&quot;: {
+    &quot;target&quot;: &quot;scene-1&quot;,
+    &quot;enabled&quot;: true
+  }
+}</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            actions
+        </th>
+        <td class="param-type">
+                <em>array&lt;string&gt;</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            A list actions associated to this plugin.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            events
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Events to react to, specific to each plugin.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>{
+  &quot;onClick&quot;: [
+    &quot;action-awesome-thing&quot;
+  ]
+}</pre></small>
+            
+        </td>
+    </tr>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            engine
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The UID of the engine the instance is of.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;com.awesome.plugin&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            scenes
+        </th>
+        <td class="param-type">
+                <em>array&lt;string&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The list of UID of scenes associated to the instance.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            data
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The eventual data associated to the plugin, specific to each plugin.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>{}</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            index
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The index of the plugin on the screen.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>10</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            enabled
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Is the instance enabled ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>true</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            keep
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Do we need to keep the plugin ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="pluginconfigurationconfig" class="col-lg-12">
+        <section id="pluginconfigurationconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="plugin-configuration">
+                        plugin-configuration
+                        <a href="#plugin-configuration" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            data
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The eventual data associated to the plugin, specific to each plugin.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>{}</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            options
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The options of this instance, specific and different for each plugin.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>{
+  &quot;key&quot;: &quot;overwritting-previous-key&quot;,
+  &quot;missing-options&quot;: 42
+}</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            actions
+        </th>
+        <td class="param-type">
+                <em>array&lt;string&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            A list of actions associated to this plugin.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            events
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Events to react to, specific to each plugin.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>{
+  &quot;onDrag&quot;: [
+    &quot;action-more-awesome&quot;
+  ]
+}</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+</article>
+</body>
+</html>

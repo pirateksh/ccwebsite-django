@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>JSON Reference</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css" media="screen,projection" charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="static/fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="static/forge-iframe.css">
+    <script type="text/javascript">
+        function updateLink()
+        {
+            var url, slug, links = document.getElementsByTagName('a');
+
+            for (var i = 0, ii = links.length; i < ii; i++)
+            {
+                if (!links[i].classList.contains('out'))
+                {
+                    url = links[i].href.replace(/(.+\/)\w+\.html#([\w\-]+)/, function(match, p1, p2) {
+                        var subRefs = p2.split('-');
+
+                        if (subRefs.length > 1)
+                        {
+                            slug = subRefs[0] + '/' + p2;
+                            return p1 + subRefs[0] + '.html#' + p2;
+                        } else {
+                            slug = p2;
+                            return p1 + p2 + '.html'
+                        }
+                    });
+
+                    links[i].href = 'javascript:window.parent.goTo("' + url + '", "' + slug + '");';
+                }
+            }
+        }
+    </script>
+</head>
+<body data-spy="scroll" data-target="#navbar" onload="updateLink()">
+<br>
+
+<article>
+    <header class="col-lg-12">
+        <h2>i18n</h2>
+        <p class="lead">ForgeJS supports internationalization of everything, from text to media. This section allows to configure the internationalization, by specifying each available locale. It is recommended to follow a simple scheme to identify each locale, such as <b>en-US</b> or <b>fr-FR</b>.</p>
+    </header>
+
+    
+    <section class="col-lg-12">
+        <h4>Example :</h4>
+        <small class="example-code"><pre>{
+  &quot;enabled&quot;: false,
+  &quot;default&quot;: &quot;en-US&quot;,
+  &quot;auto&quot;: false,
+  &quot;locales&quot;: [
+    {
+      &quot;uid&quot;: &quot;en-US&quot;,
+      &quot;name&quot;: &quot;English&quot;,
+      &quot;files&quot;: [
+        {
+          &quot;key&quot;: &quot;project.en-US&quot;,
+          &quot;url&quot;: &quot;./i18n/en-US/locale.json&quot;
+        }
+      ]
+    }
+  ]
+}</pre></small>
+    </section>
+    
+
+    <section id="i18nconfig" class="col-lg-12">
+        <section id="i18nconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="i18n">
+                        i18n
+                        <a href="#i18n" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            enabled
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>true</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Is the i18n support enabled for this project ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            default
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The default locale UID to use.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;en-US&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            auto
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Is the device default browser locale used if available ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            locales
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The list of each locale configuration. Each member is an instance of <a href="#i18n-locale">an i18n locale.</a><br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="i18nlocaleconfig" class="col-lg-12">
+        <section id="i18nlocaleconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="i18n-locale">
+                        i18n-locale
+                        <a href="#i18n-locale" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            uid
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The UID of the locale, we recommend a code respecting the <a href="https://tools.ietf.org/html/rfc5646#appendix-A" class="out">RFC 5646</a> for better identification.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;en-US&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            name
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The name of the locale.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;English&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            files
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The list of files containing the locale. Each member is an instance of <a href="i18n-locale-files">a i18n locale file</a>.<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="i18nlocalefileconfig" class="col-lg-12">
+        <section id="i18nlocalefileconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="i18n-locale-files">
+                        i18n-locale-files
+                        <a href="#i18n-locale-files" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            key
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            It is the unique identifier for this file.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;project.en-US&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            url
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The file can be local or on a distant server, but must be a valid JSON one.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;./i18n/en-US/locale.json&quot;</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+</article>
+</body>
+</html>

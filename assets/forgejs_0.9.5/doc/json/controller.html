@@ -1,0 +1,1514 @@
+
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>JSON Reference</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css" media="screen,projection" charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="static/fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="static/forge-iframe.css">
+    <script type="text/javascript">
+        function updateLink()
+        {
+            var url, slug, links = document.getElementsByTagName('a');
+
+            for (var i = 0, ii = links.length; i < ii; i++)
+            {
+                if (!links[i].classList.contains('out'))
+                {
+                    url = links[i].href.replace(/(.+\/)\w+\.html#([\w\-]+)/, function(match, p1, p2) {
+                        var subRefs = p2.split('-');
+
+                        if (subRefs.length > 1)
+                        {
+                            slug = subRefs[0] + '/' + p2;
+                            return p1 + subRefs[0] + '.html#' + p2;
+                        } else {
+                            slug = p2;
+                            return p1 + p2 + '.html'
+                        }
+                    });
+
+                    links[i].href = 'javascript:window.parent.goTo("' + url + '", "' + slug + '");';
+                }
+            }
+        }
+    </script>
+</head>
+<body data-spy="scroll" data-target="#navbar" onload="updateLink()">
+<br>
+
+<article>
+    <header class="col-lg-12">
+        <h2>Controllers</h2>
+        <p class="lead">Controllers can be bound to ForgeJS: by example, the keyboard and the mouse. By default, some bindings exists, like the arrow keys to move in the scene, and the mouse movement as well.</p>
+    </header>
+
+    
+    <section class="col-lg-12">
+        <h4>Example :</h4>
+        <small class="example-code"><pre>{
+  &quot;enabled&quot;: true,
+  &quot;instances&quot;: [
+    {
+      &quot;uid&quot;: &quot;controller-0&quot;,
+      &quot;type&quot;: &quot;pointer&quot;,
+      &quot;enabled&quot;: true,
+      &quot;options&quot;: {
+        &quot;fullscreen&quot;: true,
+        &quot;orientation&quot;: {
+          &quot;drag&quot;: false,
+          &quot;hardness&quot;: 0.6,
+          &quot;damping&quot;: 0.15,
+          &quot;velocityMax&quot;: 300,
+          &quot;invert&quot;: {}
+        },
+        &quot;zoom&quot;: {
+          &quot;hardness&quot;: 5,
+          &quot;invert&quot;: false,
+          &quot;toPointer&quot;: false
+        }
+      }
+    }
+  ]
+}</pre></small>
+    </section>
+    
+
+    <section id="controllersconfig" class="col-lg-12">
+        <section id="controllersconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="controller">
+                        controller
+                        <a href="#controller" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            enabled
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>true</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Enables or not all the controllers.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>true</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            instances
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The list of each controller. Each member is an instance of <a href="#controller-instance">a controller.</a><br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="controllerinstanceconfig" class="col-lg-12">
+        <section id="controllerinstanceconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="controller-instance">
+                        controller-instance
+                        <a href="#controller-instance" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            uid
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            UID of the controller instance.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;controller-0&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            type
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Type of the controller to instanciate. Can either be :<ul><li>pointer</li><li>keyboard</li><li>gyroscope</li><li>gamepad</li></ul><br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;pointer&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            enabled
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Is this controller enabled at its creation ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>true</pre></small>
+            
+        </td>
+    </tr>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            options
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>object</em></li>
+                    <li class="param-anyof"><em>object</em></li>
+                    <li class="param-anyof"><em>object</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="controllerpointerconfig" class="col-lg-12">
+        <section id="controllerpointerconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="controller-pointer">
+                        controller-pointer
+                        <a href="#controller-pointer" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            fullscreen
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>true</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Does a double click/tap/touch toggle the fullscreen mode ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>true</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            orientation
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#controller-options-orientation">a controller orientation configuration.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            zoom
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#controller-options-zoom">a controller zoom configuration.</a><br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="controllerorientationconfig" class="col-lg-12">
+        <section id="controllerorientationconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="controller-options-orientation">
+                        controller-options-orientation
+                        <a href="#controller-options-orientation" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            hardness
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Hardness (instant contribution).<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>0.6</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            damping
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Damping (inertia).<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>0.15</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            velocityMax
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Maximum velocity .<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>300</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            invert
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>boolean</em></li>
+                    <li class="param-anyof"><em>object</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Inversion of axis.<br><br>
+
+            
+        </td>
+    </tr>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            drag
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Set this to true if you want to use the drag mode control. Do not use with anything else than a rectilinear view<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="controllerorientationinvertconfig" class="col-lg-12">
+        <section id="controllerorientationinvertconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="controller-options-orientation-invert">
+                        controller-options-orientation-invert
+                        <a href="#controller-options-orientation-invert" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            x
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Is the X axis inverted ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            y
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Is the Y axis inverted ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="controllerzoomconfig" class="col-lg-12">
+        <section id="controllerzoomconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="controller-options-zoom">
+                        controller-options-zoom
+                        <a href="#controller-options-zoom" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            hardness
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Hardness (instant contribution).<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>5</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            invert
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Inversion of axis.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            toPointer
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Zoom action also rotate the camera to keep the same area under your pointer during the zoom<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="controllerkeyboardconfig" class="col-lg-12">
+        <section id="controllerkeyboardconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="controller-keyboard">
+                        controller-keyboard
+                        <a href="#controller-keyboard" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            orientation
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#controller-options-orientation">a controller orientation configuration.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            zoom
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#controller-options-zoom">a controller zoom configuration.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            default
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>true</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Loads the default controller bindings if not set to false.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>true</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            bindings
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Array of <a href="#controller-keyboard-binding">custom keyboard key bindings</a>.<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="controllerkeyboardbindingconfig" class="col-lg-12">
+        <section id="controllerkeyboardbindingconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="controller-keyboard-binding">
+                        controller-keyboard-binding
+                        <a href="#controller-keyboard-binding" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            in
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>number</em></li>
+                    <li class="param-anyof"><em>array&lt;&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The key code or array of keycodes that are associated to this key binding. Corresponds to a <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode" class="out">KeyboardEvent.keyCode</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            events
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Available events to bind actions to for the <a href="#controller-keyboard">controller keyboard.</a><br><br>
+
+            
+        </td>
+    </tr>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            name
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The name of this key binding<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            out
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>number</em></li>
+                    <li class="param-anyof"><em>array&lt;&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The key code or array of keycodes that are associated to this key binding. Corresponds to a <a href="https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode">KeyboardEvent.keyCode</a><br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="controllerkeyboardbindingeventsconfig" class="col-lg-12">
+        <section id="controllerkeyboardbindingeventsconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="controller-keyboard-binding-events">
+                        controller-keyboard-binding-events
+                        <a href="#controller-keyboard-binding-events" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            onDown
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The action or array of actions uid to trigger on key down event<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            onHold
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The action or array of actions uid to trigger on key hold event<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            onUp
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The action or array of actions uid to trigger on key up event<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="controllergamepadconfig" class="col-lg-12">
+        <section id="controllergamepadconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="controller-gamepad">
+                        controller-gamepad
+                        <a href="#controller-gamepad" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            orientation
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#controller-options-orientation">a controller orientation configuration.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            zoom
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#controller-options-zoom">a controller zoom configuration.</a><br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            default
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>true</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Loads the default controller bindings if not set to false.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>true</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            bindings
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            An instance of <a href="#controller-gamepad-binding">a controller gamepad binding config.</a><br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="controllergamepadbindingconfig" class="col-lg-12">
+        <section id="controllergamepadbindingconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="controller-gamepad-binding">
+                        controller-gamepad-binding
+                        <a href="#controller-gamepad-binding" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            buttons
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Array of <a href="#controller-gamepad-button-binding">custom gamepad button binding.</a>.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            axes
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Array of <a href="#controller-gamepad-axis-binding">custom gamepad axis binding.</a>.<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="controllergamepadbuttonbindingconfig" class="col-lg-12">
+        <section id="controllergamepadbuttonbindingconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="controller-gamepad-button-binding">
+                        controller-gamepad-button-binding
+                        <a href="#controller-gamepad-button-binding" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            in
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>number</em></li>
+                    <li class="param-anyof"><em>array&lt;&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The button code or array of button codes that are associated to this button binding.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            events
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Available events to bind actions to for the <a href="#controller-gamepad">controller gamepad.</a><br><br>
+
+            
+        </td>
+    </tr>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            name
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The name of this button binding<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            out
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>number</em></li>
+                    <li class="param-anyof"><em>array&lt;&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The button code or array of button codes that are associated to this button binding.<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="controllergamepadbuttonbindingeventsconfig" class="col-lg-12">
+        <section id="controllergamepadbuttonbindingeventsconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="controller-gamepad-button-binding-events">
+                        controller-gamepad-button-binding-events
+                        <a href="#controller-gamepad-button-binding-events" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            onDown
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The action or array of actions uid to trigger on button down event<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            onHold
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The action or array of actions uid to trigger on button hold event<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            onUp
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The action or array of actions uid to trigger on button up event<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="controllergamepadaxisbindingconfig" class="col-lg-12">
+        <section id="controllergamepadaxisbindingconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="controller-gamepad-axis-binding">
+                        controller-gamepad-axis-binding
+                        <a href="#controller-gamepad-axis-binding" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            axis
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The axis code that is associated to this axis binding.<br><br>
+
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            events
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Available events to bind actions to an axis for the <a href="#controller-gamepad">controller gamepad.</a><br><br>
+
+            
+        </td>
+    </tr>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            name
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The name of this axis binding<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="controllergamepadaxisbindingeventsconfig" class="col-lg-12">
+        <section id="controllergamepadaxisbindingeventsconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="controller-gamepad-axis-binding-events">
+                        controller-gamepad-axis-binding-events
+                        <a href="#controller-gamepad-axis-binding-events" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            onChange
+        </th>
+        <td class="param-type">
+                <dl>
+                    <li class="param-anyof"><em>string</em></li>
+                    <li class="param-anyof"><em>array&lt;&gt;</em></li>
+                </dl>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The action or array of actions uid to trigger on axis down event<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+</article>
+</body>
+</html>

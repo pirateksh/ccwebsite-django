@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: input/binding/ButtonBinding.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: input/binding/ButtonBinding.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Button binding object that handles buttons event for a list of buttons.
+ * To use a button binding, you have to add it to a {@link FORGE.Gamepad}.
+ *
+ * @constructor FORGE.ButtonBinding
+ * @param {FORGE.Viewer} viewer - the viewer referemce.
+ * @param {(Array&lt;number>|number)} buttonsIn - The button code (or array) associated to this binding.
+ * @param {?(Function|string|Array&lt;string>)=} down - The callback function that will be called on a button down event.
+ * @param {?(Function|string|Array&lt;string>)=} up - The callback function that will be called on a button release event.
+ * @param {?(Function|string|Array&lt;string>)=} hold - The callback function that will be called if a button is hold.
+ * @param {?(Array&lt;number>|number)=} buttonsOut - The button code (or array) that will be rejected if the button is down.
+ * @param {Object=} context - The context in which you want your "down", "hold" &amp; up callbacks to execute.
+ * @param {string=} name - The name of the binding, can be use as an identifier.
+ * @extends {FORGE.BaseBinding}
+ */
+FORGE.ButtonBinding = function(viewer, buttonsIn, down, up, hold, buttonsOut, context, name)
+{
+    /**
+     * The button code or array of button codes associated to this ButtonBinding.
+     * @name FORGE.ButtonBinding#_buttonsIn
+     * @type {?(Array&lt;number>|number)}
+     * @private
+     */
+    this._buttonsIn = buttonsIn;
+
+    /**
+     * The callback function that will be called on a button down event.
+     * @name FORGE.ButtonBinding#_down
+     * @type {?(Function|string|Array&lt;string>)}
+     * @private
+     */
+    this._down = down || null;
+
+    /**
+     * The callback function that will be called on a button up event.
+     * @name FORGE.ButtonBinding#_up
+     * @type {?(Function|string|Array&lt;string>)}
+     * @private
+     */
+    this._up = up || null;
+
+    /**
+     * The callback function that will be called if a button is hold.
+     * @name FORGE.ButtonBinding#_hold
+     * @type {?(Function|string|Array&lt;string>)}
+     * @private
+     */
+    this._hold = hold || null;
+
+    /**
+     * The button code or array of button codes that will be rejected if this ButtonBinding is down.
+     * @name FORGE.ButtonBinding#_buttonsOut
+     * @type {?(Array&lt;number>|number|undefined)}
+     * @private
+     */
+    this._buttonsOut = buttonsOut;
+
+    /**
+     * Flag to know if we have to wait to consider a down event as a hold one.
+     * @name FORGE.ButtonBinding#_waitToHold
+     * @type {boolean}
+     * @private
+     */
+    this._waitToHold = false;
+
+    /**
+     * Flag to know if we have this button binding is considered as pressed.&lt;br>
+     * It should be pressed if any of buttonsIn are pressed.
+     * @name FORGE.ButtonBinding#_pressed
+     * @type {boolean}
+     * @private
+     */
+    this._pressed = false;
+
+    /**
+     * When a button binding have to wait to be considered as holded this flag is check to know if down action is complete.
+     * @name FORGE.ButtonBinding#_downComplete
+     * @type {boolean}
+     * @private
+     */
+    this._downComplete = false;
+
+    /**
+     * Count of down.
+     * @name FORGE.ButtonBinding#_downCount
+     * @type {number}
+     * @private
+     */
+    this._downCount = 0;
+
+    /**
+     * Count of hold.
+     * @name FORGE.ButtonBinding#_holdCount
+     * @type {number}
+     * @private
+     */
+    this._holdCount = 0;
+
+    /**
+     * Count of up.
+     * @name FORGE.ButtonBinding#_upCount
+     * @type {number}
+     * @private
+     */
+    this._upCount = 0;
+
+    /**
+     * Action event dispatcher for down action
+     * @name FORGE.ButtonBinding#_downActionEventDispatcher
+     * @type {?FORGE.ActionEventDispatcher}
+     * @private
+     */
+    this._downActionEventDispatcher = null;
+
+    /**
+     * Action event dispatcher for hold action
+     * @name FORGE.ButtonBinding#_holdActionEventDispatcher
+     * @type {?FORGE.ActionEventDispatcher}
+     * @private
+     */
+    this._holdActionEventDispatcher = null;
+
+    /**
+     * Action event dispatcher for up action
+     * @name FORGE.ButtonBinding#_upActionEventDispatcher
+     * @type {?FORGE.ActionEventDispatcher}
+     * @private
+     */
+    this._upActionEventDispatcher = null;
+
+    FORGE.BaseBinding.call(this, viewer, "ButtonBinding", context, name);
+
+    this._boot();
+};
+
+FORGE.ButtonBinding.prototype = Object.create(FORGE.BaseBinding.prototype);
+FORGE.ButtonBinding.prototype.constructor = FORGE.ButtonBinding;
+
+/**
+ * Boot sequence
+ * @method FORGE.ButtonBinding#_boot
+ */
+FORGE.ButtonBinding.prototype._boot = function()
+{
+    if (typeof this._buttonsIn === "undefined" || this._buttonsIn === null)
+    {
+        this._buttonsIn = [];
+    }
+
+    if (typeof this._buttonsOut === "undefined")
+    {
+        this._buttonsOut = null;
+    }
+
+    if (FORGE.Utils.isTypeOf(this._down, "string") === true || FORGE.Utils.isArrayOf(this._down, "string"))
+    {
+        this._downActionEventDispatcher = new FORGE.ActionEventDispatcher(this._viewer, "onPressed");
+        this._downActionEventDispatcher.addActions( /** @type {(string|Array&lt;string>)} */ (this._down));
+    }
+
+    if (FORGE.Utils.isTypeOf(this._hold, "string") === true || FORGE.Utils.isArrayOf(this._hold, "string"))
+    {
+        this._holdActionEventDispatcher = new FORGE.ActionEventDispatcher(this._viewer, "onHold");
+        this._holdActionEventDispatcher.addActions( /** @type {(string|Array&lt;string>)} */ (this._hold));
+    }
+
+    if (FORGE.Utils.isTypeOf(this._up, "string") === true || FORGE.Utils.isArrayOf(this._up, "string"))
+    {
+        this._upActionEventDispatcher = new FORGE.ActionEventDispatcher(this._viewer, "onReleased");
+        this._upActionEventDispatcher.addActions( /** @type {(string|Array&lt;string>)} */ (this._up));
+    }
+};
+
+/**
+ * Know if a button is associated to this binding by being in.
+ * @method FORGE.ButtonBinding#hasButtonIn
+ * @param {number} button - the code of the button to check
+ * @return {boolean} true if associated, else false
+ */
+FORGE.ButtonBinding.prototype.hasButtonIn = function(button)
+{
+    return this._buttonsIn === button ||
+        (typeof this._buttonsIn.indexOf === "function" &amp;&amp; this._buttonsIn.indexOf(button) !== -1);
+};
+
+/**
+ * Know if a button is associated to this binding by being out.
+ * @method FORGE.ButtonBinding#hasButtonOut
+ * @param {number} button - the code of the button to check
+ * @return {boolean} true if associated, else false
+ */
+FORGE.ButtonBinding.prototype.hasButtonOut = function(button)
+{
+    return this._buttonsOut !== null &amp;&amp;
+        (this._buttonsOut === button ||
+            (typeof this._buttonsOut.indexOf === "function" &amp;&amp; this._buttonsOut.indexOf(button) !== -1));
+};
+
+/**
+ * This method is called by the input associated when a button is down. This triggers the
+ * down callback associated to this binding and increases the downCount value.
+ * @method FORGE.ButtonBinding#down
+ * @param {number} value - the value of the button
+ */
+FORGE.ButtonBinding.prototype.down = function(value)
+{
+    this.log("down");
+
+    this._pressed = true;
+    this._downCount++;
+
+    if (typeof this._down === "function")
+    {
+        // Call the callback with a reference to this binding + the original event.
+        this._down.call(this._context, this, value);
+    }
+    else if (this._downActionEventDispatcher !== null)
+    {
+        this._downActionEventDispatcher.dispatch();
+    }
+};
+
+/**
+ * This method is called by the input associated when a button is hold. This triggers the
+ * hold callback associated to this binding and increases the holdCount value.
+ * @method FORGE.ButtonBinding#hold
+ */
+FORGE.ButtonBinding.prototype.hold = function()
+{
+    this.log("hold");
+
+    this._holdCount++;
+
+    if (typeof this._hold === "function")
+    {
+        // Call the callback with a reference to this binding + the original event.
+        this._hold.call(this._context, this);
+    }
+    else if (this._holdActionEventDispatcher !== null)
+    {
+        this._holdActionEventDispatcher.dispatch();
+    }
+};
+
+/**
+ * This method is called by the input associated when a button is up. This triggers the
+ * up callback associated to this binding and increases the upCount value.
+ * @method FORGE.ButtonBinding#up
+ * @param {number} value - the value of the button
+ */
+FORGE.ButtonBinding.prototype.up = function(value)
+{
+    this.log("up");
+
+    this._pressed = false;
+    this._downComplete = false;
+    this._upCount++;
+
+    if (typeof this._up === "function")
+    {
+        // Call the callback with a reference to this binding + the original event.
+        this._up.call(this._context, this, value);
+    }
+    else if (this._upActionEventDispatcher !== null)
+    {
+        this._upActionEventDispatcher.dispatch();
+    }
+};
+
+/**
+ * This method has to be called by the user down callback to specify that the button down have to
+ * wait to be considered as holded.&lt;br>
+ * This gives in return a callback to set the down as complete.
+ * @method FORGE.ButtonBinding#waitToHold
+ * @return {Function} Returns a callback function that the user have to call to set the down as complete to allow hold.
+ */
+FORGE.ButtonBinding.prototype.waitToHold = function()
+{
+    this._waitToHold = true;
+
+    var _downCount = this._downCount;
+
+    var downCompleteCallback = function()
+    {
+        this.log("downCompleteCallback " + _downCount + " " + this._downCount);
+
+        if (_downCount === this._downCount)
+        {
+            this._downComplete = true;
+        }
+    };
+
+    return downCompleteCallback.bind(this);
+};
+
+/**
+ * Destroy sequence.
+ * @method  FORGE.ButtonBinding#destroy
+ */
+FORGE.ButtonBinding.prototype.destroy = function()
+{
+    this._buttonsIn = null;
+    this._down = null;
+    this._up = null;
+    this._hold = null;
+    this._buttonsOut = null;
+
+    if (this._downActionEventDispatcher !== null)
+    {
+        this._downActionEventDispatcher.destroy();
+        this._downActionEventDispatcher = null;
+    }
+
+    if (this._holdActionEventDispatcher !== null)
+    {
+        this._holdActionEventDispatcher.destroy();
+        this._holdActionEventDispatcher = null;
+    }
+
+    if (this._upActionEventDispatcher !== null)
+    {
+        this._upActionEventDispatcher.destroy();
+        this._upActionEventDispatcher = null;
+    }
+
+    FORGE.BaseBinding.prototype.destroy.call(this);
+};
+
+/**
+ * Gets the pressed status of this ButtonBinding.
+ * @name FORGE.ButtonBinding#pressed
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.ButtonBinding.prototype, "pressed",
+{
+    /** @this {FORGE.ButtonBinding} */
+    get: function()
+    {
+        return this._pressed;
+    }
+});
+
+/**
+ * Gets the down count value.
+ * @name FORGE.ButtonBinding#downCount
+ * @readonly
+ * @type {number}
+ */
+Object.defineProperty(FORGE.ButtonBinding.prototype, "downCount",
+{
+    /** @this {FORGE.ButtonBinding} */
+    get: function()
+    {
+        return this._downCount;
+    }
+});
+
+/**
+ * Gets the up count value.
+ * @name FORGE.ButtonBinding#upCount
+ * @readonly
+ * @type {number}
+ */
+Object.defineProperty(FORGE.ButtonBinding.prototype, "upCount",
+{
+    /** @this {FORGE.ButtonBinding} */
+    get: function()
+    {
+        return this._upCount;
+    }
+});
+
+/**
+ * Gets the hold count value.
+ * @name FORGE.ButtonBinding#holdCount
+ * @readonly
+ * @type {number}
+ */
+Object.defineProperty(FORGE.ButtonBinding.prototype, "holdCount",
+{
+    /** @this {FORGE.ButtonBinding} */
+    get: function()
+    {
+        return this._holdCount;
+    }
+});
+
+/**
+ * Gets the hasToWaitToHold value.
+ * @name FORGE.ButtonBinding#hasToWaitToHold
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.ButtonBinding.prototype, "hasToWaitToHold",
+{
+    /** @this {FORGE.ButtonBinding} */
+    get: function()
+    {
+        return this._waitToHold;
+    }
+});
+
+/**
+ * Gets the downComplete value.
+ * @name FORGE.ButtonBinding#downComplete
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.ButtonBinding.prototype, "downComplete",
+{
+    /** @this {FORGE.ButtonBinding} */
+    get: function()
+    {
+        return this._downComplete;
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: 3d/Tile.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: 3d/Tile.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Tile class.
+ *
+ * @constructor FORGE.Tile
+ * @param {?FORGE.Tile} parent - parent tile reference
+ * @param {FORGE.BackgroundPyramidRenderer} renderer - renderer reference
+ * @param {number} x - x coordinate (column)
+ * @param {number} y - y coordinate (row)
+ * @param {number} level - pyramid level
+ * @param {string} face - cube face
+ * @param {string} creator - string describing what created the tile
+ * @extends {THREE.Mesh}
+ */
+FORGE.Tile = function(parent, renderer, x, y, level, face, creator)
+{
+    /**
+     * String describing what created the tile
+     * @type {string}
+     */
+    this._creator = creator;
+
+    /**
+     * Reference on background renderer
+     * @name FORGE.Tile#_renderer
+     * @type {FORGE.BackgroundPyramidRenderer}
+     * @private
+     */
+    this._renderer = renderer;
+
+    /**
+     * X axis value on face coordinate system
+     * @name FORGE.Tile#_x
+     * @type {number}
+     * @private
+     */
+    this._x = x;
+
+    /**
+     * Y axis value on face coordinate system
+     * @name FORGE.Tile#_y
+     * @type {number}
+     * @private
+     */
+    this._y = y;
+
+    /**
+     * Resolution level
+     * @name FORGE.Tile#_level
+     * @type {number}
+     * @private
+     */
+    this._level = level;
+
+    /**
+     * Cube face
+     * @name FORGE.Tile#_face
+     * @type {string}
+     * @private
+     */
+    this._face = face;
+
+    /**
+     * Creation timestamp
+     * @name FORGE.Tile#_createTS
+     * @type {?number}
+     * @private
+     */
+    this._createTS = null;
+
+    /**
+     * Last display timestamp
+     * @name FORGE.Tile#_displayTS
+     * @type {?number}
+     * @private
+     */
+    this._displayTS = null;
+
+    /**
+     * Reference on parent tile
+     * @name FORGE.Tile#_parent
+     * @type {FORGE.Tile}
+     * @private
+     */
+    this._parent = parent;
+
+    /**
+     * Reference on children tiles
+     * @name FORGE.Tile#_children
+     * @type {Array&lt;FORGE.Tile>}
+     * @private
+     */
+    this._children = null;
+
+    /**
+     * Array of references on neighbour tiles
+     * @name FORGE.Tile#_neighbours
+     * @type {Array&lt;FORGE.Tile>}
+     * @private
+     */
+    this._neighbours = null;
+
+    /**
+     * Flag to know if parent has been checked
+     * @name FORGE.MediaStore#_parentNeedsCheck
+     * @type {boolean}
+     * @private
+     */
+    this._parentNeedsCheck = true;
+
+    /**
+     * Flag to know if neighbourhood has been checked
+     * @name FORGE.MediaStore#_neighborsNeedCheck
+     * @type {boolean}
+     * @private
+     */
+    this._neighborsNeedCheck = true;
+
+    /**
+     * Global opacity value
+     * @name FORGE.Tile#_opacity
+     * @type {number}
+     * @private
+     */
+    this._opacity = 0;
+
+    /**
+     * Texture set flag
+     * @name FORGE.Tile#_textureIsSet
+     * @type {boolean}
+     * @private
+     */
+    this._textureIsSet = false;
+
+    /**
+     * Event dispatcher for destroy.
+     * @name FORGE.Tile#_onDestroy
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onDestroy = null;
+
+    THREE.Mesh.call(this);
+
+    this._boot();
+};
+
+FORGE.Tile.prototype = Object.create(THREE.Mesh.prototype);
+FORGE.Tile.prototype.constructor = FORGE.Tile;
+
+/**
+ * Cube faces table
+ * @type {Array}
+ */
+FORGE.Tile.FACES = ["front", "right", "back", "left", "up", "down"];
+
+/**
+ * Preview tile
+ * @type {number}
+ */
+FORGE.Tile.PREVIEW = -Infinity;
+
+/**
+ * Opacity increment [unit per render cycle]
+ * @type {number}
+ */
+FORGE.Tile.OPACITY_INCREMENT = 0.04;
+
+/**
+ * Opacity decrement [unit per render cycle]
+ * @type {number}
+ */
+FORGE.Tile.OPACITY_DECREMENT = 0.01;
+
+/**
+ * Texture load predelay (time between creation and display)
+ * @type {number}
+ */
+FORGE.Tile.TEXTURE_LOADING_PREDELAY_MS = 200;
+
+/**
+ * Table describing previous cube face
+ * @type {CubeFaceObject}
+ */
+FORGE.Tile.FACE_PREVIOUS = {
+    "front": "left",
+    "right": "front",
+    "back": "right",
+    "left": "back",
+    "up": "up",
+    "down": "down"
+};
+
+/**
+ * Table describing next cube face
+ * @type {CubeFaceObject}
+ */
+FORGE.Tile.FACE_NEXT = {
+    "front": "right",
+    "right": "back",
+    "back": "left",
+    "left": "front",
+    "up": "up",
+    "down": "down"
+};
+
+/**
+ * Create tile name
+ * @method FORGE.Tile#createName
+ * @param {string|number} face - cube face
+ * @param {number} level - pyramid level
+ * @param {number} x - x coordinate (column)
+ * @param {number} y - y coordinate (row)
+ */
+FORGE.Tile.createName = function(face, level, x, y)
+{
+    face = typeof face === "number" ? FORGE.Tile.FACES[face] : face.toLowerCase();
+    if (level === FORGE.Tile.PREVIEW)
+    {
+        return face.substring(0, 1).toUpperCase() + "-preview";
+    }
+
+    return face.substring(0, 1).toUpperCase() + "-" + level + "-" + y + "-" + x;
+};
+
+/**
+ * Get the coordinates of the parent tile
+ * @method FORGE.Tile#getParentTileCoordinates
+ * @param {FORGE.Tile} tile - tile
+ * @return {THREE.Vector2} parent tile x,y coordinates
+ */
+FORGE.Tile.getParentTileCoordinates = function(tile)
+{
+    var px = Math.floor(tile.x / 2),
+        py = Math.floor(tile.y / 2);
+
+    return new THREE.Vector2(px, py);
+};
+
+/**
+ * Boot sequence
+ * @method FORGE.Tile#_boot
+ * @private
+ */
+FORGE.Tile.prototype._boot = function()
+{
+    this._neighbours = [];
+    this._children = [];
+
+    this.name = FORGE.Tile.createName(this._face, this._level, this._x, this._y);
+
+    // Always ensure a new tile has a parent tile
+    // This will prevent from zomming out into some empty area
+    if (this._level > 0 &amp;&amp; this._parent === null)
+    {
+        this._checkParent();
+    }
+
+    this.renderOrder = this._level === FORGE.Tile.PREVIEW ? 0 : 2 * (this._level + 1);
+    this.onBeforeRender = this._onBeforeRender.bind(this);
+    this.onAfterRender = this._onAfterRender.bind(this);
+
+    this._setGeometry();
+
+    // Level 0 objects are opaque to be rendered first
+    var transparent = (this._level !== FORGE.Tile.PREVIEW);
+    this._opacity = transparent ? 0 : 1;
+
+    this.material = new THREE.MeshBasicMaterial(
+    {
+        color: new THREE.Color(0x000000),
+        transparent: transparent,
+        opacity: this._opacity,
+        depthTest: false,
+        side: THREE.FrontSide
+    });
+
+    this._queryTexture();
+
+    if (FORGE.Tile.DEBUG === true)
+    {
+        this._addDebugLayer();
+    }
+
+    this._createTS = Date.now();
+};
+
+/**
+ * Before render callback
+ * This is called by THREE.js render routine before render is done
+ * Add to background renderer list and set opacity
+ * @method FORGE.Tile#_onBeforeRender
+ * @private
+ */
+FORGE.Tile.prototype._onBeforeRender = function()
+{
+    // Add to renderer render list
+    this._renderer.addToRenderList(this);
+
+    if (this._textureIsSet === true)
+    {
+        this._setOpacity(1);
+    }
+    else
+    {
+        this._setOpacity(0);
+    }
+};
+
+/**
+ * After render callback
+ * This is called by THREE.js render routine after render has been done
+ * Here we update all links to other tiles, ask for subdivision or neighbours
+ * Request texture if none
+ * @method FORGE.Tile#_onAfterRender
+ * @private
+ */
+FORGE.Tile.prototype._onAfterRender = function()
+{
+    // Update last display timestamp
+    this.refreshDisplayTS();
+
+    if (this._level !== FORGE.Tile.PREVIEW)
+    {
+        // Check if tile should be divided
+        if (this._renderer.level > this._level)
+        {
+            this._subdivide();
+
+            // Restoration process for required tiles previously removed from the scene
+            // Check if children are intersecting the frustum and add them back to the
+            // scene (with refreshed display timer)
+            for (var i=0, ii=this._children.length; i&lt;ii; i++)
+            {
+                var child = this._children[i];
+
+                if (!this._renderer.isObjectInScene(child) &amp;&amp; this._renderer.isObjectInFrustum(child))
+                {
+                    this._renderer.scene.add(child);
+                    child.refreshDisplayTS();
+                }
+            }
+        }
+
+        // Get all neighbour tiles references
+        this._checkNeighbours();
+    }
+
+    this._queryTexture();
+};
+
+/**
+ * Query texture for the tile
+ * @method FORGE.Tile#_queryTexture
+ * @private
+ */
+FORGE.Tile.prototype._queryTexture = function()
+{
+    // Update texture mapping
+    if (this.material !== null &amp;&amp; this.material.map === null &amp;&amp; this._textureIsSet === false)
+    {
+        // Check if predelay since creation has been respected (except for preview)
+        if ((this._level !== FORGE.Tile.PREVIEW || this._level !== this._renderer.level) &amp;&amp;
+            this._displayTS - this._createTS &lt; FORGE.Tile.TEXTURE_LOADING_PREDELAY_MS)
+        {
+            return;
+        }
+
+        var texPromise = this._renderer.textureStore.get(this);
+
+        if (texPromise !== null)
+        {
+            texPromise.then(function(texture)
+            {
+                // Check if tile has been destroyed in the meantime
+                if (this.material === null)
+                {
+                    return;
+                }
+
+                if (texture !== null &amp;&amp; texture instanceof THREE.Texture)
+                {
+                    this._textureIsSet = true;
+
+                    texture.generateMipmaps = false;
+                    texture.minFilter = THREE.LinearFilter;
+                    texture.needsUpdate = true;
+
+                    this.material.color = new THREE.Color(0xffffff);
+                    this.material.map = texture;
+                    this.material.needsUpdate = true;
+                }
+            }.bind(this),
+
+            function(error)
+            {
+                console.warn("Tile texture loading error: " + error);
+            }.bind(this));
+        }
+    }
+};
+
+/**
+ * Add graphical debug layer
+ * @method FORGE.Tile#_addDebugLayer
+ * @private
+ */
+FORGE.Tile.prototype._addDebugLayer = function()
+{
+    var canvas = document.createElement("canvas");
+    canvas.width = canvas.height = 512;
+    var ctx = canvas.getContext("2d");
+
+    var x = canvas.width / 2;
+    var y = canvas.height / 2 - 25;
+
+    ctx.fillStyle = "gray";
+    ctx.strokeStyle = "white";
+    ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
+    // General font style
+    ctx.textAlign = "center";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "white";
+
+    ctx.font = "16px Courier";
+    ctx.fillText("TILE " + this.name, x, y);
+    y += 40;
+
+    var fontSize = 12;
+    ctx.font = fontSize + "px Courier";
+    var ceiling = canvas.width - 20;
+
+    ctx.textAlign = "left";
+    ctx.font = "10px Courier";
+    if (this._level === FORGE.Tile.PREVIEW)
+    {
+        ctx.fillText("Preview", 10, canvas.height - 10);
+    }
+    else
+    {
+        ctx.fillText("Level " + this._level, 10, canvas.height - 10);
+    }
+
+    ctx.textAlign = "right";
+    ctx.fillText(this._renderer.pixelsAtCurrentLevelHumanReadable, canvas.width - 10, canvas.height - 10);
+
+    var texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+
+    var material = new THREE.MeshBasicMaterial(
+    {
+        transparent: true,
+        map: texture,
+        depthTest: false
+    });
+    var mesh = new THREE.Mesh(this.geometry.clone(), material);
+    mesh.name = this.name + "-debug-canvas";
+    this.add(mesh);
+
+    mesh.renderOrder = this.renderOrder + 1;
+};
+
+/**
+ * Set opacity of the tile and its children (recursive)
+ * @method FORGE.Tile#_setOpacity
+ * @param {number} opacity - tile opacity
+ * @private
+ */
+FORGE.Tile.prototype._setOpacity = function(opacity)
+{
+    opacity = FORGE.Math.clamp(opacity, 0, 1);
+
+    this._opacity = opacity;
+
+    var setNodeOpacity = function(node)
+    {
+        if (node !== null &amp;&amp; node.material !== null &amp;&amp;
+            typeof node.material.opacity !== "undefined")
+        {
+            if (node.material.transparent === true)
+            {
+                node.material.opacity = opacity;
+            }
+        }
+
+        for (var i = 0, ii = node.children.length; i &lt; ii; i++)
+        {
+            setNodeOpacity(node.children[i]);
+        }
+    };
+
+    setNodeOpacity(this);
+};
+
+/**
+ * Set geometry of the tile
+ * This means rotation and position in world coordinates
+ * @method FORGE.Tile#_setGeometry
+ * @private
+ */
+FORGE.Tile.prototype._setGeometry = function()
+{
+    var tx = this._renderer.nbTilesPerAxis(this._level, "x");
+    var ty = this._renderer.nbTilesPerAxis(this._level, "y");
+
+    var fullTileWidth = this._renderer.cubeSize / tx;
+    var fullTileHeight = this._renderer.cubeSize / ty;
+
+    var scaleX = this._x &lt; Math.floor(tx) ? 1 : tx - Math.floor(tx);
+    var scaleY = this._y &lt; Math.floor(ty) ? 1 : ty - Math.floor(ty);
+
+    var tileSize = new FORGE.Size(scaleX * fullTileWidth, scaleY * fullTileHeight);
+
+    this.geometry = new THREE.PlaneBufferGeometry(tileSize.width, tileSize.height);
+
+    var baseOffset = -this._renderer.cubeSize * 0.5;
+
+    // position = tile offset in XY plane - half cube size + half tile size
+    var position = new THREE.Vector3(
+        baseOffset + fullTileWidth * this._x + 0.5 * tileSize.width,
+        -(baseOffset + fullTileHeight * this._y + 0.5 * tileSize.height),
+        baseOffset);
+
+    var rotation = this._getRotation();
+    this.rotation.copy(rotation);
+
+    position.applyEuler(rotation);
+    this.position.copy(position);
+};
+
+/**
+ * Get rotation of the tile
+ * @method FORGE.Tile#_setRotation
+ * @private
+ */
+FORGE.Tile.prototype._getRotation = function()
+{
+    if (this._parent !== null)
+    {
+        return this._parent.rotation;
+    }
+
+    switch (this._face)
+    {
+        case "front":
+            return new THREE.Euler(0, 0, 0);
+
+        case "back":
+            return new THREE.Euler(0, Math.PI, 0);
+
+        case "left":
+            return new THREE.Euler(0, Math.PI / 2, 0);
+
+        case "right":
+            return new THREE.Euler(0, -Math.PI / 2, 0);
+
+        case "up":
+            return new THREE.Euler(Math.PI / 2, 0, 0);
+
+        case "down":
+            return new THREE.Euler(-Math.PI / 2, 0, 0);
+    }
+};
+
+/**
+ * Subdivide tile into n tiles
+ * @method FORGE.Tile#subdivide
+ * @private
+ */
+FORGE.Tile.prototype._subdivide = function()
+{
+    if (this._children.length > 0)
+    {
+        return;
+    }
+
+    var tile;
+    var level = this._level + 1;
+
+    if (this._level === FORGE.Tile.PREVIEW)
+    {
+        level = 0;
+    }
+
+    // tiles per axis on children level
+    var tx = this._renderer.nbTilesPerAxis(level, "x");
+    var ty = this._renderer.nbTilesPerAxis(level, "y");
+    // ratio of tiles on this level compared to children level
+    var rx = Math.round(tx / this._renderer.nbTilesPerAxis(this._level, "x"));
+    var ry = Math.round(ty / this._renderer.nbTilesPerAxis(this._level, "y"));
+
+    // load first tile
+    tile = this._renderer.getTile(this, level, this._face, rx * this._x, ry * this._y, "top left quarter of " + this.name);
+    if (this._children.indexOf(tile) === -1)
+    {
+        tile.onDestroy.add(this._onChildTileDestroyed, this);
+        this._children.push(tile);
+    }
+
+    // get all other children in
+    var xn, yn, xn_in, yn_in;
+    for (var i = 0; i &lt; rx; i++)
+    {
+        for (var j = 0; j &lt; ry; j++)
+        {
+            xn = rx * this._x + i;
+            yn = ry * this._y + j;
+
+            xn_in = xn &lt; tx;
+            yn_in = yn &lt; ty;
+
+            if (xn_in === true &amp;&amp; yn_in === true)
+            {
+                tile = this._renderer.getTile(this, level, this._face, xn, yn, "children of " + this.name);
+                if (this._children.indexOf(tile) === -1)
+                {
+                    tile.onDestroy.add(this._onChildTileDestroyed, this);
+                    this._children.push(tile);
+                }
+            }
+        }
+    }
+};
+
+/**
+ * Child tile destroy event handler
+ * @method FORGE.Tile#_onChildTileDestroyed
+ */
+FORGE.Tile.prototype._onChildTileDestroyed = function(event)
+{
+    var tile = event.emitter;
+    tile.onDestroy.remove(this._onChildTileDestroyed, this);
+
+    if (this._children === null)
+    {
+        return;
+    }
+
+    var idx = this._children.indexOf(tile);
+
+    if (idx !== -1)
+    {
+        this._children.splice(idx, 1);
+    }
+};
+
+/**
+ * Neighbour tile destroy event handler
+ * @method FORGE.Tile#_onNeighbourTileDestroyed
+ */
+FORGE.Tile.prototype._onNeighbourTileDestroyed = function(event)
+{
+    var tile = event.emitter;
+    tile.onDestroy.remove(this._onNeighbourTileDestroyed, this);
+
+    this._neighborsNeedCheck = true;
+
+    if (this._neighbours === null)
+    {
+        return;
+    }
+
+    var idx = this._neighbours.indexOf(tile);
+
+    if (idx !== -1)
+    {
+        this._neighbours.splice(idx, 1);
+    }
+};
+
+/**
+ * Parent tile destroy event handler
+ * @method FORGE.Tile#_onParentTileDestroyed
+ */
+FORGE.Tile.prototype._onParentTileDestroyed = function(event)
+{
+    var tile = event.emitter;
+    tile.onDestroy.remove(this._onParentTileDestroyed, this);
+
+    this._parent = null;
+    this._parentNeedsCheck = true;
+};
+
+/**
+ * Get parent tile
+ * @method FORGE.Tile#_checkParent
+ * @private
+ */
+FORGE.Tile.prototype._checkParent = function()
+{
+    if (this._parent !== null ||
+        this._parentNeedsCheck === false ||
+        this._level &lt;= 0)
+    {
+        return;
+    }
+
+    this._parentNeedsCheck = false;
+
+    var sequence = Promise.resolve();
+    sequence.then(function()
+    {
+        this._parent = this._renderer.getParentTile(this);
+        this._parent.onDestroy.add(this._onParentTileDestroyed, this);
+    }.bind(this));
+};
+
+/**
+ * Lookup tiles around current one and create them if needed
+ * @method FORGE.Tile#_checkNeighbours
+ * @private
+ */
+FORGE.Tile.prototype._checkNeighbours = function()
+{
+    if (this._neighborsNeedCheck === false ||
+        this._level === FORGE.Tile.PREVIEW ||
+        this._level !== this._renderer.level)
+    {
+        return;
+    }
+
+    this._neighborsNeedCheck = false;
+
+    var tx = Math.ceil(this._renderer.nbTilesPerAxis(this._level, "x"));
+    var ty = Math.ceil(this._renderer.nbTilesPerAxis(this._level, "y"));
+
+    var name = this.name;
+
+    var sequence = Promise.resolve();
+    var sequenceFn = function(prenderer, plevel, pface, px, py, neighbours, plog)
+    {
+        sequence.then(function()
+        {
+            var tile = prenderer.getTile(null, plevel, pface, px, py, plog);
+            if (neighbours.indexOf(tile) === -1)
+            {
+                tile.onDestroy.add(tileDestroyedCallback);
+                neighbours.push(tile);
+            }
+        });
+    };
+
+    // Check tile neighbors in current face
+    var xmin = Math.max(0, this._x - 1);
+    var xmax = Math.min(tx - 1, this._x + 1);
+
+    var ymin = Math.max(0, this._y - 1);
+    var ymax = Math.min(ty - 1, this._y + 1);
+
+    var tileDestroyedCallback = this._onNeighbourTileDestroyed.bind(this);
+
+    // and do the job for the current face
+    for (var y = ymin; y &lt;= ymax; y++)
+    {
+        for (var x = xmin; x &lt;= xmax; x++)
+        {
+            if (x === this._x &amp;&amp; y === this._y)
+            {
+                continue;
+            }
+
+            sequenceFn(this._renderer, this._level, this._face, x, y, this._neighbours, "foo");
+        }
+    }
+
+
+    var tileX = this._x;
+    var tileY = this._y;
+
+    // Check if tile is on a left or right edge of the cube face
+    if (tileX === 0 || tileX === tx - 1)
+    {
+        var edge = (tileX === 0); // true for left, false for right
+        var log = "neighbour-" + (edge ? "left" : "right") + "-edge of " + name;
+        var face = edge ? FORGE.Tile.FACE_PREVIOUS[this._face] : FORGE.Tile.FACE_NEXT[this._face];
+        var x = edge ? tx - 1 : 0;
+
+        sequenceFn(this._renderer, this._level, face, x, tileY, this._neighbours, log);
+    }
+
+    // Check if tile is on a bottom or top edge of the cube face
+    if (tileY === ty - 1 || tileY === 0)
+    {
+        var edge = (tileY === 0); // true for top, false for bottom
+        var fx, fy,
+            face = edge ? "up" : "down";
+
+        if (this._face === "front")
+        {
+            fx = tileX;
+            fy = edge ? 0 : ty - 1;
+        }
+        else if (this._face === "back")
+        {
+            fx = tx - 1 - tileX;
+            fy = edge ? ty - 1 : 0;
+        }
+        else if (this._face === "right")
+        {
+            fx = ty - 1;
+            fy = edge ? tx - 1 - tileX : tileX;
+        }
+        else if (this._face === "left")
+        {
+            fx = 0;
+            fy = edge ? tileX : tx - 1 - tileX;
+        }
+        else if (this._face === "up")
+        {
+            fx = edge ? tx - 1 - tileX : tileX;
+            fy = 0;
+            face = edge ? "back" : "front";
+        }
+        else if (this._face === "down")
+        {
+            fx = edge ? tileX : tx - 1 - tileX;
+            fy = edge ? tx - 1 : ty - 1;
+            face = "back";
+        }
+
+        var log = "neighbour-" + (edge ? "top" : "bottom") + "-edge of " + name;
+
+        sequenceFn(this._renderer, this._level, face, fx, fy, this._neighbours, log);
+
+        // if edge but ty = 1
+        if (edge &amp;&amp; ty === 1)
+        {
+            log = "neighbour-bottom-edge of " + name;
+            sequenceFn(this._renderer, this._level, "down", fx, fy, this._neighbours, log);
+        }
+    }
+};
+
+/**
+ * Get name of the parent tile
+ * @method FORGE.Tile#getParentName
+ * @return {?string} parent tile name
+ */
+FORGE.Tile.prototype.getParentName = function()
+{
+    if (this._level &lt;= 0)
+    {
+        return null;
+    }
+
+    var coords = FORGE.Tile.getParentTileCoordinates(this);
+    return FORGE.Tile.createName(this._face, this._level - 1, coords.x, coords.y);
+};
+
+/**
+ * Refresh display timestamp with current date
+ * @method FORGE.Tile#refreshDisplayTS
+ */
+FORGE.Tile.prototype.refreshDisplayTS = function()
+{
+    this._displayTS = Date.now();
+};
+
+/**
+ * Destroy sequence
+ * @method FORGE.Tile#destroy
+ */
+FORGE.Tile.prototype.destroy = function()
+{
+    if (this.material !== null)
+    {
+        if (typeof this.material.uniforms !== "undefined")
+        {
+            for (var u in this.material.uniforms)
+            {
+                this.material.uniforms[u].value = null;
+            }
+        }
+
+        if (this.material.map !== null)
+        {
+            this.material.map.dispose();
+            this.material.map = null;
+        }
+
+        this.material.dispose();
+        this.material = null;
+    }
+
+    if (this.geometry !== null)
+    {
+        this.geometry.dispose();
+        this.geometry = null;
+    }
+
+    this._parent = null;
+
+    for (var i = 0, ii = this._children.length; i &lt; ii; i++)
+    {
+        this._children[i].onDestroy.remove(this._onChildTileDestroyed, this);
+    }
+    this._children.length = 0;
+    this._children = null;
+
+    for (var i = 0, ii = this._neighbours.length; i &lt; ii; i++)
+    {
+        this._neighbours[i].onDestroy.remove(this._onNeighbourTileDestroyed, this);
+    }
+    this._neighbours.length = 0;
+    this._neighbours = null;
+
+    this._position = null;
+
+    this._renderer = null;
+
+    if (this._onDestroy !== null)
+    {
+        this._onDestroy.dispatch();
+        this._onDestroy.destroy();
+        this._onDestroy = null;
+    }
+};
+
+/**
+ * Get the onDestroy {@link FORGE.EventDispatcher}.
+ * @name FORGE.Tile#onDestroy
+ * @type {FORGE.EventDispatcher}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Tile.prototype, "onDestroy",
+{
+    /** @this {FORGE.Tile} */
+    get: function()
+    {
+        if (this._onDestroy === null)
+        {
+            this._onDestroy = new FORGE.EventDispatcher(this, true);
+        }
+
+        return this._onDestroy;
+    }
+});
+
+/**
+ * Get face.
+ * @name FORGE.Tile#face
+ * @type {string}
+ */
+Object.defineProperty(FORGE.Tile.prototype, "face",
+{
+    /** @this {FORGE.Tile} */
+    get: function()
+    {
+        // return FORGE.Tile.FACES.indexOf(this._face);
+        return this._face;
+    }
+});
+
+/**
+ * Get level.
+ * @name FORGE.Tile#level
+ * @type {string}
+ */
+Object.defineProperty(FORGE.Tile.prototype, "level",
+{
+    /** @this {FORGE.Tile} */
+    get: function()
+    {
+        return this._level;
+    }
+});
+
+/**
+ * Get x coordinate.
+ * @name FORGE.Tile#x
+ * @type {number}
+ */
+Object.defineProperty(FORGE.Tile.prototype, "x",
+{
+    /** @this {FORGE.Tile} */
+    get: function()
+    {
+        return this._x;
+    }
+});
+
+/**
+ * Get y coordinate.
+ * @name FORGE.Tile#y
+ * @type {number}
+ */
+Object.defineProperty(FORGE.Tile.prototype, "y",
+{
+    /** @this {FORGE.Tile} */
+    get: function()
+    {
+        return this._y;
+    }
+});
+
+/**
+ * Get opacity.
+ * @name FORGE.Tile#opacity
+ * @type {number}
+ */
+Object.defineProperty(FORGE.Tile.prototype, "opacity",
+{
+    /** @this {FORGE.Tile} */
+    get: function()
+    {
+        return this._opacity;
+    }
+});
+
+/**
+ * Create timestamp.
+ * @name FORGE.Tile#createTS
+ * @type {number}
+ */
+Object.defineProperty(FORGE.Tile.prototype, "createTS",
+{
+    /** @this {FORGE.Tile} */
+    get: function()
+    {
+        return this._createTS;
+    }
+});
+
+/**
+ * Last display timestamp.
+ * @name FORGE.Tile#displayTS
+ * @type {number}
+ */
+Object.defineProperty(FORGE.Tile.prototype, "displayTS",
+{
+    /** @this {FORGE.Tile} */
+    get: function()
+    {
+        return this._displayTS;
+    }
+});
+
+/**
+ * Neighbour tiles.
+ * @name FORGE.Tile#neighbours
+ * @type {Array&lt;FORGE.Tile>}
+ */
+Object.defineProperty(FORGE.Tile.prototype, "neighbours",
+{
+    /** @this {FORGE.Tile} */
+    get: function()
+    {
+        return this._neighbours;
+    }
+});
+
+/**
+ * Is the texture set
+ * @name FORGE.Tile#textureIsSet
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.Tile.prototype, "textureIsSet",
+{
+    /** @this {FORGE.Tile} */
+    get: function()
+    {
+        return this._textureIsSet;
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

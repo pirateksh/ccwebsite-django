@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: render/background/BackgroundPyramidRenderer.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: render/background/BackgroundPyramidRenderer.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * FORGE.BackgroundPyramidRenderer
+ * BackgroundPyramidRenderer class.
+ *
+ * @constructor FORGE.BackgroundPyramidRenderer
+ * @extends {FORGE.BackgroundRenderer}
+ *
+ * @param {FORGE.Viewer} viewer - viewer reference
+ * @param {THREE.WebGLRenderTarget} target - render target
+ * @param {SceneMediaConfig} config - media config
+ */
+FORGE.BackgroundPyramidRenderer = function(viewer, target, config)
+{
+    /**
+     * Input scene and media config
+     * @name FORGE.BackgroundPyramidRenderer#_config
+     * @type {?SceneMediaConfig}
+     * @private
+     */
+    this._config = config;
+
+    /**
+     * Current level of the pyramid
+     * @type {number}
+     * @private
+     */
+    this._level = 0;
+
+    /**
+     * The size of the cube.
+     * @type {number}
+     * @private
+     */
+    this._size = 0;
+
+    /**
+     * Texture store
+     * @type {?FORGE.MediaStore}
+     * @private
+     */
+    this._textureStore = null;
+
+    /**
+     * Cache of tiles
+     * @type {?Object}
+     * @private
+     */
+    this._tileCache = null;
+
+    /**
+     * Number of pixels at current level
+     * @type {number}
+     * @private
+     */
+    this._levelPixels = 0;
+
+    /**
+     * Minimum fov computed with max level
+     * @type {number}
+     * @private
+     */
+    this._fovMin = 0;
+
+    /**
+     * Number of tiles for all levels
+     * @type {Array&lt;TilesOnLevel>}
+     * @private
+     */
+    this._tilesLevel = null;
+
+    /**
+     * List of renderered tiles
+     * @type {?Array&lt;FORGE.Tile>}
+     * @private
+     */
+    this._renderList = null;
+
+    /**
+     * List of tiles in renderered tiles neighborhood
+     * @type {?Array&lt;FORGE.Tile>}
+     * @private
+     */
+    this._renderNeighborList = null;
+
+    /**
+     * Enable tile clearing policy
+     * @type {boolean}
+     * @private
+     */
+    this._clearTilesEnabled = true;
+
+    /**
+     * Number of pixels at current level presented in human readable format
+     * @type {string}
+     * @private
+     */
+    this._levelPixelsHumanReadable = "";
+
+    FORGE.BackgroundRenderer.call(this, viewer, target, config, "BackgroundPyramidRenderer");
+};
+
+FORGE.BackgroundPyramidRenderer.prototype = Object.create(FORGE.BackgroundRenderer.prototype);
+FORGE.BackgroundPyramidRenderer.prototype.constructor = FORGE.BackgroundPyramidRenderer;
+
+/**
+ * Max allowed time since a tile has been created before discarding it
+ * @type {number}
+ */
+FORGE.BackgroundPyramidRenderer.MAX_ALLOWED_TIME_SINCE_CREATION_MS = 2000;
+
+/**
+ * Max allowed time since a tile has been displayed before discarding it
+ * @type {number}
+ */
+FORGE.BackgroundPyramidRenderer.MAX_ALLOWED_TIME_SINCE_DISPLAY_MS = 3000;
+
+/**
+ * Boot routine.
+ * @method FORGE.BackgroundPyramidRenderer#_boot
+ * @private
+ */
+FORGE.BackgroundPyramidRenderer.prototype._boot = function()
+{
+    FORGE.BackgroundRenderer.prototype._boot.call(this);
+
+    this.log("boot");
+
+    this._parseConfig(this._config);
+
+    this._size = 2 * FORGE.RenderManager.DEPTH_FAR;
+
+    this._tileCache = {};
+    this._textureStore = this._viewer.story.scene.media.store;
+
+    this._camera = this._viewer.renderer.camera.main;
+    this._viewer.camera.onChange.add(this._onCameraChange, this);
+
+    if (typeof this._config.preview !== "undefined")
+    {
+        this._createPreview();
+    }
+
+    for (var f = 0; f &lt; 6; f++)
+    {
+        var face = Object.keys(FORGE.MediaStore.CUBE_FACE_CONFIG)[f];
+
+        for (var y = 0, ty = this.nbTilesPerAxis(0, "y"); y &lt; ty; y++)
+        {
+            for (var x = 0, tx = this.nbTilesPerAxis(0, "x"); x &lt; tx; x++)
+            {
+                this.getTile(null, 0, face, x, y, "pyramid init");
+            }
+        }
+    }
+};
+
+/**
+ * Parse configuration.
+ * @method FORGE.BackgroundPyramidRenderer#_parseConfig
+ * @private
+ */
+FORGE.BackgroundPyramidRenderer.prototype._parseConfig = function(config)
+{
+    // Store all tiles number per level for quick access
+    this._tilesLevel = [];
+    if (typeof this._config.source.levels !== "undefined")
+    {
+        var level;
+
+        for (var l = 0, levels = this._config.source.levels.length; l &lt; levels; l++)
+        {
+            level = this._config.source.levels[l];
+            this._tilesLevel.push({
+                x: level.width / level.tile,
+                y: level.height / level.tile
+            });
+        }
+    }
+
+    // Set min fov to be used to reach max level of resolution
+    this._fovMin = 1.01 * FORGE.Math.degToRad(this._pyramidLevelToCameraFov(config.source.levels.length - 1));
+};
+
+/**
+ * Create the preview (sub zero level)
+ * @method FORGE.BackgroundPyramidRenderer.prototype._createPreview
+ * @private
+ */
+FORGE.BackgroundPyramidRenderer.prototype._createPreview = function()
+{
+    for (var f = 0; f &lt; 6; f++)
+    {
+        var face = Object.keys(FORGE.MediaStore.CUBE_FACE_CONFIG)[f];
+
+        this.getTile(null, FORGE.Tile.PREVIEW, face, 0, 0, "pyramid preview");
+    }
+
+    if (typeof(this._tileCache[FORGE.Tile.PREVIEW]) !== "undefined")
+    {
+        this._tileCache[FORGE.Tile.PREVIEW].forEach(function(tile)
+        {
+            this._scene.add(tile);
+        }.bind(this));
+    }
+};
+
+/**
+ * Clear routine.
+ * @method FORGE.BackgroundPyramidRenderer#_clear
+ * @private
+ */
+FORGE.BackgroundPyramidRenderer.prototype._clear = function()
+{
+    // Draw to clear screen, then clear display object / texture
+    this._viewer.renderer.webGLRenderer.clearColor();
+};
+
+
+/**
+ * Update after view change
+ * @method FORGE.BackgroundPyramidRenderer#updateAfterViewChange
+ */
+FORGE.BackgroundPyramidRenderer.prototype.updateAfterViewChange = function()
+{
+    if (this._viewer.view.type !== FORGE.ViewType.RECTILINEAR)
+    {
+        this.warn("Only Rectilinear view is supported for multi resolution scene");
+        this._viewer.view.type = FORGE.ViewType.RECTILINEAR;
+    }
+};
+
+/**
+ * Get pyramid level for a given fov
+ * @method FORGE.BackgroundPyramidRenderer#_cameraFovToPyramidLevel
+ * @param {number} fov camera field of view [degrees]
+ * @private
+ */
+FORGE.BackgroundPyramidRenderer.prototype._cameraFovToPyramidLevel = function(fov)
+{
+    // compute the optimal number of tiles on the y axis for this fov
+    var tiles = Math.floor(180 / fov);
+
+    // check the nearest level to this optimal number
+    var level = this._tilesLevel.findIndex(function(lvl)
+    {
+        return lvl.y >= tiles;
+    });
+
+    if (level === -1)
+    {
+        level = this._tilesLevel.length - 1;
+    }
+
+    return Math.max(0, level);
+};
+
+/**
+ * Get fov threshold from a pyramid level
+ * @method FORGE.BackgroundPyramidRenderer#_pyramidLevelToCameraFov
+ * @param {number} level pyramid level
+ * @return {number} fov camera field of view [degrees]
+ * @private
+ */
+FORGE.BackgroundPyramidRenderer.prototype._pyramidLevelToCameraFov = function(level)
+{
+    var lvl = this._tilesLevel[level];
+    var fov = 90 / lvl.y;
+    return fov;
+};
+
+/**
+ * Camera change callback.
+ * @method FORGE.BackgroundPyramidRenderer#_onCameraChange
+ * @private
+ */
+FORGE.BackgroundPyramidRenderer.prototype._onCameraChange = function(event)
+{
+    var camera = event.emitter;
+    var fov = camera.fov;
+
+    var level = this._cameraFovToPyramidLevel(fov);
+    if (this._level !== level)
+    {
+        this.selectLevel(level);
+    }
+};
+
+/**
+ * Tile destroyed event handler
+ * @param {FORGE.Event} event - event
+ * @method FORGE.BackgroundPyramidRenderer#_onTileDestroyed
+ * @private
+ */
+FORGE.BackgroundPyramidRenderer.prototype._onTileDestroyed = function(event)
+{
+    var tile = event.emitter;
+    tile.onDestroy.remove(this._onTileDestroyed, this);
+    this._tileCache[tile.level].delete(tile.name);
+    this._scene.remove(tile);
+};
+
+/**
+ * Get XnYn normalized tile coords at a given level
+ * @method FORGE.BackgroundPyramidRenderer#_levelXYToXnYn
+ * @param {number} level - pyramid level
+ * @param {THREE.Vector2} XY - coordinates
+ * @return {THREE.Vector2} normalized tile coordinates vector
+ * @private
+ */
+FORGE.BackgroundPyramidRenderer.prototype._levelXYToXnYn = function(level, XY)
+{
+    var tx = this.nbTilesPerAxis(level, "x"),
+        ty = this.nbTilesPerAxis(level, "y");
+
+    return XY.divide(new THREE.Vector2(tx, ty));
+};
+
+/**
+ * Get XY tile coords at a given level depending on normalized coordinates
+ * @method FORGE.BackgroundPyramidRenderer#_levelXnYnToXY
+ * @param {number} level - pyramid level
+ * @param {THREE.Vector2} xnyn - normalized coordinates
+ * @return {THREE.Vector2} tile coordinates vector
+ * @private
+ */
+FORGE.BackgroundPyramidRenderer.prototype._levelXnYnToXY = function(level, xnyn)
+{
+    var tx = this.nbTilesPerAxis(level, "x"),
+        ty = this.nbTilesPerAxis(level, "y");
+
+    var x = Math.min(Math.floor(tx * xnyn.x), Math.ceil(tx) - 1);
+    var y = Math.min(Math.floor(ty * xnyn.y), Math.ceil(ty) - 1);
+
+    return new THREE.Vector2(x, y);
+};
+
+/**
+ * Tile clearing routine.
+ * Clear tile policy
+ * Only applies to tiles with non zero level
+ * Delete all tiles with zero opacity
+ * Delete all tiles that has been created more than 2s ago and have never been displayed
+ * Delete all tiles that has not been displayed since 30s
+ * @method FORGE.BackgroundPyramidRenderer#_clearTiles
+ * @private
+ */
+FORGE.BackgroundPyramidRenderer.prototype._clearTiles = function()
+{
+    if (this._clearTilesEnabled === false)
+    {
+        return;
+    }
+
+    var clearList = [];
+
+    var now = Date.now();
+
+    this._scene.children.forEach(function(tile)
+    {
+        // Tile with level greater than renderer level -> always removed
+        var tileLevelHigher = tile.level > this._level;
+
+        // Tile with level different than renderer level
+        var tileLevelEqualsCurrent = tile.level === this._level;
+
+        // Tile with level different than renderer level
+        var tileLevelPreview = tile.level === FORGE.Tile.PREVIEW;
+
+        // Tile with level different than renderer level
+        var tileLevelZero = tile.level === 0;
+
+        // Only clear tiles from level different from current and higher than preview and zero
+        var tileLevelClearable = !tileLevelEqualsCurrent &amp;&amp; !tileLevelPreview &amp;&amp; !tileLevelZero;
+
+        // Tile has a texture set in its material map
+        // Never clear a tile without a texture set to keep parents of the current displayed tile
+        // available (with their texture) when the user quickly zooms out
+        var tileHasATexture = tile.textureIsSet === true;
+
+        // Tile is part of the neighbour list
+        var isANeighbourTile = this._renderNeighborList.indexOf(tile) !== -1;
+
+        // Tile has never been displayed and time to live delay has been exceeded
+        var timeSinceCreate = now - tile.createTS;
+        var tileNeverDisplayedAndTTLExceeded = tile.displayTS === null
+            &amp;&amp; timeSinceCreate > FORGE.BackgroundPyramidRenderer.MAX_ALLOWED_TIME_SINCE_CREATION_MS;
+
+        // Tile has been displayed a too long time ago
+        var timeSinceDisplay = now - tile.displayTS;
+        var tileNotDisplayedRecentlyEnough = tile.displayTS !== null
+            &amp;&amp; timeSinceDisplay > FORGE.BackgroundPyramidRenderer.MAX_ALLOWED_TIME_SINCE_DISPLAY_MS;
+
+        // Tile is out of delay and could be cleared
+        // This flag will force clearing tiles with lower levels not displayed for a while
+        // Tiles at lower level (parents) rendered but hidden by current level tiles should not
+        // be cleared to keep them available immediatly when zooming out 
+        var tileOutOfDelay = tileNeverDisplayedAndTTLExceeded || tileNotDisplayedRecentlyEnough;
+
+        // Always clear all tiles from higher levels (performance and aliasing issues)
+        // OR
+        // Clear tiles from lower levels (except preview or zero) AND out of delay
+        // AND with a texture set AND out of the neighbour list
+        if (tileLevelHigher || (tileLevelClearable &amp;&amp; tileOutOfDelay &amp;&amp; tileHasATexture &amp;&amp; !isANeighbourTile))
+        {
+            clearList.push(tile);
+        }
+
+    }.bind(this));
+
+    clearList.forEach(function(tile)
+    {
+        this._scene.remove(tile);
+    }.bind(this));
+};
+
+/**
+ * Get parent tile reference and create it if does not exist
+ * @method FORGE.BackgroundPyramidRenderer#getParentTile
+ * @param {FORGE.Tile} tile - tile
+ * @return {FORGE.Tile} parent tile or null if it has no parent (level 0)
+ */
+FORGE.BackgroundPyramidRenderer.prototype.getParentTile = function(tile)
+{
+    if (tile.level === FORGE.Tile.PREVIEW)
+    {
+        return null;
+    }
+
+    if (tile.level === 0)
+    {
+        return this.getTile(null, FORGE.Tile.PREVIEW, tile.face, 0, 0, "pyramid preview");
+    }
+
+    var xnyn = this._levelXYToXnYn(tile.level, new THREE.Vector2(tile.x, tile.y));
+
+    var parentLevel = tile.level - 1;
+    var parentCoords = this._levelXnYnToXY(parentLevel, xnyn);
+
+    return this.getTile(null, parentLevel, tile.face, parentCoords.x, parentCoords.y, "parent of " + tile.name);
+};
+
+/**
+ * Get tile
+ * Lookup in cache first or create it if not already in cache
+ * @method FORGE.BackgroundPyramidRenderer#getTile
+ */
+FORGE.BackgroundPyramidRenderer.prototype.getTile = function(parent, level, face, x, y, creator)
+{
+    if (typeof this._tileCache[level] === "undefined")
+    {
+        this._tileCache[level] = new Map();
+    }
+
+    var name = FORGE.Tile.createName(face, level, x, y);
+
+    var tile = this._tileCache[level].get(name);
+
+    if (typeof tile === "undefined")
+    {
+        tile = new FORGE.Tile(parent, this, x, y, level, face, creator);
+
+        tile.onDestroy.add(this._onTileDestroyed, this);
+        this.log("Create tile " + tile.name + " (" + creator + ")");
+        this._tileCache[level].set(name, tile);
+    }
+
+    if (this._scene.children.indexOf(tile) === -1)
+    {
+        this._scene.add(tile);
+    }
+
+    return tile;
+};
+
+/**
+ * Get number of tiles per axis for a given level
+ * @param {number} level - pyramid level
+ * @param {string} axis - axis ("x" or "y")
+ * @method FORGE.BackgroundPyramidRenderer#nbTilesPerAxis
+ */
+FORGE.BackgroundPyramidRenderer.prototype.nbTilesPerAxis = function(level, axis)
+{
+    if (this._tilesLevel === null || level === FORGE.Tile.PREVIEW)
+    {
+        return 1;
+    }
+
+    var lvl = this._tilesLevel[level];
+
+    if (typeof lvl !== "undefined")
+    {
+        if (axis === "x")
+        {
+            return lvl.x;
+        }
+        else if (axis === "y")
+        {
+            return lvl.y;
+        }
+    }
+
+    return Math.pow(2, level);
+};
+
+/**
+ * Get number of tiles for a given level
+ * @method FORGE.BackgroundPyramidRenderer#nbTiles
+ */
+FORGE.BackgroundPyramidRenderer.prototype.nbTiles = function(level)
+{
+    return 6 * this.nbTilesPerAxis(level, "x") * this.nbTilesPerAxis(level, "y");
+};
+
+/**
+ * Get tile size at a given level (world units)
+ * @method FORGE.BackgroundPyramidRenderer#tileSize
+ * @return {FORGE.Size} size of a tile in world units
+ */
+FORGE.BackgroundPyramidRenderer.prototype.tileSize = function(level)
+{
+    return new FORGE.Size(this._size / this.nbTilesPerAxis(level, "x"), this._size / this.nbTilesPerAxis(level, "y"));
+};
+
+/**
+ * Select current level for the pyramid
+ * @method FORGE.BackgroundPyramidRenderer#selectLevel
+ * @param {number} level pyramid level
+ */
+FORGE.BackgroundPyramidRenderer.prototype.selectLevel = function(level)
+{
+    this._level = level;
+
+    var tilesOnAxisX = this.nbTilesPerAxis(this._level, "x");
+    var tilesOnAxisY = this.nbTilesPerAxis(this._level, "y");
+
+    this.log("Tiles per axis - X: " + tilesOnAxisX + ", Y: " + tilesOnAxisY);
+
+    if (typeof(this._tileCache[this._level]) !== "undefined")
+    {
+        this._tileCache[this._level].forEach(function(tile)
+        {
+            this._scene.add(tile);
+        }.bind(this));
+    }
+
+    var levelConfig;
+    if (level === FORGE.Tile.PREVIEW)
+    {
+        levelConfig = this._config.preview;
+        levelConfig.width = levelConfig.tile;
+        levelConfig.height = levelConfig.tile;
+    }
+    else
+    {
+        levelConfig = this._config.source.levels[level];
+    }
+
+    // Compute pixels count
+    var tilePixels = levelConfig.width * levelConfig.height;
+
+    this._levelPixels = this.nbTiles(this._level) * tilePixels;
+
+    var prefixes = {
+        3: "kilo",
+        6: "mega",
+        9: "giga",
+        12: "tera",
+        15: "peta",
+        18: "exa",
+        21: "zetta",
+        24: "yotta"
+    };
+
+    var rank = Math.floor(Math.log(this._levelPixels) / (Math.LN10 * 3)) * 3;
+    var humanPixels = this._levelPixels / Math.pow(10, rank);
+
+    var prefix = "";
+    if (rank >= 27)
+    {
+        prefix = " too many ";
+    }
+    else if (rank >= 3)
+    {
+        prefix = " " + prefixes[rank];
+    }
+
+    this._levelPixelsHumanReadable = humanPixels.toFixed(1) + prefix + "pixels";
+    this.log("Select new level: " + level + ", " + this._levelPixelsHumanReadable + " (" + this._levelPixels + ")");
+};
+
+/**
+ * Add tile to render list
+ * @method FORGE.BackgroundPyramidRenderer#addToRenderList
+ * @param {FORGE.Tile} tile - tile
+ */
+FORGE.BackgroundPyramidRenderer.prototype.addToRenderList = function(tile)
+{
+    this._renderList.push(tile);
+
+    // Add tile neighbours to the list only if its level is the current one
+    if (tile.level === this._level)
+    {
+        this._renderNeighborList = this._renderNeighborList.concat(tile.neighbours);
+    }
+};
+
+/**
+ * Render routine.
+ * Do preliminary job of specific background renderer, then summon superclass method
+ * @method FORGE.BackgroundPyramidRenderer#render
+ * @param {THREE.PerspectiveCamera} camera - perspective camera
+ */
+FORGE.BackgroundPyramidRenderer.prototype.render = function(camera)
+{
+    // Renderer should find if some tile at current level are currently rendered
+    this._renderList = [];
+    this._renderNeighborList = [];
+
+    FORGE.BackgroundRenderer.prototype.render.call(this, camera);
+
+    this._renderNeighborList = FORGE.Utils.arrayUnique(this._renderNeighborList);
+
+    this._clearTiles();
+};
+
+/**
+ * Destroy sequence.
+ * @method FORGE.BackgroundPyramidRenderer#destroy
+ */
+FORGE.BackgroundPyramidRenderer.prototype.destroy = function()
+{
+    this._viewer.camera.onChange.remove(this._onCameraChange, this);
+
+    this._clear();
+
+    var tile;
+    for (var level in this._tileCache)
+    {
+        while (this._tileCache[level].length)
+        {
+            tile = this._tileCache[level].pop();
+            tile.destroy();
+        }
+
+        this._tileCache[level] = null;
+    }
+
+    this._textureStore = null;
+    this._tileCache = null;
+    this._renderNeighborList.length = 0;
+    this._renderNeighborList = null;
+    this._renderList.length = 0;
+    this._renderList = null;
+    this._config = null;
+
+    FORGE.BackgroundRenderer.prototype.destroy.call(this);
+};
+
+/**
+ * Get cube size in world units.
+ * @name FORGE.BackgroundPyramidRenderer#cubeSize
+ * @type {number}
+ */
+Object.defineProperty(FORGE.BackgroundPyramidRenderer.prototype, "cubeSize",
+{
+    /** @this {FORGE.BackgroundPyramidRenderer} */
+    get: function()
+    {
+        return this._size;
+    }
+});
+
+/**
+ * Get texture store.
+ * @name FORGE.BackgroundPyramidRenderer#textureStore
+ * @type {FORGE.MediaStore}
+ */
+Object.defineProperty(FORGE.BackgroundPyramidRenderer.prototype, "textureStore",
+{
+    /** @this {FORGE.BackgroundPyramidRenderer} */
+    get: function()
+    {
+        return this._textureStore;
+    }
+});
+
+/**
+ * Get pyramid max level.
+ * @name FORGE.BackgroundPyramidRenderer#levelMax
+ * @type {string}
+ */
+Object.defineProperty(FORGE.BackgroundPyramidRenderer.prototype, "levelMax",
+{
+    /** @this {FORGE.BackgroundPyramidRenderer} */
+    get: function()
+    {
+        return this._config.source.levels.length - 1;
+    }
+});
+
+/**
+ * Get pyramid current level.
+ * @name FORGE.BackgroundPyramidRenderer#level
+ * @type {string}
+ */
+Object.defineProperty(FORGE.BackgroundPyramidRenderer.prototype, "level",
+{
+    /** @this {FORGE.BackgroundPyramidRenderer} */
+    get: function()
+    {
+        return this._level;
+    }
+});
+
+/**
+ * Get number of pixels at current level.
+ * @name FORGE.BackgroundPyramidRenderer#pixelsAtCurrentLevel
+ * @type {number}
+ */
+Object.defineProperty(FORGE.BackgroundPyramidRenderer.prototype, "pixelsAtCurrentLevel",
+{
+    /** @this {FORGE.BackgroundPyramidRenderer} */
+    get: function()
+    {
+        return this._levelPixels;
+    }
+});
+
+/**
+ * Get number of pixels at current level presented as human readable string.
+ * @name FORGE.BackgroundPyramidRenderer#pixelsAtCurrentLevelHumanReadable
+ * @type {string}
+ */
+Object.defineProperty(FORGE.BackgroundPyramidRenderer.prototype, "pixelsAtCurrentLevelHumanReadable",
+{
+    /** @this {FORGE.BackgroundPyramidRenderer} */
+    get: function()
+    {
+        return this._levelPixelsHumanReadable;
+    }
+});
+
+/**
+ * Get fov min.
+ * @name FORGE.BackgroundPyramidRenderer#fovMin
+ * @type {number}
+ */
+Object.defineProperty(FORGE.BackgroundPyramidRenderer.prototype, "fovMin",
+{
+    /** @this {FORGE.BackgroundPyramidRenderer} */
+    get: function()
+    {
+        return this._fovMin;
+    }
+});
+
+/**
+ * Get number of tiles on axis X for current level.
+ * @name FORGE.BackgroundPyramidRenderer#tilesOnAxisX
+ * @type {number}
+ */
+Object.defineProperty(FORGE.BackgroundPyramidRenderer.prototype, "tilesOnAxisX",
+{
+    /** @this {FORGE.BackgroundPyramidRenderer} */
+    get: function()
+    {
+        return this.nbTilesPerAxis(this._level, "x");
+    }
+});
+
+/**
+ * Get number of tiles on axis Y for current level.
+ * @name FORGE.BackgroundPyramidRenderer#tilesOnAxisY
+ * @type {number}
+ */
+Object.defineProperty(FORGE.BackgroundPyramidRenderer.prototype, "tilesOnAxisY",
+{
+    /** @this {FORGE.BackgroundPyramidRenderer} */
+    get: function()
+    {
+        return this.nbTilesPerAxis(this._level, "y");
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

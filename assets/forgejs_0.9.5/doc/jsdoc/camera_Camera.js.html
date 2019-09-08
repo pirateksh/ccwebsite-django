@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: camera/Camera.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: camera/Camera.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * A FORGE.Camera tells the renderer wich part of the scene to render.
+ *
+ * @constructor FORGE.Camera
+ * @param {FORGE.Viewer} viewer - {@link FORGE.Viewer} reference.
+ * @extends {FORGE.BaseObject}
+ */
+FORGE.Camera = function(viewer)
+{
+    /**
+     * The viewer reference.
+     * @name FORGE.Camera#_viewer
+     * @type {FORGE.Viewer}
+     * @private
+     */
+    this._viewer = viewer;
+
+    /**
+     * Camera configuration that has been loaded.
+     * @name  FORGE.Camera#_config
+     * @type {?CameraConfig}
+     * @private
+     */
+    this._config = null;
+
+    /**
+     * The yaw value in radians.
+     * @name FORGE.Camera#_yaw
+     * @type {number}
+     * @private
+     */
+    this._yaw = 0;
+
+    /**
+     * The yaw minimum value in radians.
+     * @name FORGE.Camera#_yawMin
+     * @type {number}
+     * @private
+     */
+    this._yawMin = -Infinity;
+
+    /**
+     * The yaw maximum value in radians.
+     * @name FORGE.Camera#_yawMax
+     * @type {number}
+     * @private
+     */
+    this._yawMax = Infinity;
+
+    /**
+     * The pitch value in radians.
+     * @name FORGE.Camera#_pitch
+     * @type {number}
+     * @private
+     */
+    this._pitch = 0;
+
+    /**
+     * The pitch minimum value in radians.
+     * @name FORGE.Camera#_pitchMin
+     * @type {number}
+     * @private
+     */
+    this._pitchMin = -Infinity;
+
+    /**
+     * The pitch maximum value  in radians.
+     * @name FORGE.Camera#_pitchMax
+     * @type {number}
+     * @private
+     */
+    this._pitchMax = Infinity;
+
+    /**
+     * The roll value in radians.
+     * @name FORGE.Camera#_roll
+     * @type {number}
+     * @private
+     */
+    this._roll = 0;
+
+    /**
+     * The roll minimum value  in radians.
+     * @name FORGE.Camera#_rollMin
+     * @type {number}
+     * @private
+     */
+    this._rollMin = -Infinity;
+
+    /**
+     * The roll maximum value in radians.
+     * @name FORGE.Camera#_rollMax
+     * @type {number}
+     * @private
+     */
+    this._rollMax = Infinity;
+
+    /**
+     * The fov value in radians.
+     * @name FORGE.Camera#_fov
+     * @type {number}
+     * @private
+     */
+    this._fov = 90;
+
+    /**
+     * The fov minimum value in radians.
+     * @name FORGE.Camera#_fovMin
+     * @type {number}
+     * @private
+     */
+    this._fovMin = 0;
+
+    /**
+     * The fov maximum value in radians.
+     * @name FORGE.Camera#_fovMax
+     * @type {number}
+     * @private
+     */
+    this._fovMax = Infinity;
+
+    /**
+     * Parallax setting
+     * Value range is between 0 and 1
+     * @name FORGE.Camera#_parallax
+     * @type {number}
+     * @private
+     */
+    this._parallax = 0;
+
+    /**
+     * Does the camera keep its orientation between scenes?
+     * @name FORGE.Camera#_keep
+     * @type {boolean}
+     * @private
+     */
+    this._keep = false;
+
+    /**
+     * The modelview rotation matrix.
+     * @name FORGE.Camera#_modelView
+     * @type {THREE.Matrix4}
+     * @private
+     */
+    this._modelView = null;
+
+    /**
+     * The inverse of the modelview rotation matrix.
+     * @name FORGE.Camera#_modelViewInverse
+     * @type {THREE.Matrix4}
+     * @private
+     */
+    this._modelViewInverse = null;
+
+    /**
+     * Rotation quaternion of the camera
+     * @name FORGE.Camera#_quaternion
+     * @type {THREE.Quaternion}
+     * @private
+     */
+    this._quaternion = null;
+
+    /**
+     * Three Perspective Camera object
+     * @name FORGE.Camera#_main
+     * @type {THREE.PerspectiveCamera}
+     * @private
+     */
+    this._main = null;
+
+    /**
+     * Three Orthographic Camera object
+     * @name FORGE.Camera#_flat
+     * @type {THREE.OrthographicCamera}
+     * @private
+     */
+    this._flat = null;
+
+    /**
+     * Left camera for VR rendering
+     * @name  FORGE.Camera._left
+     * @type {THREE.PerspectiveCamera}
+     * @private
+     */
+    this._left = null;
+
+    /**
+     * Right camera for VR rendering
+     * @name  FORGE.Camera._right
+     * @type {THREE.PerspectiveCamera}
+     * @private
+     */
+    this._right = null;
+
+    /**
+     * Three Perspective Camera radius (depends on parallax)
+     * @name FORGE.Camera#_radius
+     * @type {number}
+     * @private
+     */
+    this._radius = 0;
+
+    /**
+     * Camera animation object
+     * @name FORGE.Camera#_cameraAnimation
+     * @type {FORGE.CameraAnimation}
+     * @private
+     */
+    this._cameraAnimation = null;
+
+    /**
+     * Camera gaze cursor
+     * @name FORGE.Camera#_gaze
+     * @type {FORGE.CameraGaze}
+     * @private
+     */
+    this._gaze = null;
+
+    /**
+     * Is the camera have load its configuration at least one time? For keep feature.
+     * @name FORGE.Camera#_initialized
+     * @type {boolean}
+     * @private
+     */
+    this._initialized = false;
+
+    /**
+     * Log the camera changes between two updates.
+     * @name FORGE.Camera#_changelog
+     * @type {?CameraChangelog}
+     * @private
+     */
+    this._changelog = null;
+
+    /**
+     * On camera change event dispatcher.
+     * @name FORGE.Camera#_onChange
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onChange = null;
+
+    /**
+     * On camera orientation change event dispatcher.
+     * @name FORGE.Camera#_onOrientationChange
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onOrientationChange = null;
+
+    /**
+     * On camera fov change event dispatcher.
+     * @name FORGE.Camera#_onFovChange
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onFovChange = null;
+
+    FORGE.BaseObject.call(this, "Camera");
+
+    this._boot();
+};
+
+FORGE.Camera.prototype = Object.create(FORGE.BaseObject.prototype);
+FORGE.Camera.prototype.constructor = FORGE.Camera;
+
+/**
+ * Camera default radius for parallax.
+ * @name FORGE.Camera.RADIUS
+ * @type {number}
+ * @const
+ */
+FORGE.Camera.RADIUS = 50;
+
+/**
+ * Camera default configuration in degrees like in the json configuration.
+ * @name FORGE.Camera.DEFAULT_CONFIG
+ * @type {CameraConfig}
+ * @const
+ */
+FORGE.Camera.DEFAULT_CONFIG =
+{
+    keep: false,
+    parallax: 0,
+    yaw:
+    {
+        min: -Infinity,
+        max: Infinity,
+        default: 0
+    },
+    pitch:
+    {
+        min: -Infinity,
+        max: Infinity,
+        default: 0
+    },
+    roll:
+    {
+        min: -Infinity,
+        max: Infinity,
+        default: 0
+    },
+    fov:
+    {
+        min: 0,
+        max: Infinity,
+        default: 90
+    },
+    gaze:
+    {
+        delay: 2000,
+        cursor:
+        {
+            innerRadius: 0.02,
+            outerRadius: 0.04,
+            color: 0xffffff,
+            opacity: 0.5
+        },
+        progress:
+        {
+            innerRadius: 0.02,
+            outerRadius: 0.04,
+            color: 0xff0000,
+            opacity: 0.5
+        }
+    }
+};
+
+/**
+ * Init sequence.
+ * @method FORGE.Camera#_boot
+ * @private
+ */
+FORGE.Camera.prototype._boot = function()
+{
+    this._resetChangelog();
+
+    this._modelView = new THREE.Matrix4();
+    this._modelViewInverse = new THREE.Matrix4();
+    this._quaternion = new THREE.Quaternion();
+
+    this._gaze = new FORGE.CameraGaze(this._viewer, FORGE.Camera.DEFAULT_CONFIG.gaze);
+
+    this._viewer.renderer.view.onChange.add(this._updateInternals, this);
+    this._viewer.renderer.onBackgroundReady.add(this._updateInternals, this);
+
+    this._createMainCamera();
+    this._createFlatCamera();
+    this._createVRCameras();
+
+    // Check config to allow default to be set if they were depending
+    // on some parameter external to the camera. For example: multiresolution fovMin set
+    // by the background renderer
+    if (this._config !== null)
+    {
+        this._parseConfig(this._config);
+    }
+};
+
+/**
+ * Parse a camera configuration.
+ * @method FORGE.Camera#_parseConfig
+ * @param {?CameraConfig} config - The camera configuration to parse.
+ * @private
+ */
+FORGE.Camera.prototype._parseConfig = function(config)
+{
+    this._parallax = config.parallax;
+    this._radius = this._parallax * FORGE.Camera.RADIUS;
+    this._keep = config.keep;
+
+    if(this._keep === true &amp;&amp; this._initialized === true)
+    {
+        return;
+    }
+
+    if (typeof config.fov.min === "number")
+    {
+        this._fovMin = FORGE.Math.degToRad(config.fov.min);
+    }
+
+    if (typeof config.fov.max === "number")
+    {
+        this._fovMax = FORGE.Math.degToRad(config.fov.max);
+    }
+
+    if (typeof config.fov.default === "number")
+    {
+        this._setFov(config.fov.default, FORGE.Math.DEGREES);
+    }
+
+    if (typeof config.yaw.min === "number")
+    {
+        this._yawMin = FORGE.Math.degToRad(config.yaw.min);
+    }
+
+    if (typeof config.yaw.max === "number")
+    {
+        this._yawMax = FORGE.Math.degToRad(config.yaw.max);
+    }
+
+    if (typeof config.yaw.default === "number")
+    {
+        this._setYaw(config.yaw.default, FORGE.Math.DEGREES);
+    }
+
+    if (typeof config.pitch.min === "number")
+    {
+        this._pitchMin = FORGE.Math.degToRad(config.pitch.min);
+    }
+
+    if (typeof config.pitch.max === "number")
+    {
+        this._pitchMax = FORGE.Math.degToRad(config.pitch.max);
+    }
+
+    if (typeof config.pitch.default === "number")
+    {
+        this._setPitch(config.pitch.default, FORGE.Math.DEGREES);
+    }
+
+    if (typeof config.roll.min === "number")
+    {
+        this._rollMin = FORGE.Math.degToRad(config.roll.min);
+    }
+
+    if (typeof config.roll.max === "number")
+    {
+        this._rollMax = FORGE.Math.degToRad(config.roll.max);
+    }
+
+    if (typeof config.roll.default === "number")
+    {
+        this._setRoll(config.roll.default, FORGE.Math.DEGREES);
+    }
+
+    this._updateFromEuler();
+
+    this._updateMainCamera();
+    this._updateFlatCamera();
+
+    this._gaze.load(/** @type {CameraGazeConfig} */ (config.gaze));
+};
+
+/**
+ * Reset the camera changelog.
+ * @method FORGE.Camera#_resetChangelog
+ * @private
+ */
+FORGE.Camera.prototype._resetChangelog = function()
+{
+    this._changelog =
+    {
+        yaw: false,
+        pitch: false,
+        roll: false,
+        fov: false
+    };
+};
+
+/**
+ * Init the THREE PerspectiveCamera.
+ * @method FORGE.Camera#_createMainCamera
+ * @private
+ */
+FORGE.Camera.prototype._createMainCamera = function()
+{
+    if (typeof this._viewer.renderer !== "undefined")
+    {
+        var aspect = this._viewer.renderer.displayResolution.ratio;
+        this._main = new THREE.PerspectiveCamera(this._fov, aspect, FORGE.RenderManager.DEPTH_NEAR, 2 * FORGE.RenderManager.DEPTH_FAR);
+        this._main.name = "CameraMain";
+        this._main.matrixAutoUpdate = false;
+    }
+};
+
+/**
+ * Init the THREE OrthographicCamera.
+ * @method FORGE.Camera#_createFlatCamera
+ * @private
+ */
+FORGE.Camera.prototype._createFlatCamera = function()
+{
+    if (typeof this._viewer.renderer !== "undefined")
+    {
+        this._flat = new THREE.OrthographicCamera(
+            -1000, 1000,
+            1000, -1000,
+            FORGE.RenderManager.DEPTH_NEAR,
+            FORGE.RenderManager.DEPTH_FAR);
+
+        this._flat.name = "CameraFlat";
+        this._flat.matrixAutoUpdate = false;
+    }
+};
+
+/**
+ * Create the left and right THREE PerspectiveCamera for VR.
+ * @method FORGE.Camera#_createVRCameras
+ * @private
+ */
+FORGE.Camera.prototype._createVRCameras = function()
+{
+    this._left = this._main.clone();
+    this._left.name = "CameraLeft";
+    this._left.layers.enable(1);
+
+    this._left.add(this._gaze.object);
+
+    this._right = this._main.clone();
+    this._right.name = "CameraRight";
+    this._right.layers.enable(2);
+};
+
+/**
+ * Update VR cameras.
+ * @method FORGE.Camera#_updateVRCameras
+ * @private
+ */
+FORGE.Camera.prototype._updateVRCameras = function()
+{
+    var display = this._viewer.renderer.display;
+
+    // Get frame data before pose to ensure pose values are up to date
+    var frameData = display.vrFrameData;
+    var quat = display.getQuaternionFromPose();
+
+    if (quat !== null)
+    {
+        this._quaternion = quat;
+        this._updateFromQuaternion();
+    }
+
+    var eyeParamsL = display.vrDisplay.getEyeParameters("left");
+    var eyeParamsR = display.vrDisplay.getEyeParameters("right");
+
+    this._main.matrixWorld.decompose(this._left.position, this._left.quaternion, this._left.scale);
+    this._left.matrixWorld = new THREE.Matrix4().makeRotationFromQuaternion(this._main.quaternion);
+
+    this._main.matrixWorld.decompose(this._right.position, this._right.quaternion, this._right.scale);
+    this._right.matrixWorld = new THREE.Matrix4().makeRotationFromQuaternion(this._main.quaternion);
+
+    // Get translation from central camera matrix
+    this._left.matrixWorld.elements[12] = this._main.matrixWorld.elements[12] + eyeParamsL.offset[0];
+    this._left.matrixWorld.elements[13] = this._main.matrixWorld.elements[13] + eyeParamsL.offset[1];
+    this._left.matrixWorld.elements[14] = this._main.matrixWorld.elements[14] + eyeParamsL.offset[2];
+
+    // Get translation from central camera matrix
+    this._right.matrixWorld.elements[12] = this._main.matrixWorld.elements[12] + eyeParamsR.offset[0];
+    this._right.matrixWorld.elements[13] = this._main.matrixWorld.elements[13] + eyeParamsR.offset[1];
+    this._right.matrixWorld.elements[14] = this._main.matrixWorld.elements[14] + eyeParamsR.offset[2];
+
+    // Setup camera projection matrix
+    if (frameData !== null)
+    {
+        this._left.projectionMatrix.elements = frameData.leftProjectionMatrix;
+        this._right.projectionMatrix.elements = frameData.rightProjectionMatrix;
+    }
+    else
+    {
+        var eyeFOVL = {
+            upDegrees: eyeParamsL.fieldOfView.upDegrees,
+            downDegrees: eyeParamsL.fieldOfView.downDegrees,
+            leftDegrees: eyeParamsL.fieldOfView.leftDegrees,
+            rightDegrees: eyeParamsL.fieldOfView.rightDegrees
+        };
+
+        this._left.projectionMatrix = this._fovToProjectionMatrix(eyeFOVL, this._main);
+
+        var eyeFOVR = {
+            upDegrees: eyeParamsR.fieldOfView.upDegrees,
+            downDegrees: eyeParamsR.fieldOfView.downDegrees,
+            leftDegrees: eyeParamsR.fieldOfView.leftDegrees,
+            rightDegrees: eyeParamsR.fieldOfView.rightDegrees
+        };
+
+        this._right.projectionMatrix = this._fovToProjectionMatrix(eyeFOVR, this._main);
+    }
+
+    this._updateComplete();
+};
+
+/**
+ * Clone VR cameras objects.
+ * @method FORGE.Camera#_cloneVRCamerasChildren
+ * @private
+ */
+FORGE.Camera.prototype._cloneVRCamerasChildren = function()
+{
+    //First clear all children from camera right
+    for (var i = 0, ii = this._right.children.length; i &lt; ii; i++)
+    {
+        this._right.remove(this._right.children[i]);
+    }
+
+    //Then clone all children of camera left to camera right
+    var clone = null;
+    for (var j = 0, jj = this._left.children.length; j &lt; jj; j++)
+    {
+        clone = this._left.children[j].clone();
+        this._right.add(clone);
+    }
+};
+
+/**
+ * Get projection matrix from a VRFieldOfView
+ * @method FORGE.Camera#_fovToProjectionMatrix
+ * @param {VRFieldOfViewObject} fov - VRFieldOfView for an eye
+ * @param {THREE.PerspectiveCamera} camera - reference camera
+ * @return {THREE.Matrix4} projection matrix
+ * @private
+ */
+FORGE.Camera.prototype._fovToProjectionMatrix = function(fov, camera)
+{
+    // Get projections of field of views on zn plane
+    var fovUpTan = Math.tan(FORGE.Math.degToRad(fov.upDegrees));
+    var fovDownTan = Math.tan(FORGE.Math.degToRad(fov.downDegrees));
+    var fovLeftTan = Math.tan(FORGE.Math.degToRad(fov.leftDegrees));
+    var fovRightTan = Math.tan(FORGE.Math.degToRad(fov.rightDegrees));
+
+    // and with scale/offset info for normalized device coords
+    var pxscale = 2.0 / (fovLeftTan + fovRightTan);
+    var pxoffset = (fovLeftTan - fovRightTan) * pxscale * 0.5;
+    var pyscale = 2.0 / (fovUpTan + fovDownTan);
+    var pyoffset = (fovUpTan - fovDownTan) * pyscale * 0.5;
+
+    // start with an identity matrix
+    var matrix = new THREE.Matrix4();
+    var m = matrix.elements;
+
+    // X result, map clip edges to [-w,+w]
+    m[0 * 4 + 0] = pxscale;
+    m[0 * 4 + 1] = 0.0;
+    m[0 * 4 + 2] = -pxoffset;
+    m[0 * 4 + 3] = 0.0;
+
+    // Y result, map clip edges to [-w,+w]
+    // Y offset is negated because this proj matrix transforms from world coords with Y=up,
+    // but the NDC scaling has Y=down (thanks D3D?)
+    m[1 * 4 + 0] = 0.0;
+    m[1 * 4 + 1] = pyscale;
+    m[1 * 4 + 2] = pyoffset;
+    m[1 * 4 + 3] = 0.0;
+
+    // Z result (up to the app)
+    m[2 * 4 + 0] = 0.0;
+    m[2 * 4 + 1] = 0.0;
+    m[2 * 4 + 2] = camera.far / (camera.near - camera.far);
+    m[2 * 4 + 3] = (camera.far * camera.near) / (camera.near - camera.far);
+
+    // W result (= Z in)
+    m[3 * 4 + 0] = 0.0;
+    m[3 * 4 + 1] = 0.0;
+    m[3 * 4 + 2] = -1.0;
+    m[3 * 4 + 3] = 0.0;
+
+    matrix.transpose();
+
+    return matrix;
+};
+
+/**
+ * Apply Camera change internally.
+ * @method FORGE.Camera#_updateFromEuler
+ * @private
+ */
+FORGE.Camera.prototype._updateFromEuler = function()
+{
+    this._modelView = FORGE.Math.eulerToRotationMatrix(this._yaw, this._pitch, this._roll, false);
+
+    this._modelViewInverse = this._modelView.clone().transpose();
+
+    this._quaternion = FORGE.Quaternion.fromEuler(this._yaw, this._pitch, this._roll);
+
+    // complete camera update
+    this._updateComplete();
+};
+
+/**
+ * Camera update internals after quaternion has been set
+ * @method FORGE.Camera#_updateFromQuaternion
+ * @private
+ */
+FORGE.Camera.prototype._updateFromQuaternion = function()
+{
+    this._modelView = FORGE.Quaternion.toRotationMatrix(this._quaternion);
+
+    this._modelViewInverse = this._modelView.clone().transpose();
+
+    var euler = FORGE.Quaternion.toEuler(this._quaternion);
+
+    this._setAll(euler.yaw, euler.pitch, euler.roll, null, FORGE.Math.RADIANS);
+};
+
+/**
+ * Camera update internals after modelview matrix has been set.
+ * @method FORGE.Camera#_updateFromMatrix
+ * @private
+ */
+FORGE.Camera.prototype._updateFromMatrix = function()
+{
+    this._modelViewInverse = this._modelView.clone().transpose();
+
+    var euler = FORGE.Math.rotationMatrixToEuler(this._modelView);
+
+    this._setAll(euler.yaw, euler.pitch, euler.roll, null, FORGE.Math.RADIANS);
+
+    this._quaternion = FORGE.Quaternion.fromRotationMatrix(this._modelView);
+};
+
+/**
+ * THREE Perspective camera update internals after modelview matrix has been set.
+ * @method FORGE.Camera#_updateMainCamera
+ * @private
+ */
+FORGE.Camera.prototype._updateMainCamera = function()
+{
+    if (this._main === null || this._viewer.renderer.view.current === null)
+    {
+        return;
+    }
+
+    var mat = new THREE.Matrix4().copy(this._modelViewInverse);
+
+    if (this._parallax !== 0)
+    {
+        mat.multiply(new THREE.Matrix4().makeTranslation(0, 0, -this._radius));
+    }
+
+    // Now set the object quaternion (side effect: it will override the world matrix)
+    this._main.quaternion.setFromRotationMatrix(mat);
+
+    this._main.matrixWorld = mat;
+    this._main.matrixWorldInverse.getInverse(mat);
+
+    this._main.fov = FORGE.Math.radToDeg(this._viewer.renderer.view.current.getProjectionFov());
+    this._main.aspect = this._viewer.renderer.displayResolution.ratio;
+    this._main.updateProjectionMatrix();
+};
+
+/**
+ * THREE Orthographic camera update internals.
+ * @method FORGE.Camera#_updateFlatCamera
+ * @private
+ */
+FORGE.Camera.prototype._updateFlatCamera = function()
+{
+    if (this._flat === null)
+    {
+        return;
+    }
+
+    var camW = this._flat.right - this._flat.left;
+    var camH = this._flat.top - this._flat.bottom;
+
+    this._flat.left = this._flat.position.x - camW / 2;
+    this._flat.right = this._flat.position.x + camW / 2;
+
+    this._flat.top = this._flat.position.y + camH / 2;
+    this._flat.bottom = this._flat.position.y - camH / 2;
+
+    var max = this._fovMax;
+    var view = this._viewer.renderer.view.current;
+
+    if (view !== null &amp;&amp; view.fovMax !== null)
+    {
+        max = Math.min(view.fovMax, this._fovMax);
+        this._flat.zoom = max / this._fov;
+    }
+    else
+    {
+        this._flat.zoom = 1;
+    }
+
+    this._flat.updateProjectionMatrix();
+};
+
+/**
+ * Final method call to complete camera update, ensure main camera is up to date.
+ * @method FORGE.Camera#_updateComplete
+ * @private
+ */
+FORGE.Camera.prototype._updateComplete = function()
+{
+    var changed = false;
+
+    if(this._changelog.yaw === true || this._changelog.pitch === true || this._changelog.roll === true)
+    {
+        changed = true;
+
+        if (this._onOrientationChange !== null)
+        {
+            this._onOrientationChange.dispatch(null, true);
+        }
+    }
+
+    if(this._changelog.fov === true)
+    {
+        changed = true;
+
+        if (this._onFovChange !== null)
+        {
+            this._onFovChange.dispatch(null, true);
+        }
+    }
+
+
+    if (changed === true &amp;&amp; this._onChange !== null)
+    {
+        this._onChange.dispatch(null, true);
+    }
+};
+
+
+/**
+ * Internal setter for yaw, take a value and a unit. Default unit is radians.
+ * @method FORGE.Camera#_setYaw
+ * @param {?number=} value - The value you want to set for yaw.
+ * @param {string=} [unit="radians"] - The unit you use to set the yaw value.
+ * @return {boolean} Returns true if the value has changed.
+ * @private
+ */
+FORGE.Camera.prototype._setYaw = function(value, unit)
+{
+    if (typeof value !== "number" || isNaN(value) === true)
+    {
+        return false;
+    }
+
+    // If unit is not well defined, default will be radians
+    unit = (unit === FORGE.Math.DEGREES || unit === FORGE.Math.RADIANS) ? unit : FORGE.Math.RADIANS;
+
+    // Convert value in radians for clamp if unit is in degrees.
+    value = (unit === FORGE.Math.DEGREES) ? FORGE.Math.degToRad(value) : value;
+
+    // Wrap the value between -PI and +PI, except for FLAT view where we apply texture ratio
+    if (this._viewer.renderer.backgroundRenderer !== null &amp;&amp;
+        this._viewer.renderer.backgroundRenderer.displayObject !== null &amp;&amp;
+        this._viewer.renderer.view.type === FORGE.ViewType.FLAT)
+    {
+        var displayObject = this._viewer.renderer.backgroundRenderer.displayObject;
+        var ratio = displayObject.pixelWidth / displayObject.pixelHeight;
+
+        if (displayObject.element instanceof HTMLVideoElement)
+        {
+            ratio = displayObject.element.videoWidth / displayObject.element.videoHeight;
+        }
+
+        value = FORGE.Math.wrap(value, -Math.PI * ratio, Math.PI * ratio);
+    }
+    else
+    {
+        value = FORGE.Math.wrap(value, -Math.PI, Math.PI);
+    }
+
+    var boundaries = this._getYawBoundaries();
+
+    var yaw = FORGE.Math.clamp(value, boundaries.min, boundaries.max);
+
+    var changed = this._yaw !== yaw;
+
+    this._changelog.yaw = changed;
+
+    this._yaw = yaw;
+
+    return changed;
+};
+
+/**
+ * Compute the yaw boundaries with yaw min and yaw max.
+ * @method FORGE.Camera#_getYawBoundaries
+ * @param {boolean=} relative - do we need to get the yaw relative to the current fov (default true)
+ * @param {number=} fov - specify a fov if we do not want to use the current one (useful for simulation)
+ * @return {CameraBoundaries} Returns the min and max yaw computed from the camera configuration and the view limits.
+ * @private
+ */
+FORGE.Camera.prototype._getYawBoundaries = function(relative, fov)
+{
+    var min = this._yawMin;
+    var max = this._yawMax;
+
+    fov = fov || this._fov;
+
+    if (relative !== false &amp;&amp; min !== max)
+    {
+        var halfHFov = 0.5 * fov * this._viewer.renderer.displayResolution.ratio;
+        min += halfHFov;
+        max -= halfHFov;
+    }
+
+    var view = this._viewer.renderer.view.current;
+
+    if (view !== null)
+    {
+        min = Math.max(view.yawMin, min);
+        max = Math.min(view.yawMax, max);
+    }
+
+    return { min: min, max: max };
+};
+
+/**
+ * Internal setter for pitch, take a value and a unit. Default unit is radians.
+ * @method FORGE.Camera#_setPitch
+ * @param {?number=} value - The value you want to set for pitch.
+ * @param {string=} [unit="radians"] - The unit you use to set the pitch value.
+ * @return {boolean} Returns true if the value has changed.
+ * @private
+ */
+FORGE.Camera.prototype._setPitch = function(value, unit)
+{
+    if (typeof value !== "number" || isNaN(value) === true)
+    {
+        return false;
+    }
+
+    var oldPitch = this._pitch;
+
+    // If unit is not well defined, default will be radians
+    unit = (unit === FORGE.Math.DEGREES || unit === FORGE.Math.RADIANS) ? unit : FORGE.Math.RADIANS;
+
+    // Convert value in radians for clamp if unit is in degrees.
+    value = (unit === FORGE.Math.DEGREES) ? FORGE.Math.degToRad(value) : value;
+
+    // Wrap the value between -PI and +PI
+    value = FORGE.Math.wrap(value, -Math.PI, Math.PI);
+
+    var boundaries = this._getPitchBoundaries();
+
+    var pitch = FORGE.Math.clamp(value, boundaries.min, boundaries.max);
+
+    // If old view accepted pitch out of [-PI/2 , PI/2] and new one does not,
+    // check if old pitch value was in authorized range and if not, set to zero
+    if (Math.abs(oldPitch) > Math.PI / 2 &amp;&amp; Math.abs(pitch) === Math.PI / 2)
+    {
+        pitch = 0;
+    }
+
+    var changed = this._pitch !== pitch;
+
+    this._changelog.pitch = changed;
+
+    this._pitch = pitch;
+
+    return changed;
+};
+
+/**
+ * Compute the pitch boundaries with pitch min and pitch max.
+ * @method FORGE.Camera#_getPitchBoundaries
+ * @param {boolean=} relative - do we need to get the pitch relative to the current fov (default true)
+ * @param {number=} fov - specify a fov if we do not want to use the current one (useful for simulation)
+ * @return {CameraBoundaries} Returns the min and max pitch computed from the camera configuration and the view limits.
+ * @private
+ */
+FORGE.Camera.prototype._getPitchBoundaries = function(relative, fov)
+{
+    var min = this._pitchMin;
+    var max = this._pitchMax;
+
+    fov = fov || this._fov;
+
+    if (relative !== false &amp;&amp; min !== max)
+    {
+        var halfFov = 0.5 * fov;
+        min += halfFov;
+        max -= halfFov;
+    }
+
+    var view = this._viewer.renderer.view.current;
+
+    if (view !== null)
+    {
+        min = Math.max(view.pitchMin, min);
+        max = Math.min(view.pitchMax, max);
+    }
+
+    return { min: min, max: max };
+};
+
+/**
+ * Internal setter for roll, take a value and a unit. Default unit is radians.
+ * @method FORGE.Camera#_setRoll
+ * @param {?number=} value - The value you want to set for roll.
+ * @param {string=} [unit="radians"] - The unit you use to set the roll value.
+ * @return {boolean} Returns true if the value has changed.
+ * @private
+ */
+FORGE.Camera.prototype._setRoll = function(value, unit)
+{
+    if (typeof value !== "number" || isNaN(value) === true)
+    {
+        return false;
+    }
+
+    // If unit is not well defined, default will be radians
+    unit = (unit === FORGE.Math.DEGREES || unit === FORGE.Math.RADIANS) ? unit : FORGE.Math.RADIANS;
+
+    // Convert value in radians for clamp if unit is in degrees.
+    value = (unit === FORGE.Math.DEGREES) ? FORGE.Math.degToRad(value) : value;
+
+    // Wrap the value between -PI and +PI
+    value = FORGE.Math.wrap(value, -Math.PI, Math.PI);
+
+    var boundaries = this._getRollBoundaries();
+
+    var roll = FORGE.Math.clamp(value, boundaries.min, boundaries.max);
+
+    var changed = this._roll !== roll;
+
+    this._changelog.roll = changed;
+
+    this._roll = roll;
+
+    return changed;
+};
+
+/**
+ * Compute the roll boundaries with yaw min and yaw max.
+ * @method FORGE.Camera#_getRollBoundaries
+ * @return {CameraBoundaries} Returns the min and max roll computed from the camera configuration and the view limits.
+ * @private
+ */
+FORGE.Camera.prototype._getRollBoundaries = function()
+{
+    var min = this._rollMin;
+    var max = this._rollMax;
+    var view = this._viewer.renderer.view.current;
+
+    if (view !== null)
+    {
+        min = Math.max(view.rollMin, min);
+        max = Math.min(view.rollMax, max);
+    }
+
+    return { min: min, max: max };
+};
+
+/**
+ * Internal setter for fov (field of view), take a value and a unit. Default unit is radians.
+ * @method FORGE.Camera#_setFov
+ * @param {?number=} value - The value you want to set for fov.
+ * @param {string=} [unit="radians"] - The unit you use to set the fov value.
+ * @return {boolean} Returns true if the value has changed.
+ * @private
+ */
+FORGE.Camera.prototype._setFov = function(value, unit)
+{
+    if (typeof value !== "number" || isNaN(value) === true)
+    {
+        return false;
+    }
+
+    // If unit is not well defined, default will be radians
+    unit = (unit === FORGE.Math.DEGREES || unit === FORGE.Math.RADIANS) ? unit : FORGE.Math.RADIANS;
+
+    // Convert value in radians for clamp if unit is in degrees.
+    value = (unit === FORGE.Math.DEGREES) ? FORGE.Math.degToRad(value) : value;
+
+    var boundaries = this._getFovBoundaries();
+
+    var fov = FORGE.Math.clamp(value, boundaries.min, boundaries.max);
+
+    var changed = this._fov !== fov;
+
+    this._changelog.fov = changed;
+
+    this._fov = fov;
+
+    if (changed)
+    {
+        this._setYaw(this._yaw);
+        this._setPitch(this._pitch);
+    }
+
+    return changed;
+};
+
+/**
+ * Compute the fov boundaries with yaw min and yaw max.
+ * @method FORGE.Camera#_getFovBoundaries
+ * @return {CameraBoundaries} Returns the min and max fov computed from the camera configuration and the view limits.
+ * @private
+ */
+FORGE.Camera.prototype._getFovBoundaries = function()
+{
+    var min = this._fovMin;
+    var max = this._fovMax;
+    var view = this._viewer.renderer.view.current;
+
+    // if JSON specifies a fov min (not default 0 value), use it
+    // useful for multiresolution where fov limit will be computed depending
+    // on max level of resolution available and stored in JSON
+    if (this._viewer.renderer.backgroundRenderer !== null &amp;&amp; "fovMin" in this._viewer.renderer.backgroundRenderer)
+    {
+        min = Math.max(this._viewer.renderer.backgroundRenderer.fovMin, min);
+    }
+    else if (min === 0)
+    {
+        if (view !== null)
+        {
+            min = Math.max(view.fovMin, min);
+            max = Math.min(view.fovMax, max);
+        }
+    }
+
+    if (view !== null &amp;&amp; view.type !== FORGE.ViewType.FLAT)
+    {
+        // if there are limits, we may need to limit the maximum fov
+        var pitchBoundaries = this._getPitchBoundaries(false);
+        var pitchRange = pitchBoundaries.max - pitchBoundaries.min;
+
+        if (pitchRange > 0)
+        {
+            max = Math.min(pitchRange, max);
+        }
+
+        var yawBoundaries = this._getYawBoundaries(false);
+        var yawRange = yawBoundaries.max - yawBoundaries.min;
+        yawRange /= this._viewer.renderer.displayResolution.ratio;
+
+        if (yawRange > 0)
+        {
+            max = Math.min(yawRange, max);
+        }
+
+        // get the tiniest
+        if (max &lt; min)
+        {
+            min = max;
+        }
+    }
+
+    return { min: min, max: max };
+};
+
+/**
+ * Set all camera angles in one call (yaw, pitch, roll, fov)
+ * @method FORGE.Camera#_setAll
+ * @param {?number=} yaw - The yaw value you want to set.
+ * @param {?number=} pitch - The pitch value you want to set.
+ * @param {?number=} roll - The roll value you want to set.
+ * @param {?number=} fov - The fov value you want to set.
+ * @param {string=} unit - The unit you use for all the previous arguments (FORGE.Math.DEGREES or FORGE.Math.RADIANS)
+ * @return {boolean} Returns true if any values has changed.
+ * @private
+ */
+FORGE.Camera.prototype._setAll = function(yaw, pitch, roll, fov, unit)
+{
+    var fovChanged = this._setFov(fov, unit);
+    var yawChanged = this._setYaw(yaw, unit);
+    var pitchChanged = this._setPitch(pitch, unit);
+    var rollChanged = this._setRoll(roll, unit);
+
+    return (yawChanged === true || pitchChanged === true || rollChanged === true || fovChanged === true);
+};
+
+/**
+ * Update internals after a remote component has changed something
+ * @method FORGE.Camera#_updateInternals
+ * @private
+ */
+FORGE.Camera.prototype._updateInternals = function()
+{
+    // Force camera to update its values to bound it in new boundaries after view change
+    var changed = this._setAll(this._yaw, this._pitch, this._roll, this._fov);
+
+    if (changed === true)
+    {
+        this._updateFromEuler();
+    }
+};
+
+/**
+ * Load a camera configuration.
+ * @method FORGE.Camera#load
+ * @param {CameraConfig} config - The camera configuration to load.
+ */
+FORGE.Camera.prototype.load = function(config)
+{
+    this._config = /** @type {CameraConfig} */ (FORGE.Utils.extendMultipleObjects(FORGE.Camera.DEFAULT_CONFIG, config));
+
+    this._parseConfig(this._config);
+
+    this._initialized = true;
+};
+
+/**
+ * Set the Camera to look at a specified point into the yaw/pitch/roll space.
+ * @method FORGE.Camera#lookAt
+ * @param {?number=} yaw Euler yaw angle (deg)
+ * @param {?number=} pitch Euler pitch angle (deg)
+ * @param {?number=} roll Euler roll angle (deg)
+ * @param {?number=} fov Field of view (deg)
+ * @param {number=} durationMS - Rotation animation duration ms (undefined or zero means immediat effect)
+ * @param {boolean=} [cancelRoll=false] - If set to true, roll will be cancelled (always at 0).&lt;br> If false an auto roll movement will be done by the camera for a more natural movement effect.
+ * @param {string=} easing - Easing method name (default to {@link FORGE.EasingType.LINEAR}).
+ */
+FORGE.Camera.prototype.lookAt = function(yaw, pitch, roll, fov, durationMS, cancelRoll, easing)
+{
+    if (typeof durationMS !== "number" || durationMS === 0)
+    {
+        var changed = this._setAll(yaw, pitch, roll, fov, FORGE.Math.DEGREES);
+
+        if (changed === true)
+        {
+            this._updateFromEuler();
+        }
+    }
+    else
+    {
+        if (fov !== null &amp;&amp; typeof fov !== "undefined")
+        {
+            var fovBoundaries = this._getFovBoundaries();
+
+            fov = FORGE.Math.clamp(fov, FORGE.Math.radToDeg(fovBoundaries.min), FORGE.Math.radToDeg(fovBoundaries.max));
+
+            if (yaw !== null &amp;&amp; typeof yaw !== "undefined")
+            {
+                var yawBoundaries = this._getYawBoundaries(true, FORGE.Math.degToRad(fov));
+                yaw = FORGE.Math.clamp(yaw, FORGE.Math.radToDeg(yawBoundaries.min), FORGE.Math.radToDeg(yawBoundaries.max));
+            }
+
+            if (pitch !== null &amp;&amp; typeof pitch !== "undefined")
+            {
+                var pitchBoundaries = this._getPitchBoundaries(true, FORGE.Math.degToRad(fov));
+                pitch = FORGE.Math.clamp(pitch, FORGE.Math.radToDeg(pitchBoundaries.min), FORGE.Math.radToDeg(pitchBoundaries.max));
+            }
+        }
+
+        // before creating a track, set the goto point in future boundaries
+        var track = new FORGE.DirectorTrack(
+        {
+            easing:
+            {
+                default: easing || "LINEAR",
+                start: 0
+            },
+
+            cancelRoll: Boolean(cancelRoll),
+
+            keyframes:
+            [
+                {
+                    time: durationMS,
+                    data:
+                    {
+                        yaw: yaw,
+                        pitch: pitch,
+                        roll: roll,
+                        fov: fov
+                    }
+                }
+            ]
+        });
+
+        this.animation.play(track.uid);
+    }
+};
+
+/**
+ * Update routine called by render manager before rendering a frame.
+ * All internals should be up to date.
+ * @method FORGE.Camera#update
+ */
+FORGE.Camera.prototype.update = function()
+{
+    if (this._viewer.renderer.display.presentingVR === true)
+    {
+        this._gaze.update();
+        this._updateVRCameras();
+        this._cloneVRCamerasChildren();
+    }
+
+    this._updateMainCamera();
+    this._updateFlatCamera();
+
+    this._resetChangelog();
+};
+
+/**
+ * Destroy sequence.
+ * @method FORGE.Camera#destroy
+ */
+FORGE.Camera.prototype.destroy = function()
+{
+    this._modelView = null;
+    this._modelViewInverse = null;
+    this._quaternion = null;
+    this._main = null;
+    this._flat = null;
+
+    this._gaze.destroy();
+    this._gaze = null;
+
+    this._viewer.renderer.view.onChange.remove(this._updateInternals, this);
+    this._viewer.renderer.onBackgroundReady.remove(this._updateInternals, this);
+
+    if (this._onChange !== null)
+    {
+        this._onChange.destroy();
+        this._onChange = null;
+    }
+
+    if (this._onOrientationChange !== null)
+    {
+        this._onOrientationChange.destroy();
+        this._onOrientationChange = null;
+    }
+
+    if (this._onFovChange !== null)
+    {
+        this._onFovChange.destroy();
+        this._onFovChange = null;
+    }
+
+    if (this._cameraAnimation !== null)
+    {
+        this._cameraAnimation.destroy();
+        this._cameraAnimation = null;
+    }
+
+    this._viewer = null;
+
+    FORGE.BaseObject.prototype.destroy.call(this);
+};
+
+/**
+ * Get and set the camera configuration (default min &amp; max for all angles yaw, pitch, roll and fov).
+ * @name FORGE.Camera#config
+ * @type {CameraConfig}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "config",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        return this._config;
+    },
+
+    /** @this {FORGE.Camera} */
+    set: function(config)
+    {
+        this.load(config);
+    }
+});
+
+/**
+ * Get the keep flag
+ * @name FORGE.Camera#keep
+ * @type {boolean}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Camera.prototype, "keep",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        return this._keep;
+    }
+});
+
+/**
+ * Get and set the yaw value in degree.
+ * @name FORGE.Camera#yaw
+ * @type {number}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "yaw",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        return FORGE.Math.radToDeg(this._yaw);
+    },
+
+    /** @this {FORGE.Camera} */
+    set: function(value)
+    {
+        var yawChanged = this._setYaw(value, FORGE.Math.DEGREES);
+
+        if (yawChanged === true)
+        {
+            this._updateFromEuler();
+        }
+    }
+});
+
+/**
+ * Get the yaw min value.
+ * Return the most restrictive value between the camera value and the view value.
+ * @name FORGE.Camera#yawMin
+ * @type {number}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Camera.prototype, "yawMin",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        var boundaries = this._getYawBoundaries();
+        return FORGE.Math.radToDeg(boundaries.min);
+    }
+});
+
+/**
+ * Get the yaw max value.
+ * Return the most restrictive value between the camera value and the view value.
+ * @name FORGE.Camera#yawMax
+ * @type {number}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Camera.prototype, "yawMax",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        var boundaries = this._getYawBoundaries();
+        return FORGE.Math.radToDeg(boundaries.max);
+    }
+});
+
+/**
+ * Get and set the pitch value in degree.
+ * @name FORGE.Camera#pitch
+ * @type {number}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "pitch",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        return FORGE.Math.radToDeg(this._pitch);
+    },
+
+    /** @this {FORGE.Camera} */
+    set: function(value)
+    {
+        var pitchChanged = this._setPitch(value, FORGE.Math.DEGREES);
+
+        if (pitchChanged)
+        {
+            this._updateFromEuler();
+        }
+    }
+});
+
+/**
+ * Get the pitch min value.
+ * Return the most restrictive value between the camera value and the view value.
+ * @name FORGE.Camera#pitchMin
+ * @type {number}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Camera.prototype, "pitchMin",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        var boundaries = this._getPitchBoundaries();
+        return FORGE.Math.radToDeg(boundaries.min);
+    }
+});
+
+/**
+ * Get the pitch max value.
+ * Return the most restrictive value between the camera value and the view value.
+ * @name FORGE.Camera#pitchMax
+ * @type {number}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Camera.prototype, "pitchMax",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        var boundaries = this._getPitchBoundaries();
+        return FORGE.Math.radToDeg(boundaries.max);
+    }
+});
+
+/**
+ * Get and set the roll value in degree.
+ * @name FORGE.Camera#roll
+ * @type {number}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "roll",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        return FORGE.Math.radToDeg(this._roll);
+    },
+
+    /** @this {FORGE.Camera} */
+    set: function(value)
+    {
+        var rollChanged = this._setRoll(value, FORGE.Math.DEGREES);
+
+        if (rollChanged === true)
+        {
+            this._updateFromEuler();
+        }
+    }
+});
+
+/**
+ * Get the roll min value.
+ * Return the most restrictive value between the camera value and the view value.
+ * @name FORGE.Camera#rollMin
+ * @type {number}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Camera.prototype, "rollMin",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        var boundaries = this._getRollBoundaries();
+        return FORGE.Math.radToDeg(boundaries.min);
+    }
+});
+
+/**
+ * Get the roll max value.
+ * Return the most restrictive value between the camera value and the view value.
+ * @name FORGE.Camera#rollMax
+ * @type {number}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Camera.prototype, "rollMax",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        var boundaries = this._getRollBoundaries();
+        return FORGE.Math.radToDeg(boundaries.max);
+    }
+});
+
+/**
+ * Get and set the fov value in degree.
+ * @name FORGE.Camera#fov
+ * @type {number}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "fov",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        return FORGE.Math.radToDeg(this._fov);
+    },
+
+    /** @this {FORGE.Camera} */
+    set: function(value)
+    {
+        var fovChanged = this._setFov(value, FORGE.Math.DEGREES);
+
+        if (fovChanged === true)
+        {
+            this._updateFromEuler();
+        }
+    }
+});
+
+/**
+ * Get the fov min value.
+ * Return the most restrictive value between the camera value and the view value.
+ * @name FORGE.Camera#fovMin
+ * @type {number}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Camera.prototype, "fovMin",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        var boundaries = this._getFovBoundaries();
+        return FORGE.Math.radToDeg(boundaries.min);
+    }
+});
+
+/**
+ * Get the fov max value.
+ * Return the most restrictive value between the camera value and the view value.
+ * @name FORGE.Camera#fovMax
+ * @type {number}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Camera.prototype, "fovMax",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        var boundaries = this._getFovBoundaries();
+        return FORGE.Math.radToDeg(boundaries.max);
+    }
+});
+
+/**
+ * Get/set quaternion rotation object of the camera.
+ * Setter will update internal quaternion object
+ * @name FORGE.Camera#quaternion
+ * @readonly
+ * @type {THREE.Quaternion}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "quaternion",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        return this._quaternion;
+    },
+    /** @this {FORGE.Camera} */
+    set: function(value)
+    {
+        this._quaternion = value;
+        this._updateFromQuaternion();
+        this._updateComplete();
+    }
+});
+
+/**
+ * Get camera animation manager.
+ * @name FORGE.Camera#animation
+ * @readonly
+ * @type {FORGE.CameraAnimation}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "animation",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        if (this._cameraAnimation === null)
+        {
+            this._cameraAnimation = new FORGE.CameraAnimation(this._viewer, this);
+        }
+
+        return this._cameraAnimation;
+    }
+});
+
+/**
+ * Get/Set parallax setting.
+ * @name FORGE.Camera#parallax
+ * @type number
+ */
+Object.defineProperty(FORGE.Camera.prototype, "parallax",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        return this._parallax;
+    },
+    /** @this {FORGE.Camera} */
+    set: function(value)
+    {
+        this._parallax = FORGE.Math.clamp(value, 0, 1);
+        this._radius = this._parallax * FORGE.Camera.RADIUS;
+        this._updateComplete();
+    }
+});
+
+/**
+ * Get the modelView of the camera.
+ * @name FORGE.Camera#modelView
+ * @type {THREE.Matrix4}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "modelView",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        return this._modelView;
+    },
+    /** @this {FORGE.Camera} */
+    set: function(value)
+    {
+        this._modelView = value;
+        this._updateFromMatrix();
+        this._updateComplete();
+    }
+});
+
+/**
+ * Get the modelViewInverse of the camera.
+ * @name FORGE.Camera#modelViewInverse
+ * @readonly
+ * @type {THREE.Matrix4}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "modelViewInverse",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        return this._modelViewInverse;
+    }
+});
+
+/**
+ * Get the main THREE.PerspectiveCamera of the camera.
+ * @name FORGE.Camera#main
+ * @readonly
+ * @type {THREE.PerspectiveCamera}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "main",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        if (this._main === null)
+        {
+            this._createMainCamera();
+        }
+
+        return this._main;
+    }
+});
+
+/**
+ * Get the flat THREE.OrthographicCamera of the camera.
+ * @name FORGE.Camera#flat
+ * @readonly
+ * @type {THREE.OrthographicCamera}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "flat",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        if (this._flat === null)
+        {
+            this._createFlatCamera();
+        }
+
+        return this._flat;
+    }
+});
+
+/**
+ * Get the THREE.PerspectiveCamera radius.
+ * @name FORGE.Camera#perspectiveCameraRadius
+ * @readonly
+ * @type {number}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "perspectiveCameraRadius",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        return this._radius;
+    }
+});
+
+/**
+ * Get the left camera.
+ * @name FORGE.Camera#left
+ * @type {THREE.PerspectiveCamera}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Camera.prototype, "left",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        return this._left;
+    }
+});
+
+/**
+ * Get the right camera.
+ * @name FORGE.Camera#right
+ * @type {THREE.PerspectiveCamera}
+ * @readonly
+ */
+Object.defineProperty(FORGE.Camera.prototype, "right",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        return this._right;
+    }
+});
+
+/**
+ * Get the camera gaze.
+ * @name FORGE.Camera#gaze
+ * @readonly
+ * @type {FORGE.CameraGaze}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "gaze",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        return this._gaze;
+    }
+});
+
+/**
+ * Get the "onChange" {@link FORGE.EventDispatcher} of the camera.
+ * @name FORGE.Camera#onChange
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "onChange",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        if (this._onChange === null)
+        {
+            this._onChange = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onChange;
+    }
+});
+
+/**
+ * Get the "onOrientationChange" {@link FORGE.EventDispatcher} of the camera.
+ * @name FORGE.Camera#onOrientationChange
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "onOrientationChange",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        if (this._onOrientationChange === null)
+        {
+            this._onOrientationChange = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onOrientationChange;
+    }
+});
+
+/**
+ * Get the "onFovChange" {@link FORGE.EventDispatcher} of the camera.
+ * @name FORGE.Camera#onFovChange
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Camera.prototype, "onFovChange",
+{
+    /** @this {FORGE.Camera} */
+    get: function()
+    {
+        if (this._onFovChange === null)
+        {
+            this._onFovChange = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onFovChange;
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

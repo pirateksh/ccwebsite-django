@@ -1,0 +1,236 @@
+{
+    "playlists":
+    {
+        "volume":
+        {
+            "default": 0.5,
+            "max": 1.0
+        },
+
+        "default": "playlist-0",
+
+        "lists":
+        [
+            {
+                "uid": "playlist-0",
+                "name": "Playlist #1",
+                "default": "track-0",
+
+                "tracks": ["track-0", "track-1"]
+            },
+
+            {
+                "uid": "playlist-1",
+                "name": "Playlist #2",
+                "default": "track-2",
+
+                "tracks": ["track-2", "track-3"]
+            },
+
+            {
+                "uid": "playlist-2",
+                "name": "Playlist #3",
+                "default": "track-5",
+
+                "tracks": ["track-4", "track-5"]
+            }
+
+        ],
+
+        "tracks":
+        [
+            {
+                "uid": "track-0",
+                "author": "TinyWorlds",
+                "name": "Forest Ambience",
+                "url": "https://cdn.forgejs.org/samples/audio-playlists/Forest_Ambience.mp3"
+            },
+
+            {
+                "uid": "track-1",
+                "author": "Luftrum",
+                "name": "forestsurroundings",
+                "url": "https://cdn.forgejs.org/samples/audio-playlists/forestsurroundings.mp3"
+            },
+
+            {
+                "uid": "track-2",
+                "author": "cynicmusic",
+                "name": "Battle theme A",
+                "url": "https://cdn.forgejs.org/samples/audio-playlists/battleThemeA.mp3"
+            },
+
+            {
+                "uid": "track-3",
+                "author": "Sudocolon",
+                "name": "Space Ace",
+                "url": "https://cdn.forgejs.org/samples/audio-playlists/Logisector Intro.mp3"
+            },
+
+            {
+                "uid": "track-4",
+                "author": "Oddroom",
+                "name": "Samsara",
+                "url": "https://cdn.forgejs.org/samples/audio-playlists/samsara_0.mp3"
+            },
+
+            {
+                "uid": "track-5",
+                "author": "tebruno99",
+                "name": "The Rush",
+                "url": "https://cdn.forgejs.org/samples/audio-playlists/The Rush.mp3"
+            }
+        ]
+    },
+
+    "story":
+    {
+        "uid": "playlist-story",
+        "name": "Audio Playlists Story",
+        "slug": "playlist-story",
+        "description": "This is a demonstration of audio playlists applied to the scenes",
+        "default": "scene-1",
+
+        "scenes":
+        [
+            {
+                "uid": "scene-1",
+                "name": "First scene",
+                "slug": "first-scene",
+                "description": "This is the first scene",
+
+                "media":
+                {
+                    "uid": "media-1",
+                    "type": "image",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "url": "https://cdn.forgejs.org/samples/common/panos/01-forest.jpg"
+                    }
+                }
+            },
+            {
+                "uid": "scene-2",
+                "name": "Second scene",
+                "slug": "second-scene",
+                "description": "This is the second scene",
+
+                "media":
+                {
+                    "uid": "media-2",
+                    "type": "image",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "url": "https://cdn.forgejs.org/samples/common/panos/02-sand.jpg"
+                    }
+                },
+
+                "playlists":
+                {
+                    "default": "playlist-2"
+                }
+            },
+            {
+                "uid": "scene-3",
+                "name": "Third scene",
+                "slug": "third-scene",
+                "description": "This is the third and last scene",
+
+                "media":
+                {
+                    "uid": "media-3",
+                    "type": "image",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "url": "https://cdn.forgejs.org/samples/common/panos/03-snow.jpg"
+                    }
+                },
+
+                "playlists":
+                {
+                    "default": "playlist-1"
+                }
+            }
+        ]
+    },
+
+    "actions":
+    [
+        {
+            "uid": "action-next-track",
+            "target": "viewer.playlists",
+
+            "method":
+            {
+                "name": "nextTrack"
+            }
+        }
+    ],
+
+    "plugins":
+    {
+        "prefix": "../../plugins/",
+
+        "engines":
+        [
+            {
+                "uid": "org.forgejs.simplebutton",
+                "url": "SimpleButton/"
+            },
+
+            {
+                "uid": "org.forgejs.previousnextbuttons",
+                "url": "PreviousNextButtons/"
+            },
+
+            {
+                "uid": "org.forgejs.gyroscopebutton",
+                "url": "GyroscopeButton/"
+            }
+        ],
+
+        "instances":
+        [
+            {
+                "uid": "simplebutton-next-track",
+                "engine": "org.forgejs.simplebutton",
+
+                "options":
+                {
+                    "bottom": 10,
+                    "right": 10,
+                    "width": 100,
+                    "height": 50,
+                    "value": "Next track"
+                },
+
+                "events":
+                {
+                    "onClick": ["action-next-track"]
+                }
+            },
+
+            {
+                "uid": "previousnextbuttons",
+                "engine": "org.forgejs.previousnextbuttons"
+            },
+
+            {
+                "uid": "gyrobutton",
+                "engine": "org.forgejs.gyroscopebutton",
+
+                "options":
+                {
+                    "bottom": 10,
+                    "left": 10
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: audio/Playlist.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: audio/Playlist.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
+ * A FORGE.Playlist is an object that represents a list of media.
+ *
+ * @constructor FORGE.Playlist
+ * @param {FORGE.Viewer} viewer - The {@link FORGE.Viewer} reference.
+ * @param {AudioPlaylistConfig} config - The playlist config object.
+ * @extends {FORGE.BaseObject}
+ */
+FORGE.Playlist = function(viewer, config)
+{
+    /**
+     * The viewer reference.
+     * @name FORGE.Playlist#_viewer
+     * @type {FORGE.Viewer}
+     * @private
+     */
+    this._viewer = viewer;
+
+    /**
+     * The config object.
+     * @name FORGE.Playlist#_config
+     * @type {?AudioPlaylistConfig}
+     * @private
+     */
+    this._config = config;
+
+    /**
+     * Array of PlaylistTrack uid.
+     * @name FORGE.Playlist#_tracks
+     * @type {?Array&lt;string>}
+     * @private
+     */
+    this._tracks = null;
+
+    /**
+     * The name of the playlist.
+     * @name FORGE.Playlist#_name
+     * @type {?FORGE.LocaleString}
+     * @private
+     */
+    this._name = null;
+
+    /**
+     * The default track uid or index of the playlist.
+     * @name FORGE.Playlist#_defaultTrack
+     * @type {string}
+     * @private
+     */
+    this._defaultTrack = "";
+
+    /**
+     * UID of the current {@link FORGE.PlaylistTrack}.
+     * @name FORGE.Playlist#_trackUID
+     * @type {string}
+     * @private
+     */
+    this._trackUID = "";
+
+    /**
+     * The maximum volume for playlist.
+     * @name  FORGE.Playlist#_maxVolume
+     * @type {number}
+     * @private
+     */
+    this._maxVolume = 1;
+
+    /**
+     * The current volume of the playlist.
+     * Can't be greater than the maximum volume.
+     * @name FORGE.Playlist#_volume
+     * @type {number}
+     * @private
+     */
+    this._volume = 1;
+
+    /**
+     * Does the playlist will auto play?
+     * @name FORGE.Playlist#_autoPlay
+     * @type {boolean}
+     * @private
+     */
+    this._autoPlay = true;
+
+    /**
+     * Internal flag to know if the playlist must check the autoPlay property.
+     * @name  FORGE.Playlist#_checkAutoPlay
+     * @type {boolean}
+     * @private
+     */
+    this._checkAutoPlay = true;
+
+    /**
+     * Does the playlist will loop?
+     * @name FORGE.Playlist#_loop
+     * @type {boolean}
+     * @private
+     */
+    this._loop = true;
+
+    /**
+     * Playlist with tracks ready event dispatcher.
+     * @name FORGE.Playlist#_onReady
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onReady = null;
+
+    /**
+     * On playlist play event dispatcher.
+     * @name FORGE.Playlist#_onPlay
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onPlay = null;
+
+    /**
+     * On playlist stop event dispatcher.
+     * @name FORGE.Playlist#_onStop
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onStop = null;
+
+    /**
+     * On playlist pause event dispatcher.
+     * @name FORGE.Playlist#_onPause
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onPause = null;
+
+    /**
+     * On playlist resume event dispatcher.
+     * @name FORGE.Playlist#_onResume
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onResume = null;
+
+    /**
+     * On playlist ended event dispatcher.
+     * @name FORGE.Playlist#_onEnded
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onEnded = null;
+
+    FORGE.BaseObject.call(this, "Playlist");
+
+    this._boot();
+};
+
+FORGE.Playlist.prototype = Object.create(FORGE.BaseObject.prototype);
+FORGE.Playlist.prototype.constructor = FORGE.Playlist;
+
+/**
+ * Boot sequence.
+ * @method FORGE.Playlist#_boot
+ * @private
+ */
+FORGE.Playlist.prototype._boot = function()
+{
+    this._uid = this._config.uid;
+    this._register();
+    this._name = new FORGE.LocaleString(this._viewer, this._config.name);
+
+    this._tracks = [];
+
+    this._parseConfig(this._config);
+    this._parseTracks(this._config);
+};
+
+/**
+ * Parse playlist config.
+ * @method FORGE.Playlist#_parseConfig
+ * @private
+ * @param {AudioPlaylistConfig} config - The object that describes the playlist config.
+ */
+FORGE.Playlist.prototype._parseConfig = function(config)
+{
+    this._autoPlay = typeof config.autoPlay !== "undefined" ? Boolean(config.autoPlay) : true;
+    this._loop = typeof config.loop !== "undefined" ? Boolean(config.loop) : true;
+
+    this._maxVolume = (typeof config.volume !== "undefined" &amp;&amp; typeof config.volume.max === "number") ? FORGE.Math.clamp(config.volume.max, 0, 1) : 1;
+    this._volume = (typeof config.volume !== "undefined" &amp;&amp; typeof config.volume.default === "number") ? FORGE.Math.clamp(config.volume.default, 0, this._maxVolume) : FORGE.Math.clamp(1, 0, this._maxVolume);
+};
+
+/**
+ * Parse playlist tracks.
+ * @method FORGE.Playlist#_parseTracks
+ * @private
+ * @param {AudioPlaylistConfig} config - The object that describes the playlist config.
+ */
+FORGE.Playlist.prototype._parseTracks = function(config)
+{
+    if(typeof config.tracks !== "undefined" &amp;&amp; FORGE.Utils.isArrayOf(config.tracks, "string") === true)
+    {
+        this._tracks = config.tracks;
+    }
+    else
+    {
+        this.warn("A playlist has no track in its configuration, or configuration is not valid!");
+    }
+
+    //Parse the default track of the playlist
+    if(typeof config.default === "string" &amp;&amp; config.default !== "")
+    {
+        this._defaultTrack = config.default;
+    }
+    else if(typeof config.default === "number" &amp;&amp; config.default >= 0 &amp;&amp; config.default &lt; this._tracks.length)
+    {
+        this._defaultTrack = this._tracks[config.default].uid;
+    }
+    else
+    {
+        this.warn("A playlist has a default track that is not in its tracks array!");
+    }
+
+    this._trackUID = this._defaultTrack;
+
+    if(this._onReady !== null)
+    {
+        this._onReady.dispatch();
+    }
+};
+
+/**
+ * Event handler that triggers when the current track ends, set the next track to play.
+ * @method FORGE.Playlist#_trackEndHandler
+ * @private
+ */
+FORGE.Playlist.prototype._trackEndHandler = function()
+{
+    if(this._tracks.length > 0)
+    {
+        var index = this._tracks.indexOf(this._trackUID) + 1;
+
+        // loop if playlist loop is activated and track doesn't loop.
+        if(index === this._tracks.length &amp;&amp; (this._loop === false || this.track.loop === true))
+        {
+            // reset to the first track of the playlist for next call to play
+            this._trackUID = this._tracks[0];
+            return;
+        }
+    }
+
+    this.nextTrack();
+};
+
+/**
+ * Dispatch play event to the track
+ * @method  FORGE.Playlist#_notifyPlay
+ * @private
+ */
+FORGE.Playlist.prototype._notifyPlay = function()
+{
+    if(this._onPlay !== null)
+    {
+        this._onPlay.dispatch();
+    }
+};
+
+/**
+ * Dispatch stop event to the track
+ * @method  FORGE.Playlist#_notifyStop
+ * @private
+ */
+FORGE.Playlist.prototype._notifyStop = function()
+{
+    if(this._onStop !== null)
+    {
+        this._onStop.dispatch();
+    }
+};
+
+/**
+ * Dispatch pause event to the track
+ * @method  FORGE.Playlist#_notifyPause
+ * @private
+ */
+FORGE.Playlist.prototype._notifyPause = function()
+{
+    if(this._onPause !== null)
+    {
+        this._onPause.dispatch();
+    }
+};
+
+/**
+ * Dispatch resume event to the track
+ * @method  FORGE.Playlist#_notifyResume
+ * @private
+ */
+FORGE.Playlist.prototype._notifyResume = function()
+{
+    if(this._onResume !== null)
+    {
+        this._onResume.dispatch();
+    }
+};
+
+/**
+ * Dispatch ended event to the track
+ * @method  FORGE.Playlist#_notifyEnded
+ * @private
+ */
+FORGE.Playlist.prototype._notifyEnded = function()
+{
+    if(this._onEnded !== null)
+    {
+        this._onEnded.dispatch();
+    }
+};
+
+/**
+ * Know if the playlist have any {@link FORGE.PlaylistTrack}.
+ * @method FORGE.Playlist#hasTracks
+ * @return {boolean} Returns true if the playlist has at least a {@link FORGE.PlaylistTrack}, false if not.
+ */
+FORGE.Playlist.prototype.hasTracks = function()
+{
+    return this._tracks.length !== 0;
+};
+
+/**
+ * Play the current track or set a track to be the current one then play it.
+ * @method FORGE.Playlist#play
+ * @param {?FORGE.PlaylistTrack|string|number=} track - The track you want to play or its uid or its index, if undefined, play the current track.
+ * @param {boolean=} checkAutoPlay - Does the autoPlay status must be checked?
+ * @return {FORGE.PlaylistTrack} Returns the playing track.
+ */
+FORGE.Playlist.prototype.play = function(track, checkAutoPlay)
+{
+    this._checkAutoPlay = typeof checkAutoPlay !== "undefined" ? checkAutoPlay : false;
+
+    var uid;
+
+    if(typeof track === "string" &amp;&amp; FORGE.UID.isTypeOf(track, "PlaylistTrack"))
+    {
+        uid = track;
+    }
+    else if(FORGE.Utils.isTypeOf(track, "PlaylistTrack"))
+    {
+        uid = track.uid;
+    }
+    else if (typeof track === "number" &amp;&amp; track >= 0 &amp;&amp; track &lt; this._tracks.length)
+    {
+        uid = this._tracks[track];
+    }
+    else if(this._trackUID !== "")
+    {
+        uid = this._trackUID;
+    }
+    else if(typeof track === "undefined" || track === "")
+    {
+        uid = this._tracks[0];
+    }
+
+    if(typeof uid !== "undefined")
+    {
+        this.stop();
+
+        this._trackUID = uid;
+
+        if (this._checkAutoPlay === true &amp;&amp; this._autoPlay === false)
+        {
+            this.warn("FORGE.Playlist.play(); autoPlay is disabled");
+            return this.track;
+        }
+
+        this.track.play();
+
+        if(this.track.onEnded.has(this._trackEndHandler, this) === false)
+        {
+            this.track.onEnded.add(this._trackEndHandler, this);
+        }
+
+        this.log("FORGE.Playlist.play(); [uid: "+this._trackUID+"]");
+
+        return this.track;
+    }
+
+    return null;
+};
+
+/**
+ * Stop the current track.
+ * @method FORGE.Playlist#stop
+ */
+FORGE.Playlist.prototype.stop = function()
+{
+    if(this.track !== null)
+    {
+        this.track.stop();
+
+        if(typeof this.track.onEnded !== "undefined" &amp;&amp; this.track.onEnded.has(this._trackEndHandler, this) === false)
+        {
+            this.track.onEnded.remove(this._trackEndHandler, this);
+        }
+    }
+};
+
+/**
+ * Pause the current track.
+ * @method FORGE.Playlist#pause
+ */
+FORGE.Playlist.prototype.pause = function()
+{
+    if(this.track !== null)
+    {
+        this.track.pause();
+    }
+};
+
+/**
+ * Resume the current track if it's paused.
+ * @method FORGE.Playlist#resume
+ */
+FORGE.Playlist.prototype.resume = function()
+{
+    if(this.track !== null)
+    {
+        this.track.resume();
+    }
+};
+
+/**
+ * Set the next {@link FORGE.PlaylistTrack} to be the current track.
+ * If the playlist is paused, keep the pause status of the playlist.
+ * @method FORGE.Playlist#nextTrack
+ */
+FORGE.Playlist.prototype.nextTrack = function()
+{
+    var index = -1;
+
+    if(this._tracks.length > 0)
+    {
+        index = this._tracks.indexOf(this._trackUID) + 1;
+
+        if(index === this._tracks.length)
+        {
+            index = 0;
+        }
+    }
+
+    this.play(index, this._checkAutoPlay);
+
+    if(this.paused === true)
+    {
+        this.pause();
+    }
+};
+
+/**
+ * Set the previous {@link FORGE.PlaylistTrack} to be the current track.
+ * If the playlist is paused, keep the pause status of the playlist.
+ * @method FORGE.Playlist#previousTrack
+ */
+FORGE.Playlist.prototype.previousTrack = function()
+{
+    var index = -1;
+
+    if(this._tracks.length > 0)
+    {
+        index = this._tracks.indexOf(this._trackUID) - 1;
+
+        if(index === -1)
+        {
+            index = this._tracks.length - 1;
+        }
+    }
+
+    this.play(index, this._checkAutoPlay);
+
+    if(this.paused === true)
+    {
+        this.pause();
+    }
+};
+
+/**
+ * Destroy sequence
+ * @method FORGE.Playlist#destroy
+ */
+FORGE.Playlist.prototype.destroy = function()
+{
+    this.stop();
+
+    this._viewer = null;
+
+    this._name.destroy();
+    this._name = null;
+
+    if(this._tracks.length > 0)
+    {
+        this._tracks.length = 0;
+        this._tracks = null;
+    }
+
+    this._config = null;
+
+    FORGE.BaseObject.prototype.destroy.call(this);
+};
+
+/**
+ * Get the list of tracks of this playlist.
+ * @name FORGE.Playlist#tracks
+ * @readonly
+ * @type {Array&lt;string>}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "tracks",
+{
+    /** @this {FORGE.Playlist} */
+    get: function ()
+    {
+        return this._tracks;
+    }
+});
+
+/**
+ * Get the name of this playlist.
+ * @name FORGE.Playlist#name
+ * @readonly
+ * @type {string}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "name",
+{
+    /** @this {FORGE.Playlist} */
+    get: function ()
+    {
+        return this._name.value;
+    }
+});
+
+/**
+ * Get the ready status of this playlist current track.
+ * @name FORGE.Playlist#ready
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "ready",
+{
+    /** @this {FORGE.Playlist} */
+    get: function()
+    {
+        if(this.track !== null)
+        {
+            return this.track.ready;
+        }
+
+        return false;
+    }
+});
+
+/**
+ * Get the decoded status of this playlist current track.
+ * @name FORGE.Playlist#decoded
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "decoded",
+{
+    /** @this {FORGE.Playlist} */
+    get: function()
+    {
+        if(this.track !== null)
+        {
+            return this.track.decoded;
+        }
+
+        return false;
+    }
+});
+
+/**
+ * Get the playing status of this playlist current track.
+ * @name FORGE.Playlist#playing
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "playing",
+{
+    /** @this {FORGE.Playlist} */
+    get: function()
+    {
+        if(this.track !== null)
+        {
+            return this.track.playing;
+        }
+
+        return false;
+    }
+});
+
+/**
+ * Get the paused status of this playlist current track.
+ * @name FORGE.Playlist#paused
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "paused",
+{
+    /** @this {FORGE.Playlist} */
+    get: function()
+    {
+        if(this.track !== null)
+        {
+            return this.track.paused;
+        }
+
+        return false;
+    }
+});
+
+/**
+ * Get the current {@link FORGE.PlaylistTrack} of this playlist.
+ * @name FORGE.Playlist#track
+ * @readonly
+ * @type {FORGE.PlaylistTrack}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "track",
+{
+    /** @this {FORGE.Playlist} */
+    get: function()
+    {
+        if(FORGE.UID.isTypeOf(this._trackUID, "PlaylistTrack") === true)
+        {
+            return FORGE.UID.get(this._trackUID, "PlaylistTrack");
+        }
+
+        return null;
+    }
+});
+
+/**
+ * Get and set the loop state of the playlist.
+ * @name FORGE.Playlist#loop
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "loop",
+{
+    /** @this {FORGE.Playlist} */
+    get: function()
+    {
+        return this._loop;
+    },
+
+    /** @this {FORGE.Playlist} */
+    set: function(value)
+    {
+        this._loop = Boolean(value);
+    }
+});
+
+/**
+ * Get and set the auto play state of the playlist.
+ * @name FORGE.Playlist#autoPlay
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "autoPlay",
+{
+    /** @this {FORGE.Playlist} */
+    get: function()
+    {
+        return this._autoPlay;
+    },
+
+    /** @this {FORGE.Playlist} */
+    set: function(value)
+    {
+        this._autoPlay = Boolean(value);
+    }
+});
+
+/**
+ * Get the playlist volume.
+ * @name FORGE.Playlist#volume
+ * @type {number}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "volume",
+{
+    /** @this {FORGE.Playlist} */
+    get: function()
+    {
+        return this._volume;
+    },
+
+    /** @this {FORGE.Playlist} */
+    set: function(value)
+    {
+        if(typeof value !== "number")
+        {
+            return;
+        }
+
+        value = FORGE.Math.clamp(value, 0, 1);
+        if(this._maxVolume &lt; value)
+        {
+            this._volume = this._maxVolume;
+        }
+        else
+        {
+            this._volume = value;
+        }
+
+        if(FORGE.UID.isTypeOf(this._trackUID, "PlaylistTrack") === true)
+        {
+            var track = FORGE.UID.get(this._trackUID, "PlaylistTrack");
+
+            if(track !== null)
+            {
+                track.volume = this._volume * this._viewer.playlists.volume;
+            }
+        }
+    }
+});
+
+/**
+ * Get the "onPlay" event {@link FORGE.EventDispatcher} of the playlist.
+ * @name FORGE.Playlist#onPlay
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "onPlay",
+{
+    /** @this {FORGE.Playlist} */
+    get: function()
+    {
+        if(this._onPlay === null)
+        {
+            this._onPlay = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onPlay;
+    }
+});
+
+/**
+ * Get the "onStop" event {@link FORGE.EventDispatcher} of the playlist.
+ * @name FORGE.Playlist#onStop
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "onStop",
+{
+    /** @this {FORGE.Playlist} */
+    get: function()
+    {
+        if(this._onStop === null)
+        {
+            this._onStop = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onStop;
+    }
+});
+
+/**
+ * Get the "onPause" event {@link FORGE.EventDispatcher} of the playlist.
+ * @name FORGE.Playlist#onPause
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "onPause",
+{
+    /** @this {FORGE.Playlist} */
+    get: function()
+    {
+        if(this._onPause === null)
+        {
+            this._onPause = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onPause;
+    }
+});
+
+/**
+ * Get the "onResume" event {@link FORGE.EventDispatcher} of the playlist.
+ * @name FORGE.Playlist#onResume
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "onResume",
+{
+    /** @this {FORGE.Playlist} */
+    get: function()
+    {
+        if(this._onResume === null)
+        {
+            this._onResume = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onResume;
+    }
+});
+
+/**
+ * Get the "onEnded" event {@link FORGE.EventDispatcher} of the playlist.
+ * @name FORGE.Playlist#onEnded
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "onEnded",
+{
+    /** @this {FORGE.Playlist} */
+    get: function()
+    {
+        if(this._onEnded === null)
+        {
+            this._onEnded = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onEnded;
+    }
+});
+
+/**
+ * Get the "onReady" {@link FORGE.EventDispatcher} of the playlist.
+ * @name FORGE.Playlist#onReady
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Playlist.prototype, "onReady",
+{
+    /** @this {FORGE.Playlist} */
+    get: function()
+    {
+        if(this._onReady === null)
+        {
+            this._onReady = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onReady;
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

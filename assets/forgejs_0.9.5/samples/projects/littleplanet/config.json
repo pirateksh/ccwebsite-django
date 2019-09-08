@@ -1,0 +1,77 @@
+{
+    "view":
+    {
+        "type": "GoPro"
+    },
+
+    "story":
+    {
+        "uid": "littleplanet-story",
+        "name": "Little planet Story",
+        "slug": "littleplanet-story",
+        "description": "This is the little planet project",
+        "default": "scene-0",
+
+        "scenes":
+        [
+            {
+                "uid": "scene-0",
+                "name": "First scene",
+                "slug": "first-scene",
+                "description": "This is the first and only scene",
+
+                "media":
+                {
+                    "uid": "media-0",
+                    "type": "image",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "url": "https://cdn.forgejs.org/samples/common/panos/01-forest.jpg"
+                    }
+                },
+
+                "camera":
+                {
+                    "pitch":
+                    {
+                        "default": -90
+                    },
+
+                    "fov":
+                    {
+                        "default": 220
+                    }
+                }
+            }
+        ]
+    },
+
+    "plugins":
+    {
+        "prefix": "../../plugins/",
+
+        "engines":
+        [
+            {
+                "uid": "org.forgejs.gyroscopebutton",
+                "url": "GyroscopeButton/"
+            }
+        ],
+
+        "instances":
+        [
+            {
+                "uid": "gyrobutton",
+                "engine": "org.forgejs.gyroscopebutton",
+
+                "options":
+                {
+                    "bottom": 10,
+                    "left": 10
+                }
+            }
+        ]
+    }
+}

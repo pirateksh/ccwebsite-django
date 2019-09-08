@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>JSON Reference</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css" media="screen,projection" charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="static/fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="static/forge-iframe.css">
+    <script type="text/javascript">
+        function updateLink()
+        {
+            var url, slug, links = document.getElementsByTagName('a');
+
+            for (var i = 0, ii = links.length; i < ii; i++)
+            {
+                if (!links[i].classList.contains('out'))
+                {
+                    url = links[i].href.replace(/(.+\/)\w+\.html#([\w\-]+)/, function(match, p1, p2) {
+                        var subRefs = p2.split('-');
+
+                        if (subRefs.length > 1)
+                        {
+                            slug = subRefs[0] + '/' + p2;
+                            return p1 + subRefs[0] + '.html#' + p2;
+                        } else {
+                            slug = p2;
+                            return p1 + p2 + '.html'
+                        }
+                    });
+
+                    links[i].href = 'javascript:window.parent.goTo("' + url + '", "' + slug + '");';
+                }
+            }
+        }
+    </script>
+</head>
+<body data-spy="scroll" data-target="#navbar" onload="updateLink()">
+<br>
+
+<article>
+    <header class="col-lg-12">
+        <h2>Audio</h2>
+        <p class="lead">The global audio volume configuration, valid for either video and audio track. Volume can be changed for a video and an audio track, but take into account that this global audio config has still an effect on those others audio configuration.</p>
+    </header>
+
+    
+    <section class="col-lg-12">
+        <h4>Example :</h4>
+        <small class="example-code"><pre>{
+  &quot;enabled&quot;: true,
+  &quot;volume&quot;: {
+    &quot;default&quot;: 1,
+    &quot;max&quot;: 1
+  }
+}</pre></small>
+    </section>
+    
+
+    <section id="audioconfig" class="col-lg-12">
+        <section id="audioconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="audio">
+                        audio
+                        <a href="#audio" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            enabled
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>true</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Is the audio interface enabled ?<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>true</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            volume
+        </th>
+        <td class="param-type">
+                <em>object</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The configuration of <a href="#audio-volume">the volume of the audio.</a><br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="audiovolumeconfig" class="col-lg-12">
+        <section id="audiovolumeconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="audio-volume">
+                        audio-volume
+                        <a href="#audio-volume" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            default
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>1</code></small></span><br>
+
+
+            <span class="param-max"><small>max: <code>1</code></small></span><br>
+        </td>
+        <td class="param-description object-definition-param-description">
+            The default value of the volume.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>1</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            max
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>1</code></small></span><br>
+
+
+            <span class="param-max"><small>max: <code>1</code></small></span><br>
+        </td>
+        <td class="param-description object-definition-param-description">
+            The maximum value of the volume.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>1</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+</article>
+</body>
+</html>

@@ -1,0 +1,202 @@
+{
+    "story":
+    {
+        "uid": "toolbox-plugin-demo",
+        "name": "Toolbox Plugin Demo",
+        "slug": "toolbox-plugin-demo",
+        "description": "Demonstrates the Toolbox plugin",
+        "default": "scene-0",
+
+        "scenes":
+        [
+            {
+                "uid": "scene-0",
+                "name": "First scene",
+                "slug": "first-scene",
+                "description": "This is the first scene",
+
+                "media":
+                {
+                    "uid": "media-0",
+                    "type": "image",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "url": "https://cdn.forgejs.org/samples/common/panos/01-forest.jpg"
+                    }
+                },
+
+                "hotspots":
+                [
+                    {
+                        "uid": "hotspot-3d-0",
+                        "facingCenter": true,
+
+                        "transform":
+                        {
+                            "position":
+                            {
+                                "radius": 300,
+                                "theta": -25
+                            }
+                        },
+
+                        "geometry":
+                        {
+                            "type": "plane",
+                            "options":
+                            {
+                                "width": 60,
+                                "height": 60
+                            }
+                        },
+
+                        "material":
+                        {
+                            "image": "https://cdn.forgejs.org/samples/common/images/spot-0.png",
+                            "transparent": true
+                        }
+                    },
+
+                    {
+                        "uid": "hotspot-3d-1",
+                        "facingCenter": true,
+
+                        "transform":
+                        {
+                            "position":
+                            {
+                                "radius": 300,
+                                "theta": 25
+                            }
+                        },
+
+                        "geometry":
+                        {
+                            "type": "plane",
+                            "options":
+                            {
+                                "width": 60,
+                                "height": 60
+                            }
+                        },
+
+                        "material":
+                        {
+                            "image": "https://cdn.forgejs.org/samples/common/images/spot-1.png",
+                            "transparent": true
+                        }
+                    }
+                ]
+            },
+
+            {
+                "uid": "scene-1",
+                "name": "Second scene",
+                "slug": "second-scene",
+                "description": "This is the second scene",
+
+                "media":
+                {
+                    "uid": "media-1",
+                    "type": "image",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "url": "https://cdn.forgejs.org/samples/common/panos/02-sand.jpg"
+                    }
+                }
+            },
+
+            {
+                "uid": "scene-2",
+                "name": "Third scene",
+                "slug": "third-scene",
+                "description": "This is the third scene",
+
+                "media":
+                {
+                    "uid": "media-2",
+                    "type": "image",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "url": "https://cdn.forgejs.org/samples/common/panos/03-snow.jpg"
+                    }
+                }
+            },
+
+            {
+                "uid": "scene-3",
+                "name": "Fourth scene",
+                "slug": "fourth-scene",
+                "description": "This is the fourth and last scene",
+
+                "media":
+                {
+                    "uid": "media-3",
+                    "type": "image",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "url": "https://cdn.forgejs.org/samples/common/panos/04-dragon.jpg"
+                    }
+                }
+            }
+        ],
+
+        "groups":
+        [
+            {
+                "uid": "group-0",
+                "children": ["scene-0", "scene-1"]
+            },
+
+            {
+                "uid": "group-1",
+                "children": ["scene-2", "scene-3"]
+            }
+        ]
+    },
+
+    "plugins":
+    {
+        "prefix": "../../plugins/",
+
+        "engines":
+        [
+            {
+                "uid": "org.forgejs.webvrbutton",
+                "url": "WebVRButton/"
+            },
+
+            {
+                "uid": "org.forgejs.toolbox",
+                "url": "Toolbox/"
+            }
+        ],
+
+        "instances":
+        [
+            {
+                "uid": "webvrbutton",
+                "engine": "org.forgejs.webvrbutton",
+
+                "options":
+                {
+                    "bottom": 10,
+                    "right": 10
+                }
+            },
+
+            {
+                "uid": "toolbox",
+                "engine": "org.forgejs.toolbox"
+            }
+        ]
+    }
+}

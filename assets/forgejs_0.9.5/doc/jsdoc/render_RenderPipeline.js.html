@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: render/RenderPipeline.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: render/RenderPipeline.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * FXComposer class.
+ *
+ * @constructor FORGE.RenderPipeline
+ * @param {FORGE.Viewer} viewer - viewer reference
+ * @extends {FORGE.BaseObject}
+ *
+ * @todo think about how to render multiple scene at the same time, with blending / overlap / viewport layouting...
+ * maybe add a layer object encapsulating background / foreground renderings to ease the process
+ */
+FORGE.RenderPipeline = function(viewer)
+{
+    /**
+     * The viewer reference.
+     * @name FORGE.RenderPipeline#_viewer
+     * @type {FORGE.Viewer}
+     * @private
+     */
+    this._viewer = viewer;
+
+    /**
+     * Render composer
+     * @name FORGE.RenderPipeline#_renderComposer
+     * @type {FORGE.EffectComposer}
+     * @private
+     */
+    this._renderComposer = null;
+
+    /**
+     * Sub composers array, created for each pass including texture/render + some shaders
+     * @name FORGE.RenderPipeline#_subComposers
+     * @type {Array&lt;FORGE.EffectComposer>}
+     * @private
+     */
+    this._subComposers = null;
+
+    /**
+     * Internal clock used to feed time to effect shaders
+     * @name FORGE.RenderPipeline#_clock
+     * @type {THREE.Clock}
+     * @private
+     */
+    this._clock = null;
+
+    /**
+     * Enabled status flag
+     * @name FORGE.RenderPipeline#_enabled
+     * @type boolean
+     * @private
+     */
+    this._enabled = true;
+
+    FORGE.BaseObject.call(this, "RenderPipeline");
+
+    this._boot();
+};
+
+FORGE.RenderPipeline.prototype = Object.create(FORGE.BaseObject.prototype);
+FORGE.RenderPipeline.prototype.constructor = FORGE.RenderPipeline;
+
+/**
+ * Boot sequence
+ * @method FORGE.RenderPipeline#_boot
+ * @private
+ */
+FORGE.RenderPipeline.prototype._boot = function()
+{
+    this._clock = new THREE.Clock();
+    this._subComposers = [];
+
+    this._renderComposer = new FORGE.EffectComposer(FORGE.EffectComposerType.MAIN, this._viewer.renderer.webGLRenderer);
+};
+
+/**
+ * Get pass type of a THREE.Pass
+ * @method FORGE.RenderPipeline#_getPassType
+ * @param {THREE.Pass} pass - THREE pass object
+ * @private
+ * @return {string} - Returns the pass type.
+ */
+FORGE.RenderPipeline.prototype._getPassType = function(pass)
+{
+    if (pass instanceof FORGE.TexturePass)
+    {
+        if (pass.hasOwnProperty("map"))
+        {
+            var uid = pass.map.uuid.split("-")[0].slice(0, 4);
+            return "Texture(" + uid + ")";
+        }
+        return "Texture";
+    }
+
+    if (pass instanceof FORGE.RenderPass)
+    {
+        return "Render";
+    }
+
+    if (pass instanceof THREE.ClearMaskPass)
+    {
+        return "ClearMask";
+    }
+
+    if (pass instanceof THREE.MaskPass)
+    {
+        return "Mask";
+    }
+
+    if (pass instanceof FORGE.ShaderPass)
+    {
+        return "Shader(" + pass.type.replace("Shader", "") + ")";
+    }
+
+    return "Pass";
+};
+
+/**
+ * Dump some effect composer to console output
+ * @method FORGE.RenderPipeline#_dumpComposer
+ * @param {FORGE.EffectComposer} composer - The effect composer to dump
+ * @private
+ */
+FORGE.RenderPipeline.prototype._dumpComposer = function(composer)
+{
+    this.log("COMPOSER: " + composer.name);
+
+    if (composer.passes.length === 0 )
+    {
+        return;
+    }
+
+    var types = [];
+    var typesLength = 0;
+
+    for (var i = 0, ii = composer.passes.length; i &lt; ii; i++)
+    {
+        var typei = this._getPassType(composer.passes[i]);
+        types.push(typei);
+        typesLength += typei.length;
+    }
+
+    // Header/Footer
+    var hdft = "";
+    for (var j = 0, jj = types.length; j &lt; jj; j++)
+    {
+        var type = types[j];
+
+        hdft += "| ";
+        for (var m=0; m&lt;type.length; m++)
+        {
+            hdft += "-";
+        }
+        hdft += " |";
+
+        if (j &lt; jj - 1)
+        {
+            for (var l=0; l&lt;5; l++)
+            {
+                hdft += " ";
+            }
+        }
+    }
+
+    // Header
+    this.log(hdft);
+
+    // Types
+    var line = "";
+    for (var k = 0, kk = types.length; k &lt; kk; k++)
+    {
+        var typek = types[k];
+        line += "| " + typek + " |";
+        if (k &lt; kk - 1)
+        {
+            line += " --- ";
+        }
+    }
+
+    // Add composer output texture to the line if not render to screen
+    if (composer.passes[composer.passes.length - 1].renderToScreen === false)
+    {
+        line += " --- tex";
+        if (composer.readBuffer !== null &amp;&amp; typeof composer.readBuffer.name !== "undefined")
+        {
+            line += "(" + composer.readBuffer.name + ")";
+        };
+        // line += " --- tex";
+    }
+
+    this.log(line);
+
+    // Footer
+    this.log(hdft);
+};
+
+/**
+ * Dump whole composing pipeline to console output
+ * @method FORGE.RenderPipeline#_dumpPipeline
+ * @private
+ */
+FORGE.RenderPipeline.prototype._dumpPipeline = function()
+{
+    for (var i = 0, ii = this._subComposers.length; i &lt; ii; i++)
+    {
+        var composer = this._subComposers[i];
+        this._dumpComposer(composer);
+    }
+
+    this._dumpComposer(this._renderComposer);
+};
+
+/**
+ * Add a subcomposer to compositing pipeline
+ * Add subcomposer to inner list and add a texture pass drawing subcomposer output
+ * @method FORGE.RenderPipeline#_addSubComposer
+ * @param {FORGE.EffectComposer} subComposer - new effect composer
+ * @param {boolean} renderToTarget - subcomposer should render to target
+ * @private
+ */
+FORGE.RenderPipeline.prototype._addSubComposer = function(subComposer, renderToTarget)
+{
+    // Add a ForgeJS object into subcomposer to set some private properties
+    this._subComposers.push(subComposer);
+
+    if (renderToTarget === false)
+    {
+        var additionPass = new FORGE.AdditionPass(subComposer);
+        this._renderComposer.addPass(additionPass);
+    }
+
+    this._updateRenderPipeline();
+};
+
+/**
+ * Add shader passes to an effect composer
+ * @method FORGE.RenderPipeline#_addShaderPasses
+ * @param {FORGE.EffectComposer} composer - effect composer
+ * @param {Array&lt;THREE.Pass>|THREE.Pass} passes - pass or array of passes to be added to the composer
+ * @param {number=} index - index where passes should be inserted
+ * @private
+ */
+FORGE.RenderPipeline.prototype._addShaderPasses = function(composer, passes, index)
+{
+    index = typeof index !== "undefined" ? index : composer.passes.length;
+
+    if (Array.isArray(passes))
+    {
+        for (var i = passes.length - 1; i >= 0; i--)
+        {
+            var shaderPass = passes[i];
+            composer.insertPass(shaderPass, index);
+        }
+    }
+    else if (passes instanceof THREE.Pass)
+    {
+        var shaderThreePass = passes;
+        composer.insertPass(shaderThreePass, index);
+    }
+};
+
+/**
+ * Change status of all shader passes in a composer
+ * @method FORGE.RenderPipeline#_setComposerShaderPassesStatus
+ * @param {FORGE.EffectComposer} composer - effect composer.
+ * @param {boolean} status - The status you want to set.
+ * @private
+ */
+FORGE.RenderPipeline.prototype._setComposerShaderPassesStatus = function(composer, status)
+{
+    if (status === false)
+    {
+        this._enabled = false;
+    }
+
+    for (var i = composer.passes.length - 1; i >= 0; i--)
+    {
+        var pass = composer.passes[i];
+
+        // Enable/disable shader passes except for Addition passes
+        if (pass instanceof THREE.ShaderPass)
+        {
+            if (pass instanceof FORGE.AdditionPass)
+            {
+                continue;
+            }
+
+            pass.enabled = status;
+        }
+    }
+
+    if (composer.hasOwnProperty("enabled"))
+    {
+        composer.enabled = status;
+    }
+
+    this._updateRenderPipeline();
+};
+
+/**
+ * Set all shader passes status
+ * @method FORGE.RenderPipeline#_setAllShaderPassesStatus
+ * @param {boolean} status - new shader passes status.
+ * @private
+ */
+FORGE.RenderPipeline.prototype._setAllShaderPassesStatus = function(status)
+{
+    var composers = this._subComposers.concat(this._renderComposer);
+
+    for (var i = 0, ii = composers.length; i &lt; ii; i++)
+    {
+        var composer = composers[i];
+        this._setComposerShaderPassesStatus(composer, status);
+    }
+
+    this._enabled = status;
+};
+
+/**
+ * Update rendering pipeline
+ * Called whenever pipeline has changed to optimize the render stream.
+ * @method FORGE.RenderPipeline#_updateRenderPipeline
+ * @private
+ */
+FORGE.RenderPipeline.prototype._updateRenderPipeline = function()
+{
+    // First check render composer order
+    // background passes --> render passes --> global passes
+    var passes = this._renderComposer.passes;
+
+    // Collect background passes in reverse order and reinsert them at zero index
+    var backgrounds = [];
+
+    passes.filter(function(element, index) //array
+    {
+        if (element.position === FORGE.PassPosition.BACKGROUND)
+        {
+            backgrounds.push(index);
+        }
+    });
+
+    if (backgrounds.length > 0 &amp;&amp; backgrounds[0] > 0)
+    {
+        var bgdPasses = [];
+
+        for (var i = backgrounds.length - 1; i >= 0; i--)
+        {
+            var index = backgrounds[i];
+            var passi = passes.splice(index, 1)[0];
+            bgdPasses.push(passi);
+        }
+
+        for (var j = 0, jj = bgdPasses.length; j &lt; jj; j++)
+        {
+            this._renderComposer.insertPass(bgdPasses[j], 0);
+        }
+    }
+
+    // Collect global passes in normal order and reinsert them at the end
+    var globals = [];
+    passes.filter(function(element, index) //array
+    {
+        if (element.position === FORGE.PassPosition.GLOBAL)
+        {
+            globals.push(index);
+        }
+    });
+
+    // Check if last global pass is at the end of passes array
+    if (globals.length > 0 &amp;&amp; globals[globals.length - 1] &lt; passes.length - 1)
+    {
+        var globalPasses = [];
+
+        for (var k = 0, kk = globals.length; k &lt; kk; k++)
+        {
+            var indexk = globals[k];
+            var passk = passes.splice(indexk, 1)[0];
+            globalPasses.push(passk);
+        }
+
+        for (var l = 0, ll = globalPasses.length; l &lt; ll; l++)
+        {
+            var passl = globalPasses[l];
+            this._renderComposer.addPass(passl);
+        }
+    }
+
+    // Only first pass of each composer should clear the target
+    for (var m = 0, mm = this._subComposers.length; m &lt; mm; m++)
+    {
+        var composer = this._subComposers[m];
+
+        // First check if a composer share a target with another one
+        // Then only the first should clear the target
+        var sharingTarget = false;
+        var s, ss = this._subComposers.length;
+        for (s = 0; s &lt; ss; s++)
+        {
+            if (s === m)
+            {
+                continue;
+            }
+
+            var anotherComposer = this._subComposers[s];
+            if (composer.readBuffer === anotherComposer.readBuffer)
+            {
+                sharingTarget = true;
+                break;
+            }
+        }
+        sharingTarget = sharingTarget &amp;&amp; (m > s);
+
+        for (var n = 0, nn = composer.passes.length; n &lt; nn; n++)
+        {
+            var passn = composer.passes[n];
+
+            // If sharing target with a previous subcomposer, force clear to false
+            if (sharingTarget === true)
+            {
+                passn.clear = false;
+            }
+            else
+            {
+                passn.clear = (n === 0);
+            }
+        }
+
+    }
+
+    // Only last enabled pass of render composer should render to screen
+    var rts = false;
+    for (var p = passes.length - 1; p >= 0; p--)
+    {
+        var passp = passes[p];
+
+        if (rts === true)
+        {
+            passp.renderToScreen = false;
+        }
+        else if (passp.enabled === true)
+        {
+            passp.renderToScreen = true;
+            rts = true;
+        }
+    }
+
+    this._dumpPipeline();
+};
+
+/**
+ * Setup default background texture pass.
+ * @method FORGE.RenderPipeline#_setupDefaultBackground.
+ * @private
+ */
+FORGE.RenderPipeline.prototype._setupDefaultBackground = function()
+{
+    var canvas = document.createElement("canvas");
+    canvas.width = canvas.height = 1;
+    var context = canvas.getContext("2d");
+    context.fillStyle = "rgb(0, 0, 0)";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    var defaultTexture = new THREE.TextureLoader().load(canvas.toDataURL());
+    defaultTexture.name = "forge-default-texture";
+
+    this.addBackground(defaultTexture, null, 0);
+};
+
+/**
+ * Set all render passes camera.
+ * @method FORGE.RenderPipeline#_setAllRenderPassCamera.
+ * @param {THREE.Camera} camera render pass camera.
+ * @private
+ */
+FORGE.RenderPipeline.prototype._setAllRenderPassCamera = function(camera)
+{
+    var composers = this._subComposers.concat(this._renderComposer);
+
+    for (var i = 0, ii = composers.length; i &lt; ii; i++)
+    {
+        var composer = composers[i];
+
+        for (var j=0, jj=composer.passes.length; j&lt;jj; j++)
+        {
+            var pass = composer.passes[j];
+
+            if (pass instanceof FORGE.RenderPass)
+            {
+                pass.camera = camera;
+            }
+        }
+    }
+};
+
+/**
+ * Enable/Disable picking.
+ * @method FORGE.RenderPipeline#enablePicking
+ * @param {boolean} status new picking state
+ * @param {THREE.Material=} material picking material
+ * @param {THREE.WebGLRenderTarget=} renderTarget picking render target
+ */
+FORGE.RenderPipeline.prototype.enablePicking = function(status, material, renderTarget)
+{
+    for (var i = 0, ii = this._subComposers.length; i &lt; ii; i++)
+    {
+        var composer = this._subComposers[i];
+        if (composer.type === FORGE.EffectComposerType.PICKING)
+        {
+            composer.enabled = status;
+
+            if (typeof material !== "undefined")
+            {
+                composer.passes[0].overrideMaterial = material;
+            }
+
+            if (typeof renderTarget !== "undefined")
+            {
+                composer.renderTarget = renderTarget;
+            }
+        }
+    }
+};
+
+/**
+ * Add background to the rendering pipeline.
+ * @method FORGE.RenderPipeline#addBackground
+ * @param {THREE.Texture} texture texture object used as background.
+ * @param {Array&lt;FX>} fxSet image fx set to apply to background only.
+ * @param {number=} opacity texture pass opacity
+ */
+FORGE.RenderPipeline.prototype.addBackground = function(texture, fxSet, opacity)
+{
+    // Background addition will be an insertion of all passes at index 0
+    // First we add all shaders passes in reverse order at index 0
+    // Then we insert the texture pass so everything ends up in the right order
+
+    if (typeof fxSet !== "undefined" &amp;&amp; fxSet !== null &amp;&amp; fxSet.length > 0)
+    {
+        var shaderPasses = this._viewer.postProcessing.parseShaderPasses(fxSet);
+
+        for (var i = 0, ii = shaderPasses.length; i &lt; ii; i++)
+        {
+            var pass = shaderPasses[i];
+            pass.position = FORGE.PassPosition.BACKGROUND;
+        }
+
+        this._addShaderPasses(this._renderComposer, shaderPasses, 0);
+    }
+
+    var texturePass = new FORGE.TexturePass(texture, opacity);
+    texturePass.position = FORGE.PassPosition.BACKGROUND;
+
+    this._renderComposer.insertPass(texturePass, 0);
+
+    this._updateRenderPipeline();
+};
+
+/**
+ * Add render scenes to the rendering pipeline
+ * @method FORGE.RenderPipeline#addRenderScenes
+ * @param {Array&lt;FORGE.RenderScene>} renderScenes array of render scenes
+ */
+FORGE.RenderPipeline.prototype.addRenderScenes = function(renderScenes)
+{
+    for (var i = 0, ii = renderScenes.length; i &lt; ii; i++)
+    {
+        this._addSubComposer(renderScenes[i].sceneComposer, false);
+        this._addSubComposer(renderScenes[i].pickingComposer, true);
+    }
+
+    this._updateRenderPipeline();
+};
+
+/**
+ * Add fx at the end of the whole rendering pipeline
+ * @method FORGE.RenderPipeline#addGlobalFx
+ * @param {Array&lt;FX>} fxSet set of effects
+ */
+FORGE.RenderPipeline.prototype.addGlobalFx = function(fxSet)
+{
+    var shaderPasses = this._viewer.postProcessing.parseShaderPasses(fxSet);
+
+    for (var i = 0, ii = shaderPasses.length; i &lt; ii; i++)
+    {
+        var pass = shaderPasses[i];
+        pass.position = FORGE.PassPosition.GLOBAL;
+    }
+
+    this._addShaderPasses(this._renderComposer, shaderPasses);
+    this._updateRenderPipeline();
+};
+
+/**
+ * Get a shader pass with an UID
+ * @method FORGE.RenderPipeline#getShaderPassByUID
+ * @param {string} uid - the uid of the ShaderPass
+ * @return {THREE.Pass} shader pass
+ */
+FORGE.RenderPipeline.prototype.getShaderPassByUID = function(uid)
+{
+    if (this._renderComposer !== null)
+    {
+        for (var i = 0, ii = this._renderComposer.passes.length; i &lt; ii; i++)
+        {
+            var pass = this._renderComposer.passes[i];
+
+            if (pass.uid === uid)
+            {
+                return pass;
+            }
+        }
+    }
+
+    if (this._subComposers !== null)
+    {
+        for (var k = 0, kk = this._subComposers.length; k &lt; kk; k++)
+        {
+            var composer = this._subComposers[k];
+
+            for (var j = 0, jj = composer.passes.length; j &lt; jj; j++)
+            {
+                var subPass = composer.passes[j];
+
+                if (subPass.uid === uid)
+                {
+                    return subPass;
+                }
+            }
+        }
+    }
+
+    return null;
+};
+
+/**
+ * Set size of each composers
+ * @method FORGE.RenderPipeline#setSize
+ * @param {FORGE.Size} size new composer size
+ */
+FORGE.RenderPipeline.prototype.setSize = function(size)
+{
+    for (var i = 0, ii = this._subComposers.length; i &lt; ii; i++)
+    {
+        var composer = this._subComposers[i];
+        composer.setSize(size.width, size.height);
+
+        for (var c = 0, cc = composer.passes.length; c &lt; cc; c++)
+        {
+            var pass = composer.passes[c];
+
+            if (pass instanceof THREE.ShaderPass)
+            {
+                if (typeof pass.uniforms.resolution !== "undefined")
+                {
+                    pass.uniforms.resolution.value = new THREE.Vector2(1 / size.width, 1 / size.height);
+                }
+            }
+        }
+    }
+
+    this._renderComposer.setSize(size.width, size.height);
+
+    for (var c = 0, cc = this._renderComposer.passes.length; c &lt; cc; c++)
+    {
+        var pass = this._renderComposer.passes[c];
+
+        if (pass instanceof THREE.ShaderPass)
+        {
+            if (typeof pass.uniforms.resolution !== "undefined")
+            {
+                pass.uniforms.resolution.value = new THREE.Vector2(1 / size.width, 1 / size.height);
+            }
+        }
+    }
+};
+
+/**
+ * Render routine
+ *
+ * @method FORGE.RenderPipeline#render
+ * @param {THREE.PerspectiveCamera} camera - The camera to use for render.
+ */
+FORGE.RenderPipeline.prototype.render = function(camera)
+{
+    if (this._renderComposer === null)
+    {
+        return;
+    }
+
+    // Create default texture and use it if there is no texture in background
+    if (!(this._renderComposer.passes[0] instanceof FORGE.TexturePass))
+    {
+        this._setupDefaultBackground();
+    }
+
+    for (var i = 0, ii = this._renderComposer.passes.length; i &lt; ii; i++)
+    {
+        var pass = this._renderComposer.passes[i];
+        if (pass instanceof FORGE.AdditionPass)
+        {
+            // Pick right buffer as texture provider for addition pass
+            var composer = pass.composer;
+            var lastPass = composer.passes[composer.passes.length - 1];
+
+            // Addition pass will blend readbuffer content unless last pass needs swap (ShaderPass for example)
+            var texture = composer.readBuffer.texture;
+
+            if (typeof lastPass !== "undefined" &amp;&amp; lastPass.needsSwap === true)
+            {
+                texture = composer.writeBuffer.texture;
+            }
+
+            pass.uniforms["tAdd"].value = texture;
+        }
+    }
+
+    var delta = this._clock.getDelta();
+
+    this._setAllRenderPassCamera(camera);
+
+    for (var j = 0, jj = this._subComposers.length; j &lt; jj; j++)
+    {
+        if (this._subComposers[j].enabled)
+        {
+            this._subComposers[j].render(delta);
+        }
+    }
+
+    this._renderComposer.render(delta);
+};
+
+/**
+ * Clear composer components
+ * @method FORGE.RenderPipeline#clear
+ */
+FORGE.RenderPipeline.prototype.clear = function()
+{
+    if (this._renderComposer !== null)
+    {
+        this._renderComposer.readBuffer.dispose();
+        this._renderComposer.writeBuffer.dispose();
+
+        for (var i = 0, ii = this._renderComposer.passes.length; i &lt; ii; i++)
+        {
+            var pass = this._renderComposer.passes[i];
+            if (pass instanceof FORGE.ShaderPass &amp;&amp; pass.uniforms.hasOwnProperty("tAdd"))
+            {
+                pass.uniforms["tAdd"].value = null;
+            }
+        }
+
+        this._renderComposer.passes = [];
+    }
+
+    this._subComposers = [];
+};
+
+/**
+ * Destroy sequence
+ * @method FORGE.RenderPipeline#destroy
+ */
+FORGE.RenderPipeline.prototype.destroy = function()
+{
+    this.clear();
+    this._clock = null;
+
+    for (var i = this._subComposers.length - 1; i > 0; i--)
+    {
+        var composer = this._subComposers[i];
+
+        for (var j=0, jj=composer.passes.length; j&lt;jj; j++)
+        {
+            var pass = composer.passes[j];
+
+            if (typeof pass.destroy === "function")
+            {
+                pass.destroy();
+            }
+        }
+        composer.passes.length = 0;
+    }
+    this._subComposers = null;
+
+    for (var j=0, jj=this._renderComposer.passes.length; j&lt;jj; j++)
+    {
+        var pass = this._renderComposer.passes[j];
+
+        if (typeof pass.destroy === "function")
+        {
+            pass.destroy();
+        }
+    }
+    this._renderComposer.passes.length = 0;
+    this._renderComposer = null;
+
+    this._viewer = null;
+};
+
+/**
+ * FX pipeline status.
+ * @name FORGE.RenderPipeline#enabled
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.RenderPipeline.prototype, "enabled",
+{
+    /** @this {FORGE.RenderPipeline} */
+    get: function()
+    {
+        return this._enabled;
+    },
+
+    /** @this {FORGE.RenderPipeline} */
+    set: function(status)
+    {
+        this._setAllShaderPassesStatus(status);
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

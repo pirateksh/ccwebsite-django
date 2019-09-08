@@ -1,0 +1,20 @@
+{
+    "uid": "org.forgejs.myplugin",
+
+    "options":
+    {
+        "background": "blue"
+    },
+
+    "events":
+    {
+        "onClick": null
+    },
+
+    "sources":
+    [
+        "src/main.js"
+    ],
+
+    "constructor": "ForgePlugins.MyPlugin"
+}

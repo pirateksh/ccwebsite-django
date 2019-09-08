@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: audio/SoundManager.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: audio/SoundManager.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
+ * A FORGE.SoundManager is an object to manage all sounds.
+ *
+ * @constructor FORGE.SoundManager
+ * @param {FORGE.Viewer} viewer - The {@link FORGE.Viewer} reference.
+ * @extends {FORGE.BaseObject}
+ *
+ * @todo Start/Stop sound to avoid autoplay
+ */
+FORGE.SoundManager = function(viewer)
+{
+    /**
+     * The viewer reference.
+     * @name FORGE.SoundManager#_viewer
+     * @type {FORGE.Viewer}
+     * @private
+     */
+    this._viewer = viewer;
+
+    /**
+     * The global sound config backup.
+     * @name FORGE.SoundManager#_config
+     * @type {?AudioConfig}
+     * @private
+     */
+    this._config = null;
+
+    /**
+     * The global volume for sounds.
+     * @name FORGE.SoundManager#_volume
+     * @type {number}
+     * @private
+     */
+    this._volume = 1;
+
+    /**
+     * The volume has been changed?
+     * @name FORGE.SoundManager#_volumeChanged
+     * @type {boolean}
+     * @private
+     */
+    this._volumeChanged = false;
+
+    /**
+     * The default volume for sounds.
+     * Can't be greater than the maximum volume.
+     * @name FORGE.SoundManager#_defaultVolume
+     * @type {number}
+     * @private
+     */
+    this._defaultVolume = 1;
+
+    /**
+     * The maximum volume for sounds.
+     * @name  FORGE.SoundManager#_maxVolume
+     * @type {number}
+     * @private
+     */
+    this._maxVolume = 1;
+
+    /**
+     * The save of the global volume for sounds before a mute.
+     * @name FORGE.SoundManager#_mutedVolume
+     * @type {number}
+     * @private
+     */
+    this._mutedVolume = 1;
+
+    /**
+     * Are all sounds muted?
+     * @name FORGE.SoundManager#_muted
+     * @type {boolean}
+     * @private
+     */
+    this._muted = false;
+
+    /**
+     * Is the sound manager enabled?
+     * @name  FORGE.SoundManager#_enabled
+     * @type {boolean}
+     * @private
+     */
+    this._enabled = true;
+
+    /**
+     * Array of {@link FORGE.Sound}.
+     * @name FORGE.SoundManager#_sounds
+     * @type {?Array&lt;FORGE.Sound>}
+     * @private
+     */
+    this._sounds = null;
+
+    /**
+     * Is audio deactivated?
+     * @name FORGE.SoundManager#_noAudio
+     * @type {boolean}
+     * @private
+     */
+    this._noAudio = false;
+
+    /**
+     * Is Audio tag activated?
+     * @name FORGE.SoundManager#_useAudioTag
+     * @type {boolean}
+     * @private
+     */
+    this._useAudioTag = false;
+
+    /**
+     * Is WebAudio API activated?
+     * @name FORGE.SoundManager#_useWebAudio
+     * @type {boolean}
+     * @private
+     */
+    this._useWebAudio = true;
+
+    /**
+     * Number of sound channels.
+     * @name FORGE.SoundManager#_channels
+     * @type {number}
+     * @private
+     */
+    this._channels = 32;
+
+    /**
+     * The AudioContext interface.
+     * @name FORGE.SoundManager#_context
+     * @type {?(AudioContext|webkitAudioContext)}
+     * @private
+     */
+    this._context = null;
+
+    /**
+     * The AudioContext state.
+     * @name FORGE.SoundManager#_contextState
+     * @type {string}
+     * @private
+     */
+    this._contextState = "running";
+
+    /**
+     * AnalyserNode to expose audio time and frequency data and create data visualisations.
+     * @name FORGE.SoundManager#_analyser
+     * @type {AnalyserNode}
+     * @private
+     */
+    this._analyser = null;
+
+    /**
+     * Master GainNode used to control the overall volume of the audio graph.
+     * @name FORGE.SoundManager#_masterGain
+     * @type {GainNode}
+     * @private
+     */
+    this._masterGain = null;
+
+    /**
+     * On sounds muted event dispatcher.
+     * @name FORGE.SoundManager#_onMute
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onMute = null;
+
+     /**
+     * On sounds unmuted event dispatcher.
+     * @name FORGE.SoundManager#_onUnmute
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onUnmute = null;
+
+    /**
+     * On sounds volume change event dispatcher.
+     * @name FORGE.SoundManager#_onVolumeChange
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onVolumeChange = null;
+
+    /**
+     * On sounds disabled event dispatcher.
+     * @name FORGE.SoundManager#_onDisable
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onDisable = null;
+
+    /**
+     * On sounds enabled event dispatcher.
+     * @name FORGE.SoundManager#_onEnable
+     * @type {?FORGE.EventDispatcher}
+     * @private
+     */
+    this._onEnable = null;
+
+    FORGE.BaseObject.call(this, "SoundManager");
+};
+
+FORGE.SoundManager.prototype = Object.create(FORGE.BaseObject.prototype);
+FORGE.SoundManager.prototype.constructor = FORGE.SoundManager;
+
+/**
+ * Boot sequence.
+ * @method FORGE.SoundManager#_boot
+ * @private
+ * @suppress {deprecated}
+ */
+FORGE.SoundManager.prototype.boot = function()
+{
+    this._sounds = [];
+
+    if (FORGE.Device.iOS &amp;&amp; FORGE.Device.webAudio === false)
+    {
+        this._channels = 1; //only 1 channel in iOS with AudioTag support
+    }
+
+    if (FORGE.Device.webAudio === true)
+    {
+        try
+        {
+            if (typeof window.AudioContext === "function")
+            {
+                this._context = new window.AudioContext();
+            }
+            else
+            {
+                this._context = new window.webkitAudioContext();
+            }
+        }
+        catch (error)
+        {
+            this._context = null;
+            this._useWebAudio = false;
+            this._noAudio = true;
+        }
+    }
+
+    if (FORGE.Device.audioTag === true &amp;&amp; this._context === null)
+    {
+        this._useWebAudio = false;
+        this._useAudioTag = true;
+        this._noAudio = false;
+    }
+
+    if (this._context !== null)
+    {
+        if (typeof this._context.createGain === "undefined")
+        {
+            this._masterGain = this._context.createGainNode();
+        }
+        else
+        {
+            this._masterGain = this._context.createGain();
+        }
+
+        this._analyser = this._context.createAnalyser();
+        this._analyser.connect(this._masterGain);
+
+        this._masterGain.gain.value = this._volume;
+        this._masterGain.connect(this._context.destination);
+
+        // The common coordinate system used with WebGL.
+        // The listener is always facing down the negative Z axis, the
+        // positive Y axis points up, the positive X axis points right.
+        this._context.listener.setOrientation(0, 0, -1, 0, 1, 0);
+    }
+
+    this._viewer.story.onSceneLoadStart.add(this._sceneLoadStartHandler, this);
+};
+
+/**
+ * Event handler for scene start.
+ * @method FORGE.SoundManager#_sceneLoadStartHandler
+ * @private
+ */
+FORGE.SoundManager.prototype._sceneLoadStartHandler = function()
+{
+    if(typeof this._viewer.story.scene.config.audio !== "undefined")
+    {
+        this._parseSceneConfig(this._viewer.story.scene.config.audio);
+    }
+    else
+    {
+        //restore global sounds config
+        this._applyConfig(this._config);
+
+        //Is the sound manager enabled?
+        if(this._enabled === false)
+        {
+            if(this._onDisable !== null)
+            {
+                this._onDisable.dispatch();
+            }
+        }
+        else
+        {
+            if(this._onEnable !== null)
+            {
+                this._onEnable.dispatch();
+            }
+        }
+    }
+};
+
+/**
+ * Parse the scene configuration part related to sounds.
+ * @method  FORGE.SoundManager#_parseSceneConfig
+ * @private
+ * @param  {AudioConfig} config - The scene configuration part related to sounds.
+ */
+FORGE.SoundManager.prototype._parseSceneConfig = function(config)
+{
+    var extendedConfig = /** @type {AudioConfig} */ FORGE.Utils.extendMultipleObjects(this._config, config);
+    this._applyConfig(extendedConfig);
+
+    //Is the sound manager enabled?
+    if(this._enabled === false)
+    {
+        if(this._onDisable !== null)
+        {
+            this._onDisable.dispatch();
+        }
+    }
+    else
+    {
+        if(this._onEnable !== null)
+        {
+            this._onEnable.dispatch();
+        }
+    }
+};
+
+/**
+ * Set values from configuration file.
+ * @method  FORGE.SoundManager#_applyConfig
+ * @param {?AudioConfig} config - The config file.
+ * @private
+ */
+FORGE.SoundManager.prototype._applyConfig = function(config)
+{
+    if(config !== null)
+    {
+        this._enabled = typeof config.enabled !== "undefined" ? Boolean(config.enabled) : true;
+        this._maxVolume = (typeof config.volume !== "undefined" &amp;&amp; typeof config.volume.max === "number") ? FORGE.Math.clamp(config.volume.max, 0, 1) : 1;
+
+        if(this._volumeChanged === false)
+        {
+            this._defaultVolume = (typeof config.volume !== "undefined" &amp;&amp; typeof config.volume.default === "number") ? FORGE.Math.clamp(config.volume.default, 0, this._maxVolume) : 1;
+        }
+        else
+        {
+            this._defaultVolume = FORGE.Math.clamp(this._volume, 0, this._maxVolume);
+        }
+    }
+};
+
+/**
+ * Add a sound config to the manager.
+ * @method FORGE.SoundManager#addConfig
+ * @param {AudioConfig} config - The config you want to add.
+ */
+FORGE.SoundManager.prototype.addConfig = function(config)
+{
+    this._parseConfig(config);
+
+    this._initSounds();
+};
+
+/**
+ * Parse a playlist config object.
+ * @method FORGE.SoundManager#_parseConfig
+ * @private
+ * @param {AudioConfig} config - The config you want to parse.
+ */
+FORGE.SoundManager.prototype._parseConfig = function(config)
+{
+    this._config = config;
+
+    this._applyConfig(config);
+};
+
+/**
+ * Initialize the sounds manager.
+ * @method FORGE.PlaylistManager#_initSounds
+ * @private
+ */
+FORGE.SoundManager.prototype._initSounds = function()
+{
+    if(typeof this._defaultVolume === "number" &amp;&amp; this._volumeChanged === false)
+    {
+        this._volume = FORGE.Math.clamp(this._defaultVolume, 0, 1);
+    }
+
+    this._updateVolume();
+};
+
+/**
+ * Update method called by the viewer main loop.
+ * @method FORGE.SoundManager#update
+ */
+FORGE.SoundManager.prototype.update = function ()
+{
+    for (var i = 0, ii = this._sounds.length; i &lt; ii; i++)
+    {
+        this._sounds[i].update();
+    }
+
+    // update listener position
+    this._setContextListenerOrientation();
+};
+
+/**
+ * Add a {@link FORGE.Sound} into the _sounds Array.
+ * @method FORGE.SoundManager#add
+ * @param {FORGE.Sound} sound - The {@link FORGE.Sound} to add.
+ */
+FORGE.SoundManager.prototype.add = function (sound)
+{
+    var index = this._indexOfSound(sound);
+
+    if(index === -1)
+    {
+        this._sounds.push(sound);
+    }
+};
+
+/**
+ * Remove a {@link FORGE.Sound} into the _sounds Array.
+ * @method FORGE.SoundManager#remove
+ * @param {FORGE.Sound} sound - The {@link FORGE.Sound} to remove.
+ */
+FORGE.SoundManager.prototype.remove = function (sound)
+{
+    var index = this._indexOfSound(sound);
+
+    if(index > -1)
+    {
+        this._sounds.splice(index, 1);
+    }
+};
+
+/**
+ * Internal method to find a {@link FORGE.Sound} index in the _sounds Array.
+ * @method FORGE.SoundManager#_indexOfSound
+ * @private
+ * @param {FORGE.Sound} sound - The {@link FORGE.Sound} itself.
+ * @return {number} Returns the index of the searched {@link FORGE.Sound} if found, -1 if not.
+ *
+ * @todo Either the {@link FORGE.Sound} itself or its index or its uid. (FORGE.Sound|Number|String)
+ */
+FORGE.SoundManager.prototype._indexOfSound = function (sound)
+{
+    if(this._sounds === null)
+    {
+        return -1;
+    }
+
+    var _sound;
+
+    for (var i = 0, ii = this._sounds.length; i &lt; ii; i++)
+    {
+        _sound = this._sounds[i];
+
+        if(_sound === sound)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+};
+
+/**
+ * Suspend audio context if no sound are playing.
+ * @method FORGE.SoundManager#suspend
+ */
+FORGE.SoundManager.prototype.suspend = function()
+{
+    if(this._context !== null &amp;&amp; typeof this._context.suspend !== "undefined" &amp;&amp; this._useWebAudio === true &amp;&amp; FORGE.Device.safari === false)
+    {
+        if(this._contextState === "running")
+        {
+            var allStopped = true;
+            for (var i = 0, ii = this._sounds.length; i &lt; ii; i++)
+            {
+                if(this._sounds[i].playing === true || this._sounds[i].paused === true)
+                {
+                    allStopped = false;
+                    break;
+                }
+            }
+
+            if(allStopped === true)
+            {
+                this._contextState = "suspended";
+                this._context.suspend();
+            }
+        }
+    }
+};
+
+/**
+ * Resume the audio context if at least one sound is playing.
+ * @method FORGE.SoundManager#resume
+ */
+FORGE.SoundManager.prototype.resume = function()
+{
+    if(this._context !== null &amp;&amp; typeof this._context.resume !== "undefined" &amp;&amp; this._useWebAudio === true &amp;&amp; FORGE.Device.safari === false)
+    {
+        if(this._contextState === "suspended")
+        {
+            for (var i = 0, ii = this._sounds.length; i &lt; ii; i++)
+            {
+                if(this._sounds[i].playing === true || this._sounds[i].paused === true)
+                {
+                    this._contextState = "running";
+                    this._context.resume();
+                    break;
+                }
+            }
+        }
+    }
+};
+
+/**
+ * Pause all playing sounds.
+ * @method FORGE.SoundManager#pauseAll
+ */
+FORGE.SoundManager.prototype.pauseAll = function()
+{
+    for (var i = 0, ii = this._sounds.length; i &lt; ii; i++)
+    {
+        if (this._sounds[i].playing === true)
+        {
+            this._sounds[i].pause();
+            this._sounds[i].resumed = true;
+        }
+    }
+};
+
+/**
+ * Play all sounds that have been paused with the pauseAll method.
+ * @method FORGE.SoundManager#resumeAll
+ */
+FORGE.SoundManager.prototype.resumeAll = function()
+{
+    for (var i = 0, ii = this._sounds.length; i &lt; ii; i++)
+    {
+        if (this._sounds[i].resumed === true)
+        {
+            this._sounds[i].resume();
+            this._sounds[i].resumed = false;
+        }
+    }
+};
+
+/**
+ * Mute method of the sounds.
+ * @method FORGE.SoundManager#mute
+ */
+FORGE.SoundManager.prototype.mute = function()
+{
+    if(this._muted === true)
+    {
+        return;
+    }
+
+    this._muted = true;
+    this._mutedVolume = this._volume;
+    this._volume = 0;
+
+    if (this._useWebAudio === true)
+    {
+        this._mutedVolume = this._masterGain.gain.value;
+    }
+
+    this._updateVolume();
+
+    if(this._onMute !== null)
+    {
+        this._onMute.dispatch();
+    }
+};
+
+/**
+ * Unmute method of the sounds.
+ * @method FORGE.SoundManager#unmute
+ */
+FORGE.SoundManager.prototype.unmute = function()
+{
+    if(this._muted === false)
+    {
+        return;
+    }
+
+    this._muted = false;
+    this._volume = this._mutedVolume;
+
+    this._updateVolume();
+
+    if(this._onUnmute !== null)
+    {
+        this._onUnmute.dispatch();
+    }
+};
+
+/**
+ * Update volume method for the sounds.
+ * @method FORGE.SoundManager#unmute
+ * @private
+ */
+FORGE.SoundManager.prototype._updateVolume = function()
+{
+    if (this._useWebAudio === true)
+    {
+        this._masterGain.gain.value = this._volume;
+    }
+    else if (this._useAudioTag === true)
+    {
+        // Loop through the sound cache and change the volume of all html audio tags
+        for (var i = 0; i &lt; this._sounds.length; i++)
+        {
+            this._sounds[i]._sound.data.volume = FORGE.Math.clamp(this._sounds[i]._volume, 0, 1) * this._volume;
+        }
+    }
+    this._volumeChanged = true;
+
+    if(this._onVolumeChange !== null)
+    {
+        this._onVolumeChange.dispatch();
+    }
+};
+
+/**
+ * Change the sound manager orientation to follow the THREE perspective camera.
+ * @method FORGE.SoundManager#_setContextListenerOrientation
+ * @private
+ */
+FORGE.SoundManager.prototype._setContextListenerOrientation = function()
+{
+    if (this._useWebAudio === true &amp;&amp; this._viewer.renderer.camera.main !== null)
+    {
+        var cameraDirection = new THREE.Vector3();
+        var qCamera = this._viewer.renderer.camera.main.quaternion;
+
+        // front vector indicating where the listener is facing to
+        cameraDirection.set(0, 0, -1);
+        cameraDirection.applyQuaternion(qCamera);
+        var camera = cameraDirection.clone();
+
+        // up vector repesenting the direction of the top of the listener head
+        cameraDirection.set(0, 1, 0);
+        cameraDirection.applyQuaternion(qCamera);
+        var cameraUp = cameraDirection;
+
+        // apply orientation values
+        this._context.listener.setOrientation(camera.x, camera.y, camera.z, cameraUp.x, cameraUp.y, cameraUp.z);
+    }
+};
+
+/**
+ * Destroy sequence
+ * @method FORGE.SoundManager#destroy
+ */
+FORGE.SoundManager.prototype.destroy = function()
+{
+    this._viewer.story.onSceneLoadStart.remove(this._sceneLoadStartHandler, this);
+
+    this._viewer = null;
+    this._config = null;
+
+    var i = this._sounds.length;
+    while(i--)
+    {
+        this._sounds[i].destroy();
+    }
+
+    this._sounds = null;
+
+    this._context = null;
+    this._analyser = null;
+    this._masterGain = null;
+
+    if(this._onMute !== null)
+    {
+        this._onMute.destroy();
+        this._onMute = null;
+    }
+
+    if(this._onUnmute !== null)
+    {
+        this._onUnmute.destroy();
+        this._onUnmute = null;
+    }
+
+    if(this._onVolumeChange !== null)
+    {
+        this._onVolumeChange.destroy();
+        this._onVolumeChange = null;
+    }
+
+    if(this._onDisable !== null)
+    {
+        this._onDisable.destroy();
+        this._onDisable = null;
+    }
+
+    if(this._onEnable !== null)
+    {
+        this._onEnable.destroy();
+        this._onEnable = null;
+    }
+
+    FORGE.BaseObject.prototype.destroy.call(this);
+};
+
+
+/**
+ * Get the audio context.
+ * @name FORGE.SoundManager#context
+ * @type {?AudioContext}
+ * @readonly
+ */
+Object.defineProperty(FORGE.SoundManager.prototype, "context",
+{
+    /** @this {FORGE.SoundManager} */
+    get: function()
+    {
+        return this._context;
+    }
+});
+
+/**
+ * Get the analyser.
+ * @name FORGE.SoundManager#analyser
+ * @type {?AnalyserNode}
+ * @readonly
+ */
+Object.defineProperty(FORGE.SoundManager.prototype, "analyser",
+{
+    /** @this {FORGE.SoundManager} */
+    get: function()
+    {
+        return this._analyser;
+    }
+});
+
+/**
+ * Get the analyser
+ * @name  FORGE.SoundManager#inputNode
+ * @type {?AudioDestinationNode}
+ * @readonly
+ */
+Object.defineProperty(FORGE.SoundManager.prototype, "inputNode",
+{
+    /** @this {FORGE.SoundManager} */
+    get: function()
+    {
+        return this._analyser;
+    }
+});
+
+/**
+ * Get the masterGain.
+ * @name FORGE.SoundManager#masterGain
+ * @type {?GainNode}
+ * @readonly
+ */
+Object.defineProperty(FORGE.SoundManager.prototype, "masterGain",
+{
+    /** @this {FORGE.SoundManager} */
+    get: function()
+    {
+        return this._masterGain;
+    }
+});
+
+/**
+ * The WebAudio API tag must be used?
+ * @name FORGE.SoundManager#useWebAudio
+ * @type {boolean}
+ * @readonly
+ */
+Object.defineProperty(FORGE.SoundManager.prototype, "useWebAudio",
+{
+    /** @this {FORGE.SoundManager} */
+    get: function()
+    {
+        return this._useWebAudio;
+    },
+
+    /** @this {FORGE.SoundManager} */
+    set: function(value)
+    {
+        if(typeof value === "boolean")
+        {
+            this._useWebAudio = value;
+            this._useAudioTag = !value;
+        }
+    }
+});
+
+/**
+ * The Audio tag must be used?
+ * @name FORGE.SoundManager#useAudioTag
+ * @type {boolean}
+ * @readonly
+ */
+Object.defineProperty(FORGE.SoundManager.prototype, "useAudioTag",
+{
+    /** @this {FORGE.SoundManager} */
+    get: function()
+    {
+        return this._useAudioTag;
+    },
+
+    /** @this {FORGE.SoundManager} */
+    set: function(value)
+    {
+        if(typeof value === "boolean")
+        {
+            this._useAudioTag = value;
+            this._useWebAudio = !value;
+        }
+    }
+});
+
+/**
+ * Get the enabled state for sounds.
+ * @name FORGE.SoundManager#enabled
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.SoundManager.prototype, "enabled", {
+
+    /** @this {FORGE.SoundManager} */
+    get: function()
+    {
+        return this._enabled;
+    }
+
+});
+
+/**
+ * Get or set the muted state for sounds.
+ * @name FORGE.SoundManager#muted
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.SoundManager.prototype, "muted", {
+
+    /** @this {FORGE.SoundManager} */
+    get: function()
+    {
+        return this._muted;
+    },
+
+    /** @this {FORGE.SoundManager} */
+    set: function(value)
+    {
+        if(typeof value === "boolean")
+        {
+            if (value === true)
+            {
+                this.mute();
+            }
+            else
+            {
+                this.unmute();
+            }
+        }
+    }
+});
+
+/**
+ * Get or set the global volume for sounds.
+ * @name FORGE.SoundManager#volume
+ * @type {number}
+ */
+Object.defineProperty(FORGE.SoundManager.prototype, "volume", {
+
+    /** @this {FORGE.SoundManager} */
+    get: function()
+    {
+        if (this._useWebAudio === true)
+        {
+            return this._masterGain.gain.value;
+        }
+        else
+        {
+            return this._volume;
+        }
+    },
+
+    /** @this {FORGE.SoundManager} */
+    set: function(value)
+    {
+        if(typeof value !== "number")
+        {
+            return;
+        }
+
+        value = FORGE.Math.clamp(value, 0, 1);
+        if(this._maxVolume &lt; value)
+        {
+            this._volume = this._maxVolume;
+        }
+        else
+        {
+            this._volume = value;
+        }
+
+        if (this._volume > 0)
+        {
+            this._muted = false;
+        }
+
+        this._updateVolume();
+    }
+});
+
+/**
+ * Get the sounds "onMute" event {@link FORGE.EventDispatcher}.
+ * The {@link FORGE.EventDispatcher} is created only if you ask for it.
+ * @name FORGE.SoundManager#onMute
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.SoundManager.prototype, "onMute",
+{
+    /** @this {FORGE.SoundManager} */
+    get: function()
+    {
+        if(this._onMute === null)
+        {
+            this._onMute = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onMute;
+    }
+});
+
+/**
+ * Get the sounds "onUnmute" event {@link FORGE.EventDispatcher}.
+ * The {@link FORGE.EventDispatcher} is created only if you ask for it.
+ * @name FORGE.SoundManager#onUnmute
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.SoundManager.prototype, "onUnmute",
+{
+    /** @this {FORGE.SoundManager} */
+    get: function()
+    {
+        if(this._onUnmute === null)
+        {
+            this._onUnmute = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onUnmute;
+    }
+});
+
+/**
+ * Get the sounds "onVolumeChange" event {@link FORGE.EventDispatcher}.
+ * The {@link FORGE.EventDispatcher} is created only if you ask for it.
+ * @name FORGE.SoundManager#onVolumeChange
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.SoundManager.prototype, "onVolumeChange",
+{
+    /** @this {FORGE.SoundManager} */
+    get: function()
+    {
+        if(this._onVolumeChange === null)
+        {
+            this._onVolumeChange = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onVolumeChange;
+    }
+});
+
+/**
+ * Get the sounds "onDisable" event {@link FORGE.EventDispatcher}.
+ * The {@link FORGE.EventDispatcher} is created only if you ask for it.
+ * @name FORGE.SoundManager#onDisable
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.SoundManager.prototype, "onDisable",
+{
+    /** @this {FORGE.SoundManager} */
+    get: function()
+    {
+        if(this._onDisable === null)
+        {
+            this._onDisable = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onDisable;
+    }
+});
+
+/**
+ * Get the sounds "onEnable" event {@link FORGE.EventDispatcher}.
+ * The {@link FORGE.EventDispatcher} is created only if you ask for it.
+ * @name FORGE.SoundManager#onDisable
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.SoundManager.prototype, "onEnable",
+{
+    /** @this {FORGE.SoundManager} */
+    get: function()
+    {
+        if(this._onEnable === null)
+        {
+            this._onEnable = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onEnable;
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

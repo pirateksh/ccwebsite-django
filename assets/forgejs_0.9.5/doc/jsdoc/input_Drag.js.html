@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: input/Drag.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: input/Drag.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
+ * Drag manager module
+ * @constructor FORGE.Drag
+ * @param {FORGE.DisplayObject} displayObject - The display object concerned by the drag.
+ * @extends {FORGE.BaseObject}
+ *
+ * @todo  work also with rectangle for constrain
+ */
+FORGE.Drag = function(displayObject)
+{
+    /**
+     * The display object taht will be moved during the drag.
+     * @name  FORGE.Drag#_displayObject
+     * @type {FORGE.DisplayObject}
+     * @private
+     */
+    this._displayObject = displayObject;
+
+    /**
+     * The object that will be litening to mouse down.&lt;br>
+     * This is the handle object that initiate the drag.&lt;br>
+     * By default, this is the same object that the display object. 
+     * @name  FORGE.Drag#_handleObject
+     * @type {FORGE.DisplayObject}
+     * @private
+     */
+    this._handleObject = displayObject;
+
+    /**
+     * Is the drag is enabled ?
+     * @name FORGE.Drag#_enabled
+     * @type {boolean}
+     * @default  false
+     * @private
+     */
+    this._enabled = false;
+
+    /**
+     * The display object taht will be used as constrain.
+     * @name  FORGE.Drag#_constrain
+     * @type {FORGE.DisplayObject}
+     * @default  null
+     * @private
+     */
+    this._constrain = null;
+
+    /**
+     * The axis constrain.&lt;br>
+     * This could be "x" or "y" or "" an empty string will remove the axis constrain.
+     * @name  FORGE.Drag#_axis
+     * @type {string}
+     * @default ""
+     * @private
+     */
+    this._axis = "";
+
+    /**
+     * The position of the object on start drag.
+     * @name  FORGE.Drag#_startPostion
+     * @type {Object}
+     * @property {number} x - The x position.
+     * @property {number} y - The y position.
+     * @default  null
+     * @private
+     */
+    this._startPostion = null;
+
+    /**
+     * The last  mouse position during drag.&lt;br>
+     * This is used to calculate distances.
+     * @name  FORGE.Drag#_lastMousePosition
+     * @type {Object}
+     * @property {number} x - The x position.
+     * @property {number} y - The y position.
+     * @default null
+     * @private
+     */
+    this._lastMousePosition = null;
+
+    /**
+     * Flag for dragging.
+     * @name  FORGE.Drag#_dragging
+     * @type {boolean}
+     * @default  false
+     * @private
+     */
+    this._dragging = false;
+
+    /**
+     * Flag to know if the displayObject have to revert position after drag stop.
+     * @name  FORGE.Drag#_revert
+     * @type {boolean}
+     * @default  false
+     * @private
+     */
+    this._revert = false;
+
+    /**
+     * Flag to know if the displayObject is currently reverting its position.
+     * @name  FORGE.Drag#_reverting
+     * @type {boolean}
+     * @default  false
+     * @private
+     */
+    this._reverting = false;
+
+    /**
+     * Tween used to revert the dispay object position after drag stops.
+     * @name  FORGE.Drag#_revertTween
+     * @type {FORGE.Tween}
+     * @private
+     */
+    this._revertTween = null;
+
+    /**
+     * The revert duration in milliseconds.
+     * @name FORGE.Drag#_revertDuration
+     * @type {number}
+     * @default 200
+     * @private
+     */
+    this._revertDuration = 200;
+
+    /**
+     * This is a backup of the original alpha when alpha is altered during drag.
+     * @name  FORGE.Drag#_originalAlpha
+     * @type {number}
+     * @private
+     */
+    this._originalAlpha = 1;
+
+    /**
+     * This is the alpha that will be applied to the display object during drag.
+     * @name FORGE.Drag#_alpha
+     * @type {number}
+     * @private
+     */
+    this._alpha = 1;
+
+    /**
+     * The revert easing method.
+     * @name FORGE.Drag#_revertEasing
+     * @type {Function}
+     * @default  {@link FORGE.Easing.LINEAR}
+     * @private
+     */
+    this._revertEasing = FORGE.Easing.LINEAR;
+
+    /**
+     * On start event dispatcher.
+     * @name  FORGE.Drag#_onStart
+     * @type {FORGE.EventDispatcher}
+     * @default  null
+     * @private
+     */
+    this._onStart = null;
+
+    /**
+     * On drag event dispatcher.
+     * @name  FORGE.Drag#_onDrag
+     * @type {FORGE.EventDispatcher}
+     * @default  null
+     * @private
+     */
+    this._onDrag = null;
+
+    /**
+     * On stop event dispatcher.
+     * @name  FORGE.Drag#_onStop
+     * @type {FORGE.EventDispatcher}
+     * @default  null
+     * @private
+     */
+    this._onStop = null;
+
+    /**
+     * On revert event dispatcher.
+     * @name  FORGE.Drag#_onRevert
+     * @type {FORGE.EventDispatcher}
+     * @default  null
+     * @private
+     */
+    this._onRevert = null;
+
+    FORGE.BaseObject.call(this, "Drag");
+
+    this._boot();
+};
+
+FORGE.Drag.prototype = Object.create(FORGE.BaseObject.prototype);
+FORGE.Drag.prototype.constructor = FORGE.Drag;
+
+/**
+ * Boot sequence
+ * @method FORGE.Drag#_boot
+ * @private
+ */
+FORGE.Drag.prototype._boot = function()
+{
+    this._alpha = this._displayObject.alpha;
+};
+
+/**
+ * Set the object that will be the handle object.&lt;br>
+ * Sets up mouse events on the handle.
+ * @method  FORGE.Drag#_setHandleObject
+ * @private
+ * @param {FORGE.DisplayObject} displayObject - The {@link FORGE.DisplayObject} that will be the handle.
+ */
+FORGE.Drag.prototype._setHandleObject = function(displayObject)
+{
+    if(this._handleObject !== null)
+    {
+        this._unsetHandleObject();
+    }
+
+    this._handleObject = displayObject;
+
+    this._handleObject.pointer.enabled = true;
+    this._handleObject.pointer.onPanStart.add(this._panStartHandler, this);
+    this._handleObject.pointer.onPanMove.add(this._panMoveHandler, this);
+    this._handleObject.pointer.onPanEnd.add(this._panEndHandler, this);
+};
+
+/**
+ * Unset the handle object.&lt;br>
+ * Remove mouse events on the previous handle.
+ * @method  FORGE.Drag#_unsetHandleObject
+ * @private
+ */
+FORGE.Drag.prototype._unsetHandleObject = function()
+{
+    if(this._handleObject !== null)
+    {
+        this._handleObject.pointer.onPanStart.remove(this._panStartHandler, this);
+        this._handleObject.pointer.onPanMove.remove(this._panMoveHandler, this);
+        this._handleObject.pointer.onPanEnd.remove(this._panEndHandler, this); 
+    }
+
+    this._handleObject = null;
+};
+
+/**
+ * Internal pan start handler, this event is on the handle object.
+ * 
+ * @method  FORGE.Drag#_panStartHandler
+ * @private
+ * @param  {MouseEvent} event - The resulting event object from pan start.
+ */
+FORGE.Drag.prototype._panStartHandler = function(event)
+{
+    this.log("_panStartHandler");
+
+    var hammerEvent = event.data;
+    var mouseEvent = event.data["srcEvent"];
+
+    //If it is a touch event we need to get the coordinate from the first touch
+    if(typeof mouseEvent.touches !== "undefined" &amp;&amp; typeof mouseEvent.touches[0] === "object")
+    {
+        mouseEvent = mouseEvent.touches[0];
+    }
+
+    //Cancel the drag if reverting OR if its not the target OR if its start position isn't valid
+    if(this._reverting === true || hammerEvent.target !== this._handleObject.dom || this._isPositionValid() === false)
+    {
+        return;
+    }
+
+    this._dragging = true;
+
+    this._startPostion = {x: this._displayObject.x, y: this._displayObject.y};
+    
+    this._displayObject.top = null;
+    this._displayObject.right = null;
+    this._displayObject.bottom = null;
+    this._displayObject.left = null;
+
+    this._lastMousePosition = {x: mouseEvent.pageX, y: mouseEvent.pageY};
+
+    this._originalAlpha = this._displayObject.alpha;
+    this._displayObject.alpha = this._alpha;
+
+    if(this._onStart !== null)
+    {
+        this._onStart.dispatch();
+    }
+};
+
+/**
+ * Internal pan end handler.
+ * @method  FORGE.Drag#_panEndHandler
+ * @private
+ */
+FORGE.Drag.prototype._panEndHandler = function()
+{
+    this.log("_panEndHandler");
+
+    if(this._dragging !== true)
+    {
+        return;
+    }
+
+    this._dragging = false;
+
+    if(this._onStop !== null)
+    {
+        this._onStop.dispatch();
+    }
+
+    if(this._revert === true &amp;&amp; this._revertTween !== null)
+    {
+        this._reverting = true;
+        this._revertTween.to({x: this._startPostion.x, y: this._startPostion.y}, this._revertDuration, this._revertEasing).start();
+    }
+    else
+    {
+        this._displayObject.alpha = this._originalAlpha;
+    }
+
+    this._startPostion = null;
+    
+    this._lastMousePosition = null;
+};
+
+/**
+ * Internal pointer pan move handler.
+ *
+ * @method  FORGE.Drag#_panMoveHandler
+ * @private
+ * @param  {MouseEvent} event - The resulting event object from pan move.
+ */
+FORGE.Drag.prototype._panMoveHandler = function(event)
+{
+    this.log("_panMoveHandler");
+
+    if(this._dragging !== true)
+    {
+        return;
+    }
+
+    var mouseEvent = event.data["srcEvent"];
+
+    //If it is a touch event we need to get the coordinate from the first touch
+    if(typeof mouseEvent.touches !== "undefined" &amp;&amp; typeof mouseEvent.touches[0] === "object")
+    {
+        mouseEvent = mouseEvent.touches[0];
+    }
+
+    var position = {x: mouseEvent.pageX, y: mouseEvent.pageY};
+    var dx = position.x - this._lastMousePosition.x;
+    var dy = position.y - this._lastMousePosition.y;
+
+    this._lastMousePosition = position;
+
+    if(this._constrain !== null)
+    {
+        var o = this._displayObject.globalOffset; // o = offset
+        var po = this._displayObject.parent.globalOffset; // po = parent offset
+        var co = this._constrain.globalOffset; // co = constrain offset
+
+        if(this._axis === "" || this._axis === "x")
+        {
+            if(o.left + dx &lt; co.left)
+            {
+                this.log("out left");
+                this._displayObject.x = Math.abs(po.left - co.left);
+            }
+            else if(o.left + dx + this._displayObject.pixelWidth > co.left + this._constrain.innerWidth)
+            {
+                this.log("out right");
+                this._displayObject.x = Math.abs(po.left - co.left) + this._constrain.innerWidth - this._displayObject.pixelWidth;
+            }
+            else
+            {
+                this._displayObject.x += dx;
+            }
+        }
+        
+        if(this._axis === "" || this._axis === "y")
+        {
+            if(o.top + dy &lt; co.top)
+            {
+                this.log("out top");
+                this._displayObject.y = Math.abs(po.top - co.top);
+            }
+            else if(o.top + dy + this._displayObject.pixelHeight > co.top + this._constrain.innerHeight)
+            {
+                this.log("out bottom");
+                this._displayObject.y = Math.abs(po.top - co.top) + this._constrain.innerHeight - this._displayObject.pixelHeight;
+            }
+            else
+            {
+                this._displayObject.y += dy;
+            }
+        }
+    }
+    else
+    {
+        if(this._axis === "" || this._axis === "x")
+        {
+            this._displayObject.x += dx;
+        }
+        
+        if(this._axis === "" || this._axis === "y")
+        {
+            this._displayObject.y += dy;
+        }
+    }
+
+    if(this._onDrag !== null)
+    {
+        this._onDrag.dispatch();
+    }
+};
+
+/**
+ * Internal handler for the revert tween complete.
+ * @method  FORGE.Drag#_revertCompleteHandler
+ * @private
+ */
+FORGE.Drag.prototype._revertCompleteHandler = function()
+{
+    this.log("_revertCompleteHandler");
+
+    this._reverting = false;
+    this._displayObject.alpha = this._originalAlpha;
+
+    if(this._onRevert !== null)
+    {
+        this._onRevert.dispatch();
+    }
+};
+
+/**
+ * Helper that check if the display object position is valid.&lt;br>
+ * By valid I mean in its constrain if it have one.
+ * @method  FORGE.Drag#_isPositionValid
+ * @private
+ * @return {boolean} Returns true if the current dragged object position is valid, false if not.
+ */
+FORGE.Drag.prototype._isPositionValid = function()
+{
+    //If no constrain, the position is always valid.
+    if(this._constrain === null)
+    {
+        return true;
+    }
+
+    var o = this._displayObject.globalOffset; // o = offset
+    var co = this._constrain.globalOffset; // co = constrain offset
+
+    //Is it out of bound for left, right, top &amp; bottom?
+    var left = (o.left &lt; co.left);
+    var right = (o.left + this._displayObject.pixelWidth > co.left + this._constrain.innerWidth);
+    var top = (o.top &lt; co.top);
+    var bottom = (o.top + this._displayObject.pixelHeight > co.top + this._constrain.innerHeight);
+
+    if(left === true || right === true || top === true || bottom === true)
+    {
+        return false;
+    }
+        
+    return true;
+};
+
+/**
+ * Enable the drag on its display object
+ * @method FORGE.Drag.enable
+ */
+FORGE.Drag.prototype.enable = function()
+{
+    this._enabled = true;
+    this._setHandleObject(this._handleObject);
+};
+
+/**
+ * Disable the drag on its display object
+ * @method FORGE.Drag.disable
+ */
+FORGE.Drag.prototype.disable = function()
+{
+    this._enabled = false;
+};
+
+/**
+ * Destroy sequence
+ * @method FORGE.Drag#destroy
+ */
+FORGE.Drag.prototype.destroy = function()
+{
+    this.revert = false; //This unbind events and nullify revertTween
+
+    if(this._onStart !== null)
+    {
+        this._onStart.destroy();
+        this._onStart = null;
+    }
+
+    if(this._onDrag !== null)
+    {
+        this._onDrag.destroy();
+        this._onDrag = null;
+    }
+
+    if(this._onStop !== null)
+    {
+        this._onStop.destroy();
+        this._onStop = null;
+    }
+
+    if(this._onRevert !== null)
+    {
+        this._onRevert.destroy();
+        this._onRevert = null;
+    }
+
+    this._handleObject = null;
+    this._displayObject = null;
+    this._constrain = null;
+
+    this._lastMousePosition = null;
+
+    FORGE.BaseObject.prototype.destroy.call(this);
+};
+
+/**
+ * Enabled flag for the drag module
+ * @name FORGE.Drag#enabled
+ * @type {boolean} 
+ * @default false
+ */
+Object.defineProperty(FORGE.Drag.prototype, "enabled", 
+{
+    /** @this {FORGE.Drag} */
+    get: function()
+    {
+        return this._enabled;
+    },
+
+    /** @this {FORGE.Drag} */
+    set: function(value)
+    {
+        var enabled = Boolean(value);
+
+        if(enabled === true)
+        {
+            this.enable();
+        }
+        else
+        {
+            this.disable();
+        }
+    }
+});
+
+/**
+ * Dragging flag for the drag module
+ * @name FORGE.Drag#dragging
+ * @readonly
+ * @type {boolean} 
+ */
+Object.defineProperty(FORGE.Drag.prototype, "dragging", 
+{
+    /** @this {FORGE.Drag} */
+    get: function()
+    {
+        return this._dragging;
+    }
+});
+
+/**
+ * Get and set the handle object
+ * @name FORGE.Drag#handle
+ * @type {FORGE.DisplayObject} 
+ */
+Object.defineProperty(FORGE.Drag.prototype, "handle", 
+{
+    /** @this {FORGE.Drag} */
+    get: function()
+    {
+        return this._handleObject;
+    },
+
+    /** @this {FORGE.Drag} */
+    set: function(value)
+    {
+        this._setHandleObject(value);
+    }
+});
+
+/**
+ * Get and set the constrain object
+ * @name FORGE.Drag#constrain
+ * @type {FORGE.DisplayObject} 
+ * @default  null
+ */
+Object.defineProperty(FORGE.Drag.prototype, "constrain", 
+{
+    /** @this {FORGE.Drag} */
+    get: function()
+    {
+        return this._constrain;
+    },
+
+    /** @this {FORGE.Drag} */
+    set: function(value)
+    {
+        this._constrain = value;
+    }
+});
+
+/**
+ * Get the progress of the drag position on its contrain on two axes.&lt;br>
+ * If no constrain, this wiil return undefined.
+ * @name  FORGE.Drag#progress
+ * @readonly
+ * @type {Object}
+ * @property {number} [x] The progress on x axis between 0 and 1.
+ * @property {number} [y] The progress on y axis between 0 and 1.
+ */
+Object.defineProperty(FORGE.Drag.prototype, "progress", 
+{
+    /** @this {FORGE.Drag} */
+    get: function()
+    {
+        if(this._constrain === null)
+        {
+            return undefined;
+        }
+
+        var o = this._displayObject.globalOffset; // o = offset
+        var co = this._constrain.globalOffset; // co = constrain offset
+        var progressX = (o.left - co.left) / (this._constrain.innerWidth - this._displayObject.pixelWidth);
+        var progressY = (o.top - co.top) / (this._constrain.innerHeight - this._displayObject.pixelHeight);
+        return {x: progressX, y: progressY};
+    }
+});
+
+/**
+ * Get and set the axis constrains.&lt;br>
+ * Values can be "x" or "y".&lt;br>
+ * To disable axis constrain, you can set an empty string or anything else.
+ * @name FORGE.Drag#axis
+ * @type {string} 
+ * @default  "empty string"
+ */
+Object.defineProperty(FORGE.Drag.prototype, "axis", 
+{
+    /** @this {FORGE.Drag} */
+    get: function()
+    {
+        return this._axis;
+    },
+
+    /** @this {FORGE.Drag} */
+    set: function(value)
+    {
+        if(value === "x" || value === "y")
+        {
+            this._axis = value;
+        }
+        else
+        {
+            this._axis = "";
+        }
+    }
+});
+
+/**
+ * Get and set the alpha of the display object during drag
+ * Value can be between 0 and 1.
+ * @name FORGE.Drag#alpha
+ * @type {number} 
+ * @default 1
+ */
+Object.defineProperty(FORGE.Drag.prototype, "alpha", 
+{
+    /** @this {FORGE.Drag} */
+    get: function()
+    {
+        return this._alpha;
+    },
+
+    /** @this {FORGE.Drag} */
+    set: function(value)
+    {
+        if(typeof value === "number")
+        {
+            this._alpha = value;
+        }
+    }
+});
+
+/**
+ * Reverting flag for the drag module
+ * @name FORGE.Drag#reverting
+ * @readonly
+ * @type {boolean} 
+ */
+Object.defineProperty(FORGE.Drag.prototype, "reverting", 
+{
+    /** @this {FORGE.Drag} */
+    get: function()
+    {
+        return this._reverting;
+    }
+});
+
+/**
+ * Get and set the revert flag.
+ * If revert is at true, the display object will revert its position to its original position after the drag stop.
+ * @name FORGE.Drag#revert
+ * @type {boolean} 
+ * @default  false
+ */
+Object.defineProperty(FORGE.Drag.prototype, "revert", 
+{
+    /** @this {FORGE.Drag} */
+    get: function()
+    {
+        return this._revert;
+    },
+
+    /** @this {FORGE.Drag} */
+    set: function(value)
+    {
+        this._revert = Boolean(value);
+
+        if(this._revert === true &amp;&amp; this._revertTween === null)
+        {
+            this._revertTween = new FORGE.Tween(this._displayObject.viewer, this._displayObject);
+            this._revertTween.onComplete.add(this._revertCompleteHandler, this);
+            this._displayObject.viewer.tween.add(this._revertTween);
+        }
+        else if(this._revert === false &amp;&amp; this._revertTween !== null)
+        {
+            this._displayObject.viewer.tween.remove(this._revertTween);
+            this._revertTween.onComplete.remove(this._revertCompleteHandler, this);
+            this._revertTween.destroy();
+            this._revertTween = null;
+        }
+    }
+});
+
+/**
+ * Get and set the revert duration in milliseconds
+ * @name FORGE.Drag#revertDuration
+ * @type {number} 
+ * @default  200
+ */
+Object.defineProperty(FORGE.Drag.prototype, "revertDuration", 
+{
+    /** @this {FORGE.Drag} */
+    get: function()
+    {
+        return this._revertDuration;
+    },
+
+    /** @this {FORGE.Drag} */
+    set: function(value)
+    {
+        if(typeof value === "number")
+        {
+            this._revertDuration = value;
+        }
+    }
+});
+
+/**
+ * Get and set the revert easing method
+ * @name FORGE.Drag#revertEasing
+ * @type {Function} 
+ * @default FORGE.Easing.LINEAR
+ */
+Object.defineProperty(FORGE.Drag.prototype, "revertEasing", 
+{
+    /** @this {FORGE.Drag} */
+    get: function()
+    {
+        return this._revertEasing;
+    },
+
+    /** @this {FORGE.Drag} */
+    set: function(value)
+    {
+        if(typeof value === "function")
+        {
+            this._revertEasing = value;
+        }
+    }
+});
+
+
+/**
+ * Get the onStart {@link FORGE.EventDispatcher}.
+ * @name  FORGE.Drag#onStart
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Drag.prototype, "onStart", 
+{
+    /** @this {FORGE.Drag} */
+    get: function()
+    {
+        if(this._onStart === null)
+        {
+            this._onStart = new FORGE.EventDispatcher(this._displayObject);
+        }
+        
+        return this._onStart;
+    }
+});
+
+/**
+ * Get the onDrag {@link FORGE.EventDispatcher}.
+ * @name  FORGE.Drag#onDrag
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Drag.prototype, "onDrag", 
+{
+    /** @this {FORGE.Drag} */
+    get: function()
+    {
+        if(this._onDrag === null)
+        {
+            this._onDrag = new FORGE.EventDispatcher(this._displayObject);
+        }
+        
+        return this._onDrag;
+    }
+});
+
+/**
+ * Get the onStop {@link FORGE.EventDispatcher}.
+ * @name  FORGE.Drag#onStop
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Drag.prototype, "onStop", 
+{
+    /** @this {FORGE.Drag} */
+    get: function()
+    {
+        if(this._onStop === null)
+        {
+            this._onStop = new FORGE.EventDispatcher(this._displayObject);
+        }
+        
+        return this._onStop;
+    }
+});
+
+/**
+ * Get the onRevert {@link FORGE.EventDispatcher}.
+ * @name  FORGE.Drag#onRevert
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Drag.prototype, "onRevert", 
+{
+    /** @this {FORGE.Drag} */
+    get: function()
+    {
+        if(this._onRevert === null)
+        {
+            this._onRevert = new FORGE.EventDispatcher(this._displayObject);
+        }
+        
+        return this._onRevert;
+    }
+});
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

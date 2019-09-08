@@ -1,0 +1,163 @@
+{
+    "audio":
+    {
+        "enabled": true,
+
+        "volume":
+        {
+            "default": 0.5,
+            "max": 1.0
+        }
+    },
+
+    "playlists":
+    {
+        "enabled": true,
+
+        "volume":
+        {
+            "default": 0.5,
+            "max": 1.0
+        },
+
+        "default": "playlist-0",
+
+        "lists":
+        [
+            {
+                "uid": "playlist-0",
+                "name": "Karting Playlist",
+                "default": "playlist-0-track-0",
+                "loop": true,
+                "autoPlay": true,
+
+                "tracks": ["playlist-0-track-0"]
+            }
+        ],
+
+        "tracks":
+        [
+            {
+                "uid": "playlist-0-track-0",
+                "author": "",
+                "name": "",
+                "url": "https://cdn.forgejs.org/samples/vrrroom/audio/Conscious.mp3"
+            }
+        ]
+    },
+
+    "story":
+    {
+        "uid": "story-0",
+        "name": "Karting Race",
+        "slug": "kart-race",
+        "description": "This project have multiple synchronized videos scenes.",
+        "default": "scene-0",
+
+        "scenes":
+        [
+            {
+                "uid": "scene-0",
+                "name": "Samy Karting",
+                "slug": "samy-karting",
+                "description": "Samy Karting Session",
+                "sync":["scene-1"],
+
+                "media":
+                {
+                    "uid": "media-0",
+                    "type": "video",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "streaming": "dash",
+                        "url": "https://cdn.forgejs.org/samples/vrrroom/videos/460017/460017.mpd"
+                    },
+
+                    "options":
+                    {
+                        "autoPlay": true,
+                        "loop": true,
+                        "volume": 0
+                    }
+                },
+
+                "view":
+                {
+                    "type": "GoPro"
+                }
+            },
+
+            {
+                "uid": "scene-1",
+                "name": "Martin Karting",
+                "slug": "martin-karting",
+                "description": "Martin Karting Session",
+                "sync":["scene-0"],
+
+                "media":
+                {
+                    "uid": "media-1",
+                    "type": "video",
+
+                    "source":
+                    {
+                        "format": "equi",
+                        "streaming": "dash",
+                        "url": "https://cdn.forgejs.org/samples/vrrroom/videos/459989/459989.mpd"
+                    },
+
+                    "options":
+                    {
+                        "autoPlay": true,
+                        "loop": true,
+                        "volume": 0
+                    }
+                },
+
+                "view":
+                {
+                    "type": "GoPro"
+                }
+            }
+        ]
+    },
+
+    "plugins":
+    {
+        "prefix": "../../plugins/",
+
+        "engines":
+        [
+            {
+                "uid": "org.forgejs.previousnextbuttons",
+                "url": "PreviousNextButtons/"
+            },
+
+            {
+                "uid": "org.forgejs.gyroscopebutton",
+                "url": "GyroscopeButton/"
+            }
+        ],
+
+        "instances":
+        [
+            {
+                "uid": "previousnextbuttons",
+                "engine": "org.forgejs.previousnextbuttons"
+            },
+
+            {
+                "uid": "gyrobutton",
+                "engine": "org.forgejs.gyroscopebutton",
+
+                "options":
+                {
+                    "bottom": 10,
+                    "left": 10
+                }
+            }
+        ]
+    }
+}

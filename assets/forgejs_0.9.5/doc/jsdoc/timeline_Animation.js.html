@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: timeline/Animation.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: timeline/Animation.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Abstract class allowing the animation of an element, given instructions about it.
+ *
+ * @constructor FORGE.Animation
+ * @param {FORGE.Viewer} viewer - {@link FORGE.Viewer} reference
+ * @param {*} target - The element to animate
+ * @extends {FORGE.BaseObject}
+ */
+FORGE.Animation = function(viewer, target)
+{
+    /**
+     * Viewer reference.
+     * @name FORGE.Animation#_viewer
+     * @type {FORGE.Viewer}
+     * @private
+     */
+    this._viewer = viewer;
+
+    /**
+     * The target of the animation
+     * @name FORGE.Animation#_target
+     * @type {*}
+     * @private
+     */
+    this._target = target || null;
+
+    /**
+     * The instruction to apply on the target.
+     * @name FORGE.Animation#_instruction
+     * @type {?AnimationInstruction}
+     * @private
+     */
+    this._instruction = null;
+
+    /**
+     * Timeline reference.
+     * @name FORGE.Animation#_timeline
+     * @type {FORGE.Timeline}
+     * @private
+     */
+    this._timeline = null;
+
+    /**
+     * The index of the previous keyframe in the timeline.
+     * @name FORGE.Animation#_kfp
+     * @type {?FORGE.Keyframe}
+     * @private
+     */
+    this._kfp = null;
+
+    /**
+     * The index of the next keyframe in the timeline.
+     * @name FORGE.Animation#_kfn
+     * @type {?FORGE.Keyframe}
+     * @private
+     */
+    this._kfn = null;
+
+    /**
+     * Current animation time.
+     * @name FORGE.Animation#_time
+     * @type {number}
+     * @private
+     */
+    this._time = 0;
+
+    /**
+     * Duration of the animation
+     * @name FORGE.Animation#_duration
+     * @type {number}
+     * @private
+     */
+    this._duration = 0;
+
+    /**
+     * Running flag.
+     * @name FORGE.Animation#_running
+     * @type {boolean}
+     * @private
+     */
+    this._running = false;
+
+    /**
+     * Tween object.
+     * @name FORGE.Animation#_tween
+     * @type {FORGE.Tween}
+     * @private
+     */
+    this._tween = null;
+
+    /**
+     * Tween time reference.
+     * @name FORGE.Animation#_tweenTime
+     * @type {number}
+     * @private
+     */
+    this._tweenTime = 0;
+
+    /**
+     * Smooth interpolation flag.
+     * @name FORGE.Animation#_smooth
+     * @type {boolean}
+     * @private
+     */
+    this._smooth = false;
+
+    /**
+     * Left spline for SQUAD algo.
+     * @name FORGE.Animation#_sp
+     * @type {THREE.Quaternion}
+     * @private
+     */
+    this._sp = null;
+
+    /**
+     * Righ spline for SQUAD algo.
+     * @name FORGE.Animation#_sn
+     * @type {THREE.Quaternion}
+     * @private
+     */
+    this._sn = null;
+
+    /**
+     * On animation play event dispatcher.
+     * @name FORGE.Animation#_onPlay
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onPlay = null;
+
+    /**
+     * On animation stop event dispatcher.
+     * @name FORGE.Animation#_onStop
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onStop = null;
+
+    /**
+     * On animation progress event dispatcher.
+     * @name FORGE.Animation#_onProgress
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onProgress = null;
+
+    /**
+     * On animation complete event dispatcher.
+     * @name FORGE.Animation#_onComplete
+     * @type {FORGE.EventDispatcher}
+     * @private
+     */
+    this._onComplete = null;
+
+    FORGE.BaseObject.call(this, "Animation");
+
+    this._boot();
+};
+
+FORGE.Animation.prototype = Object.create(FORGE.BaseObject.prototype);
+FORGE.Animation.prototype.constructor = FORGE.Animation;
+
+/**
+ * Boot sequence
+ *
+ * @method FORGE.Animation#_boot
+ * @private
+ */
+FORGE.Animation.prototype._boot = function()
+{
+    this._register();
+
+    // Create the tween object
+    this._tween = new FORGE.Tween(this._viewer, this);
+    this._tween.onStart.add(this._onTweenStartHandler, this);
+    this._tween.onStop.add(this._onTweenStopHandler, this);
+    this._tween.onProgress.add(this._onTweenProgressHandler, this);
+    this._tween.onComplete.add(this._onTweenCompleteHandler, this);
+    this._viewer.tween.add(this._tween);
+
+    this._timeline = new FORGE.Timeline();
+};
+
+/**
+ * Get the property from a target and the associated instructions
+ *
+ * @method FORGE.Animation#_getProp
+ * @param  {string} prop - The instruction describing the access of the property
+ * @param  {*} target - The target
+ * @return {Array} An array composed of the property without the last accessor + the last accessor
+ * @private
+ */
+FORGE.Animation.prototype._getProp = function(prop, target)
+{
+    var acc = prop.split(".");
+    var res = target;
+
+    for (var i = 0, ii = acc.length; i &lt; ii - 1; i++)
+    {
+        res = res[acc[i]];
+    }
+
+    return [res, acc[i]];
+};
+
+/**
+ * Interpolation evaluation function
+ *
+ * @method FORGE.Animation#_at
+ * @param  {number} t - Current time [0...1]
+ * @private
+ */
+FORGE.Animation.prototype._at = function(t)
+{
+    // If there is no next keyframe, abort
+    if (this._kfn === null)
+    {
+        return;
+    }
+
+    // Update the time, given the current keyframes
+    this._time = (t * this._duration) + this._kfp.time;
+
+    var props = [],
+        prop, i, ii;
+
+    if (!Array.isArray(this._instruction.prop))
+    {
+        this._instruction.prop = [this._instruction.prop];
+    }
+
+    ii = this._instruction.prop.length;
+
+    // Get all properties to update
+    for (i = 0; i &lt; ii; i++)
+    {
+        props.push(this._getProp(this._instruction.prop[i], this._target));
+    }
+
+    // If smooth, interpolate all properties together
+    if (this._instruction.smooth === true &amp;&amp; this._instruction.prop[0] === "quaternion")
+    {
+        // SQUAD interpolation
+        prop = props[0];
+        prop[0].quaternion = FORGE.Quaternion.squadNoInvert(this._kfp.data.quaternion, this._sp, this._sn, this._kfn.data.quaternion, t);
+    }
+    // Else no smooth interpolation, interpolate properties one by one
+    else if (this._instruction.prop[0] === "quaternion")
+    {
+        prop = props[0];
+        prop[0].quaternion = FORGE.Quaternion.slerp(this._kfp.data.quaternion, this._kfn.data.quaternion, t);
+    }
+    else
+    {
+        var alpha = this._tween.easing(t);
+        var pp, pn, offset = 0;
+
+        // For each property of the instruction
+        for (i = 0; i &lt; ii; i++)
+        {
+            // Get the previous and the next properties related to the current one
+            pp = this._getProp(this._instruction.prop[i], this._kfp.data);
+            pn = this._getProp(this._instruction.prop[i], this._kfn.data);
+
+            prop = props[i];
+
+            pp = pp[0][pp[1]];
+            pn = pn[0][pn[1]];
+
+            // Wrap it if necessary
+            if (this._instruction.wrap &amp;&amp; this._instruction.wrap[i])
+            {
+                var ilow = this._instruction.wrap[i][0];
+                var ihigh = this._instruction.wrap[i][1];
+
+                offset = Math.abs(ilow - ihigh) / 2;
+
+                // Change the direction
+                if (Math.abs(pp - pn) > offset)
+                {
+                    pp = FORGE.Math.wrap(pp + offset, ilow, ihigh);
+                    pn = FORGE.Math.wrap(pn + offset, ilow, ihigh);
+                }
+                else
+                {
+                    offset = 0;
+                }
+            }
+
+            // Update it using a classic alpha
+            prop[0][prop[1]] = (1 - alpha) * pp + alpha * pn - offset;
+        }
+    }
+
+    if (typeof this._instruction.fun === "function")
+    {
+        this._instruction.fun.call(this, t);
+    }
+};
+
+/**
+ * Go from the current keyframe to the next one. If no time is specified, it
+ * takes the two next keyframes if there are one, given the current time.
+ *
+ * @method FORGE.Animation#_goTo
+ * @param {number=} time - Time to start the animation at
+ * @private
+ */
+FORGE.Animation.prototype._goTo = function(time)
+{
+    time = time || this._time;
+
+    this.log("going to the next keyframes at " + time);
+
+    // By default, increase keyframes by 1
+    var kfs = this._timeline.getKeyframesIndexes(time || this._time);
+    this._kfn = this._timeline.keyframes[kfs.next];
+    this._kfp = this._timeline.keyframes[kfs.previous];
+
+    if (this._kfn === null || kfs.next === -1)
+    {
+        return false;
+    };
+
+    // If smooth, prepare SQUAD interpolation
+    if (this._smooth)
+    {
+        this._prepareSQUAD(time);
+    }
+
+    // Configure the tween
+    this._duration = this._kfn.time - this._kfp.time;
+
+    this._tween.to(
+    {
+        "tweenTime": 1
+    }, this._duration);
+
+    this._tweenTime = 0;
+
+    // Start the tween
+    this._tween.start();
+
+    return true;
+};
+
+/**
+ * Prepare the SQUAD interpolation if wanted.
+ * From Shoemake 85 at SIGGRAPH
+ * http://run.usc.edu/cs520-s12/assign2/p245-shoemake.pdf
+ *
+ * @method FORGE.Animation#_prepareSQUAD
+ * @param {number} time - Time to start the animation at
+ * @private
+ */
+FORGE.Animation.prototype._prepareSQUAD = function(time)
+{
+    var sideKfs = this._timeline.getSideKeyframes(time);
+
+    if (sideKfs.previous === null || sideKfs.next === null)
+    {
+        return;
+    }
+
+    // Quaternions to join with a path
+    var qp = new THREE.Quaternion().copy(this._kfp.data.quaternion).normalize();
+    var qn = new THREE.Quaternion().copy(this._kfn.data.quaternion).normalize();
+
+    // Quaternions before and after the previous ones, used for interpolation
+    var qpp = new THREE.Quaternion().copy(sideKfs.previous.data.quaternion).normalize();
+    var qnn = new THREE.Quaternion().copy(sideKfs.next.data.quaternion).normalize();
+
+    // Compute the splines used for describing the path of the camera
+    this._sp = FORGE.Quaternion.spline(qpp, qp, qn);
+    this._sn = FORGE.Quaternion.spline(qp, qn, qnn);
+};
+
+/**
+ * On tween start event handler
+ *
+ * @method FORGE.Animation#_onTweenStartHandler
+ * @private
+ */
+FORGE.Animation.prototype._onTweenStartHandler = function()
+{
+    // Don't dispatch the event if the animation is already running
+    if (this._running !== true)
+    {
+        if (this._onPlay !== null)
+        {
+            this._onPlay.dispatch();
+        }
+
+        this._running = true;
+    }
+};
+
+/**
+ * On tween stop event handler
+ *
+ * @method FORGE.Animation#_onTweenStopHandler
+ * @private
+ */
+FORGE.Animation.prototype._onTweenStopHandler = function()
+{
+    this._running = false;
+
+    if (this._onStop !== null)
+    {
+        this._onStop.dispatch();
+    }
+};
+
+/**
+ * On tween progress event handler
+ *
+ * @method FORGE.Animation#_onTweenProgressHandler
+ * @private
+ */
+FORGE.Animation.prototype._onTweenProgressHandler = function()
+{
+    // Interpolate
+    this._at(this._tweenTime);
+
+    if (this._onProgress !== null)
+    {
+        this._onProgress.dispatch(
+        {
+            progress: this._time / this._duration
+        });
+    }
+};
+
+/**
+ * On tween complete event handler
+ *
+ * @method FORGE.Animation#_onTweenCompleteHandler
+ * @private
+ */
+FORGE.Animation.prototype._onTweenCompleteHandler = function()
+{
+    // Don't dispatch the event until the whole animation is stopped
+    if (!this._goTo())
+    {
+        if (this._onComplete !== null)
+        {
+            this._onComplete.dispatch();
+        }
+    }
+};
+
+/**
+ * Play the animation.
+ *
+ * @method  FORGE.Animation#play
+ * @param {number=} time - Time to start the animation at
+ */
+FORGE.Animation.prototype.play = function(time)
+{
+    // Reset the time
+    this._time = time || 0;
+
+    // Start the animation
+    this._goTo(this._time);
+};
+
+/**
+ * Stop the animation.
+ *
+ * @method  FORGE.Animation#stop
+ */
+FORGE.Animation.prototype.stop = function()
+{
+    this._tween.stop();
+};
+
+/**
+ * Resume the animation.
+ *
+ * @method  FORGE.Animation#resume
+ */
+FORGE.Animation.prototype.resume = function()
+{
+    this._goTo();
+};
+
+/**
+ * Destroy sequence.
+ *
+ * @method FORGE.Animation#destroy
+ */
+FORGE.Animation.prototype.destroy = function()
+{
+    if (this._timeline !== null)
+    {
+        this._timeline.destroy();
+        this._timeline = null;
+    }
+
+    if (this._tween !== null)
+    {
+        this._tween.destroy();
+        this._tween = null;
+    }
+
+    if (this._onPlay !== null)
+    {
+        this._onPlay.destroy();
+        this._onPlay = null;
+    }
+
+    if (this._onStop !== null)
+    {
+        this._onStop.destroy();
+        this._onStop = null;
+    }
+
+    if (this._onProgress !== null)
+    {
+        this._onProgress.destroy();
+        this._onProgress = null;
+    }
+
+    if (this._onComplete !== null)
+    {
+        this._onComplete.destroy();
+        this._onComplete = null;
+    }
+
+    FORGE.BaseObject.prototype.destroy.call(this);
+};
+
+/**
+ * Accessors to the running flag
+ * @name FORGE.Animation#running
+ * @readonly
+ * @type {boolean}
+ */
+Object.defineProperty(FORGE.Animation.prototype, "running",
+{
+    /** @this {FORGE.Animation} */
+    get: function()
+    {
+        return this._running;
+    }
+});
+
+/**
+ * Accessors to timeline
+ * @name FORGE.Animation#timeline
+ * @readonly
+ * @type {FORGE.Timeline}
+ */
+Object.defineProperty(FORGE.Animation.prototype, "timeline",
+{
+    /** @this {FORGE.Animation} */
+    get: function()
+    {
+        return this._timeline;
+    }
+});
+
+/**
+ * Accessors to instruction.
+ * @name FORGE.Animation#instruction
+ * @type {AnimationInstruction}
+ */
+Object.defineProperty(FORGE.Animation.prototype, "instruction",
+{
+    /** @this {FORGE.Animation} */
+    get: function()
+    {
+        return this._instruction;
+    },
+
+    /** @this {FORGE.Animation} */
+    set: function(value)
+    {
+        this._instruction = value;
+    }
+});
+
+/**
+ * Accessors to tween.
+ * @name FORGE.Animation#tween
+ * @type {number}
+ */
+Object.defineProperty(FORGE.Animation.prototype, "tween",
+{
+    /** @this {FORGE.Animation} */
+    get: function()
+    {
+        return this._tween;
+    },
+
+    /** @this {FORGE.Animation} */
+    set: function(value)
+    {
+        this._tween = value;
+    }
+});
+
+/**
+ * Accessors to normalized tween time.
+ * @name FORGE.Animation#tweenTime
+ * @type {number}
+ */
+Object.defineProperty(FORGE.Animation.prototype, "tweenTime",
+{
+    /** @this {FORGE.Animation} */
+    get: function()
+    {
+        return this._tweenTime;
+    },
+
+    /** @this {FORGE.Animation} */
+    set: function(value)
+    {
+        this._tweenTime = value;
+    }
+});
+
+/**
+ * Accessors to smooth.
+ * @name FORGE.Animation#smooth
+ * @type {number}
+ */
+Object.defineProperty(FORGE.Animation.prototype, "smooth",
+{
+    /** @this {FORGE.Animation} */
+    get: function()
+    {
+        return this._smooth;
+    },
+
+    /** @this {FORGE.Animation} */
+    set: function(value)
+    {
+        this._smooth = value;
+    }
+});
+
+/**
+ * Get the "onPlay" {@link FORGE.EventDispatcher} of the target.
+ * @name FORGE.Animation#onPlay
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Animation.prototype, "onPlay",
+{
+    /** @this {FORGE.Animation} */
+    get: function()
+    {
+        if (this._onPlay === null)
+        {
+            this._onPlay = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onPlay;
+    }
+});
+
+/**
+ * Get the "onStop" {@link FORGE.EventDispatcher} of the target.
+ * @name FORGE.Animation#onStop
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Animation.prototype, "onStop",
+{
+    /** @this {FORGE.Animation} */
+    get: function()
+    {
+        if (this._onStop === null)
+        {
+            this._onStop = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onStop;
+    }
+});
+
+/**
+ * Get the "onProgress" {@link FORGE.EventDispatcher} of the target.
+ * @name FORGE.Animation#onProgress
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Animation.prototype, "onProgress",
+{
+    /** @this {FORGE.Animation} */
+    get: function()
+    {
+        if (this._onProgress === null)
+        {
+            this._onProgress = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onProgress;
+    }
+});
+
+/**
+ * Get the "onComplete" {@link FORGE.EventDispatcher} of the target.
+ * @name FORGE.Animation#onComplete
+ * @readonly
+ * @type {FORGE.EventDispatcher}
+ */
+Object.defineProperty(FORGE.Animation.prototype, "onComplete",
+{
+    /** @this {FORGE.Animation} */
+    get: function()
+    {
+        if (this._onComplete === null)
+        {
+            this._onComplete = new FORGE.EventDispatcher(this);
+        }
+
+        return this._onComplete;
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

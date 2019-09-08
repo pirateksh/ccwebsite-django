@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ForgeJS - Source: render/background/BackgroundRenderer.js</title>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-91092428-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <script src="scripts/jquery-2.1.4.min.js"> </script>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="styles/gopro.css">
+</head>
+
+<body>
+
+<div id="header">
+
+    <p class="logo"><img src="images/forge.png" height="48"></p>
+
+    <p class="title">ForgeJS Documentation 0.9.5</p>
+
+    <div class="onoffswitch" id="showPrivate" title="show / hide private members">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch"></label>
+    </div>
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FORGE.Action.html">Action</a></li><li><a href="FORGE.ActionEventDispatcher.html">ActionEventDispatcher</a></li><li><a href="FORGE.ActionManager.html">ActionManager</a></li><li><a href="FORGE.AdditionPass.html">AdditionPass</a></li><li><a href="FORGE.Animation.html">Animation</a></li><li><a href="FORGE.AxisBinding.html">AxisBinding</a></li><li><a href="FORGE.BackgroundMeshRenderer.html">BackgroundMeshRenderer</a></li><li><a href="FORGE.BackgroundPyramidRenderer.html">BackgroundPyramidRenderer</a></li><li><a href="FORGE.BackgroundRenderer.html">BackgroundRenderer</a></li><li><a href="FORGE.BackgroundShaderRenderer.html">BackgroundShaderRenderer</a></li><li><a href="FORGE.BaseBinding.html">BaseBinding</a></li><li><a href="FORGE.BaseObject.html">BaseObject</a></li><li><a href="FORGE.Button.html">Button</a></li><li><a href="FORGE.ButtonBinding.html">ButtonBinding</a></li><li><a href="FORGE.ButtonSkin.html">ButtonSkin</a></li><li><a href="FORGE.Cache.html">Cache</a></li><li><a href="FORGE.Camera.html">Camera</a></li><li><a href="FORGE.CameraAnimation.html">CameraAnimation</a></li><li><a href="FORGE.CameraGaze.html">CameraGaze</a></li><li><a href="FORGE.Canvas.html">Canvas</a></li><li><a href="FORGE.Clock.html">Clock</a></li><li><a href="FORGE.Collection.html">Collection</a></li><li><a href="FORGE.ColorRGBA.html">ColorRGBA</a></li><li><a href="FORGE.ControllerBase.html">ControllerBase</a></li><li><a href="FORGE.ControllerGamepad.html">ControllerGamepad</a></li><li><a href="FORGE.ControllerGyroscope.html">ControllerGyroscope</a></li><li><a href="FORGE.ControllerKeyboard.html">ControllerKeyboard</a></li><li><a href="FORGE.ControllerManager.html">ControllerManager</a></li><li><a href="FORGE.ControllerPointer.html">ControllerPointer</a></li><li><a href="FORGE.Device.html">Device</a></li><li><a href="FORGE.Director.html">Director</a></li><li><a href="FORGE.DirectorTrack.html">DirectorTrack</a></li><li><a href="FORGE.DisplayList.html">DisplayList</a></li><li><a href="FORGE.DisplayObject.html">DisplayObject</a></li><li><a href="FORGE.DisplayObjectContainer.html">DisplayObjectContainer</a></li><li><a href="FORGE.Drag.html">Drag</a></li><li><a href="FORGE.EffectComposer.html">EffectComposer</a></li><li><a href="FORGE.Event.html">Event</a></li><li><a href="FORGE.EventDispatcher.html">EventDispatcher</a></li><li><a href="FORGE.File.html">File</a></li><li><a href="FORGE.Gamepad.html">Gamepad</a></li><li><a href="FORGE.GamepadsManager.html">GamepadsManager</a></li><li><a href="FORGE.Group.html">Group</a></li><li><a href="FORGE.Gyroscope.html">Gyroscope</a></li><li><a href="FORGE.History.html">History</a></li><li><a href="FORGE.Hotspot3D.html">Hotspot3D</a></li><li><a href="FORGE.HotspotAnimation.html">HotspotAnimation</a></li><li><a href="FORGE.HotspotAnimationTrack.html">HotspotAnimationTrack</a></li><li><a href="FORGE.HotspotDOM.html">HotspotDOM</a></li><li><a href="FORGE.HotspotGeometry.html">HotspotGeometry</a></li><li><a href="FORGE.HotspotManager.html">HotspotManager</a></li><li><a href="FORGE.HotspotMaterial.html">HotspotMaterial</a></li><li><a href="FORGE.HotspotSound.html">HotspotSound</a></li><li><a href="FORGE.HotspotStates.html">HotspotStates</a></li><li><a href="FORGE.HotspotTransform.html">HotspotTransform</a></li><li><a href="FORGE.HotspotTransformValues.html">HotspotTransformValues</a></li><li><a href="FORGE.Iframe.html">Iframe</a></li><li><a href="FORGE.Image.html">Image</a></li><li><a href="FORGE.KeyBinding.html">KeyBinding</a></li><li><a href="FORGE.Keyboard.html">Keyboard</a></li><li><a href="FORGE.Keyframe.html">Keyframe</a></li><li><a href="FORGE.Listener.html">Listener</a></li><li><a href="FORGE.Loader.html">Loader</a></li><li><a href="FORGE.Locale.html">Locale</a></li><li><a href="FORGE.LocaleManager.html">LocaleManager</a></li><li><a href="FORGE.LocaleString.html">LocaleString</a></li><li><a href="FORGE.Map.html">Map</a></li><li><a href="FORGE.Media.html">Media</a></li><li><a href="FORGE.MediaStore.html">MediaStore</a></li><li><a href="FORGE.MediaTexture.html">MediaTexture</a></li><li><a href="FORGE.MetaAnimation.html">MetaAnimation</a></li><li><a href="FORGE.Object3D.html">Object3D</a></li><li><a href="FORGE.ObjectRenderer.html">ObjectRenderer</a></li><li><a href="FORGE.PickingDrawPass.html">PickingDrawPass</a></li><li><a href="FORGE.PickingManager.html">PickingManager</a></li><li><a href="FORGE.Playlist.html">Playlist</a></li><li><a href="FORGE.PlaylistManager.html">PlaylistManager</a></li><li><a href="FORGE.PlaylistTrack.html">PlaylistTrack</a></li><li><a href="FORGE.Plugin.html">Plugin</a></li><li><a href="FORGE.PluginEngine.html">PluginEngine</a></li><li><a href="FORGE.PluginManager.html">PluginManager</a></li><li><a href="FORGE.PluginObjectFactory.html">PluginObjectFactory</a></li><li><a href="FORGE.Pointer.html">Pointer</a></li><li><a href="FORGE.PostProcessing.html">PostProcessing</a></li><li><a href="FORGE.Raycaster.html">Raycaster</a></li><li><a href="FORGE.Rectangle.html">Rectangle</a></li><li><a href="FORGE.RenderDisplay.html">RenderDisplay</a></li><li><a href="FORGE.RenderManager.html">RenderManager</a></li><li><a href="FORGE.RenderParams.html">RenderParams</a></li><li><a href="FORGE.RenderPass.html">RenderPass</a></li><li><a href="FORGE.RenderPipeline.html">RenderPipeline</a></li><li><a href="FORGE.RenderScene.html">RenderScene</a></li><li><a href="FORGE.RequestAnimationFrame.html">RequestAnimationFrame</a></li><li><a href="FORGE.Scene.html">Scene</a></li><li><a href="FORGE.ShaderPass.html">ShaderPass</a></li><li><a href="FORGE.Size.html">Size</a></li><li><a href="FORGE.Sound.html">Sound</a></li><li><a href="FORGE.SoundManager.html">SoundManager</a></li><li><a href="FORGE.Sprite.html">Sprite</a></li><li><a href="FORGE.SpriteAnimation.html">SpriteAnimation</a></li><li><a href="FORGE.SpriteAnimationManager.html">SpriteAnimationManager</a></li><li><a href="FORGE.Story.html">Story</a></li><li><a href="FORGE.System.html">System</a></li><li><a href="FORGE.Tags.html">Tags</a></li><li><a href="FORGE.TextField.html">TextField</a></li><li><a href="FORGE.TexturePass.html">TexturePass</a></li><li><a href="FORGE.Tile.html">Tile</a></li><li><a href="FORGE.Timeline.html">Timeline</a></li><li><a href="FORGE.Timer.html">Timer</a></li><li><a href="FORGE.TimerEvent.html">TimerEvent</a></li><li><a href="FORGE.Track.html">Track</a></li><li><a href="FORGE.Tween.html">Tween</a></li><li><a href="FORGE.TweenManager.html">TweenManager</a></li><li><a href="FORGE.UID.html">UID</a></li><li><a href="FORGE.URL.html">URL</a></li><li><a href="FORGE.VideoBase.html">VideoBase</a></li><li><a href="FORGE.VideoDash.html">VideoDash</a></li><li><a href="FORGE.VideoHTML5.html">VideoHTML5</a></li><li><a href="FORGE.VideoQuality.html">VideoQuality</a></li><li><a href="FORGE.VideoTimeRanges.html">VideoTimeRanges</a></li><li><a href="FORGE.ViewBase.html">ViewBase</a></li><li><a href="FORGE.Viewer.html">Viewer</a></li><li><a href="FORGE.ViewFlat.html">ViewFlat</a></li><li><a href="FORGE.ViewGoPro.html">ViewGoPro</a></li><li><a href="FORGE.ViewManager.html">ViewManager</a></li><li><a href="FORGE.ViewRectilinear.html">ViewRectilinear</a></li></ul><h3>Namespaces</h3><ul><li><a href="FORGE.html">FORGE</a></li><li><a href="FORGE.BackgroundType.html">BackgroundType</a></li><li><a href="FORGE.Color.html">Color</a></li><li><a href="FORGE.ControllerType.html">ControllerType</a></li><li><a href="FORGE.Dom.html">Dom</a></li><li><a href="FORGE.EasingType.html">EasingType</a></li><li><a href="FORGE.EffectComposerType.html">EffectComposerType</a></li><li><a href="FORGE.HotspotGeometryType.html">HotspotGeometryType</a></li><li><a href="FORGE.HotspotType.html">HotspotType</a></li><li><a href="FORGE.Math.html">Math</a></li><li><a href="FORGE.MediaFormat.html">MediaFormat</a></li><li><a href="FORGE.MediaType.html">MediaType</a></li><li><a href="FORGE.PassPosition.html">PassPosition</a></li><li><a href="FORGE.Quaternion.html">Quaternion</a></li><li><a href="FORGE.ShaderChunk.html">ShaderChunk</a></li><li><a href="FORGE.ShaderLib.html">ShaderLib</a></li><li><a href="FORGE.SoundType.html">SoundType</a></li><li><a href="FORGE.Utils.html">Utils</a></li><li><a href="FORGE.VideoFormat.html">VideoFormat</a></li><li><a href="FORGE.VideoQualityMode.html">VideoQualityMode</a></li><li><a href="FORGE.ViewType.html">ViewType</a></li></ul>
+</nav>
+
+<div id="main">
+
+    <!-- <h1 class="page-title">Source: render/background/BackgroundRenderer.js</h1> -->
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * FORGE.BackgroundRenderer
+ * BackgroundRenderer class.
+ *
+ * @constructor FORGE.BackgroundRenderer
+ * @param {FORGE.Viewer} viewer - viewer reference
+ * @param {THREE.WebGLRenderTarget} target - render target
+ * @param {SceneMediaOptionsConfig} options - the options for the cubemap
+ * @param {string=} type - The type of the object as long as many other object inherits from this one.
+ * @extends {FORGE.BaseObject}
+ */
+FORGE.BackgroundRenderer = function(viewer, target, options, type)
+{
+    /**
+     * @name FORGE.BackgroundRenderer#_viewer
+     * @type {FORGE.Viewer}
+     * @private
+     */
+    this._viewer = viewer;
+
+    /**
+     * @name FORGE.BackgroundRenderer#_canvas
+     * @type {FORGE.Canvas}
+     * @private
+     */
+    this._canvas = null;
+
+    /**
+     * The mesh (cube) the video is on.
+     * @type {THREE.Mesh}
+     * @private
+     */
+    this._mesh = null;
+
+    /**
+     * @name FORGE.BackgroundRenderer#_scene
+     * @type {THREE.Scene}
+     * @private
+     */
+    this._scene = null;
+
+    /**
+     * @name FORGE.BackgroundRenderer#_camera
+     * @type {THREE.Camera}
+     * @private
+     */
+    this._camera = null;
+
+    /**
+     * @name FORGE.BackgroundRenderer#_frustum
+     * @type {THREE.Frustum}
+     * @private
+     */
+    this._frustum = null;
+
+    /**
+     * Media format (cubemap, equi...)
+     * @type {string}
+     * @private
+     */
+    this._mediaFormat = options.mediaFormat || FORGE.MediaFormat.CUBE;
+
+    /**
+     * @name FORGE.BackgroundRenderer#_renderTarget
+     * @type {THREE.WebGLRenderTarget}
+     * @private
+     */
+    this._renderTarget = target || null;
+
+    FORGE.BaseObject.call(this, type || "BackgroundRenderer");
+
+    this._boot();
+};
+
+FORGE.BackgroundRenderer.prototype = Object.create(FORGE.BaseObject.prototype);
+FORGE.BackgroundRenderer.prototype.constructor = FORGE.BackgroundRenderer;
+
+/**
+ * Init routine.
+ * @method FORGE.BackgroundRenderer#_boot
+ * @private
+ */
+FORGE.BackgroundRenderer.prototype._boot = function()
+{
+    this._scene = new THREE.Scene();
+    this._scene.name = "Background scene";
+
+    if (this._renderTarget === null)
+    {
+        var width = this._viewer.renderer.canvasResolution.width;
+        var height = this._viewer.renderer.canvasResolution.height;
+
+        var rtParams =
+        {
+            minFilter: THREE.LinearFilter,
+            magFilter: THREE.LinearFilter,
+            format: THREE.RGBAFormat,
+            stencilBuffer: false
+        };
+
+        this._renderTarget = new THREE.WebGLRenderTarget(width, height, rtParams);
+    }
+
+    this._frustum = new THREE.Frustum();
+};
+
+/**
+ * Abstract method that should be implemented by subclass.
+ * @method FORGE.BackgroundRenderer#_setDisplayObject
+ * @param {FORGE.DisplayObject} displayObject - The display object to set.
+ * @private
+ */
+FORGE.BackgroundRenderer.prototype._setDisplayObject = function(displayObject)
+{
+    this.log(displayObject); //@closure
+    throw "Please implement " + this._className + "::_setDisplayObject";
+};
+
+/**
+ * Abstract method that should be implemented by subclass.
+ * @method FORGE.BackgroundRenderer#_clear
+ * @private
+ */
+FORGE.BackgroundRenderer.prototype._clear = function()
+{
+    throw "Please implement " + this._className + "::_clear";
+};
+
+/**
+ * Update texture if needed (video only).
+ * @method FORGE.BackgroundRenderer#_updateTexture
+ * @private
+ */
+FORGE.BackgroundRenderer.prototype._updateTexture = function()
+{
+    // doesn't refresh when there is no texture or texture container and when a video as WebGL texture is paused
+    if (this._texture === null || this._textureCanvas === null ||
+        this._textureContext === null || typeof this._displayObject === "undefined" || this._displayObject === null ||
+        this._displayObject.element === null || (FORGE.Utils.isTypeOf(this._displayObject, ["VideoHTML5", "VideoDash"]) === true &amp;&amp; this._displayObject.playing === false))
+    {
+        return;
+    }
+
+    var video = this._displayObject.element;
+    if (video instanceof HTMLVideoElement &amp;&amp; video.readyState === HTMLMediaElement.HAVE_ENOUGH_DATA)
+    {
+        if (this._textureContext)
+        {
+            this._textureContext.drawImage(video,
+                0, 0, video.videoWidth, video.videoHeight,
+                0, 0, this._textureCanvas.width, this._textureCanvas.height);
+            this._texture.needsUpdate = true;
+            this.log("texture update done");
+        }
+    }
+};
+
+/**
+ * Update after view change
+ * @todo change name of this method to be more generic (used by init and )
+ * Should be overriden by subclass
+ * @method FORGE.BackgroundRenderer#updateAfterViewChange
+ */
+FORGE.BackgroundRenderer.prototype.updateAfterViewChange = function()
+{
+    throw new Error(this._className + "::updateAfterViewChange not implemented");
+};
+
+/**
+ * Update size (resolution)
+ * @method FORGE.BackgroundRenderer#setSize
+ * @param {FORGE.Size} size - size [px]
+ */
+FORGE.BackgroundRenderer.prototype.setSize = function(size)
+{
+    if (this.renderTarget !== null)
+    {
+        this.renderTarget.setSize(size.width, size.height);
+    }
+};
+
+/**
+ * Render routine.
+ * @method FORGE.BackgroundRenderer#render
+ * @param {THREE.PerspectiveCamera} camera - perspective camera with mesh rendering, N/A with shader rendering (null)
+ */
+FORGE.BackgroundRenderer.prototype.render = function(camera)
+{
+    if (this._viewer.renderer === null || this._renderTarget === null)
+    {
+        return;
+    }
+
+    this._updateTexture();
+
+    var renderCamera = (camera !== null) ? camera : this._camera;
+    this._frustum.setFromMatrix( new THREE.Matrix4().multiplyMatrices( renderCamera.projectionMatrix, renderCamera.matrixWorldInverse ) );
+    this._viewer.renderer.webGLRenderer.render ( this._scene, renderCamera, this._renderTarget, true );
+};
+
+/**
+ * Check if some 3D object is interesecting the rendering frustum.
+ * @method FORGE.BackgroundRenderer#isObjectInFrustum
+ * @param {THREE.Object3D} object - 3D object
+ */
+FORGE.BackgroundRenderer.prototype.isObjectInFrustum = function(object)
+{
+    return this._frustum.intersectsObject(object);
+};
+
+/**
+ * Check if some 3D object is in the scene
+ * @method FORGE.BackgroundRenderer#isObjectInScene
+ * @param {THREE.Object3D} object - 3D object
+ */
+FORGE.BackgroundRenderer.prototype.isObjectInScene = function(object)
+{
+    return this._scene.getObjectByName(object.name) !== undefined;
+};
+
+/**
+ * Update routine.
+ * @method FORGE.BackgroundRenderer#update
+ */
+FORGE.BackgroundRenderer.prototype.update = function()
+{
+    if (this._mesh === null || !(this._mesh.material instanceof THREE.ShaderMaterial))
+    {
+        this._viewer.renderer.view.current.updateUniforms();
+        return;
+    }
+
+    var resolution = this._viewer.renderer.displayResolution;
+
+    if (this._mesh.material.uniforms.hasOwnProperty("tViewportResolution"))
+    {
+        this._mesh.material.uniforms.tViewportResolution.value = new THREE.Vector2(resolution.width, resolution.height);
+    }
+
+    if (this._mesh.material.uniforms.hasOwnProperty("tViewportResolutionRatio"))
+    {
+        this._mesh.material.uniforms.tViewportResolutionRatio.value = resolution.ratio;
+    }
+
+    if (this._mesh.material.uniforms.hasOwnProperty("tModelViewMatrixInverse"))
+    {
+        this._mesh.material.uniforms.tModelViewMatrixInverse.value = this._viewer.renderer.camera.modelViewInverse;
+    }
+
+    this._viewer.renderer.view.current.updateUniforms(this._mesh.material.uniforms);
+};
+
+/**
+ * Destroy sequence.
+ * @method FORGE.BackgroundRenderer#destroy
+ */
+FORGE.BackgroundRenderer.prototype.destroy = function()
+{
+    this._camera = null;
+    this._frustum = null;
+
+    if (this._renderTarget !== null)
+    {
+        this._renderTarget.dispose();
+        this._renderTarget = null;
+    }
+
+    while (this._scene.children.length > 0)
+    {
+        var mesh = this._scene.children.pop();
+
+        if (mesh.geometry !== null)
+        {
+            mesh.geometry.dispose();
+            mesh.geometry = null;
+        }
+
+        this._scene.remove(mesh);
+    }
+
+    this._scene = null;
+    this._viewer = null;
+
+    FORGE.BaseObject.prototype.destroy.call(this);
+};
+
+/**
+ * Get texture size.
+ * @name FORGE.BackgroundRenderer#textureSize
+ * @type {FORGE.Size}
+ */
+Object.defineProperty(FORGE.BackgroundRenderer.prototype, "textureSize",
+{
+    /** @this {FORGE.BackgroundRenderer} */
+    get: function()
+    {
+        if (this._texture === null || typeof this._texture.image === "undefined")
+        {
+            return null;
+        }
+
+        return new FORGE.Size(this._texture.image.width, this._texture.image.height);
+    }
+});
+
+/**
+ * Get background render target.
+ * @name FORGE.BackgroundRenderer#renderTarget
+ * @type {THREE.WebGLRenderTarget}
+ */
+Object.defineProperty(FORGE.BackgroundRenderer.prototype, "renderTarget",
+{
+    /** @this {FORGE.BackgroundRenderer} */
+    get: function()
+    {
+        return this._renderTarget;
+    }
+});
+
+/**
+ * Get/Set background renderer displayObject.
+ * @name FORGE.BackgroundRenderer#displayObject
+ * @type {string}
+ */
+Object.defineProperty(FORGE.BackgroundRenderer.prototype, "displayObject",
+{
+    /** @this {FORGE.BackgroundRenderer} */
+    get: function()
+    {
+        return this._displayObject;
+    },
+    /** @this {FORGE.BackgroundRenderer} */
+    set: function(value)
+    {
+        if (value === null)
+        {
+            this._clear();
+        }
+        else
+        {
+            this._setDisplayObject(value);
+        }
+    }
+});
+
+/**
+ * Get background scene.
+ * @name FORGE.BackgroundRenderer#scene
+ * @type {THREE.Scene}
+ */
+Object.defineProperty(FORGE.BackgroundRenderer.prototype, "scene",
+{
+    /** @this {FORGE.BackgroundRenderer} */
+    get: function()
+    {
+        return this._scene;
+    }
+});
+
+/**
+ * Get camera frustum.
+ * @name FORGE.BackgroundRenderer#frustum
+ * @type {THREE.Frustum}
+ */
+Object.defineProperty(FORGE.BackgroundRenderer.prototype, "frustum",
+{
+    /** @this {FORGE.BackgroundRenderer} */
+    get: function()
+    {
+        return this._frustum;
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+
+
+<br class="clear">
+
+<div id="footer">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue Oct 31 2017 12:58:25 GMT+0000 (UTC)
+</div>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+<script src="scripts/template-script.js"> </script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+    <head>
+        <title>ForgeJS tutorials - Embedding into html</title>
+        <meta charset="utf-8">
+        <style>
+
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            #container {
+                height: 100%;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+
+        <!-- Include the threejs custom build -->
+        <script src="../../../lib/three.js/three.r83.custom.min.js"></script>
+
+        <!-- Include the Hammer.js library -->
+        <script src="../../../lib/hammer.js/hammer.min.js"></script>
+
+        <!-- Include the ForgeJS library -->
+        <script type="text/javascript" src="../../../lib/forge/forge.min.js" ></script>
+
+        <!-- Start ForgeJS -->
+        <script type="text/javascript">
+
+            // Create a viewer
+            var viewer = new FORGE.Viewer("container");
+
+        </script>
+    </body>
+</html>

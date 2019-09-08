@@ -1,0 +1,466 @@
+
+<!DOCTYPE html>
+<html lang="en_US">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>JSON Reference</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css" media="screen,projection" charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="static/fonts/pfdintextpro/stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="static/forge-iframe.css">
+    <script type="text/javascript">
+        function updateLink()
+        {
+            var url, slug, links = document.getElementsByTagName('a');
+
+            for (var i = 0, ii = links.length; i < ii; i++)
+            {
+                if (!links[i].classList.contains('out'))
+                {
+                    url = links[i].href.replace(/(.+\/)\w+\.html#([\w\-]+)/, function(match, p1, p2) {
+                        var subRefs = p2.split('-');
+
+                        if (subRefs.length > 1)
+                        {
+                            slug = subRefs[0] + '/' + p2;
+                            return p1 + subRefs[0] + '.html#' + p2;
+                        } else {
+                            slug = p2;
+                            return p1 + p2 + '.html'
+                        }
+                    });
+
+                    links[i].href = 'javascript:window.parent.goTo("' + url + '", "' + slug + '");';
+                }
+            }
+        }
+    </script>
+</head>
+<body data-spy="scroll" data-target="#navbar" onload="updateLink()">
+<br>
+
+<article>
+    <header class="col-lg-12">
+        <h2>Display</h2>
+        <p class="lead">Display object are helpers to manipulate visual elements built on DOM like images, videos, sprites.</p>
+    </header>
+
+    
+    <section class="col-lg-12">
+        <h4>Example :</h4>
+        <small class="example-code"><pre>{
+  &quot;url&quot;: &quot;./videos/video.mp4&quot;
+}</pre></small>
+    </section>
+    
+
+    <section id="videoconfig" class="col-lg-12">
+        <section id="videoconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="video">
+                        video
+                        <a href="#video" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            url
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The url of the video file.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;./videos/video.mp4&quot;</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="spriteconfig" class="col-lg-12">
+        <section id="spriteconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="sprite">
+                        sprite
+                        <a href="#sprite" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            url
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The url of the sprite map image file.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;./sprites/sprite-map.png&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            frames
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The url of the sprite frames json file.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;./sprites/sprite-map.json&quot;</pre></small>
+            
+        </td>
+    </tr>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            frameRate
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>30</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The default number of frame per second to use for all animations. That modifies the speed of the animation.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>24</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            frame
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The starting frame index<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>5</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            paused
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            If paused is set to true, the sprite will be paused at start.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>true</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            loop
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>true</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            If loop is set to true, the sprite animations will loop by default.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            animation
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The name of the default animation.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;animation-0&quot;</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            animations
+        </th>
+        <td class="param-type">
+                <em>array&lt;object&gt;</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            Array of animations configurations.<br><br>
+
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+
+    <section id="spriteanimationconfig" class="col-lg-12">
+        <section id="spriteanimationconfig-properties">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="sprite-animation">
+                        sprite-animation
+                        <a href="#sprite-animation" class="title-anchor">#</a>
+                    </h3>
+                </div>
+                <div class="overflow-scroll object-definition-table">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>prop</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            name
+        </th>
+        <td class="param-type">
+                <em>string</em>
+        </td>
+        <td class="param-value">
+            <span class="param-required"><small><mark>required</mark></small></span><br>
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The name of the animation.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>&quot;animation-0&quot;</pre></small>
+            
+        </td>
+    </tr>
+                            
+    <tr>
+        <th scope="row" class="param-name">
+            start
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The index of the starting frame.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>0</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            end
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The index of the ending frame.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>24</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            loop
+        </th>
+        <td class="param-type">
+                <em>boolean</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>true</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            If loop is set to true, the sprite animation will loop<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>false</pre></small>
+            
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row" class="param-name">
+            frameRate
+        </th>
+        <td class="param-type">
+                <em>number</em>
+        </td>
+        <td class="param-value">
+
+            <span class="param-default"><small>default: <code>30</code></small></span><br>
+
+
+        </td>
+        <td class="param-description object-definition-param-description">
+            The number of frame per second to use for this animation. That modifies the speed of the animation.<br><br>
+
+            
+                <strong>Example :</strong>
+                <br/>
+                <small class="example-code"><pre>24</pre></small>
+            
+        </td>
+    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </section>
+</article>
+</body>
+</html>

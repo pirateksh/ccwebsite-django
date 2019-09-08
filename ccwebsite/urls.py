@@ -30,6 +30,8 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
     url('^inbox/notifications/', include(notifications.urls, namespace='notifications')),
+    # oauth/ url will be accessed by Soicial site link to take to their website.
+    url(r'^oauth/', include('social_django.urls', namespace='social')),  
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
