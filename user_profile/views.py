@@ -35,6 +35,8 @@ def user_profile(request, username):
     password_change_form = PasswordChangeForm(user=native_user)
     pending_posts = Post.objects.filter(verify_status=-1)
     native_pending_posts = pending_posts.filter(author=native_user)
+    read_notif = request.user.notifications.read()
+    unread_notif = request.user.notifications.unread()
     context = {
         'profile': profile,
         'avatar_form': avatar_form,
@@ -48,7 +50,9 @@ def user_profile(request, username):
         'user_profiles': user_profiles,
         'tags': tags,
         'pending_posts': pending_posts,
-        'native_pending_posts': native_pending_posts
+        'native_pending_posts': native_pending_posts,
+        'read_notif': read_notif,
+        'unread_notif': unread_notif,
     }
     return render(request, 'user_profile/user_profile.html', context)
 

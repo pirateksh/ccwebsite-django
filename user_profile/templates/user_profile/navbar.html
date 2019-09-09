@@ -29,6 +29,11 @@
                         <a class="btn tooltipped" data-tooltip="Dashboard" href="/admin"><i class="material-icons">dashboard</i></a>
                     </li>
                 {% endif %}
+                {% if user is not native_user %}
+                    <li>
+                        <a class="btn tooltipped" data-tooltip="Profile" href="{% url "User Profile" user.username %}" ><i class="material-icons">person_pin</i></a>
+                    </li>
+                {% endif %}
                 <li>
                     <a class="btn tooltipped" data-tooltip="Home" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
                 </li>

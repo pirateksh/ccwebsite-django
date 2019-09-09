@@ -104,7 +104,6 @@ def ajax_login_view(request):
     #     return redirect(HOME)
 
 
-
 def logout_view(request):
     logout(request)
     messages.success(request, f"Logout Success")
@@ -252,7 +251,7 @@ def ajax_signup_view(request):
             return HttpResponse('ERR')
 
         # Creating profile
-        profile = UserProfile(user=user_)
-        profile.save()
+        # profile = UserProfile(user=user_)
+        # profile.save()
         return HttpResponse('SS')
 

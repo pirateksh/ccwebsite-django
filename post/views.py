@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 # from django.contrib.contenttypes.models import ContentType
 # from django.views.generic import RedirectView
 from django.utils.timesince import timesince
-from datetime import datetime
+from django.utils import timezone
 from django.core import mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -115,11 +115,19 @@ def ajax_add_post(request):
         # like_url = reverse('like_toggle', kwargs={'slug': post.slug})
 
         admin = User.objects.get(username="admin")
+
         # Notifications
-        notify.send(user_profile, recipient=admin, verb='requested approval to post.', target=post)
-        # notify.send(request.user, recipient=admin,
-        #             actor=request.user, verb='A new post to verify.',
-        #             nf_type='post_approval_request')
+        notify.send(
+                user_profile,
+                recipient=admin,
+                verb='requested approval to post.',
+                target=post,
+                dp_url=user_profile.avatar.url,
+                prof_url=reverse("User Profile", kwargs={'username': user.username}),
+                post_url=reverse("post_detail", kwargs={'slug': post.slug}),
+                actor_name=user_profile.user.first_name,
+                timestamp_=timesince(timezone.now()),
+        )
 
         response_data = {
             'result': 'Post added successfully!',
@@ -181,7 +189,7 @@ def ajax_edit_post(request):
         tags_qs = Tags.objects.all()
 
         selected_tags = []
-        updated =datetime.now()
+        updated =timezone.now()
 
         if original_post_qs is None:
             result = 'ERR'
@@ -200,7 +208,7 @@ def ajax_edit_post(request):
 
             original_post.title = updated_title
             original_post.post_content = updated_content
-            original_post.updated = datetime.now()
+            original_post.updated = timezone.now()
             updated = original_post.updated
             original_post.save()
             result = 'SS'
@@ -242,7 +250,18 @@ def post_like_toggle(request, slug):
                 post.likes.add(user)
                 result = "LIKED"
                 user_profile = get_object_or_404(UserProfile, user=user)
-                notify.send(user_profile, recipient=post.author, verb='liked your post.', target=post)
+                if user_profile.user is not post.author:
+                    notify.send(
+                        user_profile,
+                        recipient=post.author,
+                        verb='liked your post.',
+                        target=post,
+                        dp_url=user_profile.avatar.url,
+                        prof_url=reverse("User Profile", kwargs={'username': user.username}),
+                        post_url=reverse("post_detail", kwargs={'slug': post.slug}),
+                        actor_name=user_profile.user.first_name,
+                        timestamp_=timesince(timezone.now()),
+                    )
             count = post.likes.count()
         else:
             result = "UNA"
@@ -302,8 +321,20 @@ def approve_post(request, slug):
                 post.verify_status = 1
                 post.save()
                 admin_prof = get_object_or_404(UserProfile, user=request.user)
-                notify.send(admin_prof, recipient=author, verb='approved this post.', target=post)
+                notify.send(
+                    admin_prof,
+                    recipient=author,
+                    verb='approved this post.',
+                    target=post,
+                    dp_url=admin_prof.avatar.url,
+                    prof_url=reverse("User Profile", kwargs={'username': admin_prof.user.username}),
+                    post_url=reverse("post_detail", kwargs={'slug': post.slug}),
+                    actor_name=admin_prof.user.first_name,
+                    timestamp_=timesince(timezone.now()),
+                )
                 messages.success(request, f"You have approved a post.")
+
+                # For Email
                 if author_profile.is_subscribed:
                     pass
             else:
@@ -332,8 +363,20 @@ def reject_post(request, slug):
                 post.verify_status = 0
                 post.save()
                 admin_prof = get_object_or_404(UserProfile, user=request.user)
-                notify.send(admin_prof, recipient=author, verb='rejected this post.', target=post)
+                notify.send(
+                    admin_prof,
+                    recipient=author,
+                    verb='rejected this post.',
+                    target=post,
+                    dp_url=admin_prof.avatar.url,
+                    prof_url=reverse("User Profile", kwargs={'username': admin_prof.user.username}),
+                    post_url=reverse("post_detail", kwargs={'slug': post.slug}),
+                    actor_name=admin_prof.user.first_name,
+                    timestamp_=timesince(timezone.now()),
+                )
                 messages.success(request, f"You have rejected a post.")
+
+                # For Email
                 if author_profile.is_subscribed:
                     pass
             else:

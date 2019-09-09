@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.contrib import messages
 from post import views as post_view
 from django.utils.timesince import timesince
+from django.utils import timezone
 
 # Imported Models
 from post.models import Post, Tags
@@ -144,9 +145,44 @@ def ajax_add_comment(request, post_id):
         # Sending Notificaions
         if created:
             if parent is None:
-                notify.send(user_profile, recipient=post.author, verb='commented on your post.', target=post)
+                if user_profile.user is not post.author:
+                    notify.send(
+                        user_profile,
+                        recipient=post.author,
+                        verb='commented on your post.',
+                        target=post,
+                        dp_url=user_profile.avatar.url,
+                        prof_url=reverse("User Profile", kwargs={'username': user_profile.user.username}),
+                        post_url=reverse("post_detail", kwargs={'slug': post.slug}),
+                        actor_name=user_profile.user.first_name,
+                        timestamp_=timesince(timezone.now()),
+                    )
             else:
-                notify.send(user_profile, recipient=post.author, verb='liked your post.', target=post)
+                if user_profile.user is not post.author:
+                    notify.send(
+                        user_profile,
+                        recipient=post.author,
+                        verb='replied to a comment.',
+                        target=post,
+                        dp_url=user_profile.avatar.url,
+                        prof_url=reverse("User Profile", kwargs={'username': user_profile.user.username}),
+                        post_url=reverse("post_detail", kwargs={'slug': post.slug}),
+                        actor_name=user_profile.user.first_name,
+                        timestamp_=timesince(timezone.now()),
+                    )
+                if parent.user is not user_profile.user:
+                    notify.send(
+                        user_profile,
+                        recipient=parent.user,
+                        verb='replied to your comment.',
+                        target=post,
+                        dp_url=user_profile.avatar.url,
+                        prof_url=reverse("User Profile", kwargs={'username': user_profile.user.username}),
+                        post_url=reverse("post_detail", kwargs={'slug': post.slug}),
+                        actor_name=user_profile.user.first_name,
+                        timestamp_=timesince(timezone.now()),
+                    )
+
 
 
 
