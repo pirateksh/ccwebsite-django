@@ -19,10 +19,10 @@ from post.forms import PostForm
 from comments.forms import CommentForm
 
 
-def index(request):
+def index(request, tag_filter=None):
     form = UserSignupForm()
     addpostform = PostForm()
-    posts = page_maker(request, Post)
+    posts = page_maker(request, Post, tag_filter=tag_filter)
     user_profiles = UserProfile.objects.all()
     tags = Tags.objects.all()
 
@@ -78,14 +78,15 @@ def ajax_login_view(request):
                 # Executed when remember_me is None i.e. not checked.
                 print("step1")
                 if 'cook_user' and 'cook_pass' in request.COOKIES:
-                    #ENTERS When either of the cookie is present.                    
+
+                    # ENTERS When either of the cookie is present.
                     # response = render(request,'blogapp/newhome.html',context)
                     print("step2")
                     response.delete_cookie('cook_user')
                     response.delete_cookie('cook_pass')
                     return response
                 else:
-                    #ENTERS When both of the cookie is not present i.e.deleted .
+                    # ENTERS When both of the cookie is not present i.e.deleted .
                     print("step3")
                     return response
             else:

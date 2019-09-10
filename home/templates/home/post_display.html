@@ -34,8 +34,6 @@
                                     {% if user_profile.user == post.author %}
                                         {% if user_profile.avatar %}
                                             <img src="{{ user_profile.avatar.url }}">
-                                        {% else %}
-                                            <img src="{% static 'default-profile-picture.jpg' %}">
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}
@@ -52,7 +50,7 @@
                 <li class="collection-item">
                     Tags :
                     {% for post_tag in post.tags.all %}
-                        <a class="chip">{{ post_tag|safe }}</a>
+                        <a class="chip" href="{% url 'index_tag' post_tag.name %}">{{ post_tag }}</a>
                     {% endfor %}
                 </li>
                 <li class="collection-item" id="p">
@@ -179,31 +177,33 @@
                                                     <a class="comment-reply-btn" href="#">Reply</a>
                                             </footer>
 
-                                            <div class="comment-reply" id="reply-{{ post.pk }}-{{ comment.pk }}" style="display: none;">
-                                                {% for child_comment in comment.children %}
-                                                        <blockquote>
-                                                        {{ child_comment.comment_text|safe }}
-                                                            <footer>
-                                                            via -
-                                                                <a class="chip" href="{% url 'User Profile' child_comment.user.username %} ">
-                                                                    {% for user_profile in user_profiles %}
-                                                                        {% if user_profile.user == child_comment.user %}
-                                                                            {% if user_profile.avatar %}
-                                                                                <img src="{{ user_profile.avatar.url }}">
-                                                                            {% else %}
-                                                                                <img src="{% static 'default-profile-picture.jpg' %}">
+                                            <div class="comment-reply">
+                                                <div id="reply-{{ post.pk }}-{{ comment.pk }}">
+                                                    {% for child_comment in comment.children %}
+                                                            <blockquote>
+                                                            {{ child_comment.comment_text|safe }}
+                                                                <footer>
+                                                                via -
+                                                                    <a class="chip" href="{% url 'User Profile' child_comment.user.username %} ">
+                                                                        {% for user_profile in user_profiles %}
+                                                                            {% if user_profile.user == child_comment.user %}
+                                                                                {% if user_profile.avatar %}
+                                                                                    <img src="{{ user_profile.avatar.url }}">
+                                                                                {% else %}
+                                                                                    <img src="{% static 'default-profile-picture.jpg' %}">
+                                                                                {% endif %}
                                                                             {% endif %}
-                                                                        {% endif %}
-                                                                    {% endfor %}
-                                                                    {{ child_comment.user }}
-                                                                </a>
-                                                                <span id="comment-timestamp" style="color: #0f74a8;">
-                                                                    | {{ child_comment.timestamp|timesince }} ago
-                                                                </span>
-                                                            </footer>
-                                                        </blockquote>
-                                                        <div class="divider"></div>
-                                                {% endfor %}
+                                                                        {% endfor %}
+                                                                        {{ child_comment.user }}
+                                                                    </a>
+                                                                    <span id="comment-timestamp" style="color: #0f74a8;">
+                                                                        | {{ child_comment.timestamp|timesince }} ago
+                                                                    </span>
+                                                                </footer>
+                                                            </blockquote>
+                                                            <div class="divider"></div>
+                                                    {% endfor %}
+                                                </div>
                                                 {% if user.is_authenticated %}
                                                     <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" comment-pk="{{ comment.pk }}" data-type="reply">
                                                         {% csrf_token %}
@@ -257,8 +257,6 @@
                                     {% if user_profile.user == post.author %}
                                         {% if user_profile.avatar %}
                                             <img src="{{ user_profile.avatar.url }}">
-                                        {% else %}
-                                            <img src="{% static 'default-profile-picture.jpg' %}">
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}
@@ -275,7 +273,7 @@
                 <li class="collection-item">
                     Tags :
                     {% for post_tag in post.tags.all %}
-                        <a class="chip">{{ post_tag|safe }}</a>
+                        <a class="chip" href="{% url 'index_tag' post_tag.name %}">{{ post_tag }}</a>
                     {% endfor %}
                 </li>
                 <li class="collection-item" id="p">
@@ -403,31 +401,33 @@
                                                     <a class="comment-reply-btn" href="#">Reply</a>
                                             </footer>
 
-                                            <div class="comment-reply" id="reply-{{ post.pk }}-{{ comment.pk }}" style="display: none;">
-                                                {% for child_comment in comment.children %}
-                                                        <blockquote>
-                                                        {{ child_comment.comment_text|safe }}
-                                                            <footer>
-                                                            via -
-                                                                <a class="chip" href="{% url 'User Profile' child_comment.user.username %} ">
-                                                                    {% for user_profile in user_profiles %}
-                                                                        {% if user_profile.user == child_comment.user %}
-                                                                            {% if user_profile.avatar %}
-                                                                                <img src="{{ user_profile.avatar.url }}">
-                                                                            {% else %}
-                                                                                <img src="{% static 'default-profile-picture.jpg' %}">
+                                            <div class="comment-reply" id="">
+                                                <div id="reply-{{ post.pk }}-{{ comment.pk }}">
+                                                    {% for child_comment in comment.children %}
+                                                            <blockquote>
+                                                            {{ child_comment.comment_text|safe }}
+                                                                <footer>
+                                                                via -
+                                                                    <a class="chip" href="{% url 'User Profile' child_comment.user.username %} ">
+                                                                        {% for user_profile in user_profiles %}
+                                                                            {% if user_profile.user == child_comment.user %}
+                                                                                {% if user_profile.avatar %}
+                                                                                    <img src="{{ user_profile.avatar.url }}">
+                                                                                {% else %}
+                                                                                    <img src="{% static 'default-profile-picture.jpg' %}">
+                                                                                {% endif %}
                                                                             {% endif %}
-                                                                        {% endif %}
-                                                                    {% endfor %}
-                                                                    {{ child_comment.user }}
-                                                                </a>
-                                                                <span id="comment-timestamp" style="color: #0f74a8;">
-                                                                    | {{ child_comment.timestamp|timesince }} ago
-                                                                </span>
-                                                            </footer>
-                                                        </blockquote>
-                                                        <div class="divider"></div>
-                                                {% endfor %}
+                                                                        {% endfor %}
+                                                                        {{ child_comment.user }}
+                                                                    </a>
+                                                                    <span id="comment-timestamp" style="color: #0f74a8;">
+                                                                        | {{ child_comment.timestamp|timesince }} ago
+                                                                    </span>
+                                                                </footer>
+                                                            </blockquote>
+                                                            <div class="divider"></div>
+                                                    {% endfor %}
+                                                </div>
                                                 {% if user.is_authenticated %}
                                                     <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" comment-pk="{{ comment.pk }}" data-type="reply">
                                                         {% csrf_token %}

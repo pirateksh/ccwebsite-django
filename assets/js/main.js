@@ -538,6 +538,7 @@ $('.edit-btn').click(function (event) {
 // For reply fadeToggle()
 $(".comment-reply-btn").click(function (event) {
     event.preventDefault();
+    console.log("This worked!");
     $(this).parent().next(".comment-reply").fadeToggle();
 });
 
@@ -660,7 +661,7 @@ $('.comment-add-form').submit(function (event) {
                     addToast("Comment Added Successfully!")
                 } else if (commentType === 'reply') {
                     var replyDiv = $('#reply-' + postPK + '-' + commentPK);
-                    replyDiv.prepend(
+                    replyDiv.append(
                         "<blockquote>" +
                             commentContent +
                             "<footer>" +

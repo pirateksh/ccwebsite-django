@@ -65,7 +65,6 @@ INSTALLED_APPS = [
 DJANGO_NOTIFICATIONS_CONFIG = {
     'SOFT_DELETE': True,
     'USE_JSONFIELD': True,
-    'PAGINATE_BY': 2,
 }
 
 # Default layout to use with "crispy_forms"

@@ -28,15 +28,34 @@
     /*color: blue;*/
 /*}*/
 
-.comment-reply{
-    display: none;
-}
 
 .notifications{
     overflow: auto;
     height: auto;
     max-height: 500px;
 }
+
+.comment-reply{
+    display: none;
+    max-height: 500px;
+    overflow: auto;
+}
+
+.comment-display{
+    max-height: 500px;
+    overflow: auto;
+}
+
+.django-ckeditor-widget{
+    display: inline-block;
+}
+
+.calendar{
+    overflow: auto;
+}
+
+/* FOR PRELOADER */
+
 /*.preloader-background {*/
 	/*display: flex;*/
 	/*align-items: center;*/

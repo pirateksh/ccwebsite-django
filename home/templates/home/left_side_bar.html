@@ -1,0 +1,15 @@
+{% load static %}
+<ul class="collection">
+    <li class="collection-item amber">
+        <h6>Filter posts</h6>
+    </li>
+    <li class="collection-item">
+        {% for tag in tags %}
+            {% if tag.name in request.build_absolute_uri %}
+                <a class="chip teal white-text" href="{% url 'index_tag' tag.name %}">{{ tag.name }}</a>
+            {% else %}
+                <a class="chip" href="{% url 'index_tag' tag.name %}">{{ tag.name }}</a>
+            {% endif %}
+        {% endfor %}
+    </li>
+</ul>

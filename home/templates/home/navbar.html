@@ -52,16 +52,17 @@
 
             {# Loop through categories #}
         
-            <li><a class="waves-light btn" id="cate" href="#cate">CATEGORIES</a></li>
-            <ul class="collapsible popout black-text">
-                {% for tag in tags %}
-                    <li>
-                        <div class="collapsible-header">{{ tag.name }}</div>
-                        <div class="collapsible-body">{{ tag.description }}</div>
-                    </li>
-                {% endfor %}
-            </ul>
-
+{#            <li><a class="waves-light btn" id="cate" href="#cate">Filter posts</a></li>#}
+{#            <ul class="collection">#}
+{#                <li class="collection-item amber">#}
+{#                   <h6>Filter posts</h6>#}
+{#                </li>#}
+{#                <li class="collection-item">#}
+{#                    {% for tag in tags %}#}
+{#                        <a class="chip" href="{% url 'index_tag' tag.name %}">{{ tag.name }}</a>#}
+{#                    {% endfor %}#}
+{#                </li>#}
+{#            </ul>#}
 
 
             {% if user.is_authenticated %}

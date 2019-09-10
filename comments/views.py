@@ -109,6 +109,8 @@ def ajax_add_comment(request, post_id):
         post_pk = request.POST['post_pk']
         parent_pk = request.POST['comment_pk']
         comment_content = request.POST['comment_content']
+        # comment_content = comment_content.strip()
+        # print(comment_content)
         parent = None
         post = None
         parent_qs = Comment.objects.filter(pk=parent_pk)
@@ -145,7 +147,7 @@ def ajax_add_comment(request, post_id):
         # Sending Notificaions
         if created:
             if parent is None:
-                if user_profile.user is not post.author:
+                if str(user_profile.user) != str(post.author):
                     notify.send(
                         user_profile,
                         recipient=post.author,
@@ -158,7 +160,7 @@ def ajax_add_comment(request, post_id):
                         timestamp_=timesince(timezone.now()),
                     )
             else:
-                if user_profile.user is not post.author:
+                if str(user_profile.user) != str(post.author):
                     notify.send(
                         user_profile,
                         recipient=post.author,
@@ -170,7 +172,7 @@ def ajax_add_comment(request, post_id):
                         actor_name=user_profile.user.first_name,
                         timestamp_=timesince(timezone.now()),
                     )
-                if parent.user is not user_profile.user:
+                if str(parent.user) != str(user_profile.user):
                     notify.send(
                         user_profile,
                         recipient=parent.user,

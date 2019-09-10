@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load materializecss %}
+{% load static %}
 {% comment %}
     Context Variables:
     form - Signup form
@@ -11,7 +12,6 @@
     comments - Comments
     comment_form - Comment Form
 {% endcomment %}
-{% load static %}
 
 {% block title %}
     Home
@@ -41,44 +41,52 @@
 
     {% include 'home/navbar.html' %}
 
-        <div class="row">
+    {# Tab for small screen #}
+    <div class="row hide-on-med-and-up">
+        <div class="col s12">
+            <ul class="tabs tabs-fixed-width tab-demo">
+                {% for tag in tags %}
+                    {% if tag.name in request.build_absolute_uri %}
+                        <li class="tab col center amber"><a class="active" href="{% url 'index_tag' tag.name %}" target="_self">{{ tag.name }}</a></li>
+                    {% else %}
+                        <li class="tab col center"><a class="" href="{% url 'index_tag' tag.name %}" target="_self">{{ tag.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
 
-            {# Left side Catergory Menu #}
-            <div class="col s12 m4 l2 hide-on-small-and-down">
-                <ul class="collapsible popout teal">
-                        {% for tag in tags %}
-                            <li>
-                                <div class="collapsible-header orange">{{ tag.name }}</div>
-                                <div class="collapsible-body">{{ tag.description }}</div>
-                            </li>
-                        {% endfor %}
-                </ul>
-            </div>
-
-            <div class="col s12 m8 l7">
-                {% if not user.is_superuser %}
-                    {% include 'home/add_post.html' %}
-                {% endif %}
-                <div class="post-display-home">
-                    {% include 'home/post_display.html' %}
-                </div>
-
-            </div>
-             {# Right side Catergory Menu #}
-            <div class="col s12 m2 l3 hide-on-med-and-down">
-                <ul class="collection white">
-                    <li class="collection-item amber">
-                        <a class="btn-flat" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col s12 m2 l3" style="overflow: auto">
-                <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23E4C441&amp;ctz=Asia%2FKolkata&amp;src=YW5raXQuc2FuZ3dhbjE5OTlAZ21haWwuY29t&amp;src=dnIyaXRvNjY4aTNuNmRrajhvOW1qMHI4Zm9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;src=Y2xhc3Nyb29tMTAwNDAyMzkwODMzMzY3MjkyNzU3QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&amp;src=ZW4uaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%237986CB&amp;color=%237986CB&amp;color=%2333B679&amp;color=%23007b83&amp;color=%230B8043" style="border-width:0" width="400px;"  height="400px" max-height="100%" frameborder="0" scrolling="no"></iframe>
-            </div>
-
-           
-
+{#                <li class="tab col s3"><a href="#test1">Test 1</a></li>#}
+{#                <li class="tab col s3"><a class="active" href="#test2">Test 2</a></li>#}
+{#                <li class="tab col s3 disabled"><a href="#test3">Disabled Tab</a></li>#}
+{#                <li class="tab col s3"><a href="#test4">Test 4</a></li>#}
+            </ul>
         </div>
+{#            <div id="test1" class="col s12">Test 1</div>#}
+{#            <div id="test2" class="col s12">Test 2</div>#}
+{#            <div id="test3" class="col s12">Test 3</div>#}
+{#            <div id="test4" class="col s12">Test 4</div>#}
+    </div>
+
+    <div class="row">
+        {# Left side Catergory Menu #}
+        <div class="col s12 m4 l2 hide-on-small-and-down">
+            {% include 'home/left_side_bar.html' %}
+        </div>
+
+        {# Middle part #}
+        <div class="col s12 m8 l7">
+            {% if not user.is_superuser %}
+                {% include 'home/add_post.html' %}
+            {% endif %}
+            <div class="post-display-home">
+                {% include 'home/post_display.html' %}
+            </div>
+        </div>
+
+        {# Right side Catergory Menu #}
+        <div class="col s12 m2 l3 hide-on-med-and-down">
+            {% include 'home/right_side_bar.html' %}
+        </div>
+
+    </div>
 
     {% include 'footer.html' %}
 {% endblock %}

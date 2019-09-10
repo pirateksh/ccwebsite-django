@@ -7,8 +7,6 @@
         <div class="user-view">
             {% if profile.avatar %}
                 <a><img class="circle materialboxed" src="{{ profile.avatar.url }}"></a>
-            {% else %}
-                <a><img class="circle" src="{% static 'default-profile-picture.jpg' %}"></a>
             {% endif %}
             <p><span class="name"><strong>{{ native_user.first_name }} {{ native_user.last_name }}</strong></span></p>
             <span class="email">{{ native_user.email }}</span>
@@ -17,18 +15,9 @@
     <div class="divider"></div>
     {% if native_user == user and not user.is_superuser %}
         <li class="collection-item amber lighten-1">
-            <a class="modal-trigger btn-flat" href="#modal">
-                Add Categories
-            </a>
-        </li>
-        <li class="collection-item amber lighten-1">
-            <a class="modal-trigger btn-flat" href="#modal-avatar">
-                Add/Change Avatar
-            </a>
-        </li>
-        <li class="collection-item amber lighten-2">
-            <a class="modal-trigger btn-flat" href="#modal-change-user-password">
-                Change Password
+            <a class="btn-flat" href="#">
+                Edit Profile
+                <i class="material-icons">edit</i>
             </a>
         </li>
         <li class="collection-item amber lighten-1">
@@ -47,16 +36,16 @@
             <a class="modal-trigger btn-flat" href="#modal-verify-posts">
                 Verify Posts
 
-                {% if live_unread_count > 0 %}
-                    <span class="new badge red">
-                    {{ live_unread_count }}
-                    </span>
-                {% else %}
+{#                {% if live_unread_count > 0 %}#}
+{#                    <span class="new badge red">#}
+{#                    {{ live_unread_count }}#}
+{#                    </span>#}
+{#                {% else %}#}
                     <span class="badge red white-text">
 {#                        {{ unread_count }}#}
                         {{ pending_posts.count }}
                     </span>
-                {% endif %}
+{#                {% endif %}#}
             </a>
         </li>
     {% endif %}

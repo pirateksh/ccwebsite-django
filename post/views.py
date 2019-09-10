@@ -31,11 +31,20 @@ from home.forms import UserSignupForm
 NUMBER_OF_POSTS_PER_PAGE = 5
 
 
-def page_maker(request, model, native_user=None, draft=False):
+def page_maker(request, model, native_user=None, draft=False, tag_filter=None, *args, **kwargs):
     """
         Function to make pages taking NUMBER_OF_POSTS_PER_PAGE in one page.
     """
-    post_list = model.objects.all(native_user=native_user, draft=draft).filter(verify_status=1)
+    if tag_filter:
+        tag_qs = Tags.objects.filter(name=tag_filter)
+        if tag_qs:
+            tag = tag_qs.first()
+            post_list = model.objects.all(native_user=native_user, draft=draft).filter(verify_status=1).filter(tags=tag)
+        else:
+            post_list = model.objects.all(native_user=native_user, draft=draft).filter(verify_status=1)
+            messages.error(request, f"Oops, Something went wrong!")
+    else:
+        post_list = model.objects.all(native_user=native_user, draft=draft).filter(verify_status=1)
     paginator = Paginator(post_list, NUMBER_OF_POSTS_PER_PAGE)
     page = request.GET.get('page')
     return paginator.get_page(page)
@@ -92,11 +101,17 @@ def ajax_add_post(request):
         post = Post.objects.create(title=title, post_content=post_content, author=user)
 
         selected_tags = []
-
+        flag = True
         for tag in tags_qs:
             if str(tag) in tags_str:
                 post.tags.add(tag)
                 selected_tags.append(str(tag))
+                flag = False
+
+        if flag:
+            tag = Tags.objects.get(name='Other')
+            post.tags.add(tag)
+            selected_tags.append(str(tag))
 
         post.save()
 
@@ -250,7 +265,7 @@ def post_like_toggle(request, slug):
                 post.likes.add(user)
                 result = "LIKED"
                 user_profile = get_object_or_404(UserProfile, user=user)
-                if user_profile.user is not post.author:
+                if str(user_profile.user) != str(post.author):
                     notify.send(
                         user_profile,
                         recipient=post.author,
