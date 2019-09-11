@@ -42,9 +42,12 @@
     {% include 'home/navbar.html' %}
 
     {# Tab for small screen #}
-    <div class="row hide-on-med-and-up">
-        <div class="col s12">
-            <ul class="tabs tabs-fixed-width tab-demo">
+{#    <div class="row hide-on-med-and-up">#}
+{#        <div class="col s12">#}
+            <ul class="tabs tabs-fixed-width tab-demo hide-on-med-and-up">
+                <li class="tab col center">
+                    <a target="_self" href="{% url 'Index' %}">Reset</a>
+                </li>
                 {% for tag in tags %}
                     {% if tag.name in request.build_absolute_uri %}
                         <li class="tab col center amber"><a class="active" href="{% url 'index_tag' tag.name %}" target="_self">{{ tag.name }}</a></li>
@@ -58,21 +61,21 @@
 {#                <li class="tab col s3 disabled"><a href="#test3">Disabled Tab</a></li>#}
 {#                <li class="tab col s3"><a href="#test4">Test 4</a></li>#}
             </ul>
-        </div>
+{#        </div>#}
 {#            <div id="test1" class="col s12">Test 1</div>#}
 {#            <div id="test2" class="col s12">Test 2</div>#}
 {#            <div id="test3" class="col s12">Test 3</div>#}
 {#            <div id="test4" class="col s12">Test 4</div>#}
-    </div>
+{#    </div>#}
 
     <div class="row">
         {# Left side Catergory Menu #}
-        <div class="col s12 m4 l2 hide-on-small-and-down">
+        <div class="col m4 l3 hide-on-small-and-down">
             {% include 'home/left_side_bar.html' %}
         </div>
 
         {# Middle part #}
-        <div class="col s12 m8 l7">
+        <div class="col s12 m8 l6">
             {% if not user.is_superuser %}
                 {% include 'home/add_post.html' %}
             {% endif %}
@@ -82,7 +85,7 @@
         </div>
 
         {# Right side Catergory Menu #}
-        <div class="col s12 m2 l3 hide-on-med-and-down">
+        <div class="col l3 hide-on-med-and-down">
             {% include 'home/right_side_bar.html' %}
         </div>
 

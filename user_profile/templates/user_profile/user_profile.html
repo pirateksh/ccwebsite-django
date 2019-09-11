@@ -29,6 +29,25 @@
 {% block content %}
 
     {% include 'user_profile/navbar.html' %}
+
+        {# Tab for small screen #}
+{#    <div class="row hide-on-med-and-up">#}
+{#        <div class="col s12">#}
+            <ul class="tabs tabs-fixed-width tab-demo hide-on-med-and-up">
+                <li class="tab col center">
+                    <a href="{% url 'User Profile' native_user.username %}" target="_self">Reset</a>
+                </li>
+                {% for tag in tags %}
+                    {% if tag.name in request.build_absolute_uri %}
+                        <li class="tab col center amber"><a class="active" href="{% url 'filter_post_user_profile' native_user.username tag.name %}" target="_self">{{ tag.name }}</a></li>
+                    {% else %}
+                        <li class="tab col center"><a href="{% url 'filter_post_user_profile' native_user.username tag.name %}" target="_self">{{ tag.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+{#        </div>#}
+{#    </div>#}
+
     <div class="row">
 
             {# Left side Catergory Menu #}

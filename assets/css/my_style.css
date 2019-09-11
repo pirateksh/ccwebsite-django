@@ -54,6 +54,10 @@
     overflow: auto;
 }
 
+.tabs .indicator{
+    background-color: darkorange;
+}
+
 /* FOR PRELOADER */
 
 /*.preloader-background {*/

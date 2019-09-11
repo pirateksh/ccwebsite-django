@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect, reverse
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
-from django.contrib.auth import authenticate, update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash  # authenticate
+from django.contrib.auth.decorators import login_required
 from post.views import page_maker
 
 # Imported Models
@@ -21,10 +22,10 @@ from comments.forms import CommentForm
 # Create your views here.
 
 
-def user_profile(request, username):
+def user_profile(request, username, tag_name=None):
     native_user = get_object_or_404(User, username=username)
     profile = get_object_or_404(UserProfile, user=native_user)
-    native_posts = page_maker(request, Post, native_user)
+    native_posts = page_maker(request, Post, native_user, tag_filter=tag_name)
     avatar_form = AvatarUploadForm()
     form = UserSignupForm()
     addpostform = PostForm()
@@ -60,6 +61,23 @@ def user_profile(request, username):
     return render(request, 'user_profile/user_profile.html', context)
 
 
+@login_required
+def edit_profile(request, username):
+    native_user = get_object_or_404(User, username=username)
+    profile = get_object_or_404(UserProfile, user=native_user)
+    avatar_form = AvatarUploadForm()
+    form = UserSignupForm()
+    password_change_form = PasswordChangeForm(user=native_user)
+    context = {
+        'form': form,
+        'profile': profile,
+        'avatar_form': avatar_form,
+        'native_user': native_user,
+        'password_change_form': password_change_form,
+    }
+    return render(request, 'user_profile/edit_profile.html', context)
+
+
 def change_password(request, username):
     if request.method == 'POST':
         password_change_form = PasswordChangeForm(request.user, request.POST)
@@ -67,12 +85,10 @@ def change_password(request, username):
             user = password_change_form.save()
             update_session_auth_hash(request, user)  # Important! To keep User Logged in.
             messages.success(request, 'Your password was successfully updated!')
-            redirect_to = '/profile/' + str(username)
-            return redirect(redirect_to)
+            return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': username}))
         else:
             messages.error(request, f'Something went wrong, try again!')
-            redirect_to = '/profile/' + str(username)
-            return redirect(redirect_to)
+            return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': username}))
     else:
         password_change_form = PasswordChangeForm(request.user)
     avatar_form = AvatarUploadForm()
@@ -90,7 +106,7 @@ def change_password(request, username):
         'comment_form': comment_form,
         'user_profiles': user_profiles,
     }
-    return render(request, 'user_profile/user_profile.html', context)
+    return render(request, 'user_profile/edit_profile.html', context)
 
 
 def avatar_upload(request, username):
@@ -102,9 +118,8 @@ def avatar_upload(request, username):
             img = avatar_form.cleaned_data['avatar']
             user_prof.avatar = img
             user_prof.save()
-            redirect_to = '/profile/' + str(username)
             messages.success(request, f"Avatar uploaded successfully!")
-            return redirect(redirect_to)
+            return HttpResponseRedirect(reverse("edit_profile", kwargs={'username': username}))
     else:
         avatar_form = AvatarUploadForm()
     form = UserSignupForm()
@@ -122,7 +137,7 @@ def avatar_upload(request, username):
         'comment_form': comment_form,
         'user_profiles': user_profiles,
     }
-    return render(request, 'user_profile/user_profile.html', context)
+    return render(request, 'user_profile/edit_profile.html', context)
 
 
 def show_drafts(request, username):
@@ -144,3 +159,6 @@ def show_drafts(request, username):
     # }
     # return render(request, 'user_profile/user_profile.html', context)
     return HttpResponse('You will see drafts here soon')
+
+
+

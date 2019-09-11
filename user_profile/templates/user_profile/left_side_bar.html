@@ -15,7 +15,7 @@
     <div class="divider"></div>
     {% if native_user == user and not user.is_superuser %}
         <li class="collection-item amber lighten-1">
-            <a class="btn-flat" href="#">
+            <a class="btn-flat" href="{% url 'edit_profile' user.username %}">
                 Edit Profile
                 <i class="material-icons">edit</i>
             </a>
@@ -49,4 +49,22 @@
             </a>
         </li>
     {% endif %}
+</ul>
+
+<ul class="collection">
+    <li class="collection-item amber">
+        <h6>Filter posts</h6>
+    </li>
+    <li class="collection-item">
+        {% for tag in tags %}
+            {% if tag.name in request.build_absolute_uri %}
+                <a class="chip teal white-text" href="{% url 'filter_post_user_profile' native_user.username tag.name %}">{{ tag.name }}</a>
+            {% else %}
+                <a class="chip" href="{% url 'filter_post_user_profile' native_user.username tag.name %}">{{ tag.name }}</a>
+            {% endif %}
+        {% endfor %}
+    </li>
+    <li class="row collection-item">
+        <a class="col s12 m12 l12 center btn" href="{% url 'User Profile' native_user.username %}">Reset</a>
+    </li>
 </ul>
