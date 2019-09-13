@@ -15,7 +15,7 @@
     {% include 'notif/navbar.html' %}
     <div class="row">
         <div class="col m3 l3">
-            {% include 'user_profile/left_side_bar.html' %}
+{#            {% include 'user_profile/left_side_bar.html' %}#}
         </div>
 {#        <div class="row hide-on-small-and-down">#}
 {#            <div class="col s6 m6 l6">#}
@@ -137,13 +137,13 @@
                         {% if read_notif %}
                             {% for read in read_notif %}
                                 <li class="collection-item avatar">
+                                    <!-- Profile Picture -->
                                     {% if read.actor.avatar %}
                                         <img src="{{ read.actor.avatar.url }}" alt="" class="circle">
-                                    {% else %}
-                                        <img src="{% static 'default-profile-picture.jpg' %}">
                                     {% endif %}
 
                                     <span class="title">
+                                        <!-- Message -->
                                         <strong>
                                             <a href="{% url 'User Profile' read.actor.user.username %}">{{ read.actor.user.first_name }}</a>
                                             {{ read.verb }}
@@ -159,6 +159,7 @@
                                 </li>
                             {% endfor %}
                         {% else %}
+                            {# If no notiications #}
                             <li class="collection-item">
                                 Sorry! Currently you do not have any notifications.
                             </li>

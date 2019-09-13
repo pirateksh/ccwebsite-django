@@ -32,7 +32,7 @@
 
 
     <div class="row">
-        <div class="col m5 l3 hide-on-small-and-down">
+        <div class="col l3 hide-on-med-and-down">
             <ul class="collection">
                 <li class="collection-item amber">
                     <h6><strong>Edit</strong></h6>
@@ -51,7 +51,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col s12 m7 l9">
+        <div class="col s12 m12 l9">
             <ul class="collection">
 
                 <div id="personal-info">
@@ -60,15 +60,15 @@
                     </li>
                     <li class="collection-item white black-text">
                         <div class="row">
-                            <div class="col s2 m2 l2">
+                            <div class="col s12 m2 l2">
                                 <strong>Profile Picture</strong>
                             </div>
-                            <form class="col s10 m10 l10" method="post" enctype="multipart/form-data" action="{% url 'Avatar Upload' native_user.username %}">
+                            <form class="col s12 m10 l10" method="post" enctype="multipart/form-data" action="{% url 'Avatar Upload' native_user.username %}">
                                 <div class="row">
-                                    <img src="{{ profile.avatar.url }}" class="circle col s3 m3 l3" alt="profile-picture">
+                                    <img src="{{ profile.avatar.url }}" class="circle col s4 m3 l3" alt="profile-picture">
                                     {% csrf_token %}
-                                    {{ avatar_form|materializecss:'col s7 m7 l7' }}
-                                    <div class="col s2 m2 l2">
+                                    {{ avatar_form|materializecss:'col s8 m7 l7' }}
+                                    <div class="col s12 m2 l2 center">
                                         <button class="btn" type="submit">Save</button>
                                     </div>
                                 </div>
@@ -76,22 +76,23 @@
                             </form>
                         </div>
                         <div class="row">
-                            <div class="col s2 m2 l2">
+                            <div class="col s12 m2 l2">
                                 <strong>Name</strong>
                             </div>
-                            <form class="col s10 m10 l10">
+                            <form class="col s12 m10 l10" action="{% url 'change_name' native_user.username %}" method="post">
+                                {% csrf_token %}
                                 <div class="row">
-                                    <div class="input-field col s5 m5 l5">
+                                    <div class="input-field col s12 m5 l5">
                                         <i class="material-icons prefix">account_circle</i>
-                                        <input id="icon_prefix" type="text" class="validate" value="{{ native_user.first_name }}">
-                                        <label for="icon_prefix">First Name</label>
+                                        <input id="first_name" type="text" class="validate" name="first_name" value="{{ native_user.first_name }}">
+                                        <label for="first_name">First Name</label>
                                     </div>
-                                    <div class="input-field col s5 m5 l5">
+                                    <div class="input-field col s12 m5 l5">
                                         <i class="material-icons prefix">account_circle</i>
-                                        <input id="icon_telephone" type="tel" class="validate" value="{{ native_user.last_name }}">
-                                        <label for="icon_telephone">Surname</label>
+                                        <input id="last_name" type="tel" class="validate" name="last_name" value="{{ native_user.last_name }}">
+                                        <label for="last_name">Last Name</label>
                                     </div>
-                                    <div class="input-field col s2 m2 l2">
+                                    <div class="input-field col s12 m2 l2 center">
                                         <button class="btn" type="submit">Save</button>
                                     </div>
                                 </div>
@@ -99,17 +100,18 @@
                             </form>
                         </div>
                         <div class="row">
-                            <div class="col s2 m2 l2">
+                            <div class="col s12 m2 l2">
                                 <strong>Email</strong>
                             </div>
-                            <form class="col s10 m10 l10">
+                            <form class="col s12 m10 l10" method="post" action="{% url 'change_email' native_user.username %}">
+                                {% csrf_token %}
                                 <div class="row">
-                                    <div class="input-field col s10 m10 l10">
+                                    <div class="input-field col s12 m10 l10">
                                         <i class="material-icons prefix">email</i>
-                                        <input id="icon_prefix" type="text" class="validate" value="{{ native_user.email }}">
-                                        <label for="icon_prefix">Email</label>
+                                        <input id="email" type="text" class="validate" name="email" value="{{ native_user.email }}">
+                                        <label for="email">Email</label>
                                     </div>
-                                    <div class="input-field col s2 m2 l2">
+                                    <div class="input-field col s12 m2 l2 center">
                                         <button class="btn" type="submit">Save</button>
                                     </div>
                                 </div>
@@ -134,7 +136,31 @@
                         <h6><strong>Notification</strong></h6>
                     </li>
                     <li class="collection-item white black-text" id="subscribed-tags">
-                        Notification settings
+                        <div class="row">
+                            <div class="col s12 m2 l2">
+                                <strong>Email Notification</strong>
+                            </div>
+                            <div class="col s12 m10 l10">
+                                <div class="row">
+                                    {% if profile.is_subscribed %}
+                                        <div class="col s12 m8 l9">
+                                            Unsubscribe form Email Notifications.
+                                        </div>
+                                        <div class="col s12 m4 l3 center">
+                                            <a class="btn" href="{% url 'unsubscribe' native_user.username %}">Unsubscribe</a>
+                                        </div>
+                                    {% else %}
+                                        <div class="col s12 m8 l9">
+                                            Subscribe to get Email Notifications.
+                                        </div>
+                                        <div class="col s12 m4 l3 center">
+                                            <a class="btn" href="{% url 'subscribe' native_user.username %}">Subscribe</a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="divider"></div>
+                            </div>
+                        </div>
                     </li>
                 </div>
 
@@ -144,16 +170,16 @@
                     </li>
                     <li class="collection-item white black-text" id="security">
                         <div class="row">
-                            <div class="col s2 m2 l2">
+                            <div class="col s12 m2 l2">
                                 <strong>Change Password</strong>
                             </div>
-                            <form class="col s10 m10 l10" method="post" action="{% url 'Change Password' native_user.username %}">
+                            <form class="col s12 m10 l10" method="post" action="{% url 'Change Password' native_user.username %}">
                                 <div class="row">
                                     {% csrf_token %}
-                                    {{ password_change_form.new_password1|materializecss:'col s7 m7 l7, icon=fiber_new' }}
-                                    {{ password_change_form.new_password2|materializecss:'col s5 m5 l5, icon=find_replace' }}
-                                    {{ password_change_form.old_password|materializecss:'col s6 m6 l6, icon=find_in_page' }}
-                                    <div class="col s6 m6 l6 center">
+                                    {{ password_change_form.new_password1|materializecss:'col s12 m7 l7, icon=fiber_new' }}
+                                    {{ password_change_form.new_password2|materializecss:'col s12 m5 l5, icon=find_replace' }}
+                                    {{ password_change_form.old_password|materializecss:'col s12 m6 l6, icon=find_in_page' }}
+                                    <div class="col s12 m6 l6 center">
                                         <button class="btn" type="submit">Save</button>
                                     </div>
                                 </div>

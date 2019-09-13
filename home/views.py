@@ -1,17 +1,17 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect, HttpResponse,reverse
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-# from django.contrib.auth import get_user_model
 from post.views import page_maker
+# from django.contrib.auth import get_user_model
 # from django.contrib.contenttypes.models import ContentType
 
-# Importng models
+# Importing models
 from comments.models import Comment
 from django.contrib.auth.models import Group
 from post.models import Tags, Post
 from user_profile.models import UserProfile
 from django.contrib.auth.models import User
-from home.models import EmailBackend
+# from home.models import EmailBackend
 
 # Importing Forms
 from home.forms import UserSignupForm
@@ -20,17 +20,24 @@ from comments.forms import CommentForm
 
 
 def index(request, tag_filter=None):
+    """
+        This function renders Home Page.
+        If tag_filter = None, All posts are fetched
+        otherwise posts from specific tags are fetched.
+    """
+
+    # User signup form, comment form, Post adding form
     form = UserSignupForm()
+    comment_form = CommentForm()
     addpostform = PostForm()
+
+    # Fetching posts as pages, all User Profiles, tags and comments
     posts = page_maker(request, Post, tag_filter=tag_filter)
     user_profiles = UserProfile.objects.all()
     tags = Tags.objects.all()
+    comments = Comment.objects.all()  # Using overridden Model Manager all().
 
-    # Using Model Manager all().
-    comments = Comment.objects.all()
-    comment_form = CommentForm()
-    # if comment_form.is_valid():
-    #     print(comment_form.cleaned_data)
+    # Context to be sent to template
     context = {
         'form': form,
         'addpostform': addpostform,
@@ -42,26 +49,16 @@ def index(request, tag_filter=None):
     }
     return render(request, 'home/index.html', context)
 
-
-# def login_view(request):
-#     if request.method == 'POST':
-#         username = request.POST['username']
-#         password = request.POST['password']
-#         user = authenticate(request, username=username, password=password)
-#         if user is not None:
-#             login(request, user)
-#             messages.success(request, f"Login Success")
-#             return redirect(HOME)
-#         else:
-#             messages.error(request, f"Login Failed")
-#             return redirect(HOME)
-#     else:
-#         return redirect(HOME)
+    # Tried earlier:
+    # if comment_form.is_valid():
+    #     print(comment_form.cleaned_data)
 
 
 def ajax_login_view(request):
+    """
+        Function to login using AJAX.
+    """
     if request.method == "POST":
-        print(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         remember_me = request.POST.get('remember_me')
@@ -79,22 +76,22 @@ def ajax_login_view(request):
                 print("step1")
                 if 'cook_user' and 'cook_pass' in request.COOKIES:
 
-                    # ENTERS When either of the cookie is present.
+                    # Enters when either of the cookie is present.
                     # response = render(request,'blogapp/newhome.html',context)
                     print("step2")
                     response.delete_cookie('cook_user')
                     response.delete_cookie('cook_pass')
                     return response
                 else:
-                    # ENTERS When both of the cookie is not present i.e.deleted .
+                    # Enters when both of the cookie is not present i.e. deleted .
                     print("step3")
                     return response
             else:
                 print("step4")
                 if 'cook_user' and 'cook_pass' not in request.COOKIES:
                     print("step5")
-                    response.set_cookie('cook_user',username,max_age=86400,path='/')
-                    response.set_cookie('cook_pass',password,max_age=86400,path='/')
+                    response.set_cookie('cook_user', username, max_age=86400, path='/')
+                    response.set_cookie('cook_pass', password, max_age=86400, path='/')
                     return response
                 else:
                     print("step6")
@@ -106,50 +103,21 @@ def ajax_login_view(request):
 
 
 def logout_view(request):
+    """
+        A simple function to log out.
+    """
     logout(request)
+
+    # Success message
     messages.success(request, f"Logout Success")
+
     return HttpResponseRedirect(reverse('Index'))
 
 
-# def signup_view(request):
-#     if request.method == 'POST':
-#         form = UserSignupForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             username = form.cleaned_data.get('username')
-#             raw_password = form.cleaned_data.get('password1')
-#             choice = form.cleaned_data.get('choice')
-#             user = authenticate(username=username, password=raw_password)
-#             if choice == 'teacher':
-#                 my_group = Group.objects.get(name='Teacher')
-#                 my_group.user_set.add(user)
-#                 my_group.save()
-#             elif choice == 'student':
-#                 my_group = Group.objects.get(name='Student')
-#                 my_group.user_set.add(user)
-#                 my_group.save()
-#             login(request, user)
-#
-#             # Creating profile
-#             profile = UserProfile(user=user)
-#             profile.save()
-#
-#             messages.success(request, f"Signup Success")
-#             return redirect(HOME)
-#     else:
-#         form = UserSignupForm()
-#     posts = page_maker(request)
-#     tags = Tags.objects.all()
-#     addpostform = PostForm()
-#     context = {
-#         'form': form,
-#         'addpostform': addpostform,
-#         'posts': posts,
-#         'tags': tags,
-#     }
-#     return render(request, 'home/index.html', context)
-
 def is_number(s):
+    """
+        Function to check whether 's' is a number or NOT.
+    """
     try:
         int(s)
         return True
@@ -158,7 +126,12 @@ def is_number(s):
 
 
 def ajax_signup_view(request):
+    """
+        A function to Sign Up using AJAX.
+    """
     if request.method == 'POST':
+
+        # Intuitive variable names
         username_ = request.POST['username']
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -203,11 +176,13 @@ def ajax_signup_view(request):
             if len(password1) < 8:
                 return HttpResponse('PTS')
 
+            # Changing to Lower Case
             username_lower = username_.lower()
             pass_lower = password1.lower()
             fname_lower = first_name.lower()
             lname_lower = last_name.lower()
 
+            # Checks for password.
             if is_number(pass_lower):
                 return HttpResponse('PEN')
             if (pass_lower in username_lower) or (username_lower in pass_lower):
@@ -231,6 +206,7 @@ def ajax_signup_view(request):
         user_.last_name = last_name
         user_.save()
 
+        # Saving group of user
         if choice == 'teacher':
             my_group = Group.objects.get(name='Teacher')
             my_group.user_set.add(user_)
@@ -240,10 +216,13 @@ def ajax_signup_view(request):
             my_group.user_set.add(user_)
             my_group.save()
 
+        # Authenticating user
         user_ = authenticate(username=username_, password=password1)
         if user_ is not None:
+            # If user is present, Log In
             login(request, user_)
         else:
+            # Some error occurred.
             # Deleting user in case it has been added in database.
             user_qs = User.objects.filter(username=username_)
             if user_qs:
@@ -251,8 +230,65 @@ def ajax_signup_view(request):
                 user.delete()
             return HttpResponse('ERR')
 
+        return HttpResponse('SS')
+
+        # Tried earlier:
         # Creating profile
         # profile = UserProfile(user=user_)
         # profile.save()
-        return HttpResponse('SS')
 
+
+# Functions not in use currently
+
+# def login_view(request):
+#     if request.method == 'POST':
+#         username = request.POST['username']
+#         password = request.POST['password']
+#         user = authenticate(request, username=username, password=password)
+#         if user is not None:
+#             login(request, user)
+#             messages.success(request, f"Login Success")
+#             return redirect(HOME)
+#         else:
+#             messages.error(request, f"Login Failed")
+#             return redirect(HOME)
+#     else:
+#         return redirect(HOME)
+
+# def signup_view(request):
+#     if request.method == 'POST':
+#         form = UserSignupForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             username = form.cleaned_data.get('username')
+#             raw_password = form.cleaned_data.get('password1')
+#             choice = form.cleaned_data.get('choice')
+#             user = authenticate(username=username, password=raw_password)
+#             if choice == 'teacher':
+#                 my_group = Group.objects.get(name='Teacher')
+#                 my_group.user_set.add(user)
+#                 my_group.save()
+#             elif choice == 'student':
+#                 my_group = Group.objects.get(name='Student')
+#                 my_group.user_set.add(user)
+#                 my_group.save()
+#             login(request, user)
+#
+#             # Creating profile
+#             profile = UserProfile(user=user)
+#             profile.save()
+#
+#             messages.success(request, f"Signup Success")
+#             return redirect(HOME)
+#     else:
+#         form = UserSignupForm()
+#     posts = page_maker(request)
+#     tags = Tags.objects.all()
+#     addpostform = PostForm()
+#     context = {
+#         'form': form,
+#         'addpostform': addpostform,
+#         'posts': posts,
+#         'tags': tags,
+#     }
+#     return render(request, 'home/index.html', context)

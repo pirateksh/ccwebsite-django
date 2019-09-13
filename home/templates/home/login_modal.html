@@ -10,31 +10,35 @@
         <br> <br>
          <div class="row">
             <div class="row">
+                {# SOCIAL LOGIN #}
                 <div class="col s4 m4 l4 center">
                     <a href="{%url 'social:begin' 'google-oauth2'%}" class="btn-large social
                     google">
-                        <img class="circle" style="display: inline-block;" height="100%" alt="Google &quot;G&quot; Logo" src="{%static 'Images/google-icon.jpg' %}" /> 
-                        <span style="vertical-align: text-bottom;">Google</span>
+                        <img class="circle social-login" height="100%" alt="Google &quot;G&quot; Logo" src="{%static 'Images/google-icon.jpg' %}" />
+                        <span class="social-login-span">Google</span>
                     </a>
                 </div>
                 <div class="col s4 m4 l4 center">
                     <a href="{%url 'social:begin' 'github'%}" class="btn-large social github">
-                        <img class="circle" style="display: inline-block;" height="100%" alt="GitHub &quot;G&quot; Logo" src="{%static 'Images/git-logo.png' %}"/>
-                        <span style="vertical-align: text-bottom;">Github</span>
+                        <img class="circle social-login" height="100%" alt="GitHub &quot;G&quot; Logo" src="{%static 'Images/git-logo.png' %}"/>
+                        <span class="social-login-span">Github</span>
                     </a>
                 </div>
                 <div class="col s4 m4 l4 center">
                     <a href="{%url 'social:begin' 'facebook'%}" class="btn-large social
                     facebook">
-                        <img class="circle" style="display: inline-block;" height="100%" alt="Facebook &quot;G&quot; Logo" src="{%static 'Images/facebook-icon.jpg' %}"/>
-                        <span style="vertical-align: text-bottom;">Facebook</span>
+                        <img class="circle social-login" height="100%" alt="Facebook &quot;G&quot; Logo" src="{%static 'Images/facebook-icon.jpg' %}"/>
+                        <span class="social-login-span">Facebook</span>
                     </a>
                 </div>
+                {# SOCIAL LOGIN ENDED #}
                 <br> <br> <br> <br>
                 <div class="col s12 l12 m12 center">
                     <a class="chip">OR</a>
                 </div>
+                {# Checking if Cookies Exists #}
                 {% if 'cook_user' and 'cook_pass' in request.COOKIES %}
+                    {# Cookies Exists. Login using them #}
                     <div class="input-field col s12">
                         <i class="material-icons prefix">account_circle</i>
                         <input id="login_username" name="username" type="text" 
@@ -61,6 +65,7 @@
                         </label>
                     </div>
                 {% else %}
+                    {# Cookies does not exist #}
                     <div class="input-field col s12">
                         <i class="material-icons prefix">account_circle</i>
                         <input id="login_username" name="username" type="text" 
@@ -103,7 +108,7 @@
     </form>
 </div>
 
-
+{# Tried Earlier: #}
 {#<div id="modal1" class="modal modal-fixed-footer">#}
 {#    <form class="col s12" method="post" action="{% url 'Login' %}">#}
 {#        {% csrf_token %}#}

@@ -1,11 +1,14 @@
 {% load static %}
+
+{# Filtering posts according to tags #}
 <ul class="collection">
-    <li class="collection-item amber">
+    <li class="collection-item center-align amber">
         <h6>Filter posts</h6>
     </li>
     <li class="collection-item">
         {% for tag in tags %}
             {% if tag.name in request.build_absolute_uri %}
+            {# Highlight with amber colour if a tab is currently active #}
                 <a class="chip teal white-text" href="{% url 'index_tag' tag.name %}">{{ tag.name }}</a>
             {% else %}
                 <a class="chip" href="{% url 'index_tag' tag.name %}">{{ tag.name }}</a>

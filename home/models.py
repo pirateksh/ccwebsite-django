@@ -1,13 +1,13 @@
-from django.db import models
+# from django.db import models
 # from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 
 
-# Create your models here.
-
-
 class EmailBackend(object):
-
+    """
+        An Email Backend to authenticate(Log In) user with Email ID.
+        Source: StackOverflow
+    """
     def authenticate(self, request, username=None, password=None, **kwargs):
         User = get_user_model()
         try:

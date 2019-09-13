@@ -46,18 +46,6 @@
 
         {# SideNav for Mobile view #}
         <ul id="nav-mobile" class="sidenav">
-
-            {# Loop through categories #}
-
-{#            <li><a class="waves-light btn" id="cate" href="#cate">CATEGORIES</a></li>#}
-{#            <ul class="collapsible popout black-text">#}
-{#                {% for tag in tags %}#}
-{#                    <li>#}
-{#                        <div class="collapsible-header">{{ tag.name }}</div>#}
-{#                        <div class="collapsible-body">{{ tag.description }}</div>#}
-{#                    </li>#}
-{#                {% endfor %}#}
-{#            </ul>#}
             <li>
                 <div class="user-view amber lighten-3">
                     {% if profile.avatar %}
@@ -153,7 +141,3 @@
 
     </div>
 </nav>
-
-{#{% include 'home/login_modal.html' %}#}
-
-{#{% include 'home/signup_modal.html' %}#}

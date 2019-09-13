@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+# from django.contrib.contenttypes.fields import GenericForeignKey
+
+# Imported models
 from post.models import Post
+
+# 3rd Party Imports
 from ckeditor_uploader.fields import RichTextUploadingField
-# Create your models here.
 
 
 class CommentManager(models.Manager):
@@ -34,17 +37,23 @@ class CommentManager(models.Manager):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, default=None, null=True)
-    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
-    # content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    # object_id = models.PositiveIntegerField()
-    # content_object = GenericForeignKey('content_type', 'object_id')
 
-    # comment_text = models.TextField()
+    # Author of comment
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+
+    # Post in which comment is made
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, default=None, null=True)
+
+    # Parent of comment (if nested commnet)
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
+
+    # Content of comment
     comment_text = RichTextUploadingField(blank=False, null=False, verbose_name='Comment Text')
+
+    # Time at which comment was created
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    # To apply overriding of managers
     objects = CommentManager()
 
     class Meta:
@@ -56,8 +65,15 @@ class Comment(models.Model):
     def children(self):  # replies
         return Comment.objects.filter(parent=self)
 
+    # To check if a comment is parent or not
     @property
     def is_parent(self):
         if self.parent is not None:
             return False
         return True
+
+    # Tried earlier
+    # content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    # object_id = models.PositiveIntegerField()
+    # content_object = GenericForeignKey('content_type', 'object_id')
+    # comment_text = models.TextField()

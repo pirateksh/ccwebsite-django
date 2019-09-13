@@ -87,10 +87,16 @@
                         </div>
                     {% elif user.is_authenticated %}
                         <div class="row">
-                            <div class="col s6 m6 l6 center">
+                            <div class="col s3 m3 l3">
                                 <a class="btn small tooltipped" data-tooltip="Home" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
                             </div>
-                            <div class="col s6 m6 l6 center">
+                            <div class="col s3 m3 l3">
+                                <a class="btn small tooltipped" data-tooltip="Profile" href="{% url 'User Profile' native_user.username %}"><i class="material-icons">person_pin</i></a>
+                            </div>
+                            <div class="col s3 m3 l3">
+                                <a class="btn small tooltipped" data-tooltip="Edit Profile" href="{% url 'edit_profile' native_user.username %}"><i class="material-icons">edit</i></a>
+                            </div>
+                            <div class="col s3 m3 l3">
                                 <a class="btn small red tooltipped" data-tooltip="Logout" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
                             </div>
                         </div>
@@ -116,25 +122,25 @@
                         </div>
                     </li>
                 {% else %}
-                    <div class="row">
-                        <a class='dropdown-trigger btn-large waves-light col s10 m10 offset-s1 offset-m1' href='#' data-target='dropdown_edit'>Edit Profile</a>
-                        <ul id='dropdown_edit' class='dropdown-content'>
-                            <li class="collection-item amber lighten-1">
-                                <a class="modal-trigger btn-flat" href="#modal1">Add Categories</a>
-                            </li>
-                            <li class="divider" tabindex="-1"></li>
-                            <li class="collection-item amber lighten-1">
-                                <a class="modal-trigger btn-flat" href="#modal-avatar">Add/Change Avatar</a>
-                            </li>
-                            <li class="divider" tabindex="-1"></li>
-                            <li class="collection-item amber lighten-2">
-                                <a class="modal-trigger btn-flat" href="#modal-change-user-password">Change Password</a>
-                            </li>
-                            <li class="divider" tabindex="-1"></li>
-                        </ul>
-                    </div>
+{#                    <div class="row">#}
+{#                        <a class='dropdown-trigger btn-large waves-light col s10 m10 offset-s1 offset-m1' href='#' data-target='dropdown_edit'>Edit Profile</a>#}
+{#                        <ul id='dropdown_edit' class='dropdown-content'>#}
+{#                            <li class="collection-item amber lighten-1">#}
+{#                                <a class="modal-trigger btn-flat" href="#modal1">Add Categories</a>#}
+{#                            </li>#}
+{#                            <li class="divider" tabindex="-1"></li>#}
+{#                            <li class="collection-item amber lighten-1">#}
+{#                                <a class="modal-trigger btn-flat" href="#modal-avatar">Add/Change Avatar</a>#}
+{#                            </li>#}
+{#                            <li class="divider" tabindex="-1"></li>#}
+{#                            <li class="collection-item amber lighten-2">#}
+{#                                <a class="modal-trigger btn-flat" href="#modal-change-user-password">Change Password</a>#}
+{#                            </li>#}
+{#                            <li class="divider" tabindex="-1"></li>#}
+{#                        </ul>#}
+{#                    </div>#}
                     <li>
-                        <a class="btn" href="{% url 'Drafts' user.username %}">Drafts</a>
+                        <a class="btn disabled" href="{% url 'Drafts' user.username %}">Drafts</a>
                     </li>
                 {% endif %}
 

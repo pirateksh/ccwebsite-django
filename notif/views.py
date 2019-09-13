@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 
 # Imported models
 from user_profile.models import UserProfile
+from post.models import Tags
 
 User = get_user_model()
 
@@ -15,9 +16,16 @@ def notification_view(request):
         This function will render notification detail view.
     """
     user = request.user
+
+    # Read notifications of current user
     read_notif = user.notifications.read()
+
+    # Unread notifications of current user
     unread_notif = user.notifications.unread()
+
+    # All user profiles
     user_profile_qs = UserProfile.objects.all()
+
     context = {
         'read_notif': read_notif,
         'unread_notif': unread_notif,
@@ -30,7 +38,10 @@ def mark_as_read(request, pk):
     """
         This function will mark a particular unread notification as read.
     """
+
+    # Notification having primary key = pk (of current user).
     notification = request.user.notifications.get(pk=pk)
+
     notification.unread = False
     notification.save()
     return HttpResponseRedirect(reverse('all_notifications'))
@@ -40,6 +51,7 @@ def mark_all_as_read(request):
     """
         This function will mark all unread notifications as read.
     """
+    # All unread notifications of current user
     notification_qs = request.user.notifications.unread()
     if notification_qs:
         notification_qs.mark_all_as_read()
@@ -63,6 +75,7 @@ def clear_all_notification(request):
     """
         This function clears/deletes all read notification as read.
     """
+    # All unread notifications of current user
     notification_qs = request.user.notifications.read()
     if notification_qs:
         notification_qs.mark_all_as_deleted()

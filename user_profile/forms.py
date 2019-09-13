@@ -1,17 +1,20 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import UserProfile
 # from PIL import Image
 from django.core.files import File
 
+# Imported Models
+from .models import UserProfile
+
 
 class AvatarUploadForm(forms.ModelForm):
-
+    # Form to upload profile picture
     class Meta:
         model = UserProfile
         fields = ('avatar',)
 
 
+# Tried to crop image:
 # class PhotoForm(forms.ModelForm):
 #     x = forms.FloatField(widget=forms.HiddenInput())
 #     y = forms.FloatField(widget=forms.HiddenInput())

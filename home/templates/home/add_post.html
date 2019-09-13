@@ -1,6 +1,8 @@
 {% load materializecss %}
 {# Adding post #}
 {% if user.is_authenticated %}
+
+{# Add Post enabled if User is authenticated  #}
     <form class="post_form" method="post" action="{% url 'ajax_add_post' %}" author="{{ user.username }}" data-success="{% url 'Index' %}">
         <ul class="collapsible white post-form-collapse" >
             <li>
@@ -24,7 +26,9 @@
             </li>
         </ul>
     </form>
+
 {% else %}
+{# Here user is NOT authenticated to a Login Modal will pop up asking user to log in First #}
     <ul class="collapsible">
         <li>
             <div class="collapsible-header tooltipped" onclick="addToast('Login to add post!')" data-position="top" data-tooltip="Click to Add Post!">
@@ -36,7 +40,7 @@
     </ul>
 {% endif %}
 
-
+{# Tried Earier: #}
 {# CONTAINER #}
 {#{% if user.is_authenticated %}#}
 {#    <ul class="collection with-header" >#}

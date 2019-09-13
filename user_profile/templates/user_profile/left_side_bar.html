@@ -33,6 +33,12 @@
     {% endif %}
     {% if native_user == user and user.is_superuser %}
         <li class="collection-item amber lighten-1">
+            <a class="btn-flat" href="{% url 'edit_profile' user.username %}">
+                Edit Profile
+                <i class="material-icons">edit</i>
+            </a>
+        </li>
+        <li class="collection-item amber lighten-1">
             <a class="modal-trigger btn-flat" href="#modal-verify-posts">
                 Verify Posts
 
@@ -52,7 +58,7 @@
 </ul>
 
 <ul class="collection">
-    <li class="collection-item amber">
+    <li class="collection-item amber center-align">
         <h6>Filter posts</h6>
     </li>
     <li class="collection-item">

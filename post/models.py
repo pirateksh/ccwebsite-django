@@ -19,21 +19,19 @@ class PostManager(models.Manager):
     """
     def all(self, native_user=None, draft=False, *args, **kwargs):
         if native_user is None:
-            """
-                All posts
-            """
+            # All posts
             if not draft:
                 return super(PostManager, self).filter(draft=False).filter(post_on_date__lte=timezone.now()).order_by(
                     '-published')
+            # Post is draft
             return super(PostManager, self).filter(draft=True).filter(post_on_date__lte=timezone.now()).order_by(
                     '-published')
         else:
-            """
-                Posts whose author is native_user
-            """
+            # Posts whose author is native_user
             if not draft:
                 return super(PostManager, self).filter(draft=False).filter(post_on_date__lte=timezone.now()).filter(
                     author=native_user).order_by('-published')
+            # Post is draft
             return super(PostManager, self).filter(draft=True).filter(post_on_date__lte=timezone.now()).filter(
                     author=native_user).order_by('-published')
 
@@ -47,9 +45,13 @@ class Tags(models.Model):
 
 
 class Post(models.Model):
+    # Title of post
     title = models.CharField(max_length=255, blank=False, null=True, verbose_name='Post Title')
+
+    # Content of post
     post_content = RichTextUploadingField(blank=False, null=True, verbose_name='Post Content')
 
+    # Author of post - User model is foreign key
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -58,7 +60,7 @@ class Post(models.Model):
         null=True
     )
 
-    # Pinned to top
+    # Whether pinned to top or Not
     is_pinned = models.BooleanField(default=False)
 
     # To create Draft and publish post on specific day.
@@ -68,14 +70,19 @@ class Post(models.Model):
     # For AJAX likes
     likes = models.ManyToManyField(User, blank=True, related_name='post_likes')
 
+    # Date/Time at which post is published
     published = models.DateTimeField(default=datetime.now, blank=True)
     updated = models.DateTimeField(default=datetime.now, blank=True)
 
+    # Tags related to post.
     tags = models.ManyToManyField(Tags, verbose_name='Post Tags', blank=True)
     slug = models.SlugField(default='', blank=True)
 
     # Is verified or not
     verify_status = models.IntegerField(default=-1, verbose_name='Is verified')
+
+    # Soft delete
+    deleted = models.BooleanField(default=False)
 
     # Initialising post manager
     objects = PostManager()
@@ -83,13 +90,16 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
 
         """
-            Without *args and **kwargs, following error was encountered:
+            Overriding save() method to auto fill slug field of post.
+
+            Note: Without *args and **kwargs, following error was encountered:
             TypeError: save() got an unexpected keyword argument 'force_insert'
         """
 
         self.slug = slugify(self.title + str(self.pk))
         super(Post, self).save()
 
+    # URL of link to like post using post's slug
     def get_like_url(self):
         return reverse("like_toggle", (), {'slug', self.slug})
 

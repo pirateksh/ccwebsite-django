@@ -55,6 +55,7 @@
                 {% include 'user_profile/left_side_bar.html' %}
             </div>
 
+            {# Middle part #}
             <div class="col s12 m8 l6">
                 <div class="add-post-user-profile">
                     {% if user == native_user and not user.is_superuser %}
@@ -66,6 +67,7 @@
                 </div>
             </div>
 
+            {# Right side category menu #}
             <div class="col m4 l3 hide-on-small-and-down">
                 {% include 'user_profile/right_side_bar.html' %}
             </div>

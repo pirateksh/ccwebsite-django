@@ -1,3 +1,6 @@
+{% comment %}
+    This page will be EXTENDED by all other Pages.
+{% endcomment %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -6,35 +9,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>
         {% block title %}
-            Parallax Template - Materialize
+            Base - CC Website
         {% endblock %}
     </title>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'Images/logo.png' %}" />
     {% include 'css.html' %}
 
 </head>
-{#<body style="background: url('{% static 'back2.jpg' %}') fixed no-repeat center; background-size: cover;">#}
-<body style="background: antiquewhite;">
-<!--CSS Spinner-->
+    <body>
+
+        {% block content %}
+            {# Content Here #}
+        {% endblock %}
+
+        {% include 'scripts.html' %}
+
+        {% block javascript %}
+            {# JavaScript Here #}
+        {% endblock %}
+
+    </body>
+</html>
+
+{#Tried Earlier:#}
+{#<!--CSS Spinner-->#}
 {#<div class="spinner-wrapper">#}
 {#<div class="spinner"></div>#}
 {#</div>#}
-
-    {% block content %}
-        {# Content Here #}
-    {% endblock %}
-
-    <script>
-
-    </script>
-
-        {% include 'scripts.html' %}
-    {% block javascript %}
-    
-    {% endblock %}
-
-
-
-
-</body>
-</html>

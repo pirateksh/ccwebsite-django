@@ -25,17 +25,10 @@
 
 {# Beep sound for notification  #}
 <audio id="notificationAudio">
-{#  <source src="horse.ogg" type="audio/ogg">#}
   <source src="{% static 'Sound/beep-07.wav' %}" type="audio/wav">
   Your browser does not support the audio element.
 </audio>
 
-{#<embed src="{% static 'Sound/beep-07.wav' %}" autostart="false" width="0" height="0" id="notification_sound" enablejavascript="true">#}
-{#<script>#}
-{#function PlaySound(soundObj) {#}
-{#  var sound = document.getElementById(soundObj);#}
-{#  sound.Play();#}
-{# }#}
 <script>
     var x = document.getElementById("notificationAudio");
     function playAudio() {
@@ -81,11 +74,12 @@
 
 <script src="{% static 'js/main.js' %}"></script>
 
-
+{# Materialize CSS Auto Initialization #}
 <script>M.AutoInit();</script>
 
 {# Show password #}
 <script>
+    // A function to toggle 'Show Password' while login.
     function showPassword() {
         var x = document.getElementById("login_password");
         if (x.type === "password") {
@@ -98,7 +92,7 @@
 {# Show password ended #}
 
 
-{# For Toasts #}
+{# Messages and Form errors displayed as toast #}
     {% if messages %}
         {% for message in messages %}
             <script>M.toast({html: "{{ message }}", classes: 'rounded', displayLength: 3000})</script>
@@ -128,7 +122,8 @@
             {% endfor %}
         {% endfor %}
     {% endif %}
-{# Function to display toast from HTML (when message can't be passed from view) #}
+
+{# Function to display toast from HTML #}
     <script>
         function addToast(message){
             M.toast({html: message, classes: 'rounded', displayLength: 3000});

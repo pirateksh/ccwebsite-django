@@ -18,50 +18,64 @@
 {% block content %}
     {% include 'home/navbar.html' %}
     <div class="row">
-        <div class="col m3 l4"></div>
-        <div class="col m6 l6">
+        <div class="col m2 l4"></div>
+        <div class="col s12 m10 l6">
+        {% if post.deleted %}
+            <ul class="collection">
+                <li class="collection-item">
+                    <strong>This post has been deleted.</strong>
+                </li>
+            </ul>
+        {% else %}
             <ul class="collection with-header" id="user-prof-post-{{ post.pk }}" >
                 <li class="collection-header title">
+                <!-- Title -->
                     {% if post.verify_status == 1 %}
-                        <h4 id="post-head-m-down" class="hide-on-med-and-down" style="font-size: 3vw">{{ post.title }}<i class="material-icons">verified_user</i></h4>
-                        <h4 id="post-head-s-down-l" class="hide-on-small-and-down hide-on-large-only" style="font-size: 4vw;">{{ post.title }}<i class="material-icons">verified_user</i></h4>
-                        <h4 id="post-head-m-up" class="hide-on-med-and-up" style="font-size: 5vw">{{ post.title }}<i class="material-icons">verified_user</i></h4>
+                        <h4 class="hide-on-med-and-down post-head-m-down" style="font-size: 3vw;">{{ post.title }}<i class="material-icons">verified_user</i></h4>
+                        <h4 class="hide-on-small-and-down hide-on-large-only post-head-s-down-l">{{ post.title }}<i class="material-icons small">verified_user</i></h4>
+                        <h4 class="hide-on-med-and-up post-head-m-up">{{ post.title }}<i class="material-icons tiny">verified_user</i></h4>
                     {% elif post.verify_status == -1 %}
-                        <h4 id="post-head-m-down" class="hide-on-med-and-down" style="font-size: 3vw">{{ post.title }}</h4>
-                        <h4 id="post-head-s-down-l" class="hide-on-small-and-down hide-on-large-only" style="font-size: 4vw;">{{ post.title }}</h4>
-                        <h4 id="post-head-m-up" class="hide-on-med-and-up" style="font-size: 5vw">{{ post.title }}</h4>
+                        <h4 class="hide-on-med-and-down post-head-m-down" style="font-size: 3vw">{{ post.title }}</h4>
+                        <h4 class="hide-on-small-and-down hide-on-large-only post-head-s-down-l">{{ post.title }}</h4>
+                        <h4 class="hide-on-med-and-up post-head-m-up">{{ post.title }}</h4>
                     {% endif %}
                     <p class="row">
                         <span class="col s8 m8 l8">
                             <a href="{% url 'User Profile' author.username %}" class="chip">
-
+                                <!-- Profile picture -->
                                 {% if author_profile.avatar %}
                                     <img src="{{ author_profile.avatar.url }}">
                                 {% endif %}
-                                <span class="hide-on-med-and-down" style="font-size: 1.2vw">{{ post.author }}</span>
-                                <span class="hide-on-small-and-down hide-on-large-only" style="font-size: 1.5vw;">{{ post.author }}</span>
-                                <span class="hide-on-med-and-up" style="font-size: 3.5vw">{{ post.author }}</span>
+                            <!-- Author name -->
+                                <span class="hide-on-med-and-down post-head-m-down-author">{{ post.author }}</span>
+                                <span class="hide-on-small-and-down hide-on-large-only post-head-s-down-l-author">{{ post.author }}</span>
+                                <span class="hide-on-med-and-up post-head-m-up-author">{{ post.author }}</span>
                             </a>
                         </span>
-                        <span class="col s4 m4 l4 hide-on-med-and-down" style="font-size: 1.20vw">{{ post.published|timesince }} ago.</span>
-                        <span class="col s4 m4 l4 hide-on-small-and-down hide-on-large-only" style="font-size: 1.80vw;">{{ post.published|timesince }} ago.</span>
-                        <span class="col s4 m4 l4 hide-on-med-and-up" style="font-size: 2.60vw">{{ post.published|timesince }} ago.</span>
+                        <!-- Time published -->
+                        <span class="col s4 m4 l4 hide-on-med-and-down post-head-m-down-time">{{ post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-small-and-down hide-on-large-only post-head-s-down-l-time">{{ post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-med-and-up post-head-m-up-time">{{ post.published|timesince }} ago.</span>
                     </p>
                 </li>
                 <li class="collection-item tag">
+                <!-- Tags associated with post -->
                     Tags :
                     {% for post_tag in post.tags.all %}
                         <a class="chip" href="{% url 'index_tag' post_tag.name %}">{{ post_tag }}</a>
                     {% endfor %}
                 </li>
+                <!-- Post content -->
                 <li class="collection-item" id="p">
                     {{ post.post_content|safe }}
                 </li>
 
                 {% if post.verify_status == 1 %}
                     {% if user == author %}
+                        {# If current user is author of post #}
                         <li class="collection-item row" id="like-{{ post.pk }}">
                             <div class="col s3 m3 l3 center">
+                            <!-- Like button -->
                                 <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
                                     {{ post.likes.count }}
                                     {% if user in post.likes.all %}
@@ -71,10 +85,11 @@
                                     {% endif %}
                                 </a>
                             </div>
+                        <!-- Comment Button -->
                             <div class="col s3 m3 l3 center">
                                 <a class="btn-flat comment-display-btn light-blue white-text" href="#"><i class="material-icons">comment</i></a>
                             </div>
-
+                        <!-- Edit Button -->
                             <form action="{% url 'ajax_edit_post' %}" id="post-edit-form-{{ post.pk }}" method="post" data-pk="{{ post.pk }}">
                                 <div class="col s3 m3 l3 center">
                                     <a class="btn-flat like-btn light-blue white-text modal-trigger edit-btn" href="#edit-post-modal-{{ post.pk }}" data-val="{{ post.post_content }}" data-pk="{{ post.pk }}">
@@ -119,7 +134,7 @@
                                     </div>
                                 </div>
                             </form>
-
+                        <!-- Delete post button -->
                             <form action="{% url 'ajax_delete_post' %}" class="post-del-form" method="get" data-from="user_prof" data-pk="{{ post.pk }}">
                                 <div class="col s3 m3 l3 center">
                                     <a class="btn-flat red white-text modal-trigger" href="#delete-post-modal-{{ post.pk }}"><i class="material-icons">delete</i></a>
@@ -145,9 +160,10 @@
                         </li>
 
                     {% elif user.is_authenticated %}
-
+                    {# If user is logged in BUT is'nt author of this post #}
                         <li class="collection-item row" id="like-{{ post.pk }}">
                             <div class="col s6 m6 l6 center">
+                            <!-- Like Button -->
                                 <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
                                     {{ post.likes.count }}
                                     {% if user in post.likes.all %}
@@ -157,22 +173,25 @@
                                     {% endif %}
                                 </a>
                             </div>
+                        <!-- Comment button -->
                             <div class="col s6 m6 l6 center">
                                 <a class="btn-flat comment-display-btn light-blue white-text" href="#"><i class="material-icons">comment</i></a>
                             </div>
                         </li>
                     {% else %}
+                        {# User is not logged in #}
                         <li class="collection-item row" id="like-{{ post.pk }}">
                             <div class="center">
                                 <a class="btn-flat comment-display-btn light-blue white-text" href="#"><i class="material-icons">comment</i></a>
                             </div>
                         </li>
                     {% endif %}
-
-                    <li class="collection-item comment-display" > {# style="display: none;"> #}
+                    <!-- Comment Display -->
+                    <li class="collection-item comment-display" >
                             {% if user.is_authenticated %}
                                 <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" data-type="comment">
                                     {% csrf_token %}
+                                    <!-- CKEditor Box -->
                                     <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
                                     <script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
                                     <div class="django-ckeditor-widget" data-field-id="id_comment_{{ post.pk }}" style="display: inline-block;">
@@ -189,9 +208,11 @@
                                     {% if comment.post.id == post.id %}
 
                                             <blockquote>
+                                            <!-- Comment text -->
                                             {{ comment.comment_text|safe }}
                                                 <footer>
                                                 via -
+                                                <!-- Comment author -->
                                                     <a class="chip" href="{% url 'User Profile' comment.user.username %} ">
                                                         {% for user_profile in user_profiles %}
                                                             {% if user_profile.user == comment.user %}
@@ -202,6 +223,7 @@
                                                         {% endfor %}
                                                         {{ comment.user }}
                                                     </a>
+                                                <!-- Comment creation time -->
                                                         | {{ comment.timestamp|timesince }} ago |
                                                         {% if comment.children.count > 1 %}
                                                             {{ comment.children.count }} Replies |
@@ -210,14 +232,16 @@
                                                         {% endif %}
                                                         <a class="comment-reply-btn" href="#">Reply</a>
                                                 </footer>
-
+                                                <!-- Replies to comment -->
                                                 <div class="comment-reply">
                                                     <div id="reply-{{ post.pk }}-{{ comment.pk }}">
                                                         {% for child_comment in comment.children %}
                                                                 <blockquote>
+                                                                <!-- Reply content -->
                                                                 {{ child_comment.comment_text|safe }}
                                                                     <footer>
                                                                     via -
+                                                                    <!-- Reply author -->
                                                                         <a class="chip" href="{% url 'User Profile' child_comment.user.username %} ">
                                                                             {% for user_profile in user_profiles %}
                                                                                 {% if user_profile.user == child_comment.user %}
@@ -230,7 +254,8 @@
                                                                             {% endfor %}
                                                                             {{ child_comment.user }}
                                                                         </a>
-                                                                        <span id="comment-timestamp" style="color: #0f74a8;">
+                                                                        <span class="comment-timestamp">
+                                                                            <!-- Reply Creation time -->
                                                                             | {{ child_comment.timestamp|timesince }} ago
                                                                         </span>
                                                                     </footer>
@@ -241,6 +266,7 @@
                                                     {% if user.is_authenticated %}
                                                         <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" comment-pk="{{ comment.pk }}" data-type="reply">
                                                             {% csrf_token %}
+                                                            <!-- Reply CKEditor Textbox -->
                                                             <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
                                                             <script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
                                                             <div class="django-ckeditor-widget" data-field-id="id_comment_reply_{{ post.pk }}_{{ comment.pk }}" style="display: inline-block;">
@@ -262,12 +288,15 @@
                             </div>
                     </li>
             {% elif post.verify_status == -1 %}
+            {# If post is NOT yet verified by Admin #}
                     {% if user.is_superuser %}
                         <li class="collection-item row">
                             <div class="col s6 m6 l6 center">
+                                <!-- Approve post button -->
                                 <a class="btn green" href="{% url 'approve_post' post.slug %}"><i class="material-icons">check</i> </a>
                             </div>
                             <div class="col s6 m6 l6 center">
+                                <!-- Reject post button -->
                                 <a class="btn red" href="{% url 'reject_post' post.slug %}"><i class="material-icons">clear</i> </a>
                             </div>
                         </li>
@@ -275,6 +304,7 @@
                         <li class="collection-item">
                             <form action="{% url 'ajax_edit_post' %}" id="post-edit-form-{{ post.pk }}" method="post" data-pk="{{ post.pk }}">
                                     <div class="col s12 m12 l12 center">
+                                        <!-- Edit post button -->
                                         <a class="btn-flat like-btn light-blue white-text modal-trigger edit-btn" href="#edit-post-modal-{{ post.pk }}" data-val="{{ post.post_content }}" data-pk="{{ post.pk }}">
                                             <i class="material-icons">edit</i>
                                         </a>
@@ -326,6 +356,7 @@
     {#          <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>#}
     {#          </li>#}
             </ul>
+        {% endif %}
         </div>
     </div>
     {% include 'footer.html' %}

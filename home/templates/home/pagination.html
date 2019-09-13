@@ -1,21 +1,32 @@
-                {% if posts.has_other_pages %}
-                    <ul class="pagination center-align">
-                        {% if posts.has_previous %}
-                            <li><a href="?page={{ posts.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
-                        {% else %}
-                            <li class="disabled"><i class="material-icons">chevron_left</i></li>
-                        {% endif %}
-                        {% for i in posts.paginator.page_range %}
-                            {% if posts.number == i %}
-                                <li class="active teal"><a href="?page={{ i }}">{{ i }}</a></li>
-                            {% else %}
-                                <li><a href="?page={{ i }}">{{ i }}</a></li>
-                            {% endif %}
-                        {% endfor %}
-                        {% if posts.has_next %}
-                            <li><a href="?page={{ posts.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
-                        {% else %}
-                            <li class="disabled"><i class="material-icons">chevron_right</i></li>
-                        {% endif %}
-                    </ul>
-                {% endif %}
+<!-- Code to make Pages from Posts -->
+{% if posts.has_other_pages %}
+
+    <ul class="pagination center-align">
+
+        {# If there are posts before current post #}
+        {% if posts.has_previous %}
+            <li><a href="?page={{ posts.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+        {% else %}
+            <li class="disabled"><i class="material-icons">chevron_left</i></li>
+        {% endif %}
+
+        {% for i in posts.paginator.page_range %}
+
+            {% if posts.number == i %}
+                <li class="active teal"><a href="?page={{ i }}">{{ i }}</a></li>
+            {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+
+        {% endfor %}
+
+        {# If there are posts after current post #}
+        {% if posts.has_next %}
+            <li><a href="?page={{ posts.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+        {% else %}
+            <li class="disabled"><i class="material-icons">chevron_right</i></li>
+        {% endif %}
+
+    </ul>
+
+{% endif %}

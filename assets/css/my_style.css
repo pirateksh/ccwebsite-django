@@ -1,40 +1,48 @@
-/*#publish{*/
-    /*font-size:100%;*/
-/*}*/
-
-
-  /*body {*/
-    /*display: flex;*/
-    /*min-height: 100vh;*/
-    /*flex-direction: column;*/
-  /*}*/
-
-  /*main {*/
-    /*flex: 1 0 auto;*/
-  /*}*/
-.post-head-m-down{
-    font-size: 3vw;
+body{
+    background: antiquewhite;
 }
 
-.post-head-s-down-l{
+/* Adjusting Size of text in Title, Author name and Timestamp */
+.post-head-m-down{
     font-size: 4vw;
+}
+
+.post-head-m-down-author{
+    font-size: 1.2vw;
+}
+
+.post-head-m-down{
+    font-size: 1.20vw;
+}
+
+.post-head-s-down-l-time{
+    font-size: 4vw;
+}
+
+.post-head-s-down-l-author{
+    font-size: 1.5vw;
+}
+
+.post-head-s-down-l-time{
+    font-size: 1.80vw;
 }
 
 .post-head-m-up{
     font-size: 5vw;
 }
 
-/*#comment-timestamp{*/
-    /*color: blue;*/
-/*}*/
-
-
-.notifications{
-    overflow: auto;
-    height: auto;
-    max-height: 500px;
+.post-head-m-up-author{
+    font-size: 3.5vw
 }
 
+.post-head-m-up-time{
+    font-size: 2.60vw;
+}
+
+/* Styling comments */
+.comment-timestamp{
+    color: #0f74a8;
+}
 .comment-reply{
     display: none;
     max-height: 500px;
@@ -46,16 +54,36 @@
     overflow: auto;
 }
 
+
+/* Styling for notification box */
+.notifications{
+    overflow: auto;
+    height: auto;
+    max-height: 500px;
+}
+
+
+
 .django-ckeditor-widget{
     display: inline-block;
 }
 
-.calendar{
+.calendar-li{
     overflow: auto;
 }
 
+/* To change colour of Materialize Tab */
 .tabs .indicator{
     background-color: darkorange;
+}
+
+/* Social login Icons */
+.social-login{
+    display: inline-block;
+}
+
+.social-login-span{
+    vertical-align: text-bottom;
 }
 
 /* FOR PRELOADER */
@@ -114,3 +142,21 @@
     /*-webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);*/
   /*}*/
 /*}*/
+
+/*PreLoader ENDED*/
+
+
+/*#publish{*/
+    /*font-size:100%;*/
+/*}*/
+
+
+  /*body {*/
+    /*display: flex;*/
+    /*min-height: 100vh;*/
+    /*flex-direction: column;*/
+  /*}*/
+
+  /*main {*/
+    /*flex: 1 0 auto;*/
+  /*}*/

@@ -15,20 +15,23 @@
     {# Pinned Posts #}
 <div class="pinned-posts">
     {% for post in posts %}
+        {% if not post.deleted %}
         {% if post.is_pinned %}
             <ul class="collection with-header" >
                 <li class="collection-header">
-                    <h4 id="title-{{ post.pk }}" class="hide-on-med-and-down post-head-m-down" style="font-size: 3vw">
+                <!-- Post title -->
+                    <h4 id="title-{{ post.pk }}" class="hide-on-med-and-down post-head-m-down" style="font-size: 3vw;">
                         {{ post.title|safe }}<i class="material-icons">fiber_pin</i><i class="material-icons">verified_user</i>
                     </h4>
-                    <h4 id="title-{{ post.pk }}" class="hide-on-small-and-down hide-on-large-only post-head-s-down-l" style="font-size: 4vw">
-                        {{ post.title|safe }}<i class="material-icons">fiber_pin</i><i class="material-icons">verified_user</i>
+                    <h4 id="title-{{ post.pk }}" class="hide-on-small-and-down hide-on-large-only post-head-s-down-l">
+                        {{ post.title|safe }}<i class="material-icons small">fiber_pin</i><i class="material-icons small">verified_user</i>
                     </h4>
-                    <h4 id="title-{{ post.pk }}" class="hide-on-med-and-up post-head-m-up" style="font-size: 5vw">
-                        {{ post.title|safe }}<i class="material-icons">fiber_pin</i> <i class="material-icons">verified_user</i>
+                    <h4 id="title-{{ post.pk }}" class="hide-on-med-and-up post-head-m-up">
+                        {{ post.title|safe }}<i class="material-icons tiny">fiber_pin</i> <i class="material-icons tiny">verified_user</i>
                     </h4>
                     <p class="row">
                         <span class="col s8 m8 l7">
+                        <!-- Author's Profile Picture -->
                             <a class="chip" href="{% url 'User Profile' post.author.username %} ">
                                 {% for user_profile in user_profiles %}
                                     {% if user_profile.user == post.author %}
@@ -37,17 +40,20 @@
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}
-                                <span class="hide-on-med-and-down" style="font-size: 1.2vw">{{ post.author }}</span>
-                                <span class="hide-on-small-and-down hide-on-large-only" style="font-size: 1.5vw;">{{ post.author }}</span>
-                                <span class="hide-on-med-and-up" style="font-size: 3.5vw">{{ post.author }}</span>
+                            <!-- Author's name -->
+                                <span class="hide-on-med-and-down post-head-m-down-author">{{ post.author }}</span>
+                                <span class="hide-on-small-and-down hide-on-large-only post-head-s-down-l-author">{{ post.author }}</span>
+                                <span class="hide-on-med-and-up post-head-m-up-author">{{ post.author }}</span>
                             </a>
                         </span>
-                        <span class="col s4 m4 l4 hide-on-med-and-down" style="font-size: 1.20vw">{{ post.published|timesince }} ago.</span>
-                        <span class="col s4 m4 l4 hide-on-small-and-down hide-on-large-only" style="font-size: 1.80vw;">{{ post.published|timesince }} ago.</span>
-                        <span class="col s4 m4 l4 hide-on-med-and-up" style="font-size: 2.60vw">{{ post.published|timesince }} ago.</span>
+                    <!-- Creation time -->
+                        <span class="col s4 m4 l4 hide-on-med-and-down post-head-m-down-time">{{ post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-small-and-down hide-on-large-only post-head-s-down-l-time">{{ post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-med-and-up post-head-m-up-time">{{ post.published|timesince }} ago.</span>
                     </p>
                 </li>
                 <li class="collection-item">
+                <!-- Tags related to post -->
                     Tags :
                     {% for post_tag in post.tags.all %}
                         <a class="chip" href="{% url 'index_tag' post_tag.name %}">{{ post_tag }}</a>
@@ -58,7 +64,7 @@
     {#                    {{ postpost_content|safe|truncatewords:50 }}#}
     {#                    <a class="read-more-btn" href="#">Show more</a>#}
     {#                </div>#}
-
+                    <!-- Post content -->
                     <div class="expanded-content">
                         {{ post.post_content|safe|truncatewords:150 }}
                         <a href="{% url 'post_detail' post.slug %}" target="_blank">Post detail.</a>
@@ -68,6 +74,7 @@
                 <li class="collection-item row" id="like-{{ post.pk }}">
                     {% if user == post.author %}
                         <div class="col s4 m4 l4 center">
+                        <!-- Like button -->
                             <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
                                 {{ post.likes.count }}
                                 {% if user in post.likes.all %}
@@ -78,6 +85,7 @@
                             </a>
                         </div>
                         <div class="col s4 m4 l4 center">
+                        <!-- Comment Button -->
                             <a class="btn-flat comment-display-btn light-blue white-text" href="#">
                                 <i class="material-icons large">comment</i>
                             </a>
@@ -86,6 +94,7 @@
 
                         <form action="{% url 'ajax_delete_post' %}" class="post-del-form" method="get" data-from="home" data-pk="{{ post.pk }}">
                             <div class="col s4 m4 l4 center">
+                                <!-- Delete post button -->
                                 <a class="btn-flat red white-text modal-trigger" href="#delete-post-modal-{{ post.pk }}"><i class="material-icons">delete</i></a>
                             </div>
 
@@ -109,7 +118,9 @@
 
 
                     {% elif user.is_authenticated %}
+                    {# User is logged in but is not the post author #}
                         <div class="col s6 m6 l6 center">
+                        <!-- Like button -->
                             <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
                                 {{ post.likes.count }}
                                 {% if user in post.likes.all %}
@@ -120,11 +131,13 @@
                             </a>
                         </div>
                         <div class="col s6 m6 l6 center">
+                        <!-- Comment button -->
                             <a class="btn-flat comment-display-btn light-blue white-text" href="#">
                                 <i class="material-icons large">comment</i>
                             </a>
                         </div>
                     {% else %}
+                    {# User is not logged in #}
                         <div class="center">
                             <a class="btn-flat comment-display-btn light-blue white-text" href="#">
                                 <i class="material-icons large">comment</i>
@@ -132,9 +145,10 @@
                         </div>
                     {% endif %}
                 </li>
-
-                <li class="collection-item comment-display" > {# style="display: none;"> #}
+                {# Comment Section #}
+                <li class="collection-item comment-display" >
                         {% if user.is_authenticated %}
+                            <!-- Post comment CKEditor Textbox -->
                             <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" data-type="comment">
                                 {% csrf_token %}
                                 <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
@@ -153,6 +167,7 @@
                                 {% if comment.post.id == post.id %}
 
                                         <blockquote>
+                                        <!-- Comment content -->
                                         {{ comment.comment_text|safe }}
                                             <footer>
                                             via -
@@ -166,8 +181,10 @@
                                                             {% endif %}
                                                         {% endif %}
                                                     {% endfor %}
+                                                <!-- Comment author -->
                                                     {{ comment.user }}
                                                 </a>
+                                                <!-- Creation time -->
                                                     | {{ comment.timestamp|timesince }} ago |
                                                     {% if comment.children.count > 1 %}
                                                         {{ comment.children.count }} Replies |
@@ -176,11 +193,12 @@
                                                     {% endif %}
                                                     <a class="comment-reply-btn" href="#">Reply</a>
                                             </footer>
-
+                                            {# Replies started #}
                                             <div class="comment-reply">
                                                 <div id="reply-{{ post.pk }}-{{ comment.pk }}">
                                                     {% for child_comment in comment.children %}
                                                             <blockquote>
+                                                            <!-- Reply content -->
                                                             {{ child_comment.comment_text|safe }}
                                                                 <footer>
                                                                 via -
@@ -194,9 +212,11 @@
                                                                                 {% endif %}
                                                                             {% endif %}
                                                                         {% endfor %}
+                                                                    <!-- Reply author -->
                                                                         {{ child_comment.user }}
                                                                     </a>
-                                                                    <span id="comment-timestamp" style="color: #0f74a8;">
+                                                                    <span class="comment-timestamp">
+                                                                        <!-- Reply creation time -->
                                                                         | {{ child_comment.timestamp|timesince }} ago
                                                                     </span>
                                                                 </footer>
@@ -205,6 +225,7 @@
                                                     {% endfor %}
                                                 </div>
                                                 {% if user.is_authenticated %}
+                                                    <!-- Reply CKEditor textbox -->
                                                     <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" comment-pk="{{ comment.pk }}" data-type="reply">
                                                         {% csrf_token %}
                                                         <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
@@ -233,25 +254,29 @@
         {#      </li>#}
             </ul>
         {% endif %}
+        {% endif %}
     {% endfor %}
 </div>
     {# Normal Posts #}
 <div class="normal-posts">
     {% for post in posts %}
+        {% if not post.deleted %}
         {% if post.is_pinned is False %}
             <ul class="collection with-header" id="home-post-{{ post.pk }}">
                 <li class="collection-header">
-                    <h4 id="title-{{ post.pk }}" class="hide-on-med-and-down post-head-m-down" style="font-size: 3vw">
+                <!-- Post title -->
+                    <h4 id="title-{{ post.pk }}" class="post-head-m-down hide-on-med-and-down" style="font-size: 3vw;">
                         {{ post.title }}<i class="material-icons">verified_user</i>
                     </h4>
-                    <h4 id="title-{{ post.pk }}" class="hide-on-small-and-down hide-on-large-only post-head-s-down-l" style="font-size: 4vw">
-                        {{ post.title }}<i class="material-icons">verified_user</i>
+                    <h4 id="title-{{ post.pk }}" class="hide-on-small-and-down hide-on-large-only post-head-s-down-l">
+                        {{ post.title }}<i class="material-icons small">verified_user</i>
                     </h4>
-                    <h4 id="title-{{ post.pk }}" class="hide-on-med-and-up post-head-m-up" style="font-size: 5vw">
-                        {{ post.title }}<i class="material-icons">verified_user</i>
+                    <h4 id="title-{{ post.pk }}" class="hide-on-med-and-up post-head-m-up">
+                        {{ post.title }}<i class="material-icons tiny">verified_user</i>
                     </h4>
                     <p class="row">
                         <span class="col s8 m8 l7">
+                        <!-- Author profile picture -->
                             <a class="chip" href="{% url 'User Profile' post.author.username %} ">
                                 {% for user_profile in user_profiles %}
                                     {% if user_profile.user == post.author %}
@@ -260,17 +285,20 @@
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}
-                                <span class="hide-on-med-and-down" style="font-size: 1.2vw">{{ post.author }}</span>
-                                <span class="hide-on-small-and-down hide-on-large-only" style="font-size: 1.5vw;">{{ post.author }}</span>
-                                <span class="hide-on-med-and-up" style="font-size: 3.5vw">{{ post.author }}</span>
+                            <!-- Post author -->
+                                <span class="hide-on-med-and-down post-head-m-down-author">{{ post.author }}</span>
+                                <span class="hide-on-small-and-down hide-on-large-only post-head-s-down-l-author">{{ post.author }}</span>
+                                <span class="hide-on-med-and-up post-head-m-up-author">{{ post.author }}</span>
                             </a>
                         </span>
-                        <span class="col s4 m4 l4 hide-on-med-and-down" style="font-size: 1.20vw">{{ post.published|timesince }} ago.</span>
-                        <span class="col s4 m4 l4 hide-on-small-and-down hide-on-large-only" style="font-size: 1.80vw;">{{ post.published|timesince }} ago.</span>
-                        <span class="col s4 m4 l4 hide-on-med-and-up" style="font-size: 2.60vw">{{ post.published|timesince }} ago.</span>
+                    <!-- Post creation time -->
+                        <span class="col s4 m4 l4 hide-on-med-and-down post-head-m-down-time">{{ post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-small-and-down hide-on-large-only post-head-s-down-l-time">{{ post.published|timesince }} ago.</span>
+                        <span class="col s4 m4 l4 hide-on-med-and-up post-head-m-up-time">{{ post.published|timesince }} ago.</span>
                     </p>
                 </li>
                 <li class="collection-item">
+                <!-- Tags related to post -->
                     Tags :
                     {% for post_tag in post.tags.all %}
                         <a class="chip" href="{% url 'index_tag' post_tag.name %}">{{ post_tag }}</a>
@@ -283,6 +311,7 @@
     {#                </div>#}
 
                     <div class="expanded-content">
+                        <!-- Post content -->
                         {{ post.post_content|safe|truncatewords:150 }}
                         <a href="{% url 'post_detail' post.slug %}" target="_blank">Post detail.</a>
     {#                    <a class="read-less-btn" href="#">Show less</a>#}
@@ -291,7 +320,7 @@
                 <li class="collection-item row" id="like-{{ post.pk }}">
                     {% if user == post.author %}
                         <div class="col s4 m4 l4 center">
-
+                        <!-- Like button -->
                             <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
                                 {{ post.likes.count }}
                                 {% if user in post.likes.all %}
@@ -302,6 +331,7 @@
                             </a>
                         </div>
                         <div class="col s4 m4 l4 center">
+                        <!-- Comment Button -->
                             <a class="btn-flat comment-display-btn light-blue white-text" href="#">
                                 <i class="material-icons large">comment</i>
                             </a>
@@ -310,6 +340,7 @@
 
                         <form action="{% url 'ajax_delete_post' %}" class="post-del-form" method="get" data-from="home" data-pk="{{ post.pk }}">
                             <div class="col s4 m4 l4 center">
+                                <!-- Delete Button -->
                                 <a class="btn-flat red white-text modal-trigger" href="#delete-post-modal-{{ post.pk }}"><i class="material-icons">delete</i></a>
                             </div>
 
@@ -333,7 +364,9 @@
 
 
                     {% elif user.is_authenticated %}
+                    {# If user is logged in but is not post's author #}
                         <div class="col s6 m6 l6 center">
+                        <!-- Like button -->
                             <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
                                 {{ post.likes.count }}
                                 {% if user in post.likes.all %}
@@ -345,11 +378,13 @@
                             </a>
                         </div>
                         <div class="col s6 m6 l6 center">
+                        <!-- Comment button -->
                             <a class="btn-flat comment-display-btn light-blue white-text" href="#">
                                 <i class="material-icons large">comment</i>
                             </a>
                         </div>
                     {% else %}
+                    {# If user is not logged in #}
                         <div class="center">
                             <a class="btn-flat comment-display-btn light-blue white-text" href="#">
                                 <i class="material-icons large">comment</i>
@@ -357,8 +392,11 @@
                         </div>
                     {% endif %}
                 </li>
-                <li class="collection-item comment-display" > {# style="display: none;"> #}
+
+                {# Comments started #}
+                <li class="collection-item comment-display" >
                         {% if user.is_authenticated %}
+                            <!-- Comment CKEditor textbox -->
                             <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" data-type="comment">
                                 {% csrf_token %}
                                 <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
@@ -377,8 +415,10 @@
                                 {% if comment.post.id == post.id %}
 
                                         <blockquote>
+                                        <!-- Comment content -->
                                         {{ comment.comment_text|safe }}
                                             <footer>
+                                            <!-- Comment author -->
                                             via -
                                                 <a class="chip" href="{% url 'User Profile' comment.user.username %} ">
                                                     {% for user_profile in user_profiles %}
@@ -392,6 +432,7 @@
                                                     {% endfor %}
                                                     {{ comment.user }}
                                                 </a>
+                                            <!-- Comment creation date -->
                                                     | {{ comment.timestamp|timesince }} ago |
                                                     {% if comment.children.count > 1 %}
                                                         {{ comment.children.count }} Replies |
@@ -401,12 +442,15 @@
                                                     <a class="comment-reply-btn" href="#">Reply</a>
                                             </footer>
 
-                                            <div class="comment-reply" id="">
+                                            {# Reply started #}
+                                            <div class="comment-reply">
                                                 <div id="reply-{{ post.pk }}-{{ comment.pk }}">
                                                     {% for child_comment in comment.children %}
                                                             <blockquote>
+                                                            <!-- Reply content -->
                                                             {{ child_comment.comment_text|safe }}
                                                                 <footer>
+                                                                <!-- Reply author -->
                                                                 via -
                                                                     <a class="chip" href="{% url 'User Profile' child_comment.user.username %} ">
                                                                         {% for user_profile in user_profiles %}
@@ -420,7 +464,8 @@
                                                                         {% endfor %}
                                                                         {{ child_comment.user }}
                                                                     </a>
-                                                                    <span id="comment-timestamp" style="color: #0f74a8;">
+                                                                    <span class="comment-timestamp">
+                                                                        <!-- Reply creation time -->
                                                                         | {{ child_comment.timestamp|timesince }} ago
                                                                     </span>
                                                                 </footer>
@@ -429,6 +474,7 @@
                                                     {% endfor %}
                                                 </div>
                                                 {% if user.is_authenticated %}
+                                                    <!-- Reply add CKEditor textarea -->
                                                     <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" comment-pk="{{ comment.pk }}" data-type="reply">
                                                         {% csrf_token %}
                                                         <script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
@@ -457,9 +503,11 @@
         {#      </li>#}
             </ul>
         {% endif %}
+        {% endif %}
     {% endfor %}
 </div>
 {% else %}
+    {#  If no posts are there  #}
     <div class="normal-post">
     <ul class="collection no-post-yet">
         <li class="collection-item">
@@ -469,6 +517,6 @@
     </div>
 
 {% endif %}
+
 {# Pagination #}
 {% include 'home/pagination.html' %}
-{# Pagination Ended #}
