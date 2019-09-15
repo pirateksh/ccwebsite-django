@@ -11,7 +11,7 @@ class PostForm(ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', 'post_content', 'tags']
+        fields = ['title', 'post_content', 'tags', 'is_scheduled', 'draft']
 
         #  Tried Earlier:
         # widgets = {

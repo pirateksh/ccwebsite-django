@@ -7,6 +7,8 @@ from django.contrib.auth import get_user_model
 from user_profile.models import UserProfile
 from post.models import Tags
 
+# Self made function imports
+from home.views import set_profile
 User = get_user_model()
 
 
@@ -16,9 +18,14 @@ def notification_view(request):
         This function will render notification detail view.
     """
     user = request.user
+    check_profile = None
+    flag = None
+    if user.is_authenticated:
+        flag = set_profile(request, user)
+        check_profile = UserProfile.objects.get(user=user)
 
     # Read notifications of current user
-    read_notif = user.notifications.read()
+    read_notif = user.notifications.read().filter()
 
     # Unread notifications of current user
     unread_notif = user.notifications.unread()
@@ -31,6 +38,12 @@ def notification_view(request):
         'unread_notif': unread_notif,
         'user_profile_qs': user_profile_qs,
     }
+
+    if check_profile is not None:
+        if not check_profile.is_profile_set:
+            # messages.info(request, f"Set your profile first.")
+            return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': request.user.username}))
+
     return render(request, 'notif/notifications_detail.html', context)
 
 

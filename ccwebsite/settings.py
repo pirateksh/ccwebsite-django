@@ -106,8 +106,8 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
     'social_core.backends.google.GoogleOpenId',  # for Google authentication
     'social_core.backends.google.GoogleOAuth2',  # for Google authentication
-    'social_core.backends.github.GithubOAuth2', # Auth Backend for github
-    'social_core.backends.facebook.FacebookOAuth2', # Auth backend for Facebook 
+    'social_core.backends.github.GithubOAuth2',  # Auth Backend for github
+    'social_core.backends.facebook.FacebookOAuth2',  # Auth backend for Facebook
     'django.contrib.auth.backends.ModelBackend',
     # 'allauth.account.auth_backends.AuthenticationBackend',
     'home.models.EmailBackend',
@@ -230,12 +230,12 @@ import dj_database_url
 prod_db = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
 
-############# UPDATES BY ANKIT #####################
-## Added Autherntications backends
-## Added django-social in installed apps
+# UPDATES BY ANKIT
+# Added Authentications backends
+# Added django-social in installed apps
 SOCIAL_AUTH_FACEBOOK_KEY = '2360055390879727'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '8a88b6421ac59a693c98d6d6cebca9f0'  # App Secret
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='805028969894-kc5htgcqh6iuf786cmqn69octu7tnn9p.apps.googleusercontent.com'  #Paste CLient Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='805028969894-kc5htgcqh6iuf786cmqn69octu7tnn9p.apps.googleusercontent.com'  # Paste Client Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'vn34vkK3zWSoz_8GZF2UELOo' #Paste Secret Key
 SOCIAL_AUTH_GITHUB_KEY = '1cabbbe97618f7ed2303'
 SOCIAL_AUTH_GITHUB_SECRET = 'bb99d6671a23f1b91e896e5fc85609d3e210ee56'

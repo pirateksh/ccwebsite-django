@@ -54,6 +54,7 @@
         <div class="col s12 m12 l9">
             <ul class="collection">
 
+            <!-- Personal Information Section -->
                 <div id="personal-info">
                     <li class="collection-item amber">
                         <h6><strong>Personal Information</strong></h6>
@@ -121,7 +122,9 @@
 
                     </li>
                 </div>
+            <!-- Personal Information Section Ended -->
 
+            <!-- Subscription Section -->
                 <div id="subscribed-tags">
                     <li class="collection-item amber">
                         <h6><strong>Subscribe</strong></h6>
@@ -130,7 +133,9 @@
                         Subsribe to tags
                     </li>
                 </div>
+                <!-- Subscription Section ended -->
 
+                <!-- Notification Section -->
                 <div id="notif">
                     <li class="collection-item amber">
                         <h6><strong>Notification</strong></h6>
@@ -147,47 +152,102 @@
                                             Unsubscribe form Email Notifications.
                                         </div>
                                         <div class="col s12 m4 l3 center">
-                                            <a class="btn" href="{% url 'unsubscribe' native_user.username %}">Unsubscribe</a>
+                                            <a class="btn" href="{% url 'subscription_toggle' native_user.username %}">Unsubscribe</a>
                                         </div>
                                     {% else %}
                                         <div class="col s12 m8 l9">
                                             Subscribe to get Email Notifications.
                                         </div>
                                         <div class="col s12 m4 l3 center">
-                                            <a class="btn" href="{% url 'subscribe' native_user.username %}">Subscribe</a>
+                                            <a class="btn" href="{% url 'subscription_toggle' native_user.username %}">Subscribe</a>
                                         </div>
                                     {% endif %}
                                 </div>
                                 <div class="divider"></div>
                             </div>
+                            <br>
+                            <div class="col s12 m2 l2">
+                                <strong>Sound Notification</strong>
+                            </div>
+                            <div class="col s12 m10 l10">
+                                <div class="row">
+                                    {% if profile.is_sound_on %}
+                                        <div class="col s12 m8 l9">
+                                            Sound notification is currently on. Turn off sound notification.
+                                        </div>
+                                        <div class="col s12 m4 l3 center">
+                                            <a class="btn" href="{% url 'sound_notification_toggle' native_user.username %}">Off</a>
+                                        </div>
+                                    {% else %}
+                                        <div class="col s12 m8 l9">
+                                            Sound notification is currently off. Turn on sound notification.
+                                        </div>
+                                        <div class="col s12 m4 l3 center">
+                                            <a class="btn" href="{% url 'sound_notification_toggle' native_user.username %}">On</a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="divider"></div>
+
+                            </div>
                         </div>
                     </li>
                 </div>
+                <!-- Notification Section Ended -->
 
+                <!-- Security Section -->
                 <div id="security">
                     <li class="collection-item amber">
                         <h6><strong>Security</strong></h6>
                     </li>
                     <li class="collection-item white black-text" id="security">
                         <div class="row">
-                            <div class="col s12 m2 l2">
-                                <strong>Change Password</strong>
-                            </div>
-                            <form class="col s12 m10 l10" method="post" action="{% url 'Change Password' native_user.username %}">
-                                <div class="row">
-                                    {% csrf_token %}
-                                    {{ password_change_form.new_password1|materializecss:'col s12 m7 l7, icon=fiber_new' }}
-                                    {{ password_change_form.new_password2|materializecss:'col s12 m5 l5, icon=find_replace' }}
-                                    {{ password_change_form.old_password|materializecss:'col s12 m6 l6, icon=find_in_page' }}
-                                    <div class="col s12 m6 l6 center">
-                                        <button class="btn" type="submit">Save</button>
-                                    </div>
+                            {% if profile.is_password_set is True %}
+                                    <!-- If user password already set -->
+                                <div class="col s12 m2 l2">
+                                    <strong>Change Password</strong>
                                 </div>
-                                <div class="divider"></div>
-                            </form>
+                                <form class="col s12 m10 l10" method="post" action="{% url 'Change Password' native_user.username %}">
+                                    <div class="row">
+                                        {% csrf_token %}
+                                        {{ password_change_form.new_password1|materializecss:'col s12 m7 l7, icon=fiber_new' }}
+                                        {{ password_change_form.new_password2|materializecss:'col s12 m5 l5, icon=find_replace' }}
+                                        {{ password_change_form.old_password|materializecss:'col s12 m6 l6, icon=find_in_page' }}
+                                        <div class="col s12 m6 l6 center">
+                                            <button class="btn" type="submit">Save</button>
+                                        </div>
+                                    </div>
+                                    <div class="divider"></div>
+                                </form>
+                            {% else %}
+                                    <!-- If user password NOT set already -->
+                                <div class="col s12 m2 l2">
+                                    <strong>Set Password</strong>
+                                </div>
+                                <form class="col s12 m10 l10" method="post" action="{% url 'set_password' native_user.username %}">
+                                    <div class="row">
+                                        {% csrf_token %}
+                                        <div class="input-field col s12 m10 l5">
+                                            <i class="material-icons prefix">fiber_new</i>
+                                            <input id="password1" type="password" class="validate" name="password1">
+                                            <label for="password1">Password</label>
+                                        </div>
+                                        <div class="input-field col s12 m10 l5">
+                                            <i class="material-icons prefix">find_replace</i>
+                                            <input id="password2" type="password" class="validate" name="password2">
+                                            <label for="password2">Re-enter Password</label>
+                                        </div>
+                                        <div class="col s12 m6 l2 center">
+                                            <button class="btn" type="submit">Save</button>
+                                        </div>
+                                    </div>
+                                    <div class="divider"></div>
+                                </form>
+                            {% endif %}
                         </div>
                     </li>
                 </div>
+            <!-- Security Section Ended -->
             </ul>
         </div>
     </div>

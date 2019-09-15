@@ -121,6 +121,9 @@
                             </a>
                         </div>
                     </li>
+                    <li>
+                        <a class="btn modal-trigger" href="#modal-drafts">Drafts</a>
+                    </li>
                 {% else %}
 {#                    <div class="row">#}
 {#                        <a class='dropdown-trigger btn-large waves-light col s10 m10 offset-s1 offset-m1' href='#' data-target='dropdown_edit'>Edit Profile</a>#}
@@ -140,7 +143,7 @@
 {#                        </ul>#}
 {#                    </div>#}
                     <li>
-                        <a class="btn disabled" href="{% url 'Drafts' user.username %}">Drafts</a>
+                        <a class="btn modal-trigger" href="#modal-drafts">Drafts</a>
                     </li>
                 {% endif %}
 
@@ -168,3 +171,5 @@
 {% include 'home/signup_modal.html' %}
 
 {% include 'user_profile/verify_post_modal.html' %}
+
+{% include 'user_profile/drafts_modal.html' %}

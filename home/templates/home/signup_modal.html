@@ -13,24 +13,24 @@
                     {{ form.email|materializecss:'s12 m12, icon=mail' }}
 
                     <!-- Choices -->
-                     <div class="input-field col s12 m12  ">
-                        <ul id="id_choice">
-                            <i class="material-icons prefix">mail</i>
-                            <label>Signup as:</label>
-                            <p>
-                                <label for="id_choice_0">
-                                    <input class="with-gap st_choice" type="radio" name="choice" value="teacher" required id="id_choice_0" checked/>
-                                    <span>Teacher</span>
-                                </label>
-                            </p>
-                            <p>
-                                <label for="id_choice_1">
-                                    <input class="with-gap st_choice" type="radio" name="choice" value="student" required id="id_choice_1" />
-                                    <span>Student</span>
-                                </label>
-                            </p>
-                        </ul>
-                     </div>
+{#                     <div class="input-field col s12 m12  ">#}
+{#                        <ul id="id_choice">#}
+{#                            <i class="material-icons prefix">mail</i>#}
+{#                            <label>Signup as:</label>#}
+{#                            <p>#}
+{#                                <label for="id_choice_0">#}
+{#                                    <input class="with-gap st_choice" type="radio" name="choice" value="teacher" required id="id_choice_0" checked/>#}
+{#                                    <span>Teacher</span>#}
+{#                                </label>#}
+{#                            </p>#}
+{#                            <p>#}
+{#                                <label for="id_choice_1">#}
+{#                                    <input class="with-gap st_choice" type="radio" name="choice" value="student" required id="id_choice_1" />#}
+{#                                    <span>Student</span>#}
+{#                                </label>#}
+{#                            </p>#}
+{#                        </ul>#}
+{#                     </div>#}
                     {{ form.password1|materializecss:'s12 m12, icon=account_circle' }}
                     {{ form.password2|materializecss:'s12 m12, icon=account_circle' }}
                 </div>

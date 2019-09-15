@@ -1,0 +1,50 @@
+{% load materializecss %}
+{% load static %}
+<div id="modal-drafts" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Drafts</h4>
+            <div class="row">
+            {% if drafts.count == 0 %}
+                You have no saved drafts right now.
+            {% else %}
+                <table class="striped">
+                    <thead>
+                        <tr>
+{#                            <th>Author</th>#}
+                            <th>Post Title</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="drafts-tbody">
+                        {% for draft in drafts %}
+                            <tr>
+{#                                <td>#}
+{#                                    <a class="chip" href="{% url 'User Profile' draft.author.username %}">#}
+{#                                    {% for user_profile in user_profiles %}#}
+{#                                        {% if user_profile.user == draft.author %}#}
+{#                                            {% if user_profile.avatar %}#}
+{#                                                <img src="{{ user_profile.avatar.url }}">#}
+{#                                            {% endif %}#}
+{#                                                {{ draft.author }}#}
+{#                                        {% endif %}#}
+{#                                    {% endfor %}#}
+{##}
+{##}
+{#                                    </a>#}
+{#                                </td>#}
+                                <td>{{ draft.title }}</td>
+                                <td>
+{#                                        <a><i class="material-icons">check_circle</i> </a>#}
+                                    <a class="tooltipped" data-tooltip="Detail view" href="{% url 'post_detail' draft.slug %}">
+                                        <i class="material-icons">remove_red_eye</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+
+            </div>
+        </div>
+</div>

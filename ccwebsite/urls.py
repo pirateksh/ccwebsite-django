@@ -16,8 +16,8 @@ urlpatterns = [
     path('profile/', include('user_profile.urls')),
     path('comments/', include('comments.urls')),
     path('notification/', include('notif.urls')),
-    # Account URLS
 
+    # Account URLS
     url(r'^password_reset/$', views.PasswordResetView.as_view(), name='password_reset'),
     url(r'^password_reset/done/$', views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
@@ -26,12 +26,14 @@ urlpatterns = [
     url(r'^reset/done/$', views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 
     # Extra URLS
-    # url(r'^accounts/', includes('allauth.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
     url('^inbox/notifications/', include(notifications.urls, namespace='notifications')),
-    # oauth/ url will be accessed by Soicial site link to take to their website.
-    url(r'^oauth/', include('social_django.urls', namespace='social')),  
+
+
+    # url(r'^accounts/', includes('allauth.urls')),
+    # oauth/ url will be accessed by Social site link to take to their website.
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

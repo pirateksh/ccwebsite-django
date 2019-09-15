@@ -20,6 +20,7 @@
     native_pending_posts: Pending posts of native user
     'read_notif': read notifications of logged in user,
     'unread_notif': unread notifications of logged in user,
+    'drafts : Drafts of native_user
 {% endcomment %}
 
 {% block title %}
@@ -58,7 +59,8 @@
             {# Middle part #}
             <div class="col s12 m8 l6">
                 <div class="add-post-user-profile">
-                    {% if user == native_user and not user.is_superuser %}
+                    {% if user == native_user %}
+{#                        and not user.is_superuser %}#}
                         {% include 'user_profile/add_post.html' %}
                     {% endif %}
                 </div>

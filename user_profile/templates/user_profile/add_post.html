@@ -10,16 +10,37 @@
                 <div class="collapsible-body">
                     {% csrf_token %}
                     {{ addpostform.media }}
-                    {{ addpostform.title|materializecss:'col s6 m6, icon=account_circle' }}
-                    {{ addpostform.tags|materializecss:'col s6 m6, icon=account_circle' }}
+                    {{ addpostform.title|materializecss:'col s6 m6, icon=title' }}
+                    {{ addpostform.tags|materializecss:'col s6 m6, icon=bookmark' }}
                     {{ addpostform.post_content }}
-{#                    <span class="tooltipped" data-position="top" data-tooltip="Tick to save post as draft.">#}
-{#                        {{ addpostform.draft|materializecss:'col s4 m4' }}#}
-{#                    </span>#}
+                    {% if user.is_superuser %}
+{#                     <div class="input-field col s12 m12  ">#}
+{#                        <ul id="">#}
+{#                            <label>Signup as:</label>#}
+{#                            <p>#}
+{#                                <label for="scheduled">#}
+{#                                    <input class="with-gap" type="checkbox" name="choice" value="" required id="scheduled"/>#}
+{#                                    <span>Scheduled</span>#}
+{#                                </label>#}
+{#                            </p>#}
+{#                        </ul>#}
+{#                     </div>#}
+                        {{ addpostform.is_scheduled|materializecss:'col s6 m6 l6' }}
+                        {{ addpostform.draft|materializecss:'col s6 m6 l6' }}
+                    {% else %}
+                        {{ addpostform.draft|materializecss:'col s12 m12 l12' }}
+                    {% endif %}
+                <br><br><br>
+{#                    <div class="tooltipped" data-position="top" data-tooltip="Tick to save post as draft.">#}
+
+{#                    </div>#}
 {#                    {{ addpostform.post_on_date|materializecss:'col s8 m8, icon=account_circle' }}#}
-                    <button class="btn waves-light" type="submit" name="action">Post
+                    <button class="btn waves-light" type="submit" name="action" value="post">Post
                         <i class="material-icons right">send</i>
                     </button>
+{#                    <button class="btn waves-light" type="submit" name="action" value="draft">Save as Draft#}
+{#                        <i class="material-icons right">drafts</i>#}
+{#                    </button>#}
                 </div>
             </li>
         </ul>

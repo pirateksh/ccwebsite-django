@@ -59,16 +59,24 @@ def ajax_add_post(request):
         Function to add post and send it for approval using AJAX.
     """
     if request.method == "POST":
+
         # Title of post
         title = request.POST['title']
+
         # Tags, appended to each other
         tags_str = request.POST['tags']
         tags_str = str(tags_str)
+
         # Post content
         post_content = request.POST['post_content']
+
+        # Whether this post is draft or not
+        is_draft = request.POST['is_draft']
+
         # Current user and his/her User Profile
         user = request.user
         user_profile = get_object_or_404(UserProfile, user=user)
+
         # All tags
         tags_qs = Tags.objects.all()
 
@@ -95,21 +103,37 @@ def ajax_add_post(request):
 
         admin = User.objects.get(username="admin")
 
-        # Notifications
-        notify.send(
-                user_profile,
-                recipient=admin,
-                verb='requested approval to post.',
-                target=post,
-                dp_url=user_profile.avatar.url,
-                prof_url=reverse("User Profile", kwargs={'username': user.username}),
-                post_url=reverse("post_detail", kwargs={'slug': post.slug}),
-                actor_name=user_profile.user.first_name,
-                timestamp_=timesince(timezone.now()),
-        )
+        # URLs of view
+        post_url = reverse("post_detail", kwargs={'slug': post.slug})
+        profile_url = reverse("User Profile", kwargs={'username': post.author.username})
+        avatar_url = user_profile.avatar.url
+
+        if is_draft == 'true':
+            post.draft = True
+            post.save()
+            result = "DR"
+        else:
+            # Notifications
+            result = "SS"
+            notify.send(
+                    user_profile,
+                    recipient=admin,
+                    verb='requested approval to post.',
+                    target=post,
+                    dp_url=user_profile.avatar.url,
+                    prof_url=reverse("User Profile", kwargs={'username': user.username}),
+                    post_url=post_url,
+                    actor_name=user_profile.user.first_name,
+                    timestamp_=timesince(timezone.now()),
+            )
 
         response_data = {
-            'result': 'Post added successfully!',
+            'result': result,
+            'postTitle': post.title,
+            'postUrl': post_url,
+            'profileUrl': profile_url,
+            'avatarUrl': avatar_url,
+            'author': post.author.username,
         }
 
         return JsonResponse(response_data)
@@ -186,6 +210,8 @@ def ajax_edit_post(request):
         updated_title = request.POST['title']
         tags_str = request.POST['tags']
         updated_content = request.POST['post_content']
+        is_draft = request.POST['is_draft']
+
         # Fetching original post and all tags
         original_post_qs = Post.objects.filter(pk=pk)
         tags_qs = Tags.objects.all()
@@ -217,6 +243,26 @@ def ajax_edit_post(request):
             original_post.post_content = updated_content
             original_post.updated = timezone.now()
             updated = original_post.updated
+            print("I AM here!")
+            post_url = None
+            if (original_post.verify_status is -1) and (is_draft == 'false'):
+                original_post.draft = False
+                print("I was here!")
+                admin = User.objects.get(username="admin")
+                user_profile = UserProfile.objects.get(user=request.user)
+                post_url = reverse("post_detail", kwargs={'slug': original_post.slug}),
+                notify.send(
+                    user_profile,
+                    recipient=admin,
+                    verb='requested approval to post.',
+                    target=original_post,
+                    dp_url=user_profile.avatar.url,
+                    prof_url=reverse("User Profile", kwargs={'username': request.user.username}),
+                    post_url=post_url,
+                    actor_name=user_profile.user.first_name,
+                    timestamp_=timesince(timezone.now()),
+                )
+
             original_post.save()
             result = 'SS'
             like_url = reverse('like_toggle', kwargs={'slug': original_post.slug})
@@ -229,6 +275,7 @@ def ajax_edit_post(request):
             'postPK': pk,
             'updated': timesince(updated),
             'likeUrl': like_url,
+            'postUrl': post_url,
         }
 
         return JsonResponse(response_data)
@@ -304,7 +351,12 @@ def post_detail(request, slug):
 
     # Fetching post(using slug), post author, user profile of author
     # all user profiles, all comments and all tags.
-    post = get_object_or_404(Post, slug=slug)
+    post_qs = Post.objects.filter(slug=slug)
+    if post_qs:
+        post = post_qs.first()
+    else:
+        messages.info(request, f"This post does not exist.")
+        return HttpResponseRedirect(reverse('User Profile', kwargs={'username': request.user.username}))
     author = post.author
     author_profile = get_object_or_404(UserProfile, user=author)
     user_profiles = UserProfile.objects.all()

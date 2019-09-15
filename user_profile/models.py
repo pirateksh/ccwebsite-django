@@ -33,9 +33,16 @@ class UserProfile(models.Model):
     # Whether user is subscribed to email notifications
     is_subscribed = models.BooleanField(default=True)
 
+    # Whether sound notification is on or not.
+    is_sound_on = models.BooleanField(default=True)
+
+    # Whether password is set or not
+    is_password_set = models.BooleanField(default=False)
+
     # Whether user profile is set or not
     is_profile_set = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username
+
 

@@ -15,7 +15,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="verify-tbody">
                         {% for pending_post in pending_posts %}
                             <tr>
                                 <td>
@@ -24,8 +24,6 @@
                                         {% if user_profile.user == pending_post.author %}
                                             {% if user_profile.avatar %}
                                                 <img src="{{ user_profile.avatar.url }}">
-                                            {% else %}
-                                                <img src="{% static 'default-profile-picture.jpg' %}">
                                             {% endif %}
                                                 {{ pending_post.author }}
                                         {% endif %}
@@ -37,7 +35,7 @@
                                 <td>{{ pending_post.title }}</td>
                                 <td>
 {#                                        <a><i class="material-icons">check_circle</i> </a>#}
-                                    <a href="{% url 'post_detail' pending_post.slug %}">
+                                    <a class="tooltipped" data-tooltip="Detail view" href="{% url 'post_detail' pending_post.slug %}">
                                         <i class="material-icons">remove_red_eye</i>
                                     </a>
                                 </td>

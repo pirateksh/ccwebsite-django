@@ -69,6 +69,11 @@ $(function() {
 
 
 
+// AJAX for adding draft
+ function create_draft() {
+
+ }
+
 // Submit post on submit
 $('.post_form').on('submit', function(event){
     event.preventDefault();
@@ -76,7 +81,7 @@ $('.post_form').on('submit', function(event){
     create_post($(this));
 });
 
-// AJAX for posting
+// AJAX for adding post
 function create_post(this_) {
     //console.log("create post is working!"); // sanity check
     var url_ = this_.attr('action');
@@ -84,6 +89,8 @@ function create_post(this_) {
     var postContent = CKEDITOR.instances['id_post_content'].getData();
     postContent = $.trim(postContent);
     var selected = $('select[name="tags"] :selected');
+    var is_draft = $('#id_draft').is(':checked');
+    // alert(is_draft);
     var successRedirectURL = this_.attr('data-success');
     $.ajax({
         url : url_, // the endpoint
@@ -91,7 +98,8 @@ function create_post(this_) {
         data : {
             title: title.val(),
             tags: selected.text(),
-            post_content: postContent
+            post_content: postContent,
+            is_draft: is_draft
         }, // data sent with the post request
 
         // handle a successful response
@@ -257,9 +265,59 @@ function create_post(this_) {
             //     location.href =
             // }
             // location.href = successRedirectURL;
-
-            addToast("Approval pending! Check status from your profile!");
             $('.post_form').trigger("reset");
+            var tbody;
+            var tbody2;
+            if(json.result === 'SS') {
+                addToast("Approval pending! Check status from your profile!");
+                tbody = $('.pending-tbody');
+                tbody.append(
+                    "<tr>" +
+                    "<td>" + json.postTitle + "</td>" +
+                    "<td>" +
+                        "<a class='tooltipped' data-tooltip='Detail view' href='" + json.postUrl + "'>" +
+                            "<i class='material-icons'>remove_red_eye</i> " +
+                        "</a>" +
+                    "</td>" +
+                    "</tr>"
+                );
+
+                tbody2 = $('.verify-tbody');
+                tbody2.append(
+                    "<tr>" +
+                        "<td>" +
+                            "<a class='chip' href='" + json.profileUrl + "'>" +
+                                "<img alt='Avatar' src='" + json.avatarUrl + "'>" +
+                                json.author +
+                            "</a>" +
+                        "</td>" +
+                        "<td>" + json.postTitle + "</td>" +
+                        "<td>" +
+                            "<a class='tooltipped' data-tooltip='Detail view' href='" + json.postUrl + "'>" +
+                                "<i class='material-icons'>remove_red_eye</i> " +
+                            "</a>" +
+                        "</td>" +
+                    "</tr>"
+                );
+
+            } else if (json.result === 'DR') {
+                addToast("Post added to your drafts!");
+                tbody = $('.drafts-tbody');
+                tbody.append(
+                    "<tr>" +
+                        "<td>"+ json.postTitle +"</td>" +
+                        "<td>" +
+                            "<a class='tooltipped' data-tooltip='Detail view' href='" + json.postUrl + "'>" +
+                                "<i class='material-icons'>remove_red_eye</i> " +
+                            "</a> " +
+                        "</td>" +
+                    "</tr>"
+                );
+            } else {
+                addToast('Oops! We have encountered an error. Try Again!');
+            }
+
+
         },
 
         // handle a non-successful response
@@ -473,12 +531,11 @@ $('.post-del-form').submit(function (event) {
 
 // Edit post
 $('.edit-btn').click(function (event) {
-
+// DO ONSUBMIT HERE
     var this_ = $(this);
     var postPK = this_.attr('data-pk');
     var postData = this_.attr('data-val');
     CKEDITOR.instances['id_post_content_' + postPK].setData(postData);
-
     $('#post-edit-form-' + postPK).submit(function (e) {
         e.preventDefault();
         var form = $(this);
@@ -487,6 +544,9 @@ $('.edit-btn').click(function (event) {
         var updatedTags = $('#tags-edit-' + postPK).children().filter(':selected').text();
         //alert(updatedTags);
         var updatedContent = CKEDITOR.instances['id_post_content_' + postPK].getData();
+        var draft = $('#id_draft');
+        var is_draft = draft.is(':checked');
+        // alert(is_draft);
         $.ajax({
             url: url,
             type: 'POST',
@@ -495,6 +555,7 @@ $('.edit-btn').click(function (event) {
                 title: updatedTitle.val(),
                 tags: updatedTags,
                 post_content: updatedContent,
+                is_draft: is_draft,
             },
             success: function (json) {
 
@@ -516,13 +577,16 @@ $('.edit-btn').click(function (event) {
 
                     ulCollection.children('#p').html(json.content);
                     CKEDITOR.instances['id_post_content_' + postPK].setData(json.content);
-
                     var elem = $('#edit-post-modal-' + postPK);
                     var instance = M.Modal.getInstance(elem);
                     instance.close();
                     addToast('Post edited successfully!');
                     $('#post-edit-form-' + postPK).trigger("reset");
-
+                    if (is_draft === false) {
+                        draft.removeAttr('checked');
+                        draft.prop('disabled', true);
+                        location.href = json.postUrl;
+                    }
                 } else if (json.result === 'ERR') {
                     addToast('Oops! We have encountered an error. Try Again!');
                 }

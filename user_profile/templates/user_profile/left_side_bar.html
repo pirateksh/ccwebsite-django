@@ -1,5 +1,6 @@
 {% load static %}
 {% load notifications_tags %}
+{% load has_group %}
 {% notifications_unread as unread_count %}
 {% live_notify_badge as live_unread_count %}
 <ul class="collection">
@@ -20,13 +21,20 @@
                 <i class="material-icons">edit</i>
             </a>
         </li>
+        {% if user|has_group:'Teacher' %}
         <li class="collection-item amber lighten-1">
+            <a class="btn-flat modal-trigger" href="">
+                Permissions
+            </a>
+        </li>
+        {% endif %}
+        <li class="collection-item amber lighten-2">
             <a class="modal-trigger btn-flat" href="#modal-pending-posts">
                 Pending Posts <span class="new badge red">{{ native_pending_posts.count }}</span>
             </a>
         </li>
         <li class="collection-item amber lighten-2">
-            <a class="btn-flat" href="{% url 'Drafts' user.username %}" disabled>
+            <a class="btn-flat modal-trigger" href="#modal-drafts">
                 Drafts
             </a>
         </li>
@@ -38,6 +46,13 @@
                 <i class="material-icons">edit</i>
             </a>
         </li>
+
+        <li class="collection-item amber lighten-1">
+            <a class="btn-flat modal-trigger" href="#modal-ask-perm">
+                Ask Permission
+            </a>
+        </li>
+
         <li class="collection-item amber lighten-1">
             <a class="modal-trigger btn-flat" href="#modal-verify-posts">
                 Verify Posts
@@ -52,6 +67,11 @@
                         {{ pending_posts.count }}
                     </span>
 {#                {% endif %}#}
+            </a>
+        </li>
+        <li class="collection-item amber lighten-2">
+            <a class="btn-flat modal-trigger" href="#modal-drafts">
+                Drafts
             </a>
         </li>
     {% endif %}
@@ -74,3 +94,6 @@
         <a class="col s12 m12 l12 center btn" href="{% url 'User Profile' native_user.username %}">Reset</a>
     </li>
 </ul>
+
+
+{% include 'user_profile/drafts_modal.html' %}

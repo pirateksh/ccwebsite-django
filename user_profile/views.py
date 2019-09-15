@@ -2,7 +2,11 @@ from django.shortcuts import render, HttpResponse, HttpResponseRedirect, reverse
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash  # authenticate
+from django.contrib.auth.hashers import check_password, make_password
 from django.contrib.auth.decorators import login_required
+
+# Self made functions import
+from home.views import set_profile, is_number
 from post.views import page_maker
 
 # Imported Models
@@ -19,8 +23,6 @@ from home.forms import UserSignupForm
 from post.forms import PostForm
 from comments.forms import CommentForm
 
-# Create your views here.
-
 
 def user_profile(request, username, tag_name=None):
     """
@@ -28,25 +30,39 @@ def user_profile(request, username, tag_name=None):
     """
     # User whose profile is open
     native_user = get_object_or_404(User, username=username)
-
-    # Profile, posts and avatar of that user
     profile = get_object_or_404(UserProfile, user=native_user)
+
+    check_profile = None
+    flag = False
+
+    if request.user.is_authenticated:
+        check_profile = get_object_or_404(UserProfile, user=request.user)
+        if profile is check_profile:
+            flag = set_profile(request, native_user)
+            check_profile = get_object_or_404(UserProfile, user=request.user)
+
+    # Posts and avatar of that user
     native_posts = page_maker(request, Post, native_user, tag_filter=tag_name)
-    avatar_form = AvatarUploadForm()
+
+    # drafts = page_maker(request, Post, native_user, draft=True)
+    drafts = Post.objects.filter(author=native_user).filter(draft=True)
 
     # Fetching all User profiles, comments, tags, pending posts and
     # pending posts of native user
     user_profiles = UserProfile.objects.all()
     comments = Comment.objects.all()
     tags = Tags.objects.all()
-    pending_posts = Post.objects.filter(verify_status=-1)
-    native_pending_posts = pending_posts.filter(author=native_user)
+
+    # Filtering All pending posts and pending post of native user which are NOT drafts.
+    pending_posts = Post.objects.filter(verify_status=-1).filter(draft=False)
+    native_pending_posts = pending_posts.filter(author=native_user).filter(draft=False)
 
     # Comment form, user signup form, post adding form and password change form
     comment_form = CommentForm()
     form = UserSignupForm()
     addpostform = PostForm()
     password_change_form = PasswordChangeForm(user=native_user)
+    avatar_form = AvatarUploadForm()
 
     read_notif = None
     unread_notif = None
@@ -74,7 +90,13 @@ def user_profile(request, username, tag_name=None):
         'native_pending_posts': native_pending_posts,
         'read_notif': read_notif,
         'unread_notif': unread_notif,
+        'drafts': drafts,
     }
+
+    if check_profile is not None:
+        if not profile.is_profile_set:
+            messages.info(request, f"User profile not set")
+            return HttpResponseRedirect(reverse('Index'))
     return render(request, 'user_profile/user_profile.html', context)
 
 
@@ -174,29 +196,99 @@ def avatar_upload(request, username):
 
 
 @login_required
-def unsubscribe(request, username):
+def subscription_toggle(request, username):
     """
-        This function Un-subscribes user from receiving Email Notifications
+        This function toggles user's subscription of receiving Email Notifications
     """
     user = request.user
     profile = get_object_or_404(UserProfile, user=user)
-    profile.is_subscribed = False
+    if profile.is_subscribed:
+        profile.is_subscribed = False
+        messages.success(request, f"Unsubscribed from Email Notifications.")
+    else:
+        profile.is_subscribed = True
+        messages.success(request, f"Subscribed to Email Notifications.")
     profile.save()
-    messages.success(request, f"Unsubscribed from Email Notifications.")
     return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': username}))
+
+#
+# @login_required
+# def subscribe(request, username):
+#     """
+#         This function Subscribes user to receive Email Notifications
+#     """
+#     user = request.user
+#     profile = get_object_or_404(UserProfile, user=user)
+#     profile.is_subscribed = True
+#     profile.save()
+#     messages.success(request, f"Subscribed to Email Notifications.")
+#     return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': username}))
 
 
 @login_required
-def subscribe(request, username):
+def sound_notification_toggle(request, username):
     """
-        This function Subscribes user to receive Email Notifications
+        This function toggles Sound Notification option.
     """
     user = request.user
     profile = get_object_or_404(UserProfile, user=user)
-    profile.is_subscribed = True
+    if profile.is_sound_on:
+        profile.is_sound_on = False
+        messages.success(request, f"Sound notification turned Off.")
+    else:
+        profile.is_sound_on = True
+        messages.success(request, f"Sound notification turned On.")
     profile.save()
-    messages.success(request, f"Subscribed to Email Notifications.")
     return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': username}))
+
+
+# Security Section Started
+
+
+def set_password(request, username):
+    """
+        This functions sets Password of user who have logged in through Social Account.
+    """
+    if request.method == "POST":
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+
+        # Changing to Lower Case
+        username_lower = username.lower()
+        pass_lower = password1.lower()
+        fname_lower = request.user.first_name.lower()
+        lname_lower = request.user.last_name.lower()
+
+        # Checks for password.
+        if password1 != password2:
+            messages.error(request, f"Passwords did not match. Try Again!")
+            return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': username}))
+        if is_number(pass_lower):
+            messages.error(request, f"Passwords can't ne entirely numeric.")
+            return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': username}))
+        if (pass_lower in username_lower) or (username_lower in pass_lower):
+            messages.error(request, f"Password can't be too similar to personal information.")
+            return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': username}))
+        if (fname_lower in pass_lower) or (pass_lower in fname_lower):
+            messages.error(request, f"Password can't be too similar to personal information.")
+            return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': username}))
+        if (lname_lower in pass_lower) or (pass_lower in lname_lower):
+            messages.error(request, f"Password can't be too similar to personal information.")
+            return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': username}))
+        if 'qwerty' in pass_lower:
+            messages.error(request, f"Passwords can't be too common.")
+            return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': username}))
+        if '123' in pass_lower:
+            messages.error(request, f"Passwords can't be too common.")
+            return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': username}))
+
+        request.user.password = make_password(password=password1)
+        request.user.save()
+        profile = UserProfile.objects.get(user=request.user)
+        profile.is_password_set =True
+        profile.save()
+        messages.success(request, f"Password has been set successfully.")
+        return HttpResponseRedirect(reverse('Index'))
 
 
 def change_password(request, username):
@@ -232,6 +324,10 @@ def change_password(request, username):
         'user_profiles': user_profiles,
     }
     return render(request, 'user_profile/edit_profile.html', context)
+
+
+def ask_perm(request, username):
+    return HttpResponse("You can ask permissino here!")
 
 
 def show_drafts(request, username):
