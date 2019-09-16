@@ -19,9 +19,10 @@
 {#<script src="{% static 'js_for_cropper/jquery-cropper.min.js' %}"></script>#}
 
 {#Bootstrap JS files#}
-{#<script src="{% static 'Bootstrap/js/bootstrap.min.js' %}"></script>#}
-{#<script src="{% static 'Bootstrap/js/bootstrap.js' %}"></script>#}
-
+{# <script src="{% static 'Bootstrap/js/bootstrap.min.js' %}"></script> #}
+{# <script src="{% static 'Bootstrap/js/bootstrap.js' %}"></script> #}
+<!-- Including below Bootstrap JS File solved the problem for Chart object not found -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
 {# Beep sound for notification  #}
 <audio id="notificationAudio">
@@ -130,3 +131,101 @@
         }
     </script>
 
+
+{# Below Script is Required to Show the Graph-Canvas in User Profile Page #}
+<script type="text/javascript">
+    var labels = [];
+    var data = [];
+    {% for result in quiz_results %}
+        labels.push('{{ result.quiz }}');
+        data.push('{{result.score}}');
+    {% endfor %}
+    var ctxB = document.getElementById("barChart").getContext('2d');
+    var myBarChart = new Chart(ctxB, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: '# Score',
+          data: data,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+</script>
+{# Client Side Hashing using Shaw-256 Algorithm #}
+    {# including the required js file for hashing #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
+{# for login form submission #}
+<script>
+    function submitfunlogin(obj) {
+        var usernameObj = document.getElementById('login_username');
+        var passwordObj = document.getElementById('login_password');
+        var usernameObjhidden = document.getElementById('login_username_hidden');
+        var passwordObjhidden = document.getElementById('login_password_hidden');
+        usernameObjhidden.value = usernameObj.value;
+        if('{{request.COOKIES.cook_pass}}' && '{{request.COOKIES.cook_user}}'){
+            if(passwordObj.value == '{{request.COOKIES.cook_pass}}'){
+                passwordObjhidden.value = passwordObj.value;
+            }
+            else{
+                var hashObj2  = new jsSHA("SHA-512","TEXT",{numRounds:1});
+                hashObj2.update(passwordObj.value);
+                var hashedpassword = hashObj2.getHash("HEX");
+                passwordObjhidden.value = hashedpassword;
+            }
+        }
+        else{
+            var hashObj2  = new jsSHA("SHA-512","TEXT",{numRounds:1});
+            hashObj2.update(passwordObj.value);
+            var hashedpassword = hashObj2.getHash("HEX");
+            passwordObjhidden.value = hashedpassword;
+        }              
+    }
+</script>
+{# for signup form submission #}
+<script>
+    function submitfunsignup(obj) {
+        var usernameObj = document.getElementById('id_username');
+        var password1Obj = document.getElementById('id_password1');
+        var password2Obj = document.getElementById('id_password2');
+        var usernameObjhidden = document.getElementById('id_username_hidden');
+        var password1Objhidden = document.getElementById('id_password1_hidden');
+        var password2Objhidden = document.getElementById('id_password2_hidden');
+        usernameObjhidden.value = usernameObj.value;
+        alert(usernameObjhidden.value);
+        var hashObj2  = new jsSHA("SHA-512","TEXT",{numRounds:1});
+        hashObj2.update(password1Obj.value);
+        var hashedpassword1 = hashObj2.getHash("HEX");
+        password1Objhidden.value = hashedpassword1;
+        var hashObj3  = new jsSHA("SHA-512","TEXT",{numRounds:1});
+        hashObj3.update(password2Obj.value);
+        var hashedpassword2 = hashObj3.getHash("HEX");
+        password2Objhidden.value = hashedpassword2;
+    }
+</script>

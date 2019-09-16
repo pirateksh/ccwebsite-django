@@ -1,0 +1,35 @@
+{%extends 'base.html' %}
+{%load static%}
+{%load quizapp_tags%}
+{%block content%}
+<div class="row">
+    <form class="col s12" action="" method="post">
+    	{% csrf_token %}
+      <div class="row">
+  		<div class="input-field col s12">
+          {{form.title}}
+          <label for="title">Quiz-Title</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s5">
+         {{form.no_of_ques}}
+          <label for="no_of_ques">No. Of Questions</label>
+        </div>
+        <div class="input-field col s5 right">
+          {{form.time_lim}}
+          <label for="tim_lim">Time Limit</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="instructions" name ="instr" class="materialize-textarea"></textarea>
+          <label for="instructions">Instructions</label>
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    	<i class="material-icons right">send</i>
+  	  </button>
+    </form>
+</div>
+{% endblock %}

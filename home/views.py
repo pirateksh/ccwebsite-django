@@ -91,6 +91,7 @@ def index(request, tag_filter=None):
         if not check_profile.is_profile_set:
             # messages.info(request, f"Set your profile first.")
             return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': request.user.username}))
+
     return render(request, 'home/index.html', context)
 
     # Tried earlier:
@@ -279,6 +280,11 @@ def ajax_signup_view(request):
             return HttpResponse('ERR')
 
         return HttpResponse('SS')
+
+def AddToCalendar(request,pk):
+    post = Post.objects.all().filter(id = pk).first()
+    event_url = "https://www.google.com/calendar/render?action=TEMPLATE&text="+str(post.title)+"&details="+str(post.post_content)
+    return redirect(event_url)
 
         # Tried earlier:
         # Creating profile
