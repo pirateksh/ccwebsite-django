@@ -5,7 +5,9 @@ from datetime import datetime
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericRelation
 from django.shortcuts import reverse
+from notifications.models import Notification
 # Create your models here.
 
 # Model manager
@@ -85,6 +87,18 @@ class Post(models.Model):
 
     # Whether post is scheduled or not
     is_scheduled = models.BooleanField(default=False)
+
+    # Making a generic relation with Notifications
+    # Why? So that Notification is also deleted when its Target post is deleted.
+    # target_content_type = models.ForeignKey(
+    #     ContentType,
+    #     related_name='post_target',
+    #     blank=True,
+    #     null=True,
+    #     on_delete=models.CASCADE
+    # )
+    # target_object_id = models.CharField(max_length=255, blank=True, null=True)
+    # notification = GenericRelation(Notification, content_type_field=target_content_type, object_id_field=target_object_id)
 
     # Initialising post manager
     objects = PostManager()

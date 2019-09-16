@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load materializecss %}
 {% load static %}
-{#{% load notifications_tags %}#}
 {% comment %}
     Context vars:
     profile: profile of native user
@@ -21,6 +20,7 @@
     'read_notif': read notifications of logged in user,
     'unread_notif': unread notifications of logged in user,
     'drafts : Drafts of native_user
+    'scheduled_posts' : Scheduled event related posts which have not been approved yet.
 {% endcomment %}
 
 {% block title %}

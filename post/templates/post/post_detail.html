@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load materializecss %}
 {% load static %}
+{% load has_group %}
 {% comment %}
     Context Variables:
     'post': post,
@@ -293,15 +294,60 @@
                     </li>
             {% elif post.verify_status == -1 %}
             {# If post is NOT yet verified by Admin #}
-                    {% if user.is_superuser %}
+                    {% if user.is_superuser and user != post.author %}
                         <li class="collection-item row">
                             <div class="col s6 m6 l6 center">
                                 <!-- Approve post button -->
-                                <a class="btn green" href="{% url 'approve_post' post.slug %}"><i class="material-icons">check</i> </a>
+                                <a class="btn green tooltipped" data-tooltip="Approve" href="{% url 'approve_post' post.slug %}"><i class="material-icons">check</i> </a>
                             </div>
                             <div class="col s6 m6 l6 center">
                                 <!-- Reject post button -->
-                                <a class="btn red" href="{% url 'reject_post' post.slug %}"><i class="material-icons">clear</i> </a>
+                                <a class="btn red tooltipped" data-tooltip="Reject" href="{% url 'reject_post' post.slug %}"><i class="material-icons">clear</i> </a>
+                            </div>
+                        </li>
+                    {% elif user|has_group:'Teacher' and post.is_scheduled is True and post.draft is True %}
+                        <!-- Approval Form -->
+                        <li class="collection-item">
+                            <div class="row">
+                                <form class="col s12 m12 l12 event-accept-form" method="post" action="{% url 'approve_event' user.username post.slug %}" data-slug="{{ post.slug }}">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <textarea id="approve-comment" name="approve_comment" class="materialize-textarea" placeholder="Remarks on approval" required></textarea>
+                                        </div>
+                                        <div class="col s6 m6 l6 center">
+                                            <!-- Approve event button -->
+                                            <button class="btn green tooltipped approve-event" data-tooltip="Approve event." type="submit">
+                                                <i class="material-icons">check</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <!-- Rejection Form -->
+                        <li class="collection-item">
+                            <div class="row">
+                                <form class="col s12 m12 l12 event-reject-form" method="post" action="{% url 'reject_event' user.username post.slug %}" data-slug="{{ post.slug }}">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <textarea id="reject-comment" name="reject_comment" class="materialize-textarea" placeholder="Remarks on rejection" required></textarea>
+                                        </div>
+                                        <div class="col s6 m6 l6 center">
+                                            <!-- Reject event button -->
+                                            <button class="btn red tooltipped reject-event" data-tooltip="Reject event." type="submit">
+                                                <i class="material-icons">cancel</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                    {% elif user|has_group:'Teacher' and post.is_scheduled is True and post.draft is False %}
+                        <li class="collection-item">
+                            <div class="row">
+                                <div class="col s12 m12 l2 center"><a class="btn-flat red white-text">Rejected</a></div>
                             </div>
                         </li>
                     {% elif user == post.author %}

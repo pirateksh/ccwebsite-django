@@ -4,13 +4,20 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator  # EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 from django.utils.timesince import timesince
 from django.utils import timezone
+from django.contrib.sites.models import Site
+from django.contrib.sites.shortcuts import get_current_site
+
+# from django.contrib.contenttypes.models import ContentType
+# from django.views.generic import RedirectView
+
+# Imports for Email
 from django.core import mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-# from django.contrib.contenttypes.models import ContentType
-# from django.views.generic import RedirectView
+
 
 # Imported Models
 from user_profile.models import UserProfile
@@ -70,8 +77,9 @@ def ajax_add_post(request):
         # Post content
         post_content = request.POST['post_content']
 
-        # Whether this post is draft or not
+        # Whether this post is draft/scheduled or not
         is_draft = request.POST['is_draft']
+        is_scheduled = request.POST['is_scheduled']
 
         # Current user and his/her User Profile
         user = request.user
@@ -108,25 +116,90 @@ def ajax_add_post(request):
         profile_url = reverse("User Profile", kwargs={'username': post.author.username})
         avatar_url = user_profile.avatar.url
 
-        if is_draft == 'true':
+        result = "ERR"
+
+        if is_scheduled == 'true':
+            if user.is_superuser:
+                post.is_scheduled = True
+                post.draft = True
+                post.save()
+
+                # Sending mail to In charge faculty for permission.
+                subject = 'Requesting permission for CC Club Event'
+
+                # Domain of link
+                domain = Site.objects.filter()
+                email_context = {
+                    'title': post.title,
+                    'slug': post.slug,
+                    'domain': domain.first(),
+                }
+                html_message = render_to_string('user_profile/permission_mail_template.html', context=email_context)
+                plain_message = strip_tags(html_message)
+                from_email = "noreply@ccwebsite"
+
+                # Faculties to which email is to be sent
+                faculties = User.objects.filter(groups__name='Teacher')
+                to = []
+                for faculty in faculties:
+                    to.append(faculty.email)
+                try:
+                    mail.send_mail(subject, plain_message, from_email, to, html_message=html_message)
+                except mail.BadHeaderError:
+                    messages.info(request, f"Invalid Header found, mail not sent!")
+
+                # Teacher group - Used to send notification in one go.
+                teachers_group = Group.objects.get(name='Teacher')
+                notify.send(
+                        # Sending notification to all teachers.
+                        user_profile,
+                        recipient=teachers_group,
+                        verb='requested permission for an event.',
+                        target=post,
+                        dp_url=user_profile.avatar.url,
+                        prof_url=reverse("User Profile", kwargs={'username': user.username}),
+                        post_url=post_url,
+                        actor_name=user_profile.user.first_name,
+                        timestamp_=timesince(timezone.now()),
+                )
+                result = "ISCH"
+            else:
+                messages.error(request, f"You are not authenticated for this request.")
+
+        # If post is draft
+        elif is_draft == 'true':
             post.draft = True
             post.save()
             result = "DR"
         else:
+            # Normal post
             # Notifications
-            result = "SS"
-            notify.send(
-                    user_profile,
-                    recipient=admin,
-                    verb='requested approval to post.',
-                    target=post,
-                    dp_url=user_profile.avatar.url,
-                    prof_url=reverse("User Profile", kwargs={'username': user.username}),
-                    post_url=post_url,
-                    actor_name=user_profile.user.first_name,
-                    timestamp_=timesince(timezone.now()),
-            )
-
+            if post.author.is_superuser:
+                result = "SSS"
+                # Self verified here only.
+                post.verify_status = 1
+                post.save()
+            else:
+                result = "SS"
+                notify.send(
+                        user_profile,
+                        recipient=admin,
+                        verb='requested approval to post.',
+                        target=post,
+                        dp_url=user_profile.avatar.url,
+                        prof_url=reverse("User Profile", kwargs={'username': user.username}),
+                        post_url=post_url,
+                        actor_name=user_profile.user.first_name,
+                        timestamp_=timesince(timezone.now()),
+                )
+        """
+            Response Acronyms:
+            SSS - Normal post by Superuser (Success)
+            SS - Normal post (Success)
+            DR - Draft
+            ISCH - Scheduled post
+            ERR - Error
+        """
         response_data = {
             'result': result,
             'postTitle': post.title,
@@ -134,6 +207,7 @@ def ajax_add_post(request):
             'profileUrl': profile_url,
             'avatarUrl': avatar_url,
             'author': post.author.username,
+            'verifyStatus': post.verify_status,
         }
 
         return JsonResponse(response_data)
@@ -220,7 +294,7 @@ def ajax_edit_post(request):
 
         # Setting edited time = Current time
         updated =timezone.now()
-
+        post_url = None
         if original_post_qs is None:
             # Post not found
             result = 'ERR'
@@ -244,27 +318,34 @@ def ajax_edit_post(request):
             original_post.updated = timezone.now()
             updated = original_post.updated
             print("I AM here!")
-            post_url = None
             if (original_post.verify_status is -1) and (is_draft == 'false'):
+                # Undrafting happening
                 original_post.draft = False
                 print("I was here!")
                 admin = User.objects.get(username="admin")
                 user_profile = UserProfile.objects.get(user=request.user)
                 post_url = reverse("post_detail", kwargs={'slug': original_post.slug}),
-                notify.send(
-                    user_profile,
-                    recipient=admin,
-                    verb='requested approval to post.',
-                    target=original_post,
-                    dp_url=user_profile.avatar.url,
-                    prof_url=reverse("User Profile", kwargs={'username': request.user.username}),
-                    post_url=post_url,
-                    actor_name=user_profile.user.first_name,
-                    timestamp_=timesince(timezone.now()),
-                )
+                if original_post.author.is_superuser:
+                    original_post.draft = False
+                    original_post.verify_status = 1
+                    original_post.save()
+                    result = 'SSS'
+                else:
+                    notify.send(
+                        user_profile,
+                        recipient=admin,
+                        verb='requested approval to post.',
+                        target=original_post,
+                        dp_url=user_profile.avatar.url,
+                        prof_url=reverse("User Profile", kwargs={'username': request.user.username}),
+                        post_url=post_url,
+                        actor_name=user_profile.user.first_name,
+                        timestamp_=timesince(timezone.now()),
+                    )
+                    result = 'SS'
 
             original_post.save()
-            result = 'SS'
+
             like_url = reverse('like_toggle', kwargs={'slug': original_post.slug})
 
         response_data = {
@@ -377,6 +458,24 @@ def post_detail(request, slug):
         'tags': tags,
         'form': form,
     }
+
+    faculties = User.objects.filter(groups__name='Teacher')
+    # print("Iwas out of everything")
+    if post.draft:
+        # print("I was in drafts.")
+        if post.is_scheduled:
+            # print("Iwas in is scheduled")
+            # If post is scheduled and draft, only admin and teachers can see it
+            if (request.user in faculties) or (request.user.username == 'admin'):
+                return render(request, 'post/post_detail.html', context)
+            else:
+                messages.info(request, f"Sorry, You can't see this yet.")
+                return HttpResponseRedirect(reverse('Index'))
+        elif post.author != request.user:
+            # If someone tries to access Drafts of others through URL.
+            messages.info(request, f"Sorry, You can't see this yet.")
+            return HttpResponseRedirect(reverse('Index'))
+
     return render(request, 'post/post_detail.html', context)
 
 
@@ -404,23 +503,41 @@ def approve_post(request, slug):
                 post.verify_status = 1
                 post.save()
                 admin_prof = get_object_or_404(UserProfile, user=request.user)
-                notify.send(
-                    # Sending notification to post author
-                    admin_prof,
-                    recipient=author,
-                    verb='approved this post.',
-                    target=post,
-                    dp_url=admin_prof.avatar.url,
-                    prof_url=reverse("User Profile", kwargs={'username': admin_prof.user.username}),
-                    post_url=reverse("post_detail", kwargs={'slug': post.slug}),
-                    actor_name=admin_prof.user.first_name,
-                    timestamp_=timesince(timezone.now()),
-                )
-                messages.success(request, f"You have approved a post.")
+                if post.author != request.user:
+                    # Admin wont send notification to itself.
+                    notify.send(
+                        # Sending notification to post author
+                        admin_prof,
+                        recipient=author,
+                        verb='approved this post.',
+                        target=post,
+                        dp_url=admin_prof.avatar.url,
+                        prof_url=reverse("User Profile", kwargs={'username': admin_prof.user.username}),
+                        post_url=reverse("post_detail", kwargs={'slug': post.slug}),
+                        actor_name=admin_prof.user.first_name,
+                        timestamp_=timesince(timezone.now()),
+                    )
+                    messages.success(request, f"You have approved a post.")
 
-                # For Email
-                if author_profile.is_subscribed:
-                    pass
+                    # For Email
+                    if author_profile.is_subscribed:
+
+                        subject = "Post approved by admin."
+                        domain = Site.objects.filter()
+                        email_context = {
+                            'domain': domain,
+                            'status': 'approved',
+                            'post': post,
+                        }
+                        html_message = render_to_string('user_profile/post_approval_mail_template.html', context=email_context)
+                        plain_message = strip_tags(html_message)
+                        from_email = "noreply@ccwebsite"
+                        to = str(author.email)
+                        try:
+                            mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+                        except mail.BadHeaderError:
+                            messages.info(request, f"Invalid Header found, mail not sent!")
+
             else:
                 messages.error(request, f"Oops! Something went wrong. Try again!")
         else:
@@ -456,23 +573,40 @@ def reject_post(request, slug):
                 post.verify_status = 0
                 post.save()
                 admin_prof = get_object_or_404(UserProfile, user=request.user)
-                notify.send(
-                    # Send notification to post author.
-                    admin_prof,
-                    recipient=author,
-                    verb='rejected this post.',
-                    target=post,
-                    dp_url=admin_prof.avatar.url,
-                    prof_url=reverse("User Profile", kwargs={'username': admin_prof.user.username}),
-                    post_url=reverse("post_detail", kwargs={'slug': post.slug}),
-                    actor_name=admin_prof.user.first_name,
-                    timestamp_=timesince(timezone.now()),
-                )
-                messages.success(request, f"You have rejected a post.")
+                if post.author != request.user:
+                    notify.send(
+                        # Send notification to post author.
+                        admin_prof,
+                        recipient=author,
+                        verb='rejected this post.',
+                        target=post,
+                        dp_url=admin_prof.avatar.url,
+                        prof_url=reverse("User Profile", kwargs={'username': admin_prof.user.username}),
+                        post_url=reverse("post_detail", kwargs={'slug': post.slug}),
+                        actor_name=admin_prof.user.first_name,
+                        timestamp_=timesince(timezone.now()),
+                    )
+                    messages.success(request, f"You have rejected a post.")
 
-                # For Email
-                if author_profile.is_subscribed:
-                    pass
+                    # For Email
+                    if author_profile.is_subscribed:
+
+                        subject = "Post rejected by admin."
+                        domain = Site.objects.filter()
+                        email_context = {
+                            'domain': domain,
+                            'status': 'rejected',
+                            'post': post,
+                        }
+                        html_message = render_to_string('user_profile/post_approval_mail_template.html',
+                                                        context=email_context)
+                        plain_message = strip_tags(html_message)
+                        from_email = "noreply@ccwebsite"
+                        to = str(author.email)
+                        try:
+                            mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+                        except mail.BadHeaderError:
+                            messages.info(request, f"Invalid Header found, mail not sent!")
             else:
                 messages.error(request, f"Oops! Something went wrong. Try again!")
         else:

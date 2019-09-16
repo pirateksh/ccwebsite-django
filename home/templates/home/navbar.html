@@ -23,6 +23,10 @@
         <ul class="right hide-on-med-and-down">
 
             {% if user.is_authenticated %}
+                <!-- Notifications -->
+                <li>
+                    <a class="btn tooltipped" data-tooltip="Notifications" href="{% url 'all_notifications' %}"><i class="material-icons">notifications</i> </a>
+                </li>
 
                 {% if user.is_superuser %}
                     <!-- Dashboard -->
@@ -31,6 +35,7 @@
                     </li>
 
                 {% endif %}
+
                 <!-- Home -->
                 <li>
                     <a class="btn tooltipped" data-tooltip="Home" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
@@ -39,6 +44,7 @@
                 <li>
                     <a class="btn tooltipped" data-tooltip="Profile" href="{% url "User Profile" user.username %}" ><i class="material-icons">person_pin</i></a>
                 </li>
+
                 <!-- Logout -->
                 <li>
                     <a class="btn red tooltipped" data-tooltip="Logout" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
@@ -64,37 +70,44 @@
 
         {# SideNav for Mobile view #}
         <ul id="nav-mobile" class="sidenav">
-
+            <div class="row">
             {% if user.is_authenticated %}
 
                 {% if user.is_superuser %}
 
                     {# If user is superuser #}
-                    <div class="row">
+
+                        <!-- Notifications -->
+                        <div class="col s3 m3 l3 center">
+                            <a class="btn-small tooltipped" data-tooltip="Notifications" href="{% url 'all_notifications' %}"><i class="material-icons">notifications</i> </a>
+                        </div>
                         <!-- Dashboard -->
-                        <div class="col s4 m4 l4 center">
+                        <div class="col s3 m3 l3 center">
                             <a class="btn-small tooltipped" data-tooltip="Dashboard" href="/admin"><i class="material-icons">dashboard</i></a>
                         </div>
                         <!-- User Profile -->
-                        <div class="col s4 m4 l4 center">
+                        <div class="col s3 m3 l3 center">
                             <a class="btn-small tooltipped" data-tooltip="Profile" href="{% url "User Profile" user.username %}" ><i class="material-icons">person_pin</i></a>
                         </div>
                         <!-- Logout -->
-                        <div class="col s4 m4 l4 center">
+                        <div class="col s3 m3 l3 center">
                             <a class="btn-small red tooltipped" data-tooltip="Logout" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
                         </div>
 
-                    </div>
 
                 {% else %}
 
                     {# If user is authenticated but NOT superuser #}
+                    <!-- Notifications -->
+                    <div class="col s4 m4 l4 center">
+                        <a class="btn-small tooltipped" data-tooltip="Notifications" href="{% url 'all_notifications' %}"><i class="material-icons">notifications</i> </a>
+                    </div>
                     <!-- User Profile -->
-                    <div class="col s6 m6 l6 center">
+                    <div class="col s4 m4 l4 center">
                         <a class="btn-small tooltipped" data-tooltip="Profile" href="{% url "User Profile" user.username %}" ><i class="material-icons">person_pin</i></a>
                     </div>
                     <!-- Logout -->
-                    <div class="col s6 m6 l6 center">
+                    <div class="col s4 m4 l4 center">
                         <a class="btn-small red tooltipped" data-tooltip="Logout" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
                     </div>
 
@@ -103,16 +116,17 @@
             {% else %}
 
                 <!-- Login -->
-                <li>
+                <div class="col s6 m6 l6 center">
                     <a class=" waves-light btn modal-trigger" href="#modal1">Login</a>
-                </li>
+                </div>
 
                 <!-- Sign Up -->
-                <li>
+                <div class="col s6 m6 l6 center">
                     <a class=" waves-light btn modal-trigger" href="#modal2">Signup</a>
-                </li>
+                </div>
 
             {% endif %}
+            </div>
         </ul>
         {# Trigger for mobile Side Nav #}
         <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>

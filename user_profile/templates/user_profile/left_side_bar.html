@@ -23,7 +23,7 @@
         </li>
         {% if user|has_group:'Teacher' %}
         <li class="collection-item amber lighten-1">
-            <a class="btn-flat modal-trigger" href="">
+            <a class="btn-flat modal-trigger" href="#modal-permissions">
                 Permissions
             </a>
         </li>
@@ -47,11 +47,11 @@
             </a>
         </li>
 
-        <li class="collection-item amber lighten-1">
-            <a class="btn-flat modal-trigger" href="#modal-ask-perm">
-                Ask Permission
-            </a>
-        </li>
+{#        <li class="collection-item amber lighten-1">#}
+{#            <a class="btn-flat modal-trigger" href="#modal-ask-perm">#}
+{#                Ask Permission#}
+{#            </a>#}
+{#        </li>#}
 
         <li class="collection-item amber lighten-1">
             <a class="modal-trigger btn-flat" href="#modal-verify-posts">
@@ -97,3 +97,5 @@
 
 
 {% include 'user_profile/drafts_modal.html' %}
+
+{% include 'user_profile/permission_modal.html' %}
