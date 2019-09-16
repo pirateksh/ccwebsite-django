@@ -345,13 +345,13 @@ $('#signup_form').on('submit', function(event){
 function create_user(successRedirectURL) {
     // console.log("create user is working!"); // sanity check
     var url = $('#signup_form').attr('action');
-    var username = $('#id_username');
+    var username = $('#id_username_hidden');
     var f_name = $('#id_first_name');
     var l_name = $('#id_last_name');
     var email = $('#id_email');
     var choice = $('.st_choice:checked');
-    var pass1 = $('#id_password1');
-    var pass2 = $('#id_password2');
+    var pass1 = $('#id_password1_hidden');
+    var pass2 = $('#id_password2_hidden');
 
     $.ajax({
         url : url, // the endpoint
@@ -438,8 +438,8 @@ $('#login_form').on('submit', function(event){
 function login_user(this_) {
     var successRedirectURL = this_.attr('data-success');
     var url = this_.attr('action');
-    var username = $('#login_username').val();
-    var password = $('#login_password').val();
+    var username = $('#login_username_hidden').val();
+    var password = $('#login_password_hidden').val();
     if($('#remember_me').is(":checked")){
         var remember_me = $('#remember_me').val();
     }

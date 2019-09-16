@@ -14,6 +14,16 @@
         </div>
     </li>
     <div class="divider"></div>
+        <li class="collection-item amber lighten-1">   
+            <a class="modal-trigger btn-flat" href="#modal-manage-calendar" >
+                Manage Calendar
+            </a>
+        </li>
+        <li class="collection-item amber lighten-1">   
+            <a class="modal-trigger btn-flat" href="#modal-quiz-performance" >
+                Quiz Performance
+            </a>
+        </li>
     {% if native_user == user and not user.is_superuser %}
         <li class="collection-item amber lighten-1">
             <a class="btn-flat" href="{% url 'edit_profile' user.username %}">

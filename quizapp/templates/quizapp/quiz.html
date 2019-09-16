@@ -1,0 +1,221 @@
+{%extends 'base.html' %}
+{%block content%}
+{%load static%}
+{%load quizapp_tags%}
+
+    <div class="row">
+
+      <div class="col s12 m4 l3">
+         <ul id="slide-out" class="sidenav sidenav-fixed" >
+    <li><div class="user-view">
+
+      <a href="#user"><img class="circle" src="{{user.profile.image.url}}"></a>
+      <a href="#name"><span class="white-text name">{{user.first_name}}</span></a>
+      <a href="#email"><span class="white-text email">{{user.username}}</span></a>
+    </div></li>
+    <li><a href="#!"><i class="material-icons">cloud</i>Access Questions:</a></li>
+    <!-- Needs Change -->
+    {% with numofques=quiz1.no_of_ques%}
+    {%for value in numofques|times%}
+    <li><a href="#!">Question {{forloop.counter}}</a></li>
+    {%endfor%}
+    {%endwith%}
+    <li><div class="divider"></div></li>
+  </ul>
+ <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+      </div>
+
+      <div class="col s12 m8 l9">
+
+      <div id='title'>
+        <h1>{{quiz1.title}}</h1>
+      </div>
+        <br/>
+        <div id='quiz'></div>
+        <div class='btn' id='next'><a href='#'>Next</a></div>
+        <div class='btn' id='prev'><a href='#'>Prev</a></div>
+        <div class='btn' id='start'> <a href='#'>Start Over</a></div>
+      </div>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, options);
+  });
+</script>
+<script type="text/javascript">
+    (function() {
+  var questions = [];
+  {%for question in questions%}
+  questions.push(
+    
+      {
+        question:"{{question.question}}",
+        {% get_options question as opt %}
+        {% get_ans question as ans %}
+        choices:["{{opt.0}}",
+                "{{opt.1}}",
+                "{{opt.2}}",
+                "{{opt.3}}"], 
+        {%if ans == '1'%}
+          // correctAnswer: "{{opt.0}}" // COoOOl!
+          correctAnswer: 1
+        {%elif ans ==  '2' %}
+          correctAnswer: 2
+        {%elif ans == '3'%}
+          correctAnswer: 3
+        {%elif ans == '4'%}
+          correctAnswer: 4
+        {%endif%}
+      }
+    );
+  {%endfor%}
+
+  
+  var questionCounter = 0; //Tracks question number
+  var selections = []; //Array containing user choices
+  var quiz = $('#quiz'); //Quiz div object
+  
+  // Display initial question
+  displayNext();
+  
+  // Click handler for the 'next' button
+  $('#next').on('click', function (e) {
+    e.preventDefault();
+    
+    // Suspend click listener during fade animation
+    if(quiz.is(':animated')) {        
+      return false;
+    }
+    choose();
+    
+    // If no user selection, progress is stopped
+    if (isNaN(selections[questionCounter])) {
+      alert('Please make a selection!');
+    } else {
+      questionCounter++;
+      displayNext();
+    }
+  });
+  
+  // Click handler for the 'prev' button
+  $('#prev').on('click', function (e) {
+    e.preventDefault();
+    
+    if(quiz.is(':animated')) {
+      return false;
+    }
+    choose();
+    questionCounter--;
+    displayNext();
+  });
+  
+  // Click handler for the 'Start Over' button
+  $('#start').on('click', function (e) {
+    e.preventDefault();
+    
+    if(quiz.is(':animated')) {
+      return false;
+    }
+    questionCounter = 0;
+    selections = [];
+    displayNext();
+    $('#start').hide();
+  });
+  
+  // Animates buttons on hover
+  $('.btn').on('mouseenter', function () {
+    $(this).addClass('active');
+  });
+  $('.btn').on('mouseleave', function () {
+    $(this).removeClass('active');
+  });
+  
+  // Creates and returns the div that contains the questions and 
+  // the answer selections
+  function createQuestionElement(index) {
+    var qElement = $('<div>', {
+      id: 'question'
+    });
+    
+    var header = $('<h2>Question ' + (index + 1) + ':</h2>');
+    qElement.append(header);
+    
+    var question = $('<p>').append(questions[index].question);
+    qElement.append(question);
+    
+    var radioButtons = createRadios(index);
+    qElement.append(radioButtons);
+    
+    return qElement;
+  }
+  
+  // Creates a list of the answer choices as radio inputs
+  function createRadios(index) {
+    var radioList = $('<ul>');
+    var item;
+    var input = '';
+    for (var i = 0; i < questions[index].choices.length; i++) {
+      item = $('<li>');
+      input = '<input type="radio" name="answer" value=' + i + ' />';
+      input += questions[index].choices[i];
+      item.append(input);
+      radioList.append(item);
+    }
+    return radioList;
+  }
+  
+  // Reads the user selection and pushes the value to an array
+  function choose() {
+    selections[questionCounter] = +$('input[name="answer"]:checked').val();
+  }
+  
+  // Displays next requested element
+  function displayNext() {
+    quiz.fadeOut(function() {
+      $('#question').remove();
+      
+      if(questionCounter < questions.length){
+        var nextQuestion = createQuestionElement(questionCounter);
+        quiz.append(nextQuestion).fadeIn();
+        if (!(isNaN(selections[questionCounter]))) {
+          $('input[value='+selections[questionCounter]+']').prop('checked', true);
+        }
+        
+        // Controls display of 'prev' button
+        if(questionCounter === 1){
+          $('#prev').show();
+        } else if(questionCounter === 0){
+          
+          $('#prev').hide();
+          $('#next').show();
+        }
+      }else {
+        var scoreElem = displayScore();
+        quiz.append(scoreElem).fadeIn();
+        $('#next').hide();
+        $('#prev').hide();
+        $('#start').show();
+      }
+    });
+  }
+  
+  // Computes score and returns a paragraph element to be displayed
+  function displayScore() {
+    var score = $('<p>',{id: 'question'});
+    
+    var numCorrect = 0;
+    for (var i = 0; i < selections.length; i++) {
+      if (selections[i]+1 === questions[i].correctAnswer) { 
+      // counting in selections is from 0 i.e. First option is 0
+        numCorrect++;
+      }
+    }
+    
+    score.append('You got ' + numCorrect + ' questions out of ' +
+                 questions.length + ' right!!!');
+    return score;
+  }
+})();
+</script>
+{%endblock%}

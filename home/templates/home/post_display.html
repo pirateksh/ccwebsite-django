@@ -22,12 +22,38 @@
                 <!-- Post title -->
                     <h4 id="title-{{ post.pk }}" class="hide-on-med-and-down post-head-m-down" style="font-size: 3vw;">
                         {{ post.title|safe }}<i class="material-icons">fiber_pin</i><i class="material-icons">verified_user</i>
+                        {%if post.is_scheduled%}
+                        {%with add_to_calendar="add-to-calendar"%}
+                        <a class="btn tooltipped" data-position="right" data-tooltip="Add to Google Calender" href="{%url add_to_calendar post.id %}"
+                        target="_blank">
+                            <i class="material-icons">assignment</i>
+                        </a>
+                    {%endwith%}                      
+                        {%endif%}
                     </h4>
+
                     <h4 id="title-{{ post.pk }}" class="hide-on-small-and-down hide-on-large-only post-head-s-down-l">
                         {{ post.title|safe }}<i class="material-icons small">fiber_pin</i><i class="material-icons small">verified_user</i>
+                        {%if post.is_scheduled%}
+                        {%with add_to_calendar="add-to-calendar"%}
+                        <a class="btn tooltipped" data-position="right" data-tooltip="Add to Google Calender" href="{%url add_to_calendar post.id %}"
+                        target="_blank">
+                            <i class="material-icons">assignment</i>
+                        </a>
+                    {%endwith%}                      
+                        {%endif%}
                     </h4>
+
                     <h4 id="title-{{ post.pk }}" class="hide-on-med-and-up post-head-m-up">
                         {{ post.title|safe }}<i class="material-icons tiny">fiber_pin</i> <i class="material-icons tiny">verified_user</i>
+                        {%if post.is_scheduled%}
+                        {%with add_to_calendar="add-to-calendar"%}
+                        <a class="btn tooltipped" data-position="right" data-tooltip="Add to Google Calender" href="{%url add_to_calendar post.id %}"
+                        target="_blank">
+                            <i class="material-icons">assignment</i>
+                        </a>
+                    {%endwith%}                      
+                        {%endif%}
                     </h4>
                     <p class="row">
                         <span class="col s8 m8 l7">
@@ -54,10 +80,12 @@
                 </li>
                 <li class="collection-item">
                 <!-- Tags related to post -->
+
                     Tags :
                     {% for post_tag in post.tags.all %}
                         <a class="chip" href="{% url 'index_tag' post_tag.name %}">{{ post_tag }}</a>
                     {% endfor %}
+
                 </li>
                 <li class="collection-item" id="p">
     {#                <div class="less-content">#}
@@ -267,12 +295,37 @@
                 <!-- Post title -->
                     <h4 id="title-{{ post.pk }}" class="post-head-m-down hide-on-med-and-down" style="font-size: 3vw;">
                         {{ post.title }}<i class="material-icons">verified_user</i>
+                    {%if post.is_scheduled%}
+                    {%with add_to_calendar="add-to-calendar"%}
+                        <a class="btn tooltipped" data-position="right" data-tooltip="Add to Google Calender" href="{%url add_to_calendar post.id %}"
+                        target="_blank">
+                            <i class="material-icons">assignment</i>
+                        </a>
+                    {%endwith%}                      
+                        {%endif%}
                     </h4>
+
                     <h4 id="title-{{ post.pk }}" class="hide-on-small-and-down hide-on-large-only post-head-s-down-l">
                         {{ post.title }}<i class="material-icons small">verified_user</i>
+                    {%if post.is_scheduled%}
+                        {%with add_to_calendar="add-to-calendar"%}
+                        <a class="btn tooltipped" data-position="right" data-tooltip="Add to Google Calender" href="#" 
+                        >
+                            <i class="material-icons">assignment</i>
+                        </a>
+                    {%endwith%}                     
+                    {%endif%}
                     </h4>
+
                     <h4 id="title-{{ post.pk }}" class="hide-on-med-and-up post-head-m-up">
                         {{ post.title }}<i class="material-icons tiny">verified_user</i>
+                    {%if post.is_scheduled%}
+                        {%with add_to_calendar="add-to-calendar"%}
+                        <a class="btn tooltipped" data-position="right" data-tooltip="Add to Google Calender" href="#" target="_blank">
+                            <i class="material-icons">assignment</i>
+                        </a>
+                    {%endwith%}                    
+                        {%endif%}
                     </h4>
                     <p class="row">
                         <span class="col s8 m8 l7">
@@ -303,6 +356,7 @@
                     {% for post_tag in post.tags.all %}
                         <a class="chip" href="{% url 'index_tag' post_tag.name %}">{{ post_tag }}</a>
                     {% endfor %}
+
                 </li>
                 <li class="collection-item" id="p">
     {#                <div class="less-content">#}

@@ -14,7 +14,10 @@ from django.contrib.auth.models import User
 from .models import UserProfile
 from comments.models import Comment
 from post.models import Post, Tags
-# from post.models import Post, Tags
+'''
+# Imported Models from quizapp to show the results:)
+'''
+from quizapp.models import UserQuizResult
 
 # Imported Forms
 from django.contrib.auth.forms import PasswordChangeForm
@@ -22,13 +25,35 @@ from .forms import AvatarUploadForm
 from home.forms import UserSignupForm
 from post.forms import PostForm
 from comments.forms import CommentForm
-
+'''Importing Stuff for Google Calendar API'''
+from .cal_setup import get_calendar_service
+import os.path
 
 def user_profile(request, username, tag_name=None):
     """
         This functions renders User Profile Page
     """
-    # User whose profile is open
+    service = get_calendar_service(request)
+    # Call the Calendar API
+    # print('Getting list of calendars')
+    if service:
+        cal_service_found = True     
+        calendars_result = service.calendarList().list().execute()
+
+        calendars = calendars_result.get('items', [])
+
+        if not calendars:
+            print('No calendars found.')
+        for calendar in calendars:
+            # print(calendar.get('primary'))# prints True only for the primary Calendar of User
+            if calendar.get('primary'):
+                summary = calendar['summary']
+                calendar_id = calendar['id']
+                timeZone = calendar['timeZone']
+                primary = "Primary" if calendar.get('primary') else ""
+                  # print(timeZone) # prints Asia/Kolkata
+                print("%s\t%s\t%s" % (summary, calendar_id, primary))
+        # User whose profile is open
     native_user = get_object_or_404(User, username=username)
     profile = get_object_or_404(UserProfile, user=native_user)
 
@@ -73,6 +98,7 @@ def user_profile(request, username, tag_name=None):
 
         # Unread notifications
         unread_notif = request.user.notifications.unread()
+    quiz_results = UserQuizResult.objects.all().filter(user=request.user)
 
     context = {
         'profile': profile,
@@ -91,12 +117,16 @@ def user_profile(request, username, tag_name=None):
         'read_notif': read_notif,
         'unread_notif': unread_notif,
         'drafts': drafts,
+        'quiz_results':quiz_results
     }
 
     if check_profile is not None:
         if not profile.is_profile_set:
             messages.info(request, f"User profile not set")
             return HttpResponseRedirect(reverse('Index'))
+    if 'cal_service_found' in locals():
+        new_to_context = {'cal_service_found':1,'calendar_id': calendar_id,'timeZone':timeZone}
+        context.update(new_to_context)
     return render(request, 'user_profile/user_profile.html', context)
 
 
