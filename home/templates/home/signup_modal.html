@@ -8,6 +8,7 @@
                 <div class="row">
                 {% csrf_token %}
                     {{ form.username|materializecss:'s12 m12, icon=account_circle' }}
+                    <input type="hidden" id="id_username_hidden">
                     {{ form.first_name|materializecss:'s6 m6, icon=account_circle' }}
                     {{ form.last_name|materializecss:'s6 m6, icon=account_circle' }}
                     {{ form.email|materializecss:'s12 m12, icon=mail' }}
@@ -30,11 +31,13 @@
                         </ul>
                      </div>
                     {{ form.password1|materializecss:'s12 m12, icon=account_circle' }}
+                    <input type="hidden" id="id_password1_hidden">
                     {{ form.password2|materializecss:'s12 m12, icon=account_circle' }}
+                    <input type="hidden" id="id_password2_hidden">
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn waves-light" type="submit" name="action">Signup
+                <button class="btn waves-light" type="submit" name="action" onclick="submitfunsignup();">Signup
                         <i class="material-icons right">send</i>
                 </button>
             </div>

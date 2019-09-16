@@ -40,6 +40,7 @@ def index(request):
         'comments': comments,
         'comment_form': comment_form,
     }
+
     return render(request, 'home/index.html', context)
 
 
@@ -61,7 +62,7 @@ def index(request):
 
 def ajax_login_view(request):
     if request.method == "POST":
-        print(request.POST)
+        # print(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         remember_me = request.POST.get('remember_me')
@@ -255,4 +256,9 @@ def ajax_signup_view(request):
         profile = UserProfile(user=user_)
         profile.save()
         return HttpResponse('SS')
+
+def AddToCalendar(request,pk):
+    post = Post.objects.all().filter(id = pk).first()
+    event_url = "https://www.google.com/calendar/render?action=TEMPLATE&text="+str(post.title)+"&details="+str(post.post_content)
+    return redirect(event_url)
 

@@ -104,18 +104,9 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/right_side_bar.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/notif/templates/notif/navbar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
+            <state relative-caret-position="575">
               <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
             </state>
           </provider>
@@ -124,7 +115,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/navbar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
+            <state relative-caret-position="600">
               <caret line="24" column="155" selection-start-line="24" selection-start-column="155" selection-end-line="24" selection-end-column="155" />
             </state>
           </provider>
@@ -133,7 +124,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/left_side_bar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
+            <state relative-caret-position="175">
               <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
             </state>
           </provider>
@@ -142,8 +133,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/notif/templates/notif/notifications_detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2601">
-              <caret line="156" column="29" lean-forward="true" selection-start-line="156" selection-start-column="29" selection-end-line="156" selection-end-column="29" />
+            <state relative-caret-position="3900">
+              <caret line="156" column="29" selection-start-line="156" selection-start-column="29" selection-end-line="156" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -151,7 +142,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/post/templates/post/post_detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2575">
+            <state relative-caret-position="950">
               <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
             </state>
           </provider>
@@ -160,8 +151,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/post/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="39">
-              <caret line="118" column="78" lean-forward="true" selection-start-line="118" selection-start-column="78" selection-end-line="118" selection-end-column="78" />
+            <state relative-caret-position="2275">
+              <caret line="118" column="78" selection-start-line="118" selection-start-column="78" selection-end-line="118" selection-end-column="78" />
               <folding>
                 <element signature="e#0#95#0" expanded="true" />
               </folding>
@@ -169,10 +160,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/comments/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
+            <state relative-caret-position="3200">
               <caret line="146" column="83" selection-start-line="146" selection-start-column="83" selection-end-line="146" selection-end-column="83" />
               <folding>
                 <element signature="e#0#54#0" expanded="true" />
@@ -181,10 +172,15 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/home/cal_setup.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/comments/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="450">
               <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -196,7 +192,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/post/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
+            <state relative-caret-position="1725">
               <caret line="69" selection-start-line="69" selection-end-line="69" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -328,99 +324,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-              <item name="comments" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-              <item name="notif" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-              <item name="notif" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-              <item name="notif" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="notif" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-              <item name="post" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-              <item name="post" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-              <item name="post" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="post" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-              <item name="user_profile" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-              <item name="user_profile" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
-              <item name="user_profile" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="user_profile" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -544,17 +448,17 @@
       <workItem from="1567670956154" duration="8980000" />
       <workItem from="1567747671411" duration="8011000" />
       <workItem from="1567801057993" duration="41101000" />
+      <workItem from="1568478590283" duration="5000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="543928000" />
+    <option name="totallyTimeSpent" value="543933000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.102118" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10363086" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -604,13 +508,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/avatar_modal.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/post/templates/post/navbar.html" />
     <entry file="file://$PROJECT_DIR$/home/templates/css.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -713,15 +610,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/home/templates/pinax/notifications/notice_settings.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/home/templates/pinax/notifications/base.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/home/templates/pinax/notifications/email_body.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/pinax/notifications/notice_settings.html" />
+    <entry file="file://$PROJECT_DIR$/home/templates/pinax/notifications/base.html" />
+    <entry file="file://$PROJECT_DIR$/home/templates/pinax/notifications/email_body.txt" />
     <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/user_profile.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-313">
@@ -729,16 +620,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/post/signals/handlers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="43" lean-forward="true" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/post/signals/handlers.py" />
     <entry file="file://$PROJECT_DIR$/assets/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2372">
@@ -771,16 +653,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/notifications/includes/post_approval_request.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../djenv/Lib/site-packages/notifications/signals.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/notifications/includes/post_approval_request.html" />
+    <entry file="file://$PROJECT_DIR$/../djenv/Lib/site-packages/notifications/signals.py" />
     <entry file="file://$PROJECT_DIR$/home/templates/footer.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -788,13 +662,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/notifications/includes/post_approval_request_box.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/notifications/includes/post_approval_request_box.html" />
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-350">
@@ -812,20 +680,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/notifications.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/notifications_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="74" selection-start-line="11" selection-start-column="74" selection-end-line="11" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/notifications.html" />
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/notifications_detail.html" />
     <entry file="file://$PROJECT_DIR$/ccwebsite/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -884,54 +740,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/left_side_bar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/right_side_bar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="450">
           <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/navbar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="24" column="155" selection-start-line="24" selection-start-column="155" selection-end-line="24" selection-end-column="155" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/notif/templates/notif/navbar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
+        <state relative-caret-position="575">
           <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/navbar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="24" column="155" selection-start-line="24" selection-start-column="155" selection-end-line="24" selection-end-column="155" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/left_side_bar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/notif/templates/notif/notifications_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3900">
+          <caret line="156" column="29" selection-start-line="156" selection-start-column="29" selection-end-line="156" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/post/templates/post/post_detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2575">
+        <state relative-caret-position="950">
           <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/post/models.py">
+    <entry file="file://$PROJECT_DIR$/post/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="69" selection-start-line="69" selection-end-line="69" />
+        <state relative-caret-position="2275">
+          <caret line="118" column="78" selection-start-line="118" selection-start-column="78" selection-end-line="118" selection-end-column="78" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#95#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/comments/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="450">
           <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
@@ -939,32 +802,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/notif/templates/notif/notifications_detail.html">
+    <entry file="file://$PROJECT_DIR$/post/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2601">
-          <caret line="156" column="29" lean-forward="true" selection-start-line="156" selection-start-column="29" selection-end-line="156" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/post/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="39">
-          <caret line="118" column="78" lean-forward="true" selection-start-line="118" selection-start-column="78" selection-end-line="118" selection-end-column="78" />
+        <state relative-caret-position="1725">
+          <caret line="69" selection-start-line="69" selection-end-line="69" />
           <folding>
-            <element signature="e#0#95#0" expanded="true" />
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/comments/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
+        <state relative-caret-position="3200">
           <caret line="146" column="83" selection-start-line="146" selection-start-column="83" selection-end-line="146" selection-end-column="83" />
           <folding>
             <element signature="e#0#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/cal_setup.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

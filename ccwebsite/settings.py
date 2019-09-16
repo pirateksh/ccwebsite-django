@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['herokuccwebsite.herokuapp.com', '127.0.0.1','localhost']
 
 INSTALLED_APPS = [
     # Local Apps
+    'quizapp.apps.QuizappConfig',
     'notif.apps.NotifConfig',
     'comments.apps.CommentsConfig',
     'home.apps.RegistrationConfig',

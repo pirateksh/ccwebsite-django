@@ -60,7 +60,7 @@ class Post(models.Model):
 
     # Pinned to top
     is_pinned = models.BooleanField(default=False)
-
+    is_scheduled = models.BooleanField(default=False)
     # To create Draft and publish post on specific day.
     draft = models.BooleanField(default=False)
     post_on_date = models.DateField(auto_now=False, auto_now_add=False, default=timezone.now())

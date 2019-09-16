@@ -1,8 +1,19 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
-from .models import Quiz,Question,Option,Answer
+from .models import Quiz,Question,Option,Answer,UserQuizResult
 # Register your models here.
 
+class UserQuizResultAdmin(admin.ModelAdmin):
+	model = UserQuizResult
+	list_display = ['id','user','quiz_title','score','max_score']
+
+	def user(self,instance):
+		return instance.user.username
+	def quiz_title(self,instance):
+#instance is the instance of Quiz(current) class
+		return instance.quiz.title
+	def max_score(self,instance):
+		return instance.quiz.max_score
 
 class QuizAdmin(admin.ModelAdmin):
 	model = Quiz
@@ -34,7 +45,7 @@ class AnswerAdmin(admin.ModelAdmin):
 		return instance.question.question
 	
 
-
+admin.site.register(UserQuizResult,UserQuizResultAdmin)
 admin.site.register(Quiz,QuizAdmin)
 admin.site.register(Question,QuestionAdmin)
 admin.site.register(Option,OptionAdmin)

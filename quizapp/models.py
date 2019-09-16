@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 class Quiz(models.Model):
 	title = models.CharField(max_length=100)
 	no_of_ques = models.PositiveIntegerField(default=0)
-	time_lim = models.CharField(max_length=50)
+	max_score = models.PositiveIntegerField(default=0)
+	time_lim = models.PositiveIntegerField(help_text="Time Limit should be in MINUTES.")
 	instructions = models.TextField()
 	author  = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 	date_created = models.DateTimeField(default = timezone.now)
@@ -13,8 +14,10 @@ class Quiz(models.Model):
 		return "{}".format(self.title)
 	class Meta:
 		ordering = ['id']
-
-
+class UserQuizResult(models.Model):
+	user = models.ForeignKey(User,on_delete=models.CASCADE)
+	quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE,related_name="quiz_title")
+	score = models.PositiveIntegerField()
 
 class Question(models.Model):
 	quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)

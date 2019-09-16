@@ -9,7 +9,10 @@ from django.contrib.auth.models import User
 from .models import UserProfile
 from comments.models import Comment
 from post.models import Post, Tags
-# from post.models import Post, Tags
+'''
+# Imported Models from quizapp to show the results:)
+'''
+from quizapp.models import UserQuizResult
 
 # Imported Forms
 from django.contrib.auth.forms import PasswordChangeForm
@@ -18,10 +21,31 @@ from home.forms import UserSignupForm
 from post.forms import PostForm
 from comments.forms import CommentForm
 
-# Create your views here.
-
-
+'''Importing Stuff for Google Calendar API'''
+from .cal_setup import get_calendar_service
+import os.path
 def user_profile(request, username):
+    service = get_calendar_service(request)
+    # Call the Calendar API
+    # print('Getting list of calendars')
+    if service:
+        cal_service_found = True     
+        calendars_result = service.calendarList().list().execute()
+
+        calendars = calendars_result.get('items', [])
+
+        if not calendars:
+            print('No calendars found.')
+        for calendar in calendars:
+            # print(calendar.get('primary'))# prints True only for the primary Calendar of User
+            if calendar.get('primary'):
+                summary = calendar['summary']
+                calendar_id = calendar['id']
+                timeZone = calendar['timeZone']
+                primary = "Primary" if calendar.get('primary') else ""
+                  # print(timeZone) # prints Asia/Kolkata
+                print("%s\t%s\t%s" % (summary, calendar_id, primary))
+
     native_user = get_object_or_404(User, username=username)
     profile = get_object_or_404(UserProfile, user=native_user)
     native_posts = page_maker(request, Post, native_user)
@@ -35,6 +59,7 @@ def user_profile(request, username):
     password_change_form = PasswordChangeForm(user=native_user)
     pending_posts = Post.objects.filter(verify_status=-1)
     native_pending_posts = pending_posts.filter(author=native_user)
+    quiz_results = UserQuizResult.objects.all().filter(user=request.user)
     context = {
         'profile': profile,
         'avatar_form': avatar_form,
@@ -48,8 +73,12 @@ def user_profile(request, username):
         'user_profiles': user_profiles,
         'tags': tags,
         'pending_posts': pending_posts,
-        'native_pending_posts': native_pending_posts
+        'native_pending_posts': native_pending_posts,
+        'quiz_results':quiz_results
     }
+    if 'cal_service_found' in locals():
+        new_to_context = {'cal_service_found':1,'calendar_id': calendar_id,'timeZone':timeZone}
+        context.update(new_to_context)
     return render(request, 'user_profile/user_profile.html', context)
 
 
