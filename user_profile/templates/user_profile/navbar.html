@@ -8,6 +8,7 @@
 {% endcomment %}
 {% load static %}
 {% load notifications_tags %}
+{% load has_group %}
 {% notifications_unread as unread_count %}
 {% live_notify_badge as live_unread_count %}
 <nav class="amber lighten-1" role="navigation">
@@ -68,24 +69,27 @@
                 <div class="user-view amber lighten-3">
                     {% if profile.avatar %}
                         <a><img class="circle materialboxed" src="{{ profile.avatar.url }}"></a>
-                    {% else %}
-                        <a><img class="circle" src="{% static 'default-profile-picture.jpg' %}"></a>
                     {% endif %}
                     <a><span class="name">{{ native_user.first_name }} {{ native_user.last_name }}</span></a>
                     <a><span class="email">{{ native_user.email }}</span></a>
                     {% if user.is_superuser %}
+                        <!-- Admin visiting someone's profile -->
                         <div class="row">
-                            <div class="col s4 m4 l4 center">
+                            <div class="col s3 m3 l3 center">
                                 <a class="btn small tooltipped" data-tooltip="Dashboard" href="/admin"><i class="material-icons">dashboard</i></a>
                             </div>
-                            <div class="col s4 m4 l4 center">
+                            <div class="col s3 m3 l3 center">
                                 <a class="btn small tooltipped" data-tooltip="Home" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
                             </div>
-                            <div class="col s4 m4 l4 center">
+                            <div class="col s3 m3 l3">
+                                <a class="btn small tooltipped" data-tooltip="Profile" href="{% url 'User Profile' user.username %}"><i class="material-icons">person_pin</i></a>
+                            </div>
+                            <div class="col s3 m3 l3 center">
                                 <a class="btn small red tooltipped" data-tooltip="Logout" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
                             </div>
                         </div>
-                    {% elif user.is_authenticated %}
+                    {% elif user == native_user %}
+                        <!-- A user visiting his own profile -->
                         <div class="row">
                             <div class="col s3 m3 l3">
                                 <a class="btn small tooltipped" data-tooltip="Home" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
@@ -100,10 +104,23 @@
                                 <a class="btn small red tooltipped" data-tooltip="Logout" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
                             </div>
                         </div>
+                    {% elif user.is_authenticated %}
+                        <!-- One user visiting another user's profile -->
+                        <div class="row">
+                            <div class="col s3 m3 l3">
+                                <a class="btn small tooltipped" data-tooltip="Home" href="{% url 'Index' %}"><i class="material-icons">home</i></a>
+                            </div>
+                            <div class="col s3 m3 l3">
+                                <a class="btn small tooltipped" data-tooltip="Profile" href="{% url 'User Profile' user.username %}"><i class="material-icons">person_pin</i></a>
+                            </div>
+                            <div class="col s3 m3 l3">
+                                <a class="btn small red tooltipped" data-tooltip="Logout" href="{% url 'Logout' %}"><i class="material-icons">power_settings_new</i></a>
+                            </div>
+                        </div>
                     {% endif %}
                 </div>
             </li>
-            {% if user.is_authenticated %}
+            {% if user == native_user %}
                 {% if user.is_superuser %}
                     <li class="collection-item">
                         <div class="center">
@@ -142,12 +159,18 @@
 {#                            <li class="divider" tabindex="-1"></li>#}
 {#                        </ul>#}
 {#                    </div>#}
+
+                    {% if user|has_group:'Teacher' %}
+                    <li>
+                        <a class="btn modal-trigger" href="#modal-permissions">Permissions</a>
+                    </li>
+                    {% endif %}
+
                     <li>
                         <a class="btn modal-trigger" href="#modal-drafts">Drafts</a>
                     </li>
                 {% endif %}
-
-
+            {% elif user.is_authenticated %}
             {% else %}
 
                 <li>
@@ -173,3 +196,5 @@
 {% include 'user_profile/verify_post_modal.html' %}
 
 {% include 'user_profile/drafts_modal.html' %}
+
+{% include 'user_profile/permission_modal.html' %}

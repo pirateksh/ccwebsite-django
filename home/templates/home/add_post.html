@@ -14,7 +14,7 @@
                     {{ addpostform.media }}
                     {{ addpostform.title|materializecss:'col s6 m6, icon=title' }}
                     {{ addpostform.tags|materializecss:'col s6 m6, icon=bookmark' }}
-                    {{ addpostform.post_content }}
+
 
                     {% if user.is_superuser %}
 {#                     <div class="input-field col s12 m12 l12">#}
@@ -30,8 +30,10 @@
 {#                     </div>#}
                         {{ addpostform.is_scheduled|materializecss:'col s6 m6 l6' }}
                         {{ addpostform.draft|materializecss:'col s6 m6 l6' }}
+                        <br><br><br><br><br><br><br>
+                        {{ addpostform.post_content }}
                     {% endif %}
-
+                    {{ addpostform.post_content }}
 {#                    <span class="tooltipped" data-position="top" data-tooltip="Tick to save post as draft.">#}
                         {{ addpostform.draft|materializecss:'col s12 m12 l12' }}
 {#                    </span>#}

@@ -14,8 +14,8 @@ urlpatterns = [
     path('<str:username>/change_name/', views.change_name, name='change_name'),
     path('<str:username>/change_email/', views.change_email, name='change_email'),
     path('<str:username>/subscription_toggle/', views.subscription_toggle, name='subscription_toggle'),
-    # path('<str:username>/subscribe/', views.subscribe, name='subscribe'),
     path('<str:username>/sound_toggle/', views.sound_notification_toggle, name='sound_notification_toggle'),
     path('<str:username>/set_password/', views.set_password, name='set_password'),
-    path('<str:username>/ask_perm/', views.ask_perm, name='ask_perm'),
+    path('<str:username>/approve_event/<slug:slug>', views.approve_event, name='approve_event'),
+    path('<str:username>/reject_event/<slug:slug>', views.reject_event, name='reject_event'),
 ]

@@ -1,0 +1,50 @@
+{% load materializecss %}
+{% load static %}
+<div id="modal-permissions" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Permission</h4>
+            <div class="row">
+            {% if scheduled_posts.count == 0 %}
+                No permissions related to any event pending.
+            {% else %}
+                <table class="striped">
+                    <thead>
+                        <tr>
+                            <th>Author</th>
+                            <th>Event</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="verify-tbody">
+                        {% for scheduled_post in scheduled_posts %}
+                                <tr>
+                                    <td>
+                                        <a class="chip" href="{% url 'User Profile' scheduled_post.author.username %}">
+                                        {% for user_profile in user_profiles %}
+                                            {% if user_profile.user == scheduled_post.author %}
+                                                {% if user_profile.avatar %}
+                                                    <img alt="Profile picture" src="{{ user_profile.avatar.url }}">
+                                                {% endif %}
+                                                    {{ scheduled_post.author }}
+                                            {% endif %}
+                                        {% endfor %}
+
+
+                                        </a>
+                                    </td>
+                                    <td>{{ scheduled_post.title }}</td>
+                                    <td>
+    {#                                        <a><i class="material-icons">check_circle</i> </a>#}
+                                        <a class="tooltipped" data-tooltip="Detail view" href="{% url 'post_detail' scheduled_post.slug %}">
+                                            <i class="material-icons">remove_red_eye</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+
+            </div>
+        </div>
+</div>

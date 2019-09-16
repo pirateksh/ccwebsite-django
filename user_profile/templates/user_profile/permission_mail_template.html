@@ -1,0 +1,20 @@
+{% autoescape off %}
+    {% comment %}
+        Context Vars:-
+                    'title': post's title,
+                    'slug': post's slug,
+                    'domain': current domain,
+    {% endcomment %}
+Admin of CCWebsite has requested permission for following event.
+Title - {{ title }}
+
+Click this link or directly visit your CCWebsite profile.
+{{ domain }}{% url 'post_detail' slug %}
+{#    {{ protocol }}://{{ domain }}{% url 'post_detail' slug %}#}
+
+If clicking the link above doesn't work, please copy and paste the URL in a new browser
+window instead.
+
+Sincerely,
+The CCWebsite Team
+{% endautoescape %}

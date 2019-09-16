@@ -23,7 +23,7 @@ SECRET_KEY = ')xlv8*ocitg4+_-00hm6o98)#z^xqeww^7%9w@*%*=5f@2y359'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['herokuccwebsite.herokuapp.com', '127.0.0.1','localhost']
+ALLOWED_HOSTS = ['herokuccwebsite.herokuapp.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.contrib.sites',
+    'django.contrib.sites',
 
     # Third party Apps
     'rest_framework',
@@ -64,7 +64,7 @@ INSTALLED_APPS = [
 ]
 
 DJANGO_NOTIFICATIONS_CONFIG = {
-    'SOFT_DELETE': True,
+    # 'SOFT_DELETE': True,
     'USE_JSONFIELD': True,
 }
 
@@ -84,7 +84,7 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'custom',
         # 'height': False,
         'width': False,
-        'height': '15vh',
+        'height': '25vh',
         'resize_dir': 'vertical',
         'toolbar_custom': [
             ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'CodeSnippet', ],
@@ -100,7 +100,7 @@ CKEDITOR_CONFIGS = {
 }
 
 
-# SITE_ID = 1
+SITE_ID = 1
 
 #
 AUTHENTICATION_BACKENDS = (

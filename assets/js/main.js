@@ -69,10 +69,92 @@ $(function() {
 
 
 
-// AJAX for adding draft
- function create_draft() {
+// Change button name when is_scheduled checkbox is clicked
+ $('#id_is_scheduled').change(function () {
+    if($(this).is(':checked')) {
+        $('.save-post').html('Request');
+        var preHTML = "<h3>Topic - </h3>" +
+            "<strong>Event type</strong><i>(Example - Class, Seminar, Hackathon, etc)<strong>- </strong></i><br>" +
+            "<strong>Date - </strong><br>" +
+            "<strong>Time - </strong><br>" +
+            "<strong>Venue - </strong><br>" +
+            "Start your content from here...."
+        ;
+        CKEDITOR.instances['id_post_content'].setData(preHTML);
+    } else {
+        $('.save-post').html("Post<i class='material-icons'>send</i>");
+        CKEDITOR.instances['id_post_content'].setData('');
+    }
+ });
 
- }
+ // Event permission related flow
+
+ //
+ // $('.event-accept-form').submit(function (event) {
+ //     // When event approved.
+ //     event.preventDefault();
+ //     var permForm = $(this);
+ //     var url = permForm.attr('action');
+ //     // alert(url);
+ //     var slug = permForm.attr('data-slug');
+ //     var approveComment = $('#approve-comment');
+ //     // alert(approveComment.val());
+ //    $.ajax({
+ //       url: url,
+ //       type: "GET",
+ //       data: {
+ //           approve_comment: approveComment.val(),
+ //           slug: slug,
+ //           status: 'A'
+ //       },
+ //        success: function (json) {
+ //            if(json.result === 'SS'){
+ //                addToast('You have accepted the event request.')
+ //            }else {
+ //                addToast('Oops! We have encountered an error. Try Again!');
+ //            }
+ //        },
+ //         error: function(xhr){
+ //             console.log("Error: " + xhr.statusText);
+ //             console.log(xhr.responseText); //--> to get the full details of error
+ //             return false;
+ //       }
+ //    });
+ // });
+ //
+ //
+ // $('.event-reject-form').submit(function (event) {
+ //     // When event approved.
+ //     event.preventDefault();
+ //     var permForm = $(this);
+ //     var url = permForm.attr('action');
+ //     // alert(url);
+ //     var slug = permForm.attr('data-slug');
+ //     var rejectComment = $('#reject-comment');
+ //     // alert(rejectComment.val());
+ //    $.ajax({
+ //       url: url,
+ //       type: "GET",
+ //       data: {
+ //           reject_comment: rejectComment.val(),
+ //           slug: slug,
+ //           status: 'R'
+ //       },
+ //        success: function (json) {
+ //            if(json.result === 'SS'){
+ //                addToast('You have rejected the event request.')
+ //            }else {
+ //                addToast('Oops! We have encountered an error. Try Again!');
+ //            }
+ //        },
+ //         error: function(xhr){
+ //             console.log("Error: " + xhr.statusText);
+ //             console.log(xhr.responseText); //--> to get the full details of error
+ //             return false;
+ //       }
+ //    });
+ // });
+
 
 // Submit post on submit
 $('.post_form').on('submit', function(event){
@@ -91,6 +173,7 @@ function create_post(this_) {
     var selected = $('select[name="tags"] :selected');
     var is_draft = $('#id_draft').is(':checked');
     // alert(is_draft);
+    var is_scheduled = $('#id_is_scheduled').is(':checked');
     var successRedirectURL = this_.attr('data-success');
     $.ajax({
         url : url_, // the endpoint
@@ -99,7 +182,8 @@ function create_post(this_) {
             title: title.val(),
             tags: selected.text(),
             post_content: postContent,
-            is_draft: is_draft
+            is_draft: is_draft,
+            is_scheduled: is_scheduled
         }, // data sent with the post request
 
         // handle a successful response
@@ -268,7 +352,13 @@ function create_post(this_) {
             $('.post_form').trigger("reset");
             var tbody;
             var tbody2;
-            if(json.result === 'SS') {
+            if(json.result === 'SSS'){
+                // Normal post by superuser and success
+                // alert("Superuser added this!");
+                addToast('Post added successfully');
+                location.href = successRedirectURL;
+            } else if(json.result === 'SS') {
+                // Normal post by normal user
                 addToast("Approval pending! Check status from your profile!");
                 tbody = $('.pending-tbody');
                 tbody.append(
@@ -301,6 +391,7 @@ function create_post(this_) {
                 );
 
             } else if (json.result === 'DR') {
+                // Drafts
                 addToast("Post added to your drafts!");
                 tbody = $('.drafts-tbody');
                 tbody.append(
@@ -313,6 +404,20 @@ function create_post(this_) {
                         "</td>" +
                     "</tr>"
                 );
+            } else if (json.result === 'ISCH') {
+                // Scheduled post by superuser
+                tbody = $('.drafts-tbody');
+                tbody.append(
+                    "<tr>" +
+                        "<td>"+ json.postTitle +"</td>" +
+                        "<td>" +
+                            "<a class='tooltipped' data-tooltip='Detail view' href='" + json.postUrl + "'>" +
+                                "<i class='material-icons'>remove_red_eye</i> " +
+                            "</a>" +
+                        "</td>" +
+                    "</tr>"
+                );
+                addToast('Permission request is sent and this post is added to drafts.');
             } else {
                 addToast('Oops! We have encountered an error. Try Again!');
             }
@@ -576,17 +681,21 @@ $('.edit-btn').click(function (event) {
                     }
 
                     ulCollection.children('#p').html(json.content);
-                    CKEDITOR.instances['id_post_content_' + postPK].setData(json.content);
+                    CKEDITOR.instances['id_post_content_' + postPK].setData('');
+                    // CKEDITOR.instances['id_post_content_' + postPK].setData(json.content);
                     var elem = $('#edit-post-modal-' + postPK);
                     var instance = M.Modal.getInstance(elem);
                     instance.close();
                     addToast('Post edited successfully!');
                     $('#post-edit-form-' + postPK).trigger("reset");
-                    if (is_draft === false) {
+                    if (is_draft === false && json.verifyStatus === -1) {
                         draft.removeAttr('checked');
                         draft.prop('disabled', true);
                         location.href = json.postUrl;
                     }
+                } else if (json.result === 'SSS'){
+                    // Superuser undrafting
+                    location.href = json.postUrl;
                 } else if (json.result === 'ERR') {
                     addToast('Oops! We have encountered an error. Try Again!');
                 }

@@ -1,0 +1,20 @@
+{% autoescape off %}
+    {% comment %}
+        Context Vars:-
+                    'post': Post
+                    'domain': current domain,
+                    'status' : 'rejected'/'approved'
+    {% endcomment %}
+Admin of CCWebsite has {{ status }} following post.
+Title - {{ post.title }}
+
+Click this link or directly visit your CCWebsite profile.
+{{ domain }}{% url 'post_detail' post.slug %}
+{#    {{ protocol }}://{{ domain }}{% url 'post_detail' slug %}#}
+
+If clicking the link above doesn't work, please copy and paste the URL in a new browser
+window instead.
+
+Sincerely,
+The CCWebsite Team
+{% endautoescape %}

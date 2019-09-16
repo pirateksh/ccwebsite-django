@@ -1,0 +1,32 @@
+{% autoescape off %}
+    {% comment %}
+        Context Vars:-
+                    'teacher': native_user ie faculty who approved/rejected the request.,
+                     'post': post,
+                     'domain': domain.first(),
+                     'status': 'rejected'/'accepted'
+                     'remark': teacher_comment
+    {% endcomment %}
+{{ teacher.first_name }} {{ teacher.last_name }} (Username: {{ teacher.username }}) has {{ status }} your request for conducting following event.
+
+Title of post related to event - {{ post.title }}
+
+Remarks: {{ remark }}
+
+Next steps -
+{% if status == 'accepted' %}
+    Go to your drafts and post event related post.
+{% elif status == 'rejected' %}
+    Contact faculty through Email for further explanation.
+{% endif %}
+
+Click this link or directly visit your CCWebsite profile.
+{{ domain }}{% url 'post_detail' post.slug %}
+{#    {{ protocol }}://{{ domain }}{% url 'post_detail' slug %}#}
+
+If clicking the link above doesn't work, please copy and paste the URL in a new browser
+window instead.
+
+Sincerely,
+The CCWebsite Team
+{% endautoescape %}
