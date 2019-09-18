@@ -41,11 +41,38 @@
 
     {% include 'home/navbar.html' %}
 
-    {# Tab for small screen #}
+    <!-- Tab for Personalised and Public feed -->
+    <ul class="row tabs tabs-fixed-width tab-demo">
+        {% if user.username in request.build_absolute_uri and 'personalised/' in request.build_absolute_uri %}
+        <li class="tab col s6 m6 l6 center">
+            <a class="tooltipped" data-tooltip="Personalised feed">
+                <i class="material-icons small">personal_video</i>
+            </a>
+        </li>
+        {% else %}
+        <li class="tab col s12 m12 l12 center">
+            <a class="active tooltipped" data-tooltip="Public feed">
+                <i class="material-icons small ">public</i>
+            </a>
+        </li>
+        {% endif %}
+
+    </ul>
+
+    {# Tab for small screen to filter posts by tags #}
     <ul class="tabs tabs-fixed-width tab-demo hide-on-med-and-up">
         <li class="tab col center">
             <a target="_self" href="{% url 'Index' %}">Reset</a>
         </li>
+    {% if user.username in request.build_absolute_uri and 'personalised/' in request.build_absolute_uri and user.is_authenticated %}
+        {% for tag in tags %}
+            {% if tag.name in request.build_absolute_uri %}
+                <li class="tab col center amber"><a class="active" href="{% url 'personalised_index_with_filter' tag_filter=tag.name username=user.username %}" target="_self">{{ tag.name }}</a></li>
+            {% else %}
+                <li class="tab col center"><a class="" href="{% url 'personalised_index_with_filter' tag_filter=tag.name username=user.username %}" target="_self">{{ tag.name }}</a></li>
+            {% endif %}
+        {% endfor %}
+    {% else %}
         {% for tag in tags %}
             {% if tag.name in request.build_absolute_uri %}
                 <li class="tab col center amber"><a class="active" href="{% url 'index_tag' tag.name %}" target="_self">{{ tag.name }}</a></li>
@@ -53,7 +80,9 @@
                 <li class="tab col center"><a class="" href="{% url 'index_tag' tag.name %}" target="_self">{{ tag.name }}</a></li>
             {% endif %}
         {% endfor %}
+    {% endif %}
     </ul>
+    {# Small screen tab ended #}
 
     <div class="row">
 
@@ -68,9 +97,11 @@
                 {% include 'home/add_post.html' %}
             {% endif %}
             <div class="post-display-home">
+                <!-- Public feed -->
                 {% include 'home/post_display.html' %}
             </div>
         </div>
+
 
         {# Right side Catergory Menu #}
         <div class="col l3 hide-on-med-and-down">

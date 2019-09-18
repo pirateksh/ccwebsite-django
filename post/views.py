@@ -34,27 +34,58 @@ from home.forms import UserSignupForm
 from notifications.signals import notify
 # from notify.signals import notify
 
+# Self imports
+# from home.views import set_profile
+
 NUMBER_OF_POSTS_PER_PAGE = 5
 User = get_user_model()
 
 
-def page_maker(request, model, native_user=None, draft=False, tag_filter=None, *args, **kwargs):
+def page_maker(request, model, native_user=None, draft=False, tag_filter=None, username=None, *args, **kwargs):
     """
         Function to make pages taking NUMBER_OF_POSTS_PER_PAGE in one page.
     """
-    if tag_filter:
-        tag_qs = Tags.objects.filter(name=tag_filter)
-        if tag_qs:
-            # Filter posts by a tag and verify_status = 1 (i.e. Verified by Admin)
-            tag = tag_qs.first()
-            post_list = model.objects.all(native_user=native_user, draft=draft).filter(verify_status=1).filter(tags=tag)
+    if username:
+        # Posts for personalised feed.
+        user_qs = User.objects.filter(username=username)
+        user = user_qs.first()
+        profile = UserProfile.objects.get(user=user)
+        followed = profile.followed_users.all() | user_qs
+        if tag_filter:
+            tag_qs = Tags.objects.filter(name=tag_filter)
+            if tag_qs:
+                # Filter posts by a tag and verify_status = 1 (i.e. Verified by Admin)
+                tag = tag_qs.first()
+                post_list = model.objects.all(
+                    native_user=native_user,
+                    draft=draft
+                ).filter(verify_status=1).filter(tags=tag).filter(author__in=followed)
+            else:
+                # All drafts filtered by verify_status = 1 (i.e. Verified by Admin)
+                post_list = model.objects.all(
+                    native_user=native_user,
+                    draft=draft).filter(verify_status=1).filter(author__in=followed)
+                messages.error(request, f"Oops, Something went wrong!")
         else:
-            # All drafts filtered by verify_status = 1 (i.e. Verified by Admin)
-            post_list = model.objects.all(native_user=native_user, draft=draft).filter(verify_status=1)
-            messages.error(request, f"Oops, Something went wrong!")
+            # All posts filtered by verify_status = 1 (i.e. Verified by Admin)
+            post_list = model.objects.all(
+                native_user=native_user,
+                draft=draft).filter(verify_status=1).filter(author__in=followed)
     else:
-        # All posts filtered by verify_status = 1 (i.e. Verified by Admin)
-        post_list = model.objects.all(native_user=native_user, draft=draft).filter(verify_status=1)
+        # Posts for Public feed
+        if tag_filter:
+            tag_qs = Tags.objects.filter(name=tag_filter)
+            if tag_qs:
+                # Filter posts by a tag and verify_status = 1 (i.e. Verified by Admin)
+                tag = tag_qs.first()
+                post_list = model.objects.all(native_user=native_user, draft=draft).filter(verify_status=1).filter(tags=tag)
+            else:
+                # All drafts filtered by verify_status = 1 (i.e. Verified by Admin)
+                post_list = model.objects.all(native_user=native_user, draft=draft).filter(verify_status=1)
+                messages.error(request, f"Oops, Something went wrong!")
+        else:
+            # All posts filtered by verify_status = 1 (i.e. Verified by Admin)
+            post_list = model.objects.all(native_user=native_user, draft=draft).filter(verify_status=1)
     paginator = Paginator(post_list, NUMBER_OF_POSTS_PER_PAGE)
     page = request.GET.get('page')
     return paginator.get_page(page)
@@ -134,7 +165,7 @@ def ajax_add_post(request):
                     'slug': post.slug,
                     'domain': domain.first(),
                 }
-                html_message = render_to_string('user_profile/permission_mail_template.html', context=email_context)
+                html_message = render_to_string('user_profile/mail_template_permission.html', context=email_context)
                 plain_message = strip_tags(html_message)
                 from_email = "noreply@ccwebsite"
 
@@ -257,10 +288,8 @@ def ajax_del_post(request):
             # Post does not exist
             result = "ERR"
         else:
-            # Soft Deletion
             post = post_qs.first()
-            post.deleted = True
-            # post.delete()
+            post.delete()
             result = "SS"
 
         response_data = {
@@ -329,7 +358,7 @@ def ajax_edit_post(request):
                     original_post.draft = False
                     original_post.verify_status = 1
                     original_post.save()
-                    result = 'SSS'
+                    result = 'SUD'
                 else:
                     notify.send(
                         user_profile,
@@ -342,7 +371,16 @@ def ajax_edit_post(request):
                         actor_name=user_profile.user.first_name,
                         timestamp_=timesince(timezone.now()),
                     )
-                    result = 'SS'
+                    result = 'UD'
+            else:
+                result = "SS"
+
+            """
+                Acronyms - 
+                SUD - Superuser Undrafting
+                UD - Normal Undrafting
+                SS - Normal edit success
+            """
 
             original_post.save()
 
@@ -429,6 +467,19 @@ def post_detail(request, slug):
     """
         This function renders Post Detail View.
     """
+
+    # check_profile = None
+    # flag = False
+    #
+    # if request.user.is_authenticated:
+    #     check_profile = get_object_or_404(UserProfile, user=request.user)
+    #     flag = set_profile(request, request.user)
+    #     check_profile = get_object_or_404(UserProfile, user=request.user)
+    #
+    # if check_profile is not None:
+    #     if not check_profile.is_profile_set:
+    #         messages.info(request, f"User profile not set")
+    #         return HttpResponseRedirect(reverse('Index'))
 
     # Fetching post(using slug), post author, user profile of author
     # all user profiles, all comments and all tags.
@@ -529,7 +580,7 @@ def approve_post(request, slug):
                             'status': 'approved',
                             'post': post,
                         }
-                        html_message = render_to_string('user_profile/post_approval_mail_template.html', context=email_context)
+                        html_message = render_to_string('user_profile/mail_template_post_approval.html', context=email_context)
                         plain_message = strip_tags(html_message)
                         from_email = "noreply@ccwebsite"
                         to = str(author.email)
@@ -598,7 +649,7 @@ def reject_post(request, slug):
                             'status': 'rejected',
                             'post': post,
                         }
-                        html_message = render_to_string('user_profile/post_approval_mail_template.html',
+                        html_message = render_to_string('user_profile/mail_template_post_approval.html',
                                                         context=email_context)
                         plain_message = strip_tags(html_message)
                         from_email = "noreply@ccwebsite"

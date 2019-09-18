@@ -1,6 +1,12 @@
 {% load static %}
 <ul class="collection">
-    <li class="collection-item amber">
-        <a class="btn-flat" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>
-    </li>
+    {% if user.is_authenticated and user.username in request.build_absolute_uri and 'personalised/' in request.build_absolute_uri %}
+        <li class="collection-item center-align">
+            <a class="btn" href="{% url 'Index'  %}">View Public Feed</a>
+        </li>
+    {% elif user.is_authenticated %}
+        <li class="collection-item center-align">
+            <a class="btn" href="{% url 'personalised_index' username=user.username %}">View Personalised Feed</a>
+        </li>
+    {% endif %}
 </ul>

@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 
+# Imported models
+from post.models import Tags
+
 
 def user_directory_path(instance, filename):
     """
@@ -30,6 +33,9 @@ class UserProfile(models.Model):
         null=True,
     )
 
+    # Whether Email has been verified or not
+    is_email_verified = models.BooleanField(default=False)
+
     # Whether user is subscribed to email notifications
     is_subscribed = models.BooleanField(default=True)
 
@@ -41,6 +47,15 @@ class UserProfile(models.Model):
 
     # Whether user profile is set or not
     is_profile_set = models.BooleanField(default=False)
+
+    # Subscribed tags(topics)
+    subscribed_tags = models.ManyToManyField(Tags, related_name='subscribed_tags', verbose_name='Subscribed Tags', default=None, blank=True)
+
+    # Followed users
+    followed_users = models.ManyToManyField(User, related_name='followed_user', verbose_name='Followed users', default=None, blank=True)
+
+    # Followers
+    followers = models.ManyToManyField(User, related_name='followers', verbose_name='Followers', default=None, blank=True)
 
     def __str__(self):
         return self.user.username

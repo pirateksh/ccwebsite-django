@@ -21,3 +21,10 @@ class PostForm(ModelForm):
         #         'placeholder': "What's on your mind..."
         #     }),
         # }
+
+
+class TagForm(ModelForm):
+
+    class Meta:
+        model = Post
+        fields = ['tags']

@@ -1,0 +1,33 @@
+<!-- Users followed by logged in user -->
+{% load materializecss %}
+{% load static %}
+<div id="modal-followers" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Followers ({{ followers.count }})</h4>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for follower in followers %}
+                        <td>
+                            <a class="chip" href="{% url 'User Profile' follower.username %}">
+                                {% for user_profile in user_profiles %}
+                                    {% if user_profile.user == follower %}
+                                        {% if user_profile.avatar %}
+                                            <img src="{{ user_profile.avatar.url }}">
+                                        {% endif %}
+                                        {{ follower.username }}
+                                    {% endif %}
+                                {% endfor %}
+                            </a>
+                        </td>
+                        <td>{{ follower.first_name }} {{ follower.last_name }}</td>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>

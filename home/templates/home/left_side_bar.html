@@ -6,14 +6,28 @@
         <h6>Filter posts</h6>
     </li>
     <li class="collection-item">
-        {% for tag in tags %}
-            {% if tag.name in request.build_absolute_uri %}
-            {# Highlight with amber colour if a tab is currently active #}
-                <a class="chip teal white-text" href="{% url 'index_tag' tag.name %}">{{ tag.name }}</a>
-            {% else %}
-                <a class="chip" href="{% url 'index_tag' tag.name %}">{{ tag.name }}</a>
-            {% endif %}
-        {% endfor %}
+
+        {% if user.username in request.build_absolute_uri and 'personalised/' in request.build_absolute_uri and user.is_authenticated %}
+            <!-- Personalised feed is open -->
+            {% for tag in tags %}
+                {% if tag.name in request.build_absolute_uri %}
+                {# Highlight with teal colour if a tab is currently active #}
+                    <a class="chip teal white-text" href="{% url 'personalised_index_with_filter' tag_filter=tag.name username=user.username %}">{{ tag.name }}</a>
+                {% else %}
+                    <a class="chip" href="{% url 'personalised_index_with_filter' tag_filter=tag.name username=user.username %}">{{ tag.name }}</a>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <!-- Public feed is open -->
+            {% for tag in tags %}
+                {% if tag.name in request.build_absolute_uri %}
+                {# Highlight with amber colour if a tab is currently active #}
+                    <a class="chip teal white-text" href="{% url 'index_tag' tag_filter=tag.name %}">{{ tag.name }}</a>
+                {% else %}
+                    <a class="chip" href="{% url 'index_tag' tag_filter=tag.name %}">{{ tag.name }}</a>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
     </li>
     <li class="row collection-item">
         <a class="col s12 m12 l12 center btn" href="{% url 'Index' %}">Reset</a>

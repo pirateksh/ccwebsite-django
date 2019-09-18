@@ -1,0 +1,39 @@
+<!-- Users followed by logged in user -->
+{% load materializecss %}
+{% load static %}
+<div id="modal-followed" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Followed Users ({{ followed_users.count }})</h4>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Name</th>
+                        <th>Unfollow</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for followed_user in followed_users %}
+                        <td>
+                            <a class="chip" href="{% url 'User Profile' followed_user.username %}">
+                                    {% for user_profile in user_profiles %}
+                                        {% if user_profile.user == followed_user %}
+                                            {% if user_profile.avatar %}
+                                                <img src="{{ user_profile.avatar.url }}">
+                                            {% endif %}
+                                                {{ followed_user.username }}
+                                        {% endif %}
+                                    {% endfor %}
+                            </a>
+                        </td>
+                        <td>{{ followed_user.first_name }} {{ followed_user.last_name }}</td>
+                        <td>
+                            <a class="tooltipped unfollow" data-tooltip="Unfollow" data-position="right" href="{% url 'unfollow_user' user.username followed_user.username %}">
+                                <i class="material-icons">cancel</i>
+                            </a>
+                        </td>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>

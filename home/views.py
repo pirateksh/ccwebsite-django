@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect, HttpResponse, reverse
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse, reverse, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from post.views import page_maker
@@ -6,13 +6,17 @@ from django.http import JsonResponse
 # from django.contrib.auth import get_user_model
 # from django.contrib.contenttypes.models import ContentType
 
+# Imports for email
+from django.template.loader import render_to_string
+from django.core import mail
+from django.utils.html import strip_tags
+
 # Importing models
 from comments.models import Comment
 from django.contrib.auth.models import Group
 from post.models import Tags, Post
 from user_profile.models import UserProfile
 from django.contrib.auth.models import User
-# from home.models import EmailBackend
 
 # Importing Forms
 from home.forms import UserSignupForm
@@ -22,7 +26,7 @@ from comments.forms import CommentForm
 
 def set_profile(request, user):
     """
-        This fucntion checks whether all necessary information about user is filled or not
+        This function checks whether all necessary information about user is filled or not
         and sets profile.
         If profile is set successfully it returns True, otherwise False.
     """
@@ -36,15 +40,18 @@ def set_profile(request, user):
         my_group.save()
 
         if profile.is_password_set:
-            if len(str(user.email)) > 0:
-                if len(str(user.first_name)) > 0:
-                    profile.is_profile_set = True
-                    profile.save()
-                    return True
+            if profile.is_email_verified:
+                if len(str(user.email)) > 0:
+                    if len(str(user.first_name)) > 0:
+                        profile.is_profile_set = True
+                        profile.save()
+                        return True
+                    else:
+                        messages.info(request, f"Name is not set.")
                 else:
-                    messages.info(request, f"Name is not set.")
+                    messages.info(request, f"Email is not set.")
             else:
-                messages.info(request, f"Email is not set.")
+                messages.info(request, f"Email not verified")
         else:
             messages.info(request, f"Password is not set.")
         profile.is_profile_set = False
@@ -54,7 +61,7 @@ def set_profile(request, user):
     return False
 
 
-def index(request, tag_filter=None):
+def index(request, tag_filter=None, username=None):
     """
         This function renders Home Page.
         If tag_filter = None, All posts are fetched
@@ -72,7 +79,7 @@ def index(request, tag_filter=None):
     addpostform = PostForm()
 
     # Fetching posts as pages, all User Profiles, tags and comments
-    posts = page_maker(request, Post, tag_filter=tag_filter)
+    posts = page_maker(request, Post, tag_filter=tag_filter, username=username)
     user_profiles = UserProfile.objects.all()
     tags = Tags.objects.all()
     comments = Comment.objects.all()  # Using overridden Model Manager all().
@@ -92,11 +99,62 @@ def index(request, tag_filter=None):
             # messages.info(request, f"Set your profile first.")
             return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': request.user.username}))
 
+    if username is not None:
+        messages.info(request, f"You are viewing Personalised Feed.")
+    else:
+        messages.info(request, f"You are viewing Public Feed.")
+
     return render(request, 'home/index.html', context)
 
     # Tried earlier:
     # if comment_form.is_valid():
     #     print(comment_form.cleaned_data)
+
+
+# def personalised_index(request, username, tag_filter=None):
+#     """
+#         This function renders Personalised Home Page.
+#         i.e. this page will contain post of only followed user.
+#         If tag_filter = None, All posts are fetched
+#         otherwise posts from specific tags are fetched.
+#     """
+#     check_profile = None
+#     flag = False
+#     user = User.objects.get(username=username)
+#     if request.user == user:
+#         if request.user.is_authenticated:
+#             flag = set_profile(request, request.user)
+#             check_profile = UserProfile.objects.get(user=request.user)
+#
+#         # User signup form, comment form, Post adding form
+#         form = UserSignupForm()
+#         comment_form = CommentForm()
+#         addpostform = PostForm()
+#
+#         # Fetching posts as pages, all User Profiles, tags and comments
+#         posts = page_maker(request, Post, tag_filter=tag_filter)
+#         user_profiles = UserProfile.objects.all()
+#         tags = Tags.objects.all()
+#         comments = Comment.objects.all()  # Using overridden Model Manager all().
+#
+#         # Context to be sent to template
+#         context = {
+#             'form': form,
+#             'addpostform': addpostform,
+#             'posts': posts,
+#             'tags': tags,
+#             'user_profiles': user_profiles,
+#             'comments': comments,
+#             'comment_form': comment_form,
+#         }
+#         if check_profile is not None:
+#             if not check_profile.is_profile_set:
+#                 # messages.info(request, f"Set your profile first.")
+#                 return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': request.user.username}))
+#
+#         return render(request, 'home/post_display_personalised.html', context)
+#     messages.info(request, f"You are unauthorized to view this page.")
+#     return HttpResponseRedirect(reverse('Index'))
 
 
 def ajax_login_view(request):
@@ -281,15 +339,16 @@ def ajax_signup_view(request):
 
         return HttpResponse('SS')
 
-def AddToCalendar(request,pk):
-    post = Post.objects.all().filter(id = pk).first()
-    event_url = "https://www.google.com/calendar/render?action=TEMPLATE&text="+str(post.title)+"&details="+str(post.post_content)
-    return redirect(event_url)
-
         # Tried earlier:
         # Creating profile
         # profile = UserProfile(user=user_)
         # profile.save()
+
+
+def AddToCalendar(request, pk):
+    post = Post.objects.all().filter(id=pk).first()
+    event_url = "https://www.google.com/calendar/render?action=TEMPLATE&text="+str(post.title)+"&details="+str(post.post_content)
+    return redirect(event_url)
 
 
 # Functions not in use currently

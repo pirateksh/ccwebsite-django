@@ -8,6 +8,9 @@
     'avatar_form': avatar change form,
     'native_user': native_user,
     'password_change_form': password_change_form,
+    'tag_form': Tag Form
+    'tags': All tags,
+    'tags_subscribed': Tags Subscribed by native user,
 {% endcomment %}
 {% block title %}
     Edit Profile
@@ -107,12 +110,19 @@
                             <form class="col s12 m10 l10" method="post" action="{% url 'change_email' native_user.username %}">
                                 {% csrf_token %}
                                 <div class="row">
-                                    <div class="input-field col s12 m10 l10">
+                                    <div class="input-field col s12 m8 l8">
                                         <i class="material-icons prefix">email</i>
                                         <input id="email" type="text" class="validate" name="email" value="{{ native_user.email }}">
                                         <label for="email">Email</label>
                                     </div>
-                                    <div class="input-field col s12 m2 l2 center">
+                                    <div class="input-field col s6 m2 l2">
+                                        {% if profile.is_email_verified %}
+                                            <a class="btn green"><i class="material-icons">check</i>Verified</a>
+                                        {% else %}
+                                            <a class="btn tooltipped" data-tooltip="Verify your email." href="{% url 'verify_email' native_user.username %}">Verify</a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="input-field col s6 m2 l2 center">
                                         <button class="btn" type="submit">Save</button>
                                     </div>
                                 </div>
@@ -130,7 +140,36 @@
                         <h6><strong>Subscribe</strong></h6>
                     </li>
                     <li class="collection-item white black-text" id="subscribed-tags">
-                        Subsribe to tags
+                        <div class="row">
+                            <div class="col s12 m2 l2">
+                                <strong>Follow Topics</strong>
+                            </div>
+                            <div class="col s12 m10 l10">
+                                <div class="row">
+{#                                    <form id="subscribe-tag-form" method="post" action="">#}
+{#                                        {% csrf_token %}#}
+{#                                        {{ tag_form|materializecss:'col s12 m8 l8' }}#}
+                                        <p>Follow topics to get Email notification.</p>
+                                        <div class="col s12 m8 l8">
+                                            {% for tag in tags %}
+                                                {% if tag in tags_subscribed %}
+                                                    <a class="chip tags-to-subscribe amber" href="{% url 'subscribe_to_tag_toggle' username=native_user.username tag=tag %}" id="{{ tag }}">{{ tag }}</a>
+                                                {% else %}
+                                                    <a class="chip tags-to-subscribe" href="{% url 'subscribe_to_tag_toggle' username=native_user.username tag=tag %}" id="{{ tag }}">{{ tag }}</a>
+                                                {% endif %}
+                                            {% endfor %}
+{#                                            <div class="col s12 m2 l2 center">#}
+{#                                                <button class="btn" type="submit">Add</button>#}
+{#                                            </div>#}
+                                        </div>
+{#                                    </form>#}
+                                </div>
+                                <div class="divider"></div>
+                            </div>
+{#                            <div class="col s12 m10 l10">#}
+{#                                <strong>Follow Users</strong>#}
+{#                            </div>#}
+                        </div>
                     </li>
                 </div>
                 <!-- Subscription Section ended -->
@@ -149,7 +188,7 @@
                                 <div class="row">
                                     {% if profile.is_subscribed %}
                                         <div class="col s12 m8 l9">
-                                            Unsubscribe form Email Notifications.
+                                            Unsubscribe from Email Notifications.
                                         </div>
                                         <div class="col s12 m4 l3 center">
                                             <a class="btn" href="{% url 'subscription_toggle' native_user.username %}">Unsubscribe</a>

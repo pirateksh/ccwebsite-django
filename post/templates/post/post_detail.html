@@ -19,8 +19,14 @@
 {% block content %}
     {% include 'home/navbar.html' %}
     <div class="row">
-        <div class="col m2 l4"></div>
-        <div class="col s12 m10 l6">
+        <div class="col m3 l3">
+            <ul class="collection">
+                <li class="collection-item share-on-fb center-align" style="background: #385898">
+                    <a class="btn-flat white-text" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Share on Facebook</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col s12 m9 l6">
         {% if post.deleted %}
             <ul class="collection">
                 <li class="collection-item">

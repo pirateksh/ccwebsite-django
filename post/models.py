@@ -41,6 +41,9 @@ class Tags(models.Model):
     name = models.CharField(max_length=255, verbose_name='Tag Name')
     description = models.TextField(blank=True, null=True, verbose_name='Tag Description')
 
+    # Subscribed by
+    subscribed_by = models.ManyToManyField(User, verbose_name='Subscribed By')
+
     def __str__(self):
         return self.name
 
@@ -63,7 +66,7 @@ class Post(models.Model):
 
     # Whether pinned to top or Not
     is_pinned = models.BooleanField(default=False)
-    is_scheduled = models.BooleanField(default=False)
+
     # To create Draft and publish post on specific day.
     draft = models.BooleanField(default=False)
     post_on_date = models.DateField(auto_now=False, auto_now_add=False, default=timezone.now())
@@ -82,23 +85,8 @@ class Post(models.Model):
     # Is verified or not
     verify_status = models.IntegerField(default=-1, verbose_name='Is verified')
 
-    # Soft delete
-    deleted = models.BooleanField(default=False)
-
     # Whether post is scheduled or not
     is_scheduled = models.BooleanField(default=False)
-
-    # Making a generic relation with Notifications
-    # Why? So that Notification is also deleted when its Target post is deleted.
-    # target_content_type = models.ForeignKey(
-    #     ContentType,
-    #     related_name='post_target',
-    #     blank=True,
-    #     null=True,
-    #     on_delete=models.CASCADE
-    # )
-    # target_object_id = models.CharField(max_length=255, blank=True, null=True)
-    # notification = GenericRelation(Notification, content_type_field=target_content_type, object_id_field=target_object_id)
 
     # Initialising post manager
     objects = PostManager()

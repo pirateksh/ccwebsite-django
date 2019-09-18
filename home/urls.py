@@ -8,6 +8,14 @@ urlpatterns = [
 
     path('filter-post-by/<str:tag_filter>/', views.index, name="index_tag"),
 
+    path('personalised/<str:username>/', views.index, name="personalised_index"),
+
+    path(
+        'filter-post-by/<str:tag_filter>/personalised/<str:username>/',
+        views.index,
+        name="personalised_index_with_filter"
+    ),
+
     path('add-to-calendar/<int:pk>/',views.AddToCalendar,name="add-to-calendar"),
     # path('login/', views.login_view, name="Login"),
 

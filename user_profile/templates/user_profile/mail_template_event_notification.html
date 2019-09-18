@@ -1,0 +1,19 @@
+{% autoescape off %}
+    {% comment %}
+        Context Vars:-
+           'post' : Post realted to event
+           'domain': current domain,
+    {% endcomment %}
+Event of your interest is scheduled soon.
+Event Title - {{ post.title }}
+
+Click this link or directly visit your CCWebsite profile.
+{{ domain }}{% url 'post_detail' post.slug %}
+{#    {{ protocol }}://{{ domain }}{% url 'post_detail' slug %}#}
+
+If clicking the link above doesn't work, please copy and paste the URL in a new browser
+window instead.
+
+Sincerely,
+The CCWebsite Team
+{% endautoescape %}

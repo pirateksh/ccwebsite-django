@@ -9,17 +9,39 @@
             {% if profile.avatar %}
                 <a><img class="circle materialboxed" src="{{ profile.avatar.url }}"></a>
             {% endif %}
-            <p><span class="name"><strong>{{ native_user.first_name }} {{ native_user.last_name }}</strong></span></p>
+            <p>
+                <span class="name">
+                    <strong>{{ native_user.first_name }} {{ native_user.last_name }}</strong>
+                    {% if user != native_user %}
+                        {% if native_user in followed_users %}
+                            <!-- Already followed -->
+                            <a class="btn-small btn-flat tooltipped green" data-position="right" data-tooltip="Followed">
+                                <i class="material-icons">check</i>
+                            </a>
+                            <a class="btn-small tooltipped red unfollow" data-tooltip="Unfollow" data-position="right" href="{% url 'unfollow_user' user.username native_user.username %}">
+                                <i class="material-icons tiny">cancel</i>
+                            </a>
+                        {% else %}
+                        <a class="btn-small tooltipped follow" id="follow-{{ native_user.pk }}" href="{% url 'follow_user' user.username native_user.username %}" data-tooltip="Follow" data-position="right">
+                            <i class="material-icons tiny">person_add</i>
+                        </a>
+                        {% endif %}
+                    {% else %}
+                        <a class="modal-trigger btn btn-flat tooltipped" data-position="right" data-tooltip="Followed" href="#modal-followed">
+                            <i class="material-icons">contacts</i>
+                        </a>
+                        <a class="modal-trigger btn btn-flat tooltipped" data-position="right" data-tooltip="Followers" href="#modal-followers">
+                            <i class="material-icons">directions_run</i>
+                        </a>
+                    {% endif %}
+                </span>
+            </p>
             <span class="email">{{ native_user.email }}</span>
         </div>
     </li>
     <div class="divider"></div>
-        <li class="collection-item amber lighten-1">   
-            <a class="modal-trigger btn-flat" href="#modal-manage-calendar" >
-                Manage Calendar
-            </a>
-        </li>
-        <li class="collection-item amber lighten-1">   
+
+        <li class="collection-item amber lighten-1">
             <a class="modal-trigger btn-flat" href="#modal-quiz-performance" >
                 Quiz Performance
             </a>
@@ -29,6 +51,11 @@
             <a class="btn-flat" href="{% url 'edit_profile' user.username %}">
                 Edit Profile
                 <i class="material-icons">edit</i>
+            </a>
+        </li>
+        <li class="collection-item amber lighten-1">
+            <a class="modal-trigger btn-flat" href="#modal-manage-calendar" >
+                Manage Calendar
             </a>
         </li>
         {% if user|has_group:'Teacher' %}
@@ -54,6 +81,11 @@
             <a class="btn-flat" href="{% url 'edit_profile' user.username %}">
                 Edit Profile
                 <i class="material-icons">edit</i>
+            </a>
+        </li>
+        <li class="collection-item amber lighten-1">
+            <a class="modal-trigger btn-flat" href="#modal-manage-calendar" >
+                Manage Calendar
             </a>
         </li>
 
@@ -106,6 +138,10 @@
 </ul>
 
 
-{% include 'user_profile/drafts_modal.html' %}
+{% include 'user_profile/modal_drafts.html' %}
 
-{% include 'user_profile/permission_modal.html' %}
+{% include 'user_profile/modal_permission.html' %}
+
+{% include 'user_profile/modal_followed.html' %}
+
+{% include 'user_profile/modal_following.html' %}

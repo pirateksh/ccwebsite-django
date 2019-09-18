@@ -52,17 +52,31 @@
              audio.play();
              {#console.log(msg.data.dp_url);#}
              var menu = $('.notifications');
-             menu.prepend(
-                 "<li class='collection-item avatar'>" +
-                 "<img src='" + msg.data.dp_url + "' alt='' class='circle'>" +
-                 "<span class='title'><strong>" +
-                 "<a href='" + msg.data.prof_url + "'>" + msg.data.actor_name + "</a> " + msg.verb + "</strong></span>" +
-                 "<p>" +
-                 "<strong>Post title:</strong> <a href='" + msg.data.post_url + "'>" + msg.target + "</a>" +
-                 "<br><strong> -- " + msg.data.timestamp_ + " ago.</strong>" +
-                 "</p>" +
-                 "</li>"
-             );
+             if((msg.data.post_url === undefined) && (msg.target === undefined)){
+                 menu.prepend(
+                     "<li class='collection-item avatar'>" +
+                     "<img src='" + msg.data.dp_url + "' alt='' class='circle'>" +
+                     "<span class='title'><strong>" +
+                     "<a href='" + msg.data.prof_url + "'>" + msg.data.actor_name + "</a> " + msg.verb + "</strong></span>" +
+                     "<p>" +
+                     "<strong>Post title:</strong> <a href='" + msg.data.post_url + "'>" + msg.target + "</a>" +
+                     "<br><strong> -- " + msg.data.timestamp_ + " ago.</strong>" +
+                     "</p>" +
+                     "</li>"
+                 );
+             } else {
+                 menu.prepend(
+                     "<li class='collection-item avatar'>" +
+                     "<img src='" + msg.data.dp_url + "' alt='' class='circle'>" +
+                     "<span class='title'><strong>" +
+                     "<a href='" + msg.data.prof_url + "'>" + msg.data.actor_name + "</a> " + msg.verb + "</strong></span>" +
+                     "<p>" +
+                     "<br><strong> -- " + msg.data.timestamp_ + " ago.</strong>" +
+                     "</p>" +
+                     "</li>"
+                 );
+             }
+
          }
      }
 </script>

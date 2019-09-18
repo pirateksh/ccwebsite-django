@@ -618,8 +618,8 @@ $('.post-del-form').submit(function (event) {
                     postDiv = $('#home-post-' + json.postPK);
 
                 }
-
-                postDiv.css('display', 'none');
+                postDiv.remove();
+                // postDiv.css('display', 'none');
                 // postDiv.fadeOut(2000);
                 addToast("Post deleted successfully!");
             } else if (json.result === "ERR") {
@@ -636,11 +636,11 @@ $('.post-del-form').submit(function (event) {
 
 // Edit post
 $('.edit-btn').click(function (event) {
-// DO ONSUBMIT HERE
     var this_ = $(this);
     var postPK = this_.attr('data-pk');
     var postData = this_.attr('data-val');
     CKEDITOR.instances['id_post_content_' + postPK].setData(postData);
+    // alert('working');
     $('#post-edit-form-' + postPK).submit(function (e) {
         e.preventDefault();
         var form = $(this);
@@ -664,7 +664,7 @@ $('.edit-btn').click(function (event) {
             },
             success: function (json) {
 
-                if (json.result === 'SS') {
+                if (json.result === 'SS' || json.result === 'UD') {
                     //(json.content + json.title + json.selectedTags);
                     var ulCollection = $('#user-prof-post-' + postPK);
                     ulCollection.children('.title').children('#post-head-m-down').html(json.title);
@@ -693,7 +693,7 @@ $('.edit-btn').click(function (event) {
                         draft.prop('disabled', true);
                         location.href = json.postUrl;
                     }
-                } else if (json.result === 'SSS'){
+                } else if (json.result === 'SUD'){
                     // Superuser undrafting
                     location.href = json.postUrl;
                 } else if (json.result === 'ERR') {
@@ -864,4 +864,134 @@ $('.comment-add-form').submit(function (event) {
 });
 
 
+$('.follow').click(function (e) {
+    e.preventDefault();
+    var this_ = $(this);
+    var url = this_.attr('href');
+    // alert("followed!");
+    $.ajax({
+        url: url,
+        type: "POST",
+        success: function (json) {
+                if (json.result === "AF") {
+                    // Already followed
+                    addToast("You already follow this user.")
+                } else if (json.result === "SS") {
+                // Success
+                var followBtn = $('#follow-' + json.nativePK);
+                followBtn.attr('data-tooltip', 'Unfollow');
+                followBtn.html("<i class='material-icons'>cancel</i>");
+                addToast('Successfully followed.')
+            } else if (json.result === 'ERR') {
+                addToast('Oops! We have encountered an error. Try Again!');
+            }
+        },
+        error: function (xhr) {
+            // console.log("Error: " + xhr.statusText);
+            // console.log(xhr.responseText); //--> to get the full details of error
+            // return false;
+            addToast('Oops! We have encountered an error. Try Again!');
+        }
+    })
+});
 
+
+// Follow user
+$('.follow').click(function (e) {
+    e.preventDefault();
+    var this_ = $(this);
+    var url = this_.attr('href');
+    // alert("followed!");
+    $.ajax({
+        url: url,
+        type: "POST",
+        success: function (json) {
+                if (json.result === "AF") {
+                    // Already followed
+                    addToast("You already follow this user.")
+                } else if (json.result === "SS") {
+                // Success
+                var followBtn = $('#follow-' + json.nativePK);
+                followBtn.attr('data-tooltip', 'Unfollow');
+                followBtn.html("<i class='material-icons'>cancel</i>");
+                addToast('Successfully followed.')
+            } else if (json.result === 'ERR') {
+                addToast('Oops! We have encountered an error. Try Again!');
+            }
+        },
+        error: function (xhr) {
+            // console.log("Error: " + xhr.statusText);
+            // console.log(xhr.responseText); //--> to get the full details of error
+            // return false;
+            addToast('Oops! We have encountered an error. Try Again!');
+        }
+    })
+});
+
+
+// Unfollow user
+$('.unfollow').click(function (e) {
+    e.preventDefault();
+    var this_ = $(this);
+    var url = this_.attr('href');
+    // alert("unfollowed!");
+    $.ajax({
+        url: url,
+        type: "POST",
+        success: function (json) {
+                if (json.result === "AUF") {
+                    // Already followed
+                    addToast("You are already not following this user.")
+                } else if (json.result === "SS") {
+                // Success
+                // var followBtn = $('#follow-' + json.nativePK);
+                // followBtn.attr('data-tooltip', 'Unfollow');
+                // followBtn.html("<i class='material-icons'>cancel</i>");
+                addToast('Successfully un-followed.')
+            } else if (json.result === 'ERR') {
+                addToast('Oops! We have encountered an error. Try Again!');
+            }
+        },
+        error: function (xhr) {
+            // console.log("Error: " + xhr.statusText);
+            // console.log(xhr.responseText); //--> to get the full details of error
+            // return false;
+            addToast('Oops! We have encountered an error. Try Again!');
+        }
+    })
+});
+
+
+// Subscribe to topics/tags
+ $('.tags-to-subscribe').click(function (e) {
+     e.preventDefault();
+     var this_ = $(this);
+     var url = this_.attr('href');
+     var tag = this_.attr('id');
+
+     $.ajax({
+        url: url,
+        type: "GET",
+        data: {
+           tag: tag,
+        },
+        success: function (json) {
+            if (json.result === "SU"){
+                this_.attr('class', 'chip');
+                addToast("Unsubscribed from " + tag);
+            } else if (json.result === "SS") {
+                this_.attr('class', 'amber chip');
+                addToast("Subscribed to " + tag);
+            } else if (json.result === 'UA') {
+                addToast("You are not authorised to access this feature.");
+            } else if (json.result === "ERR") {
+                addToast('Oops! We have encountered an error. Try Again!');
+            }
+
+        },
+        error: function (xhr) {
+             addToast('Oops! We have encountered an error. Try Again!');
+        }
+     });
+
+ });

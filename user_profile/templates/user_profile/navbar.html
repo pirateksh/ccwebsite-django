@@ -70,7 +70,31 @@
                     {% if profile.avatar %}
                         <a><img class="circle materialboxed" src="{{ profile.avatar.url }}"></a>
                     {% endif %}
-                    <a><span class="name">{{ native_user.first_name }} {{ native_user.last_name }}</span></a>
+                    <a>
+                        <span class="name">{{ native_user.first_name }} {{ native_user.last_name }}</span>
+                        {% if user != native_user %}
+                            {% if native_user in followed_users %}
+                                <!-- Already followed -->
+                                <a class="btn-small tooltipped green" data-position="right" data-tooltip="Followed">
+                                    <i class="material-icons">check</i>
+                                </a>
+                                <a class="btn-small tooltipped red unfollow" data-tooltip="Unfollow" data-position="right" href="{% url 'unfollow_user' user.username native_user.username %}">
+                                    <i class="material-icons tiny">cancel</i>
+                                </a>
+                            {% else %}
+                            <a class="btn-small tooltipped follow" id="follow-{{ native_user.pk }}" href="{% url 'follow_user' user.username native_user.username %}" data-tooltip="Follow" data-position="right">
+                                <i class="material-icons tiny">person_add</i>
+                            </a>
+                            {% endif %}
+                        {% else %}
+                                <a class="modal-trigger btn btn-flat tooltipped" data-position="right" data-tooltip="Followed" href="#modal-followed">
+                                    <i class="material-icons">contacts</i>
+                                </a>
+                                <a class="modal-trigger btn btn-flat tooltipped" data-position="right" data-tooltip="Followers" href="#modal-followers">
+                                    <i class="material-icons">directions_run</i>
+                                </a>
+                        {% endif %}
+                    </a>
                     <a><span class="email">{{ native_user.email }}</span></a>
                     {% if user.is_superuser %}
                         <!-- Admin visiting someone's profile -->
@@ -189,12 +213,16 @@
     </div>
 </nav>
 
-{% include 'home/login_modal.html' %}
+{% include 'home/modal_login.html' %}
 
-{% include 'home/signup_modal.html' %}
+{% include 'home/modal_signup.html' %}
 
-{% include 'user_profile/verify_post_modal.html' %}
+{% include 'user_profile/modal_verify_post.html' %}
 
-{% include 'user_profile/drafts_modal.html' %}
+{% include 'user_profile/modal_drafts.html' %}
 
-{% include 'user_profile/permission_modal.html' %}
+{% include 'user_profile/modal_permission.html' %}
+
+{% include 'user_profile/modal_following.html' %}
+
+{% include 'user_profile/modal_followed.html' %}

@@ -9,6 +9,13 @@ from django.contrib.sites.models import Site
 from django.utils.timesince import timesince
 from django.utils import timezone
 
+# from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+
+# Importing token
+from .tokens import account_activation_token
+
 # Import for sending mail
 from django.core import mail
 from django.template.loader import render_to_string
@@ -23,19 +30,16 @@ from django.contrib.auth.models import User
 from .models import UserProfile
 from comments.models import Comment
 from post.models import Post, Tags
-'''
-# Imported Models from quizapp to show the results:)
-'''
 from quizapp.models import UserQuizResult
 
 # Imported Forms
 from django.contrib.auth.forms import PasswordChangeForm
 from .forms import AvatarUploadForm
 from home.forms import UserSignupForm
-from post.forms import PostForm
+from post.forms import PostForm, TagForm
 from comments.forms import CommentForm
 
-'''Importing Stuff for Google Calendar API'''
+# Importing Stuff for Google Calendar API
 from .cal_setup import get_calendar_service
 import os.path
 
@@ -50,6 +54,8 @@ def user_profile(request, username, tag_name=None):
     service = get_calendar_service(request)
     # Call the Calendar API
     # print('Getting list of calendars')
+    timeZone = None
+    calendar_id = None
     if service:
         cal_service_found = True     
         calendars_result = service.calendarList().list().execute()
@@ -79,6 +85,11 @@ def user_profile(request, username, tag_name=None):
         if profile is check_profile:
             flag = set_profile(request, native_user)
             check_profile = get_object_or_404(UserProfile, user=request.user)
+
+    # Users current user is following
+    followed_users = check_profile.followed_users.all()
+    # Users who are following current user
+    followers = check_profile.followers.all()
 
     # Posts and avatar of that user
     native_posts = page_maker(request, Post, native_user, tag_filter=tag_name)
@@ -135,18 +146,121 @@ def user_profile(request, username, tag_name=None):
         'read_notif': read_notif,
         'unread_notif': unread_notif,
         'drafts': drafts,
-        'quiz_results':quiz_results,
+        'quiz_results': quiz_results,
         'scheduled_posts': scheduled_posts,
+        'followed_users': followed_users,
+        'followers': followers,
     }
 
     if check_profile is not None:
         if not profile.is_profile_set:
             messages.info(request, f"User profile not set")
             return HttpResponseRedirect(reverse('Index'))
+
     if 'cal_service_found' in locals():
-        new_to_context = {'cal_service_found':1,'calendar_id': calendar_id,'timeZone':timeZone}
+        new_to_context = {'cal_service_found': 1, 'calendar_id': calendar_id, 'timeZone': timeZone}
         context.update(new_to_context)
     return render(request, 'user_profile/user_profile.html', context)
+
+
+@login_required
+def follow_user(request, username, username2):
+    """
+        This function adds desired user to following list of logged in user.
+    """
+    follower = User.objects.get(username=username)
+    follower_profile = UserProfile.objects.get(user=follower)
+    if request.user == follower:
+        followed = User.objects.get(username=username2)
+        followed_profile = UserProfile.objects.get(user=followed)
+
+        # Checking if logged in user already followed the user.
+        if followed in follower_profile.followed_users.all():
+            result = "AF"
+            response = {
+                'result': result,
+            }
+            return JsonResponse(response)
+
+        # Adding desired user to logged in user's followed list
+        follower_profile.followed_users.add(followed)
+        follower_profile.save()
+
+        # Adding logged in user to followed user's followers list
+        followed_profile.followers.add(follower)
+        followed_profile.save()
+
+        # A very bad idea to attach this notification with a specific post by hard - coding to avoid errors.
+        # post = Post.objects.get(title='Follow Users')
+        # post_url = reverse('post_detail', kwargs={'slug': post.slug})
+
+        notify.send(
+            # Sending notification to person being followed.
+            follower_profile,
+            recipient=followed,
+            verb='followed you',
+            # target=post,
+            dp_url=follower_profile.avatar.url,
+            prof_url=reverse("User Profile", kwargs={'username': follower.username}),
+            # post_url=post_url,
+            actor_name=follower_profile.user.first_name,
+            timestamp_=timesince(timezone.now()),
+        )
+
+        result = "SS"
+        response = {
+            'result': result,
+            'nativePK': followed.pk,
+        }
+        return JsonResponse(response)
+    result = "ERR"
+    response = {
+        'result': result,
+    }
+    return JsonResponse(response)
+
+
+@login_required
+def unfollow_user(request, username, username2):
+    """
+        This function removes desired user from following list of logged in user.
+    """
+    unfollower = User.objects.get(username=username)
+    unfollower_profile = UserProfile.objects.get(user=unfollower)
+
+    if request.user == unfollower:
+        unfollowed = User.objects.get(username=username2)
+        unfollowed_profile = UserProfile.objects.get(user=unfollowed)
+
+        # Checking if logged in user already unfollowed the user.
+        if unfollowed not in unfollower_profile.followed_users.all():
+            result = "AUF"
+            response = {
+                'result': result,
+            }
+            return JsonResponse(response)
+
+        # Removing desired user from logged in user's followed list
+        unfollower_profile.followed_users.remove(unfollowed)
+        unfollower_profile.save()
+
+        # Removing logged in user from followed user's followers list
+        unfollowed_profile.followers.remove(unfollower)
+        unfollowed_profile.save()
+
+        # No notification sent in case of un-following.
+
+        result = "SS"
+        response = {
+            'result': result,
+            'nativePK': unfollowed.pk,
+        }
+        return JsonResponse(response)
+    result = "ERR"
+    response = {
+        'result': result,
+    }
+    return JsonResponse(response)
 
 
 @login_required
@@ -156,15 +270,25 @@ def edit_profile(request, username):
     """
     native_user = get_object_or_404(User, username=username)
     profile = get_object_or_404(UserProfile, user=native_user)
+
+    # All tags and subscribed tags
+    tags = Tags.objects.all()
+    tags_subscribed = profile.subscribed_tags.all()
+
+    # Forms
     avatar_form = AvatarUploadForm()
     form = UserSignupForm()
     password_change_form = PasswordChangeForm(user=native_user)
+    tag_form = TagForm()
     context = {
         'form': form,
         'profile': profile,
         'avatar_form': avatar_form,
         'native_user': native_user,
         'password_change_form': password_change_form,
+        'tag_form': tag_form,
+        'tags': tags,
+        'tags_subscribed': tags_subscribed,
     }
 
     # A check so that other users cannot visit edit page of native user.
@@ -208,14 +332,91 @@ def change_email(request, username):
     if request.user == native_user:
         if request.method == "POST":
             email = request.POST['email']
-            user.email = email
-            user.save()
-            messages.success(request, f"Email changed successfully!")
+            old_email = user.email
+
+            if old_email != email:
+                user.email = email
+                user.save()
+                profile = UserProfile.objects.get(user=user)
+                # Setting is email verified to be false when email is changed
+                profile.is_email_verified = False
+                profile.save()
+                messages.success(request, f"Email changed successfully!")
+            else:
+                messages.info(request, f"You have entered same email as saved in you profile.")
             return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': username}))
         messages.error(request, f"Something went wrong. Try again!")
         return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': username}))
     messages.info(request, f"You are not authorised to visit this page.")
     return HttpResponseRedirect(reverse('User Profile', kwargs={'username': request.user}))
+
+
+@login_required
+def verify_email(request, username):
+    """
+        This function sends a verification link to your email.
+    """
+    native_user = get_object_or_404(User, username=username)
+    user = request.user
+    if user == native_user:
+        email = native_user.email
+        # Verifying Email
+
+        subject = 'Activate your blog account.'
+        # current_site = get_current_site(request)
+        domain = Site.objects.filter()
+        email_context = {
+            'user': user,
+            'domain': domain.first(),
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),  # .decode(),
+            'token': account_activation_token.make_token(user),
+        }
+        html_message = render_to_string('user_profile/mail_template_email_verification.html', context=email_context)
+        plain_message = strip_tags(html_message)
+
+        from_email = "noreply@ccwebsite"
+        to = str(user.email)
+        try:
+            mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+        except mail.BadHeaderError:
+            messages.info(request, f"Invalid Header found, mail not sent!")
+
+        # message = render_to_string('acc_active_email.html', {
+        #     'user': user,
+        # })
+        #
+        # to_email = form.cleaned_data.get('email')
+        # email = EmailMessage(
+        #     mail_subject, message, to=[to_email]
+        # )
+        # email.send()
+        return HttpResponse('Please confirm your email address to complete the registration')
+    messages.info(request, f"You are not authorised to visit this page.")
+    return HttpResponseRedirect(reverse('User Profile', kwargs={'username': request.user}))
+
+
+def activate(request, uidb64, token):
+    """
+        A function that verifies email through activation link.
+    """
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        if request.user == user:
+            if user.is_authenticated:
+                profile = UserProfile.objects.get(user=user)
+
+                profile.is_email_verified = True
+                profile.save()
+
+                messages.success(request, f"Your email has been verified.")
+                return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': user.username}))
+            messages.success(request, f"Login to verify email.")
+            return HttpResponseRedirect(reverse('Index'))
+    return HttpResponse('Activation link is invalid!')
 
 
 @login_required
@@ -256,6 +457,50 @@ def avatar_upload(request, username):
     return HttpResponseRedirect(reverse('User Profile', kwargs={'username': request.user}))
 
 # Personal Information Edit Section Ended
+
+
+# Subscription settings started
+
+@login_required
+def subscribe_to_tag_toggle(request, username, tag):
+    """
+        A function to subscribe/unsubscribe to tags.
+    """
+    if request.method == "GET":
+        user = User.objects.get(username=username)
+        if request.user == user:
+            tag_name = request.GET['tag']
+            tag_name = str(tag_name)
+            tag = Tags.objects.get(name=tag_name)
+            profile = UserProfile.objects.get(user=user)
+            """
+                Acronyms:
+                SU - Succesfully Unsubscribed
+                SS - Successfully Subscribed
+                UA - Unauthorised
+                ERR - Error
+            """
+            # Check if tag is already subscribed
+            if tag in profile.subscribed_tags.all():
+                # Unsubscribe
+                profile.subscribed_tags.remove(tag)
+                tag.subscribed_by.remove(user)
+                result = "SU"
+            else:
+                # Subscribe
+                profile.subscribed_tags.add(tag)
+                tag.subscribed_by.add(user)
+                result = "SS"
+            profile.save()
+            tag.save()
+        else:
+            result = "UA"
+    else:
+        result = "ERR"
+    response = {
+        'result': result
+    }
+    return JsonResponse(response)
 
 # Notification settings Started
 
@@ -408,7 +653,6 @@ def change_password(request, username):
 @login_required
 def approve_event(request, username, slug):
     if request.method == "POST":
-        # Data from AJAX
         approve_comment = request.POST['approve_comment']
         approve_comment = str(approve_comment)
 
@@ -417,7 +661,7 @@ def approve_event(request, username, slug):
         native_profile = UserProfile.objects.get(user=native_user)
 
         post = Post.objects.get(slug=slug)
-        # post_url = reverse('post_detail', kwargs={'slug': slug})
+        post_url = reverse('post_detail', kwargs={'slug': slug})
 
         # Event's post's author and author's profile
         author = post.author
@@ -433,7 +677,7 @@ def approve_event(request, username, slug):
                     'status': 'accepted',
                     'remark': approve_comment,
             }
-            html_message = render_to_string('user_profile/reply_mail_template.html', context=email_context)
+            html_message = render_to_string('user_profile/mail_template_reply.html', context=email_context)
             plain_message = strip_tags(html_message)
             from_email = "noreply@ccwebsite"
             to = str(author.email)
@@ -441,18 +685,68 @@ def approve_event(request, username, slug):
                 mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
             except mail.BadHeaderError:
                 messages.info(request, f"Invalid Header found, mail not sent!")
+
+        # Sending notification to event's post's author.
         notify.send(
-            # Sending notification to event's post's author.
             native_profile,
             recipient=author,
             verb='granted permission for event.',
             target=post,
             dp_url=native_profile.avatar.url,
             prof_url=reverse("User Profile", kwargs={'username': native_user.username}),
-            # post_url=post_url,
+            post_url=post_url,
             actor_name=native_profile.user.first_name,
             timestamp_=timesince(timezone.now()),
         )
+
+        tags = post.tags.all()
+        notify_users = []
+        email_users = []
+        for tag in tags:
+            subs = tag.subscribed_by.all()
+            for sub in subs:
+                if sub not in notify_users:
+                    notify_users.append(sub)
+                sub_profile = UserProfile.objects.get(user=sub)
+                if sub_profile.is_subscribed:
+                    if sub not in email_users:
+                        email_users.append(sub)
+
+        # Sending notification to all users who have subscribed to tag in tags.
+        """
+            This is giving error. Check why!
+        """
+
+        # notify.send(
+        #     author,
+        #     recipient=notify_users,
+        #     verb='is hosting an event.',
+        #     target=post,
+        #     dp_url=author_profile.avatar.url,
+        #     prof_url=reverse("User Profile", kwargs={'username': author.username}),
+        #     post_url=post_url,
+        #     actor_name=author.first_name,
+        #     timestamp_=timesince(timezone.now()),
+        # )
+
+        # Sending mail to subscribed users
+        subject = 'Event of your interest'
+
+        # Domain of link
+        domain = Site.objects.filter()
+        email_context = {
+            'post': post,
+            'domain': domain.first(),
+        }
+        html_message = render_to_string('user_profile/mail_template_event_notification.html', context=email_context)
+        plain_message = strip_tags(html_message)
+        from_email = "noreply@ccwebsite"
+
+        try:
+            mail.send_mail(subject, plain_message, from_email, email_users, html_message=html_message)
+        except mail.BadHeaderError:
+            messages.info(request, f"Invalid Header found, mail not sent!")
+
         post.verify_status = 1
         post.draft = False
         post.save()
@@ -463,7 +757,6 @@ def approve_event(request, username, slug):
 @login_required
 def reject_event(request, username, slug):
     if request.method == "POST":
-        # Data from AJAX
         reject_comment = request.POST['reject_comment']
         reject_comment = str(reject_comment)
         # Native user and profile
@@ -488,7 +781,7 @@ def reject_event(request, username, slug):
                 'status': 'rejected',
                 'remark': reject_comment,
             }
-            html_message = render_to_string('user_profile/reply_mail_template.html', context=email_context)
+            html_message = render_to_string('user_profile/mail_template_reply.html', context=email_context)
             plain_message = strip_tags(html_message)
             from_email = "noreply@ccwebsite"
             to = str(author.email)

@@ -19,7 +19,8 @@
     {% for native_post in native_posts %}
         {% if not native_post.deleted %}
         <div class="normal-posts">
-            <ul class="collection with-header" id="user-prof-post-{{ native_post.pk }}" >
+            <div id="user-prof-post-{{ native_post.pk }}">
+            <ul class="collection with-header">
                 <li class="collection-header title">
                 <!-- Post title -->
                     <h4 class="hide-on-med-and-down post-head-m-down" style="font-size: 3vw;">
@@ -96,12 +97,12 @@
                                     <h4>Edit Post</h4>
                                     {% csrf_token %}
 
-                                    <div class="input-field col col s6 m6">
+                                    <div class="input-field col s6 m6 l6">
                                         <i class="material-icons prefix">account_circle</i>
                                         <input type="text" name="title" maxlength="255" class=" validate validate" required id="id-title-{{ native_post.pk }}" value="{{ native_post.title }}" disabled>
                                         <label class="" for="id_title_{{ native_post.pk }}">Post Title</label>
                                     </div>
-                                    <div class="input-field col col s6 m6  ">
+                                    <div class="input-field col s6 m6 l6 ">
                                         <i class="material-icons prefix">account_circle</i>
                                         <select multiple id="tags-edit-{{ native_post.pk }}">
                                             {% for tag in tags %}
@@ -289,6 +290,7 @@
     {#          <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>#}
     {#          </li>#}
             </ul>
+            </div>
         </div>
         {% endif %}
     {% endfor %}
@@ -296,7 +298,7 @@
     <ul class="collection with-header" >
     {# If no posts found #}
         <li class="collection-header">
-            {% if user.is_superuser %}
+            {% if user.is_superuser and user == native_user %}
                 Add some post or approve your posts from Django Admin Dashboard.
             {% elif native_user == user %}
                 You have'nt added any posts yet, try to add one.
