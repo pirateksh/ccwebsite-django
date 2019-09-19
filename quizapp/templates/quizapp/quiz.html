@@ -1,221 +1,183 @@
-{%extends 'base.html' %}
-{%block content%}
-{%load static%}
+{% load static %}
 {%load quizapp_tags%}
+<!DOCTYPE html>
+<html lang="en">
 
-    <div class="row">
-
-      <div class="col s12 m4 l3">
-         <ul id="slide-out" class="sidenav sidenav-fixed" >
-    <li><div class="user-view">
-
-      <a href="#user"><img class="circle" src="{{user.profile.image.url}}"></a>
-      <a href="#name"><span class="white-text name">{{user.first_name}}</span></a>
-      <a href="#email"><span class="white-text email">{{user.username}}</span></a>
-    </div></li>
-    <li><a href="#!"><i class="material-icons">cloud</i>Access Questions:</a></li>
-    <!-- Needs Change -->
-    {% with numofques=quiz1.no_of_ques%}
-    {%for value in numofques|times%}
-    <li><a href="#!">Question {{forloop.counter}}</a></li>
-    {%endfor%}
-    {%endwith%}
-    <li><div class="divider"></div></li>
-  </ul>
- <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        
-      </div>
-
-      <div class="col s12 m8 l9">
-
-      <div id='title'>
-        <h1>{{quiz1.title}}</h1>
-      </div>
-        <br/>
-        <div id='quiz'></div>
-        <div class='btn' id='next'><a href='#'>Next</a></div>
-        <div class='btn' id='prev'><a href='#'>Prev</a></div>
-        <div class='btn' id='start'> <a href='#'>Start Over</a></div>
-      </div>
-<script type="text/javascript">
-  document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, options);
-  });
-</script>
-<script type="text/javascript">
-    (function() {
-  var questions = [];
-  {%for question in questions%}
-  questions.push(
-    
-      {
-        question:"{{question.question}}",
-        {% get_options question as opt %}
-        {% get_ans question as ans %}
-        choices:["{{opt.0}}",
-                "{{opt.1}}",
-                "{{opt.2}}",
-                "{{opt.3}}"], 
-        {%if ans == '1'%}
-          // correctAnswer: "{{opt.0}}" // COoOOl!
-          correctAnswer: 1
-        {%elif ans ==  '2' %}
-          correctAnswer: 2
-        {%elif ans == '3'%}
-          correctAnswer: 3
-        {%elif ans == '4'%}
-          correctAnswer: 4
-        {%endif%}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>QUIZ</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'Bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static 'Bootstrap/css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{% static 'Bootstrap/css/style.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'Bootstrap/css/style.css' %}">
+  <style type="text/css">
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
       }
-    );
-  {%endfor%}
+    }
 
-  
-  var questionCounter = 0; //Tracks question number
-  var selections = []; //Array containing user choices
-  var quiz = $('#quiz'); //Quiz div object
-  
-  // Display initial question
-  displayNext();
-  
-  // Click handler for the 'next' button
-  $('#next').on('click', function (e) {
-    e.preventDefault();
-    
-    // Suspend click listener during fade animation
-    if(quiz.is(':animated')) {        
-      return false;
-    }
-    choose();
-    
-    // If no user selection, progress is stopped
-    if (isNaN(selections[questionCounter])) {
-      alert('Please make a selection!');
-    } else {
-      questionCounter++;
-      displayNext();
-    }
-  });
-  
-  // Click handler for the 'prev' button
-  $('#prev').on('click', function (e) {
-    e.preventDefault();
-    
-    if(quiz.is(':animated')) {
-      return false;
-    }
-    choose();
-    questionCounter--;
-    displayNext();
-  });
-  
-  // Click handler for the 'Start Over' button
-  $('#start').on('click', function (e) {
-    e.preventDefault();
-    
-    if(quiz.is(':animated')) {
-      return false;
-    }
-    questionCounter = 0;
-    selections = [];
-    displayNext();
-    $('#start').hide();
-  });
-  
-  // Animates buttons on hover
-  $('.btn').on('mouseenter', function () {
-    $(this).addClass('active');
-  });
-  $('.btn').on('mouseleave', function () {
-    $(this).removeClass('active');
-  });
-  
-  // Creates and returns the div that contains the questions and 
-  // the answer selections
-  function createQuestionElement(index) {
-    var qElement = $('<div>', {
-      id: 'question'
-    });
-    
-    var header = $('<h2>Question ' + (index + 1) + ':</h2>');
-    qElement.append(header);
-    
-    var question = $('<p>').append(questions[index].question);
-    qElement.append(question);
-    
-    var radioButtons = createRadios(index);
-    qElement.append(radioButtons);
-    
-    return qElement;
-  }
-  
-  // Creates a list of the answer choices as radio inputs
-  function createRadios(index) {
-    var radioList = $('<ul>');
-    var item;
-    var input = '';
-    for (var i = 0; i < questions[index].choices.length; i++) {
-      item = $('<li>');
-      input = '<input type="radio" name="answer" value=' + i + ' />';
-      input += questions[index].choices[i];
-      item.append(input);
-      radioList.append(item);
-    }
-    return radioList;
-  }
-  
-  // Reads the user selection and pushes the value to an array
-  function choose() {
-    selections[questionCounter] = +$('input[name="answer"]:checked').val();
-  }
-  
-  // Displays next requested element
-  function displayNext() {
-    quiz.fadeOut(function() {
-      $('#question').remove();
-      
-      if(questionCounter < questions.length){
-        var nextQuestion = createQuestionElement(questionCounter);
-        quiz.append(nextQuestion).fadeIn();
-        if (!(isNaN(selections[questionCounter]))) {
-          $('input[value='+selections[questionCounter]+']').prop('checked', true);
-        }
-        
-        // Controls display of 'prev' button
-        if(questionCounter === 1){
-          $('#prev').show();
-        } else if(questionCounter === 0){
+  </style>
+</head>
+
+<body>
+<div style="  position: fixed;
+              width: -webkit-fill-available;">
+    <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark scrolling-navbar" id="navSmall">
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand" target="_blank">
+        <strong>CC Club MNNIT</strong>
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            {%with Index="Index"%}
+            <a class="nav-link wave-effect" href="{%url Index %}">Home
+              <span class="sr-only">(current)</span>
+            </a>
+            {%endwith%}
+          </li>
+        </ul>
+
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
           
-          $('#prev').hide();
-          $('#next').show();
-        }
-      }else {
-        var scoreElem = displayScore();
-        quiz.append(scoreElem).fadeIn();
-        $('#next').hide();
-        $('#prev').hide();
-        $('#start').show();
-      }
-    });
-  }
-  
-  // Computes score and returns a paragraph element to be displayed
-  function displayScore() {
-    var score = $('<p>',{id: 'question'});
-    
-    var numCorrect = 0;
-    for (var i = 0; i < selections.length; i++) {
-      if (selections[i]+1 === questions[i].correctAnswer) { 
-      // counting in selections is from 0 i.e. First option is 0
-        numCorrect++;
-      }
-    }
-    
-    score.append('You got ' + numCorrect + ' questions out of ' +
-                 questions.length + ' right!!!');
-    return score;
-  }
-})();
-</script>
-{%endblock%}
+          <li class="nav-item">
+              <div class="nav-link">Time Remaining :</div>
+          </li>
+          <li class="nav-item">
+            <div id="timer" class="text-white nav-link"></div>
+          </li> 
+          <li class="nav-item"> 
+            <div class="nav-link">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link border border-light rounded wave-effect"
+              target="_blank">
+              SUBMIT<i class=" mr-2"><i class="fas fa-arrow-right"></i></i>
+            </a>
+          </li>
+        </ul>
+        
+      </div>
+    </div>
+
+    <!-- Dark mode -->
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="slider round"></div>
+        </label>
+      <em class="text-white">Dark Mode!</em>
+   </div>
+   
+
+  </nav>
+        <div class="row dark">
+                <div class="col-4 mylist" id="fadeShow1">
+                  <div id="list-example" class="list-group scrollspy-example1 mylist z-depth-2 text-center">
+                    {% for question in questions %}      
+                        <a class="list-group-item list-group-item-action dark2" href="#{{question.id}}">{{question.question}}</a>
+                      
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="col-sm-8 mylist">
+                  <div data-spy="scroll" data-target="#list-example" data-offset="0" class="z-depth-5 overflow-auto scrollspy-example">     
+                  {%for question in questions %}  
+                    <p id="list-item-{{forloop.counter}}">
+                        <div class="container scrollbar scrollbar-primary">
+                            <div class="card">
+                                <div class="card-header text-center peach-gradient">
+                                    Question {{forloop.counter}}
+                                </div>
+
+                                <div class="card-body dark2">
+                                    <h5 class="card-title">{{question.question}}</h5>
+                                    <p class="card-text">echcniekncecieocm;mc cjkeicne ccieicj?</p>
+                                </div>
+
+                                <div class="card-body dark1">
+                                    <form action="#">
+                                        {% get_options question as opt %}
+                                          <p>
+                                              <label>
+                                                  <input name="group1" type="radio" />
+                                                  <span>{{opt.0}}</span>
+                                              </label>
+                                          </p>
+                                          <p>
+                                              <label>
+                                                  <input name="group1" type="radio" />
+                                                  <span>{{opt.1}}</span>
+                                              </label>
+                                          </p>
+                                          <p>
+                                              <label>
+                                                  <input name="group1" type="radio" />
+                                                  <span>{{opt.2}}</span>
+                                              </label>
+                                          </p>
+                                          <p>
+                                              <label>
+                                                  <input name="group1" type="radio" />
+                                                  <span>{{opt.3}}</span>
+                                              </label>
+                                          </p>
+                                        <p>
+                                            <button type="submit" class="btn btn-primary border">SUBMIT</button>
+                                            <button type="reset" class="btn btn-primary border">RESET</button>
+                                        </p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </p>
+                  {%endfor%}                      
+                  </div>
+                </div>
+              </div>
+ </div>
+ <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="{% static 'Bootstraptq/js/jquery-3.4.1.min.js' %}"></script>
+  <!-- Bootstraptq tooltips -->
+  <script type="text/javascript" src="{% static 'Bootstraptq/js/popper.min.js' %}"></script>
+  <!-- Bootstraptq core JavaScript -->
+  <script type="text/javascript" src="{% static 'Bootstraptq/js/bootstrap.min.js' %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'Bootstraptq/js/mdb.min.js' %}"></script>
+  <!-- Initializations -->
+  <script type="text/javascript" src="{% static 'Bootstraptq/js/timer.js' %}"></script>
+  <script type="text/javascript" src="{% static 'Bootstraptq/js/dark.js' %}"></script>
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+
+  </script>
+
+
+
+</body>
+
+</html>

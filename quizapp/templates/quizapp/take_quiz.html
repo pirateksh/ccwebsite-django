@@ -1,0 +1,412 @@
+{% load static %}
+{%load quizapp_tags%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>QUIZ</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'Bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static 'Bootstrap/css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{% static 'Bootstrap/css/style.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'Bootstrap/css/style.css' %}">
+  <style type="text/css">
+    @media (min-width: 800px) and (max-width: 850px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+<div style="  position: fixed;
+              width: -webkit-fill-available;">
+    <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark scrolling-navbar" id="navSmall">
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand" target="_blank">
+        <strong>CC Club MNNIT</strong>
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            {%with Index="Index"%}
+            <a class="nav-link wave-effect" href="{%url Index %}">Home
+              <span class="sr-only">(current)</span>
+            </a>
+            {%endwith%}
+          </li>
+        </ul>
+
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+          
+          <li class="nav-item">
+              <div class="nav-link">Time Remaining :</div>
+          </li>
+          <li class="nav-item">
+            <div id="timer" class="text-white nav-link"></div>
+          </li> 
+          <li class="nav-item"> 
+            <div class="nav-link">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+          </li>
+          <li class="nav-item">
+            <a id="submit_quiz" class="nav-link border border-light rounded wave-effect" onclick="submit_quiz()">
+              SUBMIT<i class=" mr-2"><i class="fas fa-arrow-right"></i></i>
+            </a>
+          </li>
+        </ul>
+        
+      </div>
+    </div>
+
+    <!-- Dark mode -->
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="slider round"></div>
+        </label>
+      <em class="text-white">Dark Mode!</em>
+   </div>
+   
+
+  </nav>
+        <div class="row dark">
+                <div class="col-4 mylist" id="fadeShow1">
+                  <div id="list-example" class="list-group scrollspy-example1 mylist z-depth-2 text-center">
+                    {% for question in questions %}
+                      {% if forloop.counter is 1%}
+                        <a class="list-group-item list-group-item-action active dark2" active href="#list-item-{{forloop.counter}}">{{question.quiz_ques_id}}</a>
+                      
+                      {%else%}
+                      <a class="list-group-item list-group-item-action dark2" href="#list-item-{{forloop.counter}}">{{question.quiz_ques_id}}</a>
+                      {%endif%}
+                      
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="col-sm-8 mylist">
+                  <div data-spy="scroll" data-target="#list-example" data-offset="0" class="z-depth-5 overflow-auto scrollspy-example">     
+                  {%for question in questions %} 
+                  <div id="list-item-{{forloop.counter}}"> 
+                    <p >
+                        <div  class="container scrollbar scrollbar-primary">
+                            <div class="card">
+                                <div class="card-header text-center peach-gradient">
+                                    Question {{forloop.counter}}
+                                </div>
+
+                                <div class="card-body dark2">
+                                    <h5 class="card-title">{{question.quiz_ques_id}}</h5>
+                                    <p class="card-text"></p>
+                                </div>
+
+                                <div class="card-body dark1">
+                                    <form id="quiz_form-{{forloop.counter}}" 
+                                          action="">
+                                        {% csrf_token %}
+      
+                                        {% get_options question as opt %}
+                                        {% chk_atmp question request.user as sel_ans_%}
+                                        {% if sel_ans_ %}
+                                          <p>
+                                              <label>
+                                                <input name="option-{{forloop.counter}}" 
+                                                type="radio" value="1" {% if sel_ans_ is 1 %} checked {%endif%} />
+                                                <span>{{opt.0}}</span>
+                                              </label>                                       
+                                          </p>
+                                          <p>
+                                              <label>
+                                                  <input name="option-{{forloop.counter}}" 
+                                                  type="radio" value="2"{% if sel_ans_ is 2 %} checked {%endif%} />
+                                                  <span>{{opt.1}}</span>
+                                              </label>
+                                          </p>
+                                          <p>
+                                              <label>
+                                                  <input name="option-{{forloop.counter}}" 
+                                                  type="radio" value="3" {% if sel_ans_ is 3 %} checked {%endif%} />
+                                                  <span>{{opt.2}}</span>
+                                              </label>
+                                          </p>
+                                          <p>
+                                              <label>
+                                                  <input name="option-{{forloop.counter}}" 
+                                                  type="radio" value="4" {% if sel_ans_ is 4 %} checked {%endif%} />
+                                                  <span>{{opt.3}}</span>
+                                              </label>
+                                          </p>
+
+                                        {%else%}
+                                          <p>
+                                              <label>
+                                                <input name="option-{{forloop.counter}}" type="radio" value="1" />
+                                                <span>{{opt.0}}</span>
+                                              </label>                                       
+                                          </p>
+                                          <p>
+                                              <label>
+                                                  <input name="option-{{forloop.counter}}" type="radio" value="2" />
+                                                  <span>{{opt.1}}</span>
+                                              </label>
+                                          </p>
+                                          <p>
+                                              <label>
+                                                  <input name="option-{{forloop.counter}}" type="radio" value="3" />
+                                                  <span>{{opt.2}}</span>
+                                              </label>
+                                          </p>
+                                          <p>
+                                              <label>
+                                                  <input name="option-{{forloop.counter}}" type="radio" value="4" />
+                                                  <span>{{opt.3}}</span>
+                                              </label>
+                                          </p>
+                                        {%endif%}
+                                        <p>
+                                            <button type="submit" class="btn btn-primary border" value1="{{forloop.counter}}"
+                                            value2="{{question.id}}">SUBMIT</button>
+                                            <button type="reset" class="btn btn-primary border"
+                                            value1="{{forloop.counter}}"value2="{{question.id}}">RESET</button>
+                                        </p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </p>
+                  </div>
+                  {%endfor%}                      
+                  </div>
+                </div>
+              </div>
+ </div>
+
+
+ <!-- SCRIPTS -->
+  <script type="text/javascript" src="{% static 'Bootstrap/js/jquery-3.4.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'Bootstrap/js/popper.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'Bootstrap/js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'Bootstrap/js/mdb.min.js' %}"></script>
+ 
+
+<!-- jQuery Ajax To Handle Questions Submissions -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script> -->
+
+
+<script type="text/javascript">
+  function submit_quiz(){
+    // alert("clicked");
+    // var csrftoken = getCookie('csrftoken');
+    // alert(csrftoken);
+    {%with submit_quiz="submit_quiz"%}
+    $.ajax({
+      type:'GET',
+      url: "{% url 'submit_quiz' quiz.id %}",
+      // csrfmiddlewaretoken: csrftoken,
+      success:function(data){ // this data is what we have recieved as json 
+                  // response.
+        alert(data.SS);
+        // alert(data.hit);
+        // path_ = "/quiz/"+ '{{quiz.id}}';
+        // document.cookie = "minutes=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=path_;";
+        // document.cookie = "seconds=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=path_;";
+        // alert("cookiesDelete");
+        location.href = data.hit;
+      }
+    });
+    {%endwith%}
+  }
+
+  var curr_value_; // holds info of forloop.counter
+  var ques_id_; // holds info of attempted question.id
+  var form_id_; //hols info of current question form 
+  jQuery(document).on("click","button",function(e){
+    curr_value_ = jQuery(this).attr("value1"); //updated value of global Variable
+    // alert(curr_value); 
+    ques_id_ = jQuery(this).attr("value2"); //updated value of global Variable
+    // alert(ques_id);
+    form_id_ = "#quiz_form-" + curr_value_; //updated value of global Variable
+    // alert(form_id);
+  });
+   
+  $(document).on('submit', form_id_, function(e){
+    e.preventDefault();
+      // alert(form_id);
+      var ques_id = ques_id_;
+      var curr_value  = curr_value_;
+      var option_name = "option-"+ curr_value_;
+      var radioele = document.getElementsByName(option_name);
+      var sel_ans;
+      var question_id = ques_id;
+      for(i=0;i<radioele.length;i++){
+        if(radioele[i].checked){
+            sel_ans = radioele[i].value;
+        }
+      }
+  if( sel_ans ){
+    // console.log(corr_answer);
+    $.ajax({
+      type:'POST',
+      url: "{% url 'take_quiz' user.username quiz.id %}",
+      data:{
+        question_id : question_id,
+        quiz : '{{quiz.title}}',
+        sel_ans: sel_ans,
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+      },
+      dataType: 'json',
+      success:function(data){ // this data is what we have recieved as json 
+                  // response.
+        alert(data.SS);
+
+      }
+    });   
+  }
+  else{
+    alert("No Option is Selected!");
+  }
+
+
+  });
+
+
+// Remember Submit and Reset both are Part of the Form.  
+
+// Handling Reset Button
+
+$(document).on('reset', form_id_, function(e){
+    e.preventDefault();
+      // alert(form_id_);
+      // alert("Reset Clicked");
+      var question_id = ques_id_;
+      // alert(question_id);
+      var option_name = "option-"+ curr_value_;
+      var radioele = document.getElementsByName(option_name);
+      // alert(radioele);
+      var sel_ans;
+
+      for(i=0;i<radioele.length;i++){
+        if(radioele[i].checked){
+            sel_ans = radioele[i].value;
+        }
+      }
+      // alert(sel_ans); // returns undefined when any of the options is not selected.
+      if(sel_ans){
+        $.ajax({
+            type:'GET',
+            url: "{% url 'take_quiz' user.username quiz.id %}",
+            data:{
+              question_id : question_id,
+              quiz : '{{quiz.title}}',
+            },
+            success:function(data){ // this data is what we have recieved as json response.
+              uncheck(radioele);
+              alert(data.SS);
+            }
+          }); //closing of $.ajax 
+      }
+      else{
+        alert("Not attempted Yet!");
+      }
+    }); // closing of (document).on('reset',...)
+function uncheck(radioele){
+  for(i=0;i<radioele.length;i++){
+        if(radioele[i].checked){
+            radioele[i].checked=false;
+        }
+      }
+}
+  
+  
+
+</script>
+
+
+  <!-- Below Script Handles timer -->
+  <script>
+      var timeoutHandle;
+      function countdown(minutes,stat) {
+        var seconds = 60;
+        var mins = minutes;      
+        if(getCookie("minutes")&&getCookie("seconds")&&stat){
+           var seconds = getCookie("seconds");
+           var mins = getCookie("minutes");
+        }
+       
+        function tick() {        
+            var counter = document.getElementById("timer");
+            setCookie("minutes",mins,10)
+            setCookie("seconds",seconds,10)
+            var current_minutes = mins-1
+            seconds--;
+            counter.innerHTML = 
+            current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+            //save the time in cookie
+          
+            if( seconds > 0 ) {
+                timeoutHandle=setTimeout(tick, 1000);
+            } 
+            else if(!(seconds > 0) && !(mins > 0)){
+              setTimeout('setTimeouttest()',true);
+            }
+            else if(mins > 1){                    
+                   // countdown(mins-1);   never reach “00″ issue solvedStreithorst    
+                   setTimeout(function () { countdown(parseInt(mins)-1,false); }, 1000);
+            }else{
+              setTimeout(function () { submit_quiz(); }, 1000);
+            }
+        }
+        tick();
+      }
+      function setCookie(cname,cvalue,exdays) {
+          var d = new Date();
+          d.setTime(d.getTime() + (exdays*24*60*60*1000));
+          var expires = "expires=" + d.toGMTString();
+          document.cookie = cname+"="+cvalue+"; "+expires;
+      }
+     function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+    var minu = '{{quiz.time_lim}}';
+    countdown(parseInt(minu),true);
+  </script>
+
+<script type="text/javascript" src="{% static 'Bootstrap/js/dark.js' %}"></script>
+<script type="text/javascript">
+  // Animations initialization
+  new WOW().init();
+</script>
+
+
+</body>
+</html>

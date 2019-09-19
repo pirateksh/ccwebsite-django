@@ -2,6 +2,7 @@
 {%load static%}
 {%load quizapp_tags%}
 {%block content%}
+<div class="container">
 <div class="row">
     <form class="col s12" action="" method="post">
     	{% csrf_token %}
@@ -22,6 +23,16 @@
         </div>
       </div>
       <div class="row">
+        <div class="input-field col s5">
+         {{form.neg_marks}}
+          <label for="no_of_ques">Negative Marks per Question</label>
+        </div>
+        <div class="input-field col s5 right">
+          {{form.max_score}}
+          <label for="tim_lim">Maximum Score</label>
+        </div>
+      </div>
+      <div class="row">
         <div class="input-field col s12">
           <textarea id="instructions" name ="instr" class="materialize-textarea"></textarea>
           <label for="instructions">Instructions</label>
@@ -31,5 +42,6 @@
     	<i class="material-icons right">send</i>
   	  </button>
     </form>
+</div>
 </div>
 {% endblock %}
