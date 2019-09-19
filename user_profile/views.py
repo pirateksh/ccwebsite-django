@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect, reverse
 from django.http import JsonResponse
+from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash  # authenticate
@@ -418,43 +419,84 @@ def activate(request, uidb64, token):
             return HttpResponseRedirect(reverse('Index'))
     return HttpResponse('Activation link is invalid!')
 
-
+def clean_file(request,form):
+    file = form.cleaned_data['avatar']
+    # if file.size > 524:
+    if file.size > 5242880:
+        return False
+    return True
 @login_required
 def avatar_upload(request, username):
     """
         This function uploads/re-uploads profile picture of a user.
     """
-    native_user = get_object_or_404(User, username=username)
-    if request.user == native_user:
-        if request.method == 'POST':
-            avatar_form = AvatarUploadForm(request.POST, request.FILES)
-            if avatar_form.is_valid():
-                user_prof = UserProfile.objects.get(user=native_user)
+# <<<<<<< HEAD
+#     native_user = get_object_or_404(User, username=username)
+#     if request.user == native_user:
+#         if request.method == 'POST':
+#             avatar_form = AvatarUploadForm(request.POST, request.FILES)
+#             if avatar_form.is_valid():
+#                 user_prof = UserProfile.objects.get(user=native_user)
+#                 img = avatar_form.cleaned_data['avatar']
+#                 user_prof.avatar = img
+#                 user_prof.save()
+#                 messages.success(request, f"Avatar uploaded successfully!")
+#                 return HttpResponseRedirect(reverse("edit_profile", kwargs={'username': username}))
+#         else:
+#             avatar_form = AvatarUploadForm()
+#         form = UserSignupForm()
+#         password_change_form = PasswordChangeForm(request.user)
+#         addpostform = PostForm()
+#         comments = Comment.objects.all()
+#         comment_form = CommentForm()
+#         user_profiles = UserProfile.objects.all()
+#         context = {
+#             'password_change_form': password_change_form,
+#             'addpostform': addpostform,
+#             'avatar_form': avatar_form,
+#             'form': form,
+#             'comments': comments,
+#             'comment_form': comment_form,
+#             'user_profiles': user_profiles,
+#         }
+#         return render(request, 'user_profile/edit_profile.html', context)
+#     messages.info(request, f"You are not authorised to visit this page.")
+#     return HttpResponseRedirect(reverse('User Profile', kwargs={'username': request.user}))
+# =======
+    if request.method == 'POST':
+        avatar_form = AvatarUploadForm(request.POST, request.FILES)
+        if avatar_form.is_valid():
+            user = User.objects.get(username=username)
+            user_prof = UserProfile.objects.get(user=user)
+            if clean_file(request,avatar_form):
                 img = avatar_form.cleaned_data['avatar']
-                user_prof.avatar = img
-                user_prof.save()
-                messages.success(request, f"Avatar uploaded successfully!")
-                return HttpResponseRedirect(reverse("edit_profile", kwargs={'username': username}))
+            else:
+                return HttpResponseRedirect(reverse("User Profile",kwargs={'username':request.user}))
+            user_prof.avatar = img
+            user_prof.save()
+            messages.success(request, f"Avatar uploaded successfully!")
+            return HttpResponseRedirect(reverse("edit_profile", kwargs={'username': username}))
         else:
-            avatar_form = AvatarUploadForm()
-        form = UserSignupForm()
-        password_change_form = PasswordChangeForm(request.user)
-        addpostform = PostForm()
-        comments = Comment.objects.all()
-        comment_form = CommentForm()
-        user_profiles = UserProfile.objects.all()
-        context = {
-            'password_change_form': password_change_form,
-            'addpostform': addpostform,
-            'avatar_form': avatar_form,
-            'form': form,
-            'comments': comments,
-            'comment_form': comment_form,
-            'user_profiles': user_profiles,
-        }
-        return render(request, 'user_profile/edit_profile.html', context)
-    messages.info(request, f"You are not authorised to visit this page.")
-    return HttpResponseRedirect(reverse('User Profile', kwargs={'username': request.user}))
+            return HttpResponse("Please upload an Image File only...")
+    else:
+        avatar_form = AvatarUploadForm()
+    form = UserSignupForm()
+    password_change_form = PasswordChangeForm(request.user)
+    addpostform = PostForm()
+    comments = Comment.objects.all()
+    comment_form = CommentForm()
+    user_profiles = UserProfile.objects.all()
+    context = {
+        'password_change_form': password_change_form,
+        'addpostform': addpostform,
+        'avatar_form': avatar_form,
+        'form': form,
+        'comments': comments,
+        'comment_form': comment_form,
+        'user_profiles': user_profiles,
+    }
+    return render(request, 'user_profile/edit_profile.html', context)
+# >>>>>>> ankit
 
 # Personal Information Edit Section Ended
 

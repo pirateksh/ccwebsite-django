@@ -2,10 +2,13 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 # Create your models here.
+
+
 class Quiz(models.Model):
 	title = models.CharField(max_length=100)
 	no_of_ques = models.PositiveIntegerField(default=0)
 	max_score = models.PositiveIntegerField(default=0)
+	neg_marks = models.PositiveIntegerField(default=0)
 	time_lim = models.PositiveIntegerField(help_text="Time Limit should be in MINUTES.")
 	instructions = models.TextField()
 	author  = models.ForeignKey(User,on_delete=models.DO_NOTHING)
@@ -16,9 +19,9 @@ class Quiz(models.Model):
 		ordering = ['id']
 class UserQuizResult(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
-	quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE,related_name="quiz_title")
-	score = models.PositiveIntegerField()
-
+	quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
+	score = models.IntegerField(default=0)
+	is_atm = models.BooleanField(default=0)
 class Question(models.Model):
 	quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
 	question = models.TextField()
@@ -26,6 +29,13 @@ class Question(models.Model):
 		return "{}".format(self.question)
 	class Meta:
 		ordering = ['id']
+class CurrentQuiz(models.Model):
+	user = models.ForeignKey(User,on_delete=models.CASCADE)
+	quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
+	question = models.ForeignKey(Question,on_delete=models.CASCADE)
+	sel_ans = models.CharField(max_length=1)
+	is_atm = models.BooleanField(default=False)
+	contrib = models.IntegerField(default=0)
 class Option(models.Model):
 	quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
 	question = models.ForeignKey(Question,on_delete=models.CASCADE)
@@ -57,10 +67,6 @@ class Answer(models.Model):
 	# 	# for obj in questions:
 	# 	print(obj)
 		# return(('1',getattr(obj,'option1')),('1',getattr(obj,'option2')),('1',getattr(obj,'option3')),('1',getattr(obj,'option4')))
-
-
-
-
 		# return (('1','option1'),('2','option2'),('3','option3'),('4','option4'))
 		# question = questions.filter(id = id)
 		# for question in questions:
@@ -72,3 +78,7 @@ class Answer(models.Model):
 		return "{}".format(self.question)
 	class Meta:
 		ordering = ['id']
+
+class RandomQuizQuestion(models.Model):
+	user = models.ForeignKey(User,on_delete=models.CASCADE)
+	quiz_ques_id = models.ForeignKey(Question,on_delete=models.CASCADE)

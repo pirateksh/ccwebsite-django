@@ -40,7 +40,6 @@
         </div>
     </li>
     <div class="divider"></div>
-
         <li class="collection-item amber lighten-1">
             <a class="modal-trigger btn-flat" href="#modal-quiz-performance" >
                 Quiz Performance
@@ -59,11 +58,25 @@
             </a>
         </li>
         {% if user|has_group:'Teacher' %}
+        
         <li class="collection-item amber lighten-1">
             <a class="btn-flat modal-trigger" href="#modal-permissions">
                 Permissions
             </a>
         </li>
+        {% else %}
+            <li class="collection-item amber lighten-1">   
+                <a class="modal-trigger btn-flat" href="#modal-quiz-performance" >
+                    Quiz Performance
+                </a>
+            </li>
+            <li class="collection-item amber lighten-1">  
+                {% with quiz_home="quiz_home" %} 
+                <a class="modal-trigger btn-flat" href="{%url quiz_home user.username %}" >
+                    Explore Quizzes
+                </a>
+                {% endwith %}
+            </li>
         {% endif %}
         <li class="collection-item amber lighten-2">
             <a class="modal-trigger btn-flat" href="#modal-pending-posts">
@@ -82,6 +95,18 @@
                 Edit Profile
                 <i class="material-icons">edit</i>
             </a>
+        </li>
+        <li class="collection-item amber lighten-1">   
+            <a class="modal-trigger btn-flat" href="#modal-quiz-performance" >
+                Quiz Performance
+            </a>
+        </li>
+        <li class="collection-item amber lighten-1">  
+            {% with quiz_home="quiz_home" %} 
+            <a class="modal-trigger btn-flat" href="{%url quiz_home user.username %}" >
+                Explore Quizzes
+            </a>
+            {% endwith %}
         </li>
         <li class="collection-item amber lighten-1">
             <a class="modal-trigger btn-flat" href="#modal-manage-calendar" >

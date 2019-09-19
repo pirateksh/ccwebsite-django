@@ -8,10 +8,10 @@ from django.conf.urls.static import static
 from django.contrib.auth import views
 import notifications.urls
 
-
 urlpatterns = [
     path('admin/', admin.site.urls, name="Admin"),
     path('', include('home.urls')),
+    path('',include('quizapp.urls')),
     path('post/', include('post.urls')),
     path('profile/', include('user_profile.urls')),
     path('comments/', include('comments.urls')),
