@@ -1,0 +1,273 @@
+{% load static %}
+{% load quizapp_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>CC CLUB Quiz Portal</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'Bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{% static 'Bootstrap/css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{% static 'Bootstrap/css/style.min.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+      <div class="container">
+
+        <!-- Brand -->
+        <a class="navbar-brand waves-effect" href="#" target="_blank">CC CLUB
+        </a>
+
+        <!-- Collapse -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <!-- Left -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link waves-effect" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+          </ul>
+
+          <!-- Right -->
+          <ul class="navbar-nav nav-flex-icons">
+            <li class="nav-item">
+              <a href="#" class="nav-link waves-effect" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link waves-effect" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link border border-light rounded waves-effect"
+                target="_blank">
+                <i class="fab fa-github mr-2"></i>CC GitHub
+              </a>
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+
+      <!-- Dark mode -->
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="slider round"></div>
+        </label>
+      <em class="text-white">Dark Mode!</em>
+   </div>
+
+    </nav>
+    <!-- Navbar -->
+
+  </header>
+  <!--Main Navigation-->
+
+  <!--Main layout-->
+  <main class="mt-5 pt-5">
+    <div class="container">
+
+      <!--Section: Jumbotron-->
+      <section class="card aqua-gradient wow fadeIn" id="intro">
+
+        <!-- Content -->
+        <div class="card-body text-white text-center py-5 px-5 my-5">
+
+          <h1 class="mb-4">
+            <strong>CC CLUB Quiz Portal</strong>
+          </h1>
+          <p>
+            <strong>Let the World know your GEEK stuff...</strong>
+          </p>
+          <p class="mb-4">
+            <strong>CC CLUB MNNIT welcomes you to its Quiz Portal</strong>
+          </p>
+          {% if user.is_superuser %}
+            {% with create_quiz="create_quiz" %}
+                <a target="_blank" class="btn btn-outline-white btn-lg" href="{% url create_quiz %}">Create Quiz
+                  <i class="fas fa-graduation-cap ml-2"></i>
+                </a>
+            {%endwith%}
+          {%endif%}
+        </div>
+        <!-- Content -->
+      </section>
+      <!--Section: Jumbotron-->
+
+      <hr class="my-5">
+
+      <!--Section: Cards-->
+      <section class="text-center">
+        <!--Grid row-->
+        <div class="row mb-4 wow fadeIn">
+
+          <!--Grid column-->
+    {% for quiz in quizes %}
+          <div class="col-md-4 mb-4">
+        
+            <!--Card-->
+            <div class="card">
+
+              <!--Card image-->
+              <div class="view overlay">
+                <img src="https://journal.ahima.org/wp-content/uploads/2019/03/Coding-Quiz-Time-Featured-Image.jpg" 
+                class="card-img-top" alt="">
+                <a href="#" target="_blank">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+
+              <!--Card content-->
+              <div class="card-body dark1">
+                <!--Title-->
+                <h4 class="card-title">{{quiz.title}}</h4>
+                <!--Text-->
+                <p class="card-text">
+                  <table class="table">
+                    <tr>
+                      <td scope="row">
+                        Total no. of Questions : 
+                      </td>
+                      <td>
+                        {{quiz.no_of_ques}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row">
+                        Max Score : 
+                      </td>
+                      <td>
+                        {{quiz.max_score}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row">
+                        Time Required : 
+                      </td>
+                      <td>
+                        {% if quiz.time_lim > 1%}
+                          {{quiz.time_lim}} Minutes
+                        {%else%}
+                          {{quiz.time_lim}} Minute
+                        {%endif%}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row">
+                        Author : 
+                      </td>
+                      <td>
+                        {{quiz.author}}
+                      </td>
+                    </tr>
+                  </table>
+                </p>
+                {% with take_quiz="take_quiz"%}
+                <a href="{% url take_quiz user.username quiz.id %}" target="_blank"
+                  class="btn btn-primary btn-md">Take quiz
+                  <i class="fas fa-play ml-2"></i>
+                </a>
+                {%endwith%}
+                <a href="#" target="_blank"
+                  class="btn btn-primary btn-md">Instructions 
+                  <i class="fas fa-book-open"></i>
+                </a>
+              </div>
+
+            </div>
+            <!--/.Card-->
+        </div>
+    {%endfor%}
+
+        <!--Pagination-->
+        <nav class="d-flex justify-content-center wow fadeIn">
+          <ul class="pagination pg-blue">
+
+            <!--Arrow left-->
+            <li class="page-item disabled">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+
+            <li class="page-item active">
+              <a class="page-link" href="#">1
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">4</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">5</a>
+            </li>
+
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+      </section>
+      <!--Section: Cards-->
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+{% include 'footer.html'%}
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="{% static 'Bootstrap/js/jquery-3.4.1.min.js' %}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static 'Bootstrap/js/popper.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'Bootstrap/js/bootstrap.min.js' %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'Bootstrap/js/mdb.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'Bootstrap/js/dark.js' %}"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+
+  </script>
+</body>
+
+</html>

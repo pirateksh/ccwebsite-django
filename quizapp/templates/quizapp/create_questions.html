@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{%load quizapp_tags%}
+{% block content%}
+<div class="row">
+<div class="col s4 m3">
+  <ul id="ques_list" class="sidenav sidenav-fixed">
+    <li>
+    	<div class="user-view">	
+      		<a href="#user"><img class="circle" src="{{ user.userprofile.avatar.url }}"></a>
+      		<a href="#user"><span>Hello, {{user.first_name}}</span></a>
+    	</div>
+    </li>
+    	<li>
+    		<table>
+    			<tr>
+    				<th>
+    					Title
+    				</th>
+    				<td>
+    					{{quiz.title}}
+    				</td>
+    			</tr>
+    			<tr>
+    				<th>
+    					Max Ques.
+    				</th>
+    				<td>
+    					{{quiz.no_of_ques}}
+    				</td>
+    			</tr>
+    			<tr>
+    				<th>
+    					Time Limit
+    				</th>
+    				<td>
+    					{{quiz.time_lim}}
+    				</td>
+    			</tr>
+    		</table>
+    	</li>
+    {%if questions %}
+    	{% for question in questions %}
+			<li class="ques_list_item" >
+				<a id="{{question.id}}" href="{%url 'ques_detail' question.id %}" style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">{{forloop.counter}}. {{question}}</a>
+			</li>
+		{%endfor%}
+	{%else%}
+		<li>
+			<a>No Questions till now.</a>
+		</li>
+	{%endif%}
+  </ul>
+</div>
+{% if que_cnt < quiz.no_of_ques %}
+<div class="container col s8">
+<form id="ques_form" method="post" action="">
+	{%csrf_token%}
+{{form_que}}
+{{form_opt}}
+	<div class="input-field col s12">
+    <select id="id_corr_answer">
+    	<option value="" disabled>Choose Correct Answer</option>
+    	<option value="1">Option1</option>
+    	<option value="2">Option2</option>
+    	<option value="3">Option3</option>
+    	<option value="4">Option4</option>
+      <!-- <option value="" disabled>Choose Correct Answer</option>
+      {% for x,y in form_ans.fields.corr_answer.choices %}
+      {% if forloop.counter != 1 %}
+      	<option value="{{x}}">{{y}}</option>
+      {%endif%}
+      {%endfor%} -->
+    </select>
+  </div>
+{{form_ans.extra_info}}
+   <button class="btn" type="submit" name="action">Submit Question
+    	<i class="material-icons right">send</i>
+  	 </button>
+ </form>
+</div>
+{%else%}
+<div class="container col s8">
+	Hope You created a good Quiz.
+</div>
+{% endif %}
+</div>
+
+
+
+
+
+
+{%endblock%}

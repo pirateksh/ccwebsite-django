@@ -1,17 +1,17 @@
 {% load static %}
 {% load notifications_tags %}
+
+
+
 <!--  Scripts-->
+
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="{% static "Materialize/js/materialize.js" %}"></script>
-<script src="{% static "Materialize/js/init.js" %}"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="{% static 'Materialize/js/materialize.js' %}"></script>
+<script src="{% static 'Materialize/js/init.js' %}"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script
-  src="http://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+
 
 {#Cropper JS files#}
 {#<script src="{% static 'js_for_cropper/jquery.min.js' %}"></script>#}
@@ -218,7 +218,7 @@
         var password1Objhidden = document.getElementById('id_password1_hidden');
         var password2Objhidden = document.getElementById('id_password2_hidden');
         usernameObjhidden.value = usernameObj.value;
-        alert(usernameObjhidden.value);
+        // alert(usernameObjhidden.value);
         var hashObj2  = new jsSHA("SHA-512","TEXT",{numRounds:1});
         hashObj2.update(password1Obj.value);
         var hashedpassword1 = hashObj2.getHash("HEX");
@@ -229,3 +229,137 @@
         password2Objhidden.value = hashedpassword2;
     }
 </script>
+
+
+<script type="text/javascript">
+ $(document).ready(function(){
+             $('select').formSelect();
+        });
+</script>
+<script type="text/javascript">
+   $(document).ready(function(){
+      $('.sidenav').sidenav();
+    });
+ </script>
+ <!-- Script to call the modal from url -->
+<!-- <script>
+$(document).ready(function(){
+  var hash = window.location.hash;
+  hash = hash.split("?");
+  if(hash.length>0 && hash[0]=="#modal-quiz-performance"){
+        var modal = document.getElementById('modal-quiz-performance');
+        modal.style.display = 'block';
+        // modal.style.position='absolute';
+        // modal.style.left='0px';
+        // modal.style.right='0px';
+        // modal.style.top='0px';
+        // modal.style.bottom='0px';
+        // modal.style.overflow='hidden';
+        // modal.style.pointer-events='none';
+        // modal.style.visibility='hidden';
+        // modal.style.z-index='-1';
+        // Toasts are Useful To check if things are working properly out.
+            M.toast({html:modal,classes: 'rounded', displayLength: 3900}).call();
+    }
+});
+</script> -->
+ <!-- jQuery Ajax Script -->
+<script type="text/javascript">
+  $(document).on('submit','#ques_form',function(e){
+    e.preventDefault();
+    var question = $('#id_question').val().trim();
+      var option1 = $('#id_option1').val().trim();
+      var option2 = $('#id_option2').val().trim();
+      var option3 = $('#id_option3').val().trim();
+      var option4 = $('#id_option4').val().trim();
+      var corr_answer = $('#id_corr_answer').val().trim();
+    var extra_info = $('#id_extra_info').val().trim();
+  if( question && option1 && option2 && option3 && option4 && corr_answer 
+    && extra_info ){
+    // console.log(corr_answer);
+    $.ajax({
+      type:'POST',
+      url: "{% url 'create_questions' %}",
+      data:{
+        question : question,
+        option1: option1,
+        option2: option2,
+        option3: option3,
+        option4: option4,
+        corr_answer: corr_answer,
+        extra_info: extra_info,
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+      },
+      dataType: 'json',
+      success:function(data){ // this data is what we have recieved as json 
+                  // response.
+        if(data.question){
+          appendToQuestionsMenu(data.question,data.que_cnt,data.ques_id);
+          $('#ques_form').trigger("reset");
+        }
+        if( data.que_cnt == "{{quiz.no_of_ques}}" ){
+          $("#ques_form").html(`<div class="container col s8">
+                      Hope You created a good Quiz.
+                    </div>`);
+          alert("Max Question Limit Reached");
+        }
+        alert("Question Added!");
+      }
+    });
+    
+  }
+  else{
+    alert("All fields are required.");
+  }
+  });
+// Function appendToQuestionsMenu definition
+
+function appendToQuestionsMenu(question,cnt,id){
+  // mind the ` in append function.
+  $("#ques_list").append(`
+        <li>
+            <a  id="${id}" style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">
+              ${cnt}. ${question}
+            </a>
+        </li>
+    `);
+    var href = "questions/"+id;
+    $('#'+ id).children().attr("href",href);
+}
+
+</script>
+<script type="text/javascript">
+  $(document).on('click','.ques_list_item',function(e){
+    e.preventDefault();
+    // alert("Ha aha");
+    var url = 'ques_detail';
+    $.ajax({
+      method : "POST",
+      url : url,  
+      // data = {},
+      dataType: 'json',
+      success:function(data){ // this data is what we have recieved as json 
+                  // response.
+          $("#ques_form").html(`<div class="container col s8">
+                      <p>${data.question}</p>
+                      >
+                      <p>HI</p>
+                      <p>${data.options}</p>
+                      <p>HIELLO</p>
+                      <p>${data.answer}</p>
+                    </div>`);
+          alert("Max Question Limit Reached");
+        }
+    });
+  });
+
+
+
+</script>
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<script
+  src="http://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script> -->

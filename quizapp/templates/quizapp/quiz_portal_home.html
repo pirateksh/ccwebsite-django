@@ -1,0 +1,320 @@
+{% load static %}
+{% load quizapp_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>CC CLUB Quiz Portal</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap-home core CSS -->
+  <link href="{% static 'Bootstrap-home/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Material Design Bootstrap-home -->
+  <link href="{% static 'Bootstrap-home/css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{% static 'Bootstrap-home/css/style.min.css' %}" rel="stylesheet">
+</head>
+
+<body class="darkimg">
+
+  <!--Main Navigation-->
+  <header>
+
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light scrolling-navbar navbar-dark black">
+      <div class="container">
+
+        <!-- Brand -->
+        <a class="navbar-brand waves-effect" href="{% url 'Index' %}" target="_blank">CC CLUB
+          <strong class="blue-text">Quiz Portal</strong>
+        </a>
+
+        <!-- Collapse -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <!-- Left -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link waves-effect" href="#!">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link waves-effect" href="#!" target="_blank">About</a>
+            </li> -->
+          </ul>
+
+          <!-- Right -->
+          
+
+        </div>
+
+      </div>
+
+      <!-- Dark mode -->
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="slider round"></div>
+        </label>
+      <em class="text-white">Dark Mode!</em>
+   </div>
+
+    </nav>
+    <!-- Navbar -->
+
+  </header>
+  <!--Main Navigation-->
+
+  <!--Main layout-->
+  <main class="mt-5 pt-5">
+    <div class="container">
+
+      <!--Section: Jumbotron-->
+      <section class="card aqua-gradient wow fadeIn" id="intro">
+
+        <!-- Content -->
+        <div class="card-body text-white text-center py-5 px-5 my-5">
+
+          <h1 class="mb-4">
+            <strong>CC CLUB Quiz Portal</strong>
+          </h1>
+          <p>
+            <strong>Let the World know your GEEK stuff...</strong>
+          </p>
+          <p class="mb-4">
+            <strong>CC CLUB MNNIT welcomes you to its Quiz Portal</strong>
+          </p>
+          {% if user.is_superuser %}
+            {% with create_quiz="create_quiz" %}
+                <a target="_blank" class="btn btn-outline-white btn-lg" href="{% url create_quiz %}">Create Quiz
+                  <i class="fas fa-graduation-cap ml-2"></i>
+                </a>
+            {%endwith%}
+          {%endif%}
+        </div>
+        <!-- Content -->
+      </section>
+      <!--Section: Jumbotron-->
+
+      <hr class="my-5">
+
+      <!--Section: Cards-->
+      <section class="text-center">
+
+        <!--Grid row-->
+        <div class="row mb-4 wow fadeIn">
+
+              
+
+          <!--Grid column-->
+    {% for quiz in quizes %}
+          <div class="col-md-4 mb-4">
+            <div class="card-wrapper">
+            <!--Card-->
+            <div class="card card-flip dark1" id="card-1">
+              <div class="card-front">
+
+              <!--Card image-->
+              <div class="view overlay">
+                <img src="https://journal.ahima.org/wp-content/uploads/2019/03/Coding-Quiz-Time-Featured-Image.jpg" 
+                class="card-img-top" alt="">
+                <a href="#!" target="_blank">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+
+              <!--Card content-->
+              <div class="card-body dark1">
+                <!--Title-->
+                <h4 class="card-title">{{quiz.title}}</h4>
+                <!--Text-->
+                <p class="card-text">
+                  <table class="table">
+                    <tr>
+                      <td scope="row">
+                        Total no. of Questions : 
+                      </td>
+                      <td>
+                        {{quiz.no_of_ques}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row">
+                        Time Required : 
+                      </td>
+                      <td>
+                        {% if quiz.time_lim > 1%}
+                          {{quiz.time_lim}} Minutes
+                        {%else%}
+                          {{quiz.time_lim}} Minute
+                        {%endif%}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row">
+                        Maximum Score : 
+                      </td>
+                      <td>
+                        {{quiz.max_score}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row">
+                        Negative Marking : 
+                      </td>
+                      <td>
+                        {% if quiz.neg_marks %}
+                          -{{quiz.neg_marks}} per Question
+                        {% else%}
+                        No Negative Marking!
+                        {% endif %}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td scope="row">
+                        Author : 
+                      </td>
+                      <td>
+                        {{quiz.author}}
+                      </td>
+                    </tr>
+                  </table>
+                </p>
+
+              </div>
+              </div>
+
+              <!-- Back Face -->
+
+              <!-- Back Side -->
+          <div class="card-back">
+            <div class="card-body">
+  
+          <!-- Content -->
+          <h4 class="font-weight-bold mb-0"><u>INSTRUCTIONS</u></h4>
+          <hr>
+          <p>
+            {{quiz.instructions}}
+            <hr>
+        </div>
+      </div>
+      <!-- Back Side -->
+
+            </div>
+            <!--/.Card-->
+
+             {% with take_quiz="take_quiz"%}
+                <a href="{% url take_quiz user.username quiz.id %}" target="_blank"
+                  class="btn btn-primary btn-md">Take quiz
+                  <i class="fas fa-play ml-2"></i>
+                </a>
+              {%endwith%}
+<!--                <a target="_blank"-->
+<!--                  class="btn btn-primary btn-md card-front-flip" data-card="card-1">Instructions-->
+<!--                  <i class="fas fa-book-open"></i>-->
+<!--                </a>-->
+
+          </div>
+
+          </div>
+          <!--Grid column-->
+   {%endfor%}
+        
+
+      </section>
+      <!--Section: Cards-->
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+  <!--Footer-->
+  <footer class="page-footer text-center font-small mdb-color darken-2 mt-4 wow fadeIn">
+
+    <!--Call to action-->
+    <div class="pt-4">
+      <a class="btn btn-outline-white" href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank"
+        role="button">Practice
+        <i class="fas fa-code"></i>
+      </a>
+      
+    </div>
+    <!--/.Call to action-->
+
+    <hr class="my-4">
+
+    <!-- Social icons -->
+    <div class="pb-4">
+      <a href="https://www.facebook.com/mdbootstrap" target="_blank">
+        <i class="fab fa-facebook-f mr-3"></i>
+      </a>
+
+      <a href="https://twitter.com/MDBootstrap-home" target="_blank">
+        <i class="fab fa-twitter mr-3"></i>
+      </a>
+
+      <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
+        <i class="fab fa-youtube mr-3"></i>
+      </a>
+
+      <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
+        <i class="fab fa-google-plus-g mr-3"></i>
+      </a>
+
+      <a href="https://dribbble.com/mdbootstrap" target="_blank">
+        <i class="fab fa-dribbble mr-3"></i>
+      </a>
+
+      <a href="https://pinterest.com/mdbootstrap" target="_blank">
+        <i class="fab fa-pinterest mr-3"></i>
+      </a>
+
+      <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
+        <i class="fab fa-github mr-3"></i>
+      </a>
+
+      <a href="http://codepen.io/mdbootstrap/" target="_blank">
+        <i class="fab fa-codepen mr-3"></i>
+      </a>
+    </div>
+    <!-- Social icons -->
+
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+      © 2019 Copyright:
+      <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> Django Unchained </a>
+    </div>
+    <!--/.Copyright-->
+
+  </footer>
+  <!--/.Footer-->
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="{% static 'Bootstrap-home/js/jquery-3.4.1.min.js' %}"></script>
+  <!-- Bootstrap-home tooltips -->
+  <script type="text/javascript" src="{% static 'Bootstrap-home/js/popper.min.js' %}"></script>
+  <!-- Bootstrap-home core JavaScript -->
+  <script type="text/javascript" src="{% static 'Bootstrap-home/js/bootstrap.min.js' %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'Bootstrap-home/js/mdb.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'Bootstrap-home/js/dark.js' %}"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+
+  </script>
+</body>
+
+</html>

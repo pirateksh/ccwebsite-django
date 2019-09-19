@@ -118,29 +118,27 @@ def ajax_login_view(request):
             response = HttpResponse('LS')
             if remember_me is None:
                 # Executed when remember_me is None i.e. not checked.
-                print("step1")
                 if 'cook_user' and 'cook_pass' in request.COOKIES:
-
                     # Enters when either of the cookie is present.
                     # response = render(request,'blogapp/newhome.html',context)
-                    print("step2")
                     response.delete_cookie('cook_user')
                     response.delete_cookie('cook_pass')
                     return response
                 else:
                     # Enters when both of the cookie is not present i.e. deleted .
-                    print("step3")
                     return response
             else:
-                print("step4")
                 if 'cook_user' and 'cook_pass' not in request.COOKIES:
-                    print("step5")
                     response.set_cookie('cook_user', username, max_age=86400, path='/')
                     response.set_cookie('cook_pass', password, max_age=86400, path='/')
                     return response
                 else:
-                    print("step6")
-                    return response
+                    if username==request.COOKIES.get('cook_user') and password==request.COOKIES.get('cook_password'):                        
+                        return response
+                    elif username!=request.COOKIES.get('cook_user') or password!=request.COOKIES.get('password'):
+                        response.set_cookie('cook_user', username, max_age=86400, path='/')
+                        response.set_cookie('cook_pass', password, max_age=86400, path='/')
+                        return response
         else:
             return JsonResponse('LF')
     # else:

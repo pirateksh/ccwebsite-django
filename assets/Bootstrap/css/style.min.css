@@ -1,0 +1,183 @@
+.carousel,.carousel .carousel-inner,.carousel .carousel-inner .active,.carousel .carousel-inner .carousel-item,.view,body,html{/* height:100% */}.navbar{background-color: #FF5722;}.page-footer,.top-nav-collapse{background-color:#1C2331}@media only screen and (max-width:768px){.navbar{background-color:#1C2331}}
+
+.scrollspy-example {
+	max-height: 90vh;
+	overflow: auto;
+	
+}
+
+.scrollspy-example1 {
+	max-height: 88vh;
+	overflow: auto;
+}
+.mylist{
+ 	padding-top: 1vh;
+ 	padding-bottom: 3vh;
+}
+
+@media only screen and (max-width: 575px) {
+    #fadeShow1 {
+        display: none;
+    }
+}
+
+@media only screen and (max-height: 500px) {
+    #navSmall {
+		padding-top: 0px;
+		padding-bottom: 0px;
+    }
+}
+
+.dark {
+	background-color: var(--bg-color);
+	color: var(--font-color);
+	background: var(--background);
+}
+
+.dark1 {
+	background-color: var(--bg-color);
+	color: var(--font-color);
+	background: var(--background1);
+	
+}
+
+.dark2 {
+	background-color: var(--bg-color);
+	color: var(--font-color);
+	background: var(--background2);
+}
+
+/* 
+	Dark Mode
+*/
+@import url(https://fonts.googleapis.com/css?family=Lato:400,400italic,700|Sansita+One);
+  
+ :root {
+    --primary-color: #302AE6;
+    --secondary-color: #536390;
+    --font-color: #424242;
+    --bg-color: white;
+	--heading-color: #292922;
+	--background: repeating-radial-gradient(#fdbb2d,#b21f1f,#1a2a6c);
+	--background1: repeating-linear-gradient(#fff,#BDFFF3,#4AC29A);
+	--background2: white;
+}
+
+[data-theme="dark"] {
+    --primary-color: #9A97F3;
+    --secondary-color: #818cab;
+    --font-color: #e1e1ff;
+    --bg-color: #1C2331;
+	--heading-color: #818cab;
+	--background: #1C2331;
+	--background1: #1C2331;
+	--background2: #1C2331;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  max-width: 100%;
+  margin: 0 auto;
+  font-size: calc(1rem + 0.25vh);
+}
+
+h1 {
+    color: var(--heading-color);
+    font-family: "Sansita One", serif;
+    font-size: 2rem;
+    margin-bottom: 1vh;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.6rem;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  &:hover, &:focus {
+      border-bottom: 3px solid currentColor;
+  }
+}
+
+section {
+  max-width: 68%;
+  margin: 0 auto;
+}
+
+.post-meta {
+  font-size: 1rem;
+  font-style: italic;
+  display: block;
+  margin-bottom: 4vh;
+  color: var(--secondary-color);
+}
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 0;
+}
+
+/*slider switch css */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  
+  em {
+    margin-left: 10px;
+    font-size: 1rem;
+  }
+}
+.theme-switch {
+  display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+}
+
+.theme-switch input {
+  display:none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 26px;
+}
+
+input:checked + .slider {
+  background-color: #66bb6a;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}

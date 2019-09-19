@@ -19,11 +19,6 @@
                 Manage Calendar
             </a>
         </li>
-        <li class="collection-item amber lighten-1">   
-            <a class="modal-trigger btn-flat" href="#modal-quiz-performance" >
-                Quiz Performance
-            </a>
-        </li>
     {% if native_user == user and not user.is_superuser %}
         <li class="collection-item amber lighten-1">
             <a class="btn-flat" href="{% url 'edit_profile' user.username %}">
@@ -32,11 +27,25 @@
             </a>
         </li>
         {% if user|has_group:'Teacher' %}
+        
         <li class="collection-item amber lighten-1">
             <a class="btn-flat modal-trigger" href="">
                 Permissions
             </a>
         </li>
+        {% else %}
+            <li class="collection-item amber lighten-1">   
+                <a class="modal-trigger btn-flat" href="#modal-quiz-performance" >
+                    Quiz Performance
+                </a>
+            </li>
+            <li class="collection-item amber lighten-1">  
+                {% with quiz_home="quiz_home" %} 
+                <a class="modal-trigger btn-flat" href="{%url quiz_home user.username %}" >
+                    Explore Quizzes
+                </a>
+                {% endwith %}
+            </li>
         {% endif %}
         <li class="collection-item amber lighten-2">
             <a class="modal-trigger btn-flat" href="#modal-pending-posts">
@@ -56,7 +65,18 @@
                 <i class="material-icons">edit</i>
             </a>
         </li>
-
+        <li class="collection-item amber lighten-1">   
+            <a class="modal-trigger btn-flat" href="#modal-quiz-performance" >
+                Quiz Performance
+            </a>
+        </li>
+        <li class="collection-item amber lighten-1">  
+            {% with quiz_home="quiz_home" %} 
+            <a class="modal-trigger btn-flat" href="{%url quiz_home user.username %}" >
+                Explore Quizzes
+            </a>
+            {% endwith %}
+        </li>
         <li class="collection-item amber lighten-1">
             <a class="btn-flat modal-trigger" href="#modal-ask-perm">
                 Ask Permission

@@ -24,11 +24,14 @@ class UserProfile(models.Model):
         default='default.png',
         upload_to=user_directory_path,
         processors=[ResizeToFill(100, 100)],
-        format='JPEG',
+        # allow_empty_file=False,
+        # validators=[MimetypeValidator('image/jpg')],
         options={'quality': 100},
         blank=True,
         null=True,
     )
+
+
 
     # Whether user is subscribed to email notifications
     is_subscribed = models.BooleanField(default=True)

@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect, reverse
+from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash  # authenticate
@@ -185,7 +186,12 @@ def change_email(request, username):
     messages.error(request, f"Something went wrong. Try again!")
     return HttpResponseRedirect(reverse('edit_profile', kwargs={'username': username}))
 
-
+def clean_file(request,form):
+    file = form.cleaned_data['avatar']
+    # if file.size > 524:
+    if file.size > 5242880:
+        return False
+    return True
 @login_required
 def avatar_upload(request, username):
     """
@@ -196,11 +202,16 @@ def avatar_upload(request, username):
         if avatar_form.is_valid():
             user = User.objects.get(username=username)
             user_prof = UserProfile.objects.get(user=user)
-            img = avatar_form.cleaned_data['avatar']
+            if clean_file(request,avatar_form):
+                img = avatar_form.cleaned_data['avatar']
+            else:
+                return HttpResponseRedirect(reverse("User Profile",kwargs={'username':request.user}))
             user_prof.avatar = img
             user_prof.save()
             messages.success(request, f"Avatar uploaded successfully!")
             return HttpResponseRedirect(reverse("edit_profile", kwargs={'username': username}))
+        else:
+            return HttpResponse("Please upload an Image File only...")
     else:
         avatar_form = AvatarUploadForm()
     form = UserSignupForm()
