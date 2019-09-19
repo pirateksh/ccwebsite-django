@@ -5,31 +5,103 @@
     <li class="collection-item center-align amber">
         <h6>Filter posts</h6>
     </li>
-    <li class="collection-item">
+    {% if not user.is_authenticated %}
+        <!-- User not logged in -->
+        <li class="collection-item">
+            Please login to access this feature.
+        </li>
+    {% else %}
+        <!-- User is logged in -->
+            <li class="collection-item">
+            {% if user.is_authenticated %}
+                {% if user.username in request.build_absolute_uri and '/personalised/' in request.build_absolute_uri %}
+                    <!-- User in personalised section -->
+                    {% if '/most-liked/' in request.build_absolute_uri %}
+                        <a href="{% url 'personalised_index_most_liked' liked='yes' username=user.username %}" class="chip teal white-text">Most Liked</a>
+                    {% else %}
+                        <a href="{% url 'personalised_index_most_liked' liked='yes' username=user.username %}" class="chip">Most Liked</a>
+                    {% endif %}
+                    {%if '/older-first/' in request.build_absolute_uri %}
+                        <a href="{% url 'personalised_index_older_first' older='yes' username=user.username %}" class="chip teal white-text">Older First</a>
+                    {% else %}
+                        <a href="{% url 'personalised_index_older_first' older='yes' username=user.username %}" class="chip">Older First</a>
+                    {% endif %}
+                {% else %}
+                    <!-- User in public feed -->
+                    {% if '/most-liked/' in request.build_absolute_uri %}
+                        <a href="{% url 'index_most_liked' 'yes' %}" class="chip teal white-text">Most Liked</a>
+                    {% else %}
+                        <a href="{% url 'index_most_liked' 'yes' %}" class="chip">Most Liked</a>
+                    {% endif %}
+                    {%if '/older-first/' in request.build_absolute_uri %}
+                        <a href="{% url 'index_older_first' 'yes' %}" class="chip teal white-text">Older First</a>
+                    {% else %}
+                        <a href="{% url 'index_older_first' 'yes' %}" class="chip">Older First</a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+            </li>
+            <li class="collection-item">
+                {% if user.is_authenticated %}
+                    {% if user.username in request.build_absolute_uri and '/personalised/' in request.build_absolute_uri %}
+                        <!-- Personalised feed is open -->
+                        {% for tag in tags %}
+                            {% if tag.name in request.build_absolute_uri %}
+                            {# Highlight with teal colour if a tab is currently active #}
+                                <a class="chip teal white-text" href="{% url 'personalised_index_with_filter' tag_filter=tag.name username=user.username %}">{{ tag.name }}</a>
+                            {% else %}
+                                <a class="chip" href="{% url 'personalised_index_with_filter' tag_filter=tag.name username=user.username %}">{{ tag.name }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <!-- Public feed is open -->
+                        {% for tag in tags %}
+                            {% if tag.name in request.build_absolute_uri %}
+                            {# Highlight with amber colour if a tab is currently active #}
+                                <a class="chip teal white-text" href="{% url 'index_tag' tag_filter=tag.name %}">{{ tag.name }}</a>
+                            {% else %}
+                                <a class="chip" href="{% url 'index_tag' tag_filter=tag.name %}">{{ tag.name }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+            </li>
+            <li class="row collection-item">
+                <a class="col s12 m12 l12 center btn" href="{% url 'Index' %}">Reset</a>
+            </li>
+    {% endif %}
+</ul>
 
-        {% if user.username in request.build_absolute_uri and 'personalised/' in request.build_absolute_uri and user.is_authenticated %}
-            <!-- Personalised feed is open -->
-            {% for tag in tags %}
-                {% if tag.name in request.build_absolute_uri %}
-                {# Highlight with teal colour if a tab is currently active #}
-                    <a class="chip teal white-text" href="{% url 'personalised_index_with_filter' tag_filter=tag.name username=user.username %}">{{ tag.name }}</a>
-                {% else %}
-                    <a class="chip" href="{% url 'personalised_index_with_filter' tag_filter=tag.name username=user.username %}">{{ tag.name }}</a>
-                {% endif %}
-            {% endfor %}
-        {% else %}
-            <!-- Public feed is open -->
-            {% for tag in tags %}
-                {% if tag.name in request.build_absolute_uri %}
-                {# Highlight with amber colour if a tab is currently active #}
-                    <a class="chip teal white-text" href="{% url 'index_tag' tag_filter=tag.name %}">{{ tag.name }}</a>
-                {% else %}
-                    <a class="chip" href="{% url 'index_tag' tag_filter=tag.name %}">{{ tag.name }}</a>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-    </li>
-    <li class="row collection-item">
-        <a class="col s12 m12 l12 center btn" href="{% url 'Index' %}">Reset</a>
-    </li>
+<ul class="collection">
+                <li class="collection-item amber center-align">
+                    <h6>Advanced filter</h6>
+                </li>
+            <li class="collection-item">
+                <form method="" action="">
+                    {% csrf_token %}
+                <div class="row">
+                    <div class="input-field col s12 m12 l12 ">
+{#                        <i class="material-icons prefix">account_circle</i>#}
+{#                        <select multiple>#}
+                            {% for tag in tags %}
+{#                                {% if tag in native_post.tags.all %}#}
+{#                                    <option value="{{ forloop.counter }}" selected>{{ tag }}</option>#}
+{#                                {% else %}#}
+{#                                    <option value="{{ forloop.counter }}">{{ tag }}</option>#}
+{#                                {% endif %}#}
+                                <a class="chip advanced-filter-chip" href="" id="">{{ tag }}</a>
+                            {% endfor %}
+{#                        </select>#}
+{#                        <label class="control-label col s6 m6 ">Post Tags</label>#}
+                    </div>
+                    <div class="col s6 m6 l6 center-align">
+                        <a class="btn">Filter</a>{#  <i class="material-icons tiny">filter_list</i></a>#}
+{#                        <button class="col s12 m3 l3 btn-small tooltipped" data-tooltip="Filter" type="submit"><i class="material-icons tiny">filter_list</i></button>#}
+                    </div>
+                    <div class="col s6 m6 l6 center-align">
+                        <a class="btn" href="{% url 'Index' %}">Reset</a>
+                    </div>
+                </div>
+                </form>
+            </li>
 </ul>

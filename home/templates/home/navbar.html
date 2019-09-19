@@ -71,7 +71,31 @@
         {# SideNav for Mobile view #}
         <ul id="nav-mobile" class="sidenav">
             <div class="row">
+
             {% if user.is_authenticated %}
+                {% if user.username in request.build_absolute_uri and '/personalised/' in request.build_absolute_uri %}
+                    {% if '/most-liked/' in request.build_absolute_uri %}
+                        <a href="{% url 'personalised_index_most_liked' liked='yes' username=user.username %}" class="chip teal white-text">Most Liked</a>
+                    {% else %}
+                        <a href="{% url 'personalised_index_most_liked' liked='yes' username=user.username %}" class="chip">Most Liked</a>
+                    {% endif %}
+                    {%if '/older-first/' in request.build_absolute_uri %}
+                        <a href="{% url 'personalised_index_older_first' older='yes' username=user.username %}" class="chip teal white-text">Older First</a>
+                    {% else %}
+                        <a href="{% url 'personalised_index_older_first' older='yes' username=user.username %}" class="chip">Older First</a>
+                    {% endif %}
+                {% else %}
+                    {% if '/most-liked/' in request.build_absolute_uri %}
+                        <a href="{% url 'index_most_liked' 'yes' %}" class="chip teal white-text">Most Liked</a>
+                    {% else %}
+                        <a href="{% url 'index_most_liked' 'yes' %}" class="chip">Most Liked</a>
+                    {% endif %}
+                    {%if '/older-first/' in request.build_absolute_uri %}
+                        <a href="{% url 'index_older_first' 'yes' %}" class="chip teal white-text">Older First</a>
+                    {% else %}
+                        <a href="{% url 'index_older_first' 'yes' %}" class="chip">Older First</a>
+                    {% endif %}
+                {% endif %}
                 {% if user.is_superuser %}
 
                     {# If user is superuser #}

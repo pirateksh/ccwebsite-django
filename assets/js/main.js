@@ -813,6 +813,7 @@ $('.comment-add-form').submit(function (event) {
                                 "| " + json.timestamp + " ago | " +
                                     json.countStr +
                                 "<a class='comment-reply-btn' href='#'>Reply</a>" +
+                                "<a class='comment-edit-btn' href=''>Edit</a>" +
                             "</footer>" +
                             "<div class='comment-reply' id='reply-" + postPK + "-" + commentPK + "' style='display: none;'>" +
                                 "<form class='comment-add-form' method='post' action="+ json.addCommentURL +" post-pk=" + postPK +" comment-pk="+ commentPK +" data-type='reply'>" +
@@ -845,6 +846,7 @@ $('.comment-add-form').submit(function (event) {
                                 "</a>" +
                                 "<span id='comment-timestamp' style='color: #0f74a8;'>" +
                                     "| " + json.timestamp + " ago |" +
+                                    "<a class='reply-edit-btn' href=''>Edit</a>" +
                                 "</span>" +
                             "</footer>" +
                         "</blockquote>" +
@@ -994,4 +996,42 @@ $('.unfollow').click(function (e) {
         }
      });
 
+ });
+
+
+ // Comment edit
+ $('.comment-edit-btn').click(function (e) {
+    e.preventDefault();
+    var this_ = $(this);
+    var commentText = this_.attr('data-comment');
+    var PK = this_.attr('data-pk');
+    CKEDITOR.instances['id_comment_content_' + PK].setData(commentText);
+    var form = $('#comment-edit-form-' + PK);
+    form.submit(function (event) {
+        event.preventDefault();
+        var url = form.attr('action');
+        var updatedComment = CKEDITOR.instances['id_comment_content_' + PK].getData();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                updated_comment: updatedComment
+            },
+            success: function (json) {
+                if(json.result === "SS") {
+                    $('#comment-text-' + PK).html(updatedComment);
+                    var elem = $('#edit-comment-modal-' + PK);
+                    var instance = M.Modal.getInstance(elem);
+                    instance.close();
+                    addToast("Comment edited successfully.");
+
+                } else {
+                    addToast('Oops! We have encountered an error. Try Again!');
+                }
+            },
+            error: function () {
+                addToast('Oops! We have encountered an error. Try Again!');
+            }
+        });
+    })
  });

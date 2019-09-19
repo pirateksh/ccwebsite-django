@@ -10,6 +10,14 @@ urlpatterns = [
 
     path('personalised/<str:username>/', views.index, name="personalised_index"),
 
+    path('most-liked/<str:liked>/', views.index, name="index_most_liked"),
+
+    path('older-first/<str:older>/', views.index, name="index_older_first"),
+
+    path('most-liked/<str:liked>/personalised/<str:username>/', views.index, name="personalised_index_most_liked"),
+
+    path('older-first/<str:older>/personalised/<str:username>/', views.index, name="personalised_index_older_first"),
+
     path(
         'filter-post-by/<str:tag_filter>/personalised/<str:username>/',
         views.index,

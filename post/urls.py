@@ -10,7 +10,8 @@ urlpatterns = [
     path('detail/<slug:slug>/', views.post_detail, name="post_detail"),
     path('approve/<slug:slug>/', views.approve_post, name="approve_post"),
     path('reject/<slug:slug>/', views.reject_post, name="reject_post"),
-
+    path('edit_comment/<int:pk>/', views.edit_comment, name='edit_comment'),
+    path('delete_comment/<int:pk>/', views.delete_comment, name='delete_comment'),
     # Inactive URL's
     # path('add/', views.add_post, name="Add Post"),
     # path('api/<slug:slug>/like/', views.PostLikeAPIToggle.as_view(), name="like_api_toggle"),

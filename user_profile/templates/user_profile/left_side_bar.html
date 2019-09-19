@@ -123,20 +123,77 @@
     <li class="collection-item amber center-align">
         <h6>Filter posts</h6>
     </li>
-    <li class="collection-item">
-        {% for tag in tags %}
-            {% if tag.name in request.build_absolute_uri %}
-                <a class="chip teal white-text" href="{% url 'filter_post_user_profile' native_user.username tag.name %}">{{ tag.name }}</a>
-            {% else %}
-                <a class="chip" href="{% url 'filter_post_user_profile' native_user.username tag.name %}">{{ tag.name }}</a>
-            {% endif %}
-        {% endfor %}
-    </li>
-    <li class="row collection-item">
-        <a class="col s12 m12 l12 center btn" href="{% url 'User Profile' native_user.username %}">Reset</a>
-    </li>
+    {% if not user.is_authenticated %}
+        <!-- User not logged in -->
+        <li class="collection-item">
+            Please login to access this feature.
+        </li>
+    {% else %}
+        <!-- User is logged in -->
+            <li class="collection-item">
+                {% if '/most-liked/' in request.build_absolute_uri %}
+                    <a class="chip teal white-text" href="{% url 'most_liked_user_profile' native_user.username %}">Most liked</a>
+                {% else %}
+                    <a class="chip" href="{% url 'most_liked_user_profile' native_user.username %}">Most liked</a>
+                {% endif %}
+                {% if '/older-first/' in request.build_absolute_uri %}
+                    <a class="chip teal white-text" href="{% url 'older_first_user_profile' native_user.username %}">Older First</a>
+                {% else %}
+                    <a class="chip" href="{% url 'older_first_user_profile' native_user.username %}">Older First</a>
+                {% endif %}
+            </li>
+
+            <li class="collection-item">
+                {% for tag in tags %}
+                    {% if tag.name in request.build_absolute_uri %}
+                        <a class="chip teal white-text" href="{% url 'filter_post_user_profile' native_user.username tag.name %}">{{ tag.name }}</a>
+                    {% else %}
+                        <a class="chip" href="{% url 'filter_post_user_profile' native_user.username tag.name %}">{{ tag.name }}</a>
+                    {% endif %}
+                {% endfor %}
+            </li>
+            <li class="row collection-item">
+                <a class="col s12 m12 l12 center btn" href="{% url 'Index' %}">Reset</a>
+            </li>
+    {% endif %}
 </ul>
 
+<ul class="collection">
+                <li class="collection-item amber center-align">
+                    <h6>Advanced filter</h6>
+                </li>
+                <li class="collection-item">
+                <form method="post"action="">
+                    {% csrf_token %}
+                <div class="row">
+                    <div class="input-field col s12 m12 l12">
+{#                        <i class="material-icons prefix">account_circle</i>#}
+{#                        <select multiple>#}
+                            {% for tag in tags %}
+{#                                {% if tag in native_post.tags.all %}#}
+{#                                    <option value="{{ forloop.counter }}" selected>{{ tag }}</option>#}
+{#                                {% else %}#}
+{#                                    <option value="{{ forloop.counter }}">{{ tag }}</option>#}
+{#                                {% endif %}#}
+
+                                <a class="chip advanced-filter-chip" href="" id="">{{ tag }}</a>
+                            {% endfor %}
+{#                        </select>#}
+{#                        <label class="control-label col s6 m6 ">Post Tags</label>#}
+                    </div>
+
+                    <div class="col s6 m6 l6 center-align">
+                        <a class="btn">Filter</a>
+{#                        <a class="btn tooltipped" data-tooltip="Filter"><i class="material-icons tiny">filter_list</i></a>#}
+{#                        <button class="col s12 l3 m3 tooltipped btn-small" data-tooltip="Filter" type="submit"><i class="material-icons tiny">filter_list</i></button>#}
+                    </div>
+                    <div class="col s6 m6 l6 center">
+                        <a class="center btn" href="{% url 'Index' %}">Reset</a>
+                    </div>
+                </div>
+                </form>
+            </li>
+</ul>
 
 {% include 'user_profile/modal_drafts.html' %}
 

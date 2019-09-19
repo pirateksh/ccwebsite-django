@@ -5,6 +5,7 @@ from django.core.paginator import Paginator  # EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
+from django.db.models import Count
 from django.utils.timesince import timesince
 from django.utils import timezone
 from django.contrib.sites.models import Site
@@ -23,6 +24,7 @@ from django.utils.html import strip_tags
 from user_profile.models import UserProfile
 from .models import Post, Tags
 from comments.models import Comment
+from notifications.models import Notification
 # from comments.models import Comment
 
 # Imported Forms
@@ -41,7 +43,7 @@ NUMBER_OF_POSTS_PER_PAGE = 5
 User = get_user_model()
 
 
-def page_maker(request, model, native_user=None, draft=False, tag_filter=None, username=None, *args, **kwargs):
+def page_maker(request, model, native_user=None, draft=False, tag_filter=None, username=None, liked=None, older=None, *args, **kwargs):
     """
         Function to make pages taking NUMBER_OF_POSTS_PER_PAGE in one page.
     """
@@ -86,6 +88,13 @@ def page_maker(request, model, native_user=None, draft=False, tag_filter=None, u
         else:
             # All posts filtered by verify_status = 1 (i.e. Verified by Admin)
             post_list = model.objects.all(native_user=native_user, draft=draft).filter(verify_status=1)
+
+    if liked is not None:
+        # Order by most liked posts.
+        post_list = post_list.annotate(like_count=Count('likes')).order_by('-like_count')
+    if older is not None:
+        # Order by older posts first.
+        post_list = post_list.order_by('published')
     paginator = Paginator(post_list, NUMBER_OF_POSTS_PER_PAGE)
     page = request.GET.get('page')
     return paginator.get_page(page)
@@ -667,6 +676,38 @@ def reject_post(request, slug):
     else:
         messages.info(request, f"You are not authorised to complete this action!")
     return HttpResponseRedirect(reverse("Index"))
+
+
+def edit_comment(request, pk):
+    """
+        A function to edit comments.
+    """
+    if request.method == "POST":
+        updated_comment = request.POST['updated_comment']
+        comment = Comment.objects.get(pk=pk)
+        comment.comment_text = updated_comment
+        comment.save()
+        result = "SS"
+        response = {
+            'result': result
+        }
+        return JsonResponse(response)
+
+
+def delete_comment(request, pk):
+    comment_qs = Comment.objects.filter(pk=pk)
+    post = None
+    # Checking if comment exists
+    if comment_qs:
+        # Comment deleted
+        comment = comment_qs.first()
+        post = comment.post
+        comment.delete()
+        messages.success(request, f"Comment deleted successfully.")
+    else:
+        # Comment does not exist
+        messages.info(request, f"This comment does not exist.")
+    return HttpResponseRedirect(reverse('post_detail', kwargs={'slug': post.slug}))
 
 
 # Tried Earlier:

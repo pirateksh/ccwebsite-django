@@ -220,7 +220,9 @@
 
                                             <blockquote>
                                             <!-- Comment text -->
-                                            {{ comment.comment_text|safe }}
+                                            <div id="comment-text-{{ comment.pk }}">
+                                                {{ comment.comment_text|safe }}
+                                            </div>
                                                 <footer>
                                                 via -
                                                 <!-- Comment author -->
@@ -241,15 +243,31 @@
                                                         {% elif comment.children.count == 1 %}
                                                             {{ comment.children.count }} Reply |
                                                         {% endif %}
-                                                        <a class="comment-reply-btn" href="#">Reply</a>
+                                                        <a class="comment-reply-btn" href="#">Reply</a> |
+                                                {% if user.is_authenticated %}
+                                                    {% if user == comment.user %}
+                                                        <!-- Edit comment button -->
+                                                        <a class="comment-edit-btn modal-trigger" href="#edit-comment-modal-{{ comment.pk }}" data-comment="{{ comment.comment_text }}" data-pk="{{ comment.pk }}">Edit |</a>
+                                                        {% include 'post/modal_comment_edit.html' %}
+                                                    {% endif %}
+                                                    {% if user == comment.user or user == post.author %}
+                                                        <!-- Delete comment button -->
+                                                        <a class="comment-delete-btn red-text" href="{% url 'delete_comment' comment.pk %}">Delete</a>
+                                                    {% endif %}
+                                                {% endif %}
+
+
                                                 </footer>
+
                                                 <!-- Replies to comment -->
                                                 <div class="comment-reply">
                                                     <div id="reply-{{ post.pk }}-{{ comment.pk }}">
                                                         {% for child_comment in comment.children %}
                                                                 <blockquote>
                                                                 <!-- Reply content -->
-                                                                {{ child_comment.comment_text|safe }}
+                                                                <div id="comment_text">
+                                                                    {{ child_comment.comment_text|safe }}
+                                                                </div>
                                                                     <footer>
                                                                     via -
                                                                     <!-- Reply author -->
@@ -269,6 +287,15 @@
                                                                             <!-- Reply Creation time -->
                                                                             | {{ child_comment.timestamp|timesince }} ago
                                                                         </span>
+                                                                    {% if user.is_authenticated %}
+                                                                        {% if user == child_comment.user %}
+                                                                            <a class="comment-edit-btn" href="#edit-comment-modal-{{ child_comment.pk }}" data-comment="{{ child_comment.comment_text }}" data-pk="{{ child_comment.pk }}">Edit |</a>
+                                                                        {% endif %}
+                                                                        {% if user == child_comment.user or user == post.author or user == comment.user %}
+                                                                            <!-- Delete comment button -->
+                                                                            <a class="comment-delete-btn red-text" href="{% url 'delete_comment' child_comment.pk %}">Delete</a>
+                                                                        {% endif %}
+                                                                    {% endif %}
                                                                     </footer>
                                                                 </blockquote>
                                                                 <div class="divider"></div>

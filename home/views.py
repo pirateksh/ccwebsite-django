@@ -61,7 +61,7 @@ def set_profile(request, user):
     return False
 
 
-def index(request, tag_filter=None, username=None):
+def index(request, tag_filter=None, username=None, liked=None, older=None):
     """
         This function renders Home Page.
         If tag_filter = None, All posts are fetched
@@ -79,7 +79,7 @@ def index(request, tag_filter=None, username=None):
     addpostform = PostForm()
 
     # Fetching posts as pages, all User Profiles, tags and comments
-    posts = page_maker(request, Post, tag_filter=tag_filter, username=username)
+    posts = page_maker(request, Post, tag_filter=tag_filter, username=username, liked=liked, older=older)
     user_profiles = UserProfile.objects.all()
     tags = Tags.objects.all()
     comments = Comment.objects.all()  # Using overridden Model Manager all().

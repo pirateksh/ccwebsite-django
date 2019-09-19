@@ -47,7 +47,7 @@ import os.path
 from notifications.signals import notify
 
 
-def user_profile(request, username, tag_name=None):
+def user_profile(request, username, tag_name=None, liked=None, older=None):
     """
         This functions renders User Profile Page
     """
@@ -92,7 +92,7 @@ def user_profile(request, username, tag_name=None):
     followers = check_profile.followers.all()
 
     # Posts and avatar of that user
-    native_posts = page_maker(request, Post, native_user, tag_filter=tag_name)
+    native_posts = page_maker(request, Post, native_user, tag_filter=tag_name, liked=liked, older=older)
 
     # drafts = page_maker(request, Post, native_user, draft=True)
     # This also contains scheduled but NOT yet approved event related post
@@ -199,7 +199,7 @@ def follow_user(request, username, username2):
             follower_profile,
             recipient=followed,
             verb='followed you',
-            # target=post,
+            target=None,
             dp_url=follower_profile.avatar.url,
             prof_url=reverse("User Profile", kwargs={'username': follower.username}),
             # post_url=post_url,
