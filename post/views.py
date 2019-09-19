@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, reverse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, reverse, HttpResponseRedirect, HttpResponse
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator  # EmptyPage, PageNotAnInteger
@@ -9,7 +9,7 @@ from django.db.models import Count
 from django.utils.timesince import timesince
 from django.utils import timezone
 from django.contrib.sites.models import Site
-from django.contrib.sites.shortcuts import get_current_site
+# from django.contrib.sites.shortcuts import get_current_site
 
 # from django.contrib.contenttypes.models import ContentType
 # from django.views.generic import RedirectView
@@ -22,9 +22,9 @@ from django.utils.html import strip_tags
 
 # Imported Models
 from user_profile.models import UserProfile
-from .models import Post, Tags
+from .models import Post, Tags, PostView
 from comments.models import Comment
-from notifications.models import Notification
+# from notifications.models import Notification
 # from comments.models import Comment
 
 # Imported Forms
@@ -495,6 +495,7 @@ def post_detail(request, slug):
     post_qs = Post.objects.filter(slug=slug)
     if post_qs:
         post = post_qs.first()
+        post_views = PostView.objects.filter(post=post)
     else:
         messages.info(request, f"This post does not exist.")
         return HttpResponseRedirect(reverse('User Profile', kwargs={'username': request.user.username}))
@@ -517,6 +518,7 @@ def post_detail(request, slug):
         'user_profiles': user_profiles,
         'tags': tags,
         'form': form,
+        'post_views': post_views,
     }
 
     faculties = User.objects.filter(groups__name='Teacher')
@@ -678,6 +680,7 @@ def reject_post(request, slug):
     return HttpResponseRedirect(reverse("Index"))
 
 
+@login_required
 def edit_comment(request, pk):
     """
         A function to edit comments.
@@ -694,7 +697,11 @@ def edit_comment(request, pk):
         return JsonResponse(response)
 
 
+@login_required
 def delete_comment(request, pk):
+    """
+        A function to delete comments.
+    """
     comment_qs = Comment.objects.filter(pk=pk)
     post = None
     # Checking if comment exists
@@ -709,6 +716,39 @@ def delete_comment(request, pk):
         messages.info(request, f"This comment does not exist.")
     return HttpResponseRedirect(reverse('post_detail', kwargs={'slug': post.slug}))
 
+
+def record_view(request, post_id):
+    """
+        This function count number of hits/views on a post.
+    """
+    post = get_object_or_404(Post, pk=post_id)
+    if not PostView.objects.filter(post=post, user=request.user, session=request.session.session_key):
+        view = PostView(
+            post=post,
+            # To fetch IP Address
+            ip=request.META['REMOTE_ADDR'],
+            user=request.user,
+            created=timezone.now(),
+            session=request.session.session_key
+        )
+        view.save()
+    count = PostView.objects.filter(post=post).count()
+    post.unique_view_no = count
+    post.save()
+    profile = UserProfile.objects.get(user=request.user)
+    # return HttpResponse(u"%s" % PostView.objects.filter(post=post).count())
+    result = "SS"
+    response = {
+        'result': result,
+        'title': post.title,
+        'count': count,
+        'profileURL': reverse('User Profile', kwargs={'username': request.user.username }),
+        'avatarURL': profile.avatar.url,
+        'username': request.user.username,
+        'firstName': request.user.first_name,
+        'lastName': request.user.last_name,
+    }
+    return JsonResponse(response)
 
 # Tried Earlier:
 

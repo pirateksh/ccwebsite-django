@@ -1,0 +1,37 @@
+<!-- Users who viewed a particular post -->
+{% load materializecss %}
+{% load static %}
+<div id="modal-unique-viewers" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Unique viewers</h4>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody class="unique_viewers">
+
+                    {% for post_view in post_views %}
+                        <tr>
+                            <td>
+                                <a class="chip" href="{% url 'User Profile' post_view.user.username %}">
+                                    {% for user_profile in user_profiles %}
+                                        {% if user_profile.user == post_view.user %}
+                                            {% if user_profile.avatar %}
+                                                <img src="{{ user_profile.avatar.url }}">
+                                            {% endif %}
+                                            {{ post_view.user.username }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </a>
+                            </td>
+                            <td>{{ post_view.user.first_name }} {{ post_view.user.last_name }}</td>
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+</div>

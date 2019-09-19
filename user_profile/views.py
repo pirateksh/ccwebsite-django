@@ -81,16 +81,21 @@ def user_profile(request, username, tag_name=None, liked=None, older=None):
     check_profile = None
     flag = False
 
+    # Users current user is following
+    followed_users = None
+    # Users who are following current user
+    followers = None
+
     if request.user.is_authenticated:
         check_profile = get_object_or_404(UserProfile, user=request.user)
         if profile is check_profile:
             flag = set_profile(request, native_user)
             check_profile = get_object_or_404(UserProfile, user=request.user)
+            # Users current user is following
+            followed_users = check_profile.followed_users.all()
+            # Users who are following current user
+            followers = check_profile.followers.all()
 
-    # Users current user is following
-    followed_users = check_profile.followed_users.all()
-    # Users who are following current user
-    followers = check_profile.followers.all()
 
     # Posts and avatar of that user
     native_posts = page_maker(request, Post, native_user, tag_filter=tag_name, liked=liked, older=older)
@@ -121,6 +126,7 @@ def user_profile(request, username, tag_name=None, liked=None, older=None):
 
     read_notif = None
     unread_notif = None
+    quiz_results = None
     if request.user.is_authenticated:
 
         # Read notifications
@@ -128,7 +134,8 @@ def user_profile(request, username, tag_name=None, liked=None, older=None):
 
         # Unread notifications
         unread_notif = request.user.notifications.unread()
-    quiz_results = UserQuizResult.objects.all().filter(user=request.user)
+
+        quiz_results = UserQuizResult.objects.all().filter(user=request.user)
 
     context = {
         'profile': profile,

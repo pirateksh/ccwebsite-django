@@ -21,8 +21,10 @@
                             <a class="btn-small tooltipped red unfollow" data-tooltip="Unfollow" data-position="right" href="{% url 'unfollow_user' user.username native_user.username %}">
                                 <i class="material-icons tiny">cancel</i>
                             </a>
-                        {% else %}
-                        <a class="btn-small tooltipped follow" style="background: #acca66; id="follow-{{ native_user.pk }}" href="{% url 'follow_user' user.username native_user.username %}" data-tooltip="Follow" data-position="right">
+
+                        {% elif user.is_authenticated %}
+                        <a class="btn-small tooltipped follow" style="background: #acca66;" id="follow-{{ native_user.pk }}" href="{% url 'follow_user' user.username native_user.username %}" data-tooltip="Follow" data-position="right">
+
                             <i class="material-icons tiny">person_add</i>
                         </a>
                         {% endif %}
@@ -30,7 +32,7 @@
                         <a class="modal-trigger btn btn-flat tooltipped" style="background: #acca66;" data-position="right" data-tooltip="Followed" href="#modal-followed">
                             <i class="material-icons">contacts</i>
                         </a>
-                        <a class="modal-trigger btn btn-flat tooltipped" style="background: #acca66; data-position="right" data-tooltip="Followers" href="#modal-followers">
+                        <a class="modal-trigger btn btn-flat tooltipped" style="background: #acca66;" data-position="right" data-tooltip="Followers" href="#modal-followers">
                             <i class="material-icons">directions_run</i>
                         </a>
                     {% endif %}
@@ -39,12 +41,16 @@
             <span class="email">{{ native_user.email }}</span>
         </div>
     </li>
+
 {#    <div class="divider"></div>#}
 {#        <li class="collection-item amber lighten-1">#}
 {#            <a class="modal-trigger btn-flat" href="#modal-quiz-performance" >#}
 {#                Quiz Performance#}
 {#            </a>#}
 {#        </li>#}
+
+    <div class="divider"></div>
+
     {% if native_user == user and not user.is_superuser %}
         <li class="collection-item lighten-1" style="background: var(--background4)">
             <a class="btn-flat white-text" href="{% url 'edit_profile' user.username %}">

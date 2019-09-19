@@ -93,8 +93,10 @@
                                 <a class="btn-small tooltipped red unfollow dark2 transparent" data-tooltip="Unfollow" data-position="right" href="{% url 'unfollow_user' user.username native_user.username %}">
                                     <i class="material-icons tiny">cancel</i>
                                 </a>
-                            {% else %}
+
+                            {% elif user.is_authenticated %}
                             <a class="btn-small tooltipped follow dark2 transparent" id="follow-{{ native_user.pk }}" href="{% url 'follow_user' user.username native_user.username %}" data-tooltip="Follow" data-position="right">
+
                                 <i class="material-icons tiny">person_add</i>
                             </a>
                             {% endif %}

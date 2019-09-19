@@ -11,7 +11,6 @@
  //        });
 
 
-
 $(function() {
 
     // This function gets cookie with a given name
@@ -66,7 +65,6 @@ $(function() {
     });
 
 });
-
 
 
 // Change button name when is_scheduled checkbox is clicked
@@ -743,17 +741,20 @@ $('.like-btn').click(function (event) {
                    instance.open();
                } else {
                    var btn = $('#like-btn-' + json.postPK);
+                   var countDisplay = $('.like-counter-' + json.postPK);
                    if(json.result === "UNLIKED") {
                        //console.log("UNLIKED");
+                       countDisplay.html(json.likesCount);
                        btn.html(
-                           json.likesCount +
+                           // json.likesCount +
                            " <i class='material-icons large'>thumb_up</i>"
                         );
                         addToast("Unliked");
                    } else if (json.result === "LIKED") {
                        //console.log("LIKED");
+                       countDisplay.html(json.likesCount);
                         btn.html(
-                           json.likesCount +
+                           // json.likesCount +
                            " <i class='material-icons large'>thumb_down</i>"
                         );
                         addToast("Liked");
@@ -1035,3 +1036,6 @@ $('.unfollow').click(function (e) {
         });
     })
  });
+//
+//  // Recording view
+// $('.normal-posts').filter(':onScreen')

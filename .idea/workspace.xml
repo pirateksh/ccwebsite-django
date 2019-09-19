@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30960ef7-872c-46bd-bef3-b2acd3b0d9a2" name="Default Changelist" comment="CK">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/assets/js/dark.js" afterDir="false" />
@@ -42,10 +43,66 @@
       <change beforePath="$PROJECT_DIR$/user_profile/templates/user_profile/modal_manage_calendar.html" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/templates/user_profile/modal_manage_calendar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user_profile/templates/user_profile/modal_quiz_performance.html" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/templates/user_profile/modal_quiz_performance.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user_profile/templates/user_profile/modal_verify_post.html" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/templates/user_profile/modal_verify_post.html" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/ccwebsite.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ccwebsite.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comments/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/comments/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/templates/home/post_display.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/post_display.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/templates/scripts.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/scripts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notif/templates/notif/notifications_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/notif/templates/notif/notifications_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notif/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/notif/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/post/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/migrations/0002_auto_20190917_1222.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/migrations/0002_auto_20190917_1658.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/migrations/0003_auto_20190918_0039.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/migrations/0003_auto_20190918_0133.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/migrations/0004_auto_20190918_0120.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/migrations/0004_auto_20190918_0214.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/migrations/0005_auto_20190918_0215.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/migrations/0005_auto_20190918_1254.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/migrations/0006_auto_20190918_0241.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/migrations/0006_auto_20190918_2108.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/migrations/0007_auto_20190918_1621.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/migrations/0007_auto_20190919_0252.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/migrations/0008_auto_20190918_1854.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/migrations/0009_merge_20190919_0609.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/post/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/templates/post/post_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/post/templates/post/post_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/post/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/post/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizapp/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/quizapp/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizapp/migrations/0002_currentquiz.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizapp/migrations/0003_userquizresult_is_atm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizapp/migrations/0004_currentquiz_sel_ans.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizapp/migrations/0005_auto_20190918_2108.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quizapp/migrations/0006_randomquizquestion.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_calendar_tokens/token.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/user_calendar_tokens/token.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_calendar_tokens/tokenadmin.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/user_calendar_tokens/tokenadmin.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_calendar_tokens/tokenpirate_ksh.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/user_calendar_tokens/tokenpirate_ksh.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_profile/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_profile/migrations/0002_userprofile_is_email_verified.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_profile/migrations/0003_auto_20190918_0039.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_profile/migrations/0004_auto_20190918_0215.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_profile/migrations/0005_auto_20190918_0241.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_profile/templates/user_profile/left_side_bar.html" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/templates/user_profile/left_side_bar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_profile/templates/user_profile/modal_followed.html" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/templates/user_profile/modal_followed.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_profile/templates/user_profile/modal_following.html" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/templates/user_profile/modal_following.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_profile/templates/user_profile/modal_quiz_performance.html" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/templates/user_profile/modal_quiz_performance.html" afterDir="false" />
+>>>>>>> Kshitiz
       <change beforePath="$PROJECT_DIR$/user_profile/templates/user_profile/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/templates/user_profile/navbar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user_profile/templates/user_profile/post_display.html" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/templates/user_profile/post_display.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user_profile/templates/user_profile/right_side_bar.html" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/templates/user_profile/right_side_bar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user_profile/templates/user_profile/user_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/templates/user_profile/user_profile.html" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/user_profile/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile/views.py" afterDir="false" />
+>>>>>>> Kshitiz
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,21 +130,327 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="504">
+              <caret line="746" column="58" lean-forward="true" selection-start-line="746" selection-start-column="58" selection-end-line="746" selection-end-column="58" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#blockquote#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#blockquote#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#footer#0;n#blockquote#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/post/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="318">
+              <caret line="743" column="23" lean-forward="true" selection-start-line="743" selection-start-column="23" selection-end-line="743" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#99#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/notif/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="393">
+              <caret line="95" column="37" selection-start-line="95" selection-start-column="37" selection-end-line="95" selection-end-column="37" />
+              <folding>
+                <element signature="e#0#66#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/post/templates/post/post_detail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="97" column="169" selection-start-line="97" selection-start-column="169" selection-end-line="97" selection-end-column="169" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/modal_unique_viewers.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="29" column="63" lean-forward="true" selection-start-line="29" selection-start-column="63" selection-end-line="29" selection-end-column="63" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/user_profile/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="113">
+              <caret line="128" column="23" selection-start-line="128" selection-start-column="23" selection-end-line="128" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#80#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/home/templates/scripts.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="61" column="61" selection-start-line="61" selection-start-column="61" selection-end-line="61" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+>>>>>>> Kshitiz
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="Python Script" />
         <option value="JavaScript File" />
         <option value="HTML File" />
-        <option value="Python Script" />
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1R2i4GxUFWjean94QxXq0HEFXOv" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+=======
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>dele</find>
+      <find>id_comment_repl</find>
+      <find>reply-</find>
+      <find>comment-rep</find>
+      <find>comment-reply</find>
+      <find>upda</find>
+      <find>redirect</find>
+      <find>HOME</find>
+      <find>social-login</find>
+      <find>index</find>
+      <find>dra</find>
+      <find>location.hre</find>
+      <find>SITE_I</find>
+      <find>Ask</find>
+      <find>alert</find>
+      <find>edit post</find>
+      <find>appro</find>
+      <find>author</find>
+      <find>accep</find>
+      <find>app</find>
+      <find>modal</find>
+      <find>edit pos</find>
+      <find>comment</find>
+      <find>CK</find>
+      <find>edit</find>
+      <find>target</find>
+      <find>delete</find>
+      <find>#home</find>
+      <find>like-btn</find>
+      <find>post_detail</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>posts</replace>
+      <replace>post</replace>
+      <replace>author</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/permission_modal.html" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/reply_mail_template.html" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/post_approval_mail_template.html" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/drafts_modal.html" />
+        <option value="$PROJECT_DIR$/post/forms.py" />
+        <option value="$PROJECT_DIR$/home/tokens.py" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/email_verification_mail_template.html" />
+        <option value="$PROJECT_DIR$/user_profile/tokens.py" />
+        <option value="$PROJECT_DIR$/home/templates/home/personalised_post_display.html" />
+        <option value="$PROJECT_DIR$/user_profile/models.py" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/followed_modal.html" />
+        <option value="$PROJECT_DIR$/ccwebsite/settings.py" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/following_modal.html" />
+        <option value="$PROJECT_DIR$/home/templates/home/add_post.html" />
+        <option value="$PROJECT_DIR$/home/templates/home/personalized_post_display.html" />
+        <option value="$PROJECT_DIR$/assets/css/my_style.css" />
+        <option value="$PROJECT_DIR$/home/templates/home/index.html" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/edit_profile.html" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/mail_template_event_notification.html" />
+        <option value="$PROJECT_DIR$/home/templates/home/right_side_bar.html" />
+        <option value="$PROJECT_DIR$/home/templates/home/navbar.html" />
+        <option value="$PROJECT_DIR$/user_profile/urls.py" />
+        <option value="$PROJECT_DIR$/home/templates/home/left_side_bar.html" />
+        <option value="$PROJECT_DIR$/post/templates/post/modal_comment_edit.html" />
+        <option value="$PROJECT_DIR$/post/signals.py" />
+        <option value="$PROJECT_DIR$/post/apps.py" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/modal_quiz_performance.html" />
+        <option value="$PROJECT_DIR$/post/urls.py" />
+        <option value="$PROJECT_DIR$/assets/js/jquery.onscreen.js" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/user_profile.html" />
+        <option value="$PROJECT_DIR$/home/urls.py" />
+        <option value="$PROJECT_DIR$/notif/templates/notif/notifications_detail.html" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/right_side_bar.html" />
+        <option value="$PROJECT_DIR$/home/templates/base.html" />
+        <option value="$PROJECT_DIR$/post/admin.py" />
+        <option value="$PROJECT_DIR$/assets/js/main.js" />
+        <option value="$PROJECT_DIR$/home/views.py" />
+        <option value="$PROJECT_DIR$/post/models.py" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/post_display.html" />
+        <option value="$PROJECT_DIR$/home/templates/home/post_display.html" />
+        <option value="$PROJECT_DIR$/post/templates/post/modal_unique_viewers.html" />
+        <option value="$PROJECT_DIR$/post/templates/post/post_detail.html" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/modal_followed.html" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/modal_following.html" />
+        <option value="$PROJECT_DIR$/user_profile/views.py" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/navbar.html" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/left_side_bar.html" />
+        <option value="$PROJECT_DIR$/post/views.py" />
+        <option value="$PROJECT_DIR$/user_profile/templates/user_profile/modal_unique_viewers.html" />
+        <option value="$PROJECT_DIR$/home/templates/scripts.html" />
+        <option value="$PROJECT_DIR$/notif/views.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="10" />
+    <option name="y" value="213" />
+    <option name="width" value="1346" />
+    <option name="height" value="688" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="comments" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="notif" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="notif" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="notif" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="notif" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="post" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="post" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="post" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="post" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="post" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="user_profile" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="user_profile" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ccwebsite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ccwebsite" type="462c0819:PsiDirectoryNode" />
+              <item name="user_profile" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="user_profile" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+>>>>>>> Kshitiz
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -100,6 +463,9 @@
     <property name="settings.editor.selected.configurable" value="http.proxy" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Django_Projects\ccwebsite\post\templates\post" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\ccwebsite\ccwebsite-django\ccwebsite-django\home\templates" />
       <recent name="C:\Django_Projects\ccwebsite\user_profile" />
@@ -252,6 +618,7 @@
       <workItem from="1568605138153" duration="9951000" />
       <workItem from="1568625958355" duration="31941000" />
       <workItem from="1568667979559" duration="72435000" />
+<<<<<<< HEAD
       <workItem from="1568871427286" duration="3646000" />
       <workItem from="1568875294765" duration="8979000" />
       <workItem from="1568886294635" duration="6499000" />
@@ -259,6 +626,68 @@
     </task>
     <servers />
   </component>
+=======
+      <workItem from="1568864315229" duration="10016000" />
+      <workItem from="1568877564999" duration="164000" />
+      <workItem from="1568879956428" duration="11163000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="808347000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8726334" visible="true" weight="0.03706505" />
+      <window_info id="Structure" order="1" sideWeight="0.1273666" side_tool="true" weight="0.11119516" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3715221" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3289689" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39934534" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.8445172" />
+      <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3289689" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5075643" side_tool="true" weight="0.5450082" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4924357" weight="0.055646483" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49621785" weight="0.3289689" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.3289689" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.32980332" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32753405" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8726334" visible="true" weight="0.22012103" />
+      <window_info id="Structure" order="1" sideWeight="0.1273666" side_tool="true" weight="0.11119516" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3715221" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3289689" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39934534" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.8445172" />
+      <window_info anchor="bottom" id="Database Changes" order="9" weight="0.3289689" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5075643" side_tool="true" weight="0.5450082" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4924357" visible="true" weight="0.055646483" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49621785" weight="0.3289689" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.3289689" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.32980332" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32753405" />
+    </layout-to-restore>
+  </component>
+>>>>>>> Kshitiz
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
@@ -289,4 +718,359 @@
       </map>
     </option>
   </component>
+<<<<<<< HEAD
+=======
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/modal_manage_calendar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="6" lean-forward="true" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/modal_permission.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="7" column="52" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ccwebsite/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="173" column="20" selection-start-line="173" selection-start-column="20" selection-end-line="173" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/home/modal_login.html" />
+    <entry file="file://$PROJECT_DIR$/home/templates/home/post_display_personalised.html" />
+    <entry file="file://$PROJECT_DIR$/home/templates/home/add_post.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="91" selection-start-line="8" selection-start-column="91" selection-end-line="8" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/home/personalized_post_display.html" />
+    <entry file="file://$PROJECT_DIR$/assets/css/my_style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="85" column="1" selection-start-line="85" selection-start-column="1" selection-end-line="85" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/mail_template_permission.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="19" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/mail_template_event_notification.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="14" lean-forward="true" selection-start-column="14" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/edit_profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="151" column="83" selection-start-line="151" selection-start-column="83" selection-end-line="151" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/home/right_side_bar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/home/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-301">
+          <caret line="66" column="104" selection-start-line="66" selection-start-column="104" selection-end-line="66" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/home/navbar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="159" selection-start-line="159" selection-end-line="159" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/home/left_side_bar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="97" column="49" lean-forward="true" selection-start-line="97" selection-start-column="24" selection-end-line="97" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/modal_avatar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="17" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/comments/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-612">
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/post/templates/post/modal_comment_edit.html" />
+    <entry file="file://$PROJECT_DIR$/post/signals.py" />
+    <entry file="file://$PROJECT_DIR$/post/apps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/signals.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/modal_verify_post.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="21" column="113" lean-forward="true" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="113" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/modal_change_password.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="68" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/modal_quiz_performance.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="10" lean-forward="true" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/jquery.onscreen.js" />
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/user_profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="85" column="28" selection-start-line="85" selection-start-column="28" selection-end-line="85" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
+          <folding>
+            <element signature="e#35#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/post/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="78" selection-start-line="14" selection-start-column="78" selection-end-line="14" selection-end-column="78" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/post/migrations/0010_auto_20190919_0944.py" />
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/right_side_bar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/notif/templates/notif/notifications_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="155" column="51" lean-forward="true" selection-start-line="155" selection-start-column="51" selection-end-line="155" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="26" column="59" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/post/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="27" lean-forward="true" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
+          <folding>
+            <element signature="e#0#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/models.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/post_display.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="192" column="46" lean-forward="true" selection-start-line="192" selection-start-column="46" selection-end-line="192" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/home/post_display.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="455" column="52" lean-forward="true" selection-start-line="455" selection-start-column="52" selection-end-line="455" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/post/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="91" column="87" selection-start-line="91" selection-start-column="87" selection-end-line="91" selection-end-column="87" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/post/templates/post/modal_unique_viewers.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="37" lean-forward="true" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="746" column="58" lean-forward="true" selection-start-line="746" selection-start-column="58" selection-end-line="746" selection-end-column="58" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#blockquote#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#blockquote#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#footer#0;n#blockquote#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/modal_followed.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="37" column="29" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/modal_following.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="35" column="11" lean-forward="true" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="128" column="23" selection-start-line="128" selection-start-column="23" selection-end-line="128" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/navbar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="83" column="57" selection-start-line="83" selection-start-column="57" selection-end-line="83" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/left_side_bar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="23" column="53" selection-start-line="23" selection-start-column="53" selection-end-line="23" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/post/templates/post/post_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="97" column="169" selection-start-line="97" selection-start-column="169" selection-end-line="97" selection-end-column="169" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user_profile/templates/user_profile/modal_unique_viewers.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="29" column="63" lean-forward="true" selection-start-line="29" selection-start-column="63" selection-end-line="29" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/scripts.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="61" column="61" selection-start-line="61" selection-start-column="61" selection-end-line="61" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/post/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="743" column="23" lean-forward="true" selection-start-line="743" selection-start-column="23" selection-end-line="743" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#99#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/notif/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="95" column="37" selection-start-line="95" selection-start-column="37" selection-end-line="95" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+>>>>>>> Kshitiz
 </project>

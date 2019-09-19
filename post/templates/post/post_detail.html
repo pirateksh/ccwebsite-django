@@ -12,6 +12,7 @@
     'user_profiles': user_profiles,
     'tags': tags,
     'form': User Signup form,
+    'post_views': post_views,
 {% endcomment %}
 {% block title %}
     Post Detail
@@ -27,15 +28,17 @@
             </ul>
         </div>
         <div class="col s12 m9 l6">
-        {% if post.deleted %}
-            <ul class="collection">
-                <li class="collection-item dark2">
-                    <strong>This post has been deleted.</strong>
-                </li>
-            </ul>
-        {% else %}
-            <ul class="collection with-header" id="user-prof-post-{{ post.pk }}" >
+
+{#        {% if post.deleted %}#}
+{#            <ul class="collection">#}
+{#                <li class="collection- dark2">#}
+{#                    <strong>This post has been deleted.</strong>#}
+{#                </li>#}
+{#            </ul>#}
+{#        {% else %}#}
+            <ul class="collection with-header posts" data-pk="{{ post.pk }}" id="user-prof-post-{{ post.pk }}" data-url="{% url 'record_view' post.pk %}" >
                 <li class="collection-header title" style="background: var(--background2)">
+
                 <!-- Title -->
                     {% if post.verify_status == 1 %}
                         <h4 class="hide-on-med-and-down post-head-m-down" style="font-size: 3vw;">{{ post.title }}<i class="material-icons">verified_user</i></h4>
@@ -82,13 +85,28 @@
                 </li>
 
                 {% if post.verify_status == 1 %}
+                    <!-- If post has been verified -->
                     {% if user == author %}
                         {# If current user is author of post #}
+
+                        <!-- Like and view count -->
+                        <li class="collection-item row">
+                            <div class="col s6 m6 l6 center">
+                                <span id="like-counter-{{ post.pk }}">{{ post.likes.count }}</span> likes
+                            </div>
+{#                            <div class="col s4 m4 l4 center">#}
+{#                                comments#}
+{#                            </div>#}
+                            <div class="col s6 m6 l6 center">
+                                <a class="modal-trigger" href="#modal-unique-viewers"><span class="view-counter-{{ post.pk }}">{{ post.unique_view_no }}</span> views</a>
+                            </div>
+                        </li>
                         <li class="collection-item row" id="like-{{ post.pk }}" style="background: var(--background2)">
+
                             <div class="col s3 m3 l3 center">
                             <!-- Like button -->
                                 <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
-                                    {{ post.likes.count }}
+{#                                    {{ post.likes.count }}#}
                                     {% if user in post.likes.all %}
                                         <i class="material-icons large">thumb_down</i>
                                     {% else %}
@@ -172,11 +190,25 @@
 
                     {% elif user.is_authenticated %}
                     {# If user is logged in BUT is'nt author of this post #}
+
+                        <!-- Like and view count -->
+                        <li class="collection-item row">
+                            <div class="col s6 m6 l6 center">
+                                <span class="like-counter-{{ post.pk }}">{{ post.likes.count }}</span> likes
+                            </div>
+{#                            <div class="col s4 m4 l4 center">#}
+{#                                comments#}
+{#                            </div>#}
+                            <div class="col s6 m6 l6 center">
+                                <a class="modal-trigger" href="#modal-unique-viewers"><span class="view-counter-{{ post.pk }}">{{ post.unique_view_no }}</span> views</a>
+                            </div>
+                        </li>
                         <li class="collection-item row" style="background: var(--background2)" id="like-{{ post.pk }}">
+
                             <div class="col s6 m6 l6 center">
                             <!-- Like Button -->
                                 <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
-                                    {{ post.likes.count }}
+{#                                    {{ post.likes.count }}#}
                                     {% if user in post.likes.all %}
                                         <i class="material-icons large">thumb_down</i>
                                     {% else %}
@@ -447,9 +479,10 @@
     {#          <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>#}
     {#          </li>#}
             </ul>
-        {% endif %}
+{#        {% endif %}#}
         </div>
     </div>
+    {% include 'user_profile/modal_unique_viewers.html' %}
     {% include 'footer.html' %}
 {% endblock %}
 
