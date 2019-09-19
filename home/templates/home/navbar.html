@@ -10,12 +10,12 @@
     comment_form - Comment Form
 {% endcomment %}
 {% load static %}
-<nav class="amber" role="navigation">
+<nav class="" role="navigation">
 
     <div class="nav-wrapper container">
 
         {% if user.is_authenticated %}
-            <a id="logo-container" class="brand-logo"><img alt="Logo" src="{% static 'Images/logo.jpg' %}"></a>
+            <a id="logo-container" class="brand-logo">LOGO
         {% else %}
             <a id="logo-container" class="brand-logo">Hi, User!</a>
         {% endif %}
@@ -66,10 +66,21 @@
 
             {% endif %}
 
+            <li>
+                {#Switch#}
+                <div class="switch tooltipped" data-tooltip="Dark Mode.">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox">
+                        <span class="lever"></span>
+                    </label>
+{#                    <em class="text-white">Dark Mode!</em>#}
+                </div>
+            </li>
+
         </ul>
 
         {# SideNav for Mobile view #}
-        <ul id="nav-mobile" class="sidenav">
+        <ul id="nav-mobile" class="sidenav" style="background: var(--background2)">
             <div class="row">
 
             {% if user.is_authenticated %}
@@ -169,6 +180,18 @@
                 </div>
 
             {% endif %}
+
+            <li>
+                {#Switch#}
+                <div class="switch tooltipped" data-tooltip="Dark Mode.">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox">
+                        <span class="lever"></span>
+                    </label>
+{#                    <em class="text-white">Dark Mode!</em>#}
+                </div>
+            </li>
+
             </div>
         </ul>
         {# Trigger for mobile Side Nav #}

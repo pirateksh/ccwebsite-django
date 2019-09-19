@@ -2,17 +2,17 @@
 
 {# Filtering posts according to tags #}
 <ul class="collection">
-    <li class="collection-item center-align amber">
+    <li class="collection-item center-align white-text" style="background: var(--background3)">
         <h6>Filter posts</h6>
     </li>
     {% if not user.is_authenticated %}
         <!-- User not logged in -->
-        <li class="collection-item">
+        <li class="collection-item" style="background: var(--background2)">
             Please login to access this feature.
         </li>
     {% else %}
         <!-- User is logged in -->
-            <li class="collection-item">
+            <li class="collection-item" style="background: var(--background2)">
             {% if user.is_authenticated %}
                 {% if user.username in request.build_absolute_uri and '/personalised/' in request.build_absolute_uri %}
                     <!-- User in personalised section -->
@@ -41,7 +41,7 @@
                 {% endif %}
             {% endif %}
             </li>
-            <li class="collection-item">
+            <li class="collection-item" style="background: var(--background2)">
                 {% if user.is_authenticated %}
                     {% if user.username in request.build_absolute_uri and '/personalised/' in request.build_absolute_uri %}
                         <!-- Personalised feed is open -->
@@ -66,17 +66,17 @@
                     {% endif %}
                 {% endif %}
             </li>
-            <li class="row collection-item">
+            <li class="row collection-item" style="background: var(--background2)">
                 <a class="col s12 m12 l12 center btn" href="{% url 'Index' %}">Reset</a>
             </li>
     {% endif %}
 </ul>
 
 <ul class="collection">
-                <li class="collection-item amber center-align">
+                <li class="collection-item white-text center-align" style="background: var(--background3)">
                     <h6>Advanced filter</h6>
                 </li>
-            <li class="collection-item">
+            <li class="collection-item" style="background: var(--background2)">
                 <form method="" action="">
                     {% csrf_token %}
                 <div class="row">

@@ -25,10 +25,10 @@
 {#                <li class="tab col center">#}
 {#                    <a href="{% url 'User Profile' native_user.username %}" target="_self">Reset</a>#}
 {#                </li>#}
-                <li class="tab col s3 m3 l3 center"><a class="active" href="#personal-info"><i class="material-icons small ">person</i></a></li>
-                <li class="tab col s3 m3 l3 center"><a href="#subscribed-tags"><i class="material-icons small">subscriptions</i> </a></li>
-                <li class="tab col s3 m3 l3 center"><a href="#notif"><i class="material-icons small">notifications</i></a></li>
-                <li class="tab col s3 m3 l3 center"><a href="#security"><i class="material-icons small">security</i></a></li>
+                <li class="tab col s3 m3 l3 center" style="background: var(--background2)"><a class="active" href="#personal-info"><i class="material-icons small ">person</i></a></li>
+                <li class="tab col s3 m3 l3 center" style="background: var(--background2)"><a href="#subscribed-tags"><i class="material-icons small">subscriptions</i> </a></li>
+                <li class="tab col s3 m3 l3 center" style="background: var(--background2)"><a href="#notif"><i class="material-icons small">notifications</i></a></li>
+                <li class="tab col s3 m3 l3 center" style="background: var(--background2)"><a href="#security"><i class="material-icons small">security</i></a></li>
             </ul>
 {#        </div>#}
 {#    </div>#}
@@ -37,19 +37,19 @@
     <div class="row">
         <div class="col l3 hide-on-med-and-down">
             <ul class="collection">
-                <li class="collection-item amber">
+                <li class="collection-item teal"  style="background: var(--background2)">
                     <h6><strong>Edit</strong></h6>
                 </li>
-                <li class="collection-item">
+                <li class="collection-item"  style="background: var(--background2)">
                     <strong>Personal Information</strong>
                 </li>
-                <li class="collection-item">
+                <li class="collection-item"  style="background: var(--background2)">
                     <strong>Subscription</strong>
                 </li>
-                <li class="collection-item">
+                <li class="collection-item"  style="background: var(--background2)">
                     <strong>Notifications</strong>
                 </li>
-                <li class="collection-item">
+                <li class="collection-item"  style="background: var(--background2)">
                     <strong>Security</strong>
                 </li>
             </ul>
@@ -59,10 +59,10 @@
 
             <!-- Personal Information Section -->
                 <div id="personal-info">
-                    <li class="collection-item amber">
+                    <li class="collection-item teal"  style="background: var(--background2)">
                         <h6><strong>Personal Information</strong></h6>
                     </li>
-                    <li class="collection-item white black-text">
+                    <li class="collection-item" style="background: var(--background2)">
                         <div class="row">
                             <div class="col s12 m2 l2">
                                 <strong>Profile Picture</strong>
@@ -88,12 +88,12 @@
                                 <div class="row">
                                     <div class="input-field col s12 m5 l5">
                                         <i class="material-icons prefix">account_circle</i>
-                                        <input id="first_name" type="text" class="validate" name="first_name" value="{{ native_user.first_name }}">
+                                        <input id="first_name" type="text" class="validate white" name="first_name" value="{{ native_user.first_name }}">
                                         <label for="first_name">First Name</label>
                                     </div>
                                     <div class="input-field col s12 m5 l5">
                                         <i class="material-icons prefix">account_circle</i>
-                                        <input id="last_name" type="tel" class="validate" name="last_name" value="{{ native_user.last_name }}">
+                                        <input id="last_name" type="tel" class="validate white" name="last_name" value="{{ native_user.last_name }}">
                                         <label for="last_name">Last Name</label>
                                     </div>
                                     <div class="input-field col s12 m2 l2 center">
@@ -112,7 +112,7 @@
                                 <div class="row">
                                     <div class="input-field col s12 m8 l8">
                                         <i class="material-icons prefix">email</i>
-                                        <input id="email" type="text" class="validate" name="email" value="{{ native_user.email }}">
+                                        <input id="email" type="text" class="validate white" name="email" value="{{ native_user.email }}">
                                         <label for="email">Email</label>
                                     </div>
                                     <div class="input-field col s6 m2 l2">
@@ -136,10 +136,10 @@
 
             <!-- Subscription Section -->
                 <div id="subscribed-tags">
-                    <li class="collection-item amber">
+                    <li class="collection-item teal" style="background: var(--background2)">
                         <h6><strong>Subscribe</strong></h6>
                     </li>
-                    <li class="collection-item white black-text" id="subscribed-tags">
+                    <li class="collection-item" id="subscribed-tags" style="background: var(--background2)">
                         <div class="row">
                             <div class="col s12 m2 l2">
                                 <strong>Follow Topics</strong>
@@ -176,10 +176,10 @@
 
                 <!-- Notification Section -->
                 <div id="notif">
-                    <li class="collection-item amber">
+                    <li class="collection-item teal" style="background: var(--background2)">
                         <h6><strong>Notification</strong></h6>
                     </li>
-                    <li class="collection-item white black-text" id="subscribed-tags">
+                    <li class="collection-item" id="subscribed-tags" style="background: var(--background2)">
                         <div class="row">
                             <div class="col s12 m2 l2">
                                 <strong>Email Notification</strong>
@@ -236,10 +236,10 @@
 
                 <!-- Security Section -->
                 <div id="security">
-                    <li class="collection-item amber">
+                    <li class="collection-item teal" style="background: var(--background2)">
                         <h6><strong>Security</strong></h6>
                     </li>
-                    <li class="collection-item white black-text" id="security">
+                    <li class="collection-item" id="security" style="background: var(--background2)">
                         <div class="row">
                             {% if profile.is_password_set is True %}
                                     <!-- If user password already set -->
@@ -249,9 +249,9 @@
                                 <form class="col s12 m10 l10" method="post" action="{% url 'Change Password' native_user.username %}">
                                     <div class="row">
                                         {% csrf_token %}
-                                        {{ password_change_form.new_password1|materializecss:'col s12 m7 l7, icon=fiber_new' }}
-                                        {{ password_change_form.new_password2|materializecss:'col s12 m5 l5, icon=find_replace' }}
-                                        {{ password_change_form.old_password|materializecss:'col s12 m6 l6, icon=find_in_page' }}
+                                        {{ password_change_form.new_password1|materializecss:'col s12 m7 l7 grey lighten-1 black-text, icon=fiber_new' }}
+                                        {{ password_change_form.new_password2|materializecss:'col s12 m5 l5 grey lighten-1 black-text, icon=find_replace' }}
+                                        {{ password_change_form.old_password|materializecss:'col s12 m6 l6 grey lighten-1 black-text, icon=find_in_page' }}
                                         <div class="col s12 m6 l6 center">
                                             <button class="btn" type="submit">Save</button>
                                         </div>

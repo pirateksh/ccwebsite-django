@@ -18,7 +18,7 @@
         {% if not post.deleted %}
         {% if post.is_pinned %}
             <ul class="collection with-header" >
-                <li class="collection-header">
+                <li class="collection-header" style="background: var(--background2)">
                 <!-- Post title -->
                     <h4 id="title-{{ post.pk }}" class="hide-on-med-and-down post-head-m-down" style="font-size: 3vw;">
                         {{ post.title|safe }}<i class="material-icons">fiber_pin</i><i class="material-icons">verified_user</i>
@@ -78,7 +78,7 @@
                         <span class="col s4 m4 l4 hide-on-med-and-up post-head-m-up-time">{{ post.published|timesince }} ago.</span>
                     </p>
                 </li>
-                <li class="collection-item">
+                <li class="collection-item" style="background: var(--background2)">
                 <!-- Tags related to post -->
 
                     Tags :
@@ -87,7 +87,7 @@
                     {% endfor %}
 
                 </li>
-                <li class="collection-item" id="p">
+                <li class="collection-item" id="p" style="background: var(--background2)">
     {#                <div class="less-content">#}
     {#                    {{ postpost_content|safe|truncatewords:50 }}#}
     {#                    <a class="read-more-btn" href="#">Show more</a>#}
@@ -99,7 +99,7 @@
                     </div>
                 </li>
 
-                <li class="collection-item row" id="like-{{ post.pk }}">
+                <li class="collection-item row" id="like-{{ post.pk }}" style="background: var(--background2)">
                     {% if user == post.author %}
                         <div class="col s4 m4 l4 center">
                         <!-- Like button -->
@@ -174,7 +174,7 @@
                     {% endif %}
                 </li>
                 {# Comment Section #}
-                <li class="collection-item comment-display" >
+                <li class="collection-item comment-display" style="background: var(--background2);">
                         {% if user.is_authenticated %}
                             <!-- Post comment CKEditor Textbox -->
                             <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" data-type="comment">
@@ -291,7 +291,7 @@
         {% if not post.deleted %}
         {% if post.is_pinned is False %}
             <ul class="collection with-header" id="home-post-{{ post.pk }}">
-                <li class="collection-header">
+                <li class="collection-header" style="background: var(--background2)">
                 <!-- Post title -->
                     <h4 id="title-{{ post.pk }}" class="post-head-m-down hide-on-med-and-down" style="font-size: 3vw;">
                         {{ post.title }}<i class="material-icons">verified_user</i>
@@ -350,7 +350,7 @@
                         <span class="col s4 m4 l4 hide-on-med-and-up post-head-m-up-time">{{ post.published|timesince }} ago.</span>
                     </p>
                 </li>
-                <li class="collection-item">
+                <li class="collection-item" style="background: var(--background2)">
                 <!-- Tags related to post -->
                     Tags :
                     {% for post_tag in post.tags.all %}
@@ -358,7 +358,7 @@
                     {% endfor %}
 
                 </li>
-                <li class="collection-item" id="p">
+                <li class="collection-item" id="p" style="background: var(--background2)">
     {#                <div class="less-content">#}
     {#                    {{ postpost_content|safe|truncatewords:50 }}#}
     {#                    <a class="read-more-btn" href="#">Show more</a>#}
@@ -371,7 +371,7 @@
     {#                    <a class="read-less-btn" href="#">Show less</a>#}
                     </div>
                 </li>
-                <li class="collection-item row" id="like-{{ post.pk }}">
+                <li class="collection-item row" id="like-{{ post.pk }}" style="background: var(--background2)">
                     {% if user == post.author %}
                         <div class="col s4 m4 l4 center">
                         <!-- Like button -->
@@ -448,7 +448,7 @@
                 </li>
 
                 {# Comments started #}
-                <li class="collection-item comment-display" >
+                <li class="collection-item comment-display" style="background: var(--background2)">
                         {% if user.is_authenticated %}
                             <!-- Comment CKEditor textbox -->
                             <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" data-type="comment">
@@ -564,7 +564,7 @@
     {#  If no posts are there  #}
     <div class="normal-post">
     <ul class="collection no-post-yet">
-        <li class="collection-item">
+        <li class="collection-item" style="background: var(--background2)">
             There isn't any post to show yet.
         </li>
     </ul>

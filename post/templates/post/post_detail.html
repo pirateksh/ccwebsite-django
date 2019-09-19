@@ -29,13 +29,13 @@
         <div class="col s12 m9 l6">
         {% if post.deleted %}
             <ul class="collection">
-                <li class="collection-item">
+                <li class="collection-item dark2">
                     <strong>This post has been deleted.</strong>
                 </li>
             </ul>
         {% else %}
             <ul class="collection with-header" id="user-prof-post-{{ post.pk }}" >
-                <li class="collection-header title">
+                <li class="collection-header title" style="background: var(--background2)">
                 <!-- Title -->
                     {% if post.verify_status == 1 %}
                         <h4 class="hide-on-med-and-down post-head-m-down" style="font-size: 3vw;">{{ post.title }}<i class="material-icons">verified_user</i></h4>
@@ -69,7 +69,7 @@
                         <span class="col s4 m4 l4 hide-on-med-and-up post-head-m-up-time">{{ post.published|timesince }} ago.</span>
                     </p>
                 </li>
-                <li class="collection-item tag">
+                <li class="collection-item tag" style="background: var(--background2);">
                 <!-- Tags associated with post -->
                     Tags :
                     {% for post_tag in post.tags.all %}
@@ -77,14 +77,14 @@
                     {% endfor %}
                 </li>
                 <!-- Post content -->
-                <li class="collection-item" id="p">
+                <li class="collection-item" id="p" style="background: var(--background2)">
                     {{ post.post_content|safe }}
                 </li>
 
                 {% if post.verify_status == 1 %}
                     {% if user == author %}
                         {# If current user is author of post #}
-                        <li class="collection-item row" id="like-{{ post.pk }}">
+                        <li class="collection-item row" id="like-{{ post.pk }}" style="background: var(--background2)">
                             <div class="col s3 m3 l3 center">
                             <!-- Like button -->
                                 <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
@@ -172,7 +172,7 @@
 
                     {% elif user.is_authenticated %}
                     {# If user is logged in BUT is'nt author of this post #}
-                        <li class="collection-item row" id="like-{{ post.pk }}">
+                        <li class="collection-item row" style="background: var(--background2)" id="like-{{ post.pk }}">
                             <div class="col s6 m6 l6 center">
                             <!-- Like Button -->
                                 <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">
@@ -191,14 +191,14 @@
                         </li>
                     {% else %}
                         {# User is not logged in #}
-                        <li class="collection-item row" id="like-{{ post.pk }}">
+                        <li class="collection-item row" id="like-{{ post.pk }}" style="background: var(--background2)">
                             <div class="center">
                                 <a class="btn-flat comment-display-btn light-blue white-text" href="#"><i class="material-icons">comment</i></a>
                             </div>
                         </li>
                     {% endif %}
                     <!-- Comment Display -->
-                    <li class="collection-item comment-display" >
+                    <li class="collection-item comment-display" style="background: var(--background2)" >
                             {% if user.is_authenticated %}
                                 <form class="comment-add-form" method="post" action="{% url 'Add Comment' post.id %}" post-pk="{{ post.pk }}" data-type="comment">
                                     {% csrf_token %}
@@ -328,7 +328,7 @@
             {% elif post.verify_status == -1 %}
             {# If post is NOT yet verified by Admin #}
                     {% if user.is_superuser and user != post.author %}
-                        <li class="collection-item row">
+                        <li class="collection-item row" style="background: var(--background2)">
                             <div class="col s6 m6 l6 center">
                                 <!-- Approve post button -->
                                 <a class="btn green tooltipped" data-tooltip="Approve" href="{% url 'approve_post' post.slug %}"><i class="material-icons">check</i> </a>
@@ -340,7 +340,7 @@
                         </li>
                     {% elif user|has_group:'Teacher' and post.is_scheduled is True and post.draft is True %}
                         <!-- Approval Form -->
-                        <li class="collection-item">
+                        <li class="collection-item" style="background: var(--background2)">
                             <div class="row">
                                 <form class="col s12 m12 l12 event-accept-form" method="post" action="{% url 'approve_event' user.username post.slug %}" data-slug="{{ post.slug }}">
                                     {% csrf_token %}
@@ -359,7 +359,7 @@
                             </div>
                         </li>
                         <!-- Rejection Form -->
-                        <li class="collection-item">
+                        <li class="collection-item" style="background: var(--background2)">
                             <div class="row">
                                 <form class="col s12 m12 l12 event-reject-form" method="post" action="{% url 'reject_event' user.username post.slug %}" data-slug="{{ post.slug }}">
                                     {% csrf_token %}
@@ -378,13 +378,13 @@
                             </div>
                         </li>
                     {% elif user|has_group:'Teacher' and post.is_scheduled is True and post.draft is False %}
-                        <li class="collection-item">
+                        <li class="collection-item" style="background: var(--background2)">
                             <div class="row">
                                 <div class="col s12 m12 l2 center"><a class="btn-flat red white-text">Rejected</a></div>
                             </div>
                         </li>
                     {% elif user == post.author %}
-                        <li class="collection-item">
+                        <li class="collection-item" style="background: var(--background2)">
                             <form action="{% url 'ajax_edit_post' %}" id="post-edit-form-{{ post.pk }}" method="post" data-pk="{{ post.pk }}">
                                     <div class="col s12 m12 l12 center">
                                         <!-- Edit post button -->

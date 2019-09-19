@@ -4,14 +4,14 @@
     <form class="post_form" method="post" action="{% url 'ajax_add_post' %}" author="{{ user.username }}" data-success="{% url 'User Profile' user.username %}">
         <ul class="collapsible white post-form-collapse" >
             <li>
-                <div class="collapsible-header tooltipped" data-position="top" data-tooltip="Click to Add Post!">
+                <div class="collapsible-header tooltipped" style="background: var(--background2)" data-position="top" data-tooltip="Click to Add Post!">
                     <strong>Add Post</strong>
                 </div>
-                <div class="collapsible-body">
+                <div class="collapsible-body" style="background: var(--background2)">
                     {% csrf_token %}
                     {{ addpostform.media }}
-                    {{ addpostform.title|materializecss:'col s6 m6, icon=title' }}
-                    {{ addpostform.tags|materializecss:'col s6 m6, icon=bookmark' }}
+                    {{ addpostform.title|materializecss:'col s6 m6 grey lighten-1 black-text, icon=title' }}
+                    {{ addpostform.tags|materializecss:'col s6 m6 grey lighten-1 black-text, icon=bookmark' }}
 
                     {% if user.is_superuser %}
 {#                     <div class="input-field col s12 m12  ">#}
@@ -49,7 +49,7 @@
 {% else %}
     <ul class="collapsible">
         <li>
-            <div class="collapsible-header tooltipped" onclick="addToast('Login to add post!')" data-position="top" data-tooltip="Click to Add Post!">
+            <div class="collapsible-header tooltipped" style="background: var(--background2)" onclick="addToast('Login to add post!')" data-position="top" data-tooltip="Click to Add Post!">
                 <a class="btn-flat modal-trigger white black-text col s12 m12 l12" href="#modal1" id="add-post-without-login" >
                     <strong>Add Post</strong>
                 </a>

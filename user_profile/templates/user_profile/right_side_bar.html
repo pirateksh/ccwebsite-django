@@ -11,7 +11,7 @@
 {#        #}
 {#    </li>#}
     {% if user == native_user %}
-        <li class="collection-item amber center">
+        <li class="collection-item white-text center" style="background: var(--background3)">
             <h6>Quick Notifications</h6>
         </li>
         <div class="notifications">
@@ -20,13 +20,13 @@
                     {% if unread_list %}
                         {{ unread_list }}
                     {% else %}
-                        <li class="collection-item">
+                        <li class="collection-item" style="background: var(--background2)">
                             You don't have any recent notifications.
                         </li>
                     {% endif %}
             {% if read_notif %}
             {% for read in read_notif %}
-                <li class="collection-item avatar">
+                <li class="collection-item avatar" style="background: var(--background2)">
                     <img src="{{ read.actor.avatar.url }}" alt="" class="circle">
                     <span class="title">
                         <strong>
