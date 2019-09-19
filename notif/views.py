@@ -79,8 +79,7 @@ def clear_notification(request, pk):
         This function clears/deletes a particular read notification as read.
     """
     notification = request.user.notifications.get(pk=pk)
-    notification.delete = True
-    notification.save()
+    notification.delete()
     return HttpResponseRedirect(reverse('all_notifications'))
 
 
@@ -91,7 +90,9 @@ def clear_all_notification(request):
     # All unread notifications of current user
     notification_qs = request.user.notifications.read()
     if notification_qs:
-        notification_qs.mark_all_as_deleted()
+        for notification in notification_qs:
+            notification.delete()
+        # notification_qs.mark_all_as_deleted()
         messages.success(request, f"All notifications cleared.")
     else:
         messages.info(request, f"You do not have any notification.")

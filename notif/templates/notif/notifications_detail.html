@@ -150,9 +150,9 @@
                                         </strong>
                                     </span>
                                     <p>
-{#                                        {% if read.target is not None %}#}
+                                        {% if read.target is not None %}
                                             <strong>Post title:</strong> <a href="{% url 'post_detail' read.target.slug %}">{{ read.target.title }}</a>
-{#                                        {% endif %}#}
+                                        {% endif %}
                                         <strong> -- {{ read.timestamp|timesince }} ago.</strong>
                                     </p>
                                     <a href="{% url 'clear_notification' read.pk %}" class="secondary-content tooltipped" data-tooltip="Clear">

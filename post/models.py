@@ -42,7 +42,7 @@ class Tags(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name='Tag Description')
 
     # Subscribed by
-    subscribed_by = models.ManyToManyField(User, verbose_name='Subscribed By')
+    subscribed_by = models.ManyToManyField(User, verbose_name='Subscribed By', blank=True)
 
     def __str__(self):
         return self.name
@@ -79,7 +79,7 @@ class Post(models.Model):
     updated = models.DateTimeField(default=datetime.now, blank=True)
 
     # Tags related to post.
-    tags = models.ManyToManyField(Tags, verbose_name='Post Tags', blank=True)
+    tags = models.ManyToManyField(Tags, verbose_name='Post Tags', blank=True, default=None)
     slug = models.SlugField(default='', blank=True)
 
     # Is verified or not
@@ -87,6 +87,9 @@ class Post(models.Model):
 
     # Whether post is scheduled or not
     is_scheduled = models.BooleanField(default=False)
+
+    # No. of unique views
+    unique_view_no = models.PositiveIntegerField(verbose_name="Unique views", default=0)
 
     # Initialising post manager
     objects = PostManager()
@@ -114,3 +117,14 @@ class Post(models.Model):
     def get_content_type(self):
         content_type = ContentType.objects.get_for_model(self.__class__)
         return content_type
+
+
+class PostView(models.Model):
+    post = models.ForeignKey(Post, related_name='postviews', on_delete=models.CASCADE)
+    ip = models.CharField(max_length=40)
+    session = models.CharField(max_length=40)
+    created = models.DateTimeField(default=timezone.now())
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+
+    def __str__(self):
+        return str(self.user.username) + "viewed" + str(self.post.title)

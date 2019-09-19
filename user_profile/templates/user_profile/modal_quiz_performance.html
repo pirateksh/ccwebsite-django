@@ -1,4 +1,14 @@
 
-<div id="modal-quiz-performance" class="modal" style="overflow:auto;text-align: center;height: 100%">
-	<canvas id="barChart"></canvas>
+<div id="modal-quiz-performance" class="modal modal-fixed-footer" style="overflow:auto;text-align: center;height: 100%">
+	<div class="modal-content">
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <div class="modal-footer">
+        {% if user.is_authenticated and user != native_user %}
+            <button class="btn waves-light" type="submit" name="action">Compare
+                <i class="material-icons right">send</i>
+            </button>
+        {% endif %}
+    </div>
 </div>

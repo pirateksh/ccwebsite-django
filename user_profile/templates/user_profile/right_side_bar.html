@@ -35,7 +35,9 @@
                         </strong>
                     </span>
                     <p>
+                        {% if read.target is not None %}
                         <strong>Post title:</strong> <a href="{% url 'post_detail' read.target.slug %}">{{ read.target.title }}</a>
+                        {% endif %}
                         <br>
                         <strong> -- {{ read.timestamp|timesince }} ago.</strong>
                     </p>

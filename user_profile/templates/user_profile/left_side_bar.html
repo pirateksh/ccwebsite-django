@@ -21,7 +21,7 @@
                             <a class="btn-small tooltipped red unfollow" data-tooltip="Unfollow" data-position="right" href="{% url 'unfollow_user' user.username native_user.username %}">
                                 <i class="material-icons tiny">cancel</i>
                             </a>
-                        {% else %}
+                        {% elif user.is_authenticated %}
                         <a class="btn-small tooltipped follow" id="follow-{{ native_user.pk }}" href="{% url 'follow_user' user.username native_user.username %}" data-tooltip="Follow" data-position="right">
                             <i class="material-icons tiny">person_add</i>
                         </a>
@@ -40,11 +40,6 @@
         </div>
     </li>
     <div class="divider"></div>
-        <li class="collection-item amber lighten-1">
-            <a class="modal-trigger btn-flat" href="#modal-quiz-performance" >
-                Quiz Performance
-            </a>
-        </li>
     {% if native_user == user and not user.is_superuser %}
         <li class="collection-item amber lighten-1">
             <a class="btn-flat" href="{% url 'edit_profile' user.username %}">

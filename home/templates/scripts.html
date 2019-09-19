@@ -23,12 +23,57 @@
 {# <script src="{% static 'Bootstrap/js/bootstrap.js' %}"></script> #}
 <!-- Including below Bootstrap JS File solved the problem for Chart object not found -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-
+{# For on screen seector in jQuery #}
+<script type="text/javascript" src="{% static 'js/jquery.scrolling.js' %}"></script>
 {# Beep sound for notification  #}
 <audio id="notificationAudio">
   <source src="{% static 'Sound/beep-07.wav' %}" type="audio/wav">
   Your browser does not support the audio element.
 </audio>
+
+{% if user.is_authenticated %}
+    <script>
+        //Recording view
+     var posts = $('.posts');
+     posts.scrolling();
+     {#posts.on('scrollin', function(event, $all_elements) {#}
+          // we reach this point as soon as the 'selector' element becomes visibile inside the browser viewport.
+          // $all_elements contains all the appeared elements.
+         posts.one('scrollout', function (event, $all_elem) {
+             var this_ = $(this);
+             var pk = this_.attr('data-pk');
+             var url = this_.attr('data-url');
+             {#console.log(pk);#}
+             $.ajax({
+                 url: url,
+                 type: "POST",
+                 success: function (json) {
+                     if(json.result === "SS"){
+                         $('.view-counter-' + pk).html(json.count);
+                         var modal = $('.unique_viewers');
+                         modal.prepend(
+                             "<tr>" +
+                             "<td>" +
+                             "<a class='chip' href='"+ json.profileURL +"'>" +
+                                    "<img src='"+ json.avatarURL +"'>" +
+                                     json.username +
+                             "</a>" +
+                             "</td>" +
+                             "<td>" + json.firstName + " " + json.lastName + "</td>" +
+                             "</tr>"
+                         );
+                         console.log(json.title + "has been seen with count=" + json.count);
+                     } else {
+                         console.log("Recording view malfunctioned!");
+                     }
+                 },
+                 error: function (xhr) {
+                     console.log("Recording view malfunctioned!");
+                 }
+             });
+     });
+    </script>
+{% endif %}
 
 <script>
     var x = document.getElementById("notificationAudio");
@@ -52,8 +97,20 @@
              audio.play();
              {#console.log(msg.data.dp_url);#}
              var menu = $('.notifications');
-             {#if((msg.data.post_url === undefined) && (msg.target === undefined)){#}
+             if((msg.data.post_url === undefined) && (msg.target === undefined)) {
                  menu.prepend(
+                     "<li class='collection-item avatar'>" +
+                     "<img src='" + msg.data.dp_url + "' alt='' class='circle'>" +
+                     "<span class='title'><strong>" +
+                     "<a href='" + msg.data.prof_url + "'>" + msg.data.actor_name + "</a> " + msg.verb + "</strong></span>" +
+                     "<p>" +
+                     {#"<strong>Post title:</strong> <a href='" + msg.data.post_url + "'>" + msg.target + "</a>" +#}
+                     "<br><strong> -- " + msg.data.timestamp_ + " ago.</strong>" +
+                     "</p>" +
+                     "</li>"
+                 );
+             } else {
+                  menu.prepend(
                      "<li class='collection-item avatar'>" +
                      "<img src='" + msg.data.dp_url + "' alt='' class='circle'>" +
                      "<span class='title'><strong>" +
@@ -63,7 +120,8 @@
                      "<br><strong> -- " + msg.data.timestamp_ + " ago.</strong>" +
                      "</p>" +
                      "</li>"
-                 );
+                  );
+             }
          }
      }
 </script>
@@ -72,7 +130,6 @@
 {#{% register_notify_callbacks callbacks='fill_notification_list, fill_notification_badge' %}#}
 
 {# DJANGO NOTIFICATIONS HQ #}
-
 
 <script src="{% static 'js/main.js' %}"></script>
 
