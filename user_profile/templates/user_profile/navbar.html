@@ -11,7 +11,7 @@
 {% load has_group %}
 {% notifications_unread as unread_count %}
 {% live_notify_badge as live_unread_count %}
-<nav class="amber lighten-1" role="navigation">
+<nav class="lighten-1" role="navigation">
     <div class="nav-wrapper container">
 {#        {% if user.is_authenticated %}#}
             <a id="logo-container" class="brand-logo hide-on-med-and-down" style="font-size:3vw;">{{ native_user.first_name }} {{ native_user.last_name }}</a>
@@ -49,10 +49,22 @@
                     <a class=" waves-light btn modal-trigger" href="#modal2">Signup</a>
                 </li>
             {% endif %}
+
+            <li>
+                {#Switch#}
+                <div class="switch tooltipped" data-tooltip="Dark Mode.">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox">
+                        <span class="lever"></span>
+                    </label>
+{#                    <em class="text-white">Dark Mode!</em>#}
+                </div>
+            </li>
+
         </ul>
 
         {# SideNav for Mobile view #}
-        <ul id="nav-mobile" class="sidenav">
+        <ul id="nav-mobile" class="sidenav" style="background: var(--background2)">
 
             {# Loop through categories #}
 
@@ -66,36 +78,36 @@
 {#                {% endfor %}#}
 {#            </ul>#}
             <li>
-                <div class="user-view amber lighten-3">
+                <div class="user-view lighten-3" style="background: var(--background1)">
                     {% if profile.avatar %}
                         <a><img class="circle materialboxed" src="{{ profile.avatar.url }}"></a>
                     {% endif %}
                     <a>
-                        <span class="name">{{ native_user.first_name }} {{ native_user.last_name }}</span>
+                        <span class="name dark2 transparent" >{{ native_user.first_name }} {{ native_user.last_name }}</span>
                         {% if user != native_user %}
                             {% if native_user in followed_users %}
                                 <!-- Already followed -->
-                                <a class="btn-small tooltipped green" data-position="right" data-tooltip="Followed">
+                                <a class="btn-small tooltipped green dark2 dark2 transparent" data-position="right" data-tooltip="Followed">
                                     <i class="material-icons">check</i>
                                 </a>
-                                <a class="btn-small tooltipped red unfollow" data-tooltip="Unfollow" data-position="right" href="{% url 'unfollow_user' user.username native_user.username %}">
+                                <a class="btn-small tooltipped red unfollow dark2 transparent" data-tooltip="Unfollow" data-position="right" href="{% url 'unfollow_user' user.username native_user.username %}">
                                     <i class="material-icons tiny">cancel</i>
                                 </a>
                             {% else %}
-                            <a class="btn-small tooltipped follow" id="follow-{{ native_user.pk }}" href="{% url 'follow_user' user.username native_user.username %}" data-tooltip="Follow" data-position="right">
+                            <a class="btn-small tooltipped follow dark2 transparent" id="follow-{{ native_user.pk }}" href="{% url 'follow_user' user.username native_user.username %}" data-tooltip="Follow" data-position="right">
                                 <i class="material-icons tiny">person_add</i>
                             </a>
                             {% endif %}
                         {% else %}
-                                <a class="modal-trigger btn btn-flat tooltipped" data-position="right" data-tooltip="Followed" href="#modal-followed">
+                                <a class="modal-trigger btn btn-flat tooltipped dark2 transparent" data-position="right" data-tooltip="Followed" href="#modal-followed">
                                     <i class="material-icons">contacts</i>
                                 </a>
-                                <a class="modal-trigger btn btn-flat tooltipped" data-position="right" data-tooltip="Followers" href="#modal-followers">
+                                <a class="modal-trigger btn btn-flat tooltipped dark2 transparent" data-position="right" data-tooltip="Followers" href="#modal-followers">
                                     <i class="material-icons">directions_run</i>
                                 </a>
                         {% endif %}
                     </a>
-                    <a><span class="email">{{ native_user.email }}</span></a>
+                    <a ><span class="email dark2 transparent">{{ native_user.email }}</span></a>
                     {% if user.is_superuser %}
                         <!-- Admin visiting someone's profile -->
                         <div class="row">
@@ -206,6 +218,17 @@
                 </li>
 
             {% endif %}
+                <li>
+                {#Switch#}
+                <div class="switch tooltipped" data-tooltip="Dark Mode.">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox">
+                        <span class="lever"></span>
+                    </label>
+{#                    <em class="text-white">Dark Mode!</em>#}
+                </div>
+            </li>
+
 
         </ul>
         <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>

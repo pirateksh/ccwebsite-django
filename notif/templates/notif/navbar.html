@@ -8,7 +8,7 @@
 {% load notifications_tags %}
 {% notifications_unread as unread_count %}
 {% live_notify_badge as live_unread_count %}
-<nav class="amber lighten-1" role="navigation">
+<nav class="lighten-1" role="navigation">
     <div class="nav-wrapper container">
 {#        {% if user.is_authenticated %}#}
             <a id="logo-container" class="brand-logo hide-on-med-and-down" style="font-size:3vw;">{{ user.first_name }} {{ user.last_name }}</a>
@@ -42,19 +42,31 @@
                     <a class=" waves-light btn modal-trigger" href="#modal2">Signup</a>
                 </li>
             {% endif %}
+
+            <li>
+                {#Switch#}
+                <div class="switch tooltipped" data-tooltip="Dark Mode.">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox">
+                        <span class="lever"></span>
+                    </label>
+{#                    <em class="text-white">Dark Mode!</em>#}
+                </div>
+            </li>
+
         </ul>
 
         {# SideNav for Mobile view #}
-        <ul id="nav-mobile" class="sidenav">
+        <ul id="nav-mobile" class="sidenav" style="background: var(--background2)">
             <li>
-                <div class="user-view amber lighten-3">
+                <div class="user-view lighten-3" style="background: var(--background1)">
                     {% if profile.avatar %}
                         <a><img class="circle materialboxed" src="{{ profile.avatar.url }}"></a>
                     {% else %}
                         <a><img class="circle" src="{% static 'default-profile-picture.jpg' %}"></a>
                     {% endif %}
-                    <a><span class="name">{{ user.first_name }} {{ user.last_name }}</span></a>
-                    <a><span class="email">{{ user.email }}</span></a>
+                    <a><span class="name dark2 transparent">{{ user.first_name }} {{ user.last_name }}</span></a>
+                    <a><span class="email dark2 transparent">{{ user.email }}</span></a>
                     {% if user.is_superuser %}
                         <div class="row">
                             <div class="col s3 m3 l3 center">
@@ -135,6 +147,17 @@
                 </li>
 
             {% endif %}
+
+                <li>
+                {#Switch#}
+                <div class="switch tooltipped" data-tooltip="Dark Mode.">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox">
+                        <span class="lever"></span>
+                    </label>
+{#                    <em class="text-white">Dark Mode!</em>#}
+                </div>
+            </li>
 
         </ul>
         <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>

@@ -1,11 +1,11 @@
 {% load static %}
 <ul class="collection">
     {% if user.is_authenticated and user.username in request.build_absolute_uri and 'personalised/' in request.build_absolute_uri %}
-        <li class="collection-item center-align">
+        <li class="collection-item center-align" style="background: var(--background2)">
             <a class="btn" href="{% url 'Index'  %}">View Public Feed</a>
         </li>
     {% elif user.is_authenticated %}
-        <li class="collection-item center-align">
+        <li class="collection-item center-align" style="background: var(--background2)">
             <a class="btn" href="{% url 'personalised_index' username=user.username %}">View Personalised Feed</a>
         </li>
     {% endif %}

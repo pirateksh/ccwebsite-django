@@ -126,17 +126,17 @@
 {#            </div>#}
             <div class="col s12 m9 l9">
                 <ul class="collection">
-                    <li class="collection-item amber lighten-1">
+                    <li class="collection-item white-text lighten-1" style="background: var(--background3)">
                         <h5>All Notifications
                         <a href="{% url 'clear_all_notification' %}" class="secondary-content tooltipped" data-tooltip="Clear all">
                             <i class="material-icons">clear_all</i>
                         </a>
                         </h5>
                     </li>
-                    <div class="notifications">
+                    <div class="notifications" >
                         {% if read_notif %}
                             {% for read in read_notif %}
-                                <li class="collection-item avatar">
+                                <li class="collection-item avatar" style="background: var(--background2)">
                                     <!-- Profile Picture -->
                                     {% if read.actor.avatar %}
                                         <img src="{{ read.actor.avatar.url }}" alt="" class="circle">

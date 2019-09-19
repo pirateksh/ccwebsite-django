@@ -6,7 +6,7 @@
     <form class="post_form" method="post" action="{% url 'ajax_add_post' %}" author="{{ user.username }}" data-success="{% url 'Index' %}">
         <ul class="collapsible white post-form-collapse" >
             <li>
-                <div class="collapsible-header tooltipped" data-tooltip="Click to Add Post.">
+                <div class="collapsible-header tooltipped dark2" data-tooltip="Click to Add Post.">
                     <strong>Add Post</strong>
                 </div>
                 <div class="collapsible-body">
@@ -56,8 +56,8 @@
 {# Here user is NOT authenticated to a Login Modal will pop up asking user to log in First #}
     <ul class="collapsible">
         <li>
-            <div class="collapsible-header tooltipped" onclick="addToast('Login to add post!')" data-position="top" data-tooltip="Click to Add Post!">
-                <a class="btn-flat modal-trigger white black-text col s12 m12 l12" href="#modal1" id="add-post-without-login" >
+            <div class="collapsible-header tooltipped dark2" onclick="addToast('Login to add post!')" data-position="top" data-tooltip="Click to Add Post!">
+                <a class="btn-flat modal-trigger dark2 col s12 m12 l12" href="#modal1" id="add-post-without-login" >
                     <strong>Add Post</strong>
                 </a>
             </div>

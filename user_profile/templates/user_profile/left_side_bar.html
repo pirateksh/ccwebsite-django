@@ -4,7 +4,7 @@
 {% notifications_unread as unread_count %}
 {% live_notify_badge as live_unread_count %}
 <ul class="collection">
-    <li class="collection-item amber">
+    <li class="collection-item white-text" style="background: var(--background4)">
         <div class="user-view">
             {% if profile.avatar %}
                 <a><img class="circle materialboxed" src="{{ profile.avatar.url }}"></a>
@@ -22,15 +22,15 @@
                                 <i class="material-icons tiny">cancel</i>
                             </a>
                         {% else %}
-                        <a class="btn-small tooltipped follow" id="follow-{{ native_user.pk }}" href="{% url 'follow_user' user.username native_user.username %}" data-tooltip="Follow" data-position="right">
+                        <a class="btn-small tooltipped follow" style="background: #acca66; id="follow-{{ native_user.pk }}" href="{% url 'follow_user' user.username native_user.username %}" data-tooltip="Follow" data-position="right">
                             <i class="material-icons tiny">person_add</i>
                         </a>
                         {% endif %}
                     {% else %}
-                        <a class="modal-trigger btn btn-flat tooltipped" data-position="right" data-tooltip="Followed" href="#modal-followed">
+                        <a class="modal-trigger btn btn-flat tooltipped" style="background: #acca66;" data-position="right" data-tooltip="Followed" href="#modal-followed">
                             <i class="material-icons">contacts</i>
                         </a>
-                        <a class="modal-trigger btn btn-flat tooltipped" data-position="right" data-tooltip="Followers" href="#modal-followers">
+                        <a class="modal-trigger btn btn-flat tooltipped" style="background: #acca66; data-position="right" data-tooltip="Followers" href="#modal-followers">
                             <i class="material-icons">directions_run</i>
                         </a>
                     {% endif %}
@@ -39,77 +39,77 @@
             <span class="email">{{ native_user.email }}</span>
         </div>
     </li>
-    <div class="divider"></div>
-        <li class="collection-item amber lighten-1">
-            <a class="modal-trigger btn-flat" href="#modal-quiz-performance" >
-                Quiz Performance
-            </a>
-        </li>
+{#    <div class="divider"></div>#}
+{#        <li class="collection-item amber lighten-1">#}
+{#            <a class="modal-trigger btn-flat" href="#modal-quiz-performance" >#}
+{#                Quiz Performance#}
+{#            </a>#}
+{#        </li>#}
     {% if native_user == user and not user.is_superuser %}
-        <li class="collection-item amber lighten-1">
-            <a class="btn-flat" href="{% url 'edit_profile' user.username %}">
+        <li class="collection-item lighten-1" style="background: var(--background4)">
+            <a class="btn-flat white-text" href="{% url 'edit_profile' user.username %}">
                 Edit Profile
                 <i class="material-icons">edit</i>
             </a>
         </li>
-        <li class="collection-item amber lighten-1">
-            <a class="modal-trigger btn-flat" href="#modal-manage-calendar" >
+        <li class="collection-item lighten-1" style="background: var(--background4)">
+            <a class="modal-trigger btn-flat white-text" href="#modal-manage-calendar" >
                 Manage Calendar
             </a>
         </li>
         {% if user|has_group:'Teacher' %}
         
-        <li class="collection-item amber lighten-1">
-            <a class="btn-flat modal-trigger" href="#modal-permissions">
+        <li class="collection-item lighten-1" style="background: var(--background4)">
+            <a class="btn-flat modal-trigger white-text" href="#modal-permissions">
                 Permissions
             </a>
         </li>
         {% else %}
-            <li class="collection-item amber lighten-1">   
-                <a class="modal-trigger btn-flat" href="#modal-quiz-performance" >
+            <li class="collection-item lighten-1" style="background: var(--background4)">
+                <a class="modal-trigger btn-flat white-text" href="#modal-quiz-performance" >
                     Quiz Performance
                 </a>
             </li>
-            <li class="collection-item amber lighten-1">  
+            <li class="collection-item lighten-1" style="background: var(--background4)">
                 {% with quiz_home="quiz_home" %} 
-                <a class="modal-trigger btn-flat" href="{%url quiz_home user.username %}" >
+                <a class="modal-trigger btn-flat white-text" href="{%url quiz_home user.username %}" >
                     Explore Quizzes
                 </a>
                 {% endwith %}
             </li>
         {% endif %}
-        <li class="collection-item amber lighten-2">
-            <a class="modal-trigger btn-flat" href="#modal-pending-posts">
+        <li class="collection-item lighten-2" style="background: var(--background4)">
+            <a class="modal-trigger btn-flat white-text" href="#modal-pending-posts">
                 Pending Posts <span class="new badge red">{{ native_pending_posts.count }}</span>
             </a>
         </li>
-        <li class="collection-item amber lighten-2">
-            <a class="btn-flat modal-trigger" href="#modal-drafts">
+        <li class="collection-item lighten-2" style="background: var(--background4)">
+            <a class="btn-flat modal-trigger white-text" href="#modal-drafts">
                 Drafts
             </a>
         </li>
     {% endif %}
     {% if native_user == user and user.is_superuser %}
-        <li class="collection-item amber lighten-1">
-            <a class="btn-flat" href="{% url 'edit_profile' user.username %}">
+        <li class="collection-item lighten-1" style="background: var(--background4)">
+            <a class="btn-flat white-text" href="{% url 'edit_profile' user.username %}">
                 Edit Profile
                 <i class="material-icons">edit</i>
             </a>
         </li>
-        <li class="collection-item amber lighten-1">   
-            <a class="modal-trigger btn-flat" href="#modal-quiz-performance" >
+        <li class="collection-item lighten-1" style="background: var(--background4)">
+            <a class="modal-trigger btn-flat white-text" href="#modal-quiz-performance" >
                 Quiz Performance
             </a>
         </li>
-        <li class="collection-item amber lighten-1">  
+        <li class="collection-item lighten-1" style="background: var(--background4)">
             {% with quiz_home="quiz_home" %} 
-            <a class="modal-trigger btn-flat" href="{%url quiz_home user.username %}" >
+            <a class="modal-trigger btn-flat white-text" href="{%url quiz_home user.username %}" >
                 Explore Quizzes
             </a>
             {% endwith %}
         </li>
-        <li class="collection-item amber lighten-1">
-            <a class="modal-trigger btn-flat" href="#modal-manage-calendar" >
+        <li class="collection-item lighten-1" style="background: var(--background4)">
+            <a class="modal-trigger btn-flat white-text" href="#modal-manage-calendar" >
                 Manage Calendar
             </a>
         </li>
@@ -120,8 +120,8 @@
 {#            </a>#}
 {#        </li>#}
 
-        <li class="collection-item amber lighten-1">
-            <a class="modal-trigger btn-flat" href="#modal-verify-posts">
+        <li class="collection-item lighten-1" style="background: var(--background4)">
+            <a class="modal-trigger btn-flat white-text" href="#modal-verify-posts">
                 Verify Posts
 
 {#                {% if live_unread_count > 0 %}#}
@@ -136,8 +136,8 @@
 {#                {% endif %}#}
             </a>
         </li>
-        <li class="collection-item amber lighten-2">
-            <a class="btn-flat modal-trigger" href="#modal-drafts">
+        <li class="collection-item lighten-2" style="background: var(--background4)">
+            <a class="btn-flat modal-trigger white-text" href="#modal-drafts">
                 Drafts
             </a>
         </li>
@@ -145,17 +145,17 @@
 </ul>
 
 <ul class="collection">
-    <li class="collection-item amber center-align">
+    <li class="collection-item white-text center-align" style="background: var(--background3)">
         <h6>Filter posts</h6>
     </li>
     {% if not user.is_authenticated %}
         <!-- User not logged in -->
-        <li class="collection-item">
+        <li class="collection-item" style="background: var(--background2)">
             Please login to access this feature.
         </li>
     {% else %}
         <!-- User is logged in -->
-            <li class="collection-item">
+            <li class="collection-item" style="background: var(--background2)">
                 {% if '/most-liked/' in request.build_absolute_uri %}
                     <a class="chip teal white-text" href="{% url 'most_liked_user_profile' native_user.username %}">Most liked</a>
                 {% else %}
@@ -168,7 +168,7 @@
                 {% endif %}
             </li>
 
-            <li class="collection-item">
+            <li class="collection-item" style="background: var(--background2)">
                 {% for tag in tags %}
                     {% if tag.name in request.build_absolute_uri %}
                         <a class="chip teal white-text" href="{% url 'filter_post_user_profile' native_user.username tag.name %}">{{ tag.name }}</a>
@@ -177,17 +177,17 @@
                     {% endif %}
                 {% endfor %}
             </li>
-            <li class="row collection-item">
+            <li class="row collection-item" style="background: var(--background2)">
                 <a class="col s12 m12 l12 center btn" href="{% url 'Index' %}">Reset</a>
             </li>
     {% endif %}
 </ul>
 
 <ul class="collection">
-                <li class="collection-item amber center-align">
+                <li class="collection-item white-text center-align" style="background: var(--background3)">
                     <h6>Advanced filter</h6>
                 </li>
-                <li class="collection-item">
+                <li class="collection-item" style="background: var(--background2)">
                 <form method="post"action="">
                     {% csrf_token %}
                 <div class="row">

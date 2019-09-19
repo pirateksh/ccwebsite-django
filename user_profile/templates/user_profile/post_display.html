@@ -21,7 +21,7 @@
         <div class="normal-posts">
             <div id="user-prof-post-{{ native_post.pk }}">
             <ul class="collection with-header">
-                <li class="collection-header title">
+                <li class="collection-header title" style="background: var(--background2)">
                 <!-- Post title -->
                     <h4 class="hide-on-med-and-down post-head-m-down" style="font-size: 3vw;">
                         {{ native_post.title }}<i class="material-icons">verified_user</i>
@@ -51,21 +51,21 @@
                         <span class="col s4 m4 l4 hide-on-med-and-up post-head-m-up-time">{{ native_post.published|timesince }} ago.</span>
                     </p>
                 </li>
-                <li class="collection-item tag">
+                <li class="collection-item tag" style="background: var(--background2)">
                 <!-- Post tags -->
                     Tags :
                     {% for native_post_tag in native_post.tags.all %}
                         <a class="chip" href="{% url 'index_tag' native_post_tag.name %}">{{ native_post_tag }}</a>
                     {% endfor %}
                 </li>
-                <li class="collection-item" id="p">
+                <li class="collection-item" id="p" style="background: var(--background2)">
                     <!-- Post content -->
                     {{ native_post.post_content|safe|truncatewords:150 }}
                     <a href="{% url 'post_detail' native_post.slug %}" target="_blank">Post detail.</a>
                 </li>
 
                 {% if user == native_user %}
-                    <li class="collection-item row" id="like-{{ native_post.pk }}">
+                    <li class="collection-item row" id="like-{{ native_post.pk }}" style="background: var(--background2)">
                         <div class="col s3 m3 l3 center">
                         <!-- Like button -->
                             <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ native_post.pk }}" data-likes="{{ native_post.likes.count }}" href="{% url 'like_toggle' native_post.slug %}">
@@ -155,7 +155,7 @@
 
                 {% elif user.is_authenticated %}
 
-                    <li class="collection-item row" id="like-{{ native_post.pk }}">
+                    <li class="collection-item row" id="like-{{ native_post.pk }}" style="background: var(--background2)">
                         <div class="col s6 m6 l6 center">
                         <!-- Like button -->
                             <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ native_post.pk }}" data-likes="{{ native_post.likes.count }}" href="{% url 'like_toggle' native_post.slug %}">
@@ -174,7 +174,7 @@
                     </li>
                 {% else %}
                     {# If user is not logged in #}
-                    <li class="collection-item row" id="like-{{ native_post.pk }}">
+                    <li class="collection-item row" id="like-{{ native_post.pk }}" style="background: var(--background2)">
                     <!-- Comment Button -->
                         <div class="center">
                             <a class="btn-flat comment-display-btn light-blue white-text" href="#"><i class="material-icons">comment</i></a>
@@ -184,7 +184,7 @@
 
 
                 {# Comment started #}
-                <li class="collection-item comment-display" >
+                <li class="collection-item comment-display" style="background: var(--background2)">
                         {% if user.is_authenticated %}
                             <form class="comment-add-form" method="post" action="{% url 'Add Comment' native_post.id %}" post-pk="{{ native_post.pk }}" data-type="comment">
                                 {% csrf_token %}
@@ -297,7 +297,7 @@
 {% else %}
     <ul class="collection with-header" >
     {# If no posts found #}
-        <li class="collection-header">
+        <li class="collection-header" style="background: var(--background2)">
             {% if user.is_superuser and user == native_user %}
                 Add some post or approve your posts from Django Admin Dashboard.
             {% elif native_user == user %}

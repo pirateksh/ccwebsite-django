@@ -44,13 +44,13 @@
     <!-- Tab for Personalised and Public feed -->
     <ul class="row tabs tabs-fixed-width tab-demo">
         {% if user.username in request.build_absolute_uri and 'personalised/' in request.build_absolute_uri %}
-        <li class="tab col s6 m6 l6 center">
+        <li class="tab col s6 m6 l6 center" style="background: var(--background2)">
             <a class="tooltipped" data-tooltip="Personalised feed">
                 <i class="material-icons small">personal_video</i>
             </a>
         </li>
         {% else %}
-        <li class="tab col s12 m12 l12 center">
+        <li class="tab col s12 m12 l12 center" style="background: var(--background2)">
             <a class="active tooltipped" data-tooltip="Public feed">
                 <i class="material-icons small ">public</i>
             </a>
