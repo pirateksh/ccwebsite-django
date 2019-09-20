@@ -35,6 +35,7 @@ hyperlink==19.0.0
 idna==2.8
 incremental==17.5.0
 jsonfield==2.0.2
+libmagic==1.0
 Markdown==3.1.1
 msgpack==0.6.1
 msgpack-python==0.5.6
@@ -47,6 +48,7 @@ pyasn1-modules==0.2.6
 pycryptodome==3.9.0
 PyHamcrest==1.9.0
 PyJWT==1.7.1
+python-magic-bin==0.4.14
 python3-openid==3.1.0
 pytz==2018.9
 requests==2.22.0
