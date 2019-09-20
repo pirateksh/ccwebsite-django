@@ -422,3 +422,62 @@ function appendToQuestionsMenu(question,cnt,id){
   src="http://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script> -->
+
+<script>
+  $(document).on('click',"#manage-calendar",function(e){
+    e.preventDefault();
+    // alert("lite hai bhai");
+    $.ajax({
+      url: "{% url 'get_user_calendar' '{{request.user.username}}' %}",
+      success:function(data){ // this data is what we have recieved as json 
+                  // response.
+        // alert(data.cal_msg);
+        // alert(data.cal_service_found);
+          // alert(data.calendar_id);
+          if(data.cal_service_found){
+            appendToCalendar(data.cal_service_found,data.calendar_id,data.timeZone);
+          }
+          else{
+              appendToCalendar1();
+          }
+
+        jQuery('#modal-manage-calendar').modal('open');
+      }
+    });
+  });
+  function appendToCalendar(cal_ser,cal_id,cal_time){
+      // mind the ` in append function.
+      if(cal_id){
+        $("#modal-manage-calendar").append(`
+              <iframe src="https://calendar.google.com/calendar/embed?src=${cal_id}&ctz=${cal_time}" 
+                  style="border-width:0;width:100%; height: 100%;padding:10px; " max-height="100%"frameborder="0" scrolling="no">
+              </iframe>
+          `);
+      }
+      else{
+        $("#modal-manage-calendar").append(`       
+        <b>You have decided not to set up the Calender Service:(</b>
+        <form action="{% url 'get_user_calendar' '{{request.user.username}}' %}" method="post">
+          '{% csrf_token %}''
+          <button type="submit" name="submit" value="1">Click</button> to Allow Now.
+        </form>
+        `);
+            }
+  }
+      function appendToCalendar1(){
+
+         $("#modal-manage-calendar").append(`       
+        <b>You have decided not to set up the Calender Service:(</b>
+        <form action="{% url 'get_user_calendar' '{{request.user.username}}' %}" method="post">
+          '{% csrf_token %}''
+          <button type="submit" name="submit" value="1">Click</button> to Allow Now.
+        </form>
+        `);
+
+      }
+      // var id= "modal-manage-calendar";
+      // var style="overflow:auto;text-align: center;height: 100%";
+      // $('#'+ id).attr("style",style);
+
+
+</script>

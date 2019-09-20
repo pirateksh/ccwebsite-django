@@ -47,33 +47,90 @@ import os.path
 # 3rd Party imports
 from notifications.signals import notify
 
-
-def user_profile(request, username, tag_name=None, liked=None, older=None):
+@login_required
+def get_user_calendar(request,username):
     """
         This functions renders User Profile Page
     """
-    service = get_calendar_service(request)
-    # Call the Calendar API
-    # print('Getting list of calendars')
-    timeZone = None
-    calendar_id = None
-    if service:
-        cal_service_found = True     
-        calendars_result = service.calendarList().list().execute()
+    if request.method == 'POST':
+        print(request.POST)
+        if request.POST.get('submit'):
+            # print(user_profile.is_google_calendar)
+            service = get_calendar_service(request)
+            # Call the Calendar API
+            # print('Getting list of calendars')
+            timeZone = None
+            calendar_id = None
+            if service:
+                cal_service_found = True     
+                calendars_result = service.calendarList().list().execute()
+                calendars = calendars_result.get('items', [])
 
-        calendars = calendars_result.get('items', [])
+                if not calendars:
+                    print('No calendars found.')
+                for calendar in calendars:
+                    # print(calendar.get('primary'))# prints True only for the primary Calendar of User
+                    if calendar.get('primary'):
+                        summary = calendar['summary']
+                        calendar_id = calendar['id']
+                        timeZone = calendar['timeZone']
+                        primary = "Primary" if calendar.get('primary') else ""
+                          # print(timeZone) # prints Asia/Kolkata
+                        print("%s\t%s\t%s" % (summary, calendar_id, primary))
+            if 'cal_service_found' in locals():
+                context = {
+                    'cal_service_found': 1, 'calendar_id': calendar_id, 'timeZone': timeZone
+                }
+                # new_to_context = {'cal_service_found': 1, 'calendar_id': calendar_id, 'timeZone': timeZone}
+                # context.update(new_to_context)
+                user_profile = UserProfile.objects.all().filter(user=request.user).first()
+                user_profile.is_google_calendar = True
+                user_profile.save()
+            else:
+                messages.info(request, f"Google Calendar Integration Failed")
+        return HttpResponseRedirect(reverse('User Profile',kwargs={'username':request.user.username}))
+            # return HttpResponse("With Post")
+    else:
+        print(request.user.userprofile.is_google_calendar)
+        if request.user.userprofile.is_google_calendar:       
+            service = get_calendar_service(request)
+            # Call the Calendar API
+            # print('Getting list of calendars')
+            timeZone = None
+            calendar_id = None
+            if service:
+                cal_service_found = True     
+                calendars_result = service.calendarList().list().execute()
+                calendars = calendars_result.get('items', [])
 
-        if not calendars:
-            print('No calendars found.')
-        for calendar in calendars:
-            # print(calendar.get('primary'))# prints True only for the primary Calendar of User
-            if calendar.get('primary'):
-                summary = calendar['summary']
-                calendar_id = calendar['id']
-                timeZone = calendar['timeZone']
-                primary = "Primary" if calendar.get('primary') else ""
-                  # print(timeZone) # prints Asia/Kolkata
-                print("%s\t%s\t%s" % (summary, calendar_id, primary))
+                if not calendars:
+                    print('No calendars found.')
+                for calendar in calendars:
+                    # print(calendar.get('primary'))# prints True only for the primary Calendar of User
+                    if calendar.get('primary'):
+                        summary = calendar['summary']
+                        calendar_id = calendar['id']
+                        timeZone = calendar['timeZone']
+                        primary = "Primary" if calendar.get('primary') else ""
+                          # print(timeZone) # prints Asia/Kolkata
+                        print("%s\t%s\t%s" % (summary, calendar_id, primary))
+            if 'cal_service_found' in locals():
+                context = {
+                    'cal_service_found': 1, 'calendar_id': calendar_id, 'timeZone': timeZone
+                }
+                # new_to_context = {'cal_service_found': 1, 'calendar_id': calendar_id, 'timeZone': timeZone}
+                # context.update(new_to_context)
+            # return HttpResponse("some")
+            return JsonResponse(context)
+            # return render(request, 'user_profile/user_profile.html', context)
+        else:
+            data = {
+                'cal_service_found': 0,
+                 'cal_msg' : "You have choosed not to share your google Caledar..."
+            }
+            return JsonResponse(data)
+    
+def user_profile(request, username, tag_name=None, liked=None, older=None):
         # User whose profile is open
     native_user = get_object_or_404(User, username=username)
     profile = get_object_or_404(UserProfile, user=native_user)
@@ -165,11 +222,7 @@ def user_profile(request, username, tag_name=None, liked=None, older=None):
             messages.info(request, f"User profile not set")
             return HttpResponseRedirect(reverse('Index'))
 
-    if 'cal_service_found' in locals():
-        new_to_context = {'cal_service_found': 1, 'calendar_id': calendar_id, 'timeZone': timeZone}
-        context.update(new_to_context)
     return render(request, 'user_profile/user_profile.html', context)
-
 
 @login_required
 def follow_user(request, username, username2):
@@ -425,13 +478,16 @@ def activate(request, uidb64, token):
             messages.success(request, f"Login to verify email.")
             return HttpResponseRedirect(reverse('Index'))
     return HttpResponse('Activation link is invalid!')
-
+import magic
 def clean_file(request,form):
     file = form.cleaned_data['avatar']
-    # if file.size > 524:
     if file.size > 5242880:
         return False
     return True
+
+def check_in_memory_mime(request):
+    mime = magic.from_buffer(request.FILES.get('avatar').read(),mime=True)
+    return mime
 @login_required
 def avatar_upload(request, username):
     """
@@ -472,19 +528,35 @@ def avatar_upload(request, username):
 # =======
     if request.method == 'POST':
         avatar_form = AvatarUploadForm(request.POST, request.FILES)
-        if avatar_form.is_valid():
+        # print(request.FILES)
+        
+        if avatar_form.is_valid():         
+            # print("Hello")
             user = User.objects.get(username=username)
             user_prof = UserProfile.objects.get(user=user)
             if clean_file(request,avatar_form):
-                img = avatar_form.cleaned_data['avatar']
+                mime = check_in_memory_mime(request)
+                if mime == 'image/jpg' or mime == 'image/jpeg' or mime == 'image/png' :
+                    img = avatar_form.cleaned_data['avatar']
+                    user_prof.avatar = img
+                    user_prof.save()
+                    messages.success(request, f"Avatar uploaded successfully!")
+                    # return HttpResponse("Something Something")
+                    return HttpResponseRedirect(reverse("edit_profile", kwargs={'username': username}))
+                else:
+                    messages.success(request, f"Please upload an Image File only of jpeg/jpg/png format only...")
+                    return HttpResponseRedirect(reverse("edit_profile", kwargs={'username': username}))
             else:
-                return HttpResponseRedirect(reverse("User Profile",kwargs={'username':request.user}))
-            user_prof.avatar = img
-            user_prof.save()
-            messages.success(request, f"Avatar uploaded successfully!")
-            return HttpResponseRedirect(reverse("edit_profile", kwargs={'username': username}))
+                messages.success(request, f"File too Large to be uploaded...")
+                return HttpResponseRedirect(reverse("edit_profile", kwargs={'username': username}))
+                # return HttpResponseRedirect(reverse("User Profile",kwargs={'username':request.user}))
         else:
-            return HttpResponse("Please upload an Image File only...")
+            if avatar_form.errors:
+                for field in avatar_form:
+                    for error in field.errors:
+                        print(error)
+                        messages.success(request,error)
+            return HttpResponseRedirect(reverse("edit_profile", kwargs={'username': username}))
     else:
         avatar_form = AvatarUploadForm()
     form = UserSignupForm()

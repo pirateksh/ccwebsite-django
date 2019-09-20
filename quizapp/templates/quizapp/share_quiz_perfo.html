@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -78,9 +77,13 @@
       <section class="card aqua-gradient wow fadeIn" id="intro">
           <div class="card-body text-white text-center py-5 px-5 my-5 mx-5">
       <h3 class="center">
-          You scored 12 in 20.
+      	<strogn>{{title}} - Results:</strogn>
+      	<br>
+          You scored {{score}} out of {{max_score}}.
       </h3>
-      <button class="center btn btn-unique">Share on your profile</button>
+      {% with profileurl="User Profile" %}
+      <button onclick='window.location.href="{% url profileurl request.user.username %}"' class="center btn btn-unique">Share on your profile</button>
+      {% endwith %}
               <button class="btn btn-indigo">Share on Facebook</button>
 
           </div>
@@ -208,5 +211,4 @@
 
   </script>
 </body>
-
 </html>

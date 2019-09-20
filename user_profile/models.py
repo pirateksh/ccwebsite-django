@@ -42,7 +42,8 @@ class UserProfile(models.Model):
 
     # Whether sound notification is on or not.
     is_sound_on = models.BooleanField(default=True)
-
+    # Whether Calendar Service is allowed or not
+    is_google_calendar = models.BooleanField(default=False)
     # Whether password is set or not
     is_password_set = models.BooleanField(default=False)
 
