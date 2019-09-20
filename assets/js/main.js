@@ -589,7 +589,7 @@ $('.post-del-form').submit(function (event) {
     // alert('delete success!');
     var this_ = $(this);
     var url = this_.attr('action');
-    var comingFrom = this_.attr('data-from');
+    var comingFrom = this_.attr('data-from'); // URL
     // alert(comingFrom);
     var postPK = this_.attr('data-pk');
 
@@ -607,16 +607,17 @@ $('.post-del-form').submit(function (event) {
 
             if (json.result === "SS") {
 
-                if (json.comingFrom === "user_prof") {
-
-                    postDiv = $('#user-prof-post-' + json.postPK);
-
-                } else if (json.comingFrom === "home") {
-
-                    postDiv = $('#home-post-' + json.postPK);
-
-                }
-                postDiv.remove();
+                location.href = comingFrom;
+                // if (json.comingFrom === "user_prof") {
+                //
+                //     postDiv = $('#user-prof-post-' + json.postPK);
+                //
+                // } else if (json.comingFrom === "home") {
+                //
+                //     postDiv = $('#home-post-' + json.postPK);
+                //
+                // }
+                // postDiv.remove();
                 // postDiv.css('display', 'none');
                 // postDiv.fadeOut(2000);
                 addToast("Post deleted successfully!");
@@ -814,7 +815,7 @@ $('.comment-add-form').submit(function (event) {
                                 "| " + json.timestamp + " ago | " +
                                     json.countStr +
                                 "<a class='comment-reply-btn' href='#'>Reply</a>" +
-                                "<a class='comment-edit-btn' href=''>Edit</a>" +
+                                // "<a class='comment-edit-btn' href=''>Edit</a>" +
                             "</footer>" +
                             "<div class='comment-reply' id='reply-" + postPK + "-" + commentPK + "' style='display: none;'>" +
                                 "<form class='comment-add-form' method='post' action="+ json.addCommentURL +" post-pk=" + postPK +" comment-pk="+ commentPK +" data-type='reply'>" +
@@ -847,7 +848,7 @@ $('.comment-add-form').submit(function (event) {
                                 "</a>" +
                                 "<span id='comment-timestamp' style='color: #0f74a8;'>" +
                                     "| " + json.timestamp + " ago |" +
-                                    "<a class='reply-edit-btn' href=''>Edit</a>" +
+                                    // "<a class='reply-edit-btn' href=''>Edit</a>" +
                                 "</span>" +
                             "</footer>" +
                         "</blockquote>" +
@@ -1036,6 +1037,5 @@ $('.unfollow').click(function (e) {
         });
     })
  });
-//
-//  // Recording view
-// $('.normal-posts').filter(':onScreen')
+
+

@@ -1,6 +1,6 @@
 {% load materializecss %}
 
-<div id="modal-avatar" class="modal modal-fixed-footer">
+<div id="modal-avatar" class="modal modal-fixed-footer" style="background: var(--background2)">
     <form class="col s12" method="post" enctype="multipart/form-data" action="{% url 'Avatar Upload' native_user.username %}">
         <div class="modal-content">
             <h4>Upload Avatar</h4>

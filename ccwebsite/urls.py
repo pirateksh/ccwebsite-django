@@ -31,6 +31,7 @@ urlpatterns = [
     url('^inbox/notifications/', include(notifications.urls, namespace='notifications')),
 
 
+
     # url(r'^accounts/', includes('allauth.urls')),
     # oauth/ url will be accessed by Social site link to take to their website.
 

@@ -53,14 +53,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'multiselectfield',
     'imagekit',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'materialize',
-    # 'crispy_forms',
-    # 'crispy_forms_materialize',
     'notifications',
-    # 'notify',
 ]
 
 DJANGO_NOTIFICATIONS_CONFIG = {

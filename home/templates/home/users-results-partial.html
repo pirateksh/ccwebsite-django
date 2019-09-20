@@ -1,0 +1,24 @@
+{% comment %}
+    Context Vars -
+            'persons': users,
+            'user_profiles': user_profiles,
+{%  endcomment %}
+{% if persons == 'empty' %}
+    <p>Search to get result.</p>
+{% elif persons %}
+  <div>
+  {% for person in persons %}
+      <a class="chip" href="{% url 'User Profile' person.username %}">
+          {% for user_profile in user_profiles %}
+                {% if user_profile.user == person %}
+                    <img src="{{ user_profile.avatar.url }}">
+                {% endif %}
+          {% endfor %}
+
+          {{ person.username }}
+      </a>
+  {% endfor %}
+  </div>
+{% else %}
+  <p>Search to get result.</p>
+{% endif %}

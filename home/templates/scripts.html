@@ -100,7 +100,7 @@
              var menu = $('.notifications');
              if((msg.data.post_url === undefined) && (msg.target === undefined)) {
                  menu.prepend(
-                     "<li class='collection-item avatar'>" +
+                     "<li class='collection-item avatar' style='background: var(--background2)'>" +
                      "<img src='" + msg.data.dp_url + "' alt='' class='circle'>" +
                      "<span class='title'><strong>" +
                      "<a href='" + msg.data.prof_url + "'>" + msg.data.actor_name + "</a> " + msg.verb + "</strong></span>" +
@@ -112,7 +112,7 @@
                  );
              } else {
                   menu.prepend(
-                     "<li class='collection-item avatar'>" +
+                     "<li class='collection-item avatar' style='background: var(--background2)'>" +
                      "<img src='" + msg.data.dp_url + "' alt='' class='circle'>" +
                      "<span class='title'><strong>" +
                      "<a href='" + msg.data.prof_url + "'>" + msg.data.actor_name + "</a> " + msg.verb + "</strong></span>" +
@@ -131,7 +131,6 @@
 {#{% register_notify_callbacks callbacks='fill_notification_list, fill_notification_badge' %}#}
 
 {# DJANGO NOTIFICATIONS HQ #}
-
 <script src="{% static 'js/main.js' %}"></script>
 
 {# Materialize CSS Auto Initialization #}
@@ -422,3 +421,29 @@ function appendToQuestionsMenu(question,cnt,id){
   src="http://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script> -->
+
+
+<script>
+
+
+    $('#search-input').keyup(function () {
+        var this_ = $(this);
+        var key = this_.val();
+        var url = $('search-form').attr('action');
+        {#console.log("AJAX called!");#}
+        $.ajax({
+            url: {% url 'search' %},
+            type: "GET",
+            data: {
+                key: key
+            },
+            success: function (data) {
+                    var con = $('#replaceable-content');
+                    con.html(data.html);
+            },
+            error: function (xhr) {
+                addToast("Error");
+            }
+        });
+    })
+</script>
