@@ -20,6 +20,7 @@ urlpatterns = [
     path('<str:username>/set_password/', views.set_password, name='set_password'),
     path('<str:username>/approve_event/<slug:slug>', views.approve_event, name='approve_event'),
     path('<str:username>/reject_event/<slug:slug>', views.reject_event, name='reject_event'),
+    path('<str:username>/get_calendar/',views.get_user_calendar,name="get_user_calendar"),
     path('<str:username>/verify_email/', views.verify_email, name='verify_email'),
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.activate, name='activate'),
