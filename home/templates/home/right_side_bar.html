@@ -10,3 +10,23 @@
         </li>
     {% endif %}
 </ul>
+<ul class="collection">
+        <li class="collection-item center-align white-text" style="background: var(--background3);">
+            <h6>Search User</h6>
+        </li>
+        <li class="collection-item center-align" style="background: var(--background2)">
+            <input type='text' class='form-control' id='search-input' placeholder="Search" name='search'>
+        </li>
+{#    <li class="collection-item row" style="background: var(--background2)">#}
+{#        <a class="col s12 l12 m12 center btn" href="{% url 'Index' %}">Reset</a>#}
+{#    </li>#}
+</ul>
+
+<ul class="collection">
+    <li class="collection-item white-text center-align" style="background: var(--background3);"><h6>Search Results</h6></li>
+        <li class="collection-item" style="overflow: auto;background: var(--background2);">
+             <div id="replaceable-content">
+                {% include 'home/users-results-partial.html' %}
+             </div>
+        </li>
+</ul>

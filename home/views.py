@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from post.views import page_maker
 from django.http import JsonResponse
+from json import dump, dumps
 # from django.contrib.auth import get_user_model
 # from django.contrib.contenttypes.models import ContentType
 
@@ -22,6 +23,69 @@ from django.contrib.auth.models import User
 from home.forms import UserSignupForm
 from post.forms import PostForm
 from comments.forms import CommentForm
+
+
+# def search(request):
+#     context = {}
+#     url_parameter = request.GET.get('key')
+#     if url_parameter:
+#         users = User.objects.filter(username__icontains=url_parameter)
+#     else:
+#         users = User.objects.all()
+#
+#     # result = "SS"
+#     # response = {
+#     #     'result': result,
+#     #     'userQs': userQs,
+#     # }
+#     # return JsonResponse(response)
+#     if request.is_ajax():
+#         html = render_to_string(
+#             template_name="home/users-results-partial.html",
+#             context={"persons": users}
+#         )
+#
+#         data_dict = {"html_from_view": html}
+#
+#         return JsonResponse(data=data_dict, safe=False)
+#
+#     return render(request, "In.html", context=context)
+
+def search(request):
+    key = request.GET['key']
+    if key:
+        users = User.objects.filter(username__icontains=key)
+        user_profiles = UserProfile.objects.filter(user__in=users)
+    else:
+        users = 'empty' # User.objects.all()
+        user_profiles = UserProfile.objects.all()
+
+    html = render_to_string(
+        template_name="home/users-results-partial.html",
+        context={
+            'persons': users,
+            'user_profiles': user_profiles,
+        }
+    )
+
+    response = {
+        'html': html
+    }
+    return JsonResponse(data=response, safe=False)
+
+# def autocompleteModel(request):
+#     if request.is_ajax():
+#         q = request.GET.get('term', '').capitalize()
+#         search_qs = Post.objects.filter(name__startswith=q)
+#         results = []
+#         print(q)
+#         for r in search_qs:
+#             results.append(r.FIELD)
+#         data = dumps(results)
+#     else:
+#         data = 'fail'
+#     mimetype = 'application/json'
+#     return HttpResponse(data, mimetype)
 
 
 def set_profile(request, user):
