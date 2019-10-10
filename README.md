@@ -1,7 +1,9 @@
 # CCWebsite using Django and Materialize CSS
 
-##CC Club MNNIT Website Description – A one stop solution for tech/coding enthusiasts following CC Club, MNNIT Allahabad. Sign-up, choose categories which interests you and see related posts on top of your home page feed, comment on them or add a new post to clear any doubts and a LOT more.
-###Salient Features of website –
+## CC Club MNNIT Website Description – 
+A one stop solution for tech/coding enthusiasts following CC Club, MNNIT Allahabad. Sign-up, choose categories which interests you and see related posts on top of your home page feed, comment on them or add a new post to clear any doubts and a LOT more.
+
+### Salient Features of website –
 * Home view.
 * Login/ Signup as Student or Faculty.
 * Social Media Login from Google, Facebook and Github.
