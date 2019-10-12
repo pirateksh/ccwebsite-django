@@ -11,7 +11,7 @@ crispy-forms-materialize==0.2
 daphne==2.3.0
 defusedxml==0.6.0
 dj-database-url==0.5.0
-Django==2.2.4
+Django==2.2.6
 django-allauth==0.39.1
 django-appconf==1.0.3
 django-ckeditor==5.7.1
@@ -48,7 +48,7 @@ pyasn1-modules==0.2.6
 pycryptodome==3.9.0
 PyHamcrest==1.9.0
 PyJWT==1.7.1
-python-magic-bin==0.4.14
+python-magic-debian-bin
 python3-openid==3.1.0
 pytz==2018.9
 requests==2.22.0
