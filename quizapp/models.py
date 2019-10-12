@@ -17,11 +17,14 @@ class Quiz(models.Model):
 		return "{}".format(self.title)
 	class Meta:
 		ordering = ['id']
+
 class UserQuizResult(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
 	quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
 	score = models.IntegerField(default=0)
 	is_atm = models.BooleanField(default=0)
+
+
 class Question(models.Model):
 	quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
 	question = models.TextField()
@@ -29,6 +32,8 @@ class Question(models.Model):
 		return "{}".format(self.question)
 	class Meta:
 		ordering = ['id']
+
+
 class CurrentQuiz(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
 	quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
@@ -36,6 +41,8 @@ class CurrentQuiz(models.Model):
 	sel_ans = models.CharField(max_length=1)
 	is_atm = models.BooleanField(default=False)
 	contrib = models.IntegerField(default=0)
+
+
 class Option(models.Model):
 	quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
 	question = models.ForeignKey(Question,on_delete=models.CASCADE)
@@ -47,6 +54,8 @@ class Option(models.Model):
 		return "{}{}{}{}".format(self.option1,self.option2,self.option3,self.option4)
 	class Meta:
 		ordering = ['id']
+
+
 class Answer(models.Model):
 	'''
 		Here We have used a convention that if a question is True False Type then
@@ -78,6 +87,7 @@ class Answer(models.Model):
 		return "{}".format(self.question)
 	class Meta:
 		ordering = ['id']
+
 
 class RandomQuizQuestion(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE)

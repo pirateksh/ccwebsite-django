@@ -100,8 +100,8 @@
                         <a href="{% url 'post_detail' post.slug %}" target="_blank">Post detail.</a>
                     </div>
                 </li>
-            <!-- Like and view count -->
-                <li class="collection-item row">
+            {% if user == post.author %}
+             <li class="collection-item row">
                     <div class="col s6 m6 l6 center">
                         <span class="like-counter-{{ post.pk }}">{{ post.likes.count }}</span> likes
                     </div>
@@ -111,9 +111,12 @@
                     <div class="col s6 m6 l6 center">
                         <span class="view-counter-{{ post.pk }}">{{ post.unique_view_no }}</span> views
                     </div>
-                </li>
+                </li>{% endif %}
+
                 <li class="collection-item row" id="like-{{ post.pk }}" style="background: var(--background2)">
                     {% if user == post.author %}
+                          <!-- Like and view count -->
+
                         <div class="col s6 m6 l6 center">
                         <!-- Like button -->
                             <a class="btn-flat like-btn light-blue white-text" id="like-btn-{{ post.pk }}" data-likes="{{ post.likes.count }}" href="{% url 'like_toggle' post.slug %}">

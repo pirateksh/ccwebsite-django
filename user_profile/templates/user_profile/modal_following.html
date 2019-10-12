@@ -3,7 +3,7 @@
 {% load static %}
 
 <div id="modal-followers" class="modal modal-fixed-footer" style="background: var(--background2)">
-{% if user.is_authenticated %}
+{#{% if user.is_authenticated %}#}
 
         <div class="modal-content">
             <h4>Followers ({{ followers.count }})</h4>
@@ -35,5 +35,5 @@
                 </tbody>
             </table>
         </div>
-{% endif %}
+{#{% endif %}#}
 </div>

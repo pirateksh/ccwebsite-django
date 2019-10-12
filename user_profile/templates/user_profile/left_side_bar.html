@@ -59,8 +59,8 @@
             </a>
         </li>
 
-        <li class="collection-item amber lighten-1">
-            <a class="modal-trigger btn-flat" href="{% url 'get_user_calendar' user.username %}" 
+        <li class="collection-item lighten-1" style="background: var(--background4)">
+            <a class="modal-trigger btn-flat white-text" href="{% url 'get_user_calendar' user.username %}"
             id="manage-calendar" >
                 Manage Calendar
             </a>
@@ -88,7 +88,8 @@
         {% endif %}
         <li class="collection-item lighten-2" style="background: var(--background4)">
             <a class="modal-trigger btn-flat white-text" href="#modal-pending-posts">
-                Pending Posts <span class="new badge red">{{ native_pending_posts.count }}</span>
+                Pending Posts
+{#                <span class="new badge red">{{ native_pending_posts.count }}</span>#}
             </a>
         </li>
         <li class="collection-item lighten-2" style="background: var(--background4)">
@@ -116,8 +117,8 @@
             </a>
             {% endwith %}
         </li>
-        <li class="collection-item amber lighten-1">
-            <a class="modal-trigger btn-flat" href="{%url 'get_user_calendar' user.username %}" id="manage-calendar" >
+        <li class="collection-item lighten-1" style="background: var(--background4)">
+            <a class="modal-trigger btn-flat white-text" href="{%url 'get_user_calendar' user.username %}" id="manage-calendar" >
                 Manage Calendar
             </a>
         </li>
@@ -191,7 +192,7 @@
     {% endif %}
 </ul>
 
-<ul class="collection">
+<ul class="collection advanced">
                 <li class="collection-item white-text center-align" style="background: var(--background3)">
                     <h6>Advanced filter</h6>
                 </li>

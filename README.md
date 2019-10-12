@@ -1,17 +1,9 @@
-# CCWebsite using Django and Materialize CSS
-## External dependencies
+# Webster (Avishkar) 2k19
+## Team Name - Django Unchained
+## Project - CC Club MNNIT Website (Open Problem)
 <ul>
-<li>django-materializecss-form</li>
-<li>django-ckeditor</li>
-<li>extraPlugin 'resize' for CKEditor</li>
-<li>pillow</li>
-<li>django-imagekit</li>
-</ul>
-<h3> External dependencies For Heroku Deployement</h3>
-<ul>
-<li>gunicorn</li>
-<li>dj-database-url</li>
-<li>whitenoise</li>
-<li>psycopg2</li>
+	<li>Kshitiz Srivastava (20184091)</li>
+	<li>Ankit (20185091)</li>
+	<li>Vishwajeet Kumar (20188053)</li>
 </ul>
 
