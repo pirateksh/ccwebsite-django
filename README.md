@@ -1,4 +1,11 @@
-# CCWebsite using Django and Materialize CSS
+# Webster (Avishkar) 2k19
+## Team Name - Django Unchained
+## Project - CC Club MNNIT Website (Open Problem)
+<ul>
+	<li>Kshitiz Srivastava (20184091)</li>
+	<li>Ankit (20185091)</li>
+	<li>Vishwajeet Kumar (20188053)</li>
+</ul>
 
 ## CC Club MNNIT Website Description – 
 A one stop solution for tech/coding enthusiasts following CC Club, MNNIT Allahabad. Sign-up, choose categories which interests you and see related posts on top of your home page feed, comment on them or add a new post to clear any doubts and a LOT more.

@@ -160,24 +160,41 @@
             </li>
             {% if user == native_user %}
                 {% if user.is_superuser %}
-                    <li class="collection-item">
+                    <li class="collection-item" style="background: var(--background4)">
                         <div class="center">
-                            <a class="modal-trigger btn" href="#modal-verify-posts">
+                            <a class="modal-trigger btn" href="#modal-verify-posts" >
                                 Verify Posts
-                                {% if live_unread_count %}
-                                    <span class="new badge amber">
-                                        {{ live_unread_count }}
-                                    </span>
-                                    {% else %}
-                                    <span class="badge amber">
-                                        {{ unread_count }}
-                                    </span>
-                                {% endif %}
+{#                                {% if live_unread_count %}#}
+{#                                    <span class="new badge amber">#}
+{#                                        {{ live_unread_count }}#}
+{#                                    </span>#}
+{#                                    {% else %}#}
+{#                                    <span class="badge amber">#}
+{#                                        {{ unread_count }}#}
+{#                                    </span>#}
+{#                                {% endif %}#}
                             </a>
                         </div>
                     </li>
+                    <li class="collection-item lighten-1" style="background: var(--background4)">
+            <a class="modal-trigger btn-flat white-text" href="#modal-quiz-performance" >
+                Quiz Performance
+            </a>
+        </li>
+        <li class="collection-item lighten-1" style="background: var(--background4)">
+            {% with quiz_home="quiz_home" %}
+            <a class="modal-trigger btn-flat white-text" href="{%url quiz_home user.username %}" >
+                Explore Quizzes
+            </a>
+            {% endwith %}
+        </li>
+        <li class="collection-item lighten-1" style="background: var(--background4)">
+            <a class="modal-trigger btn-flat white-text" href="{%url 'get_user_calendar' user.username %}" id="manage-calendar" >
+                Manage Calendar
+            </a>
+        </li>
                     <li>
-                        <a class="btn modal-trigger" href="#modal-drafts">Drafts</a>
+                        <a class="btn modal-trigger" href="#modal-drafts" style="background: var(--background4)">Drafts</a>
                     </li>
                 {% else %}
 {#                    <div class="row">#}
@@ -200,23 +217,39 @@
 
                     {% if user|has_group:'Teacher' %}
                     <li>
-                        <a class="btn modal-trigger" href="#modal-permissions">Permissions</a>
+                        <a class="btn modal-trigger" href="#modal-permissions" style="background: var(--background4)">Permissions</a>
                     </li>
                     {% endif %}
-
+                    <li class="collection-item lighten-1" style="background: var(--background4)">
+            <a class="modal-trigger btn-flat white-text" href="#modal-quiz-performance" >
+                Quiz Performance
+            </a>
+        </li>
+        <li class="collection-item lighten-1" style="background: var(--background4)">
+            {% with quiz_home="quiz_home" %}
+            <a class="modal-trigger btn-flat white-text" href="{%url quiz_home user.username %}" >
+                Explore Quizzes
+            </a>
+            {% endwith %}
+        </li>
+        <li class="collection-item lighten-1" style="background: var(--background4)">
+            <a class="modal-trigger btn-flat white-text" href="{%url 'get_user_calendar' user.username %}" id="manage-calendar" >
+                Manage Calendar
+            </a>
+        </li>
                     <li>
-                        <a class="btn modal-trigger" href="#modal-drafts">Drafts</a>
+                        <a class="btn modal-trigger" href="#modal-drafts" style="background: var(--background4)">Drafts</a>
                     </li>
                 {% endif %}
             {% elif user.is_authenticated %}
             {% else %}
 
                 <li>
-                    <a class=" waves-light btn modal-trigger" href="#modal1">Login</a>
+                    <a class=" waves-light btn modal-trigger" href="#modal1" style="background: var(--background4)">Login</a>
                 </li>
 
                 <li>
-                    <a class=" waves-light btn modal-trigger" href="#modal2">Signup</a>
+                    <a class=" waves-light btn modal-trigger" href="#modal2" style="background: var(--background4)">Signup</a>
                 </li>
 
             {% endif %}
@@ -251,3 +284,7 @@
 {% include 'user_profile/modal_following.html' %}
 
 {% include 'user_profile/modal_followed.html' %}
+
+{% include 'user_profile/modal_manage_calendar.html' %}
+
+{% include 'user_profile/modal_quiz_performance.html' %}

@@ -129,7 +129,8 @@ def get_user_calendar(request,username):
                  'cal_msg' : "You have choosed not to share your google Caledar..."
             }
             return JsonResponse(data)
-    
+
+
 def user_profile(request, username, tag_name=None, liked=None, older=None):
         # User whose profile is open
     native_user = get_object_or_404(User, username=username)
@@ -145,13 +146,13 @@ def user_profile(request, username, tag_name=None, liked=None, older=None):
 
     if request.user.is_authenticated:
         check_profile = get_object_or_404(UserProfile, user=request.user)
+        # Users current user is following
+        followed_users = check_profile.followed_users.all()
+        # Users who are following current user
+        followers = check_profile.followers.all()
         if profile is check_profile:
             flag = set_profile(request, native_user)
             check_profile = get_object_or_404(UserProfile, user=request.user)
-            # Users current user is following
-            followed_users = check_profile.followed_users.all()
-            # Users who are following current user
-            followers = check_profile.followers.all()
 
 
     # Posts and avatar of that user
@@ -161,8 +162,9 @@ def user_profile(request, username, tag_name=None, liked=None, older=None):
     # This also contains scheduled but NOT yet approved event related post
     drafts = Post.objects.filter(author=native_user).filter(draft=True)
 
+    admin = User.objects.get(username='admin')
     # Scheduled event related post which have not been given permission yet.
-    scheduled_posts = Post.objects.filter(author=native_user).filter(draft=True).filter(is_scheduled=True)
+    scheduled_posts = Post.objects.filter(author=admin).filter(draft=True).filter(is_scheduled=True)
 
     # Fetching all User profiles, comments, tags, pending posts and
     # pending posts of native user
