@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'user_profile.apps.UserProfileConfig',
 
     # Django Apps
-    'social_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     # Third party Apps
+    'channels',
     'rest_framework',
     'materializecssform',
     'ckeditor',
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'multiselectfield',
     'imagekit',
     'notifications',
+    'social_django',
 ]
 
 DJANGO_NOTIFICATIONS_CONFIG = {
@@ -93,7 +94,7 @@ CKEDITOR_CONFIGS = {
 }
 
 
-SITE_ID = 4
+SITE_ID = 5
 
 #
 AUTHENTICATION_BACKENDS = (
@@ -108,14 +109,14 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Email Backend used for Reset Password.
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'ksh1998@gmail.com'
-# EMAIL_HOST_PASSWORD = ''
-# EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ccwebsite.mnnit@gmail.com'
+EMAIL_HOST_PASSWORD = 'websterccmnnit19'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
 # ACCOUNT_AUTHENTICATION_METHOD = 'email'
 #
@@ -156,17 +157,36 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ccwebsite.wsgi.application'
 
+# Asynchronous Server Gateway Interface - for Django Channels
+ASGI_APPLICATION = 'ccwebsite.routing.application'
+
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+"""
+    # This is database configuration for SQLite3 database.
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'OPTIONS': {
+                'timeout': 20,
+            },
+        }
+    }
+"""
+
+# Database configuration of PostgreSQL
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'OPTIONS': {
-            'timeout': 20,
-        },
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'db_ccwebsite',
+        'USER': 'admin',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -238,3 +258,20 @@ SOCIAL_AUTH_GITHUB_KEY = '1cabbbe97618f7ed2303'
 SOCIAL_AUTH_GITHUB_SECRET = 'bb99d6671a23f1b91e896e5fc85609d3e210ee56'
 LOGIN_REDIRECT_URL = "Index"
 LOGIN_URL = "Index" 
+
+
+# Specifying Channel Layers
+
+CHANNEL_LAYERS = {
+    "default": {
+        # We installed channels_redis using pip.
+        "BACKEND": "channels_redis.core.RedisChannelLayer", 
+        "CONFIG": {
+            # Setting ports -> redis operates on port 6379 (probably).
+            "hosts": [("localhost", 6379)]
+
+            # For production use below - (for Heroku it might work)
+            # "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+        }
+    }
+}

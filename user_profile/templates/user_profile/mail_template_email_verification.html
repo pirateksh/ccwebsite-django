@@ -1,13 +1,13 @@
 {% autoescape off %}
+<br>
+Hi {{ user.username }},<br><br>
 
-Hi {{ user.username }},
-
-Please click on the link to verify your email,
-http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+Please click on the link to verify your email,<br><br>
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %} <br> <br>
 
 If clicking the link above doesn't work, please copy and paste the URL in a new browser
-window instead.
+window instead.<br><br>
 
-Sincerely,
-The CCWebsite Team
+Sincerely,<br>
+The CCWebsite Team<br>
 {% endautoescape %}

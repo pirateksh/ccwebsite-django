@@ -1,8 +1,6 @@
 {% load static %}
 {% load notifications_tags %}
 
-
-
 <!--  Scripts-->
 
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -13,19 +11,80 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
+<!-- Below is standard path provided by Channels -->
+<!-- <script src = "{% static '/channels/js/websocketbridge.js' %}" type="text/javascript"></script> -->
+
+<!-- 3rd party package that automatically reconnects Websockets !-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"></script>
+
 
 {#Cropper JS files#}
+<!-- These are currently not is use - probably can be removed -->
 {#<script src="{% static 'js_for_cropper/jquery.min.js' %}"></script>#}
 {#<script src="{% static 'js_for_cropper/cropper.min.js' %}"></script>#}
 {#<script src="{% static 'js_for_cropper/jquery-cropper.min.js' %}"></script>#}
 
+
 {#Bootstrap JS files#}
 {# <script src="{% static 'Bootstrap/js/bootstrap.min.js' %}"></script> #}
 {# <script src="{% static 'Bootstrap/js/bootstrap.js' %}"></script> #}
+
+<script type="text/javascript">
+  
+// console.log(window.location);
+
+
+// For Websockets
+var loc = window.location
+
+var wsStart = 'ws://' 
+
+
+if(loc.protocol == 'https:') {
+    wsStart = 'wss://' 
+}
+
+var endpoint = wsStart + loc.host + "/notifications/" //loc.pathname
+
+var socket = new ReconnectingWebSocket(endpoint)
+
+socket.onmessage = function(e) {
+    console.log('message', e);
+    if(e.data[0] === '{') {
+      console.log(JSON.parse(e.data))
+    } else {
+      console.log(e.data)
+    }
+}
+socket.onopen = function(e) {
+    console.log('open', e);
+
+    var msg = "Hello World from scripts.html"
+
+    var FinalData = {
+      // Sending a dictionary
+      'message': msg
+    }
+
+
+    // JSON.stringify done as FinalData is a dictionary.
+    socket.send(JSON.stringify(FinalData));
+}
+socket.onerror = function(e) {
+    console.log('error', e);
+}
+socket.onclose = function(e) {
+    console.log('close', e);
+}
+
+</script>
+
 <!-- Including below Bootstrap JS File solved the problem for Chart object not found -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+
 {# For on screen seector in jQuery #}
 <script type="text/javascript" src="{% static 'js/jquery.scrolling.js' %}"></script>
+
 {# Beep sound for notification  #}
 <audio id="notificationAudio">
   <source src="{% static 'Sound/beep-07.wav' %}" type="audio/wav">
@@ -126,11 +185,14 @@
          }
      }
 </script>
+
+
 <script src="{% static 'notifications/notify.js' %}" type="text/javascript"></script>
 {% register_notify_callbacks callbacks='my_special_notification_callback, fill_notification_badge' refresh_period=5 %}
 {#{% register_notify_callbacks callbacks='fill_notification_list, fill_notification_badge' %}#}
 
 {# DJANGO NOTIFICATIONS HQ #}
+
 <script src="{% static 'js/main.js' %}"></script>
 
 {# Materialize CSS Auto Initialization #}
@@ -321,6 +383,7 @@ $(document).ready(function(){
     }
 });
 </script> -->
+
  <!-- jQuery Ajax Script -->
 <script type="text/javascript">
   $(document).on('submit','#ques_form',function(e){
@@ -370,6 +433,7 @@ $(document).ready(function(){
     alert("All fields are required.");
   }
   });
+
 // Function appendToQuestionsMenu definition
 
 function appendToQuestionsMenu(question,cnt,id){
@@ -386,6 +450,8 @@ function appendToQuestionsMenu(question,cnt,id){
 }
 
 </script>
+
+
 <script type="text/javascript">
   $(document).on('click','.ques_list_item',function(e){
     e.preventDefault();
@@ -410,8 +476,6 @@ function appendToQuestionsMenu(question,cnt,id){
         }
     });
   });
-
-
 
 </script>
 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -480,9 +544,8 @@ function appendToQuestionsMenu(question,cnt,id){
 </script>
 
 
+<!-- Live User Search -->
 <script>
-
-
     $('#search-input').keyup(function () {
         var this_ = $(this);
         var key = this_.val();
