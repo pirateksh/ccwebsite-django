@@ -1,51 +1,61 @@
+{% comment %}
+        'profile': profile,
+        'avatar_form': avatar_form,
+        'form': form,
+        'native_user': native_user,
+        'native_posts': native_posts,
+        'addpostform': addpostform,
+        'password_change_form': password_change_form,
+        'comments': comments,
+        'comment_form': comment_form,
+        'user_profiles': user_profiles,
+        'tags': tags,
+        'pending_posts': pending_posts,
+        'native_pending_posts': native_pending_posts,
+        'read_notif': read_notif,
+        'unread_notif': unread_notif,
+        'drafts': drafts,
+        'quiz_results': quiz_results,
+        'scheduled_posts': scheduled_posts,
+        'followed_users': followed_users,
+        'followers': followers,
+{% endcomment %}
 {#{% load notifications_tags %}#}
-{#{% load notification_tags %}#}
-{% load notifications_tags %}
 {% load static %}
-{#{% include_notify_js_variables %}#}
-{% live_notify_badge as live_unread_count %}
 
 <ul class="collection">
-{#    <li class="collection-item amber">#}
-{#        <a class="btn-flat" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>#}
-{#        #}
-{#    </li>#}
+
     {% if user == native_user %}
         <li class="collection-item white-text center" style="background: var(--background3)">
-            <h6>Quick Notifications</h6>
+            <h6>Recent Notifications</h6>
         </li>
         <div class="notifications">
-            {#    <li class="collection-item amber">{% notifications_unread %}</li>#}
-            {% live_notify_list as unread_list %}
-                    {% if unread_list %}
-                        {{ unread_list }}
-                    {% else %}
-                        <li class="collection-item" style="background: var(--background2)">
-                            You don't have any recent notifications.
-                        </li>
-                    {% endif %}
-            {% if read_notif %}
-            {% for read in read_notif %}
-                <li class="collection-item avatar" style="background: var(--background2)">
-                    <img src="{{ read.actor.avatar.url }}" alt="" class="circle">
-                    <span class="title">
-                        <strong>
-                            <a href="{% url 'User Profile' read.actor.user.username %}">{{ read.actor.user.first_name }}</a>
-                            {{ read.verb }}
-                        </strong>
-                    </span>
-                    <p>
-                        {% if read.target is not None %}
-                        <strong>Post title:</strong> <a href="{% url 'post_detail' read.target.slug %}">{{ read.target.title }}</a>
-                        {% endif %}
-                        <br>
-                        <strong> -- {{ read.timestamp|timesince }} ago.</strong>
-                    </p>
-    {#                <a href="{% url 'clear_notification' read.pk %}" class="secondary-content tooltipped" data-tooltip="Clear">#}
-    {#                    <i class="material-icons">clear</i>#}
-    {#                </a>#}
+            {% if unread_notif %}
+                {% for unread in unread_notif %}
+                    <li class="collection-item avatar" style="background: var(--background2)">
+                        <img src="{{ unread.data.dp_url }}" alt="" class="circle">
+                        <span class="title">
+                            <strong>
+                                <a href="{% url 'User Profile' unread.sender.username %}">{{ unread.sender.first_name }}</a>
+                                {{ unread.verb }}
+                            </strong>
+                        </span>
+                        <p>
+                            {% if unread.post is not None %}
+                            <strong>Post title:</strong> <a href="{% url 'post_detail' unread.post.slug %}">{{ unread.post.title }}</a>
+                            {% endif %}
+                            <br>
+                            <strong> -- {{ unread.timestamp|timesince }} ago.</strong>
+                        </p>
+{#                        <a href="{% url 'clear_notification' unread.pk %}" class="secondary-content tooltipped" data-tooltip="Clear">#}
+{#                            <i class="material-icons">clear</i>#}
+{#                        </a>#}
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li class="collection-item" style="background: var(--background2)">
+                    You don't have any recent notifications.
                 </li>
-            {% endfor %}
             {% endif %}
         </div>
     {% endif %}

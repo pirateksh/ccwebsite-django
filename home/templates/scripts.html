@@ -1,5 +1,5 @@
 {% load static %}
-{% load notifications_tags %}
+{#{% load notifications_tags %}#}
 
 <!--  Scripts-->
 
@@ -29,7 +29,91 @@
 {# <script src="{% static 'Bootstrap/js/bootstrap.min.js' %}"></script> #}
 {# <script src="{% static 'Bootstrap/js/bootstrap.js' %}"></script> #}
 
+<!-- For LikeNotificationConsumer -->
 <script type="text/javascript">
+    var loc = window.location;
+
+    var wsStart = 'ws://';
+
+    if(loc.protocol === 'https:') {
+    // For Production on secure server.
+        wsStart = 'wss://' 
+    }
+
+    var endpoint = wsStart + loc.host + "/like_notification/";
+
+    var likeSocket = new ReconnectingWebSocket(endpoint);
+
+    likeSocket.onmessage = function (e) {
+        console.log("message LikeNotificationConsumer", e);
+        
+        let audio = new Audio('{% static 'Sound/beep-07.wav' %}');
+        var data_dict = JSON.parse(e.data);
+
+        console.log(data_dict.data);
+        /*
+          data_dict: { 
+                "event"
+                "recipient_username"
+                "sender_username"
+                "sender_name"
+                "verb"
+                "data": {
+                    "post_title": Title of post
+                    "dp_url": URL of dp of User who liked.
+                    "prof_url": URL of User Profile of User who liked.
+                    "post_url": URL of post detail.
+                }
+          }
+        */
+        var current_user = "{{ request.user.username }}";
+        var menu = $('.notifications');
+
+
+        if( data_dict.event === "Liked") {
+
+            if(current_user === data_dict.recipient_username) {
+                audio.play();
+                addToast(data_dict.verb);
+
+                menu.prepend(
+                     "<li class='collection-item avatar' style='background: var(--background2)'>" +
+                     "<img src='" + data_dict.data.dp_url + "' alt='' class='circle'>" +
+                     "<span class='title'><strong>" +
+                     "<a href='" + data_dict.data.prof_url + "'>" + data_dict.sender_name + "</a> " + data_dict.verb + "</strong></span>" +
+                     "<p>" +
+                     "<strong>Post title:</strong> <a href='" + data_dict.data.post_url + "'>" + data_dict.data.post_title + "</a>" +
+                     "<br><strong> -- just now.</strong>" +
+                     "</p>" +
+                     "</li>"
+                  );
+            }
+        }
+
+        likeSocket.close();
+    };
+
+    likeSocket.onopen = function (e) {
+    console.log("opened LikeNotificationConsumer", e)
+
+    // var prom = prompt("Enter Message - ")
+    // dict = {
+    //   'likeCount': "+1",
+    //   'message': prom,
+    // }
+    // likeSocket.send(JSON.stringify(dict))
+    };
+
+    likeSocket.onerror = function (e) {
+        console.log("error LikeNotificationConsumer", e)
+    };
+
+    likeSocket.onclose = function (e) {
+        console.log("close LikeNotificationConsumer", e)
+    }
+</script>
+
+<!-- <script type="text/javascript">
   
 // console.log(window.location);
 
@@ -77,7 +161,7 @@ socket.onclose = function(e) {
     console.log('close', e);
 }
 
-</script>
+</script> -->
 
 <!-- Including below Bootstrap JS File solved the problem for Chart object not found -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
@@ -146,49 +230,50 @@ socket.onclose = function(e) {
 </script>
 
 {# DJANGO NOTIFICATIONS HQ #}
-
-<script>
-    let audio = new Audio('{% static 'Sound/beep-07.wav' %}');
-     function my_special_notification_callback(data) {
-         msg = data.unread_list[0];
-         if (msg) {
-             addToast("You may have new notifications.");
+{##}
+{#<script>#}
+{#    let audio = new Audio('{% static 'Sound/beep-07.wav' %}');#}
+{#     function my_special_notification_callback(data) {#}
+{#         msg = data.unread_list[0];#}
+{#         if (msg) {#}
+{#             addToast("You may have new notifications.");#}
              {#playAudio();#}
-             audio.play();
+{#             audio.play();#}
              {#console.log(msg.data.dp_url);#}
-             var menu = $('.notifications');
-             if((msg.data.post_url === undefined) && (msg.target === undefined)) {
-                 menu.prepend(
-                     "<li class='collection-item avatar' style='background: var(--background2)'>" +
-                     "<img src='" + msg.data.dp_url + "' alt='' class='circle'>" +
-                     "<span class='title'><strong>" +
-                     "<a href='" + msg.data.prof_url + "'>" + msg.data.actor_name + "</a> " + msg.verb + "</strong></span>" +
-                     "<p>" +
+{#             var menu = $('.notifications');#}
+{#             if((msg.data.post_url === undefined) && (msg.target === undefined)) {#}
+{#                 menu.prepend(#}
+{#                     "<li class='collection-item avatar' style='background: var(--background2)'>" +#}
+{#                     "<img src='" + msg.data.dp_url + "' alt='' class='circle'>" +#}
+{#                     "<span class='title'><strong>" +#}
+{#                     "<a href='" + msg.data.prof_url + "'>" + msg.data.actor_name + "</a> " + msg.verb + "</strong></span>" +#}
+{#                     "<p>" +#}
                      {#"<strong>Post title:</strong> <a href='" + msg.data.post_url + "'>" + msg.target + "</a>" +#}
-                     "<br><strong> -- " + msg.data.timestamp_ + " ago.</strong>" +
-                     "</p>" +
-                     "</li>"
-                 );
-             } else {
-                  menu.prepend(
-                     "<li class='collection-item avatar' style='background: var(--background2)'>" +
-                     "<img src='" + msg.data.dp_url + "' alt='' class='circle'>" +
-                     "<span class='title'><strong>" +
-                     "<a href='" + msg.data.prof_url + "'>" + msg.data.actor_name + "</a> " + msg.verb + "</strong></span>" +
-                     "<p>" +
-                     "<strong>Post title:</strong> <a href='" + msg.data.post_url + "'>" + msg.target + "</a>" +
-                     "<br><strong> -- " + msg.data.timestamp_ + " ago.</strong>" +
-                     "</p>" +
-                     "</li>"
-                  );
-             }
-         }
-     }
-</script>
-
-
-<script src="{% static 'notifications/notify.js' %}" type="text/javascript"></script>
-{% register_notify_callbacks callbacks='my_special_notification_callback, fill_notification_badge' refresh_period=5 %}
+{#                     "<br><strong> -- " + msg.data.timestamp_ + " ago.</strong>" +#}
+{#                     "</p>" +#}
+{#                     "</li>"#}
+{#                 );#}
+{#             } else {#}
+{#                  menu.prepend(#}
+{#                     "<li class='collection-item avatar' style='background: var(--background2)'>" +#}
+{#                     "<img src='" + msg.data.dp_url + "' alt='' class='circle'>" +#}
+{#                     "<span class='title'><strong>" +#}
+{#                     "<a href='" + msg.data.prof_url + "'>" + msg.data.actor_name + "</a> " + msg.verb + "</strong></span>" +#}
+{#                     "<p>" +#}
+{#
+    "<strong>Post title:</strong> <a href='" + msg.data.post_url + "'>" + msg.target + "</a>" +#}
+{#                     "<br><strong> -- " + msg.data.timestamp_ + " ago.</strong>" +#}
+{#                     "</p>" +#}
+{#                     "</li>"#}
+{#                  );#}
+{#             }#}
+{#         }#}
+{#     }#}
+{#</script>#}
+{##}
+{##}
+{#<script src="{% static 'notifications/notify.js' %}" type="text/javascript"></script>#}
+{#{% register_notify_callbacks callbacks='my_special_notification_callback, fill_notification_badge' refresh_period=5 %}#}
 {#{% register_notify_callbacks callbacks='fill_notification_list, fill_notification_badge' %}#}
 
 {# DJANGO NOTIFICATIONS HQ #}

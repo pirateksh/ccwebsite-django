@@ -9,10 +9,16 @@ from django.db.models import Count
 from django.utils.timesince import timesince
 from django.utils import timezone
 from django.contrib.sites.models import Site
+
 # from django.contrib.sites.shortcuts import get_current_site
 
 # from django.contrib.contenttypes.models import ContentType
 # from django.views.generic import RedirectView
+
+# Imports for notification
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+import json
 
 # Imports for Email
 from django.core import mail
@@ -33,7 +39,7 @@ from home.forms import UserSignupForm
 # from .forms import PostForm
 
 # 3rd Party imports
-from notifications.signals import notify
+# from notifications.signals import notify
 # from notify.signals import notify
 
 # Self imports
@@ -190,18 +196,18 @@ def ajax_add_post(request):
 
                 # Teacher group - Used to send notification in one go.
                 teachers_group = Group.objects.get(name='Teacher')
-                notify.send(
-                        # Sending notification to all teachers.
-                        user_profile,
-                        recipient=teachers_group,
-                        verb='requested permission for an event.',
-                        target=post,
-                        dp_url=user_profile.avatar.url,
-                        prof_url=reverse("User Profile", kwargs={'username': user.username}),
-                        post_url=post_url,
-                        actor_name=user_profile.user.first_name,
-                        timestamp_=timesince(timezone.now()),
-                )
+                # notify.send(
+                #         # Sending notification to all teachers.
+                #         user_profile,
+                #         recipient=teachers_group,
+                #         verb='requested permission for an event.',
+                #         target=post,
+                #         dp_url=user_profile.avatar.url,
+                #         prof_url=reverse("User Profile", kwargs={'username': user.username}),
+                #         post_url=post_url,
+                #         actor_name=user_profile.user.first_name,
+                #         timestamp_=timesince(timezone.now()),
+                # )
                 result = "ISCH"
             else:
                 messages.error(request, f"You are not authenticated for this request.")
@@ -221,17 +227,17 @@ def ajax_add_post(request):
                 post.save()
             else:
                 result = "SS"
-                notify.send(
-                        user_profile,
-                        recipient=admin,
-                        verb='requested approval to post.',
-                        target=post,
-                        dp_url=user_profile.avatar.url,
-                        prof_url=reverse("User Profile", kwargs={'username': user.username}),
-                        post_url=post_url,
-                        actor_name=user_profile.user.first_name,
-                        timestamp_=timesince(timezone.now()),
-                )
+                # notify.send(
+                #         user_profile,
+                #         recipient=admin,
+                #         verb='requested approval to post.',
+                #         target=post,
+                #         dp_url=user_profile.avatar.url,
+                #         prof_url=reverse("User Profile", kwargs={'username': user.username}),
+                #         post_url=post_url,
+                #         actor_name=user_profile.user.first_name,
+                #         timestamp_=timesince(timezone.now()),
+                # )
         """
             Response Acronyms:
             SSS - Normal post by Superuser (Success)
@@ -369,17 +375,17 @@ def ajax_edit_post(request):
                     original_post.save()
                     result = 'SUD'
                 else:
-                    notify.send(
-                        user_profile,
-                        recipient=admin,
-                        verb='requested approval to post.',
-                        target=original_post,
-                        dp_url=user_profile.avatar.url,
-                        prof_url=reverse("User Profile", kwargs={'username': request.user.username}),
-                        post_url=post_url,
-                        actor_name=user_profile.user.first_name,
-                        timestamp_=timesince(timezone.now()),
-                    )
+                    # notify.send(
+                    #     user_profile,
+                    #     recipient=admin,
+                    #     verb='requested approval to post.',
+                    #     target=original_post,
+                    #     dp_url=user_profile.avatar.url,
+                    #     prof_url=reverse("User Profile", kwargs={'username': request.user.username}),
+                    #     post_url=post_url,
+                    #     actor_name=user_profile.user.first_name,
+                    #     timestamp_=timesince(timezone.now()),
+                    # )
                     result = 'UD'
             else:
                 result = "SS"
@@ -414,6 +420,9 @@ def post_like_toggle(request, slug):
     """
         Function to like/unlike posts using AJAX.
     """
+
+    print("\n\n\n\nLIKE############UNLIKED\n\n\n\n")
+
     post_qs = Post.objects.filter(slug=slug)
     user = request.user
     count = -1
@@ -440,16 +449,43 @@ def post_like_toggle(request, slug):
                 # Post author is not same as user liking the post
                 if str(user_profile.user) != str(post.author):
                     # Notification sent to post author
-                    notify.send(
-                        user_profile,
-                        recipient=post.author,
-                        verb='liked your post.',
-                        target=post,
-                        dp_url=user_profile.avatar.url,
-                        prof_url=reverse("User Profile", kwargs={'username': user.username}),
-                        post_url=reverse("post_detail", kwargs={'slug': post.slug}),
-                        actor_name=user_profile.user.first_name,
-                        timestamp_=timesince(timezone.now()),
+                    # notify.send(
+                    #     user_profile,
+                    #     recipient=post.author,
+                    #     verb='liked your post.',
+                    #     target=post,
+                    #     dp_url=user_profile.avatar.url,
+                    #     prof_url=reverse("User Profile", kwargs={'username': user.username}),
+                    #     post_url=reverse("post_detail", kwargs={'slug': post.slug}),
+                    #     actor_name=user_profile.user.first_name,
+                    #     timestamp_=timesince(timezone.now()),
+                    # )
+
+                    channel_layer = get_channel_layer()
+
+                    verb = "liked your post"
+                    event = "Liked"
+
+                    text_dict = {
+                        "event": event,
+                        'recipient_username': post.author.username,
+                        'sender_username': user.username,
+                        'sender_name': user.first_name,
+                        'post_pk': post.pk,
+                        'verb': verb,
+                        'data': {
+                            'post_title': post.title,
+                            'dp_url': user_profile.avatar.url,
+                            'prof_url': reverse("User Profile", kwargs={'username': user.username}),
+                            'post_url': reverse("post_detail", kwargs={'slug': post.slug}),
+                        }
+                    }
+
+                    async_to_sync(channel_layer.group_send)(
+                        "like_notif", {
+                            "type": "notif_like",
+                            "text": json.dumps(text_dict),
+                        }
                     )
 
             count = post.likes.count()
@@ -567,18 +603,18 @@ def approve_post(request, slug):
                 admin_prof = get_object_or_404(UserProfile, user=request.user)
                 if post.author != request.user:
                     # Admin wont send notification to itself.
-                    notify.send(
-                        # Sending notification to post author
-                        admin_prof,
-                        recipient=author,
-                        verb='approved this post.',
-                        target=post,
-                        dp_url=admin_prof.avatar.url,
-                        prof_url=reverse("User Profile", kwargs={'username': admin_prof.user.username}),
-                        post_url=reverse("post_detail", kwargs={'slug': post.slug}),
-                        actor_name=admin_prof.user.first_name,
-                        timestamp_=timesince(timezone.now()),
-                    )
+                    # notify.send(
+                    #     # Sending notification to post author
+                    #     admin_prof,
+                    #     recipient=author,
+                    #     verb='approved this post.',
+                    #     target=post,
+                    #     dp_url=admin_prof.avatar.url,
+                    #     prof_url=reverse("User Profile", kwargs={'username': admin_prof.user.username}),
+                    #     post_url=reverse("post_detail", kwargs={'slug': post.slug}),
+                    #     actor_name=admin_prof.user.first_name,
+                    #     timestamp_=timesince(timezone.now()),
+                    # )
                     messages.success(request, f"You have approved a post.")
 
                     # For Email
@@ -636,18 +672,18 @@ def reject_post(request, slug):
                 post.save()
                 admin_prof = get_object_or_404(UserProfile, user=request.user)
                 if post.author != request.user:
-                    notify.send(
-                        # Send notification to post author.
-                        admin_prof,
-                        recipient=author,
-                        verb='rejected this post.',
-                        target=post,
-                        dp_url=admin_prof.avatar.url,
-                        prof_url=reverse("User Profile", kwargs={'username': admin_prof.user.username}),
-                        post_url=reverse("post_detail", kwargs={'slug': post.slug}),
-                        actor_name=admin_prof.user.first_name,
-                        timestamp_=timesince(timezone.now()),
-                    )
+                    # notify.send(
+                    #     # Send notification to post author.
+                    #     admin_prof,
+                    #     recipient=author,
+                    #     verb='rejected this post.',
+                    #     target=post,
+                    #     dp_url=admin_prof.avatar.url,
+                    #     prof_url=reverse("User Profile", kwargs={'username': admin_prof.user.username}),
+                    #     post_url=reverse("post_detail", kwargs={'slug': post.slug}),
+                    #     actor_name=admin_prof.user.first_name,
+                    #     timestamp_=timesince(timezone.now()),
+                    # )
                     messages.success(request, f"You have rejected a post.")
 
                     # For Email
@@ -660,8 +696,7 @@ def reject_post(request, slug):
                             'status': 'rejected',
                             'post': post,
                         }
-                        html_message = render_to_string('user_profile/mail_template_post_approval.html',
-                                                        context=email_context)
+                        html_message = render_to_string('user_profile/mail_template_post_approval.html', context=email_context)
                         plain_message = strip_tags(html_message)
                         from_email = "noreply@ccwebsite"
                         to = str(author.email)

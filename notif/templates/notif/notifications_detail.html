@@ -6,7 +6,7 @@
     'user_profile_qs': ALl user profiles,
 {% endcomment %}
 {% load static %}
-{% load notifications_tags %}
+{#{% load notifications_tags %}#}
 {% block title %}
     All notifications
 {% endblock %}
@@ -14,160 +14,182 @@
 {% block content %}
     {% include 'notif/navbar.html' %}
     <div class="row">
-        <div class="col m3 l3">
+{#        <div class="col m3 l3">#}
 {#            {% include 'user_profile/left_side_bar.html' %}#}
-        </div>
-{#        <div class="row hide-on-small-and-down">#}
-{#            <div class="col s6 m6 l6">#}
-{#                <ul class="collection ">#}
-{#                    <li class="collection-item amber lighten-1">#}
-{#                        Unread Notifications#}
-{#                        <a href="{% url 'mark_all_as_read'%}" class="secondary-content tooltipped" data-tooltip="Mark all as read">#}
-{#                            <i class="material-icons">chrome_reader_mode</i>#}
-{#                        </a>#}
-{#                    </li>#}
-{#                    {% if unread_notif %}#}
-{#                        {% for unread in unread_notif %}#}
-{#                            <li class="collection-item avatar">#}
-{#                                <a href="{% url 'User Profile' unread.actor.user.username %}">#}
-{#                                {% if unread.actor.avatar %}#}
-{#                                    <img src="{{ unread.actor.avatar.url }}" alt="" class="circle">#}
-{#                                {% else %}#}
-{#                                    <img src="{% static 'default-profile-picture.jpg' %}">#}
-{#                                {% endif %}#}
-{#                                </a>#}
-{#                                <span class="title"><strong>{{ unread.actor.user.first_name }} {{ unread.verb }}</strong></span>#}
-{#                                <p>#}
-{#                                    <strong>Post title:</strong> <a href="{% url 'post_detail' unread.target.slug %}">{{ unread.target.title }}</a>#}
-{#                                    <strong> -- {{ unread.timestamp|timesince }} ago.</strong>#}
-{#                                </p>#}
-{#                                <a href="{% url 'mark_as_read' unread.pk %}" class="secondary-content tooltipped" data-tooltip="Mark as read">#}
-{#                                    <i class="material-icons">class</i>#}
-{#                                </a>#}
-{#                            </li>#}
-{#                        {% endfor %}#}
-{#                    {% else %}#}
-{#                        <li class="collection-item">#}
-{#                            Emptiness..#}
-{#                        </li>#}
-{#                    {% endif %}#}
-{#                </ul>#}
-{#            </div>#}
-{#            <div class="col s6 m6 l6">#}
-{#                <ul class="collection">#}
-{#                    <li class="collection-item amber lighten-1">#}
-{#                        Read Notifications#}
-{#                        <a href="{% url 'clear_all_notification' %}" class="secondary-content tooltipped" data-tooltip="Clear all">#}
-{#                            <i class="material-icons">clear_all</i>#}
-{#                        </a>#}
-{#                    </li>#}
-{#                    {% if read_notif %}#}
-{#                        {% for read in read_notif %}#}
-{#                            <li class="collection-item avatar">#}
-{#                                {% if read.actor.avatar %}#}
-{#                                    <img src="{{ read.actor.avatar.url }}" alt="" class="circle">#}
-{#                                {% else %}#}
-{#                                    <img src="{% static 'default-profile-picture.jpg' %}">#}
-{#                                {% endif %}#}
-{#                                <span class="title"><strong>{{ read.actor.user.first_name }} {{ read.verb }}</strong></span>#}
-{#                                <p>#}
-{#                                    <strong>Post title:</strong> <a href="{% url 'post_detail' read.target.slug %}">{{ read.target.title }}</a>#}
-{#                                    <strong> -- {{ read.timestamp|timesince }} ago.</strong>#}
-{#                                </p>#}
-{#                                <a href="{% url 'clear_notification' read.pk %}" class="secondary-content tooltipped" data-tooltip="Clear">#}
-{#                                    <i class="material-icons">clear</i>#}
-{#                                </a>#}
-{#                            </li>#}
-{#                        {% endfor %}#}
-{#                    {% else %}#}
-{#                        <li class="collection-item">#}
-{#                            Emptiness..#}
-{#                        </li>#}
-{#                    {% endif %}#}
-{#            </ul>#}
-{#            </div>#}
 {#        </div>#}
-
-{#         hide-on-med-and-up">#}
-{#            <div class="col s12 m12 l12">#}
-{#                <ul class="collection">#}
-{#                    <li class="collection-item amber lighten-1">#}
-{#                        Unread Notifications#}
-{#                        <a href="{% url 'mark_all_as_read'%}" class="secondary-content tooltipped" data-tooltip="Mark all as read">#}
-{#                            <i class="material-icons">chrome_reader_mode</i>#}
-{#                        </a>#}
-{#                    </li>#}
-{#                    {% if unread_notif %}#}
-{#                        {% for unread in unread_notif %}#}
-{#                            <li class="collection-item avatar">#}
-{#                                <a href="{% url 'User Profile' unread.actor.user.username %}">#}
-{#                                {% if unread.actor.avatar %}#}
-{#                                    <img src="{{ unread.actor.avatar.url }}" alt="" class="circle">#}
-{#                                {% else %}#}
-{#                                    <img src="{% static 'default-profile-picture.jpg' %}">#}
-{#                                {% endif %}#}
-{#                                </a>#}
-{#                                <span class="title"><strong>{{ unread.actor.user.first_name }} {{ unread.verb }}</strong></span>#}
-{#                                <p>#}
-{#                                    <strong>Post title:</strong> <a href="{% url 'post_detail' unread.target.slug %}">{{ unread.target.title }}</a>#}
-{#                                    <strong> -- {{ unread.timestamp|timesince }} ago.</strong>#}
-{#                                </p>#}
-{#                                <a href="{% url 'mark_as_read' unread.pk %}" class="secondary-content tooltipped" data-tooltip="Mark as read">#}
-{#                                    <i class="material-icons">class</i>#}
-{#                                </a>#}
-{#                            </li>#}
-{#                        {% endfor %}#}
-{#                    {% else %}#}
-{#                        <li class="collection-item">#}
-{#                            Emptiness..#}
-{#                        </li>#}
-{#                    {% endif %}#}
-{#                </ul>#}
-{#            </div>#}
-            <div class="col s12 m9 l9">
+        <div class="row hide-on-small-and-down">
+            <div class="col s6 m6 l6">
+                <ul class="collection ">
+                    <li class="collection-item white-text" style="background: var(--background3)">
+                        Unread Notifications
+                        <a href="{% url 'mark_all_as_read'%}" class="secondary-content tooltipped" data-tooltip="Mark all as read">
+                            <i class="material-icons">chrome_reader_mode</i>
+                        </a>
+                    </li>
+                    {% if unread_notif %}
+                        {% for unread in unread_notif %}
+                            <li class="collection-item avatar" style="background: var(--background2)">
+                                <a href="{% url 'User Profile' unread.sender.username %}">
+                                <img src="{{ unread.data.dp_url }}" alt="" class="circle">
+                                </a>
+                                <span class="title"><strong>{{ unread.sender.first_name }} {{ unread.verb }}</strong></span>
+                                <p>
+                                    <strong>Post title:</strong> <a href="{% url 'post_detail' unread.post.slug %}">{{ unread.post.title }}</a>
+                                    <strong> -- {{ unread.timestamp|timesince }} ago.</strong>
+                                </p>
+                                <a href="{% url 'mark_as_read' unread.pk %}" class="secondary-content tooltipped" data-tooltip="Mark as read">
+                                    <i class="material-icons">class</i>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="collection-item" style="background: var(--background2)">
+                            Emptiness..
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="col s6 m6 l6">
                 <ul class="collection">
-                    <li class="collection-item white-text lighten-1" style="background: var(--background3)">
-                        <h5>All Notifications
+                    <li class="collection-item white-text" style="background: var(--background3)">
+                        Read Notifications
                         <a href="{% url 'clear_all_notification' %}" class="secondary-content tooltipped" data-tooltip="Clear all">
                             <i class="material-icons">clear_all</i>
                         </a>
-                        </h5>
                     </li>
-                    <div class="notifications" >
-                        {% if read_notif %}
-                            {% for read in read_notif %}
-                                <li class="collection-item avatar" style="background: var(--background2)">
-                                    <!-- Profile Picture -->
-                                    {% if read.actor.avatar %}
-                                        <img src="{{ read.actor.avatar.url }}" alt="" class="circle">
-                                    {% endif %}
-
-                                    <span class="title">
-                                        <!-- Message -->
-                                        <strong>
-                                            <a href="{% url 'User Profile' read.actor.user.username %}">{{ read.actor.user.first_name }}</a>
-                                            {{ read.verb }}
-                                        </strong>
-                                    </span>
-                                    <p>
-                                        {% if read.target is not None %}
-                                            <strong>Post title:</strong> <a href="{% url 'post_detail' read.target.slug %}">{{ read.target.title }}</a>
-                                        {% endif %}
-                                        <strong> -- {{ read.timestamp|timesince }} ago.</strong>
-                                    </p>
-                                    <a href="{% url 'clear_notification' read.pk %}" class="secondary-content tooltipped" data-tooltip="Clear">
-                                        <i class="material-icons">clear</i>
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        {% else %}
-                            {# If no notiications #}
-                            <li class="collection-item" style="background: var(--background2)">
-                                Sorry! Currently you do not have any notifications.
+                    {% if read_notif %}
+                        {% for read in read_notif %}
+                            <li class="collection-item avatar" style="background: var(--background2)">
+                                <img src="{{ read.data.dp_url }}" alt="" class="circle">
+                                <span class="title"><strong>{{ read.sender.first_name }} {{ read.verb }}</strong></span>
+                                <p>
+                                    <strong>Post title:</strong> <a href="{% url 'post_detail' read.post.slug %}">{{ read.post.title }}</a>
+                                    <strong> -- {{ read.timestamp|timesince }} ago.</strong>
+                                </p>
+                                <a href="{% url 'clear_notification' read.pk %}" class="secondary-content tooltipped" data-tooltip="Clear">
+                                    <i class="material-icons">clear</i>
+                                </a>
                             </li>
-                        {% endif %}
-                    </div>
+                        {% endfor %}
+                    {% else %}
+                        <li class="collection-item" style="background: var(--background2)">
+                            Emptiness..
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
+        </div>
+
+         <div class="hide-on-med-and-up">
+            <div class="col s12 m12 l12">
+                <ul class="collection">
+                    <li class="collection-item white-text" style="background: var(--background3)">
+                        Unread Notifications
+                        <a href="{% url 'mark_all_as_read'%}" class="secondary-content tooltipped" data-tooltip="Mark all as read">
+                            <i class="material-icons">chrome_reader_mode</i>
+                        </a>
+                    </li>
+                    {% if unread_notif %}
+                        {% for unread in unread_notif %}
+                            <li class="collection-item avatar" style="background: var(--background2)">
+                                <a href="{% url 'User Profile' unread.sender.username %}">
+                                    <img src="{{ unread.data.dp_url }}" alt="" class="circle">
+                                </a>
+                                <span class="title"><strong>{{ unread.sender.first_name }} {{ unread.verb }}</strong></span>
+                                <p>
+                                    <strong>Post title:</strong> <a href="{% url 'post_detail' unread.post.slug %}">{{ unread.post.title }}</a>
+                                    <strong> -- {{ unread.timestamp|timesince }} ago.</strong>
+                                </p>
+                                <a href="{% url 'mark_as_read' unread.pk %}" class="secondary-content tooltipped" data-tooltip="Mark as read">
+                                    <i class="material-icons">class</i>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="collection-item" style="background: var(--background2)">
+                            Emptiness..
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="col s12 m12 l12">
+                <ul class="collection">
+                    <li class="collection-item white-text" style="background: var(--background3)">
+                        Read Notifications
+                        <a href="{% url 'clear_all_notification' %}" class="secondary-content tooltipped" data-tooltip="Clear all">
+                            <i class="material-icons">clear_all</i>
+                        </a>
+                    </li>
+                    {% if read_notif %}
+                        {% for read in read_notif %}
+                            <li class="collection-item avatar" style="background: var(--background2)">
+                                <img src="{{ read.data.dp_url }}" alt="" class="circle">
+                                <span class="title"><strong>{{ read.sender.first_name }} {{ read.verb }}</strong></span>
+                                <p>
+                                    <strong>Post title:</strong> <a href="{% url 'post_detail' read.post.slug %}">{{ read.post.title }}</a>
+                                    <strong> -- {{ read.timestamp|timesince }} ago.</strong>
+                                </p>
+                                <a href="{% url 'clear_notification' read.pk %}" class="secondary-content tooltipped" data-tooltip="Clear">
+                                    <i class="material-icons">clear</i>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="collection-item" style="background: var(--background2)">
+                            Emptiness..
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+         </div>
+
+
+
+{#            <div class="col s12 m9 l9">#}
+{#                <ul class="collection">#}
+{#                    <li class="collection-item white-text lighten-1" style="background: var(--background3)">#}
+{#                        <h5>All Notifications#}
+{#                        <a href="{% url 'clear_all_notification' %}" class="secondary-content tooltipped" data-tooltip="Clear all">#}
+{#                            <i class="material-icons">clear_all</i>#}
+{#                        </a>#}
+{#                        </h5>#}
+{#                    </li>#}
+{#                    <div class="notifications" >#}
+{#                        {% if read_notif %}#}
+{#                            {% for read in read_notif %}#}
+{#                                <li class="collection-item avatar" style="background: var(--background2)">#}
+{#                                    <!-- Profile Picture -->#}
+{#                                    {% if read.actor.avatar %}#}
+{#                                        <img src="{{ read.actor.avatar.url }}" alt="" class="circle">#}
+{#                                    {% endif %}#}
+{##}
+{#                                    <span class="title">#}
+{#                                        <!-- Message -->#}
+{#                                        <strong>#}
+{#                                            <a href="{% url 'User Profile' read.actor.user.username %}">{{ read.actor.user.first_name }}</a>#}
+{#                                            {{ read.verb }}#}
+{#                                        </strong>#}
+{#                                    </span>#}
+{#                                    <p>#}
+{#                                        {% if read.target is not None %}#}
+{#                                            <strong>Post title:</strong> <a href="{% url 'post_detail' read.target.slug %}">{{ read.target.title }}</a>#}
+{#                                        {% endif %}#}
+{#                                        <strong> -- {{ read.timestamp|timesince }} ago.</strong>#}
+{#                                    </p>#}
+{#                                    <a href="{% url 'clear_notification' read.pk %}" class="secondary-content tooltipped" data-tooltip="Clear">#}
+{#                                        <i class="material-icons">clear</i>#}
+{#                                    </a>#}
+{#                                </li>#}
+{#                            {% endfor %}#}
+{#                        {% else %}#}
+                            {# If no notiications #}
+{#                            <li class="collection-item" style="background: var(--background2)">#}
+{#                                Sorry! Currently you do not have any notifications.#}
+{#                            </li>#}
+{#                        {% endif %}#}
+{#                    </div>#}
+{#                </ul>#}
+{#            </div>#}
+{#    </div>#}
     </div>
 {% endblock %}

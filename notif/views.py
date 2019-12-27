@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 # Imported models
 from user_profile.models import UserProfile
 from post.models import Tags
+from notif.models import Notification
 
 # Self made function imports
 from home.views import set_profile
@@ -25,10 +26,12 @@ def notification_view(request):
         check_profile = UserProfile.objects.get(user=user)
 
     # Read notifications of current user
-    read_notif = user.notifications.read().filter()
+    # read_notif = user.notifications.read().filter()
+    read_notif = Notification.objects.filter(recipient=user).filter(unread=False)
 
     # Unread notifications of current user
-    unread_notif = user.notifications.unread()
+    # unread_notif = user.notifications.unread()
+    unread_notif = Notification.objects.filter(recipient=user).filter(unread=True)
 
     # All user profiles
     user_profile_qs = UserProfile.objects.all()
@@ -53,7 +56,8 @@ def mark_as_read(request, pk):
     """
 
     # Notification having primary key = pk (of current user).
-    notification = request.user.notifications.get(pk=pk)
+    # notification = request.user.notifications.get(pk=pk)
+    notification = Notification.objects.get(pk=pk)
 
     notification.unread = False
     notification.save()
@@ -65,9 +69,10 @@ def mark_all_as_read(request):
         This function will mark all unread notifications as read.
     """
     # All unread notifications of current user
-    notification_qs = request.user.notifications.unread()
+    notification_qs = Notification.objects.filter(recipient=request.user).filter(unread=True)
     if notification_qs:
-        notification_qs.mark_all_as_read()
+        for notification in notification_qs:
+            notification.unread = False
         messages.success(request, f"All notifications marked as read.")
     else:
         messages.info(request, f"You do not have any notification.")
@@ -78,7 +83,7 @@ def clear_notification(request, pk):
     """
         This function clears/deletes a particular read notification as read.
     """
-    notification = request.user.notifications.get(pk=pk)
+    notification = Notification.objects.get(pk=pk)
     notification.delete()
     return HttpResponseRedirect(reverse('all_notifications'))
 
@@ -88,7 +93,7 @@ def clear_all_notification(request):
         This function clears/deletes all read notification as read.
     """
     # All unread notifications of current user
-    notification_qs = request.user.notifications.read()
+    notification_qs = Notification.objects.filter(recipient=request.user).filter(unread=False)
     if notification_qs:
         for notification in notification_qs:
             notification.delete()

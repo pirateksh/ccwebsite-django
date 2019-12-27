@@ -32,6 +32,7 @@ from .models import UserProfile
 from comments.models import Comment
 from post.models import Post, Tags
 from quizapp.models import UserQuizResult
+from notif.models import Notification
 
 # Imported Forms
 from django.contrib.auth.forms import PasswordChangeForm
@@ -45,13 +46,11 @@ from .cal_setup import get_calendar_service
 import os.path
 
 # 3rd Party imports
-from notifications.signals import notify
+# from notifications.signals import notify
 
 @login_required
 def get_user_calendar(request,username):
-    """
-        This functions renders User Profile Page
-    """
+
     if request.method == 'POST':
         print(request.POST)
         if request.POST.get('submit'):
@@ -132,7 +131,9 @@ def get_user_calendar(request,username):
 
 
 def user_profile(request, username, tag_name=None, liked=None, older=None):
-        # User whose profile is open
+    """
+        This functions renders User Profile Page
+    """
     native_user = get_object_or_404(User, username=username)
     profile = get_object_or_404(UserProfile, user=native_user)
 
@@ -189,10 +190,12 @@ def user_profile(request, username, tag_name=None, liked=None, older=None):
     if request.user.is_authenticated:
 
         # Read notifications
-        read_notif = request.user.notifications.read()
+        # read_notif = request.user.notifications.read()
+        read_notif = Notification.objects.filter(recipient=request.user).filter(unread=False)
 
         # Unread notifications
-        unread_notif = request.user.notifications.unread()
+        # unread_notif = request.user.notifications.unread()
+        unread_notif = Notification.objects.filter(recipient=request.user).filter(unread=True)
 
         quiz_results = UserQuizResult.objects.all().filter(user=request.user)
 
@@ -257,18 +260,18 @@ def follow_user(request, username, username2):
         # post = Post.objects.get(title='Follow Users')
         # post_url = reverse('post_detail', kwargs={'slug': post.slug})
 
-        notify.send(
-            # Sending notification to person being followed.
-            follower_profile,
-            recipient=followed,
-            verb='followed you',
-            target=None,
-            dp_url=follower_profile.avatar.url,
-            prof_url=reverse("User Profile", kwargs={'username': follower.username}),
-            # post_url=post_url,
-            actor_name=follower_profile.user.first_name,
-            timestamp_=timesince(timezone.now()),
-        )
+        # notify.send(
+        #     # Sending notification to person being followed.
+        #     follower_profile,
+        #     recipient=followed,
+        #     verb='followed you',
+        #     target=None,
+        #     dp_url=follower_profile.avatar.url,
+        #     prof_url=reverse("User Profile", kwargs={'username': follower.username}),
+        #     # post_url=post_url,
+        #     actor_name=follower_profile.user.first_name,
+        #     timestamp_=timesince(timezone.now()),
+        # )
 
         result = "SS"
         response = {
@@ -810,17 +813,17 @@ def approve_event(request, username, slug):
                 messages.info(request, f"Invalid Header found, mail not sent!")
 
         # Sending notification to event's post's author.
-        notify.send(
-            native_profile,
-            recipient=author,
-            verb='granted permission for event.',
-            target=post,
-            dp_url=native_profile.avatar.url,
-            prof_url=reverse("User Profile", kwargs={'username': native_user.username}),
-            post_url=post_url,
-            actor_name=native_profile.user.first_name,
-            timestamp_=timesince(timezone.now()),
-        )
+        # notify.send(
+        #     native_profile,
+        #     recipient=author,
+        #     verb='granted permission for event.',
+        #     target=post,
+        #     dp_url=native_profile.avatar.url,
+        #     prof_url=reverse("User Profile", kwargs={'username': native_user.username}),
+        #     post_url=post_url,
+        #     actor_name=native_profile.user.first_name,
+        #     timestamp_=timesince(timezone.now()),
+        # )
 
         tags = post.tags.all()
         notify_users = []
@@ -912,18 +915,18 @@ def reject_event(request, username, slug):
                 mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
             except mail.BadHeaderError:
                 messages.info(request, f"Invalid Header found, mail not sent!")
-        notify.send(
-            # Sending notification to event's post's author.
-            native_profile,
-            recipient=author,
-            verb='rejected permission for event.',
-            target=post,
-            dp_url=native_profile.avatar.url,
-            prof_url=reverse("User Profile", kwargs={'username': native_user.username}),
-            post_url=post_url,
-            actor_name=native_profile.user.first_name,
-            timestamp_=timesince(timezone.now()),
-        )
+        # notify.send(
+        #     # Sending notification to event's post's author.
+        #     native_profile,
+        #     recipient=author,
+        #     verb='rejected permission for event.',
+        #     target=post,
+        #     dp_url=native_profile.avatar.url,
+        #     prof_url=reverse("User Profile", kwargs={'username': native_user.username}),
+        #     post_url=post_url,
+        #     actor_name=native_profile.user.first_name,
+        #     timestamp_=timesince(timezone.now()),
+        # )
         post.verify_status = -1
         post.draft = False
         post.save()

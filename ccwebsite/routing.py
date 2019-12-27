@@ -6,7 +6,7 @@ from channels.security.websocket import AllowedHostsOriginValidator, AllowedHost
 # AllowedHostOriginValidator - Only ALLOWED_HOSTS in settings.py can connect
 # OriginValidator - We can have specific origin for just channels using this.
 
-from notif.consumers import NoseyConsumer
+from notif.consumers import NoseyConsumer, LikeNotificationConsumer
 
 application = ProtocolTypeRouter({
 	"websocket": AllowedHostsOriginValidator(
@@ -16,6 +16,7 @@ application = ProtocolTypeRouter({
 					[
 						# Consumer is similar to views in Django.
 						path("notifications/", NoseyConsumer),
+						path("like_notification/", LikeNotificationConsumer),
 					]
 				),
 			)

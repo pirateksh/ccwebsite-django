@@ -17,7 +17,7 @@ from home.forms import UserSignupForm
 from post.forms import PostForm
 
 # 3rd Party imports
-from notifications.signals import notify
+# from notifications.signals import notify
 # Create your views here.
 
 HOME = '/'
@@ -168,48 +168,51 @@ def ajax_add_comment(request, post_id):
             if parent is None:
                 # Check if comment author and post author are NOT same.
                 if str(user_profile.user) != str(post.author):
-                    notify.send(
-                        user_profile,
-                        recipient=post.author,
-                        verb='commented on your post.',
-                        target=post,
-                        dp_url=user_profile.avatar.url,
-                        prof_url=reverse("User Profile", kwargs={'username': user_profile.user.username}),
-                        post_url=reverse("post_detail", kwargs={'slug': post.slug}),
-                        actor_name=user_profile.user.first_name,
-                        timestamp_=timesince(timezone.now()),
-                    )
+                    pass
+                    # notify.send(
+                    #     user_profile,
+                    #     recipient=post.author,
+                    #     verb='commented on your post.',
+                    #     target=post,
+                    #     dp_url=user_profile.avatar.url,
+                    #     prof_url=reverse("User Profile", kwargs={'username': user_profile.user.username}),
+                    #     post_url=reverse("post_detail", kwargs={'slug': post.slug}),
+                    #     actor_name=user_profile.user.first_name,
+                    #     timestamp_=timesince(timezone.now()),
+                    # )
             else:
                 # This comment is reply to some other comment.
                 # Check if comment author and post author are NOT same.
                 if str(user_profile.user) != str(post.author):
+                    pass
                     # Send notification to post author.
-                    notify.send(
-                        user_profile,
-                        recipient=post.author,
-                        verb='replied to a comment.',
-                        target=post,
-                        dp_url=user_profile.avatar.url,
-                        prof_url=reverse("User Profile", kwargs={'username': user_profile.user.username}),
-                        post_url=reverse("post_detail", kwargs={'slug': post.slug}),
-                        actor_name=user_profile.user.first_name,
-                        timestamp_=timesince(timezone.now()),
-                    )
+                    # notify.send(
+                    #     user_profile,
+                    #     recipient=post.author,
+                    #     verb='replied to a comment.',
+                    #     target=post,
+                    #     dp_url=user_profile.avatar.url,
+                    #     prof_url=reverse("User Profile", kwargs={'username': user_profile.user.username}),
+                    #     post_url=reverse("post_detail", kwargs={'slug': post.slug}),
+                    #     actor_name=user_profile.user.first_name,
+                    #     timestamp_=timesince(timezone.now()),
+                    # )
 
                 # Check if parent comment author and post author are NOT same.
                 if str(parent.user) != str(user_profile.user):
+                    pass
                     # Send notification to Parent comment author
-                    notify.send(
-                        user_profile,
-                        recipient=parent.user,
-                        verb='replied to your comment.',
-                        target=post,
-                        dp_url=user_profile.avatar.url,
-                        prof_url=reverse("User Profile", kwargs={'username': user_profile.user.username}),
-                        post_url=reverse("post_detail", kwargs={'slug': post.slug}),
-                        actor_name=user_profile.user.first_name,
-                        timestamp_=timesince(timezone.now()),
-                    )
+                    # notify.send(
+                    #     user_profile,
+                    #     recipient=parent.user,
+                    #     verb='replied to your comment.',
+                    #     target=post,
+                    #     dp_url=user_profile.avatar.url,
+                    #     prof_url=reverse("User Profile", kwargs={'username': user_profile.user.username}),
+                    #     post_url=reverse("post_detail", kwargs={'slug': post.slug}),
+                    #     actor_name=user_profile.user.first_name,
+                    #     timestamp_=timesince(timezone.now()),
+                    # )
         # Sending notifications ended
 
         # Other URL's

@@ -47,20 +47,20 @@ INSTALLED_APPS = [
 
     # Third party Apps
     'channels',
-    'rest_framework',
+    # 'rest_framework',
     'materializecssform',
     'ckeditor',
     'ckeditor_uploader',
     'multiselectfield',
     'imagekit',
-    'notifications',
+    # 'notifications',
     'social_django',
 ]
 
-DJANGO_NOTIFICATIONS_CONFIG = {
-    # 'SOFT_DELETE': True,
-    'USE_JSONFIELD': True,
-}
+# DJANGO_NOTIFICATIONS_CONFIG = {
+#     # 'SOFT_DELETE': True,
+#     'USE_JSONFIELD': True,
+# }
 
 # Default layout to use with "crispy_forms"
 # CRISPY_TEMPLATE_PACK = 'materialize_css_forms'

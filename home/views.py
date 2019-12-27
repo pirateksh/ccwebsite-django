@@ -262,7 +262,7 @@ def ajax_login_view(request):
                         response.set_cookie('cook_pass', password, max_age=86400, path='/')
                         return response
         else:
-            return JsonResponse('LF')
+            return HttpResponse('LF')
     # else:
     #     return redirect(HOME)
 

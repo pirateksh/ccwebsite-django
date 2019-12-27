@@ -6,7 +6,7 @@ from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views
-import notifications.urls
+# import notifications.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls, name="Admin"),
@@ -28,7 +28,7 @@ urlpatterns = [
     # Extra URLS
     path('ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
-    url('^inbox/notifications/', include(notifications.urls, namespace='notifications')),
+    # url('^inbox/notifications/', include(notifications.urls, namespace='notifications')),
 
 
 
