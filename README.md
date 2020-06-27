@@ -40,14 +40,17 @@ A one stop solution for tech/coding enthusiasts following CC Club, MNNIT Allahab
 * Dark Mode (Homepage)
 ![Image of Darkmode](https://drive.google.com/uc?export=view&id=1O3fne6tVkjM0qy0csczahC__t7emtzfL)
 
+* Mobile Friendly UI <br/>
+![Image of Mobile Friendly UI](https://drive.google.com/uc?export=view&id=1hM6TVb79nN0f3qq_mPPbFdlcjbRiS6ST)
+
 * Login Modal
 ![Image of Login Modal](https://drive.google.com/uc?export=view&id=1tzcC_Z8fln5e1WZDa3aPlL7c850cOw9O)
 
 * Edit Profile 
 ![Image of Edit Profile](https://drive.google.com/uc?export=view&id=1beRCgaS6wwdW1Nkt0Vly6tfTYQlxS4Bl)
 
-* Mobile Friendly UI <br/>
-![Image of Mobile Friendly UI](https://drive.google.com/uc?export=view&id=1hM6TVb79nN0f3qq_mPPbFdlcjbRiS6ST)
+* Add Post
+![Image of Add Post](https://drive.google.com/uc?export=view&id=15V0XotBua18LUodrC-usMlg0dXdeq9Ky)
 
-* Add Post 
-![Image of Add Post](https://drive.google.com/uc?export=view&id=1c7fnTir56qmwniRCL6XuiUsZM2FGtvZj)
+* Footer
+![Image of Footer](https://drive.google.com/uc?export=view&id=1c7fnTir56qmwniRCL6XuiUsZM2FGtvZj)
