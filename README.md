@@ -17,7 +17,6 @@ A one stop solution for tech/coding enthusiasts following CC Club, MNNIT Allahab
 * Edit your profile (add profile picture, etc.).
 * Add/Edit/Delete/Like posts after verification by Admin.
 * Drafts.
-* Trending post feature.
 * Add comments to post.
 * Reply to comments.
 * Filter posts by tags (ML, Web D, Python, etc.).
@@ -27,7 +26,7 @@ A one stop solution for tech/coding enthusiasts following CC Club, MNNIT Allahab
 * Coordinators can request permission for any class/event from faculty.
 * Quiz Portal.
 * Quiz Performance Graph.
-* Calendar where user can add his/her classes, etc.
+* Integrated Google Calendar where user can add his/her classes, etc.
 * Live notification feature.
 * Mobile Responsive UI.
 * Password Reset through Email.
@@ -46,11 +45,29 @@ A one stop solution for tech/coding enthusiasts following CC Club, MNNIT Allahab
 * Login Modal
 ![Image of Login Modal](https://drive.google.com/uc?export=view&id=1tzcC_Z8fln5e1WZDa3aPlL7c850cOw9O)
 
+* Profile with avatar 
+![Image of Profile with avatar](https://drive.google.com/uc?export=view&id=10rLPH6HZEnKSmxLb5xJXWVL8ojFbiqvA)
+
 * Edit Profile 
 ![Image of Edit Profile](https://drive.google.com/uc?export=view&id=1beRCgaS6wwdW1Nkt0Vly6tfTYQlxS4Bl)
 
 * Add Post
 ![Image of Add Post](https://drive.google.com/uc?export=view&id=15V0XotBua18LUodrC-usMlg0dXdeq9Ky)
+
+* Notifications
+![Image of Notifications](https://drive.google.com/uc?export=view&id=1rLq93_91sQNXNyYj8XZmHkE3TtievtYV)
+
+* Quiz Portal
+![Image of Quiz Portal](https://drive.google.com/uc?export=view&id=1cPnqnAF8HHcgpixZcWPVT8EL1ziqQDQj)
+
+* Add Quiz
+![Image of Add Quiz](https://drive.google.com/uc?export=view&id=1a0PhCv9Xpaev_-w1lXXNkRq9Bt4s2D48)
+
+* Quiz Performance Graph
+![Image of Quiz Performance Graph](https://drive.google.com/uc?export=view&id=14i-m5qxXqCXOnPhn1tFPTvXlI8DNRzUZ)
+
+* Real-time Search User Functionality <br/>
+![Image of Real-time Search User Functionality](https://drive.google.com/uc?export=view&id=1gXfSWkUd02DldQ8EuxUmN4_mDEsjK7z6)
 
 * Footer
 ![Image of Footer](https://drive.google.com/uc?export=view&id=1c7fnTir56qmwniRCL6XuiUsZM2FGtvZj)
