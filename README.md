@@ -34,40 +34,43 @@ A one stop solution for tech/coding enthusiasts following CC Club, MNNIT Allahab
 
 ### Screenshots of Website
 * Homepage 
-![Image of Homepage](https://drive.google.com/uc?export=view&id=1DcemBkChjQUKM1wWPM5LjEQ9YdFc_UOg)
+![Image of Homepage](./screenshots/home_page.png?raw=true)
 
 * Dark Mode (Homepage)
-![Image of Darkmode](https://drive.google.com/uc?export=view&id=1O3fne6tVkjM0qy0csczahC__t7emtzfL)
+![Image of Darkmode](./screenshots/dark_mode.png?raw=true)
 
 * Mobile Friendly UI <br/>
-![Image of Mobile Friendly UI](https://drive.google.com/uc?export=view&id=1hM6TVb79nN0f3qq_mPPbFdlcjbRiS6ST)
+![Image of Mobile Friendly UI](./screenshots/mobile_ui.png?raw=true)
 
 * Login Modal
-![Image of Login Modal](https://drive.google.com/uc?export=view&id=1tzcC_Z8fln5e1WZDa3aPlL7c850cOw9O)
+![Image of Login Modal](./screenshots/login_modal.png?raw=true)
 
 * Profile with avatar 
-![Image of Profile with avatar](https://drive.google.com/uc?export=view&id=10rLPH6HZEnKSmxLb5xJXWVL8ojFbiqvA)
+![Image of Profile with avatar](./screenshots/profile_with_avatar.png?raw=true)
 
 * Edit Profile 
-![Image of Edit Profile](https://drive.google.com/uc?export=view&id=1beRCgaS6wwdW1Nkt0Vly6tfTYQlxS4Bl)
+![Image of Edit Profile](./screenshots/edit_profile.png?raw=true)
 
 * Add Post
-![Image of Add Post](https://drive.google.com/uc?export=view&id=15V0XotBua18LUodrC-usMlg0dXdeq9Ky)
+![Image of Add Post](./screenshots/add_post.png?raw=true)
 
 * Notifications
-![Image of Notifications](https://drive.google.com/uc?export=view&id=1rLq93_91sQNXNyYj8XZmHkE3TtievtYV)
+![Image of Notifications](./screenshots/notifications.png?raw=true)
 
 * Quiz Portal
-![Image of Quiz Portal](https://drive.google.com/uc?export=view&id=1cPnqnAF8HHcgpixZcWPVT8EL1ziqQDQj)
+![Image of Quiz Portal](./screenshots/quiz_portal.png?raw=true)
 
 * Add Quiz
-![Image of Add Quiz](https://drive.google.com/uc?export=view&id=1a0PhCv9Xpaev_-w1lXXNkRq9Bt4s2D48)
+![Image of Add Quiz](./screenshots/add_quiz.png?raw=true)
 
 * Quiz Performance Graph
-![Image of Quiz Performance Graph](https://drive.google.com/uc?export=view&id=14i-m5qxXqCXOnPhn1tFPTvXlI8DNRzUZ)
+![Image of Quiz Performance Graph](./screenshots/quiz_performance_graph.png?raw=true)
 
 * Real-time Search User Functionality <br/>
-![Image of Real-time Search User Functionality](https://drive.google.com/uc?export=view&id=1gXfSWkUd02DldQ8EuxUmN4_mDEsjK7z6)
+![Image of Real-time Search User Functionality](./screenshots/search_user.png?raw=true)
 
 * Footer
-![Image of Footer](https://drive.google.com/uc?export=view&id=1c7fnTir56qmwniRCL6XuiUsZM2FGtvZj)
+![Image of Footer](./screenshots/footer.png?raw=true)
+
+
+### Thank you!
